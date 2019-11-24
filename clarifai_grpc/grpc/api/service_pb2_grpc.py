@@ -23,252 +23,252 @@ class V2Stub(object):
     self.GetConceptCounts = channel.unary_unary(
         '/clarifai.api.V2/GetConceptCounts',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptCountsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptCountResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptCountResponse,
         )
     self.GetConcept = channel.unary_unary(
         '/clarifai.api.V2/GetConcept',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleConceptResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleConceptResponse,
         )
     self.ListConcepts = channel.unary_unary(
         '/clarifai.api.V2/ListConcepts',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse,
         )
     self.PostConceptsSearches = channel.unary_unary(
         '/clarifai.api.V2/PostConceptsSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsSearchesRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse,
         )
     self.PostConcepts = channel.unary_unary(
         '/clarifai.api.V2/PostConcepts',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse,
         )
     self.PatchConcepts = channel.unary_unary(
         '/clarifai.api.V2/PatchConcepts',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse,
         )
     self.GetInputCount = channel.unary_unary(
         '/clarifai.api.V2/GetInputCount',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputCountResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputCountResponse,
         )
     self.GetInput = channel.unary_unary(
         '/clarifai.api.V2/GetInput',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse,
         )
     self.ListInputs = channel.unary_unary(
         '/clarifai.api.V2/ListInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse,
         )
     self.PostInputs = channel.unary_unary(
         '/clarifai.api.V2/PostInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse,
         )
     self.PatchInputs = channel.unary_unary(
         '/clarifai.api.V2/PatchInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchInputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse,
         )
     self.DeleteInput = channel.unary_unary(
         '/clarifai.api.V2/DeleteInput',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.DeleteInputs = channel.unary_unary(
         '/clarifai.api.V2/DeleteInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.PostModelOutputs = channel.unary_unary(
         '/clarifai.api.V2/PostModelOutputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse,
         )
     self.GetModel = channel.unary_unary(
         '/clarifai.api.V2/GetModel',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse,
         )
     self.GetModelOutputInfo = channel.unary_unary(
         '/clarifai.api.V2/GetModelOutputInfo',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse,
         )
     self.ListModels = channel.unary_unary(
         '/clarifai.api.V2/ListModels',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse,
         )
     self.PostModelsSearches = channel.unary_unary(
         '/clarifai.api.V2/PostModelsSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsSearchesRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse,
         )
     self.PostModels = channel.unary_unary(
         '/clarifai.api.V2/PostModels',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse,
         )
     self.PatchModels = channel.unary_unary(
         '/clarifai.api.V2/PatchModels',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse,
         )
     self.DeleteModel = channel.unary_unary(
         '/clarifai.api.V2/DeleteModel',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.DeleteModels = channel.unary_unary(
         '/clarifai.api.V2/DeleteModels',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.ListModelInputs = channel.unary_unary(
         '/clarifai.api.V2/ListModelInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelInputsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse,
         )
     self.GetModelVersion = channel.unary_unary(
         '/clarifai.api.V2/GetModelVersion',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse,
         )
     self.ListModelVersions = channel.unary_unary(
         '/clarifai.api.V2/ListModelVersions',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse,
         )
     self.PostModelVersions = channel.unary_unary(
         '/clarifai.api.V2/PostModelVersions',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse,
         )
     self.DeleteModelVersion = channel.unary_unary(
         '/clarifai.api.V2/DeleteModelVersion',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.GetModelVersionMetrics = channel.unary_unary(
         '/clarifai.api.V2/GetModelVersionMetrics',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionMetricsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse,
         )
     self.PostModelVersionMetrics = channel.unary_unary(
         '/clarifai.api.V2/PostModelVersionMetrics',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse,
         )
     self.GetWorkflow = channel.unary_unary(
         '/clarifai.api.V2/GetWorkflow',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowResponse,
         )
     self.ListWorkflows = channel.unary_unary(
         '/clarifai.api.V2/ListWorkflows',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse,
         )
     self.PostWorkflows = channel.unary_unary(
         '/clarifai.api.V2/PostWorkflows',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse,
         )
     self.PatchWorkflows = channel.unary_unary(
         '/clarifai.api.V2/PatchWorkflows',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse,
         )
     self.DeleteWorkflow = channel.unary_unary(
         '/clarifai.api.V2/DeleteWorkflow',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.DeleteWorkflows = channel.unary_unary(
         '/clarifai.api.V2/DeleteWorkflows',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.PostWorkflowResults = channel.unary_unary(
         '/clarifai.api.V2/PostWorkflowResults',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse,
         )
     self.GetKey = channel.unary_unary(
         '/clarifai.api.V2/GetKey',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse,
         )
     self.ListKeys = channel.unary_unary(
         '/clarifai.api.V2/ListKeys',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKeysRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse,
         )
     self.ListAppKeys = channel.unary_unary(
         '/clarifai.api.V2/ListAppKeys',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppKeysRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse,
         )
     self.DeleteKey = channel.unary_unary(
         '/clarifai.api.V2/DeleteKey',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteKeyRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.PostKeys = channel.unary_unary(
         '/clarifai.api.V2/PostKeys',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKeysRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse,
         )
     self.PatchKeys = channel.unary_unary(
         '/clarifai.api.V2/PatchKeys',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchKeysRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse,
         )
     self.GetApp = channel.unary_unary(
         '/clarifai.api.V2/GetApp',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse,
         )
     self.ListApps = channel.unary_unary(
         '/clarifai.api.V2/ListApps',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse,
         )
     self.DeleteApp = channel.unary_unary(
         '/clarifai.api.V2/DeleteApp',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse,
         )
     self.PostApps = channel.unary_unary(
         '/clarifai.api.V2/PostApps',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse,
         )
     self.PatchApps = channel.unary_unary(
         '/clarifai.api.V2/PatchApps',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse,
         )
     self.PostSearches = channel.unary_unary(
         '/clarifai.api.V2/PostSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse,
         )
     self.ListStatusCodes = channel.unary_unary(
         '/clarifai.api.V2/ListStatusCodes',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListStatusCodesRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatusCodeResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatusCodeResponse,
         )
     self.GetStatusCode = channel.unary_unary(
         '/clarifai.api.V2/GetStatusCode',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
-        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.FromString,
+        response_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse,
         )
 
 
@@ -696,252 +696,252 @@ def add_V2Servicer_to_server(servicer, server):
   rpc_method_handlers = {
       'GetConceptCounts': grpc.unary_unary_rpc_method_handler(
           servicer.GetConceptCounts,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptCountsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptCountsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptCountResponse.SerializeToString,
       ),
       'GetConcept': grpc.unary_unary_rpc_method_handler(
           servicer.GetConcept,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleConceptResponse.SerializeToString,
       ),
       'ListConcepts': grpc.unary_unary_rpc_method_handler(
           servicer.ListConcepts,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
       ),
       'PostConceptsSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostConceptsSearches,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsSearchesRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsSearchesRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
       ),
       'PostConcepts': grpc.unary_unary_rpc_method_handler(
           servicer.PostConcepts,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
       ),
       'PatchConcepts': grpc.unary_unary_rpc_method_handler(
           servicer.PatchConcepts,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
       ),
       'GetInputCount': grpc.unary_unary_rpc_method_handler(
           servicer.GetInputCount,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputCountResponse.SerializeToString,
       ),
       'GetInput': grpc.unary_unary_rpc_method_handler(
           servicer.GetInput,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse.SerializeToString,
       ),
       'ListInputs': grpc.unary_unary_rpc_method_handler(
           servicer.ListInputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
       ),
       'PostInputs': grpc.unary_unary_rpc_method_handler(
           servicer.PostInputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
       ),
       'PatchInputs': grpc.unary_unary_rpc_method_handler(
           servicer.PatchInputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchInputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchInputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
       ),
       'DeleteInput': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteInput,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'DeleteInputs': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteInputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostModelOutputs': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelOutputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
       ),
       'GetModel': grpc.unary_unary_rpc_method_handler(
           servicer.GetModel,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
       ),
       'GetModelOutputInfo': grpc.unary_unary_rpc_method_handler(
           servicer.GetModelOutputInfo,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
       ),
       'ListModels': grpc.unary_unary_rpc_method_handler(
           servicer.ListModels,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
       ),
       'PostModelsSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelsSearches,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsSearchesRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsSearchesRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
       ),
       'PostModels': grpc.unary_unary_rpc_method_handler(
           servicer.PostModels,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
       ),
       'PatchModels': grpc.unary_unary_rpc_method_handler(
           servicer.PatchModels,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
       ),
       'DeleteModel': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteModel,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'DeleteModels': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteModels,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'ListModelInputs': grpc.unary_unary_rpc_method_handler(
           servicer.ListModelInputs,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelInputsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelInputsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
       ),
       'GetModelVersion': grpc.unary_unary_rpc_method_handler(
           servicer.GetModelVersion,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.SerializeToString,
       ),
       'ListModelVersions': grpc.unary_unary_rpc_method_handler(
           servicer.ListModelVersions,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse.SerializeToString,
       ),
       'PostModelVersions': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelVersions,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
       ),
       'DeleteModelVersion': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteModelVersion,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'GetModelVersionMetrics': grpc.unary_unary_rpc_method_handler(
           servicer.GetModelVersionMetrics,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionMetricsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionMetricsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.SerializeToString,
       ),
       'PostModelVersionMetrics': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelVersionMetrics,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.SerializeToString,
       ),
       'GetWorkflow': grpc.unary_unary_rpc_method_handler(
           servicer.GetWorkflow,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowResponse.SerializeToString,
       ),
       'ListWorkflows': grpc.unary_unary_rpc_method_handler(
           servicer.ListWorkflows,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
       ),
       'PostWorkflows': grpc.unary_unary_rpc_method_handler(
           servicer.PostWorkflows,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
       ),
       'PatchWorkflows': grpc.unary_unary_rpc_method_handler(
           servicer.PatchWorkflows,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
       ),
       'DeleteWorkflow': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteWorkflow,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'DeleteWorkflows': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteWorkflows,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostWorkflowResults': grpc.unary_unary_rpc_method_handler(
           servicer.PostWorkflowResults,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse.SerializeToString,
       ),
       'GetKey': grpc.unary_unary_rpc_method_handler(
           servicer.GetKey,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse.SerializeToString,
       ),
       'ListKeys': grpc.unary_unary_rpc_method_handler(
           servicer.ListKeys,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKeysRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKeysRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.SerializeToString,
       ),
       'ListAppKeys': grpc.unary_unary_rpc_method_handler(
           servicer.ListAppKeys,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppKeysRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppKeysRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.SerializeToString,
       ),
       'DeleteKey': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteKey,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteKeyRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteKeyRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostKeys': grpc.unary_unary_rpc_method_handler(
           servicer.PostKeys,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKeysRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKeysRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.SerializeToString,
       ),
       'PatchKeys': grpc.unary_unary_rpc_method_handler(
           servicer.PatchKeys,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchKeysRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchKeysRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.SerializeToString,
       ),
       'GetApp': grpc.unary_unary_rpc_method_handler(
           servicer.GetApp,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse.SerializeToString,
       ),
       'ListApps': grpc.unary_unary_rpc_method_handler(
           servicer.ListApps,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
       ),
       'DeleteApp': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteApp,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostApps': grpc.unary_unary_rpc_method_handler(
           servicer.PostApps,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
       ),
       'PatchApps': grpc.unary_unary_rpc_method_handler(
           servicer.PatchApps,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
       ),
       'PostSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostSearches,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
       ),
       'ListStatusCodes': grpc.unary_unary_rpc_method_handler(
           servicer.ListStatusCodes,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListStatusCodesRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListStatusCodesRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatusCodeResponse.SerializeToString,
       ),
       'GetStatusCode': grpc.unary_unary_rpc_method_handler(
           servicer.GetStatusCode,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.FromString,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.SerializeToString,
       ),
   }
