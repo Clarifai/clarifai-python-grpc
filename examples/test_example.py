@@ -1,22 +1,16 @@
 import os
 
-import requests
-
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
-from clarifai_grpc.channel.grpc_json_channel import GRPCJSONChannel
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 
 SAMPLE_URL = 'https://samples.clarifai.com/dog2.jpeg'
 
 
-
 def test_PostModelOutputs():
-  # creds = service_pb2_grpc.grpc.ssl_channel_credentials()
-  # channel = service_pb2_grpc.grpc.secure_channel('api-grpc.clarifai.com:18081', creds)
-
-  # channel = service_pb2_grpc.grpc.insecure_channel('api-grpc.clarifai.com:18080')
 
   channel = ClarifaiChannel.get_json_channel()
+  # channel = ClarifaiChannel.get_insecure_grpc_channel()
+  # channel = ClarifaiChannel.get_grpc_channel()
 
   stub = service_pb2_grpc.V2Stub(channel)
 
