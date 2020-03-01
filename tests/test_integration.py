@@ -63,11 +63,11 @@ def _assert_post_patch_delete_input(channel):
       get_request = service_pb2.GetInputRequest(input_id=input_id)
       get_response = stub.GetInput(get_request, metadata=metadata)
       status_code = get_response.input.status.code
-      if status_code == status_code_pb2.INPUT_IMAGE_DOWNLOAD_SUCCESS:
+      if status_code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
         break
       elif status_code not in (
-          status_code_pb2.INPUT_IMAGE_DOWNLOAD_PENDING,
-          status_code_pb2.INPUT_IMAGE_DOWNLOAD_IN_PROGRESS
+          status_code_pb2.INPUT_DOWNLOAD_PENDING,
+          status_code_pb2.INPUT_DOWNLOAD_IN_PROGRESS
       ):
         raise Exception(
           f'Waiting for input ID {input_id} failed, status code is {status_code}.')
