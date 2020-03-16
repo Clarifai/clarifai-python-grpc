@@ -7,6 +7,14 @@ This is the official Clarifai Python gRPC client.
 In addition to the actual gRPC channel, it is also possible to use a JSON channel, which uses 
 JSON & HTTP/REST, while using the same request / response handling code.
 
+[![PyPI version](https://pypip.in/v/clarifai-grpc/badge.png)](https://pypi.python.org/pypi/clarifai-grpc)
+
+## Installation
+
+```cmd
+pip install clarifai-grpc
+```
+
 ## Getting started
 
 Construct the channel you want to use:
