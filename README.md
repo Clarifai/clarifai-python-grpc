@@ -2,10 +2,16 @@
 
 # Clarifai Python gRPC Client
 
-This is the official Clarifai Python gRPC client.
+This is the official Clarifai gRPC Python client for interacting with our powerful recognition
+[API](https://docs.clarifai.com).
+The Clarifai API offers image and video recognition as a service. Whether you have one image or
+billions, you are only steps away from using artificial intelligence to recognize your visual
+content.
 
-In addition to the actual gRPC channel, it is also possible to use a JSON channel, which uses 
-JSON & HTTP/REST, while using the same request / response handling code.
+* Try the Clarifai demo at: https://clarifai.com/demo
+* Sign up for a free account at: https://portal.clarifai.com/signup
+* Read the documentation at: https://docs.clarifai.com/
+
 
 [![PyPI version](https://pypip.in/v/clarifai-grpc/badge.png)](https://pypi.python.org/pypi/clarifai-grpc)
 
@@ -16,6 +22,9 @@ pip install clarifai-grpc
 ```
 
 ## Getting started
+
+Alternatively to using the gRPC channel, it is also possible to use the HTTP+JSON channel with the
+exact same request / response handling code.
 
 Construct the channel you want to use:
 
