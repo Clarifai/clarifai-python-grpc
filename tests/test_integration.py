@@ -34,6 +34,10 @@ def _assert_post_model_outputs(channel):
     ])
   metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
   response = stub.PostModelOutputs(request, metadata=metadata)
+
+  if response.status.code != status_code_pb2.SUCCESS:
+      raise Exception(response.status.description + " " + response.status.details)
+
   assert len(response.outputs[0].data.concepts) > 0
 
 
@@ -54,7 +58,9 @@ def _assert_post_patch_delete_input(channel):
     ]
   )
   post_response = stub.PostInputs(post_request, metadata=metadata)
-  assert status_code_pb2.SUCCESS == post_response.status.code
+
+  if post_response.status.code != status_code_pb2.SUCCESS:
+      raise Exception(post_response.status.description + " " + post_response.status.details)
 
   input_id = post_response.inputs[0].id
 
