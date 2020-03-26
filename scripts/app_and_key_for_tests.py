@@ -12,8 +12,8 @@ except ImportError:
     from urllib2 import urlopen, Request, HTTPError, build_opener, HTTPHandler
 
 
-EMAIL = os.environ['secrets.CLARIFAI_USER_EMAIL']
-PASSWORD = os.environ['secrets.CLARIFAI_USER_PASSWORD']
+EMAIL = os.environ['CLARIFAI_USER_EMAIL']
+PASSWORD = os.environ['CLARIFAI_USER_PASSWORD']
 
 
 BASE = 'https://api.clarifai.com/v2'

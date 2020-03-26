@@ -28,6 +28,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Prepare the API keys
+      env:
+        CLARIFAI_USER_EMAIL: ${{ secrets.CLARIFAI_USER_EMAIL }}
+        CLARIFAI_USER_PASSWORD: ${{ secrets.CLARIFAI_USER_PASSWORD }}
       run: |
         export PYTHONPATH=.
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
