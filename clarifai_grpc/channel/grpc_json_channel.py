@@ -10,6 +10,7 @@ from google.protobuf.message import Message  # noqa
 from clarifai_grpc.channel import http_client
 from clarifai_grpc.channel.custom_converters.custom_dict_to_message import dict_to_protobuf
 from clarifai_grpc.channel.custom_converters.custom_message_to_dict import protobuf_to_dict
+from clarifai_grpc.channel.errors import UsageError
 from clarifai_grpc.grpc.api.service_pb2 import _V2
 
 
@@ -40,20 +41,21 @@ class GRPCJSONChannel(object):
       url="http://...")))]))
   """
 
-  def __init__(self, session, key, base_url=BASE_URL, service_descriptor=_V2):
-    # type: (requests.Session, str, str, typing.Any) -> None
+  def __init__(
+      self,
+      session: requests.Session,
+      base_url: str = BASE_URL,
+      service_descriptor: typing.Any = _V2
+  ) -> None:
     """
     Args:
       session: a request session
-      key: a string api key to use in the {"Authorization": "Key %s" % key} headers to send in each
-    request.
       base_url: if you want to point at a different url than the default.
-      service_description: This is a ServiceDescriptor object found in the compiled grpc-gateway
+      service_descriptor: This is a ServiceDescriptor object found in the compiled grpc-gateway
     .proto results. For example if your proto defining the endpoints is in endpoint.proto then look
     in endpoint_pb2.py file for ServiceDescriptor and use that.
     """
     self.session = session
-    self.key = key
     self.name_to_resources = {}
 
     for m in service_descriptor.methods:
@@ -102,8 +104,8 @@ class GRPCJSONChannel(object):
     # type: (str, typing.Callable, typing.Callable) -> JSONUnaryUnary
     """ Method to create the callable JSONUnaryUnary. """
     request_message_descriptor, resources = self.name_to_resources[name]
-    return JSONUnaryUnary(self.session, self.key, request_message_descriptor, resources,
-                          request_serializer, response_deserializer)
+    return JSONUnaryUnary(self.session, request_message_descriptor, resources, request_serializer,
+                          response_deserializer)
 
 
 class JSONUnaryUnary(object):
@@ -113,7 +115,6 @@ class JSONUnaryUnary(object):
   def __init__(
       self,
       session,  # type: requests.Session
-      key,  # type: str
       request_message_descriptor,  # type: Descriptor
       resources,  # type: typing.List[typing.Tuple[str, typing.Any]]
       request_serializer,  # type: typing.Callable
@@ -123,8 +124,6 @@ class JSONUnaryUnary(object):
     """
     Args:
       session: a request session
-      key: a string api key to use in the {"Authorization": "Key %s" % key} headers to send in each
-           request.
       request_message_descriptor: this is a MessageDescriptor for the input type.
       resources: a list of available resource endpoints
       request_serializer: the method to use to serialize the request proto
@@ -134,12 +133,11 @@ class JSONUnaryUnary(object):
     Returns:
       response: a proto object of class response_deserializer filled in with the response.
     """
-    self.key = key
+    self.session = session
     self.request_message_descriptor = request_message_descriptor
     self.resources = resources
     self.request_serializer = request_serializer
     self.response_deserializer = response_deserializer
-    self.http_client = http_client.HttpClient(session, key)
 
   def __call__(self, request, metadata=None):  # type: (Message, tuple) -> Message
     """ This is where the actually calls come through when the stub is called such as
@@ -170,13 +168,28 @@ class JSONUnaryUnary(object):
     for url_field in url_fields:
       del params[url_field]
 
-    response_json = self.http_client.execute_request(method, params, url)
+    api_key = self._read_api_key(metadata)
+
+    http = http_client.HttpClient(self.session, api_key)
+    response_json = http.execute_request(method, params, url)
 
     # Get the actual message object to construct
     message = self.response_deserializer
     result = dict_to_protobuf(message, response_json, ignore_unknown_fields=True)
 
     return result
+
+  def _read_api_key(self, metadata: typing.Tuple) -> str:
+    authorization_values = [v for k, v in metadata if k.lower() == "authorization"]
+    if (
+        len(authorization_values) != 1 or
+        not authorization_values[0].startswith("Key ") or
+        len(authorization_values[0].split(" ")) != 2
+    ):
+      raise UsageError("Please provide metadata with the format of "
+                       "(('authorization', 'Key YOUR_CLARIFAI_API_KEY'),)")
+    api_key = authorization_values[0].split(" ")[1]
+    return api_key
 
 
 def _pick_proper_endpoint(
