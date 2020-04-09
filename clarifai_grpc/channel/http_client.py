@@ -37,7 +37,7 @@ class HttpClient:
                  json.dumps(succinct_payload, indent=2))
     try:
       if method == 'GET':
-        res = self._session.get(url, params=params, headers=headers)
+        res = self._session.get(url, params=self._encode_get_params(params), headers=headers)
       elif method == "POST":
         res = self._session.post(url, data=json.dumps(params), headers=headers)
       elif method == "DELETE":
@@ -104,3 +104,22 @@ class HttpClient:
       return original_base64[:10] + '......' + original_base64[-10:]
     else:
       return original_base64
+
+  def _encode_get_params(self, params):
+    """
+    Encodes message params into format for use in GET args
+    """
+    encoded_params = {}
+    for (k, v) in params.items():
+      if isinstance(v, str):
+        encoded_params[k] = v
+      elif isinstance(v, bytes):
+        encoded_params[k] = v.decode("utf-8")
+      elif isinstance(v, (int, float, bool)):
+        encoded_params[k] = str(v)
+      elif isinstance(v, dict):
+        for (subk, subv) in self._encode_get_params(v).items():
+          encoded_params[k + '.' + subk] = subv
+      else:
+        raise TypeError('Cannot convert type for get params: %s' % type(v))
+    return encoded_params
