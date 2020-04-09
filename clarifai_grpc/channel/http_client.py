@@ -3,7 +3,6 @@ import json
 import logging
 import os
 import typing  # noqa
-from pprint import pformat
 
 import requests
 
@@ -34,8 +33,8 @@ class HttpClient:
     }
     logger.debug("=" * 100)
     succinct_payload = self._mangle_base64_values(params)
-    logger.debug("%s %s\nHEADERS:\n%s\nPAYLOAD:\n%s", method, url, pformat(headers),
-                 pformat(succinct_payload))
+    logger.debug("%s %s\nHEADERS:\n%s\nPAYLOAD:\n%s", method, url, json.dumps(headers, indent=2),
+                 json.dumps(succinct_payload, indent=2))
     try:
       if method == 'GET':
         res = self._session.get(url, params=params, headers=headers)
@@ -55,11 +54,11 @@ class HttpClient:
       response_json = json.loads(res.content.decode('utf-8'))
     except ValueError:
       logger.exception("Could not get valid JSON from server response.")
-      logger.debug("\nRESULT:\n%s", pformat(res.content.decode('utf-8')))
+      logger.debug("\nRESULT:\n%s", json.dumps(res.text, indent=2))
       error = ApiError(url, params, method, res)
       raise error
     else:
-      logger.debug("\nRESULT:\n%s", pformat(response_json))
+      logger.debug("\nRESULT:\n%s", json.dumps(response_json, indent=2))
     if int(res.status_code / 100) != 2:
       error = ApiError(url, params, method, res)
       logger.warning("%s", str(error))
