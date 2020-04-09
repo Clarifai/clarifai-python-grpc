@@ -7,10 +7,7 @@ from pprint import pformat
 
 import requests
 
-
-class ApiError(Exception):
-  pass
-
+from clarifai_grpc.channel.errors import ApiError
 
 CLIENT_VERSION = '0.1.0'
 OS_VER = os.sys.platform
