@@ -13,6 +13,7 @@ content.
 * Read the documentation at: https://docs.clarifai.com/
 
 
+![Build](https://github.com/Clarifai/clarifai-python-grpc/workflows/.github/workflows/ci.yml/badge.svg)
 [![PyPI version](https://pypip.in/v/clarifai-grpc/badge.png)](https://pypi.python.org/pypi/clarifai-grpc)
 
 ## Installation
