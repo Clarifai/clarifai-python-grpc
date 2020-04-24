@@ -8,6 +8,7 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 
 DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
+NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 
 
 def test_post_model_outputs_on_json_channel():
@@ -16,6 +17,22 @@ def test_post_model_outputs_on_json_channel():
 
 def test_post_model_outputs_on_grpc_channel():
   _assert_post_model_outputs(ClarifaiChannel.get_insecure_grpc_channel())
+
+
+def test_failed_post_model_outputs_on_json_channel():
+  _assert_failed_post_model_outputs(ClarifaiChannel.get_json_channel())
+
+
+def test_failed_post_model_outputs_on_grpc_channel():
+  _assert_failed_post_model_outputs(ClarifaiChannel.get_insecure_grpc_channel())
+
+
+def test_mixed_success_post_model_outputs_on_json_channel():
+  _assert_mixed_success_post_model_outputs(ClarifaiChannel.get_json_channel())
+
+
+def test_mixed_success_post_model_outputs_on_grpc_channel():
+  _assert_mixed_success_post_model_outputs(ClarifaiChannel.get_insecure_grpc_channel())
 
 
 def test_post_patch_delete_input_on_json_channel():
@@ -56,6 +73,39 @@ def _assert_post_model_outputs(channel):
       raise Exception(response.status.description + " " + response.status.details)
 
   assert len(response.outputs[0].data.concepts) > 0
+
+
+def _assert_failed_post_model_outputs(channel):
+  stub = service_pb2_grpc.V2Stub(channel)
+  request = service_pb2.PostModelOutputsRequest(
+    model_id='aaa03c23b3724a16a56b629203edc62c',
+    inputs=[
+      resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL)))
+    ])
+  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
+  response = stub.PostModelOutputs(request, metadata=metadata)
+
+  assert response.status.code == status_code_pb2.FAILURE
+  assert response.status.description == "Failure"
+
+  assert response.outputs[0].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
+
+
+def _assert_mixed_success_post_model_outputs(channel):
+  stub = service_pb2_grpc.V2Stub(channel)
+  request = service_pb2.PostModelOutputsRequest(
+    model_id='aaa03c23b3724a16a56b629203edc62c',
+    inputs=[
+      resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))),
+      resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL)))
+    ])
+  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
+  response = stub.PostModelOutputs(request, metadata=metadata)
+
+  assert response.status.code == status_code_pb2.MIXED_STATUS
+
+  assert response.outputs[0].status.code == status_code_pb2.SUCCESS
+  assert response.outputs[1].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
 
 
 def _assert_post_patch_delete_input(channel):
