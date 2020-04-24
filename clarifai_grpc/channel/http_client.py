@@ -59,10 +59,6 @@ class HttpClient:
       raise error
     else:
       logger.debug("\nRESULT:\n%s", json.dumps(response_json, indent=2))
-    if int(res.status_code / 100) != 2:
-      error = ApiError(url, params, method, res)
-      logger.warning("%s", str(error))
-      raise error
     return response_json
 
   def _mangle_base64_values(self, params):  # type: (dict) -> dict
