@@ -10,6 +10,8 @@ DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 
+metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
+
 
 def test_post_model_outputs_on_json_channel():
   _assert_post_model_outputs(ClarifaiChannel.get_json_channel())
@@ -66,7 +68,6 @@ def _assert_post_model_outputs(channel):
     inputs=[
       resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)))
     ])
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
   response = stub.PostModelOutputs(request, metadata=metadata)
 
   if response.status.code != status_code_pb2.SUCCESS:
@@ -82,7 +83,6 @@ def _assert_failed_post_model_outputs(channel):
     inputs=[
       resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL)))
     ])
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
   response = stub.PostModelOutputs(request, metadata=metadata)
 
   assert response.status.code == status_code_pb2.FAILURE
@@ -99,7 +99,6 @@ def _assert_mixed_success_post_model_outputs(channel):
       resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))),
       resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL)))
     ])
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
   response = stub.PostModelOutputs(request, metadata=metadata)
 
   assert response.status.code == status_code_pb2.MIXED_STATUS
@@ -110,7 +109,6 @@ def _assert_mixed_success_post_model_outputs(channel):
 
 def _assert_post_patch_delete_input(channel):
   stub = service_pb2_grpc.V2Stub(channel)
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
   post_request = service_pb2.PostInputsRequest(
     inputs=[
@@ -165,7 +163,6 @@ def _assert_post_patch_delete_input(channel):
 
 def _assert_list_models_with_pagination(channel):
   stub = service_pb2_grpc.V2Stub(channel)
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
   response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata)
   if response.status.code != status_code_pb2.SUCCESS:
@@ -185,7 +182,6 @@ def _assert_list_models_with_pagination(channel):
 def _assert_multiple_requests(channel):
   model_id = str(uuid.uuid4())
 
-  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
   stub = service_pb2_grpc.V2Stub(channel)
 
   _raise_on_failure(
