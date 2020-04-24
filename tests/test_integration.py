@@ -70,8 +70,7 @@ def _assert_post_model_outputs(channel):
     ])
   response = stub.PostModelOutputs(request, metadata=metadata)
 
-  if response.status.code != status_code_pb2.SUCCESS:
-      raise Exception(response.status.description + " " + response.status.details)
+  _raise_on_failure(response)
 
   assert len(response.outputs[0].data.concepts) > 0
 
@@ -124,8 +123,7 @@ def _assert_post_patch_delete_input(channel):
   )
   post_response = stub.PostInputs(post_request, metadata=metadata)
 
-  if post_response.status.code != status_code_pb2.SUCCESS:
-      raise Exception(post_response.status.description + " " + post_response.status.details)
+  _raise_on_failure(post_response)
 
   input_id = post_response.inputs[0].id
 
