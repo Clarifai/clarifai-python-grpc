@@ -26,6 +26,14 @@ def test_post_patch_delete_input_on_grpc_channel():
   _assert_post_patch_delete_input(ClarifaiChannel.get_insecure_grpc_channel())
 
 
+def test_list_models_with_pagination_on_json_channel():
+  _assert_list_models_with_pagination(ClarifaiChannel.get_json_channel())
+
+
+def test_list_models_with_pagination_on_grpc_channel():
+  _assert_list_models_with_pagination(ClarifaiChannel.get_insecure_grpc_channel())
+
+
 def test_multiple_requests_on_json_channel():
   _assert_multiple_requests(ClarifaiChannel.get_json_channel())
 
@@ -103,6 +111,25 @@ def _assert_post_patch_delete_input(channel):
     delete_request = service_pb2.DeleteInputRequest(input_id=input_id)
     delete_response = stub.DeleteInput(delete_request, metadata=metadata)
     assert status_code_pb2.SUCCESS == delete_response.status.code
+
+
+def _assert_list_models_with_pagination(channel):
+  stub = service_pb2_grpc.V2Stub(channel)
+  metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
+
+  response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata)
+  if response.status.code != status_code_pb2.SUCCESS:
+    raise Exception(response.status.description + " " + response.status.details)
+  assert len(response.models) == 2
+
+  # We shouldn 't have 1000*500 number of models, so the result should be empty.
+  response = stub.ListModels(
+    service_pb2.ListModelsRequest(page=1000, per_page=500),
+    metadata=metadata
+  )
+  if response.status.code != status_code_pb2.SUCCESS:
+    raise Exception(response.status.description + " " + response.status.details)
+  assert len(response.models) == 0
 
 
 def _assert_multiple_requests(channel):
