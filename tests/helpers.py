@@ -34,8 +34,13 @@ def _wait_for_inputs_upload(stub, metadata, input_ids):
                                                     status_code_pb2.INPUT_DOWNLOAD_IN_PROGRESS):
         time.sleep(1)
       else:
+        error_message = (
+          str(get_input_response.status.code) + " " +
+          get_input_response.status.description + " " +
+          get_input_response.status.details
+        )
         raise Exception(
-          get_input_response.status.description + " " + get_input_response.status.details
+          f"Expected inputs to upload, but got {error_message}. Full response: {get_input_response}"
         )
   # At this point, all inputs have been downloaded successfully.
 
@@ -53,8 +58,13 @@ def _wait_for_model_trained(stub, metadata, model_id, model_version_id):
                                                 status_code_pb2.MODEL_TRAINING):
       time.sleep(1)
     else:
+      error_message = (
+        str(response.status.code) + " " +
+        response.status.description + " " +
+        response.status.details
+      )
       raise Exception(
-        response.status.description + " " + response.status.details
+        f"Expected model to train, but got {error_message}. Full response: {response}"
       )
   # At this point, the model has successfully finished training.
 
@@ -72,15 +82,24 @@ def _wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
                                                         status_code_pb2.MODEL_EVALUATING):
       time.sleep(1)
     else:
+      error_message = (
+        str(response.status.code) + " " +
+        response.status.description + " " +
+        response.status.details
+      )
       raise Exception(
-        response.status.description + " " + response.status.details
+        f"Expected model to evaluate, but got {error_message}. Full response: {response}"
       )
   # At this point, the model has successfully finished evaluation.
 
 
 def _raise_on_failure(response):
   if response.status.code != status_code_pb2.SUCCESS:
-    message = str(response.status.code) + " " + response.status.description + " " + response.status.details
+    error_message = (
+      str(response.status.code) + " " +
+      response.status.description + " " +
+      response.status.details
+    )
     raise Exception(
-      f"Received failure response `{message}`. Whole response object: {response}"
+      f"Received failure response `{error_message}`. Whole response object: {response}"
     )
