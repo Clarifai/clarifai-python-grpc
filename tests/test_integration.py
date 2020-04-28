@@ -128,8 +128,7 @@ def test_list_models_with_pagination(channel):
   stub = service_pb2_grpc.V2Stub(channel)
 
   response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata)
-  if response.status.code != status_code_pb2.SUCCESS:
-    raise Exception(response.status.description + " " + response.status.details)
+  _raise_on_failure(response)
   assert len(response.models) == 2
 
   # We shouldn 't have 1000*500 number of models, so the result should be empty.
@@ -137,8 +136,7 @@ def test_list_models_with_pagination(channel):
     service_pb2.ListModelsRequest(page=1000, per_page=500),
     metadata=metadata
   )
-  if response.status.code != status_code_pb2.SUCCESS:
-    raise Exception(response.status.description + " " + response.status.details)
+  _raise_on_failure(response)
   assert len(response.models) == 0
 
 
