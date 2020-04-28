@@ -83,8 +83,7 @@ def _wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
 
 def _raise_on_failure(response):
   if response.status.code != status_code_pb2.SUCCESS:
-    print("Received failure response:")
-    print(response)
+    message = str(response.status.code) + " " + response.status.description + " " + response.status.details
     raise Exception(
-      str(response.status.code) + " " + response.status.description + " " + response.status.details
+      f"Received failure response `{message}`. Whole response object: {response}"
     )
