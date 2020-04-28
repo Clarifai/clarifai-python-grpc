@@ -33,7 +33,6 @@ def _wait_for_inputs_upload(stub, metadata, input_ids):
       elif get_input_response.input.status.code in (status_code_pb2.INPUT_DOWNLOAD_PENDING,
                                                     status_code_pb2.INPUT_DOWNLOAD_IN_PROGRESS):
         time.sleep(1)
-        continue
       else:
         raise Exception(
           get_input_response.status.description + " " + get_input_response.status.details
@@ -53,7 +52,6 @@ def _wait_for_model_trained(stub, metadata, model_id, model_version_id):
     elif response.model_version.status.code in (status_code_pb2.MODEL_QUEUED_FOR_TRAINING,
                                                 status_code_pb2.MODEL_TRAINING):
       time.sleep(1)
-      continue
     else:
       raise Exception(
         response.status.description + " " + response.status.details
@@ -73,7 +71,6 @@ def _wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     elif response.model_version.metrics.status.code in (status_code_pb2.MODEL_QUEUED_FOR_EVALUATION,
                                                         status_code_pb2.MODEL_EVALUATING):
       time.sleep(1)
-      continue
     else:
       raise Exception(
         response.status.description + " " + response.status.details
