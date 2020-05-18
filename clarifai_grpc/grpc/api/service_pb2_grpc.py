@@ -51,10 +51,100 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
         )
+    self.GetConceptLanguage = channel.unary_unary(
+        '/clarifai.api.V2/GetConceptLanguage',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptLanguageRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleConceptLanguageResponse),
+        )
+    self.ListConceptLanguages = channel.unary_unary(
+        '/clarifai.api.V2/ListConceptLanguages',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptLanguagesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse),
+        )
+    self.PostConceptLanguages = channel.unary_unary(
+        '/clarifai.api.V2/PostConceptLanguages',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptLanguagesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse),
+        )
+    self.PatchConceptLanguages = channel.unary_unary(
+        '/clarifai.api.V2/PatchConceptLanguages',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse),
+        )
+    self.ListConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/ListConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
+        )
+    self.PostConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/PostConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
+        )
+    self.DeleteConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/DeleteConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.ListKnowledgeGraphs = channel.unary_unary(
+        '/clarifai.api.V2/ListKnowledgeGraphs',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse),
+        )
+    self.PostKnowledgeGraphs = channel.unary_unary(
+        '/clarifai.api.V2/PostKnowledgeGraphs',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse),
+        )
+    self.PostConceptMappingJobs = channel.unary_unary(
+        '/clarifai.api.V2/PostConceptMappingJobs',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse),
+        )
+    self.GetAnnotation = channel.unary_unary(
+        '/clarifai.api.V2/GetAnnotation',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleAnnotationResponse),
+        )
+    self.ListAnnotations = channel.unary_unary(
+        '/clarifai.api.V2/ListAnnotations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
+        )
+    self.PostAnnotations = channel.unary_unary(
+        '/clarifai.api.V2/PostAnnotations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
+        )
+    self.PatchAnnotations = channel.unary_unary(
+        '/clarifai.api.V2/PatchAnnotations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
+        )
+    self.DeleteAnnotation = channel.unary_unary(
+        '/clarifai.api.V2/DeleteAnnotation',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.DeleteAnnotations = channel.unary_unary(
+        '/clarifai.api.V2/DeleteAnnotations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PostAnnotationsSearches = channel.unary_unary(
+        '/clarifai.api.V2/PostAnnotationsSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
     self.GetInputCount = channel.unary_unary(
         '/clarifai.api.V2/GetInputCount',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputCountResponse),
+        )
+    self.StreamInputs = channel.unary_unary(
+        '/clarifai.api.V2/StreamInputs',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamInputsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
         )
     self.GetInput = channel.unary_unary(
         '/clarifai.api.V2/GetInput',
@@ -85,6 +175,11 @@ class V2Stub(object):
         '/clarifai.api.V2/DeleteInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PostInputsSearches = channel.unary_unary(
+        '/clarifai.api.V2/PostInputsSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
         )
     self.PostModelOutputs = channel.unary_unary(
         '/clarifai.api.V2/PostModelOutputs',
@@ -201,6 +296,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse),
         )
+    self.PostWorkflowResultsSimilarity = channel.unary_unary(
+        '/clarifai.api.V2/PostWorkflowResultsSimilarity',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse),
+        )
     self.GetKey = channel.unary_unary(
         '/clarifai.api.V2/GetKey',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.SerializeToString,
@@ -231,6 +331,16 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchKeysRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse),
         )
+    self.MyScopes = channel.unary_unary(
+        '/clarifai.api.V2/MyScopes',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeResponse),
+        )
+    self.ListScopes = channel.unary_unary(
+        '/clarifai.api.V2/ListScopes',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListScopesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeDepsResponse),
+        )
     self.GetApp = channel.unary_unary(
         '/clarifai.api.V2/GetApp',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppRequest.SerializeToString,
@@ -256,10 +366,50 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
         )
+    self.PostValidatePassword = channel.unary_unary(
+        '/clarifai.api.V2/PostValidatePassword',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SinglePasswordValidationResponse),
+        )
+    self.GetSearch = channel.unary_unary(
+        '/clarifai.api.V2/GetSearch',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSearchRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleSearchResponse),
+        )
+    self.ListSearches = channel.unary_unary(
+        '/clarifai.api.V2/ListSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
     self.PostSearches = channel.unary_unary(
         '/clarifai.api.V2/PostSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
+    self.PostSearchesByID = channel.unary_unary(
+        '/clarifai.api.V2/PostSearchesByID',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesByIDRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
+    self.PostAnnotationSearchMetrics = channel.unary_unary(
+        '/clarifai.api.V2/PostAnnotationSearchMetrics',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationSearchMetricsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
+        )
+    self.GetAnnotationSearchMetrics = channel.unary_unary(
+        '/clarifai.api.V2/GetAnnotationSearchMetrics',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationSearchMetricsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
+        )
+    self.ListAnnotationSearchMetrics = channel.unary_unary(
+        '/clarifai.api.V2/ListAnnotationSearchMetrics',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
+        )
+    self.DeleteSearch = channel.unary_unary(
+        '/clarifai.api.V2/DeleteSearch',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSearchRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
     self.ListStatusCodes = channel.unary_unary(
         '/clarifai.api.V2/ListStatusCodes',
@@ -270,6 +420,106 @@ class V2Stub(object):
         '/clarifai.api.V2/GetStatusCode',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse),
+        )
+    self.ListCollaborators = channel.unary_unary(
+        '/clarifai.api.V2/ListCollaborators',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaboratorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse),
+        )
+    self.PostCollaborators = channel.unary_unary(
+        '/clarifai.api.V2/PostCollaborators',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollaboratorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse),
+        )
+    self.PatchCollaborators = channel.unary_unary(
+        '/clarifai.api.V2/PatchCollaborators',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollaboratorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse),
+        )
+    self.DeleteCollaborators = channel.unary_unary(
+        '/clarifai.api.V2/DeleteCollaborators',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollaboratorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.ListCollaborations = channel.unary_unary(
+        '/clarifai.api.V2/ListCollaborations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaborationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaborationsResponse),
+        )
+    self.PostAppDuplications = channel.unary_unary(
+        '/clarifai.api.V2/PostAppDuplications',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppDuplicationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppDuplicationsResponse),
+        )
+    self.ListAppDuplications = channel.unary_unary(
+        '/clarifai.api.V2/ListAppDuplications',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppDuplicationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppDuplicationsResponse),
+        )
+    self.GetAppDuplication = channel.unary_unary(
+        '/clarifai.api.V2/GetAppDuplication',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppDuplicationRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppDuplicationResponse),
+        )
+    self.PostTasks = channel.unary_unary(
+        '/clarifai.api.V2/PostTasks',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse),
+        )
+    self.GetTask = channel.unary_unary(
+        '/clarifai.api.V2/GetTask',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskResponse),
+        )
+    self.ListTasks = channel.unary_unary(
+        '/clarifai.api.V2/ListTasks',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTasksRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse),
+        )
+    self.PatchTasks = channel.unary_unary(
+        '/clarifai.api.V2/PatchTasks',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchTasksRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse),
+        )
+    self.DeleteTasks = channel.unary_unary(
+        '/clarifai.api.V2/DeleteTasks',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PostCollectors = channel.unary_unary(
+        '/clarifai.api.V2/PostCollectors',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
+        )
+    self.GetCollector = channel.unary_unary(
+        '/clarifai.api.V2/GetCollector',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetCollectorRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleCollectorResponse),
+        )
+    self.ListCollectors = channel.unary_unary(
+        '/clarifai.api.V2/ListCollectors',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollectorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
+        )
+    self.PatchCollectors = channel.unary_unary(
+        '/clarifai.api.V2/PatchCollectors',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollectorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
+        )
+    self.DeleteCollectors = channel.unary_unary(
+        '/clarifai.api.V2/DeleteCollectors',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollectorsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PostStatValues = channel.unary_unary(
+        '/clarifai.api.V2/PostStatValues',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueResponse),
+        )
+    self.PostStatValuesAggregate = channel.unary_unary(
+        '/clarifai.api.V2/PostStatValuesAggregate',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse),
         )
 
 
@@ -330,12 +580,157 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetConceptLanguage(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Concept Languages
+    //////////////////////////////////////
+
+    Get a specific concept from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListConceptLanguages(self, request, context):
+    """List the concept in all the translated languages.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostConceptLanguages(self, request, context):
+    """Add a new tranlsation for this concept.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchConceptLanguages(self, request, context):
+    """Patch the name for a given language names by passing in a list of concepts with the new names
+    for the languages.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListConceptRelations(self, request, context):
+    """//////////////////////////////////////
+    Concept Relationships
+    //////////////////////////////////////
+
+    List concept relations between concepts in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostConceptRelations(self, request, context):
+    """Post concept relations to create relations between concepts in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteConceptRelations(self, request, context):
+    """Post concept relations to create relations between concepts in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListKnowledgeGraphs(self, request, context):
+    """//////////////////////////////////////
+    Knowledge Graph
+    //////////////////////////////////////
+
+    List all domain graphs.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostKnowledgeGraphs(self, request, context):
+    """Post domain graphs.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostConceptMappingJobs(self, request, context):
+    """Start concept mapping jobs.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetAnnotation(self, request, context):
+    """//////////////////////////////////////
+    annotations
+    //////////////////////////////////////
+
+    Get a specific annotation from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListAnnotations(self, request, context):
+    """List all the annotation.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostAnnotations(self, request, context):
+    """Post annotations.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchAnnotations(self, request, context):
+    """Patch one or more annotations.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteAnnotation(self, request, context):
+    """Delete a single annotation.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteAnnotations(self, request, context):
+    """Delete multiple annotations in one request.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostAnnotationsSearches(self, request, context):
+    """Execute a search over annotation
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def GetInputCount(self, request, context):
     """//////////////////////////////////////
     Inputs
     //////////////////////////////////////
 
     Patch one or more inputs.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def StreamInputs(self, request, context):
+    """Streams all the inputs starting from oldest assets.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -381,6 +776,13 @@ class V2Servicer(object):
   def DeleteInputs(self, request, context):
     """Delete multiple inputs in one request.
     This call is asynchronous. Use DeleteInput if you want a synchronous version.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostInputsSearches(self, request, context):
+    """Execute a search over input
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -572,6 +974,14 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PostWorkflowResultsSimilarity(self, request, context):
+    """Compare embeddings distances using a workflow
+
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def GetKey(self, request, context):
     """//////////////////////////////////////
 
@@ -622,6 +1032,22 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def MyScopes(self, request, context):
+    """API Keys in the public API -- request is itself Key authorized, and will tell
+    the user the scopes/access of the key/credential they're providing, as computed by
+    our authorizer:
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListScopes(self, request, context):
+    """List all auth scopes available.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def GetApp(self, request, context):
     """//////////////////////////////////////
     Apps
@@ -665,8 +1091,76 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PostValidatePassword(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Password
+    //////////////////////////////////////
+
+    Validate new password in real-time for a user
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetSearch(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Searches
+    //////////////////////////////////////
+
+    Get a saved search.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListSearches(self, request, context):
+    """List all saved searches.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def PostSearches(self, request, context):
     """Execute a new search and optionally save it.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostSearchesByID(self, request, context):
+    """Execute a previously saved search.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostAnnotationSearchMetrics(self, request, context):
+    """Evaluate the results of two search requests
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetAnnotationSearchMetrics(self, request, context):
+    """Get the evaluation results between two search requests
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListAnnotationSearchMetrics(self, request, context):
+    """List the evaluation results between two search requests
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteSearch(self, request, context):
+    """Delete a saved search.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -688,6 +1182,172 @@ class V2Servicer(object):
   def GetStatusCode(self, request, context):
     """Get more details for a status code.
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListCollaborators(self, request, context):
+    """//////////////////////////////////////
+    App Sharing
+    //////////////////////////////////////
+
+    owner list users who the app is shared with
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostCollaborators(self, request, context):
+    """add collaborators to an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchCollaborators(self, request, context):
+    """Patch existing collaborators.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteCollaborators(self, request, context):
+    """Delete existing collaborators.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListCollaborations(self, request, context):
+    """Collaboration includes the app user are invitied to work on
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostAppDuplications(self, request, context):
+    """//////////////////////////////////////
+    App duplication
+    //////////////////////////////////////
+
+    start to duplicate an app which copies all the inputs, annotations, models, concepts etc. to a new app.
+    this is an async process, you should use ListAppDuplications or GetAppDuplication to check the status.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListAppDuplications(self, request, context):
+    """list all the app duplications user triggers
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetAppDuplication(self, request, context):
+    """get the app duplication status
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostTasks(self, request, context):
+    """//////////////////////////////////////
+    Tasks
+    //////////////////////////////////////
+
+    Add tasks to an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetTask(self, request, context):
+    """Get a specific task from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListTasks(self, request, context):
+    """List tasks from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchTasks(self, request, context):
+    """Patch one or more tasks.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteTasks(self, request, context):
+    """Delete multiple tasks in one request.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostCollectors(self, request, context):
+    """//////////////////////////////////////
+    Collectors
+    //////////////////////////////////////
+
+    Add a list of Collectors to an app.
+    In the handler of this endpoint we also check for all the scopes of the  POST /inputs
+    endpoint.
+    Those current scopes are listed here as a hard requirement.
+    They are needed when adding the collectors just so we now that you have permission with
+    that key at least to do the writing to this app with POST /inputs.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetCollector(self, request, context):
+    """Get a specific collector from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListCollectors(self, request, context):
+    """List all the collectors.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchCollectors(self, request, context):
+    """Patch one or more collectors.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteCollectors(self, request, context):
+    """Delete multiple collectors in one request.
+    This call is asynchronous. Use DeleteCollector if you want a synchronous version.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostStatValues(self, request, context):
+    """//////////////////////////////////////////////////////////////////////////////
+    Stats Collection Endpoints.
+    //////////////////////////////////////////////////////////////////////////////
+
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostStatValuesAggregate(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -725,10 +1385,100 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
       ),
+      'GetConceptLanguage': grpc.unary_unary_rpc_method_handler(
+          servicer.GetConceptLanguage,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptLanguageRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleConceptLanguageResponse.SerializeToString,
+      ),
+      'ListConceptLanguages': grpc.unary_unary_rpc_method_handler(
+          servicer.ListConceptLanguages,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptLanguagesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse.SerializeToString,
+      ),
+      'PostConceptLanguages': grpc.unary_unary_rpc_method_handler(
+          servicer.PostConceptLanguages,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptLanguagesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse.SerializeToString,
+      ),
+      'PatchConceptLanguages': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchConceptLanguages,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse.SerializeToString,
+      ),
+      'ListConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.ListConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
+      ),
+      'PostConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.PostConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
+      ),
+      'DeleteConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'ListKnowledgeGraphs': grpc.unary_unary_rpc_method_handler(
+          servicer.ListKnowledgeGraphs,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.SerializeToString,
+      ),
+      'PostKnowledgeGraphs': grpc.unary_unary_rpc_method_handler(
+          servicer.PostKnowledgeGraphs,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.SerializeToString,
+      ),
+      'PostConceptMappingJobs': grpc.unary_unary_rpc_method_handler(
+          servicer.PostConceptMappingJobs,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.SerializeToString,
+      ),
+      'GetAnnotation': grpc.unary_unary_rpc_method_handler(
+          servicer.GetAnnotation,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAnnotationResponse.SerializeToString,
+      ),
+      'ListAnnotations': grpc.unary_unary_rpc_method_handler(
+          servicer.ListAnnotations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
+      ),
+      'PostAnnotations': grpc.unary_unary_rpc_method_handler(
+          servicer.PostAnnotations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
+      ),
+      'PatchAnnotations': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchAnnotations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
+      ),
+      'DeleteAnnotation': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteAnnotation,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'DeleteAnnotations': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteAnnotations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PostAnnotationsSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PostAnnotationsSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
       'GetInputCount': grpc.unary_unary_rpc_method_handler(
           servicer.GetInputCount,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputCountResponse.SerializeToString,
+      ),
+      'StreamInputs': grpc.unary_unary_rpc_method_handler(
+          servicer.StreamInputs,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamInputsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
       ),
       'GetInput': grpc.unary_unary_rpc_method_handler(
           servicer.GetInput,
@@ -759,6 +1509,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.DeleteInputs,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PostInputsSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PostInputsSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
       ),
       'PostModelOutputs': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelOutputs,
@@ -875,6 +1630,11 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse.SerializeToString,
       ),
+      'PostWorkflowResultsSimilarity': grpc.unary_unary_rpc_method_handler(
+          servicer.PostWorkflowResultsSimilarity,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse.SerializeToString,
+      ),
       'GetKey': grpc.unary_unary_rpc_method_handler(
           servicer.GetKey,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.FromString,
@@ -905,6 +1665,16 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchKeysRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKeyResponse.SerializeToString,
       ),
+      'MyScopes': grpc.unary_unary_rpc_method_handler(
+          servicer.MyScopes,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeResponse.SerializeToString,
+      ),
+      'ListScopes': grpc.unary_unary_rpc_method_handler(
+          servicer.ListScopes,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListScopesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeDepsResponse.SerializeToString,
+      ),
       'GetApp': grpc.unary_unary_rpc_method_handler(
           servicer.GetApp,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppRequest.FromString,
@@ -930,10 +1700,50 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
       ),
+      'PostValidatePassword': grpc.unary_unary_rpc_method_handler(
+          servicer.PostValidatePassword,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SinglePasswordValidationResponse.SerializeToString,
+      ),
+      'GetSearch': grpc.unary_unary_rpc_method_handler(
+          servicer.GetSearch,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSearchRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleSearchResponse.SerializeToString,
+      ),
+      'ListSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.ListSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
       'PostSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostSearches,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
+      'PostSearchesByID': grpc.unary_unary_rpc_method_handler(
+          servicer.PostSearchesByID,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesByIDRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
+      'PostAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
+          servicer.PostAnnotationSearchMetrics,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationSearchMetricsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
+      ),
+      'GetAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
+          servicer.GetAnnotationSearchMetrics,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationSearchMetricsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
+      ),
+      'ListAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
+          servicer.ListAnnotationSearchMetrics,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
+      ),
+      'DeleteSearch': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteSearch,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSearchRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'ListStatusCodes': grpc.unary_unary_rpc_method_handler(
           servicer.ListStatusCodes,
@@ -944,6 +1754,106 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.GetStatusCode,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.SerializeToString,
+      ),
+      'ListCollaborators': grpc.unary_unary_rpc_method_handler(
+          servicer.ListCollaborators,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaboratorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse.SerializeToString,
+      ),
+      'PostCollaborators': grpc.unary_unary_rpc_method_handler(
+          servicer.PostCollaborators,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollaboratorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse.SerializeToString,
+      ),
+      'PatchCollaborators': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchCollaborators,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollaboratorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaboratorsResponse.SerializeToString,
+      ),
+      'DeleteCollaborators': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteCollaborators,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollaboratorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'ListCollaborations': grpc.unary_unary_rpc_method_handler(
+          servicer.ListCollaborations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaborationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaborationsResponse.SerializeToString,
+      ),
+      'PostAppDuplications': grpc.unary_unary_rpc_method_handler(
+          servicer.PostAppDuplications,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppDuplicationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppDuplicationsResponse.SerializeToString,
+      ),
+      'ListAppDuplications': grpc.unary_unary_rpc_method_handler(
+          servicer.ListAppDuplications,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAppDuplicationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppDuplicationsResponse.SerializeToString,
+      ),
+      'GetAppDuplication': grpc.unary_unary_rpc_method_handler(
+          servicer.GetAppDuplication,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAppDuplicationRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppDuplicationResponse.SerializeToString,
+      ),
+      'PostTasks': grpc.unary_unary_rpc_method_handler(
+          servicer.PostTasks,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse.SerializeToString,
+      ),
+      'GetTask': grpc.unary_unary_rpc_method_handler(
+          servicer.GetTask,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskResponse.SerializeToString,
+      ),
+      'ListTasks': grpc.unary_unary_rpc_method_handler(
+          servicer.ListTasks,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTasksRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse.SerializeToString,
+      ),
+      'PatchTasks': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchTasks,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchTasksRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse.SerializeToString,
+      ),
+      'DeleteTasks': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteTasks,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PostCollectors': grpc.unary_unary_rpc_method_handler(
+          servicer.PostCollectors,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
+      ),
+      'GetCollector': grpc.unary_unary_rpc_method_handler(
+          servicer.GetCollector,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetCollectorRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleCollectorResponse.SerializeToString,
+      ),
+      'ListCollectors': grpc.unary_unary_rpc_method_handler(
+          servicer.ListCollectors,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollectorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
+      ),
+      'PatchCollectors': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchCollectors,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollectorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
+      ),
+      'DeleteCollectors': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteCollectors,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollectorsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PostStatValues': grpc.unary_unary_rpc_method_handler(
+          servicer.PostStatValues,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueResponse.SerializeToString,
+      ),
+      'PostStatValuesAggregate': grpc.unary_unary_rpc_method_handler(
+          servicer.PostStatValuesAggregate,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
