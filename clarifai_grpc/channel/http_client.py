@@ -19,8 +19,12 @@ logger = logging.getLogger('clarifai')
 
 class HttpClient:
 
-  def __init__(self, session, api_key):  # type: (requests.Session, str) -> None
-    self._api_key = api_key
+  def __init__(self, session, auth_string):  # type: (requests.Session, str) -> None
+    """
+    :param session: The requests session object.
+    :param auth_string: Either Clarifai's API key or Personal Access Token.
+    """
+    self._auth_string = auth_string
     self._session = session
 
   def execute_request(self, method, params, url):
@@ -29,7 +33,7 @@ class HttpClient:
         'Content-Type': 'application/json',
         'X-Clarifai-gRPC-Client': 'python:%s' % CLIENT_VERSION,
         'Python-Client': '%s:%s' % (OS_VER, PYTHON_VERSION),
-        'Authorization': 'Key %s' % self._api_key
+        'Authorization': 'Key %s' % self._auth_string
     }
     logger.debug("=" * 100)
     succinct_payload = self._mangle_base64_values(params)

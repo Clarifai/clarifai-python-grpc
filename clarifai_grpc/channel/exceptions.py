@@ -1,0 +1,2 @@
+class ClarifaiException(Exception):
+  pass

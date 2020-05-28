@@ -147,7 +147,7 @@ class JSONUnaryUnary(object):
       request: the proto object for the request. It must be the proper type for the request or the
         server will complain. Note: this doesn't type check the incoming request in the client but
         does make sure it can serialize before sending to the server atleast.
-      metadata: not used currently, just added to match grpc.
+      metadata: the authorization string (either API key or Personal Access Token)
 
     Returns:
       response: the proto object that this method returns.
@@ -166,11 +166,12 @@ class JSONUnaryUnary(object):
     url, method, url_fields = _pick_proper_endpoint(self.resources, params)
 
     for url_field in url_fields:
-      del params[url_field]
+      if url_field in params:
+        del params[url_field]
 
-    api_key = self._read_api_key(metadata)
+    auth_string = self._read_auth_string(metadata)
 
-    http = http_client.HttpClient(self.session, api_key)
+    http = http_client.HttpClient(self.session, auth_string)
     response_json = http.execute_request(method, params, url)
 
     # Get the actual message object to construct
@@ -179,7 +180,13 @@ class JSONUnaryUnary(object):
 
     return result
 
-  def _read_api_key(self, metadata: typing.Tuple) -> str:
+  def _read_auth_string(self, metadata: typing.Tuple) -> str:
+    """
+    The auth string returned is either an API key or a PAT (Personal Access Token).
+    :param metadata: The call metadata.
+    :return: The auth string.
+    """
+
     authorization_values = [v for k, v in metadata if k.lower() == "authorization"]
     if (
         len(authorization_values) != 1 or
@@ -190,6 +197,34 @@ class JSONUnaryUnary(object):
                        "(('authorization', 'Key YOUR_CLARIFAI_API_KEY'),)")
     api_key = authorization_values[0].split(" ")[1]
     return api_key
+
+
+def _read_app_info(data):
+  """
+  This function extracts the app_id and user_id values from the request object, or returns None.
+  :param data: The request object
+  :return: (app_id, user_id) or None
+  """
+  if type(data) is list:
+    for e in data:
+      vals = _read_app_info(e)
+      if vals:
+        return vals
+  elif type(data) is dict:
+    for k, v in data.items():
+      if k == "apps":
+        if len(v) == 1:
+          return v[0]["id"], v[0]["user_id"]
+        elif len(v) == 0:
+          return None
+        else:
+          raise
+      elif k == "metadata":
+        continue
+      vals = _read_app_info(v)
+      if vals:
+        return vals
+  return None
 
 
 def _pick_proper_endpoint(
@@ -213,6 +248,9 @@ def _pick_proper_endpoint(
   best_match_method = None
   best_match_count = -1
 
+  ids = _read_app_info(request_dict)
+  app_id, user_id = ids if ids else (None, None)
+
   all_fields = []
   best_match_url_fields = None
   for url_template, method in resources:
@@ -222,8 +260,18 @@ def _pick_proper_endpoint(
     count = 0
     url_fields = list(re.findall(URL_TEMPLATE_PARAM_REGEX, url_template))
     for field in url_fields:
+      field_name = field.split('.')[-1]
 
-      field_value = request_dict.get(field.split('.')[-1])
+      if field_name == "app_id":
+        field_value = app_id
+      elif field_name == "user_id":
+        if user_id:
+          field_value = user_id
+        else:
+          # "me" is the alias for the ID of the authorized user.
+          field_value = "me"
+      else:
+        field_value = request_dict.get(field_name)
       if not field_value:
         all_arguments_translated = False
         break
