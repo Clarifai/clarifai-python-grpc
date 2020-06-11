@@ -186,6 +186,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse),
         )
+    self.ListModelTypes = channel.unary_unary(
+        '/clarifai.api.V2/ListModelTypes',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelTypesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelTypeResponse),
+        )
     self.GetModel = channel.unary_unary(
         '/clarifai.api.V2/GetModel',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.SerializeToString,
@@ -405,6 +410,11 @@ class V2Stub(object):
         '/clarifai.api.V2/ListAnnotationSearchMetrics',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
+        )
+    self.DeleteAnnotationSearchMetrics = channel.unary_unary(
+        '/clarifai.api.V2/DeleteAnnotationSearchMetrics',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationSearchMetricsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
     self.DeleteSearch = channel.unary_unary(
         '/clarifai.api.V2/DeleteSearch',
@@ -795,14 +805,21 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetModel(self, request, context):
+  def ListModelTypes(self, request, context):
     """//////////////////////////////////////
 
     //////////////////////////////////////
     Models
     //////////////////////////////////////
 
-    Get a specific model from an app.
+    List all the models available in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetModel(self, request, context):
+    """Get a specific model from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -913,7 +930,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostModelVersionMetrics(self, request, context):
-    """Get the evaluation metrics for a model version.
+    """Run the evaluation metrics for a model version.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1155,6 +1172,13 @@ class V2Servicer(object):
   def ListAnnotationSearchMetrics(self, request, context):
     """List the evaluation results between two search requests
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteAnnotationSearchMetrics(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1520,6 +1544,11 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
       ),
+      'ListModelTypes': grpc.unary_unary_rpc_method_handler(
+          servicer.ListModelTypes,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelTypesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelTypeResponse.SerializeToString,
+      ),
       'GetModel': grpc.unary_unary_rpc_method_handler(
           servicer.GetModel,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelRequest.FromString,
@@ -1739,6 +1768,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.ListAnnotationSearchMetrics,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
+      ),
+      'DeleteAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteAnnotationSearchMetrics,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationSearchMetricsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'DeleteSearch': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteSearch,
