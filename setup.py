@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="clarifai-grpc",
-    version="6.2.0",
+    version="6.3.0",
     author="Clarifai",
     author_email="support@clarifai.com",
     description="Clarifai gRPC API Client",
