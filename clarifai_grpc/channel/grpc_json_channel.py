@@ -214,7 +214,7 @@ def _read_app_info(data):
     for k, v in data.items():
       if k == "apps":
         if len(v) == 1:
-          return v[0]["id"], v[0]["user_id"]
+          return v[0]["id"], v[0].get("user_id", "me")
         elif len(v) == 0:
           return None
         else:
