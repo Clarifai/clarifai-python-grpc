@@ -121,9 +121,8 @@ class HttpClient:
         for (subk, subv) in self._encode_get_params(v).items():
           encoded_params[k + '.' + subk] = subv
       elif isinstance(v, list):
-        text_list = [str(x) for x in v]
-        if text_list:
-          encoded_params[k] = text_list  # only text in list is allowed
+        if v:
+          encoded_params[k] = v
       else:
         raise TypeError('Cannot convert type for get params: %s' % type(v))
     return encoded_params
