@@ -186,6 +186,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse),
         )
+    self.GetModelType = channel.unary_unary(
+        '/clarifai.api.V2/GetModelType',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelTypeRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelTypeResponse),
+        )
     self.ListModelTypes = channel.unary_unary(
         '/clarifai.api.V2/ListModelTypes',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelTypesRequest.SerializeToString,
@@ -369,6 +374,11 @@ class V2Stub(object):
     self.PatchApps = channel.unary_unary(
         '/clarifai.api.V2/PatchApps',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
+        )
+    self.PostAppsSearches = channel.unary_unary(
+        '/clarifai.api.V2/PostAppsSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
         )
     self.PostValidatePassword = channel.unary_unary(
@@ -805,14 +815,21 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ListModelTypes(self, request, context):
+  def GetModelType(self, request, context):
     """//////////////////////////////////////
 
     //////////////////////////////////////
     Models
     //////////////////////////////////////
 
-    List all the models available in the platform.
+    Get a specific model type.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListModelTypes(self, request, context):
+    """List all the model types available in the platform.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1103,6 +1120,15 @@ class V2Servicer(object):
 
   def PatchApps(self, request, context):
     """Patch one or more apps.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostAppsSearches(self, request, context):
+    """Search over the applications to find one or more you're looking for.
+    This leverage the "body" parameter because we also have page and
+    per_page as url query param variables in this request.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1544,6 +1570,11 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
       ),
+      'GetModelType': grpc.unary_unary_rpc_method_handler(
+          servicer.GetModelType,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelTypeRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelTypeResponse.SerializeToString,
+      ),
       'ListModelTypes': grpc.unary_unary_rpc_method_handler(
           servicer.ListModelTypes,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelTypesRequest.FromString,
@@ -1727,6 +1758,11 @@ def add_V2Servicer_to_server(servicer, server):
       'PatchApps': grpc.unary_unary_rpc_method_handler(
           servicer.PatchApps,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
+      ),
+      'PostAppsSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PostAppsSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
       ),
       'PostValidatePassword': grpc.unary_unary_rpc_method_handler(

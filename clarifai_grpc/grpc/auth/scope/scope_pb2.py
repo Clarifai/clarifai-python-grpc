@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='clarifai.auth.scope',
   syntax='proto3',
   serialized_options=b'\n\034com.clarifai.grpc.auth.scopeP\001Z\005scope\242\002\004CAIP',
-  serialized_pb=b'\n%proto/clarifai/auth/scope/scope.proto\x12\x13\x63larifai.auth.scope\x1a google/protobuf/descriptor.proto\"F\n\tScopeList\x12&\n\x06scopes\x18\x01 \x03(\x0e\x32\x16.clarifai.auth.scope.S\x12\x11\n\tendpoints\x18\x02 \x03(\t*\xcb\r\n\x01S\x12\t\n\x05undef\x10\x00\x12\r\n\x03\x41ll\x10\x01\x1a\x04\xf0\x9b\'\x01\x12\x11\n\x07Predict\x10\x02\x1a\x04\xf0\x9b\'\x01\x12\x1c\n\x10Predict_Feedback\x10\x1d\x1a\x06\x08\x01\xf0\x9b\'\x00\x12\x10\n\x06Search\x10\x03\x1a\x04\xf0\x9b\'\x01\x12\x1b\n\x0fSearch_Feedback\x10\x1c\x1a\x06\x08\x01\xf0\x9b\'\x00\x12\x18\n\nInputs_Add\x10\x04\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x05\x12\x14\n\nInputs_Get\x10\x05\x1a\x04\xf0\x9b\'\x01\x12 \n\x0cInputs_Patch\x10\x07\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x04\xf8\x9b\'\x05\x12\x1f\n\rInputs_Delete\x10\x08\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x04\xf8\x9b\'\x05\x12\x1d\n\rOutputs_Patch\x10\t\x1a\n\x08\x01\xf8\x9b\'\x05\xf8\x9b\'\x02\x12\x1a\n\x0c\x43oncepts_Add\x10\n\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0b\x12\x16\n\x0c\x43oncepts_Get\x10\x0b\x1a\x04\xf0\x9b\'\x01\x12\"\n\x0e\x43oncepts_Patch\x10\x0c\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\n\xf8\x9b\'\x0b\x12\x1d\n\x0f\x43oncepts_Delete\x10\r\x1a\x08\xf8\x9b\'\n\xf8\x9b\'\x0b\x12\x18\n\nModels_Add\x10\x0e\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0f\x12\x14\n\nModels_Get\x10\x0f\x1a\x04\xf0\x9b\'\x01\x12$\n\x0cModels_Patch\x10\x10\x1a\x12\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x0e\xf8\x9b\'\x0f\xf8\x9b\'\x1a\x12\x1f\n\rModels_Delete\x10\x11\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x0e\xf8\x9b\'\x0f\x12\x1a\n\x0cModels_Train\x10\x1a\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0f\x12\x15\n\x0bModels_Sync\x10\x1b\x1a\x04\xf8\x9b\'\x0f\x12\x1b\n\rModels_Deploy\x10\"\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0f\x12\x1b\n\rWorkflows_Add\x10\x12\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x13\x12\x17\n\rWorkflows_Get\x10\x13\x1a\x04\xf0\x9b\'\x01\x12#\n\x0fWorkflows_Patch\x10\x14\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x12\xf8\x9b\'\x13\x12\"\n\x10Workflows_Delete\x10\x15\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x12\xf8\x9b\'\x13\x12\"\n\x16TSNEVisualizations_Add\x10\x18\x1a\x06\x08\x01\xf8\x9b\'\x19\x12\x1e\n\x16TSNEVisualizations_Get\x10\x19\x1a\x02\x08\x01\x12\x1d\n\x0f\x41nnotations_Add\x10%\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'&\x12\x19\n\x0f\x41nnotations_Get\x10&\x1a\x04\xf0\x9b\'\x01\x12%\n\x11\x41nnotations_Patch\x10\'\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'%\xf8\x9b\'&\x12$\n\x12\x41nnotations_Delete\x10(\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'%\xf8\x9b\'&\x12\x1c\n\x0e\x43ollectors_Add\x10)\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'*\x12\x18\n\x0e\x43ollectors_Get\x10*\x1a\x04\xf0\x9b\'\x01\x12#\n\x11\x43ollectors_Delete\x10+\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\')\xf8\x9b\'*\x12\x16\n\x08\x41pps_Add\x10,\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'-\x12\x12\n\x08\x41pps_Get\x10-\x1a\x04\xf0\x9b\'\x01\x12\x1d\n\x0b\x41pps_Delete\x10.\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\',\xf8\x9b\'-\x12\x16\n\x08Keys_Add\x10/\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'0\x12\x12\n\x08Keys_Get\x10\x30\x1a\x04\xf0\x9b\'\x01\x12\x1d\n\x0bKeys_Delete\x10\x31\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'/\xf8\x9b\'0\x12\x1f\n\x11\x43ollaborators_Add\x10\x33\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'2\x12\x1b\n\x11\x43ollaborators_Get\x10\x32\x1a\x04\xf0\x9b\'\x01\x12&\n\x14\x43ollaborators_Delete\x10\x34\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'3\xf8\x9b\'2\x12\x19\n\x0bMetrics_Add\x10\x36\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'5\x12\x15\n\x0bMetrics_Get\x10\x35\x1a\x04\xf0\x9b\'\x01\x12 \n\x0eMetrics_Delete\x10?\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'6\xf8\x9b\'5\x12\x17\n\tTasks_Add\x10\x37\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'8\x12\x13\n\tTasks_Get\x10\x38\x1a\x04\xf0\x9b\'\x01\x12\"\n\x14PasswordPolicies_Add\x10\x39\x1a\x08\xf0\x9b\'\x01\xf8\x9b\':\x12\x1e\n\x14PasswordPolicies_Get\x10:\x1a\x04\xf0\x9b\'\x01\x12)\n\x17PasswordPolicies_Delete\x10;\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'9\xf8\x9b\':\x12!\n\x13PasswordHistory_Add\x10<\x1a\x08\xf0\x9b\'\x00\xf8\x9b\'=\x12\x1d\n\x13PasswordHistory_Get\x10=\x1a\x04\xf0\x9b\'\x00\x12(\n\x16PasswordHistory_Delete\x10>\x1a\x0c\xf0\x9b\'\x00\xf8\x9b\'<\xf8\x9b\'=\x12\x1b\n\x11Notifications_Get\x10@\x1a\x04\xf0\x9b\'\x00\x12\x1f\n\x11Notifications_Add\x10\x41\x1a\x08\xf0\x9b\'\x00\xf8\x9b\'@\x12&\n\x14Notifications_Delete\x10\x42\x1a\x0c\xf0\x9b\'\x00\xf8\x9b\'A\xf8\x9b\'@\"\x04\x08\x1e\x10\x1e\"\x04\x08\x1f\x10\x1f\"\x04\x08 \x10 \"\x04\x08!\x10!:<\n\x0f\x63larfai_exposed\x12!.google.protobuf.EnumValueOptions\x18\xbe\xf3\x04 \x01(\x08:^\n\x19\x63larifai_depending_scopes\x12!.google.protobuf.EnumValueOptions\x18\xbf\xf3\x04 \x03(\x0e\x32\x16.clarifai.auth.scope.SB.\n\x1c\x63om.clarifai.grpc.auth.scopeP\x01Z\x05scope\xa2\x02\x04\x43\x41IPb\x06proto3'
+  serialized_pb=b'\n%proto/clarifai/auth/scope/scope.proto\x12\x13\x63larifai.auth.scope\x1a google/protobuf/descriptor.proto\"F\n\tScopeList\x12&\n\x06scopes\x18\x01 \x03(\x0e\x32\x16.clarifai.auth.scope.S\x12\x11\n\tendpoints\x18\x02 \x03(\t*\xa9\x0f\n\x01S\x12\t\n\x05undef\x10\x00\x12\r\n\x03\x41ll\x10\x01\x1a\x04\xf0\x9b\'\x01\x12\x11\n\x07Predict\x10\x02\x1a\x04\xf0\x9b\'\x01\x12\x1c\n\x10Predict_Feedback\x10\x1d\x1a\x06\x08\x01\xf0\x9b\'\x00\x12\x10\n\x06Search\x10\x03\x1a\x04\xf0\x9b\'\x01\x12\x1b\n\x0fSearch_Feedback\x10\x1c\x1a\x06\x08\x01\xf0\x9b\'\x00\x12\x18\n\nInputs_Add\x10\x04\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x05\x12\x14\n\nInputs_Get\x10\x05\x1a\x04\xf0\x9b\'\x01\x12 \n\x0cInputs_Patch\x10\x07\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x04\xf8\x9b\'\x05\x12\x1f\n\rInputs_Delete\x10\x08\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x04\xf8\x9b\'\x05\x12\x1d\n\rOutputs_Patch\x10\t\x1a\n\x08\x01\xf8\x9b\'\x05\xf8\x9b\'\x02\x12\x1a\n\x0c\x43oncepts_Add\x10\n\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0b\x12\x16\n\x0c\x43oncepts_Get\x10\x0b\x1a\x04\xf0\x9b\'\x01\x12\"\n\x0e\x43oncepts_Patch\x10\x0c\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\n\xf8\x9b\'\x0b\x12\x1d\n\x0f\x43oncepts_Delete\x10\r\x1a\x08\xf8\x9b\'\n\xf8\x9b\'\x0b\x12\x18\n\nModels_Add\x10\x0e\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0f\x12\x14\n\nModels_Get\x10\x0f\x1a\x04\xf0\x9b\'\x01\x12$\n\x0cModels_Patch\x10\x10\x1a\x12\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x0e\xf8\x9b\'\x0f\xf8\x9b\'\x1a\x12\x1f\n\rModels_Delete\x10\x11\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x0e\xf8\x9b\'\x0f\x12\x1a\n\x0cModels_Train\x10\x1a\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x0f\x12\x15\n\x0bModels_Sync\x10\x1b\x1a\x04\xf8\x9b\'\x0f\x12\x1b\n\rWorkflows_Add\x10\x12\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'\x13\x12\x17\n\rWorkflows_Get\x10\x13\x1a\x04\xf0\x9b\'\x01\x12#\n\x0fWorkflows_Patch\x10\x14\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'\x12\xf8\x9b\'\x13\x12\"\n\x10Workflows_Delete\x10\x15\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'\x12\xf8\x9b\'\x13\x12\"\n\x16TSNEVisualizations_Add\x10\x18\x1a\x06\x08\x01\xf8\x9b\'\x19\x12\x1e\n\x16TSNEVisualizations_Get\x10\x19\x1a\x02\x08\x01\x12\x1d\n\x0f\x41nnotations_Add\x10%\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'&\x12\x19\n\x0f\x41nnotations_Get\x10&\x1a\x04\xf0\x9b\'\x01\x12%\n\x11\x41nnotations_Patch\x10\'\x1a\x0e\x08\x01\xf0\x9b\'\x01\xf8\x9b\'%\xf8\x9b\'&\x12$\n\x12\x41nnotations_Delete\x10(\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'%\xf8\x9b\'&\x12\x1c\n\x0e\x43ollectors_Add\x10)\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'*\x12\x18\n\x0e\x43ollectors_Get\x10*\x1a\x04\xf0\x9b\'\x01\x12#\n\x11\x43ollectors_Delete\x10+\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\')\xf8\x9b\'*\x12\x16\n\x08\x41pps_Add\x10,\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'-\x12\x12\n\x08\x41pps_Get\x10-\x1a\x04\xf0\x9b\'\x01\x12\x1d\n\x0b\x41pps_Delete\x10.\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\',\xf8\x9b\'-\x12\x16\n\x08Keys_Add\x10/\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'0\x12\x12\n\x08Keys_Get\x10\x30\x1a\x04\xf0\x9b\'\x01\x12\x1d\n\x0bKeys_Delete\x10\x31\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'/\xf8\x9b\'0\x12\x1f\n\x11\x43ollaborators_Add\x10\x33\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'2\x12\x1b\n\x11\x43ollaborators_Get\x10\x32\x1a\x04\xf0\x9b\'\x01\x12&\n\x14\x43ollaborators_Delete\x10\x34\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'3\xf8\x9b\'2\x12\x19\n\x0bMetrics_Add\x10\x36\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'5\x12\x15\n\x0bMetrics_Get\x10\x35\x1a\x04\xf0\x9b\'\x01\x12 \n\x0eMetrics_Delete\x10?\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'6\xf8\x9b\'5\x12\x17\n\tTasks_Add\x10\x37\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'8\x12\x13\n\tTasks_Get\x10\x38\x1a\x04\xf0\x9b\'\x01\x12\x1e\n\x0cTasks_Delete\x10\x46\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'7\xf8\x9b\'8\x12\"\n\x14PasswordPolicies_Add\x10\x39\x1a\x08\xf0\x9b\'\x01\xf8\x9b\':\x12\x1e\n\x14PasswordPolicies_Get\x10:\x1a\x04\xf0\x9b\'\x01\x12)\n\x17PasswordPolicies_Delete\x10;\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'9\xf8\x9b\':\x12!\n\x13PasswordHistory_Add\x10<\x1a\x08\xf0\x9b\'\x00\xf8\x9b\'=\x12\x1d\n\x13PasswordHistory_Get\x10=\x1a\x04\xf0\x9b\'\x00\x12(\n\x16PasswordHistory_Delete\x10>\x1a\x0c\xf0\x9b\'\x00\xf8\x9b\'<\xf8\x9b\'=\x12\x1b\n\x11Notifications_Get\x10@\x1a\x04\xf0\x9b\'\x00\x12\x1f\n\x11Notifications_Add\x10\x41\x1a\x08\xf0\x9b\'\x00\xf8\x9b\'@\x12&\n\x14Notifications_Delete\x10\x42\x1a\x0c\xf0\x9b\'\x00\xf8\x9b\'A\xf8\x9b\'@\x12\x19\n\x0fLabelOrders_Get\x10\x43\x1a\x04\xf0\x9b\'\x01\x12\x1d\n\x0fLabelOrders_Add\x10\x44\x1a\x08\xf0\x9b\'\x01\xf8\x9b\'C\x12$\n\x12LabelOrders_Delete\x10\x45\x1a\x0c\xf0\x9b\'\x01\xf8\x9b\'D\xf8\x9b\'C\x12 \n\x16UserFeatureConfigs_Get\x10G\x1a\x04\xf0\x9b\'\x01\x12$\n\x16UserFeatureConfigs_Add\x10H\x1a\x08\xf0\x9b\'\x00\xf8\x9b\'G\x12+\n\x19UserFeatureConfigs_Delete\x10I\x1a\x0c\xf0\x9b\'\x00\xf8\x9b\'H\xf8\x9b\'G\"\x04\x08\x1e\x10\x1e\"\x04\x08\x1f\x10\x1f\"\x04\x08 \x10 \"\x04\x08!\x10!\"\x04\x08\"\x10\":<\n\x0f\x63larfai_exposed\x12!.google.protobuf.EnumValueOptions\x18\xbe\xf3\x04 \x01(\x08:^\n\x19\x63larifai_depending_scopes\x12!.google.protobuf.EnumValueOptions\x18\xbf\xf3\x04 \x03(\x0e\x32\x16.clarifai.auth.scope.SB.\n\x1c\x63om.clarifai.grpc.auth.scopeP\x01Z\x05scope\xa2\x02\x04\x43\x41IPb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 
@@ -115,116 +115,116 @@ _S = _descriptor.EnumDescriptor(
       serialized_options=b'\370\233\'\017',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Models_Deploy', index=21, number=34,
-      serialized_options=b'\360\233\'\001\370\233\'\017',
-      type=None),
-    _descriptor.EnumValueDescriptor(
-      name='Workflows_Add', index=22, number=18,
+      name='Workflows_Add', index=21, number=18,
       serialized_options=b'\360\233\'\001\370\233\'\023',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Workflows_Get', index=23, number=19,
+      name='Workflows_Get', index=22, number=19,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Workflows_Patch', index=24, number=20,
+      name='Workflows_Patch', index=23, number=20,
       serialized_options=b'\010\001\360\233\'\001\370\233\'\022\370\233\'\023',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Workflows_Delete', index=25, number=21,
+      name='Workflows_Delete', index=24, number=21,
       serialized_options=b'\360\233\'\001\370\233\'\022\370\233\'\023',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TSNEVisualizations_Add', index=26, number=24,
+      name='TSNEVisualizations_Add', index=25, number=24,
       serialized_options=b'\010\001\370\233\'\031',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TSNEVisualizations_Get', index=27, number=25,
+      name='TSNEVisualizations_Get', index=26, number=25,
       serialized_options=b'\010\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Annotations_Add', index=28, number=37,
+      name='Annotations_Add', index=27, number=37,
       serialized_options=b'\360\233\'\001\370\233\'&',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Annotations_Get', index=29, number=38,
+      name='Annotations_Get', index=28, number=38,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Annotations_Patch', index=30, number=39,
+      name='Annotations_Patch', index=29, number=39,
       serialized_options=b'\010\001\360\233\'\001\370\233\'%\370\233\'&',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Annotations_Delete', index=31, number=40,
+      name='Annotations_Delete', index=30, number=40,
       serialized_options=b'\360\233\'\001\370\233\'%\370\233\'&',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collectors_Add', index=32, number=41,
+      name='Collectors_Add', index=31, number=41,
       serialized_options=b'\360\233\'\001\370\233\'*',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collectors_Get', index=33, number=42,
+      name='Collectors_Get', index=32, number=42,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collectors_Delete', index=34, number=43,
+      name='Collectors_Delete', index=33, number=43,
       serialized_options=b'\360\233\'\001\370\233\')\370\233\'*',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Apps_Add', index=35, number=44,
+      name='Apps_Add', index=34, number=44,
       serialized_options=b'\360\233\'\001\370\233\'-',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Apps_Get', index=36, number=45,
+      name='Apps_Get', index=35, number=45,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Apps_Delete', index=37, number=46,
+      name='Apps_Delete', index=36, number=46,
       serialized_options=b'\360\233\'\001\370\233\',\370\233\'-',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Keys_Add', index=38, number=47,
+      name='Keys_Add', index=37, number=47,
       serialized_options=b'\360\233\'\001\370\233\'0',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Keys_Get', index=39, number=48,
+      name='Keys_Get', index=38, number=48,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Keys_Delete', index=40, number=49,
+      name='Keys_Delete', index=39, number=49,
       serialized_options=b'\360\233\'\001\370\233\'/\370\233\'0',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collaborators_Add', index=41, number=51,
+      name='Collaborators_Add', index=40, number=51,
       serialized_options=b'\360\233\'\001\370\233\'2',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collaborators_Get', index=42, number=50,
+      name='Collaborators_Get', index=41, number=50,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Collaborators_Delete', index=43, number=52,
+      name='Collaborators_Delete', index=42, number=52,
       serialized_options=b'\360\233\'\001\370\233\'3\370\233\'2',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Metrics_Add', index=44, number=54,
+      name='Metrics_Add', index=43, number=54,
       serialized_options=b'\360\233\'\001\370\233\'5',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Metrics_Get', index=45, number=53,
+      name='Metrics_Get', index=44, number=53,
       serialized_options=b'\360\233\'\001',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Metrics_Delete', index=46, number=63,
+      name='Metrics_Delete', index=45, number=63,
       serialized_options=b'\360\233\'\001\370\233\'6\370\233\'5',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Tasks_Add', index=47, number=55,
+      name='Tasks_Add', index=46, number=55,
       serialized_options=b'\360\233\'\001\370\233\'8',
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='Tasks_Get', index=48, number=56,
+      name='Tasks_Get', index=47, number=56,
       serialized_options=b'\360\233\'\001',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='Tasks_Delete', index=48, number=70,
+      serialized_options=b'\360\233\'\001\370\233\'7\370\233\'8',
       type=None),
     _descriptor.EnumValueDescriptor(
       name='PasswordPolicies_Add', index=49, number=57,
@@ -262,11 +262,35 @@ _S = _descriptor.EnumDescriptor(
       name='Notifications_Delete', index=57, number=66,
       serialized_options=b'\360\233\'\000\370\233\'A\370\233\'@',
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LabelOrders_Get', index=58, number=67,
+      serialized_options=b'\360\233\'\001',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LabelOrders_Add', index=59, number=68,
+      serialized_options=b'\360\233\'\001\370\233\'C',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LabelOrders_Delete', index=60, number=69,
+      serialized_options=b'\360\233\'\001\370\233\'D\370\233\'C',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserFeatureConfigs_Get', index=61, number=71,
+      serialized_options=b'\360\233\'\001',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserFeatureConfigs_Add', index=62, number=72,
+      serialized_options=b'\360\233\'\000\370\233\'G',
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='UserFeatureConfigs_Delete', index=63, number=73,
+      serialized_options=b'\360\233\'\000\370\233\'H\370\233\'G',
+      type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=169,
-  serialized_end=1908,
+  serialized_end=2130,
 )
 _sym_db.RegisterEnumDescriptor(_S)
 
@@ -292,7 +316,6 @@ Models_Patch = 16
 Models_Delete = 17
 Models_Train = 26
 Models_Sync = 27
-Models_Deploy = 34
 Workflows_Add = 18
 Workflows_Get = 19
 Workflows_Patch = 20
@@ -320,6 +343,7 @@ Metrics_Get = 53
 Metrics_Delete = 63
 Tasks_Add = 55
 Tasks_Get = 56
+Tasks_Delete = 70
 PasswordPolicies_Add = 57
 PasswordPolicies_Get = 58
 PasswordPolicies_Delete = 59
@@ -329,6 +353,12 @@ PasswordHistory_Delete = 62
 Notifications_Get = 64
 Notifications_Add = 65
 Notifications_Delete = 66
+LabelOrders_Get = 67
+LabelOrders_Add = 68
+LabelOrders_Delete = 69
+UserFeatureConfigs_Get = 71
+UserFeatureConfigs_Add = 72
+UserFeatureConfigs_Delete = 73
 
 CLARFAI_EXPOSED_FIELD_NUMBER = 80318
 clarfai_exposed = _descriptor.FieldDescriptor(
@@ -424,7 +454,6 @@ _S.values_by_name["Models_Patch"]._options = None
 _S.values_by_name["Models_Delete"]._options = None
 _S.values_by_name["Models_Train"]._options = None
 _S.values_by_name["Models_Sync"]._options = None
-_S.values_by_name["Models_Deploy"]._options = None
 _S.values_by_name["Workflows_Add"]._options = None
 _S.values_by_name["Workflows_Get"]._options = None
 _S.values_by_name["Workflows_Patch"]._options = None
@@ -452,6 +481,7 @@ _S.values_by_name["Metrics_Get"]._options = None
 _S.values_by_name["Metrics_Delete"]._options = None
 _S.values_by_name["Tasks_Add"]._options = None
 _S.values_by_name["Tasks_Get"]._options = None
+_S.values_by_name["Tasks_Delete"]._options = None
 _S.values_by_name["PasswordPolicies_Add"]._options = None
 _S.values_by_name["PasswordPolicies_Get"]._options = None
 _S.values_by_name["PasswordPolicies_Delete"]._options = None
@@ -461,4 +491,10 @@ _S.values_by_name["PasswordHistory_Delete"]._options = None
 _S.values_by_name["Notifications_Get"]._options = None
 _S.values_by_name["Notifications_Add"]._options = None
 _S.values_by_name["Notifications_Delete"]._options = None
+_S.values_by_name["LabelOrders_Get"]._options = None
+_S.values_by_name["LabelOrders_Add"]._options = None
+_S.values_by_name["LabelOrders_Delete"]._options = None
+_S.values_by_name["UserFeatureConfigs_Get"]._options = None
+_S.values_by_name["UserFeatureConfigs_Add"]._options = None
+_S.values_by_name["UserFeatureConfigs_Delete"]._options = None
 # @@protoc_insertion_point(module_scope)
