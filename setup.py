@@ -3,6 +3,8 @@ import setuptools
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+packages = setuptools.find_packages(include=["clarifai_grpc*"])
+
 setuptools.setup(
     name="clarifai-grpc",
     version="6.7.0",
@@ -12,7 +14,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Clarifai/clarifai-python-grpc",
-    packages=setuptools.find_packages(),
+    packages=packages,
     classifiers=[
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
         "Programming Language :: Python :: 3",
