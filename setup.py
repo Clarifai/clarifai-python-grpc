@@ -28,5 +28,7 @@ setuptools.setup(
         "protobuf>=3.10.0",
         "googleapis-common-protos>=1.6.0",
         "requests>=2.22.0",
-    ]
+    ],
+    package_data={p: ["*.pyi"] for p in packages},
+    include_package_data=True
 )
