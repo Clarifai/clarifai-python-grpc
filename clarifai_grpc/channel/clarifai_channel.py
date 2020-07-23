@@ -44,13 +44,17 @@ class ClarifaiChannel:
     return session
 
   @staticmethod
-  def get_grpc_channel():
+  def get_grpc_channel(base=None):
     global wrap_response_deserializer
     wrap_response_deserializer = _response_deserializer_for_grpc
-    channel_address = "{}:18081".format(os.environ.get('CLARIFAI_GRPC_BASE', 'api-grpc.clarifai.com'))
+
+    if not base:
+      base = os.environ.get("CLARIFAI_GRPC_BASE")
+    if not base:
+      base = "api.clarifai.com"
 
     return service_pb2_grpc.grpc.secure_channel(
-      channel_address,
+      base,
       service_pb2_grpc.grpc.ssl_channel_credentials()
     )
 
