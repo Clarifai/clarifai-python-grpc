@@ -6,7 +6,7 @@ import pytest
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.helpers import (both_channels, _raise_on_failure, _wait_for_inputs_upload,
+from tests.helpers import (channels, _raise_on_failure, _wait_for_inputs_upload,
                            _wait_for_model_trained, _wait_for_model_evaluated)
 
 
@@ -19,7 +19,7 @@ GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
 metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
 
-@both_channels
+@channels
 def test_post_model_outputs(channel):
   stub = service_pb2_grpc.V2Stub(channel)
   request = service_pb2.PostModelOutputsRequest(
@@ -34,7 +34,7 @@ def test_post_model_outputs(channel):
   assert len(response.outputs[0].data.concepts) > 0
 
 
-@both_channels
+@channels
 def test_failed_post_model_outputs(channel):
   stub = service_pb2_grpc.V2Stub(channel)
   request = service_pb2.PostModelOutputsRequest(
@@ -52,7 +52,7 @@ def test_failed_post_model_outputs(channel):
   assert response.outputs[0].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
 
 
-@both_channels
+@channels
 def test_mixed_success_post_model_outputs(channel):
   stub = service_pb2_grpc.V2Stub(channel)
   request = service_pb2.PostModelOutputsRequest(
@@ -71,7 +71,7 @@ def test_mixed_success_post_model_outputs(channel):
   assert response.outputs[1].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
 
 
-@both_channels
+@channels
 def test_post_patch_delete_input(channel):
   stub = service_pb2_grpc.V2Stub(channel)
 
@@ -125,7 +125,7 @@ def test_post_patch_delete_input(channel):
     assert status_code_pb2.SUCCESS == delete_response.status.code
 
 
-@both_channels
+@channels
 def test_list_models_with_pagination(channel):
   stub = service_pb2_grpc.V2Stub(channel)
 
@@ -143,7 +143,7 @@ def test_list_models_with_pagination(channel):
 
 
 @pytest.mark.skip(reason="On Github Actions there's 'Model training had no data' error for some reason")
-@both_channels
+@channels
 def test_model_creation_training_and_evaluation(channel):
   model_id = str(uuid.uuid4())
 

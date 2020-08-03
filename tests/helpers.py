@@ -1,3 +1,4 @@
+import os
 import time
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
@@ -5,9 +6,9 @@ from clarifai_grpc.grpc.api import service_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
 
 
-def both_channels(func):
+def channels(func):
   """
-  A decorator that runs the test first using the gRPC channel and then using the JSON channel.
+  A decorator that runs the function using all of the available channels.
   :param func: The test function.
   :return: A function wrapper.
   """
@@ -16,6 +17,9 @@ def both_channels(func):
     func(channel)
 
     channel = ClarifaiChannel.get_json_channel()
+    func(channel)
+
+    channel = ClarifaiChannel.get_grpc_channel()
     func(channel)
   return func_wrapper
 
