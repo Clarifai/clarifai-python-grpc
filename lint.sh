@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -eo pipefail
+
 FIND_SOURCE_FILES='find clarifai_grpc tests -name "*.py" -not -path "clarifai_grpc/grpc/*"'
 
 function run_isort() {
