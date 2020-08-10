@@ -13,7 +13,7 @@ NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
 
 
-def _metadata():
+def metadata():
   return (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
 
@@ -32,14 +32,14 @@ def both_channels(func):
   return func_wrapper
 
 
-def _wait_for_inputs_upload(stub, metadata, input_ids):
+def wait_for_inputs_upload(stub, metadata, input_ids):
   for input_id in input_ids:
     while True:
       get_input_response = stub.GetInput(
         service_pb2.GetInputRequest(input_id=input_id),
         metadata=metadata
       )
-      _raise_on_failure(get_input_response)
+      raise_on_failure(get_input_response)
       if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
         break
       elif get_input_response.input.status.code in (status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -57,13 +57,13 @@ def _wait_for_inputs_upload(stub, metadata, input_ids):
   # At this point, all inputs have been downloaded successfully.
 
 
-def _wait_for_model_trained(stub, metadata, model_id, model_version_id):
+def wait_for_model_trained(stub, metadata, model_id, model_version_id):
   while True:
     response = stub.GetModelVersion(
       service_pb2.GetModelVersionRequest(model_id=model_id, version_id=model_version_id),
       metadata=metadata
     )
-    _raise_on_failure(response)
+    raise_on_failure(response)
     if response.model_version.status.code == status_code_pb2.MODEL_TRAINED:
       break
     elif response.model_version.status.code in (status_code_pb2.MODEL_QUEUED_FOR_TRAINING,
@@ -81,13 +81,13 @@ def _wait_for_model_trained(stub, metadata, model_id, model_version_id):
   # At this point, the model has successfully finished training.
 
 
-def _wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
+def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
   while True:
     response = stub.GetModelVersionMetrics(
       service_pb2.GetModelVersionMetricsRequest(model_id=model_id, version_id=model_version_id),
       metadata=metadata
     )
-    _raise_on_failure(response)
+    raise_on_failure(response)
     if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
       break
     elif response.model_version.metrics.status.code in (status_code_pb2.MODEL_QUEUED_FOR_EVALUATION,
@@ -105,7 +105,7 @@ def _wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
   # At this point, the model has successfully finished evaluation.
 
 
-def _raise_on_failure(response):
+def raise_on_failure(response):
   if response.status.code != status_code_pb2.SUCCESS:
     error_message = (
       str(response.status.code) + " " +
