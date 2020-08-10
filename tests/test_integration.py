@@ -1,4 +1,3 @@
-import os
 import time
 import uuid
 
@@ -7,7 +6,7 @@ import pytest
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.helpers import (both_channels, _raise_on_failure, _wait_for_inputs_upload,
-                           _wait_for_model_trained, _wait_for_model_evaluated)
+                           _wait_for_model_trained, _wait_for_model_evaluated, _metadata)
 
 
 DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
@@ -15,8 +14,6 @@ TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 
 GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
-
-metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
 
 @both_channels
@@ -27,7 +24,7 @@ def test_post_model_outputs(channel):
     inputs=[
       resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)))
     ])
-  response = stub.PostModelOutputs(request, metadata=metadata)
+  response = stub.PostModelOutputs(request, metadata=_metadata())
 
   _raise_on_failure(response)
 
@@ -44,7 +41,7 @@ def test_failed_post_model_outputs(channel):
         data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL))
       )
     ])
-  response = stub.PostModelOutputs(request, metadata=metadata)
+  response = stub.PostModelOutputs(request, metadata=_metadata())
 
   assert response.status.code == status_code_pb2.FAILURE
   assert response.status.description == "Failure"
@@ -63,7 +60,7 @@ def test_mixed_success_post_model_outputs(channel):
         data=resources_pb2.Data(image=resources_pb2.Image(url=NON_EXISTING_IMAGE_URL))
       )
     ])
-  response = stub.PostModelOutputs(request, metadata=metadata)
+  response = stub.PostModelOutputs(request, metadata=_metadata())
 
   assert response.status.code == status_code_pb2.MIXED_STATUS
 
@@ -87,7 +84,7 @@ def test_post_patch_delete_input(channel):
       )
     ]
   )
-  post_response = stub.PostInputs(post_request, metadata=metadata)
+  post_response = stub.PostInputs(post_request, metadata=_metadata())
 
   _raise_on_failure(post_response)
 
@@ -96,7 +93,7 @@ def test_post_patch_delete_input(channel):
   try:
     while True:
       get_request = service_pb2.GetInputRequest(input_id=input_id)
-      get_response = stub.GetInput(get_request, metadata=metadata)
+      get_response = stub.GetInput(get_request, metadata=_metadata())
       status_code = get_response.input.status.code
       if status_code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
         break
@@ -117,11 +114,11 @@ def test_post_patch_delete_input(channel):
         )
       ]
     )
-    patch_response = stub.PatchInputs(patch_request, metadata=metadata)
+    patch_response = stub.PatchInputs(patch_request, metadata=_metadata())
     assert status_code_pb2.SUCCESS == patch_response.status.code
   finally:
     delete_request = service_pb2.DeleteInputRequest(input_id=input_id)
-    delete_response = stub.DeleteInput(delete_request, metadata=metadata)
+    delete_response = stub.DeleteInput(delete_request, metadata=_metadata())
     assert status_code_pb2.SUCCESS == delete_response.status.code
 
 
@@ -129,14 +126,14 @@ def test_post_patch_delete_input(channel):
 def test_list_models_with_pagination(channel):
   stub = service_pb2_grpc.V2Stub(channel)
 
-  response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata)
+  response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=_metadata())
   _raise_on_failure(response)
   assert len(response.models) == 2
 
   # We shouldn 't have 1000*500 number of models, so the result should be empty.
   response = stub.ListModels(
     service_pb2.ListModelsRequest(page=1000, per_page=500),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(response)
   assert len(response.models) == 0
@@ -166,7 +163,7 @@ def test_model_creation_training_and_evaluation(channel):
           )
         ]
       ),
-      metadata=metadata)
+      metadata=_metadata())
   )
 
   post_inputs_response = stub.PostInputs(
@@ -192,31 +189,31 @@ def test_model_creation_training_and_evaluation(channel):
         ),
       ]
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(post_inputs_response)
 
   input_ids = [i.id for i in post_inputs_response.inputs]
-  _wait_for_inputs_upload(stub, metadata, input_ids)
+  _wait_for_inputs_upload(stub, _metadata, input_ids)
 
   response = stub.PostModelVersions(
     service_pb2.PostModelVersionsRequest(model_id=model_id),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(response)
 
   model_version_id = response.model.model_version.id
-  _wait_for_model_trained(stub, metadata, model_id, model_version_id)
+  _wait_for_model_trained(stub, _metadata, model_id, model_version_id)
 
   _raise_on_failure(stub.PostModelVersionMetrics(
     service_pb2.PostModelVersionMetricsRequest(
       model_id=model_id,
       version_id=model_version_id,
     ),
-    metadata=metadata
+    metadata=_metadata()
   ))
 
-  _wait_for_model_evaluated(stub, metadata, model_id, model_version_id)
+  _wait_for_model_evaluated(stub, _metadata, model_id, model_version_id)
 
   response = stub.GetModelVersionMetrics(
     service_pb2.GetModelVersionMetricsRequest(
@@ -230,14 +227,14 @@ def test_model_creation_training_and_evaluation(channel):
         test_set=True,
       )
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(response)
 
   _raise_on_failure(
-    stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata)
+    stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=_metadata())
   )
 
   _raise_on_failure(
-    stub.DeleteInputs(service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata)
+    stub.DeleteInputs(service_pb2.DeleteInputsRequest(ids=input_ids), metadata=_metadata())
   )

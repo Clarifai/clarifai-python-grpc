@@ -1,11 +1,8 @@
-import os
 import uuid
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.helpers import both_channels, _raise_on_failure
-
-metadata = (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
+from tests.helpers import both_channels, _raise_on_failure, _metadata
 
 
 @both_channels
@@ -25,7 +22,7 @@ def test_concepts(channel):
         )
       ]
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(post_concepts_response)
 
@@ -33,7 +30,7 @@ def test_concepts(channel):
     service_pb2.GetConceptRequest(
       concept_id=random_concept_id
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(get_concepts_response)
   assert get_concepts_response.concept.id == random_concept_id
@@ -47,7 +44,7 @@ def test_concepts(channel):
         )
       ]
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   assert duplicated_post_concepts_response.status.code == status_code_pb2.StatusCode.CONCEPTS_INVALID_REQUEST
   assert duplicated_post_concepts_response.status.description == "Invalid request"
@@ -57,7 +54,7 @@ def test_concepts(channel):
     service_pb2.PostConceptsSearchesRequest(
       concept_query=resources_pb2.ConceptQuery(name=random_concept_name)
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(post_concepts_searches_response)
   assert random_concept_name in post_concepts_searches_response.concepts[0].name
@@ -72,7 +69,7 @@ def test_concepts(channel):
         )
       ]
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(patch_concepts_response)
 
@@ -85,7 +82,7 @@ def test_search_public_concepts_in_english(channel):
     service_pb2.PostConceptsSearchesRequest(
       concept_query=resources_pb2.ConceptQuery(name="dog*")
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(post_concepts_searches_response)
   assert len(post_concepts_searches_response.concepts) > 0
@@ -99,7 +96,7 @@ def test_search_public_concepts_in_chinese(channel):
     service_pb2.PostConceptsSearchesRequest(
       concept_query=resources_pb2.ConceptQuery(name="狗*", language="zh")
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   _raise_on_failure(post_concepts_searches_response)
   assert len(post_concepts_searches_response.concepts) > 0
@@ -119,7 +116,7 @@ def test_patching_public_concept_fails(channel):
         )
       ]
     ),
-    metadata=metadata
+    metadata=_metadata()
   )
   assert patch_concepts_searches_response.status.code == status_code_pb2.StatusCode.CONN_DOES_NOT_EXIST
   assert patch_concepts_searches_response.status.description == "Resource does not exist"

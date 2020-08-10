@@ -1,8 +1,13 @@
+import os
 import time
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
+
+
+def _metadata():
+  return (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 
 
 def both_channels(func):
