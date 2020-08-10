@@ -1,6 +1,6 @@
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.helpers import both_channels
+from tests.common import both_channels
 
 
 @both_channels

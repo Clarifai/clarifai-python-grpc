@@ -2,7 +2,7 @@ import uuid
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.helpers import both_channels, raise_on_failure, metadata
+from tests.common import both_channels, raise_on_failure, metadata
 
 
 @both_channels
