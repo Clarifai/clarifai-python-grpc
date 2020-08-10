@@ -1,8 +1,6 @@
-import time
-
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import both_channels, raise_on_failure, metadata
+from tests.common import both_channels, raise_on_failure, metadata, wait_for_inputs_upload
 
 from tests.common import TRUCK_IMAGE_URL
 
@@ -30,19 +28,7 @@ def test_post_patch_delete_input(channel):
   input_id = post_response.inputs[0].id
 
   try:
-    while True:
-      get_request = service_pb2.GetInputRequest(input_id=input_id)
-      get_response = stub.GetInput(get_request, metadata=metadata())
-      status_code = get_response.input.status.code
-      if status_code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
-        break
-      elif status_code not in (
-          status_code_pb2.INPUT_DOWNLOAD_PENDING,
-          status_code_pb2.INPUT_DOWNLOAD_IN_PROGRESS
-      ):
-        raise Exception(
-          f'Waiting for input ID {input_id} failed, status code is {status_code}.')
-      time.sleep(0.2)
+    wait_for_inputs_upload(stub, metadata(), [input_id])
 
     patch_request = service_pb2.PatchInputsRequest(
       action='overwrite',
