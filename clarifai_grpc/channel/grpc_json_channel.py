@@ -13,7 +13,6 @@ from clarifai_grpc.channel.custom_converters.custom_message_to_dict import proto
 from clarifai_grpc.channel.errors import UsageError
 from clarifai_grpc.grpc.api.service_pb2 import _V2
 
-
 BASE_URL = "https://api.clarifai.com"
 URL_TEMPLATE_PARAM_REGEX = re.compile(r'\{{1}(.*?)\}{1}')
 
@@ -41,12 +40,10 @@ class GRPCJSONChannel(object):
       url="http://...")))]))
   """
 
-  def __init__(
-      self,
-      session: requests.Session,
-      base_url: str = BASE_URL,
-      service_descriptor: typing.Any = _V2
-  ) -> None:
+  def __init__(self,
+               session: requests.Session,
+               base_url: str = BASE_URL,
+               service_descriptor: typing.Any = _V2) -> None:
     """
     Args:
       session: a request session
@@ -188,11 +185,8 @@ class JSONUnaryUnary(object):
     """
 
     authorization_values = [v for k, v in metadata if k.lower() == "authorization"]
-    if (
-        len(authorization_values) != 1 or
-        not authorization_values[0].startswith("Key ") or
-        len(authorization_values[0].split(" ")) != 2
-    ):
+    if (len(authorization_values) != 1 or not authorization_values[0].startswith("Key ") or
+        len(authorization_values[0].split(" ")) != 2):
       raise UsageError("Please provide metadata with the format of "
                        "(('authorization', 'Key YOUR_CLARIFAI_API_KEY'),)")
     api_key = authorization_values[0].split(" ")[1]

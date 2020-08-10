@@ -1,0 +1,30 @@
+[style]
+based_on_style = google
+
+# maximum number of chars per line
+column_limit = 99
+
+# number of spaces for a block indent
+indent_width = 2
+
+# number of spaces for line continuation indent
+# (i.e. single statement spanning more than one line)
+continuation_indent_width = 4
+
+# number of spaces between the end of a statement and same-line comment, e.g.:
+# x = 3  # there are 2 spaces before this comment
+spaces_before_comment = 2
+
+# prefer to put long class lists in "from module import (...)" statements
+# on fewer lines, not one class per line
+split_penalty_import_names = 0
+
+# prefer a little more to keep function calls on the same line as
+# their first argument. increased from default value 30
+split_penalty_after_opening_bracket = 70
+
+# indent values relative to keys in multiline dict entries, e.g.:
+# {key_with_long_name:
+#     value_on_a_long_line,
+# }
+indent_dictionary_value = true

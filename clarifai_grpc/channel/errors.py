@@ -1,6 +1,6 @@
 class ApiError(Exception):
-    pass
+  pass
 
 
 class UsageError(Exception):
-    pass
+  pass

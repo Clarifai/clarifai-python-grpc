@@ -11,11 +11,10 @@ def protobuf_to_dict(object_protobuf, use_integers_for_enums=True, ignore_show_e
   # type: (Message, typing.Optional[bool], typing.Optional[bool]) -> dict
 
   # printer = _CustomPrinter(
-  printer = _CustomPrinter(
-      including_default_value_fields=False,
-      preserving_proto_field_name=True,
-      use_integers_for_enums=use_integers_for_enums,
-      ignore_show_empty=ignore_show_empty)
+  printer = _CustomPrinter(including_default_value_fields=False,
+                           preserving_proto_field_name=True,
+                           use_integers_for_enums=use_integers_for_enums,
+                           ignore_show_empty=ignore_show_empty)
   # pylint: disable=protected-access
   return printer._MessageToJsonObject(object_protobuf)
 
