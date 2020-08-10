@@ -3,11 +3,11 @@ import uuid
 
 import pytest
 
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import (both_channels, raise_on_failure, wait_for_inputs_upload,
-                          wait_for_model_trained, wait_for_model_evaluated, metadata, GENERAL_MODEL_ID,
-                          DOG_IMAGE_URL, NON_EXISTING_IMAGE_URL)
+from tests.common import (DOG_IMAGE_URL, GENERAL_MODEL_ID, NON_EXISTING_IMAGE_URL, both_channels,
+                          metadata, raise_on_failure, wait_for_inputs_upload,
+                          wait_for_model_evaluated, wait_for_model_trained)
 
 
 @both_channels
