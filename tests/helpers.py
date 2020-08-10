@@ -6,6 +6,13 @@ from clarifai_grpc.grpc.api import service_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
 
 
+DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
+TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
+NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
+
+GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
+
+
 def _metadata():
   return (('authorization', 'Key %s' % os.environ.get('CLARIFAI_API_KEY')),)
 

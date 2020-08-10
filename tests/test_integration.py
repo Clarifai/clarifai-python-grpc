@@ -6,14 +6,8 @@ import pytest
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.helpers import (both_channels, _raise_on_failure, _wait_for_inputs_upload,
-                           _wait_for_model_trained, _wait_for_model_evaluated, _metadata)
-
-
-DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
-TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
-NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
-
-GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
+                           _wait_for_model_trained, _wait_for_model_evaluated, _metadata, GENERAL_MODEL_ID,
+                           DOG_IMAGE_URL, NON_EXISTING_IMAGE_URL)
 
 
 @both_channels
@@ -66,60 +60,6 @@ def test_mixed_success_post_model_outputs(channel):
 
   assert response.outputs[0].status.code == status_code_pb2.SUCCESS
   assert response.outputs[1].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
-
-
-@both_channels
-def test_post_patch_delete_input(channel):
-  stub = service_pb2_grpc.V2Stub(channel)
-
-  post_request = service_pb2.PostInputsRequest(
-    inputs=[
-      resources_pb2.Input(
-        data=resources_pb2.Data(
-          image=resources_pb2.Image(
-            url=TRUCK_IMAGE_URL, allow_duplicate_url=True
-          ),
-          concepts=[resources_pb2.Concept(id='some-concept')]
-        )
-      )
-    ]
-  )
-  post_response = stub.PostInputs(post_request, metadata=_metadata())
-
-  _raise_on_failure(post_response)
-
-  input_id = post_response.inputs[0].id
-
-  try:
-    while True:
-      get_request = service_pb2.GetInputRequest(input_id=input_id)
-      get_response = stub.GetInput(get_request, metadata=_metadata())
-      status_code = get_response.input.status.code
-      if status_code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
-        break
-      elif status_code not in (
-        status_code_pb2.INPUT_DOWNLOAD_PENDING,
-        status_code_pb2.INPUT_DOWNLOAD_IN_PROGRESS
-      ):
-        raise Exception(
-          f'Waiting for input ID {input_id} failed, status code is {status_code}.')
-      time.sleep(0.2)
-
-    patch_request = service_pb2.PatchInputsRequest(
-      action='overwrite',
-      inputs=[
-        resources_pb2.Input(
-          id=input_id,
-          data=resources_pb2.Data(concepts=[resources_pb2.Concept(id='some-new-concept')])
-        )
-      ]
-    )
-    patch_response = stub.PatchInputs(patch_request, metadata=_metadata())
-    assert status_code_pb2.SUCCESS == patch_response.status.code
-  finally:
-    delete_request = service_pb2.DeleteInputRequest(input_id=input_id)
-    delete_response = stub.DeleteInput(delete_request, metadata=_metadata())
-    assert status_code_pb2.SUCCESS == delete_response.status.code
 
 
 @both_channels
