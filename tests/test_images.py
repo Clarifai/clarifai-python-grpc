@@ -5,7 +5,7 @@ from tests.common import (TRUCK_IMAGE_URL, both_channels, metadata, raise_on_fai
 
 
 @both_channels
-def test_post_patch_delete_input(channel):
+def test_post_list_patch_delete_input(channel):
   stub = service_pb2_grpc.V2Stub(channel)
 
   post_request = service_pb2.PostInputsRequest(inputs=[
@@ -21,6 +21,14 @@ def test_post_patch_delete_input(channel):
 
   try:
     wait_for_inputs_upload(stub, metadata(), [input_id])
+
+    list_request = service_pb2.ListInputsRequest(per_page=1)
+    list_response = stub.ListInputs(list_request, metadata=metadata())
+    assert len(list_response.inputs) == 1
+
+    # Most likely we don't have that many inputs, so this should return 0.
+    list_response2 = stub.ListInputs(service_pb2.ListInputsRequest(per_page=500, page=1000), metadata=metadata())
+    assert len(list_response2.inputs) == 0
 
     patch_request = service_pb2.PatchInputsRequest(
         action='overwrite',
