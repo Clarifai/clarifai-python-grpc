@@ -84,7 +84,10 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
       break
     elif response.model_version.metrics.status.code in (
-        status_code_pb2.MODEL_QUEUED_FOR_EVALUATION, status_code_pb2.MODEL_EVALUATING):
+        status_code_pb2.MODEL_NOT_EVALUATED,
+        status_code_pb2.MODEL_QUEUED_FOR_EVALUATION,
+        status_code_pb2.MODEL_EVALUATING
+    ):
       time.sleep(1)
     else:
       error_message = (str(response.status.code) + " " + response.status.description + " " +
