@@ -37,7 +37,7 @@ jobs:
         pip install -r requirements.txt
         pip install -r tests/requirements.txt
     - name: Run static analysis lint
-      run: ./lint.sh
+      run: ./lint.sh check
     - name: Prepare the API keys & run pytest
       env:
         CLARIFAI_USER_EMAIL: ${{ secrets.CLARIFAI_USER_EMAIL }}
