@@ -8,8 +8,10 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 DOG_IMAGE_URL = 'https://samples.clarifai.com/dog2.jpeg'
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
-
 RED_TRUCK_IMAGE_FILE_PATH = os.path.dirname(__file__) + "/assets/red-truck.png"
+
+CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
+TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
 GENERAL_MODEL_ID = 'aaa03c23b3724a16a56b629203edc62c'
 

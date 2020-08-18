@@ -3,62 +3,8 @@ import uuid
 import pytest
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import (DOG_IMAGE_URL, GENERAL_MODEL_ID, NON_EXISTING_IMAGE_URL, both_channels,
-                          metadata, raise_on_failure, wait_for_inputs_upload,
+from tests.common import (both_channels, metadata, raise_on_failure, wait_for_inputs_upload,
                           wait_for_model_evaluated, wait_for_model_trained)
-
-
-@both_channels
-def test_post_model_outputs(channel):
-  stub = service_pb2_grpc.V2Stub(channel)
-  request = service_pb2.PostModelOutputsRequest(
-      model_id=GENERAL_MODEL_ID,
-      inputs=[
-          resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(
-              url=DOG_IMAGE_URL)))
-      ])
-  response = stub.PostModelOutputs(request, metadata=metadata())
-
-  raise_on_failure(response)
-
-  assert len(response.outputs[0].data.concepts) > 0
-
-
-@both_channels
-def test_failed_post_model_outputs(channel):
-  stub = service_pb2_grpc.V2Stub(channel)
-  request = service_pb2.PostModelOutputsRequest(
-      model_id=GENERAL_MODEL_ID,
-      inputs=[
-          resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(
-              url=NON_EXISTING_IMAGE_URL)))
-      ])
-  response = stub.PostModelOutputs(request, metadata=metadata())
-
-  assert response.status.code == status_code_pb2.FAILURE
-  assert response.status.description == "Failure"
-
-  assert response.outputs[0].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
-
-
-@both_channels
-def test_mixed_success_post_model_outputs(channel):
-  stub = service_pb2_grpc.V2Stub(channel)
-  request = service_pb2.PostModelOutputsRequest(
-      model_id=GENERAL_MODEL_ID,
-      inputs=[
-          resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(
-              url=DOG_IMAGE_URL))),
-          resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(
-              url=NON_EXISTING_IMAGE_URL)))
-      ])
-  response = stub.PostModelOutputs(request, metadata=metadata())
-
-  assert response.status.code == status_code_pb2.MIXED_STATUS
-
-  assert response.outputs[0].status.code == status_code_pb2.SUCCESS
-  assert response.outputs[1].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
 
 
 @both_channels
