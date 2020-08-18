@@ -25,28 +25,6 @@ function run_autoflake {
 }
 
 
-function run_isort() {
-  # Whitespace is ignored
-
-  echo ""
-  echo "- isort: Make sure all imports are sorted"
-
-  if [ "$1" == "check" ]; then
-    isort --sp .isort.cfg --ws --diff -c $(eval ${FIND_SOURCE_FILES})
-  else
-    isort --sp .isort.cfg --ws $(eval ${FIND_SOURCE_FILES})
-  fi
-
-  if [ $? != 0 ]; then
-    echo ""
-    echo "  isort failed. Run './lint.sh' to automatically sort the imports correctly."
-    exit 1
-  fi
-
-  echo "  Done isort"
-}
-
 run_autoflake
-run_isort $1
 
 echo "SUCCESSFUL FINISH OF lint.sh"
