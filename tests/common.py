@@ -125,7 +125,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     # At this point, the model has successfully finished evaluation.
 
 
-def raise_on_failure(response):
+def raise_on_failure(response, custom_message=""):
     if response.status.code != status_code_pb2.SUCCESS:
         error_message = (
             str(response.status.code)
@@ -134,6 +134,10 @@ def raise_on_failure(response):
             + " "
             + response.status.details
         )
+        if custom_message:
+            if not str.isspace(custom_message[-1]):
+                custom_message += " "
         raise Exception(
-            f"Received failure response `{error_message}`. Whole response object: {response}"
+            custom_message
+            + f"Received failure response `{error_message}`. Whole response object: {response}"
         )
