@@ -1,6 +1,5 @@
 import urllib.request
 import uuid
-from typing import Tuple
 
 from google.protobuf import struct_pb2
 
@@ -15,37 +14,12 @@ from tests.common import (
 
 
 @both_channels
-def test_search(channel):
+def test_search_by_annotated_concept_id(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    with SetupImage(stub) as (input_id, my_concept_id, my_concept_name):
-        #
-        # Search by annotated concept ID
-        #
-        post_searches_response_1 = stub.PostSearches(
-            service_pb2.PostSearchesRequest(
-                query=resources_pb2.Query(
-                    ands=[
-                        resources_pb2.And(
-                            input=resources_pb2.Input(
-                                data=resources_pb2.Data(
-                                    concepts=[resources_pb2.Concept(name=my_concept_name, value=1)]
-                                )
-                            )
-                        )
-                    ]
-                )
-            ),
-            metadata=metadata(),
-        )
-        raise_on_failure(post_searches_response_1)
-        assert len(post_searches_response_1.hits) == 1
-        assert post_searches_response_1.hits[0].input.id == input_id
-
-        #
-        # Search by annotated concept name
-        #
-        post_searches_response_2 = stub.PostSearches(
+    with SetupImage(stub) as input_:
+        my_concept_id = input_.data.concepts[0].id
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -61,14 +35,44 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_2)
-        assert len(post_searches_response_2.hits) == 1
-        assert post_searches_response_2.hits[0].input.id == input_id
+        raise_on_failure(response)
+        assert len(response.hits) == 1
+        assert response.hits[0].input.id == input_.id
 
-        #
-        # Search by predicted concept ID
-        #
-        post_searches_response_3 = stub.PostSearches(
+
+@both_channels
+def test_search_by_annotated_concept_name(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        my_concept_name = input_.data.concepts[0].name
+        response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                query=resources_pb2.Query(
+                    ands=[
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    concepts=[resources_pb2.Concept(name=my_concept_name, value=1)]
+                                )
+                            )
+                        )
+                    ]
+                )
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        assert len(response.hits) == 1
+        assert response.hits[0].input.id == input_.id
+
+
+@both_channels
+def test_search_by_predicted_concept_id(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -86,14 +90,17 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_3)
-        assert len(post_searches_response_3.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_3.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by predicted concept name
-        #
-        post_searches_response_4 = stub.PostSearches(
+
+@both_channels
+def test_search_by_predicted_concept_name(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -110,14 +117,17 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_4)
-        assert len(post_searches_response_4.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_4.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by predicted concept name in Chinese
-        #
-        post_searches_response_5 = stub.PostSearches(
+
+@both_channels
+def test_search_by_predicted_concept_name_in_chinese(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -135,14 +145,17 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_5)
-        assert len(post_searches_response_5.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_5.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by predicted concept name in Japanese
-        #
-        post_searches_response_6 = stub.PostSearches(
+
+@both_channels
+def test_search_by_predicted_concept_name_in_japanese(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -160,14 +173,17 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_6)
-        assert len(post_searches_response_6.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_6.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by image URL
-        #
-        post_searches_response_7 = stub.PostSearches(
+
+@both_channels
+def test_search_by_image_url(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -186,16 +202,19 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_7)
-        assert len(post_searches_response_7.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_7.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by image bytes
-        #
-        response = urllib.request.urlopen(DOG_IMAGE_URL)
-        url_bytes = response.read()
-        post_searches_response_8 = stub.PostSearches(
+
+@both_channels
+def test_search_by_image_bytes(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        http_response = urllib.request.urlopen(DOG_IMAGE_URL)
+        url_bytes = http_response.read()
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -212,16 +231,19 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_8)
-        assert len(post_searches_response_8.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_8.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
-        #
-        # Search by metadata
-        #
+
+@both_channels
+def test_search_by_metadata(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
         search_metadata = struct_pb2.Struct()
         search_metadata.update({"another-key": {"inner-key": "inner-value"}})
-        post_searches_response_9 = stub.PostSearches(
+        response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
                 query=resources_pb2.Query(
                     ands=[
@@ -236,16 +258,16 @@ def test_search(channel):
             ),
             metadata=metadata(),
         )
-        raise_on_failure(post_searches_response_9)
-        assert len(post_searches_response_9.hits) > 0
-        assert input_id in [hit.input.id for hit in post_searches_response_9.hits]
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
 
 
 class SetupImage:
     def __init__(self, stub: service_pb2_grpc.V2Stub) -> None:
         self._stub = stub
 
-    def __enter__(self) -> Tuple[str, str, str]:
+    def __enter__(self) -> resources_pb2.Input:
         my_concept_id = "my-concept-id-" + uuid.uuid4().hex
         my_concept_name = "my concept name " + uuid.uuid4().hex
 
@@ -273,14 +295,14 @@ class SetupImage:
             metadata=metadata(),
         )
         raise_on_failure(post_response)
-        self._input_id = post_response.inputs[0].id
+        self._input = post_response.inputs[0]
 
-        wait_for_inputs_upload(self._stub, metadata(), [self._input_id])
+        wait_for_inputs_upload(self._stub, metadata(), [self._input.id])
 
-        return self._input_id, my_concept_id, my_concept_name
+        return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
         delete_response = self._stub.DeleteInput(
-            service_pb2.DeleteInputRequest(input_id=self._input_id), metadata=metadata()
+            service_pb2.DeleteInputRequest(input_id=self._input.id), metadata=metadata()
         )
         raise_on_failure(delete_response)
