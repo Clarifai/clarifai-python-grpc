@@ -1,5 +1,6 @@
 import urllib.request
 import uuid
+from typing import Tuple
 
 from google.protobuf import struct_pb2
 
@@ -17,34 +18,7 @@ from tests.common import (
 def test_search(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    my_concept_id = "my-concept-id-" + uuid.uuid4().hex
-    my_concept_name = "my concept name " + uuid.uuid4().hex
-
-    image_metadata = struct_pb2.Struct()
-    image_metadata.update({"some-key": "some-value", "another-key": {"inner-key": "inner-value"}})
-
-    post_response = stub.PostInputs(
-        service_pb2.PostInputsRequest(
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
-                        concepts=[
-                            resources_pb2.Concept(id=my_concept_id, name=my_concept_name, value=1)
-                        ],
-                        metadata=image_metadata,
-                    ),
-                )
-            ]
-        ),
-        metadata=metadata(),
-    )
-    raise_on_failure(post_response)
-    input_id = post_response.inputs[0].id
-
-    wait_for_inputs_upload(stub, metadata(), [input_id])
-
-    try:
+    with SetupImage(stub) as (input_id, my_concept_id, my_concept_name):
         #
         # Search by annotated concept ID
         #
@@ -265,8 +239,48 @@ def test_search(channel):
         raise_on_failure(post_searches_response_9)
         assert len(post_searches_response_9.hits) > 0
         assert input_id in [hit.input.id for hit in post_searches_response_9.hits]
-    finally:
-        delete_response = stub.DeleteInput(
-            service_pb2.DeleteInputRequest(input_id=input_id), metadata=metadata()
+
+
+class SetupImage:
+    def __init__(self, stub: service_pb2_grpc.V2Stub) -> None:
+        self._stub = stub
+
+    def __enter__(self) -> Tuple[str, str, str]:
+        my_concept_id = "my-concept-id-" + uuid.uuid4().hex
+        my_concept_name = "my concept name " + uuid.uuid4().hex
+
+        image_metadata = struct_pb2.Struct()
+        image_metadata.update(
+            {"some-key": "some-value", "another-key": {"inner-key": "inner-value"}}
+        )
+
+        post_response = self._stub.PostInputs(
+            service_pb2.PostInputsRequest(
+                inputs=[
+                    resources_pb2.Input(
+                        data=resources_pb2.Data(
+                            image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
+                            concepts=[
+                                resources_pb2.Concept(
+                                    id=my_concept_id, name=my_concept_name, value=1
+                                )
+                            ],
+                            metadata=image_metadata,
+                        ),
+                    )
+                ]
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(post_response)
+        self._input_id = post_response.inputs[0].id
+
+        wait_for_inputs_upload(self._stub, metadata(), [self._input_id])
+
+        return self._input_id, my_concept_id, my_concept_name
+
+    def __exit__(self, type_, value, traceback) -> None:
+        delete_response = self._stub.DeleteInput(
+            service_pb2.DeleteInputRequest(input_id=self._input_id), metadata=metadata()
         )
         raise_on_failure(delete_response)
