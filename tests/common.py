@@ -10,6 +10,7 @@ TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 RED_TRUCK_IMAGE_FILE_PATH = os.path.dirname(__file__) + "/assets/red-truck.png"
 
+BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
