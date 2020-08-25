@@ -263,6 +263,184 @@ def test_search_by_metadata(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
+@both_channels
+def test_search_by_geo_point_and_limit(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                query=resources_pb2.Query(
+                    ands=[
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    geo=resources_pb2.Geo(
+                                        geo_point=resources_pb2.GeoPoint(
+                                            longitude=43, latitude=56
+                                        ),
+                                        geo_limit=resources_pb2.GeoLimit(
+                                            value=1000, type="withinKilometers"
+                                        ),
+                                    )
+                                )
+                            )
+                        )
+                    ]
+                ),
+                pagination=service_pb2.Pagination(page=1, per_page=1000),
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
+
+
+@both_channels
+def test_search_by_geo_box(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                query=resources_pb2.Query(
+                    ands=[
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    geo=resources_pb2.Geo(
+                                        geo_box=[
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=43, latitude=54
+                                                )
+                                            ),
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=45, latitude=56
+                                                )
+                                            ),
+                                        ]
+                                    )
+                                )
+                            )
+                        )
+                    ]
+                ),
+                pagination=service_pb2.Pagination(page=1, per_page=1000),
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
+
+
+@both_channels
+def test_search_by_image_url_and_geo_box(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                query=resources_pb2.Query(
+                    ands=[
+                        resources_pb2.And(
+                            output=resources_pb2.Output(
+                                input=resources_pb2.Input(
+                                    data=resources_pb2.Data(
+                                        image=resources_pb2.Image(url=DOG_IMAGE_URL)
+                                    )
+                                )
+                            )
+                        ),
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    geo=resources_pb2.Geo(
+                                        geo_box=[
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=43, latitude=54
+                                                )
+                                            ),
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=45, latitude=56
+                                                )
+                                            ),
+                                        ]
+                                    )
+                                )
+                            )
+                        ),
+                    ]
+                ),
+                pagination=service_pb2.Pagination(page=1, per_page=1000),
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
+
+
+@both_channels
+def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    with SetupImage(stub) as input_:
+        my_concept_name = input_.data.concepts[0].name
+        response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                query=resources_pb2.Query(
+                    ands=[
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    geo=resources_pb2.Geo(
+                                        geo_box=[
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=43, latitude=54
+                                                )
+                                            ),
+                                            resources_pb2.GeoBoxedPoint(
+                                                geo_point=resources_pb2.GeoPoint(
+                                                    longitude=45, latitude=56
+                                                )
+                                            ),
+                                        ]
+                                    )
+                                )
+                            )
+                        ),
+                        resources_pb2.And(
+                            input=resources_pb2.Input(
+                                data=resources_pb2.Data(
+                                    concepts=[resources_pb2.Concept(name=my_concept_name, value=1)]
+                                )
+                            )
+                        ),
+                        resources_pb2.And(
+                            output=resources_pb2.Output(
+                                data=resources_pb2.Data(
+                                    concepts=[resources_pb2.Concept(name="dog", value=1)]
+                                )
+                            )
+                        ),
+                    ]
+                ),
+                pagination=service_pb2.Pagination(page=1, per_page=1000),
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        assert len(response.hits) > 0
+        assert input_.id in [hit.input.id for hit in response.hits]
+
+
 class SetupImage:
     def __init__(self, stub: service_pb2_grpc.V2Stub) -> None:
         self._stub = stub
@@ -288,6 +466,9 @@ class SetupImage:
                                 )
                             ],
                             metadata=image_metadata,
+                            geo=resources_pb2.Geo(
+                                geo_point=resources_pb2.GeoPoint(longitude=44, latitude=55)
+                            ),
                         ),
                     )
                 ]
