@@ -29,7 +29,6 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("apparel", APPAREL_MODEL_ID),
     ("celebrity", CELEBRITY_MODEL_ID),
     ("color", COLOR_MODEL_ID),
-    ("demographics", DEMOGRAPHICS_MODEL_ID),
     ("face detection", FACE_DETECTION_MODEL_ID),
     ("face embedding", FACE_EMBEDDING_MODEL_ID),
     ("food", FOOD_MODEL_ID),
