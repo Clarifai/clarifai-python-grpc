@@ -1,5 +1,4 @@
 # TODO: Switch to range versions.
-black==20.8b1
 grpcio==1.25.0
 protobuf==3.10.0
 googleapis-common-protos==1.6.0
