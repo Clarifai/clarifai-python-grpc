@@ -10,6 +10,9 @@ from tests.common import (
     raise_on_failure,
     wait_for_model_evaluated,
     wait_for_model_trained,
+    wait_for_inputs_upload,
+    TRUCK_IMAGE_URL,
+    DOG_IMAGE_URL,
 )
 
 
@@ -41,6 +44,31 @@ def test_list_models_with_pagination(channel):
 @both_channels
 def test_post_patch_get_train_evaluate_delete_model(channel):
     stub = service_pb2_grpc.V2Stub(channel)
+
+    # Add some inputs with the concepts that we'll need in the model.
+    post_inputs_response = stub.PostInputs(
+        service_pb2.PostInputsRequest(
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True),
+                        concepts=[resources_pb2.Concept(id="some-initial-concept")],
+                    )
+                ),
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
+                        concepts=[resources_pb2.Concept(id="some-new-concept")],
+                    )
+                ),
+            ]
+        ),
+        metadata=metadata(),
+    )
+    raise_on_failure(post_inputs_response)
+    input_id_1 = post_inputs_response.inputs[0].id
+    input_id_2 = post_inputs_response.inputs[1].id
+    wait_for_inputs_upload(stub, metadata(), [input_id_1, input_id_2])
 
     model_id = u"我的新模型-" + uuid.uuid4().hex
 
@@ -110,6 +138,11 @@ def test_post_patch_get_train_evaluate_delete_model(channel):
             service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
         )
         raise_on_failure(delete_response)
+
+        delete_inputs_response = stub.DeleteInputs(
+            service_pb2.DeleteInputsRequest(ids=[input_id_1, input_id_2]), metadata=metadata()
+        )
+        raise_on_failure(delete_inputs_response)
 
 
 @both_channels
