@@ -29,10 +29,10 @@ def dict_to_protobuf(protobuf_class, js_dict, ignore_unknown_fields=False):
 class _CustomParser(_Parser):
     def _ConvertFieldValuePair(self, js, message):
         """
-    Because of fields with custom extensions such as cl_default_float, we need
-    to adjust the original's method's JSON object parameter by setting them explicitly to the
-    default value.
-    """
+        Because of fields with custom extensions such as cl_default_float, we need
+        to adjust the original's method's JSON object parameter by setting them explicitly to the
+        default value.
+        """
 
         message_descriptor = message.DESCRIPTOR
         for f in message_descriptor.fields:

@@ -11,7 +11,14 @@ from clarifai_grpc.channel.errors import ApiError
 CLIENT_VERSION = "6.7.1"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
-    map(str, [os.sys.version_info.major, os.sys.version_info.minor, os.sys.version_info.micro,],)
+    map(
+        str,
+        [
+            os.sys.version_info.major,
+            os.sys.version_info.minor,
+            os.sys.version_info.micro,
+        ],
+    )
 )
 
 logger = logging.getLogger("clarifai")
@@ -20,9 +27,9 @@ logger = logging.getLogger("clarifai")
 class HttpClient:
     def __init__(self, session, auth_string):  # type: (requests.Session, str) -> None
         """
-    :param session: The requests session object.
-    :param auth_string: Either Clarifai's API key or Personal Access Token.
-    """
+        :param session: The requests session object.
+        :param auth_string: Either Clarifai's API key or Personal Access Token.
+        """
         self._auth_string = auth_string
         self._session = session
 
@@ -113,8 +120,8 @@ class HttpClient:
 
     def _encode_get_params(self, params):
         """
-    Encodes message params into format for use in GET args
-    """
+        Encodes message params into format for use in GET args
+        """
         encoded_params = {}
         for (k, v) in params.items():
             if isinstance(v, str):

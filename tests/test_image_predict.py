@@ -37,7 +37,11 @@ def test_predict_image_url_with_max_concepts(channel):
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
-                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL,),),
+                data=resources_pb2.Data(
+                    image=resources_pb2.Image(
+                        url=DOG_IMAGE_URL,
+                    ),
+                ),
             )
         ],
         model=resources_pb2.Model(
@@ -60,7 +64,11 @@ def test_predict_image_url_with_min_value(channel):
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
-                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL,),),
+                data=resources_pb2.Data(
+                    image=resources_pb2.Image(
+                        url=DOG_IMAGE_URL,
+                    ),
+                ),
             )
         ],
         model=resources_pb2.Model(
@@ -85,7 +93,11 @@ def test_predict_image_url_with_selected_concepts(channel):
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
-                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL,),),
+                data=resources_pb2.Data(
+                    image=resources_pb2.Image(
+                        url=DOG_IMAGE_URL,
+                    ),
+                ),
             )
         ],
         model=resources_pb2.Model(

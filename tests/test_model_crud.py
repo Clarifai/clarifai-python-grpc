@@ -33,7 +33,7 @@ def test_list_models_with_pagination(channel):
     raise_on_failure(response)
     assert len(response.models) == 2
 
-    # We shouldn 't have 1000*500 number of models, so the result should be empty.
+    # We shouldn't have 1000*500 number of models, so the result should be empty.
     response = stub.ListModels(
         service_pb2.ListModelsRequest(page=1000, per_page=500), metadata=metadata()
     )
@@ -225,7 +225,8 @@ def test_model_creation_training_and_evaluation(channel):
                 resources_pb2.Input(
                     data=resources_pb2.Data(
                         image=resources_pb2.Image(
-                            url="https://samples.clarifai.com/dog2.jpeg", allow_duplicate_url=True,
+                            url="https://samples.clarifai.com/dog2.jpeg",
+                            allow_duplicate_url=True,
                         ),
                         concepts=[resources_pb2.Concept(id="dog")],
                     )
@@ -259,7 +260,8 @@ def test_model_creation_training_and_evaluation(channel):
     raise_on_failure(
         stub.PostModelVersionMetrics(
             service_pb2.PostModelVersionMetricsRequest(
-                model_id=model_id, version_id=model_version_id,
+                model_id=model_id,
+                version_id=model_version_id,
             ),
             metadata=metadata(),
         )

@@ -29,7 +29,13 @@ def test_concept_post_get_patch(channel):
     assert get_concepts_response.concept.name == random_concept_name
 
     duplicated_post_concepts_response = stub.PostConcepts(
-        service_pb2.PostConceptsRequest(concepts=[resources_pb2.Concept(id=random_concept_id,)]),
+        service_pb2.PostConceptsRequest(
+            concepts=[
+                resources_pb2.Concept(
+                    id=random_concept_id,
+                )
+            ]
+        ),
         metadata=metadata(),
     )
     assert (

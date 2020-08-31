@@ -117,7 +117,13 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
 
     input_metadata = Struct()
     input_metadata.update(
-        {"key1": 123, "key2": {"inner-key1": "inner-val1", "inner-key2": "inner-val2",}}
+        {
+            "key1": 123,
+            "key2": {
+                "inner-key1": "inner-val1",
+                "inner-key2": "inner-val2",
+            },
+        }
     )
 
     post_response = stub.PostInputs(

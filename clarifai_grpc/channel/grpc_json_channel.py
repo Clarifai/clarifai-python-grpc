@@ -20,25 +20,25 @@ logger = logging.getLogger("clarifai")
 
 
 class GRPCJSONChannel(object):
-    """ This mimics the behaviour of a grpc channel object but allows transport over https with
-  json request and response bodies.
+    """This mimics the behaviour of a grpc channel object but allows transport over https with
+    json request and response bodies.
 
-  Currently there is only support for unary_unary requests. If you have any other type of grpc
-  request this channel will nicely fail when trying to use within a grpc stub.
+    Currently there is only support for unary_unary requests. If you have any other type of grpc
+    request this channel will nicely fail when trying to use within a grpc stub.
 
-  Example:
-    Assuming your top level endpoints are called V2 and in a proto/clarifai/api/endpoint.proto file,
-    then you build those in python and can import the spec to use in GRPCJSONChannel as follows:
+    Example:
+      Assuming your top level endpoints are called V2 and in a proto/clarifai/api/endpoint.proto file,
+      then you build those in python and can import the spec to use in GRPCJSONChannel as follows:
 
-    from clarifai.rest.grpc.proto.clarifai.api.endpoint_pb2_grpc import V2Stub
-    from clarifai.rest.grpc.proto.clarifai.api.endpoint_pb2 import _V2
-    channel = GRPCJSONChannel(key="api key", service_descriptor=_V2)
-    stub = V2Stub(channel)
+      from clarifai.rest.grpc.proto.clarifai.api.endpoint_pb2_grpc import V2Stub
+      from clarifai.rest.grpc.proto.clarifai.api.endpoint_pb2 import _V2
+      channel = GRPCJSONChannel(key="api key", service_descriptor=_V2)
+      stub = V2Stub(channel)
 
-    # Then you can use the stub to call just like grpc directly!!!
-    result = stub.PostInputs(PostInputsRequest(inputs=[Input(data=Data(image=Image(
-      url="http://...")))]))
-  """
+      # Then you can use the stub to call just like grpc directly!!!
+      result = stub.PostInputs(PostInputsRequest(inputs=[Input(data=Data(image=Image(
+        url="http://...")))]))
+    """
 
     def __init__(
         self,
@@ -47,13 +47,13 @@ class GRPCJSONChannel(object):
         service_descriptor: typing.Any = _V2,
     ) -> None:
         """
-    Args:
-      session: a request session
-      base_url: if you want to point at a different url than the default.
-      service_descriptor: This is a ServiceDescriptor object found in the compiled grpc-gateway
-    .proto results. For example if your proto defining the endpoints is in endpoint.proto then look
-    in endpoint_pb2.py file for ServiceDescriptor and use that.
-    """
+        Args:
+          session: a request session
+          base_url: if you want to point at a different url than the default.
+          service_descriptor: This is a ServiceDescriptor object found in the compiled grpc-gateway
+        .proto results. For example if your proto defining the endpoints is in endpoint.proto then look
+        in endpoint_pb2.py file for ServiceDescriptor and use that.
+        """
         self.session = session
         self.name_to_resources = {}
 
@@ -113,8 +113,7 @@ class GRPCJSONChannel(object):
 
 
 class JSONUnaryUnary(object):
-    """ This mimics the unary_unary calls and is actually the thing doing the http requests.
-  """
+    """This mimics the unary_unary calls and is actually the thing doing the http requests."""
 
     def __init__(
         self,
@@ -126,17 +125,17 @@ class JSONUnaryUnary(object):
     ):
         # type: (...) -> None
         """
-    Args:
-      session: a request session
-      request_message_descriptor: this is a MessageDescriptor for the input type.
-      resources: a list of available resource endpoints
-      request_serializer: the method to use to serialize the request proto
-      response_deserializer: the response proto deserializer which will be used to convert the http
-                             response will be parsed into this.
+        Args:
+          session: a request session
+          request_message_descriptor: this is a MessageDescriptor for the input type.
+          resources: a list of available resource endpoints
+          request_serializer: the method to use to serialize the request proto
+          response_deserializer: the response proto deserializer which will be used to convert the http
+                                 response will be parsed into this.
 
-    Returns:
-      response: a proto object of class response_deserializer filled in with the response.
-    """
+        Returns:
+          response: a proto object of class response_deserializer filled in with the response.
+        """
         self.session = session
         self.request_message_descriptor = request_message_descriptor
         self.resources = resources
@@ -144,18 +143,18 @@ class JSONUnaryUnary(object):
         self.response_deserializer = response_deserializer
 
     def __call__(self, request, metadata=None):  # type: (Message, tuple) -> Message
-        """ This is where the actually calls come through when the stub is called such as
-    stub.PostInputs(). They get passed to this method which actually makes the request.
+        """This is where the actually calls come through when the stub is called such as
+        stub.PostInputs(). They get passed to this method which actually makes the request.
 
-    Args:
-      request: the proto object for the request. It must be the proper type for the request or the
-        server will complain. Note: this doesn't type check the incoming request in the client but
-        does make sure it can serialize before sending to the server atleast.
-      metadata: the authorization string (either API key or Personal Access Token)
+        Args:
+          request: the proto object for the request. It must be the proper type for the request or the
+            server will complain. Note: this doesn't type check the incoming request in the client but
+            does make sure it can serialize before sending to the server atleast.
+          metadata: the authorization string (either API key or Personal Access Token)
 
-    Returns:
-      response: the proto object that this method returns.
-    """
+        Returns:
+          response: the proto object that this method returns.
+        """
         # if metadata is not None:
         #   raise Exception("No support currently for metadata field.")
 
@@ -188,10 +187,10 @@ class JSONUnaryUnary(object):
 
     def _read_auth_string(self, metadata: typing.Tuple) -> str:
         """
-    The auth string returned is either an API key or a PAT (Personal Access Token).
-    :param metadata: The call metadata.
-    :return: The auth string.
-    """
+        The auth string returned is either an API key or a PAT (Personal Access Token).
+        :param metadata: The call metadata.
+        :return: The auth string.
+        """
 
         authorization_values = [v for k, v in metadata if k.lower() == "authorization"]
         if (
@@ -209,10 +208,10 @@ class JSONUnaryUnary(object):
 
 def _read_app_info(data):
     """
-  This function extracts the app_id and user_id values from the request object, or returns None.
-  :param data: The request object
-  :return: (app_id, user_id) or None
-  """
+    This function extracts the app_id and user_id values from the request object, or returns None.
+    :param data: The request object
+    :return: (app_id, user_id) or None
+    """
     if type(data) is list:
         for e in data:
             vals = _read_app_info(e)
@@ -241,16 +240,16 @@ def _pick_proper_endpoint(
 ):
     # type: (...) -> typing.Tuple[str, typing.Any, typing.List[str]]
     """
-  Fills in the url template with the actual url params from the request body.
-  Picks the most appropriate url depending on which parameters are present in the request body.
-  Args:
-    resources: all available resource endpoints for this method.
-    request_dict: a dictionary form of the request from json_format.MessageToDict(request,
-                  preserving_proto_field_name=True) so that we can recursively lookup url params.
-  Returns:
-    url: the url string to use in requests.
-    method: one of get/post/patch/delete.
-  """
+    Fills in the url template with the actual url params from the request body.
+    Picks the most appropriate url depending on which parameters are present in the request body.
+    Args:
+      resources: all available resource endpoints for this method.
+      request_dict: a dictionary form of the request from json_format.MessageToDict(request,
+                    preserving_proto_field_name=True) so that we can recursively lookup url params.
+    Returns:
+      url: the url string to use in requests.
+      method: one of get/post/patch/delete.
+    """
 
     best_match_url = None
     best_match_method = None

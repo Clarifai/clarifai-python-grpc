@@ -30,15 +30,17 @@ class _CustomPrinter(_Printer):
         ignore_show_empty,
     ):
         super(_CustomPrinter, self).__init__(
-            including_default_value_fields, preserving_proto_field_name, use_integers_for_enums,
+            including_default_value_fields,
+            preserving_proto_field_name,
+            use_integers_for_enums,
         )
         self._ignore_show_empty = ignore_show_empty
 
     def _RegularMessageToJsonObject(self, message, js):
         """
-    Because of the fields with the custom extension `cl_show_if_empty`, we need to adjust the
-    original's method's return JSON object and keep these fields.
-    """
+        Because of the fields with the custom extension `cl_show_if_empty`, we need to adjust the
+        original's method's return JSON object and keep these fields.
+        """
 
         js = super(_CustomPrinter, self)._RegularMessageToJsonObject(message, js)
 
@@ -77,11 +79,11 @@ class _CustomPrinter(_Printer):
 
     def _StructMessageToJsonObject(self, message):
         """
-    Converts Struct message according to Proto3 JSON Specification.
+        Converts Struct message according to Proto3 JSON Specification.
 
-    However, by default, empty objects {} get converted to null. We overwrite this behavior so {}
-    get converted to {}.
-    """
+        However, by default, empty objects {} get converted to null. We overwrite this behavior so {}
+        get converted to {}.
+        """
 
         fields = message.fields
         ret = {}

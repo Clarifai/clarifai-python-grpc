@@ -39,10 +39,10 @@ def metadata():
 
 def both_channels(func):
     """
-  A decorator that runs the test first using the gRPC channel and then using the JSON channel.
-  :param func: The test function.
-  :return: A function wrapper.
-  """
+    A decorator that runs the test first using the gRPC channel and then using the JSON channel.
+    :param func: The test function.
+    :return: A function wrapper.
+    """
 
     def func_wrapper():
         channel = ClarifaiChannel.get_insecure_grpc_channel()
