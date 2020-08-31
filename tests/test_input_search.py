@@ -1,7 +1,8 @@
+import time
 import urllib.request
 import uuid
 
-from google.protobuf import struct_pb2
+from google.protobuf import struct_pb2, timestamp_pb2
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
@@ -484,6 +485,92 @@ def test_save_and_execute_search_by_id(channel):
         raise_on_failure(post_search_by_id_response)
         assert len(post_search_by_id_response.hits) == 1
         assert post_search_by_id_response.hits[0].input.id == input_.id
+
+
+@both_channels
+def test_save_and_execute_annotations_search_by_id(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    my_search_id = "my-search-id-" + uuid.uuid4().hex
+    my_concept_id = "my-annotation-concept-" + uuid.uuid4().hex
+
+    with SetupImage(stub) as input1, SetupImage(stub) as input2:
+
+        list_annotations_response = stub.ListAnnotations(
+            service_pb2.ListAnnotationsRequest(input_ids=[input1.id, input2.id]),
+            metadata=metadata(),
+        )
+        raise_on_failure(list_annotations_response)
+
+        input_id_to_annotation_id = {
+            an.input_id: an.id for an in list_annotations_response.annotations
+        }
+
+        patch_annotations_response = stub.PatchAnnotations(
+            service_pb2.PatchAnnotationsRequest(
+                action="merge",
+                annotations=[
+                    resources_pb2.Annotation(
+                        id=input_id_to_annotation_id[input1.id],
+                        input_id=input1.id,
+                        data=resources_pb2.Data(
+                            concepts=[resources_pb2.Concept(id=my_concept_id, value=1)]
+                        ),
+                    ),
+                    resources_pb2.Annotation(
+                        id=input_id_to_annotation_id[input2.id],
+                        input_id=input2.id,
+                        data=resources_pb2.Data(
+                            concepts=[resources_pb2.Concept(id=my_concept_id, value=1)]
+                        ),
+                    ),
+                ],
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(patch_annotations_response)
+
+        as_of = timestamp_pb2.Timestamp()
+        as_of.FromSeconds(int(time.time() + 5))
+
+        save_search_response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                searches=[
+                    resources_pb2.Search(
+                        id=my_search_id,
+                        save=True,
+                        as_of=as_of,
+                        query=resources_pb2.Query(
+                            ands=[
+                                resources_pb2.And(
+                                    input=resources_pb2.Input(
+                                        data=resources_pb2.Data(
+                                            concepts=[
+                                                resources_pb2.Concept(id=my_concept_id, value=1)
+                                            ]
+                                        )
+                                    )
+                                )
+                            ]
+                        ),
+                    )
+                ]
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(save_search_response)
+
+        # Executing the search returns results.
+        post_search_by_id_response = stub.PostSearchesByID(
+            service_pb2.PostSearchesByIDRequest(id=my_search_id),
+            metadata=metadata(),
+        )
+        raise_on_failure(post_search_by_id_response)
+        hits = post_search_by_id_response.hits
+        assert len(hits) == 2
+        assert input1.id in [hit.input.id for hit in hits]
+        assert input2.id in [hit.input.id for hit in hits]
+        assert all(hit.score == 1 for hit in hits)
 
 
 class SetupImage:
