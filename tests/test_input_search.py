@@ -441,6 +441,51 @@ def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
+@both_channels
+def test_save_and_execute_search_by_id(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    search_id = "my-search-id-" + uuid.uuid4().hex
+
+    with SetupImage(stub) as input_:
+        my_concept_id = input_.data.concepts[0].id
+        # This saves the search under an ID, but does not execute it / return any results.
+        save_search_response = stub.PostSearches(
+            service_pb2.PostSearchesRequest(
+                searches=[
+                    resources_pb2.Search(
+                        id=search_id,
+                        save=True,
+                        query=resources_pb2.Query(
+                            ands=[
+                                resources_pb2.And(
+                                    input=resources_pb2.Input(
+                                        data=resources_pb2.Data(
+                                            concepts=[
+                                                resources_pb2.Concept(id=my_concept_id, value=1)
+                                            ]
+                                        )
+                                    )
+                                )
+                            ]
+                        ),
+                    )
+                ]
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(save_search_response)
+
+        # Executing the search returns results.
+        post_search_by_id_response = stub.PostSearchesByID(
+            service_pb2.PostSearchesByIDRequest(id=search_id),
+            metadata=metadata(),
+        )
+        raise_on_failure(post_search_by_id_response)
+        assert len(post_search_by_id_response.hits) == 1
+        assert post_search_by_id_response.hits[0].input.id == input_.id
+
+
 class SetupImage:
     def __init__(self, stub: service_pb2_grpc.V2Stub) -> None:
         self._stub = stub
