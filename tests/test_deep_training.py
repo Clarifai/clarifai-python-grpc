@@ -189,6 +189,14 @@ def test_deep_classification_training_with_queries():
     assert concepts[1].id == "test-only-concept"
     assert concepts[1].value <= 0.0001
 
+    delete_app_response = stub.DeleteApp(
+        service_pb2.DeleteAppRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
+        ),
+        metadata=pat_key_metadata(),
+    )
+    raise_on_failure(delete_app_response)
+
 
 def _get_model_type_for_template(
     stub: service_pb2_grpc.V2Stub, api_key: str, template_name: str
