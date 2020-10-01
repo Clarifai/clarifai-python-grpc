@@ -64,3 +64,13 @@ for concept in response.outputs[0].data.concepts:
 ```
 
 See [the Clarifai API documentation](https://docs.clarifai.com/) for all available functionality.
+
+## Troubleshooting
+
+#### I get the following error when installing the library: `Failed building wheel for grpcio`
+
+Try upgrading **setuptools** to a version `40.7.1` or higher.
+```
+pip install --upgrade setuptools
+```
+Source: https://github.com/grpc/grpc/issues/17829
