@@ -16,12 +16,11 @@ EMAIL = os.environ['CLARIFAI_USER_EMAIL']
 PASSWORD = os.environ['CLARIFAI_USER_PASSWORD']
 
 
-BASE = 'https://api.clarifai.com/v2'
-
-
 def _request(method, url, payload={}, headers={}):
+    base_url = os.environ.get('CLARIFAI_GRPC_BASE', 'api.clarifai.com')
+
     opener = build_opener(HTTPHandler)
-    full_url = '%s%s' % (BASE, url)
+    full_url = f'https://{base_url}/v2{url}'
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
