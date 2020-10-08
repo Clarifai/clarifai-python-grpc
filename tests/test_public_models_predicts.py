@@ -2,11 +2,9 @@ from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     DOG_IMAGE_URL,
     APPAREL_MODEL_ID,
-    CELEBRITY_MODEL_ID,
     COLOR_MODEL_ID,
     DEMOGRAPHICS_MODEL_ID,
-    FACE_DETECTION_MODEL_ID,
-    FACE_EMBEDDING_MODEL_ID,
+    FACE_MODEL_ID,
     FOOD_MODEL_ID,
     GENERAL_EMBEDDING_MODEL_ID,
     GENERAL_MODEL_ID,
@@ -27,10 +25,8 @@ from tests.common import (
 
 MODEL_TITLE_AND_ID_PAIRS = [
     ("apparel", APPAREL_MODEL_ID),
-    ("celebrity", CELEBRITY_MODEL_ID),
     ("color", COLOR_MODEL_ID),
-    ("face detection", FACE_DETECTION_MODEL_ID),
-    ("face embedding", FACE_EMBEDDING_MODEL_ID),
+    ("face", FACE_MODEL_ID),
     ("food", FOOD_MODEL_ID),
     ("general embedding", GENERAL_EMBEDDING_MODEL_ID),
     ("general", GENERAL_MODEL_ID),
