@@ -64,6 +64,27 @@ def create_key(app_id):
     print(key_id)
 
 
+def create_pat():
+    session_token, user_id = _login()
+
+    url = '/users/%s/keys' % user_id
+    payload = {
+        'keys': [{
+            'description': 'Auto-created in a CI test run',
+            'scopes': ['All'],
+            'type': 'personal_access_token',
+            'apps': []
+        }]
+    }
+    response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
+    _raise_on_http_error(response)
+    data = response
+    pat_id = data['keys'][0]['id']
+
+    # This print needs to be present so we can read the value in CI.
+    print(pat_id)
+
+
 def delete(app_id):
     session_token, user_id = _login()
 
@@ -152,6 +173,11 @@ def run(arguments):
 
         app_id = arguments[1]
         create_key(app_id)
+    elif command == '--create-pat':
+        if len(arguments) != 1:
+            raise Exception('--create-pat takes zero arguments')
+
+        create_pat()
     elif command == '--delete-app':
         if len(arguments) != 2:
             raise Exception('--delete-app takes one argument')
@@ -167,6 +193,7 @@ def run(arguments):
 ARGUMENTS:
 --create-app [env_name]      ... Creates a new application.
 --create-key [app_id]        ... Creates a new API key.
+--create-pat                 ... Creates a new PAT key.
 --delete-app [app_id]        ... Deletes an application (API keys that use it are deleted as well).
 --create-workflow [api_key]  ... Creates a sample workflow to be used in int. tests.
 --help                       ... This text.''')

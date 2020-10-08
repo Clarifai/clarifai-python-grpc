@@ -42,12 +42,12 @@ jobs:
       env:
         CLARIFAI_USER_EMAIL: ${{ secrets.CLARIFAI_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.CLARIFAI_USER_PASSWORD }}
-        CLARIFAI_PAT_KEY: ${{ secrets.CLARIFAI_PAT_KEY }}
       shell: bash
       run: |
         export PYTHONPATH=.
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
+        export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
         pip install pytest
         pytest tests/ -v -n auto
