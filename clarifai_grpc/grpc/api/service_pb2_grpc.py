@@ -486,6 +486,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse),
         )
+    self.GetTaskAnnotationsCount = channel.unary_unary(
+        '/clarifai.api.V2/GetTaskAnnotationsCount',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskAnnotationsCountRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskAnnotationsCountResponse),
+        )
     self.GetTask = channel.unary_unary(
         '/clarifai.api.V2/GetTask',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskRequest.SerializeToString,
@@ -1127,8 +1132,6 @@ class V2Servicer(object):
 
   def PostAppsSearches(self, request, context):
     """Search over the applications to find one or more you're looking for.
-    This leverage the "body" parameter because we also have page and
-    per_page as url query param variables in this request.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1149,8 +1152,6 @@ class V2Servicer(object):
 
   def GetSearch(self, request, context):
     """//////////////////////////////////////
-
-    //////////////////////////////////////
     Searches
     //////////////////////////////////////
 
@@ -1307,6 +1308,13 @@ class V2Servicer(object):
     //////////////////////////////////////
 
     Add tasks to an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetTaskAnnotationsCount(self, request, context):
+    """Task annotation counts
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1869,6 +1877,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.PostTasks,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse.SerializeToString,
+      ),
+      'GetTaskAnnotationsCount': grpc.unary_unary_rpc_method_handler(
+          servicer.GetTaskAnnotationsCount,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskAnnotationsCountRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskAnnotationsCountResponse.SerializeToString,
       ),
       'GetTask': grpc.unary_unary_rpc_method_handler(
           servicer.GetTask,

@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='clarifai.api.status',
   syntax='proto3',
   serialized_options=b'\n\034com.clarifai.grpc.api.statusP\001Z\006status\242\002\004CAIP',
-  serialized_pb=b'\n+proto/clarifai/api/status/status_code.proto\x12\x13\x63larifai.api.status*\xa0\x42\n\nStatusCode\x12\x08\n\x04ZERO\x10\x00\x12\x0c\n\x07SUCCESS\x10\x90N\x12\x11\n\x0cMIXED_STATUS\x10\x9aN\x12\x0c\n\x07\x46\x41ILURE\x10\xa4N\x12\x0e\n\tTRY_AGAIN\x10\xaeN\x12\x14\n\x0fNOT_IMPLEMENTED\x10\xb8N\x12\x18\n\x13\x43ONN_ACCOUNT_ISSUES\x10\xf8U\x12\x17\n\x12\x43ONN_TOKEN_INVALID\x10\xf9U\x12\x1d\n\x18\x43ONN_CREDENTIALS_INVALID\x10\xfaU\x12\x1d\n\x18\x43ONN_EXCEED_HOURLY_LIMIT\x10\xfbU\x12\x1e\n\x19\x43ONN_EXCEED_MONTHLY_LIMIT\x10\xfcU\x12\x13\n\x0e\x43ONN_THROTTLED\x10\xfdU\x12\x18\n\x13\x43ONN_EXCEEDS_LIMITS\x10\xfeU\x12\x1d\n\x18\x43ONN_INSUFFICIENT_SCOPES\x10\xffU\x12\x15\n\x10\x43ONN_KEY_INVALID\x10\x80V\x12\x17\n\x12\x43ONN_KEY_NOT_FOUND\x10\x81V\x12\x1c\n\x17\x43ONN_BAD_REQUEST_FORMAT\x10\xdcV\x12\x18\n\x13\x43ONN_DOES_NOT_EXIST\x10\xddV\x12\x19\n\x14\x43ONN_INVALID_REQUEST\x10\xdeV\x12\x1c\n\x17\x43ONN_METHOD_NOT_ALLOWED\x10\xdfV\x12\x19\n\x14\x43ONN_NO_GDPR_CONSENT\x10\xe0V\x12\x1e\n\x19\x43ONN_AUTH_METHOD_DISABLED\x10\xc0W\x12\x13\n\rMODEL_TRAINED\x10\xec\xa4\x01\x12\x14\n\x0eMODEL_TRAINING\x10\xed\xa4\x01\x12\x15\n\x0fMODEL_UNTRAINED\x10\xee\xa4\x01\x12\x1f\n\x19MODEL_QUEUED_FOR_TRAINING\x10\xef\xa4\x01\x12\x15\n\x0fMODEL_UPLOADING\x10\xf0\xa4\x01\x12\x1c\n\x16MODEL_UPLOADING_FAILED\x10\xf1\xa4\x01\x12\x1c\n\x16MODEL_TRAINING_NO_DATA\x10\xf6\xa4\x01\x12!\n\x1bMODEL_TRAINING_NO_POSITIVES\x10\xf7\xa4\x01\x12*\n$MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS\x10\xf8\xa4\x01\x12\x1e\n\x18MODEL_TRAINING_TIMED_OUT\x10\xf9\xa4\x01\x12\"\n\x1cMODEL_TRAINING_WAITING_ERROR\x10\xfa\xa4\x01\x12\"\n\x1cMODEL_TRAINING_UNKNOWN_ERROR\x10\xfb\xa4\x01\x12\"\n\x1cMODEL_TRAINING_MSG_REDELIVER\x10\xfc\xa4\x01\x12&\n MODEL_TRAINING_INSUFFICIENT_DATA\x10\xfd\xa4\x01\x12#\n\x1dMODEL_TRAINING_INVALID_PARAMS\x10\xfe\xa4\x01\x12\x34\n.MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED\x10\xff\xa4\x01\x12\x1a\n\x14MODEL_MODIFY_SUCCESS\x10\x9e\xa5\x01\x12\x1a\n\x14MODEL_MODIFY_PENDING\x10\x9f\xa5\x01\x12\x19\n\x13MODEL_MODIFY_FAILED\x10\xa0\xa5\x01\x12\x1a\n\x14MODEL_DOES_NOT_EXIST\x10\xd0\xa5\x01\x12\x1d\n\x17MODEL_PERMISSION_DENIED\x10\xd1\xa5\x01\x12\x1c\n\x16MODEL_INVALID_ARGUMENT\x10\xd2\xa5\x01\x12\x1b\n\x15MODEL_INVALID_REQUEST\x10\xd3\xa5\x01\x12\x15\n\x0fMODEL_EVALUATED\x10\xb4\xa6\x01\x12\x16\n\x10MODEL_EVALUATING\x10\xb5\xa6\x01\x12\x19\n\x13MODEL_NOT_EVALUATED\x10\xb6\xa6\x01\x12!\n\x1bMODEL_QUEUED_FOR_EVALUATION\x10\xb7\xa6\x01\x12 \n\x1aMODEL_EVALUATION_TIMED_OUT\x10\xbe\xa6\x01\x12$\n\x1eMODEL_EVALUATION_WAITING_ERROR\x10\xbf\xa6\x01\x12$\n\x1eMODEL_EVALUATION_UNKNOWN_ERROR\x10\xc0\xa6\x01\x12\x1d\n\x17MODEL_PREDICTION_FAILED\x10\xc1\xa6\x01\x12$\n\x1eMODEL_EVALUATION_MSG_REDELIVER\x10\xc2\xa6\x01\x12\"\n\x1cMODEL_EVALUATION_NEED_LABELS\x10\xc3\xa6\x01\x12\"\n\x1cMODEL_EVALUATION_NEED_INPUTS\x10\xc4\xa6\x01\x12\x1d\n\x17MODEL_DEPLOYMENT_FAILED\x10\xe6\xa6\x01\x12\x15\n\x0fMODEL_DEPLOYING\x10\xe7\xa6\x01\x12!\n\x1bMODEL_QUEUED_FOR_DEPLOYMENT\x10\xe8\xa6\x01\x12\x18\n\x12MODEL_NOT_DEPLOYED\x10\xe9\xa6\x01\x12 \n\x1aWORKFLOW_NO_MATCHING_INPUT\x10\xf1\xab\x01\x12$\n\x1eWORKFLOW_REQUIRE_TRAINED_MODEL\x10\xf2\xab\x01\x12\x18\n\x12WORKFLOW_DUPLICATE\x10\xd4\xac\x01\x12!\n\x1bWORKFLOW_UNSUPPORTED_FORMAT\x10\xd5\xac\x01\x12\x1d\n\x17WORKFLOW_DOES_NOT_EXIST\x10\xd6\xac\x01\x12 \n\x1aWORKFLOW_PERMISSION_DENIED\x10\xd7\xac\x01\x12\x1f\n\x19WORKFLOW_INVALID_ARGUMENT\x10\xd8\xac\x01\x12\x1d\n\x17WORKFLOW_INVALID_RECIPE\x10\xd9\xac\x01\x12\x1f\n\x19WORKFLOW_INVALID_TEMPLATE\x10\xda\xac\x01\x12\x1c\n\x16WORKFLOW_INVALID_GRAPH\x10\xdb\xac\x01\x12\x1f\n\x19WORKFLOW_INTERNAL_FAILURE\x10\xdc\xac\x01\x12\x1e\n\x18WORKFLOW_INVALID_REQUEST\x10\xd7\xb3\x01\x12\x1d\n\x17WORKFLOW_MODIFY_SUCCESS\x10\x86\xad\x01\x12\x1d\n\x17WORKFLOW_MODIFY_PENDING\x10\x87\xad\x01\x12\x1c\n\x16WORKFLOW_MODIFY_FAILED\x10\x88\xad\x01\x12\x1d\n\x17WORKFLOW_REINDEX_FAILED\x10\x89\xad\x01\x12\x1c\n\x16\x43ONCEPT_MODIFY_SUCCESS\x10\xee\xb4\x01\x12\x1c\n\x16\x43ONCEPT_MODIFY_PENDING\x10\xef\xb4\x01\x12\x1b\n\x15\x43ONCEPT_MODIFY_FAILED\x10\xf0\xb4\x01\x12\x18\n\x12\x41NNOTATION_SUCCESS\x10\xd6\xbc\x01\x12\x18\n\x12\x41NNOTATION_PENDING\x10\xd7\xbc\x01\x12\x17\n\x11\x41NNOTATION_FAILED\x10\xd8\xbc\x01\x12\x1f\n\x19\x41NNOTATION_UNKNOWN_STATUS\x10\xda\xbc\x01\x12!\n\x1b\x41NNOTATION_INVALID_ARGUMENT\x10\xdb\xbc\x01\x12\"\n\x1c\x41NNOTATION_PERMISSION_DENIED\x10\xdc\xbc\x01\x12 \n\x1a\x41NNOTATION_AWAITING_REVIEW\x10\xdd\xbc\x01\x12\x1e\n\x18\x41NNOTATION_REVIEW_DENIED\x10\xde\xbc\x01\x12\x1f\n\x19\x41NNOTATION_MODIFY_SUCCESS\x10\xba\xbd\x01\x12\x1f\n\x19\x41NNOTATION_MODIFY_PENDING\x10\xbb\xbd\x01\x12\x1e\n\x18\x41NNOTATION_MODIFY_FAILED\x10\xbc\xbd\x01\x12&\n METADATA_INVALID_PATCH_ARGUMENTS\x10\xc4\xc2\x01\x12\x1c\n\x16METADATA_PARSING_ISSUE\x10\xc5\xc2\x01\x12!\n\x1bMETADATA_MANIPULATION_ISSUE\x10\xc6\xc2\x01\x12\x1c\n\x16TRAINER_JOB_STATE_NONE\x10\xa8\xc3\x01\x12\x1e\n\x18TRAINER_JOB_STATE_QUEUED\x10\xa9\xc3\x01\x12\x1f\n\x19TRAINER_JOB_STATE_RUNNING\x10\xaa\xc3\x01\x12 \n\x1aTRAINER_JOB_STATE_COMPLETE\x10\xab\xc3\x01\x12\x1d\n\x17TRAINER_JOB_STATE_ERROR\x10\xac\xc3\x01\x12\x17\n\x11\x44\x41TA_DUMP_SUCCESS\x10\xbe\xc4\x01\x12\x17\n\x11\x44\x41TA_DUMP_PENDING\x10\xbf\xc4\x01\x12\x16\n\x10\x44\x41TA_DUMP_FAILED\x10\xc0\xc4\x01\x12\x1b\n\x15\x44\x41TA_DUMP_IN_PROGRESS\x10\xc1\xc4\x01\x12\x1d\n\x17\x41PP_DUPLICATION_SUCCESS\x10\xf0\xc4\x01\x12\x1c\n\x16\x41PP_DUPLICATION_FAILED\x10\xf1\xc4\x01\x12\x1d\n\x17\x41PP_DUPLICATION_PENDING\x10\xf2\xc4\x01\x12!\n\x1b\x41PP_DUPLICATION_IN_PROGRESS\x10\xf3\xc4\x01\x12%\n\x1f\x41PP_DUPLICATION_INVALID_REQUEST\x10\xf4\xc4\x01\x12\x1c\n\x16INPUT_DOWNLOAD_SUCCESS\x10\xb0\xea\x01\x12\x1c\n\x16INPUT_DOWNLOAD_PENDING\x10\xb1\xea\x01\x12\x1b\n\x15INPUT_DOWNLOAD_FAILED\x10\xb2\xea\x01\x12 \n\x1aINPUT_DOWNLOAD_IN_PROGRESS\x10\xb3\xea\x01\x12 \n\x1aINPUT_STATUS_UPDATE_FAILED\x10\xb4\xea\x01\x12\x19\n\x13INPUT_DELETE_FAILED\x10\xb5\xea\x01\x12\x15\n\x0fINPUT_DUPLICATE\x10\x94\xeb\x01\x12\x1e\n\x18INPUT_UNSUPPORTED_FORMAT\x10\x95\xeb\x01\x12\x1a\n\x14INPUT_DOES_NOT_EXIST\x10\x96\xeb\x01\x12\x1d\n\x17INPUT_PERMISSION_DENIED\x10\x97\xeb\x01\x12\x1c\n\x16INPUT_INVALID_ARGUMENT\x10\x98\xeb\x01\x12\x16\n\x10INPUT_OVER_LIMIT\x10\x99\xeb\x01\x12\x17\n\x11INPUT_INVALID_URL\x10\x9a\xeb\x01\x12\x1a\n\x14INPUT_MODIFY_SUCCESS\x10\xf8\xeb\x01\x12\x1a\n\x14INPUT_MODIFY_PENDING\x10\xf9\xeb\x01\x12\x19\n\x13INPUT_MODIFY_FAILED\x10\xfb\xeb\x01\x12\x1f\n\x19INPUT_STORAGE_HOST_FAILED\x10\x82\xec\x01\x12\x1d\n\x17\x41LL_INPUT_INVALID_BYTES\x10\xdc\xec\x01\x12\x1b\n\x15INPUT_CLUSTER_SUCCESS\x10\xc0\xed\x01\x12\x1b\n\x15INPUT_CLUSTER_PENDING\x10\xc1\xed\x01\x12\x1a\n\x14INPUT_CLUSTER_FAILED\x10\xc2\xed\x01\x12\x1f\n\x19INPUT_CLUSTER_IN_PROGRESS\x10\xc3\xed\x01\x12\x1b\n\x15INPUT_REINDEX_SUCCESS\x10\xa4\xee\x01\x12\x1b\n\x15INPUT_REINDEX_PENDING\x10\xa5\xee\x01\x12\x1a\n\x14INPUT_REINDEX_FAILED\x10\xa6\xee\x01\x12\x1f\n\x19INPUT_REINDEX_IN_PROGRESS\x10\xa7\xee\x01\x12\"\n\x1cINPUT_VIDEO_DOWNLOAD_SUCCESS\x10\x98\xf2\x01\x12\"\n\x1cINPUT_VIDEO_DOWNLOAD_PENDING\x10\x99\xf2\x01\x12!\n\x1bINPUT_VIDEO_DOWNLOAD_FAILED\x10\x9a\xf2\x01\x12\x1b\n\x15INPUT_VIDEO_DUPLICATE\x10\xfc\xf2\x01\x12$\n\x1eINPUT_VIDEO_UNSUPPORTED_FORMAT\x10\xfd\xf2\x01\x12 \n\x1aINPUT_VIDEO_DOES_NOT_EXIST\x10\xfe\xf2\x01\x12#\n\x1dINPUT_VIDEO_PERMISSION_DENIED\x10\xff\xf2\x01\x12\"\n\x1cINPUT_VIDEO_INVALID_ARGUMENT\x10\x80\xf3\x01\x12\x1c\n\x16INPUT_VIDEO_OVER_LIMIT\x10\x81\xf3\x01\x12\x1d\n\x17INPUT_VIDEO_INVALID_URL\x10\x82\xf3\x01\x12 \n\x1aINPUT_VIDEO_MODIFY_SUCCESS\x10\xe0\xf3\x01\x12 \n\x1aINPUT_VIDEO_MODIFY_PENDING\x10\xe1\xf3\x01\x12\x1f\n\x19INPUT_VIDEO_MODIFY_FAILED\x10\xe3\xf3\x01\x12%\n\x1fINPUT_VIDEO_STORAGE_HOST_FAILED\x10\xea\xf3\x01\x12$\n\x1e\x41LL_INPUT_VIDEOS_INVALID_BYTES\x10\xc4\xf4\x01\x12\x1d\n\x17INPUT_CONNECTION_FAILED\x10\xbc\xb8\x02\x12&\n REQUEST_DISABLED_FOR_MAINTENANCE\x10\xbd\xb8\x02\x12+\n%INPUT_WRITES_DISABLED_FOR_MAINTENANCE\x10\xbe\xb8\x02\x12\x1b\n\x15INPUT_INVALID_REQUEST\x10\xbf\xb8\x02\x12\x1d\n\x17PREDICT_INVALID_REQUEST\x10\xc1\xb8\x02\x12\x1c\n\x16SEARCH_INVALID_REQUEST\x10\xc2\xb8\x02\x12\x1e\n\x18\x43ONCEPTS_INVALID_REQUEST\x10\xc3\xb8\x02\x12\x1b\n\x15STATS_INVALID_REQUEST\x10\xc4\xb8\x02\x12\x1c\n\x16\x44\x41TABASE_DUPLICATE_KEY\x10\xca\xb8\x02\x12 \n\x1a\x44\x41TABASE_STATEMENT_TIMEOUT\x10\xcb\xb8\x02\x12$\n\x1e\x44\x41TABASE_INVALID_ROWS_AFFECTED\x10\xcc\xb8\x02\x12 \n\x1a\x44\x41TABASE_DEADLOCK_DETECTED\x10\xcd\xb8\x02\x12\x18\n\x12\x44\x41TABASE_FAIL_TASK\x10\xce\xb8\x02\x12&\n DATABASE_FAIL_TO_GET_CONNECTIONS\x10\xcf\xb8\x02\x12\x1f\n\x19\x44\x41TABASE_TOO_MANY_CLIENTS\x10\xd0\xb8\x02\x12\"\n\x1c\x44\x41TABASE_CONSTRAINT_VIOLATED\x10\xd1\xb8\x02\x12$\n\x1e\x44\x41TABASE_NO_ONGOING_OPERATIONS\x10\xd2\xb8\x02\x12*\n$DATABASE_LOCKED_BY_ONGOING_OPERATION\x10\xd3\xb8\x02\x12\x1f\n\x19\x41SYNC_WORKER_MULTI_ERRORS\x10\xd4\xb8\x02\x12\x1c\n\x16RPC_REQUEST_QUEUE_FULL\x10\xde\xb8\x02\x12\x1c\n\x16RPC_SERVER_UNAVAILABLE\x10\xdf\xb8\x02\x12\x19\n\x13RPC_REQUEST_TIMEOUT\x10\xe0\xb8\x02\x12#\n\x1dRPC_MAX_MESSAGE_SIZE_EXCEEDED\x10\xe1\xb8\x02\x12\x12\n\x0cRPC_CANCELED\x10\xe3\xb8\x02\x12\x1e\n\x18\x43LUSTER_INTERNAL_FAILURE\x10\xa0\xd0\x02\x12\x1f\n\x19\x45XTERNAL_CONNECTION_ERROR\x10\xe2\xb8\x02\x12\x16\n\x10QUEUE_CONN_ERROR\x10\xa8\xc0\x02\x12!\n\x1bQUEUE_CLOSE_REQUEST_TIMEOUT\x10\xaa\xc0\x02\x12\x17\n\x11QUEUE_CONN_CLOSED\x10\xab\xc0\x02\x12\x1f\n\x19QUEUE_PUBLISH_ACK_TIMEOUT\x10\xac\xc0\x02\x12\x19\n\x13QUEUE_PUBLISH_ERROR\x10\xad\xc0\x02\x12 \n\x1aQUEUE_SUBSCRIPTION_TIMEOUT\x10\xae\xc0\x02\x12\x1e\n\x18QUEUE_SUBSCRIPTION_ERROR\x10\xaf\xc0\x02\x12\x1e\n\x18QUEUE_MARSHALLING_FAILED\x10\xb0\xc0\x02\x12 \n\x1aQUEUE_UNMARSHALLING_FAILED\x10\xb1\xc0\x02\x12\'\n!QUEUE_MAX_MSG_REDELIVERY_EXCEEDED\x10\xb2\xc0\x02\x12\x17\n\x11QUEUE_ACK_FAILURE\x10\xb3\xc0\x02\x12\x13\n\rSQS_OVERLIMIT\x10\x8c\xc1\x02\x12 \n\x1aSQS_INVALID_RECEIPT_HANDLE\x10\x8d\xc1\x02\x12\x11\n\x0bSQS_UNKNOWN\x10\x8e\xc1\x02\x12\x12\n\x0cKAFKA_UNKNOW\x10\xf0\xc1\x02\x12\x19\n\x13KAFKA_MISSING_TOPIC\x10\xf1\xc1\x02\x12\x15\n\x0fKAFKA_ADMIN_ERR\x10\xf2\xc1\x02\x12\x18\n\x12KAFKA_CONSUMER_ERR\x10\xf3\xc1\x02\x12\x19\n\x13KAFKA_PUBLISHER_ERR\x10\xf4\xc1\x02\x12\x1d\n\x17SEARCH_INTERNAL_FAILURE\x10\xf9\xcf\x02\x12\x1f\n\x19SEARCH_PROJECTION_FAILURE\x10\xfa\xcf\x02\x12\x1f\n\x19SEARCH_PREDICTION_FAILURE\x10\xfb\xcf\x02\x12\'\n!SEARCH_BY_NOT_FULLY_INDEXED_INPUT\x10\xfc\xcf\x02\x12 \n\x1aSAVED_SEARCH_MODIFY_FAILED\x10\xfd\xcf\x02\x12\x35\n/ANNOTATION_SEARCH_METRICS_QUEUED_FOR_EVALUATION\x10\xdc\xd0\x02\x12*\n$ANNOTATION_SEARCH_METRICS_EVALUATING\x10\xdd\xd0\x02\x12)\n#ANNOTATION_SEARCH_METRICS_EVALUATED\x10\xde\xd0\x02\x12\x37\n1ANNOTATION_SEARCH_METRICS_FAILED_TO_RETRIEVE_DATA\x10\xdf\xd0\x02\x12\x30\n*ANNOTATION_SEARCH_METRICS_INVALID_ARGUMENT\x10\xe0\xd0\x02\x12&\n ANNOTATION_SEARCH_METRICS_FAILED\x10\xe1\xd0\x02\x12\x18\n\x12STRIPE_EVENT_ERROR\x10\xe1\xd7\x02\x12\x10\n\nCACHE_MISS\x10\xc9\xdf\x02\x12&\n REDIS_SCRIPT_EXITED_WITH_FAILURE\x10\xca\xdf\x02\x12\x18\n\x12SIGNUP_EVENT_ERROR\x10\xb1\xe7\x02\x12\x14\n\x0eSIGNUP_FLAGGED\x10\xb2\xe7\x02\x12\x1a\n\x14\x46ILETYPE_UNSUPPORTED\x10\xb3\xe7\x02\x12\x1f\n\x19\x41PP_COUNT_INVALID_MESSAGE\x10\x99\xef\x02\x12\'\n!APP_COUNT_UPDATE_INCREMENT_FAILED\x10\x9a\xef\x02\x12\x1e\n\x18\x41PP_COUNT_REBUILD_FAILED\x10\x9b\xef\x02\x12 \n\x1a\x41PP_COUNT_INTERNAL_FAILURE\x10\x9c\xef\x02\x12\x17\n\x11MP_DOWNLOAD_ERROR\x10\xfd\xef\x02\x12\x1a\n\x14MP_RESOLVE_DNS_ERROR\x10\xfe\xef\x02\x12)\n#MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR\x10\xff\xef\x02\x12\x1b\n\x15MP_IMAGE_DECODE_ERROR\x10\x80\xf0\x02\x12\x19\n\x13MP_INVALID_ARGUMENT\x10\x81\xf0\x02\x12\x1f\n\x19MP_IMAGE_PROCESSING_ERROR\x10\x82\xf0\x02\x12\x17\n\x11USER_CONSENT_FACE\x10\xd1\x86\x03\x12\x14\n\x0eWORKER_MISSING\x10\xb8\x8e\x03\x12\x13\n\rWORKER_ACTIVE\x10\xb9\x8e\x03\x12\x15\n\x0fWORKER_INACTIVE\x10\xba\x8e\x03\x12\x17\n\x11\x43OLLECTOR_MISSING\x10\xa0\x96\x03\x12\x16\n\x10\x43OLLECTOR_ACTIVE\x10\xa1\x96\x03\x12\x18\n\x12\x43OLLECTOR_INACTIVE\x10\xa2\x96\x03\x12*\n$SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST\x10\x89\x9e\x03\x12\x16\n\x10TASK_IN_PROGRESS\x10\xf1\xa5\x03\x12\x0f\n\tTASK_DONE\x10\xf2\xa5\x03\x12\x12\n\x0cTASK_WONT_DO\x10\xf3\xa5\x03\x12\"\n\x1cTASK_ADD_ANNOTATIONS_FAILURE\x10\xf5\xa5\x03\x12\x13\n\rTASK_CONFLICT\x10\xd4\xa6\x03\x12\x1a\n\x14TASK_NOT_IMPLEMENTED\x10\xd5\xa6\x03\x12\x19\n\x13LABEL_ORDER_PENDING\x10\xd9\xad\x03\x12\x1d\n\x17LABEL_ORDER_IN_PROGRESS\x10\xda\xad\x03\x12\x19\n\x13LABEL_ORDER_SUCCESS\x10\xdb\xad\x03\x12\x1a\n\x14LABEL_ORDER_CANCELED\x10\xdc\xad\x03\x12\x14\n\x0eLICENSE_ACTIVE\x10\xe0\xd4\x03\x12\x1c\n\x16LICENSE_DOES_NOT_EXIST\x10\xe1\xd4\x03\x12\x19\n\x13LICENSE_NEED_UPDATE\x10\xe2\xd4\x03\x12\x15\n\x0fLICENSE_EXPIRED\x10\xe3\xd4\x03\x12\x15\n\x0fLICENSE_REVOKED\x10\xe4\xd4\x03\x12\x15\n\x0fLICENSE_DELETED\x10\xe5\xd4\x03\x12\x1d\n\x17LICENSE_VOLUME_EXCEEDED\x10\xe6\xd4\x03\x12!\n\x1bPASSWORD_VALIDATION_SUCCESS\x10\xc8\xdc\x03\x12 \n\x1aPASSWORD_VALIDATION_FAILED\x10\xc9\xdc\x03\x12%\n\x1fPASSWORDPOLICY_INVALID_ARGUMENT\x10\xca\xdc\x03\x12\"\n\x1c\x46\x45\x41TUREFLAG_CONFIG_NOT_FOUND\x10\xb0\xe4\x03\x12\"\n\x1c\x46\x45\x41TUREFLAG_INVALID_ARGUMENT\x10\xb1\xe4\x03\x12\x19\n\x13\x46\x45\x41TUREFLAG_BLOCKED\x10\xb2\xe4\x03\x12\x1b\n\x15INTERNAL_SERVER_ISSUE\x10\xd4\xfd\x05\x12\x1d\n\x17INTERNAL_FETCHING_ISSUE\x10\xd5\xfd\x05\x12\x1d\n\x17INTERNAL_DATABASE_ISSUE\x10\xd6\xfd\x05\x12!\n\x1bINTERNAL_UNEXPECTED_TIMEOUT\x10\xd9\xfd\x05\x12\x1c\n\x16INTERNAL_UNEXPECTED_V1\x10\xda\xfd\x05\x12\x1f\n\x19INTERNAL_UNEXPECTED_PANIC\x10\xdb\xfd\x05\x12\x1f\n\x19INTERNAL_UNEXPECTED_SPIRE\x10\xdc\xfd\x05\x12 \n\x1aINTERNAL_REDIS_UNAVAILABLE\x10\xdd\xfd\x05\x12!\n\x1bINTERNAL_RESOURCE_EXHAUSTED\x10\xde\xfd\x05\x12\"\n\x1cINTERNAL_REDIS_UNCATEGORIZED\x10\xdf\xfd\x05\x12 \n\x1aINTERNAL_AWS_UNCATEGORIZED\x10\xe0\xfd\x05\x12\"\n\x1cINTERNAL_AZURE_UNCATEGORIZED\x10\xe1\xfd\x05\x12\x18\n\x12\x43ONN_UNCATEGORIZED\x10\xb9\x85\x06\x12\x19\n\x13MODEL_UNCATEGORIZED\x10\xba\x85\x06\x12\x19\n\x13INPUT_UNCATEGORIZED\x10\xbb\x85\x06\x12\x1e\n\x18\x41NNOTATION_UNCATEGORIZED\x10\xbc\x85\x06\x12\x1b\n\x15\x42ILLING_UNCATEGORIZED\x10\xbd\x85\x06\x12\x1c\n\x16INTERNAL_UNCATEGORIZED\x10\xc1\x85\x06\x12\x11\n\x0b\x42\x41\x44_REQUEST\x10\xa0\xc2\x05\x12\x12\n\x0cSERVER_ERROR\x10\x84\xc3\x05\"\x08\x08\xe8\x81\x02\x10\xe8\x81\x02\"\x08\x08\xe9\x81\x02\x10\xe9\x81\x02\"\x08\x08\xea\x81\x02\x10\xea\x81\x02\"\x08\x08\xcc\x82\x02\x10\xcc\x82\x02\"\x08\x08\xcd\x82\x02\x10\xcd\x82\x02\"\x08\x08\xce\x82\x02\x10\xce\x82\x02\"\x08\x08\xcf\x82\x02\x10\xcf\x82\x02\"\x08\x08\xd0\x82\x02\x10\xd0\x82\x02\"\x08\x08\xd1\x82\x02\x10\xd1\x82\x02\"\x08\x08\xd2\x82\x02\x10\xd2\x82\x02\"\x08\x08\xb0\x83\x02\x10\xb0\x83\x02\"\x08\x08\xb1\x83\x02\x10\xb1\x83\x02\"\x08\x08\xb3\x83\x02\x10\xb3\x83\x02\"\x08\x08\xba\x83\x02\x10\xba\x83\x02\"\x08\x08\xbb\xb8\x02\x10\xbb\xb8\x02\x42/\n\x1c\x63om.clarifai.grpc.api.statusP\x01Z\x06status\xa2\x02\x04\x43\x41IPb\x06proto3'
+  serialized_pb=b'\n+proto/clarifai/api/status/status_code.proto\x12\x13\x63larifai.api.status*\xcc\x42\n\nStatusCode\x12\x08\n\x04ZERO\x10\x00\x12\x0c\n\x07SUCCESS\x10\x90N\x12\x11\n\x0cMIXED_STATUS\x10\x9aN\x12\x0c\n\x07\x46\x41ILURE\x10\xa4N\x12\x0e\n\tTRY_AGAIN\x10\xaeN\x12\x14\n\x0fNOT_IMPLEMENTED\x10\xb8N\x12\x18\n\x13\x43ONN_ACCOUNT_ISSUES\x10\xf8U\x12\x17\n\x12\x43ONN_TOKEN_INVALID\x10\xf9U\x12\x1d\n\x18\x43ONN_CREDENTIALS_INVALID\x10\xfaU\x12\x1d\n\x18\x43ONN_EXCEED_HOURLY_LIMIT\x10\xfbU\x12\x1e\n\x19\x43ONN_EXCEED_MONTHLY_LIMIT\x10\xfcU\x12\x13\n\x0e\x43ONN_THROTTLED\x10\xfdU\x12\x18\n\x13\x43ONN_EXCEEDS_LIMITS\x10\xfeU\x12\x1d\n\x18\x43ONN_INSUFFICIENT_SCOPES\x10\xffU\x12\x15\n\x10\x43ONN_KEY_INVALID\x10\x80V\x12\x17\n\x12\x43ONN_KEY_NOT_FOUND\x10\x81V\x12\x1c\n\x17\x43ONN_BAD_REQUEST_FORMAT\x10\xdcV\x12\x18\n\x13\x43ONN_DOES_NOT_EXIST\x10\xddV\x12\x19\n\x14\x43ONN_INVALID_REQUEST\x10\xdeV\x12\x1c\n\x17\x43ONN_METHOD_NOT_ALLOWED\x10\xdfV\x12\x19\n\x14\x43ONN_NO_GDPR_CONSENT\x10\xe0V\x12\x1e\n\x19\x43ONN_AUTH_METHOD_DISABLED\x10\xc0W\x12\x13\n\rMODEL_TRAINED\x10\xec\xa4\x01\x12\x14\n\x0eMODEL_TRAINING\x10\xed\xa4\x01\x12\x15\n\x0fMODEL_UNTRAINED\x10\xee\xa4\x01\x12\x1f\n\x19MODEL_QUEUED_FOR_TRAINING\x10\xef\xa4\x01\x12\x15\n\x0fMODEL_UPLOADING\x10\xf0\xa4\x01\x12\x1c\n\x16MODEL_UPLOADING_FAILED\x10\xf1\xa4\x01\x12\x1c\n\x16MODEL_TRAINING_NO_DATA\x10\xf6\xa4\x01\x12!\n\x1bMODEL_TRAINING_NO_POSITIVES\x10\xf7\xa4\x01\x12*\n$MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS\x10\xf8\xa4\x01\x12\x1e\n\x18MODEL_TRAINING_TIMED_OUT\x10\xf9\xa4\x01\x12\"\n\x1cMODEL_TRAINING_WAITING_ERROR\x10\xfa\xa4\x01\x12\"\n\x1cMODEL_TRAINING_UNKNOWN_ERROR\x10\xfb\xa4\x01\x12\"\n\x1cMODEL_TRAINING_MSG_REDELIVER\x10\xfc\xa4\x01\x12&\n MODEL_TRAINING_INSUFFICIENT_DATA\x10\xfd\xa4\x01\x12#\n\x1dMODEL_TRAINING_INVALID_PARAMS\x10\xfe\xa4\x01\x12\x34\n.MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED\x10\xff\xa4\x01\x12\x1a\n\x14MODEL_MODIFY_SUCCESS\x10\x9e\xa5\x01\x12\x1a\n\x14MODEL_MODIFY_PENDING\x10\x9f\xa5\x01\x12\x19\n\x13MODEL_MODIFY_FAILED\x10\xa0\xa5\x01\x12\x1a\n\x14MODEL_DOES_NOT_EXIST\x10\xd0\xa5\x01\x12\x1d\n\x17MODEL_PERMISSION_DENIED\x10\xd1\xa5\x01\x12\x1c\n\x16MODEL_INVALID_ARGUMENT\x10\xd2\xa5\x01\x12\x1b\n\x15MODEL_INVALID_REQUEST\x10\xd3\xa5\x01\x12\x15\n\x0fMODEL_EVALUATED\x10\xb4\xa6\x01\x12\x16\n\x10MODEL_EVALUATING\x10\xb5\xa6\x01\x12\x19\n\x13MODEL_NOT_EVALUATED\x10\xb6\xa6\x01\x12!\n\x1bMODEL_QUEUED_FOR_EVALUATION\x10\xb7\xa6\x01\x12 \n\x1aMODEL_EVALUATION_TIMED_OUT\x10\xbe\xa6\x01\x12$\n\x1eMODEL_EVALUATION_WAITING_ERROR\x10\xbf\xa6\x01\x12$\n\x1eMODEL_EVALUATION_UNKNOWN_ERROR\x10\xc0\xa6\x01\x12\x1d\n\x17MODEL_PREDICTION_FAILED\x10\xc1\xa6\x01\x12$\n\x1eMODEL_EVALUATION_MSG_REDELIVER\x10\xc2\xa6\x01\x12\"\n\x1cMODEL_EVALUATION_NEED_LABELS\x10\xc3\xa6\x01\x12\"\n\x1cMODEL_EVALUATION_NEED_INPUTS\x10\xc4\xa6\x01\x12\x1d\n\x17MODEL_DEPLOYMENT_FAILED\x10\xe6\xa6\x01\x12\x15\n\x0fMODEL_DEPLOYING\x10\xe7\xa6\x01\x12!\n\x1bMODEL_QUEUED_FOR_DEPLOYMENT\x10\xe8\xa6\x01\x12\x18\n\x12MODEL_NOT_DEPLOYED\x10\xe9\xa6\x01\x12 \n\x1aWORKFLOW_NO_MATCHING_INPUT\x10\xf1\xab\x01\x12$\n\x1eWORKFLOW_REQUIRE_TRAINED_MODEL\x10\xf2\xab\x01\x12\x18\n\x12WORKFLOW_DUPLICATE\x10\xd4\xac\x01\x12!\n\x1bWORKFLOW_UNSUPPORTED_FORMAT\x10\xd5\xac\x01\x12\x1d\n\x17WORKFLOW_DOES_NOT_EXIST\x10\xd6\xac\x01\x12 \n\x1aWORKFLOW_PERMISSION_DENIED\x10\xd7\xac\x01\x12\x1f\n\x19WORKFLOW_INVALID_ARGUMENT\x10\xd8\xac\x01\x12\x1d\n\x17WORKFLOW_INVALID_RECIPE\x10\xd9\xac\x01\x12\x1f\n\x19WORKFLOW_INVALID_TEMPLATE\x10\xda\xac\x01\x12\x1c\n\x16WORKFLOW_INVALID_GRAPH\x10\xdb\xac\x01\x12\x1f\n\x19WORKFLOW_INTERNAL_FAILURE\x10\xdc\xac\x01\x12\x1e\n\x18WORKFLOW_INVALID_REQUEST\x10\xd7\xb3\x01\x12\x1d\n\x17WORKFLOW_MODIFY_SUCCESS\x10\x86\xad\x01\x12\x1d\n\x17WORKFLOW_MODIFY_PENDING\x10\x87\xad\x01\x12\x1c\n\x16WORKFLOW_MODIFY_FAILED\x10\x88\xad\x01\x12\x1d\n\x17WORKFLOW_REINDEX_FAILED\x10\x89\xad\x01\x12\x1c\n\x16\x43ONCEPT_MODIFY_SUCCESS\x10\xee\xb4\x01\x12\x1c\n\x16\x43ONCEPT_MODIFY_PENDING\x10\xef\xb4\x01\x12\x1b\n\x15\x43ONCEPT_MODIFY_FAILED\x10\xf0\xb4\x01\x12\x18\n\x12\x41NNOTATION_SUCCESS\x10\xd6\xbc\x01\x12\x18\n\x12\x41NNOTATION_PENDING\x10\xd7\xbc\x01\x12\x17\n\x11\x41NNOTATION_FAILED\x10\xd8\xbc\x01\x12\x1f\n\x19\x41NNOTATION_UNKNOWN_STATUS\x10\xda\xbc\x01\x12!\n\x1b\x41NNOTATION_INVALID_ARGUMENT\x10\xdb\xbc\x01\x12\"\n\x1c\x41NNOTATION_PERMISSION_DENIED\x10\xdc\xbc\x01\x12 \n\x1a\x41NNOTATION_AWAITING_REVIEW\x10\xdd\xbc\x01\x12*\n$ANNOTATION_AWAITING_CONSENSUS_REVIEW\x10\xdf\xbc\x01\x12\x1e\n\x18\x41NNOTATION_REVIEW_DENIED\x10\xde\xbc\x01\x12\x1f\n\x19\x41NNOTATION_MODIFY_SUCCESS\x10\xba\xbd\x01\x12\x1f\n\x19\x41NNOTATION_MODIFY_PENDING\x10\xbb\xbd\x01\x12\x1e\n\x18\x41NNOTATION_MODIFY_FAILED\x10\xbc\xbd\x01\x12&\n METADATA_INVALID_PATCH_ARGUMENTS\x10\xc4\xc2\x01\x12\x1c\n\x16METADATA_PARSING_ISSUE\x10\xc5\xc2\x01\x12!\n\x1bMETADATA_MANIPULATION_ISSUE\x10\xc6\xc2\x01\x12\x1c\n\x16TRAINER_JOB_STATE_NONE\x10\xa8\xc3\x01\x12\x1e\n\x18TRAINER_JOB_STATE_QUEUED\x10\xa9\xc3\x01\x12\x1f\n\x19TRAINER_JOB_STATE_RUNNING\x10\xaa\xc3\x01\x12 \n\x1aTRAINER_JOB_STATE_COMPLETE\x10\xab\xc3\x01\x12\x1d\n\x17TRAINER_JOB_STATE_ERROR\x10\xac\xc3\x01\x12\x17\n\x11\x44\x41TA_DUMP_SUCCESS\x10\xbe\xc4\x01\x12\x17\n\x11\x44\x41TA_DUMP_PENDING\x10\xbf\xc4\x01\x12\x16\n\x10\x44\x41TA_DUMP_FAILED\x10\xc0\xc4\x01\x12\x1b\n\x15\x44\x41TA_DUMP_IN_PROGRESS\x10\xc1\xc4\x01\x12\x1d\n\x17\x41PP_DUPLICATION_SUCCESS\x10\xf0\xc4\x01\x12\x1c\n\x16\x41PP_DUPLICATION_FAILED\x10\xf1\xc4\x01\x12\x1d\n\x17\x41PP_DUPLICATION_PENDING\x10\xf2\xc4\x01\x12!\n\x1b\x41PP_DUPLICATION_IN_PROGRESS\x10\xf3\xc4\x01\x12%\n\x1f\x41PP_DUPLICATION_INVALID_REQUEST\x10\xf4\xc4\x01\x12\x1c\n\x16INPUT_DOWNLOAD_SUCCESS\x10\xb0\xea\x01\x12\x1c\n\x16INPUT_DOWNLOAD_PENDING\x10\xb1\xea\x01\x12\x1b\n\x15INPUT_DOWNLOAD_FAILED\x10\xb2\xea\x01\x12 \n\x1aINPUT_DOWNLOAD_IN_PROGRESS\x10\xb3\xea\x01\x12 \n\x1aINPUT_STATUS_UPDATE_FAILED\x10\xb4\xea\x01\x12\x19\n\x13INPUT_DELETE_FAILED\x10\xb5\xea\x01\x12\x15\n\x0fINPUT_DUPLICATE\x10\x94\xeb\x01\x12\x1e\n\x18INPUT_UNSUPPORTED_FORMAT\x10\x95\xeb\x01\x12\x1a\n\x14INPUT_DOES_NOT_EXIST\x10\x96\xeb\x01\x12\x1d\n\x17INPUT_PERMISSION_DENIED\x10\x97\xeb\x01\x12\x1c\n\x16INPUT_INVALID_ARGUMENT\x10\x98\xeb\x01\x12\x16\n\x10INPUT_OVER_LIMIT\x10\x99\xeb\x01\x12\x17\n\x11INPUT_INVALID_URL\x10\x9a\xeb\x01\x12\x1a\n\x14INPUT_MODIFY_SUCCESS\x10\xf8\xeb\x01\x12\x1a\n\x14INPUT_MODIFY_PENDING\x10\xf9\xeb\x01\x12\x19\n\x13INPUT_MODIFY_FAILED\x10\xfb\xeb\x01\x12\x1f\n\x19INPUT_STORAGE_HOST_FAILED\x10\x82\xec\x01\x12\x1d\n\x17\x41LL_INPUT_INVALID_BYTES\x10\xdc\xec\x01\x12\x1b\n\x15INPUT_CLUSTER_SUCCESS\x10\xc0\xed\x01\x12\x1b\n\x15INPUT_CLUSTER_PENDING\x10\xc1\xed\x01\x12\x1a\n\x14INPUT_CLUSTER_FAILED\x10\xc2\xed\x01\x12\x1f\n\x19INPUT_CLUSTER_IN_PROGRESS\x10\xc3\xed\x01\x12\x1b\n\x15INPUT_REINDEX_SUCCESS\x10\xa4\xee\x01\x12\x1b\n\x15INPUT_REINDEX_PENDING\x10\xa5\xee\x01\x12\x1a\n\x14INPUT_REINDEX_FAILED\x10\xa6\xee\x01\x12\x1f\n\x19INPUT_REINDEX_IN_PROGRESS\x10\xa7\xee\x01\x12\"\n\x1cINPUT_VIDEO_DOWNLOAD_SUCCESS\x10\x98\xf2\x01\x12\"\n\x1cINPUT_VIDEO_DOWNLOAD_PENDING\x10\x99\xf2\x01\x12!\n\x1bINPUT_VIDEO_DOWNLOAD_FAILED\x10\x9a\xf2\x01\x12\x1b\n\x15INPUT_VIDEO_DUPLICATE\x10\xfc\xf2\x01\x12$\n\x1eINPUT_VIDEO_UNSUPPORTED_FORMAT\x10\xfd\xf2\x01\x12 \n\x1aINPUT_VIDEO_DOES_NOT_EXIST\x10\xfe\xf2\x01\x12#\n\x1dINPUT_VIDEO_PERMISSION_DENIED\x10\xff\xf2\x01\x12\"\n\x1cINPUT_VIDEO_INVALID_ARGUMENT\x10\x80\xf3\x01\x12\x1c\n\x16INPUT_VIDEO_OVER_LIMIT\x10\x81\xf3\x01\x12\x1d\n\x17INPUT_VIDEO_INVALID_URL\x10\x82\xf3\x01\x12 \n\x1aINPUT_VIDEO_MODIFY_SUCCESS\x10\xe0\xf3\x01\x12 \n\x1aINPUT_VIDEO_MODIFY_PENDING\x10\xe1\xf3\x01\x12\x1f\n\x19INPUT_VIDEO_MODIFY_FAILED\x10\xe3\xf3\x01\x12%\n\x1fINPUT_VIDEO_STORAGE_HOST_FAILED\x10\xea\xf3\x01\x12$\n\x1e\x41LL_INPUT_VIDEOS_INVALID_BYTES\x10\xc4\xf4\x01\x12\x1d\n\x17INPUT_CONNECTION_FAILED\x10\xbc\xb8\x02\x12&\n REQUEST_DISABLED_FOR_MAINTENANCE\x10\xbd\xb8\x02\x12+\n%INPUT_WRITES_DISABLED_FOR_MAINTENANCE\x10\xbe\xb8\x02\x12\x1b\n\x15INPUT_INVALID_REQUEST\x10\xbf\xb8\x02\x12\x1d\n\x17PREDICT_INVALID_REQUEST\x10\xc1\xb8\x02\x12\x1c\n\x16SEARCH_INVALID_REQUEST\x10\xc2\xb8\x02\x12\x1e\n\x18\x43ONCEPTS_INVALID_REQUEST\x10\xc3\xb8\x02\x12\x1b\n\x15STATS_INVALID_REQUEST\x10\xc4\xb8\x02\x12\x1c\n\x16\x44\x41TABASE_DUPLICATE_KEY\x10\xca\xb8\x02\x12 \n\x1a\x44\x41TABASE_STATEMENT_TIMEOUT\x10\xcb\xb8\x02\x12$\n\x1e\x44\x41TABASE_INVALID_ROWS_AFFECTED\x10\xcc\xb8\x02\x12 \n\x1a\x44\x41TABASE_DEADLOCK_DETECTED\x10\xcd\xb8\x02\x12\x18\n\x12\x44\x41TABASE_FAIL_TASK\x10\xce\xb8\x02\x12&\n DATABASE_FAIL_TO_GET_CONNECTIONS\x10\xcf\xb8\x02\x12\x1f\n\x19\x44\x41TABASE_TOO_MANY_CLIENTS\x10\xd0\xb8\x02\x12\"\n\x1c\x44\x41TABASE_CONSTRAINT_VIOLATED\x10\xd1\xb8\x02\x12$\n\x1e\x44\x41TABASE_NO_ONGOING_OPERATIONS\x10\xd2\xb8\x02\x12*\n$DATABASE_LOCKED_BY_ONGOING_OPERATION\x10\xd3\xb8\x02\x12\x1f\n\x19\x41SYNC_WORKER_MULTI_ERRORS\x10\xd4\xb8\x02\x12\x1c\n\x16RPC_REQUEST_QUEUE_FULL\x10\xde\xb8\x02\x12\x1c\n\x16RPC_SERVER_UNAVAILABLE\x10\xdf\xb8\x02\x12\x19\n\x13RPC_REQUEST_TIMEOUT\x10\xe0\xb8\x02\x12#\n\x1dRPC_MAX_MESSAGE_SIZE_EXCEEDED\x10\xe1\xb8\x02\x12\x12\n\x0cRPC_CANCELED\x10\xe3\xb8\x02\x12\x1e\n\x18\x43LUSTER_INTERNAL_FAILURE\x10\xa0\xd0\x02\x12\x1f\n\x19\x45XTERNAL_CONNECTION_ERROR\x10\xe2\xb8\x02\x12\x16\n\x10QUEUE_CONN_ERROR\x10\xa8\xc0\x02\x12!\n\x1bQUEUE_CLOSE_REQUEST_TIMEOUT\x10\xaa\xc0\x02\x12\x17\n\x11QUEUE_CONN_CLOSED\x10\xab\xc0\x02\x12\x1f\n\x19QUEUE_PUBLISH_ACK_TIMEOUT\x10\xac\xc0\x02\x12\x19\n\x13QUEUE_PUBLISH_ERROR\x10\xad\xc0\x02\x12 \n\x1aQUEUE_SUBSCRIPTION_TIMEOUT\x10\xae\xc0\x02\x12\x1e\n\x18QUEUE_SUBSCRIPTION_ERROR\x10\xaf\xc0\x02\x12\x1e\n\x18QUEUE_MARSHALLING_FAILED\x10\xb0\xc0\x02\x12 \n\x1aQUEUE_UNMARSHALLING_FAILED\x10\xb1\xc0\x02\x12\'\n!QUEUE_MAX_MSG_REDELIVERY_EXCEEDED\x10\xb2\xc0\x02\x12\x17\n\x11QUEUE_ACK_FAILURE\x10\xb3\xc0\x02\x12\x13\n\rSQS_OVERLIMIT\x10\x8c\xc1\x02\x12 \n\x1aSQS_INVALID_RECEIPT_HANDLE\x10\x8d\xc1\x02\x12\x11\n\x0bSQS_UNKNOWN\x10\x8e\xc1\x02\x12\x12\n\x0cKAFKA_UNKNOW\x10\xf0\xc1\x02\x12\x19\n\x13KAFKA_MISSING_TOPIC\x10\xf1\xc1\x02\x12\x15\n\x0fKAFKA_ADMIN_ERR\x10\xf2\xc1\x02\x12\x18\n\x12KAFKA_CONSUMER_ERR\x10\xf3\xc1\x02\x12\x19\n\x13KAFKA_PUBLISHER_ERR\x10\xf4\xc1\x02\x12\x1d\n\x17SEARCH_INTERNAL_FAILURE\x10\xf9\xcf\x02\x12\x1f\n\x19SEARCH_PROJECTION_FAILURE\x10\xfa\xcf\x02\x12\x1f\n\x19SEARCH_PREDICTION_FAILURE\x10\xfb\xcf\x02\x12\'\n!SEARCH_BY_NOT_FULLY_INDEXED_INPUT\x10\xfc\xcf\x02\x12 \n\x1aSAVED_SEARCH_MODIFY_FAILED\x10\xfd\xcf\x02\x12\x35\n/ANNOTATION_SEARCH_METRICS_QUEUED_FOR_EVALUATION\x10\xdc\xd0\x02\x12*\n$ANNOTATION_SEARCH_METRICS_EVALUATING\x10\xdd\xd0\x02\x12)\n#ANNOTATION_SEARCH_METRICS_EVALUATED\x10\xde\xd0\x02\x12\x37\n1ANNOTATION_SEARCH_METRICS_FAILED_TO_RETRIEVE_DATA\x10\xdf\xd0\x02\x12\x30\n*ANNOTATION_SEARCH_METRICS_INVALID_ARGUMENT\x10\xe0\xd0\x02\x12&\n ANNOTATION_SEARCH_METRICS_FAILED\x10\xe1\xd0\x02\x12\x18\n\x12STRIPE_EVENT_ERROR\x10\xe1\xd7\x02\x12\x10\n\nCACHE_MISS\x10\xc9\xdf\x02\x12&\n REDIS_SCRIPT_EXITED_WITH_FAILURE\x10\xca\xdf\x02\x12\x18\n\x12SIGNUP_EVENT_ERROR\x10\xb1\xe7\x02\x12\x14\n\x0eSIGNUP_FLAGGED\x10\xb2\xe7\x02\x12\x1a\n\x14\x46ILETYPE_UNSUPPORTED\x10\xb3\xe7\x02\x12\x1f\n\x19\x41PP_COUNT_INVALID_MESSAGE\x10\x99\xef\x02\x12\'\n!APP_COUNT_UPDATE_INCREMENT_FAILED\x10\x9a\xef\x02\x12\x1e\n\x18\x41PP_COUNT_REBUILD_FAILED\x10\x9b\xef\x02\x12 \n\x1a\x41PP_COUNT_INTERNAL_FAILURE\x10\x9c\xef\x02\x12\x17\n\x11MP_DOWNLOAD_ERROR\x10\xfd\xef\x02\x12\x1a\n\x14MP_RESOLVE_DNS_ERROR\x10\xfe\xef\x02\x12)\n#MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR\x10\xff\xef\x02\x12\x1b\n\x15MP_IMAGE_DECODE_ERROR\x10\x80\xf0\x02\x12\x19\n\x13MP_INVALID_ARGUMENT\x10\x81\xf0\x02\x12\x1f\n\x19MP_IMAGE_PROCESSING_ERROR\x10\x82\xf0\x02\x12\x17\n\x11USER_CONSENT_FACE\x10\xd1\x86\x03\x12\x14\n\x0eWORKER_MISSING\x10\xb8\x8e\x03\x12\x13\n\rWORKER_ACTIVE\x10\xb9\x8e\x03\x12\x15\n\x0fWORKER_INACTIVE\x10\xba\x8e\x03\x12\x17\n\x11\x43OLLECTOR_MISSING\x10\xa0\x96\x03\x12\x16\n\x10\x43OLLECTOR_ACTIVE\x10\xa1\x96\x03\x12\x18\n\x12\x43OLLECTOR_INACTIVE\x10\xa2\x96\x03\x12*\n$SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST\x10\x89\x9e\x03\x12\x16\n\x10TASK_IN_PROGRESS\x10\xf1\xa5\x03\x12\x0f\n\tTASK_DONE\x10\xf2\xa5\x03\x12\x12\n\x0cTASK_WONT_DO\x10\xf3\xa5\x03\x12\"\n\x1cTASK_ADD_ANNOTATIONS_FAILURE\x10\xf5\xa5\x03\x12\x13\n\rTASK_CONFLICT\x10\xd4\xa6\x03\x12\x1a\n\x14TASK_NOT_IMPLEMENTED\x10\xd5\xa6\x03\x12\x19\n\x13LABEL_ORDER_PENDING\x10\xd9\xad\x03\x12\x1d\n\x17LABEL_ORDER_IN_PROGRESS\x10\xda\xad\x03\x12\x19\n\x13LABEL_ORDER_SUCCESS\x10\xdb\xad\x03\x12\x1a\n\x14LABEL_ORDER_CANCELED\x10\xdc\xad\x03\x12\x14\n\x0eLICENSE_ACTIVE\x10\xe0\xd4\x03\x12\x1c\n\x16LICENSE_DOES_NOT_EXIST\x10\xe1\xd4\x03\x12\x19\n\x13LICENSE_NEED_UPDATE\x10\xe2\xd4\x03\x12\x15\n\x0fLICENSE_EXPIRED\x10\xe3\xd4\x03\x12\x15\n\x0fLICENSE_REVOKED\x10\xe4\xd4\x03\x12\x15\n\x0fLICENSE_DELETED\x10\xe5\xd4\x03\x12\x1d\n\x17LICENSE_VOLUME_EXCEEDED\x10\xe6\xd4\x03\x12!\n\x1bPASSWORD_VALIDATION_SUCCESS\x10\xc8\xdc\x03\x12 \n\x1aPASSWORD_VALIDATION_FAILED\x10\xc9\xdc\x03\x12%\n\x1fPASSWORDPOLICY_INVALID_ARGUMENT\x10\xca\xdc\x03\x12\"\n\x1c\x46\x45\x41TUREFLAG_CONFIG_NOT_FOUND\x10\xb0\xe4\x03\x12\"\n\x1c\x46\x45\x41TUREFLAG_INVALID_ARGUMENT\x10\xb1\xe4\x03\x12\x19\n\x13\x46\x45\x41TUREFLAG_BLOCKED\x10\xb2\xe4\x03\x12\x1b\n\x15INTERNAL_SERVER_ISSUE\x10\xd4\xfd\x05\x12\x1d\n\x17INTERNAL_FETCHING_ISSUE\x10\xd5\xfd\x05\x12\x1d\n\x17INTERNAL_DATABASE_ISSUE\x10\xd6\xfd\x05\x12!\n\x1bINTERNAL_UNEXPECTED_TIMEOUT\x10\xd9\xfd\x05\x12\x1c\n\x16INTERNAL_UNEXPECTED_V1\x10\xda\xfd\x05\x12\x1f\n\x19INTERNAL_UNEXPECTED_PANIC\x10\xdb\xfd\x05\x12\x1f\n\x19INTERNAL_UNEXPECTED_SPIRE\x10\xdc\xfd\x05\x12 \n\x1aINTERNAL_REDIS_UNAVAILABLE\x10\xdd\xfd\x05\x12!\n\x1bINTERNAL_RESOURCE_EXHAUSTED\x10\xde\xfd\x05\x12\"\n\x1cINTERNAL_REDIS_UNCATEGORIZED\x10\xdf\xfd\x05\x12 \n\x1aINTERNAL_AWS_UNCATEGORIZED\x10\xe0\xfd\x05\x12\"\n\x1cINTERNAL_AZURE_UNCATEGORIZED\x10\xe1\xfd\x05\x12\x18\n\x12\x43ONN_UNCATEGORIZED\x10\xb9\x85\x06\x12\x19\n\x13MODEL_UNCATEGORIZED\x10\xba\x85\x06\x12\x19\n\x13INPUT_UNCATEGORIZED\x10\xbb\x85\x06\x12\x1e\n\x18\x41NNOTATION_UNCATEGORIZED\x10\xbc\x85\x06\x12\x1b\n\x15\x42ILLING_UNCATEGORIZED\x10\xbd\x85\x06\x12\x1c\n\x16INTERNAL_UNCATEGORIZED\x10\xc1\x85\x06\x12\x11\n\x0b\x42\x41\x44_REQUEST\x10\xa0\xc2\x05\x12\x12\n\x0cSERVER_ERROR\x10\x84\xc3\x05\"\x08\x08\xe8\x81\x02\x10\xe8\x81\x02\"\x08\x08\xe9\x81\x02\x10\xe9\x81\x02\"\x08\x08\xea\x81\x02\x10\xea\x81\x02\"\x08\x08\xcc\x82\x02\x10\xcc\x82\x02\"\x08\x08\xcd\x82\x02\x10\xcd\x82\x02\"\x08\x08\xce\x82\x02\x10\xce\x82\x02\"\x08\x08\xcf\x82\x02\x10\xcf\x82\x02\"\x08\x08\xd0\x82\x02\x10\xd0\x82\x02\"\x08\x08\xd1\x82\x02\x10\xd1\x82\x02\"\x08\x08\xd2\x82\x02\x10\xd2\x82\x02\"\x08\x08\xb0\x83\x02\x10\xb0\x83\x02\"\x08\x08\xb1\x83\x02\x10\xb1\x83\x02\"\x08\x08\xb3\x83\x02\x10\xb3\x83\x02\"\x08\x08\xba\x83\x02\x10\xba\x83\x02\"\x08\x08\xbb\xb8\x02\x10\xbb\xb8\x02\x42/\n\x1c\x63om.clarifai.grpc.api.statusP\x01Z\x06status\xa2\x02\x04\x43\x41IPb\x06proto3'
 )
 
 _STATUSCODE = _descriptor.EnumDescriptor(
@@ -373,750 +373,754 @@ _STATUSCODE = _descriptor.EnumDescriptor(
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_REVIEW_DENIED', index=86, number=24158,
+      name='ANNOTATION_AWAITING_CONSENSUS_REVIEW', index=86, number=24159,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_MODIFY_SUCCESS', index=87, number=24250,
+      name='ANNOTATION_REVIEW_DENIED', index=87, number=24158,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_MODIFY_PENDING', index=88, number=24251,
+      name='ANNOTATION_MODIFY_SUCCESS', index=88, number=24250,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_MODIFY_FAILED', index=89, number=24252,
+      name='ANNOTATION_MODIFY_PENDING', index=89, number=24251,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='METADATA_INVALID_PATCH_ARGUMENTS', index=90, number=24900,
+      name='ANNOTATION_MODIFY_FAILED', index=90, number=24252,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='METADATA_PARSING_ISSUE', index=91, number=24901,
+      name='METADATA_INVALID_PATCH_ARGUMENTS', index=91, number=24900,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='METADATA_MANIPULATION_ISSUE', index=92, number=24902,
+      name='METADATA_PARSING_ISSUE', index=92, number=24901,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TRAINER_JOB_STATE_NONE', index=93, number=25000,
+      name='METADATA_MANIPULATION_ISSUE', index=93, number=24902,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TRAINER_JOB_STATE_QUEUED', index=94, number=25001,
+      name='TRAINER_JOB_STATE_NONE', index=94, number=25000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TRAINER_JOB_STATE_RUNNING', index=95, number=25002,
+      name='TRAINER_JOB_STATE_QUEUED', index=95, number=25001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TRAINER_JOB_STATE_COMPLETE', index=96, number=25003,
+      name='TRAINER_JOB_STATE_RUNNING', index=96, number=25002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TRAINER_JOB_STATE_ERROR', index=97, number=25004,
+      name='TRAINER_JOB_STATE_COMPLETE', index=97, number=25003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATA_DUMP_SUCCESS', index=98, number=25150,
+      name='TRAINER_JOB_STATE_ERROR', index=98, number=25004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATA_DUMP_PENDING', index=99, number=25151,
+      name='DATA_DUMP_SUCCESS', index=99, number=25150,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATA_DUMP_FAILED', index=100, number=25152,
+      name='DATA_DUMP_PENDING', index=100, number=25151,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATA_DUMP_IN_PROGRESS', index=101, number=25153,
+      name='DATA_DUMP_FAILED', index=101, number=25152,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_DUPLICATION_SUCCESS', index=102, number=25200,
+      name='DATA_DUMP_IN_PROGRESS', index=102, number=25153,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_DUPLICATION_FAILED', index=103, number=25201,
+      name='APP_DUPLICATION_SUCCESS', index=103, number=25200,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_DUPLICATION_PENDING', index=104, number=25202,
+      name='APP_DUPLICATION_FAILED', index=104, number=25201,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_DUPLICATION_IN_PROGRESS', index=105, number=25203,
+      name='APP_DUPLICATION_PENDING', index=105, number=25202,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_DUPLICATION_INVALID_REQUEST', index=106, number=25204,
+      name='APP_DUPLICATION_IN_PROGRESS', index=106, number=25203,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DOWNLOAD_SUCCESS', index=107, number=30000,
+      name='APP_DUPLICATION_INVALID_REQUEST', index=107, number=25204,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DOWNLOAD_PENDING', index=108, number=30001,
+      name='INPUT_DOWNLOAD_SUCCESS', index=108, number=30000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DOWNLOAD_FAILED', index=109, number=30002,
+      name='INPUT_DOWNLOAD_PENDING', index=109, number=30001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DOWNLOAD_IN_PROGRESS', index=110, number=30003,
+      name='INPUT_DOWNLOAD_FAILED', index=110, number=30002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_STATUS_UPDATE_FAILED', index=111, number=30004,
+      name='INPUT_DOWNLOAD_IN_PROGRESS', index=111, number=30003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DELETE_FAILED', index=112, number=30005,
+      name='INPUT_STATUS_UPDATE_FAILED', index=112, number=30004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DUPLICATE', index=113, number=30100,
+      name='INPUT_DELETE_FAILED', index=113, number=30005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_UNSUPPORTED_FORMAT', index=114, number=30101,
+      name='INPUT_DUPLICATE', index=114, number=30100,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_DOES_NOT_EXIST', index=115, number=30102,
+      name='INPUT_UNSUPPORTED_FORMAT', index=115, number=30101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_PERMISSION_DENIED', index=116, number=30103,
+      name='INPUT_DOES_NOT_EXIST', index=116, number=30102,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_INVALID_ARGUMENT', index=117, number=30104,
+      name='INPUT_PERMISSION_DENIED', index=117, number=30103,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_OVER_LIMIT', index=118, number=30105,
+      name='INPUT_INVALID_ARGUMENT', index=118, number=30104,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_INVALID_URL', index=119, number=30106,
+      name='INPUT_OVER_LIMIT', index=119, number=30105,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_MODIFY_SUCCESS', index=120, number=30200,
+      name='INPUT_INVALID_URL', index=120, number=30106,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_MODIFY_PENDING', index=121, number=30201,
+      name='INPUT_MODIFY_SUCCESS', index=121, number=30200,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_MODIFY_FAILED', index=122, number=30203,
+      name='INPUT_MODIFY_PENDING', index=122, number=30201,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_STORAGE_HOST_FAILED', index=123, number=30210,
+      name='INPUT_MODIFY_FAILED', index=123, number=30203,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ALL_INPUT_INVALID_BYTES', index=124, number=30300,
+      name='INPUT_STORAGE_HOST_FAILED', index=124, number=30210,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CLUSTER_SUCCESS', index=125, number=30400,
+      name='ALL_INPUT_INVALID_BYTES', index=125, number=30300,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CLUSTER_PENDING', index=126, number=30401,
+      name='INPUT_CLUSTER_SUCCESS', index=126, number=30400,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CLUSTER_FAILED', index=127, number=30402,
+      name='INPUT_CLUSTER_PENDING', index=127, number=30401,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CLUSTER_IN_PROGRESS', index=128, number=30403,
+      name='INPUT_CLUSTER_FAILED', index=128, number=30402,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_REINDEX_SUCCESS', index=129, number=30500,
+      name='INPUT_CLUSTER_IN_PROGRESS', index=129, number=30403,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_REINDEX_PENDING', index=130, number=30501,
+      name='INPUT_REINDEX_SUCCESS', index=130, number=30500,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_REINDEX_FAILED', index=131, number=30502,
+      name='INPUT_REINDEX_PENDING', index=131, number=30501,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_REINDEX_IN_PROGRESS', index=132, number=30503,
+      name='INPUT_REINDEX_FAILED', index=132, number=30502,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_DOWNLOAD_SUCCESS', index=133, number=31000,
+      name='INPUT_REINDEX_IN_PROGRESS', index=133, number=30503,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_DOWNLOAD_PENDING', index=134, number=31001,
+      name='INPUT_VIDEO_DOWNLOAD_SUCCESS', index=134, number=31000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_DOWNLOAD_FAILED', index=135, number=31002,
+      name='INPUT_VIDEO_DOWNLOAD_PENDING', index=135, number=31001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_DUPLICATE', index=136, number=31100,
+      name='INPUT_VIDEO_DOWNLOAD_FAILED', index=136, number=31002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_UNSUPPORTED_FORMAT', index=137, number=31101,
+      name='INPUT_VIDEO_DUPLICATE', index=137, number=31100,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_DOES_NOT_EXIST', index=138, number=31102,
+      name='INPUT_VIDEO_UNSUPPORTED_FORMAT', index=138, number=31101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_PERMISSION_DENIED', index=139, number=31103,
+      name='INPUT_VIDEO_DOES_NOT_EXIST', index=139, number=31102,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_INVALID_ARGUMENT', index=140, number=31104,
+      name='INPUT_VIDEO_PERMISSION_DENIED', index=140, number=31103,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_OVER_LIMIT', index=141, number=31105,
+      name='INPUT_VIDEO_INVALID_ARGUMENT', index=141, number=31104,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_INVALID_URL', index=142, number=31106,
+      name='INPUT_VIDEO_OVER_LIMIT', index=142, number=31105,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_MODIFY_SUCCESS', index=143, number=31200,
+      name='INPUT_VIDEO_INVALID_URL', index=143, number=31106,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_MODIFY_PENDING', index=144, number=31201,
+      name='INPUT_VIDEO_MODIFY_SUCCESS', index=144, number=31200,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_MODIFY_FAILED', index=145, number=31203,
+      name='INPUT_VIDEO_MODIFY_PENDING', index=145, number=31201,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_VIDEO_STORAGE_HOST_FAILED', index=146, number=31210,
+      name='INPUT_VIDEO_MODIFY_FAILED', index=146, number=31203,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ALL_INPUT_VIDEOS_INVALID_BYTES', index=147, number=31300,
+      name='INPUT_VIDEO_STORAGE_HOST_FAILED', index=147, number=31210,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_CONNECTION_FAILED', index=148, number=39996,
+      name='ALL_INPUT_VIDEOS_INVALID_BYTES', index=148, number=31300,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REQUEST_DISABLED_FOR_MAINTENANCE', index=149, number=39997,
+      name='INPUT_CONNECTION_FAILED', index=149, number=39996,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_WRITES_DISABLED_FOR_MAINTENANCE', index=150, number=39998,
+      name='REQUEST_DISABLED_FOR_MAINTENANCE', index=150, number=39997,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_INVALID_REQUEST', index=151, number=39999,
+      name='INPUT_WRITES_DISABLED_FOR_MAINTENANCE', index=151, number=39998,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PREDICT_INVALID_REQUEST', index=152, number=40001,
+      name='INPUT_INVALID_REQUEST', index=152, number=39999,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SEARCH_INVALID_REQUEST', index=153, number=40002,
+      name='PREDICT_INVALID_REQUEST', index=153, number=40001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CONCEPTS_INVALID_REQUEST', index=154, number=40003,
+      name='SEARCH_INVALID_REQUEST', index=154, number=40002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='STATS_INVALID_REQUEST', index=155, number=40004,
+      name='CONCEPTS_INVALID_REQUEST', index=155, number=40003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_DUPLICATE_KEY', index=156, number=40010,
+      name='STATS_INVALID_REQUEST', index=156, number=40004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_STATEMENT_TIMEOUT', index=157, number=40011,
+      name='DATABASE_DUPLICATE_KEY', index=157, number=40010,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_INVALID_ROWS_AFFECTED', index=158, number=40012,
+      name='DATABASE_STATEMENT_TIMEOUT', index=158, number=40011,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_DEADLOCK_DETECTED', index=159, number=40013,
+      name='DATABASE_INVALID_ROWS_AFFECTED', index=159, number=40012,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_FAIL_TASK', index=160, number=40014,
+      name='DATABASE_DEADLOCK_DETECTED', index=160, number=40013,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_FAIL_TO_GET_CONNECTIONS', index=161, number=40015,
+      name='DATABASE_FAIL_TASK', index=161, number=40014,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_TOO_MANY_CLIENTS', index=162, number=40016,
+      name='DATABASE_FAIL_TO_GET_CONNECTIONS', index=162, number=40015,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_CONSTRAINT_VIOLATED', index=163, number=40017,
+      name='DATABASE_TOO_MANY_CLIENTS', index=163, number=40016,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_NO_ONGOING_OPERATIONS', index=164, number=40018,
+      name='DATABASE_CONSTRAINT_VIOLATED', index=164, number=40017,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='DATABASE_LOCKED_BY_ONGOING_OPERATION', index=165, number=40019,
+      name='DATABASE_NO_ONGOING_OPERATIONS', index=165, number=40018,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ASYNC_WORKER_MULTI_ERRORS', index=166, number=40020,
+      name='DATABASE_LOCKED_BY_ONGOING_OPERATION', index=166, number=40019,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RPC_REQUEST_QUEUE_FULL', index=167, number=40030,
+      name='ASYNC_WORKER_MULTI_ERRORS', index=167, number=40020,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RPC_SERVER_UNAVAILABLE', index=168, number=40031,
+      name='RPC_REQUEST_QUEUE_FULL', index=168, number=40030,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RPC_REQUEST_TIMEOUT', index=169, number=40032,
+      name='RPC_SERVER_UNAVAILABLE', index=169, number=40031,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RPC_MAX_MESSAGE_SIZE_EXCEEDED', index=170, number=40033,
+      name='RPC_REQUEST_TIMEOUT', index=170, number=40032,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='RPC_CANCELED', index=171, number=40035,
+      name='RPC_MAX_MESSAGE_SIZE_EXCEEDED', index=171, number=40033,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CLUSTER_INTERNAL_FAILURE', index=172, number=43040,
+      name='RPC_CANCELED', index=172, number=40035,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='EXTERNAL_CONNECTION_ERROR', index=173, number=40034,
+      name='CLUSTER_INTERNAL_FAILURE', index=173, number=43040,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_CONN_ERROR', index=174, number=41000,
+      name='EXTERNAL_CONNECTION_ERROR', index=174, number=40034,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_CLOSE_REQUEST_TIMEOUT', index=175, number=41002,
+      name='QUEUE_CONN_ERROR', index=175, number=41000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_CONN_CLOSED', index=176, number=41003,
+      name='QUEUE_CLOSE_REQUEST_TIMEOUT', index=176, number=41002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_PUBLISH_ACK_TIMEOUT', index=177, number=41004,
+      name='QUEUE_CONN_CLOSED', index=177, number=41003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_PUBLISH_ERROR', index=178, number=41005,
+      name='QUEUE_PUBLISH_ACK_TIMEOUT', index=178, number=41004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_SUBSCRIPTION_TIMEOUT', index=179, number=41006,
+      name='QUEUE_PUBLISH_ERROR', index=179, number=41005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_SUBSCRIPTION_ERROR', index=180, number=41007,
+      name='QUEUE_SUBSCRIPTION_TIMEOUT', index=180, number=41006,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_MARSHALLING_FAILED', index=181, number=41008,
+      name='QUEUE_SUBSCRIPTION_ERROR', index=181, number=41007,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_UNMARSHALLING_FAILED', index=182, number=41009,
+      name='QUEUE_MARSHALLING_FAILED', index=182, number=41008,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_MAX_MSG_REDELIVERY_EXCEEDED', index=183, number=41010,
+      name='QUEUE_UNMARSHALLING_FAILED', index=183, number=41009,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='QUEUE_ACK_FAILURE', index=184, number=41011,
+      name='QUEUE_MAX_MSG_REDELIVERY_EXCEEDED', index=184, number=41010,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SQS_OVERLIMIT', index=185, number=41100,
+      name='QUEUE_ACK_FAILURE', index=185, number=41011,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SQS_INVALID_RECEIPT_HANDLE', index=186, number=41101,
+      name='SQS_OVERLIMIT', index=186, number=41100,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SQS_UNKNOWN', index=187, number=41102,
+      name='SQS_INVALID_RECEIPT_HANDLE', index=187, number=41101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='KAFKA_UNKNOW', index=188, number=41200,
+      name='SQS_UNKNOWN', index=188, number=41102,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='KAFKA_MISSING_TOPIC', index=189, number=41201,
+      name='KAFKA_UNKNOW', index=189, number=41200,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='KAFKA_ADMIN_ERR', index=190, number=41202,
+      name='KAFKA_MISSING_TOPIC', index=190, number=41201,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='KAFKA_CONSUMER_ERR', index=191, number=41203,
+      name='KAFKA_ADMIN_ERR', index=191, number=41202,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='KAFKA_PUBLISHER_ERR', index=192, number=41204,
+      name='KAFKA_CONSUMER_ERR', index=192, number=41203,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SEARCH_INTERNAL_FAILURE', index=193, number=43001,
+      name='KAFKA_PUBLISHER_ERR', index=193, number=41204,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SEARCH_PROJECTION_FAILURE', index=194, number=43002,
+      name='SEARCH_INTERNAL_FAILURE', index=194, number=43001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SEARCH_PREDICTION_FAILURE', index=195, number=43003,
+      name='SEARCH_PROJECTION_FAILURE', index=195, number=43002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SEARCH_BY_NOT_FULLY_INDEXED_INPUT', index=196, number=43004,
+      name='SEARCH_PREDICTION_FAILURE', index=196, number=43003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SAVED_SEARCH_MODIFY_FAILED', index=197, number=43005,
+      name='SEARCH_BY_NOT_FULLY_INDEXED_INPUT', index=197, number=43004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_QUEUED_FOR_EVALUATION', index=198, number=43100,
+      name='SAVED_SEARCH_MODIFY_FAILED', index=198, number=43005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_EVALUATING', index=199, number=43101,
+      name='ANNOTATION_SEARCH_METRICS_QUEUED_FOR_EVALUATION', index=199, number=43100,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_EVALUATED', index=200, number=43102,
+      name='ANNOTATION_SEARCH_METRICS_EVALUATING', index=200, number=43101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_FAILED_TO_RETRIEVE_DATA', index=201, number=43103,
+      name='ANNOTATION_SEARCH_METRICS_EVALUATED', index=201, number=43102,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_INVALID_ARGUMENT', index=202, number=43104,
+      name='ANNOTATION_SEARCH_METRICS_FAILED_TO_RETRIEVE_DATA', index=202, number=43103,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_SEARCH_METRICS_FAILED', index=203, number=43105,
+      name='ANNOTATION_SEARCH_METRICS_INVALID_ARGUMENT', index=203, number=43104,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='STRIPE_EVENT_ERROR', index=204, number=44001,
+      name='ANNOTATION_SEARCH_METRICS_FAILED', index=204, number=43105,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CACHE_MISS', index=205, number=45001,
+      name='STRIPE_EVENT_ERROR', index=205, number=44001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='REDIS_SCRIPT_EXITED_WITH_FAILURE', index=206, number=45002,
+      name='CACHE_MISS', index=206, number=45001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SIGNUP_EVENT_ERROR', index=207, number=46001,
+      name='REDIS_SCRIPT_EXITED_WITH_FAILURE', index=207, number=45002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SIGNUP_FLAGGED', index=208, number=46002,
+      name='SIGNUP_EVENT_ERROR', index=208, number=46001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='FILETYPE_UNSUPPORTED', index=209, number=46003,
+      name='SIGNUP_FLAGGED', index=209, number=46002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_COUNT_INVALID_MESSAGE', index=210, number=47001,
+      name='FILETYPE_UNSUPPORTED', index=210, number=46003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_COUNT_UPDATE_INCREMENT_FAILED', index=211, number=47002,
+      name='APP_COUNT_INVALID_MESSAGE', index=211, number=47001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_COUNT_REBUILD_FAILED', index=212, number=47003,
+      name='APP_COUNT_UPDATE_INCREMENT_FAILED', index=212, number=47002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='APP_COUNT_INTERNAL_FAILURE', index=213, number=47004,
+      name='APP_COUNT_REBUILD_FAILED', index=213, number=47003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_DOWNLOAD_ERROR', index=214, number=47101,
+      name='APP_COUNT_INTERNAL_FAILURE', index=214, number=47004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_RESOLVE_DNS_ERROR', index=215, number=47102,
+      name='MP_DOWNLOAD_ERROR', index=215, number=47101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR', index=216, number=47103,
+      name='MP_RESOLVE_DNS_ERROR', index=216, number=47102,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_IMAGE_DECODE_ERROR', index=217, number=47104,
+      name='MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR', index=217, number=47103,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_INVALID_ARGUMENT', index=218, number=47105,
+      name='MP_IMAGE_DECODE_ERROR', index=218, number=47104,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MP_IMAGE_PROCESSING_ERROR', index=219, number=47106,
+      name='MP_INVALID_ARGUMENT', index=219, number=47105,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='USER_CONSENT_FACE', index=220, number=50001,
+      name='MP_IMAGE_PROCESSING_ERROR', index=220, number=47106,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='WORKER_MISSING', index=221, number=51000,
+      name='USER_CONSENT_FACE', index=221, number=50001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='WORKER_ACTIVE', index=222, number=51001,
+      name='WORKER_MISSING', index=222, number=51000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='WORKER_INACTIVE', index=223, number=51002,
+      name='WORKER_ACTIVE', index=223, number=51001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='COLLECTOR_MISSING', index=224, number=52000,
+      name='WORKER_INACTIVE', index=224, number=51002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='COLLECTOR_ACTIVE', index=225, number=52001,
+      name='COLLECTOR_MISSING', index=225, number=52000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='COLLECTOR_INACTIVE', index=226, number=52002,
+      name='COLLECTOR_ACTIVE', index=226, number=52001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST', index=227, number=53001,
+      name='COLLECTOR_INACTIVE', index=227, number=52002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_IN_PROGRESS', index=228, number=54001,
+      name='SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST', index=228, number=53001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_DONE', index=229, number=54002,
+      name='TASK_IN_PROGRESS', index=229, number=54001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_WONT_DO', index=230, number=54003,
+      name='TASK_DONE', index=230, number=54002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_ADD_ANNOTATIONS_FAILURE', index=231, number=54005,
+      name='TASK_WONT_DO', index=231, number=54003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_CONFLICT', index=232, number=54100,
+      name='TASK_ADD_ANNOTATIONS_FAILURE', index=232, number=54005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='TASK_NOT_IMPLEMENTED', index=233, number=54101,
+      name='TASK_CONFLICT', index=233, number=54100,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LABEL_ORDER_PENDING', index=234, number=55001,
+      name='TASK_NOT_IMPLEMENTED', index=234, number=54101,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LABEL_ORDER_IN_PROGRESS', index=235, number=55002,
+      name='LABEL_ORDER_PENDING', index=235, number=55001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LABEL_ORDER_SUCCESS', index=236, number=55003,
+      name='LABEL_ORDER_IN_PROGRESS', index=236, number=55002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LABEL_ORDER_CANCELED', index=237, number=55004,
+      name='LABEL_ORDER_SUCCESS', index=237, number=55003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_ACTIVE', index=238, number=60000,
+      name='LABEL_ORDER_CANCELED', index=238, number=55004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_DOES_NOT_EXIST', index=239, number=60001,
+      name='LICENSE_ACTIVE', index=239, number=60000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_NEED_UPDATE', index=240, number=60002,
+      name='LICENSE_DOES_NOT_EXIST', index=240, number=60001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_EXPIRED', index=241, number=60003,
+      name='LICENSE_NEED_UPDATE', index=241, number=60002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_REVOKED', index=242, number=60004,
+      name='LICENSE_EXPIRED', index=242, number=60003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_DELETED', index=243, number=60005,
+      name='LICENSE_REVOKED', index=243, number=60004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='LICENSE_VOLUME_EXCEEDED', index=244, number=60006,
+      name='LICENSE_DELETED', index=244, number=60005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PASSWORD_VALIDATION_SUCCESS', index=245, number=61000,
+      name='LICENSE_VOLUME_EXCEEDED', index=245, number=60006,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PASSWORD_VALIDATION_FAILED', index=246, number=61001,
+      name='PASSWORD_VALIDATION_SUCCESS', index=246, number=61000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='PASSWORDPOLICY_INVALID_ARGUMENT', index=247, number=61002,
+      name='PASSWORD_VALIDATION_FAILED', index=247, number=61001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='FEATUREFLAG_CONFIG_NOT_FOUND', index=248, number=62000,
+      name='PASSWORDPOLICY_INVALID_ARGUMENT', index=248, number=61002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='FEATUREFLAG_INVALID_ARGUMENT', index=249, number=62001,
+      name='FEATUREFLAG_CONFIG_NOT_FOUND', index=249, number=62000,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='FEATUREFLAG_BLOCKED', index=250, number=62002,
+      name='FEATUREFLAG_INVALID_ARGUMENT', index=250, number=62001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_SERVER_ISSUE', index=251, number=98004,
+      name='FEATUREFLAG_BLOCKED', index=251, number=62002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_FETCHING_ISSUE', index=252, number=98005,
+      name='INTERNAL_SERVER_ISSUE', index=252, number=98004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_DATABASE_ISSUE', index=253, number=98006,
+      name='INTERNAL_FETCHING_ISSUE', index=253, number=98005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_UNEXPECTED_TIMEOUT', index=254, number=98009,
+      name='INTERNAL_DATABASE_ISSUE', index=254, number=98006,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_UNEXPECTED_V1', index=255, number=98010,
+      name='INTERNAL_UNEXPECTED_TIMEOUT', index=255, number=98009,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_UNEXPECTED_PANIC', index=256, number=98011,
+      name='INTERNAL_UNEXPECTED_V1', index=256, number=98010,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_UNEXPECTED_SPIRE', index=257, number=98012,
+      name='INTERNAL_UNEXPECTED_PANIC', index=257, number=98011,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_REDIS_UNAVAILABLE', index=258, number=98013,
+      name='INTERNAL_UNEXPECTED_SPIRE', index=258, number=98012,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_RESOURCE_EXHAUSTED', index=259, number=98014,
+      name='INTERNAL_REDIS_UNAVAILABLE', index=259, number=98013,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_REDIS_UNCATEGORIZED', index=260, number=98015,
+      name='INTERNAL_RESOURCE_EXHAUSTED', index=260, number=98014,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_AWS_UNCATEGORIZED', index=261, number=98016,
+      name='INTERNAL_REDIS_UNCATEGORIZED', index=261, number=98015,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_AZURE_UNCATEGORIZED', index=262, number=98017,
+      name='INTERNAL_AWS_UNCATEGORIZED', index=262, number=98016,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='CONN_UNCATEGORIZED', index=263, number=99001,
+      name='INTERNAL_AZURE_UNCATEGORIZED', index=263, number=98017,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='MODEL_UNCATEGORIZED', index=264, number=99002,
+      name='CONN_UNCATEGORIZED', index=264, number=99001,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INPUT_UNCATEGORIZED', index=265, number=99003,
+      name='MODEL_UNCATEGORIZED', index=265, number=99002,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='ANNOTATION_UNCATEGORIZED', index=266, number=99004,
+      name='INPUT_UNCATEGORIZED', index=266, number=99003,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='BILLING_UNCATEGORIZED', index=267, number=99005,
+      name='ANNOTATION_UNCATEGORIZED', index=267, number=99004,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='INTERNAL_UNCATEGORIZED', index=268, number=99009,
+      name='BILLING_UNCATEGORIZED', index=268, number=99005,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='BAD_REQUEST', index=269, number=90400,
+      name='INTERNAL_UNCATEGORIZED', index=269, number=99009,
       serialized_options=None,
       type=None),
     _descriptor.EnumValueDescriptor(
-      name='SERVER_ERROR', index=270, number=90500,
+      name='BAD_REQUEST', index=270, number=90400,
+      serialized_options=None,
+      type=None),
+    _descriptor.EnumValueDescriptor(
+      name='SERVER_ERROR', index=271, number=90500,
       serialized_options=None,
       type=None),
   ],
   containing_type=None,
   serialized_options=None,
   serialized_start=69,
-  serialized_end=8549,
+  serialized_end=8593,
 )
 _sym_db.RegisterEnumDescriptor(_STATUSCODE)
 
@@ -1207,6 +1211,7 @@ ANNOTATION_UNKNOWN_STATUS = 24154
 ANNOTATION_INVALID_ARGUMENT = 24155
 ANNOTATION_PERMISSION_DENIED = 24156
 ANNOTATION_AWAITING_REVIEW = 24157
+ANNOTATION_AWAITING_CONSENSUS_REVIEW = 24159
 ANNOTATION_REVIEW_DENIED = 24158
 ANNOTATION_MODIFY_SUCCESS = 24250
 ANNOTATION_MODIFY_PENDING = 24251
