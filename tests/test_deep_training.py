@@ -31,7 +31,7 @@ def api_key_metadata(api_key: str):
 
 
 def test_deep_classification_training_with_queries():
-    stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_insecure_grpc_channel())
+    stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
 
     app_id = "my-app-" + uuid.uuid4().hex[:20]
     post_apps_response = stub.PostApps(
