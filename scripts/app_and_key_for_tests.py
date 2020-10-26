@@ -21,7 +21,6 @@ def _request(method, url, payload={}, headers={}):
 
     opener = build_opener(HTTPHandler)
     full_url = f'https://{base_url}/v2{url}'
-    print("Sending a HTTP request to: %s %s" % (method, full_url))
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
@@ -34,6 +33,7 @@ def _request(method, url, payload={}, headers={}):
             error_body = json.dumps(json.loads(error_body), indent=4)
         except:
             pass
+        print("ERROR after a HTTP request to: %s %s" % (method, full_url))
         print("%d %s:\n%s" % (e.code, e.reason, error_body))
         os._exit(1)
     return json.loads(response)
