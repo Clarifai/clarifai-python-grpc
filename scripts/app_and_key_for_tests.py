@@ -45,9 +45,8 @@ def create_app(env_name):
     url = '/users/%s/apps' % user_id
     payload = {'apps': [{'name': 'auto-created-in-%s-ci-test-run' % env_name}]}
 
-    response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
+    data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
 
-    data = response
     app_id = data['apps'][0]['id']
 
     # This print needs to be present so we can read the value in CI.
@@ -65,8 +64,7 @@ def create_key(app_id):
             'apps': [{'id': app_id, 'user_id': user_id}]
         }]
     }
-    response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
-    data = response
+    data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
     key_id = data['keys'][0]['id']
 
     # This print needs to be present so we can read the value in CI.
@@ -85,8 +83,7 @@ def create_pat():
             'apps': []
         }]
     }
-    response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
-    data = response
+    data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
     pat_id = data['keys'][0]['id']
 
     # This print needs to be present so we can read the value in CI.
@@ -150,8 +147,7 @@ def _auth_headers_for_api_key_key(api_key):
 def _login():
     url = '/login'
     payload = {'email': EMAIL, 'password': PASSWORD}
-    response = _request(method='POST', url=url, payload=payload)
-    data = response
+    data = _request(method='POST', url=url, payload=payload)
     user_id = data['v2_user_id']
     session_token = data['session_token']
     return session_token, user_id
