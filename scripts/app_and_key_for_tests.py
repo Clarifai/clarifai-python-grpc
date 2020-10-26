@@ -47,7 +47,6 @@ def create_app(env_name):
 
     response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
 
-    _raise_on_http_error(response)
     data = response
     app_id = data['apps'][0]['id']
 
@@ -67,7 +66,6 @@ def create_key(app_id):
         }]
     }
     response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
-    _raise_on_http_error(response)
     data = response
     key_id = data['keys'][0]['id']
 
@@ -88,7 +86,6 @@ def create_pat():
         }]
     }
     response = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
-    _raise_on_http_error(response)
     data = response
     pat_id = data['keys'][0]['id']
 
@@ -133,13 +130,11 @@ def create_sample_workflow(api_key):
         ]
     }
     response = _request(method='POST', url=url, payload=payload, headers=_auth_headers_for_api_key_key(api_key))
-    _raise_on_http_error(response)
 
 
 def _delete_app(session_token, user_id, app_id):
     url = '/users/%s/apps/%s' % (user_id, app_id)
     response = _request(method='DELETE', url=url, headers=_auth_headers(session_token))
-    _raise_on_http_error(response)
 
 
 def _auth_headers(session_token):
@@ -156,18 +151,10 @@ def _login():
     url = '/login'
     payload = {'email': EMAIL, 'password': PASSWORD}
     response = _request(method='POST', url=url, payload=payload)
-    _raise_on_http_error(response)
     data = response
     user_id = data['v2_user_id']
     session_token = data['session_token']
     return session_token, user_id
-
-
-def _raise_on_http_error(response):
-    # TODO: Make this work with urllib.
-    # if int(response.status_code) // 100 != 2:
-    #     raise Exception('Unexpected response %s: %s' % (response.status_code, response.text))
-    pass
 
 
 def run(arguments):
