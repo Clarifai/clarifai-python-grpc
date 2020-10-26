@@ -21,11 +21,22 @@ def _request(method, url, payload={}, headers={}):
 
     opener = build_opener(HTTPHandler)
     full_url = f'https://{base_url}/v2{url}'
+    print("Sending a HTTP request to: %s %s" % (method, full_url))
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
     request.get_method = lambda: method
-    return json.loads(opener.open(request).read().decode())
+    try:
+        response = opener.open(request).read().decode()
+    except HTTPError as e:
+        error_body = e.read().decode()
+        try:
+            error_body = json.dumps(json.loads(error_body), indent=4)
+        except:
+            pass
+        print("%d %s:\n%s" % (e.code, e.reason, error_body))
+        os._exit(1)
+    return json.loads(response)
 
 
 def create_app(env_name):
