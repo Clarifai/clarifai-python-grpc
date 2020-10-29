@@ -9,7 +9,6 @@ from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
-    _retry_on_504_on_non_prod,
     post_model_outputs_with_retries,
 )
 
