@@ -1,8 +1,11 @@
 import os
 import time
+from typing import Tuple
+
+from grpc._channel import _Rendezvous
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
-from clarifai_grpc.grpc.api import service_pb2
+from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
@@ -156,3 +159,35 @@ def raise_on_failure(response, custom_message=""):
             custom_message
             + f"Received failure response `{error_message}`. Whole response object: {response}"
         )
+
+
+def post_model_outputs_with_retries(
+    stub: service_pb2_grpc.V2Stub, request: service_pb2.PostModelOutputsRequest, metadata: Tuple
+):
+    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
+
+
+def _retry_on_504_on_non_prod(func):
+    """
+    On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
+    We don't care about those as long as, after a few seconds, the response is a success.
+    """
+    MAX_ATTEMPTS = 4
+    for i in range(1, MAX_ATTEMPTS + 1):
+        try:
+            response = func()
+            break
+        except _Rendezvous as e:
+            grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
+            if not grpc_base or grpc_base == "api.clarifai.com":
+                raise e
+
+            if "status: 504" not in e._state.details:
+                raise e
+
+            if i == MAX_ATTEMPTS:
+                raise e
+
+            print(f"Received 504, doing retry #{i}")
+            time.sleep(2 ** (i - 1))
+    return response

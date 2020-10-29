@@ -3,7 +3,6 @@ from tests.common import (
     DOG_IMAGE_URL,
     APPAREL_MODEL_ID,
     COLOR_MODEL_ID,
-    DEMOGRAPHICS_MODEL_ID,
     FACE_MODEL_ID,
     FOOD_MODEL_ID,
     GENERAL_EMBEDDING_MODEL_ID,
@@ -20,6 +19,7 @@ from tests.common import (
     metadata,
     raise_on_failure,
     BEER_VIDEO_URL,
+    post_model_outputs_with_retries,
 )
 
 
@@ -54,7 +54,7 @@ def test_image_predict_on_public_models(channel):
                 )
             ],
         )
-        response = stub.PostModelOutputs(request, metadata=metadata())
+        response = post_model_outputs_with_retries(stub, request, metadata=metadata())
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
@@ -80,7 +80,7 @@ def test_video_predict_on_public_models(channel):
                 )
             ],
         )
-        response = stub.PostModelOutputs(request, metadata=metadata())
+        response = post_model_outputs_with_retries(stub, request, metadata=metadata())
         raise_on_failure(
             response,
             custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",

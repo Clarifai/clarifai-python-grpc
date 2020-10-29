@@ -5,7 +5,13 @@ from google.protobuf import struct_pb2
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
-from tests.common import raise_on_failure, wait_for_inputs_upload, wait_for_model_trained
+from tests.common import (
+    raise_on_failure,
+    wait_for_inputs_upload,
+    wait_for_model_trained,
+    _retry_on_504_on_non_prod,
+    post_model_outputs_with_retries,
+)
 
 URLS = [
     "https://samples.clarifai.com/metro-north.jpg",
@@ -169,17 +175,16 @@ def test_deep_classification_training_with_queries():
 
     wait_for_model_trained(stub, api_key_metadata(api_key), model_id, model_version_id)
 
-    post_model_outputs_response = stub.PostModelOutputs(
-        service_pb2.PostModelOutputsRequest(
-            model_id=model_id,
-            version_id=model_version_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=URLS[0]))
-                )
-            ],
-        ),
-        metadata=api_key_metadata(api_key),
+    post_model_outputs_request = service_pb2.PostModelOutputsRequest(
+        model_id=model_id,
+        version_id=model_version_id,
+        inputs=[
+            resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=URLS[0])))
+        ],
+    )
+
+    post_model_outputs_response = post_model_outputs_with_retries(
+        stub, post_model_outputs_request, metadata=api_key_metadata(api_key)
     )
     raise_on_failure(post_model_outputs_response)
 

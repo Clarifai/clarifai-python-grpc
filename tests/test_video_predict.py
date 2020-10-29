@@ -7,6 +7,7 @@ from tests.common import (
     metadata,
     raise_on_failure,
     BEER_VIDEO_URL,
+    post_model_outputs_with_retries,
 )
 
 
@@ -22,7 +23,7 @@ def test_predict_video_url(channel):
             )
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.frames) > 0
@@ -47,7 +48,7 @@ def test_predict_video_url_with_min_value(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.frames) > 0
@@ -74,7 +75,7 @@ def test_predict_video_url_with_max_concepts(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.frames) > 0
@@ -99,7 +100,7 @@ def test_predict_video_url_with_custom_sample_ms(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     # The expected time per frame is the middle between the start and the end of the frame
@@ -127,7 +128,7 @@ def test_predict_video_bytes(channel):
             )
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.frames) > 0
