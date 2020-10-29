@@ -8,6 +8,7 @@ from tests.common import (
     both_channels,
     metadata,
     raise_on_failure,
+    post_model_outputs_with_retries,
 )
 
 
@@ -23,7 +24,7 @@ def test_predict_image_url(channel):
             )
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.concepts) > 0
@@ -50,7 +51,7 @@ def test_predict_image_url_with_max_concepts(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.concepts) == 3
@@ -77,7 +78,7 @@ def test_predict_image_url_with_min_value(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     assert len(response.outputs[0].data.concepts) > 0
@@ -111,7 +112,7 @@ def test_predict_image_url_with_selected_concepts(channel):
             )
         ),
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
     raise_on_failure(response)
 
     concepts = response.outputs[0].data.concepts
@@ -136,7 +137,7 @@ def test_predict_image_bytes(channel):
             )
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
 
     raise_on_failure(response)
 
@@ -154,7 +155,7 @@ def test_failed_predict(channel):
             )
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
 
     assert response.status.code == status_code_pb2.FAILURE
     assert response.status.description == "Failure"
@@ -176,7 +177,7 @@ def test_mixed_success_predict(channel):
             ),
         ],
     )
-    response = stub.PostModelOutputs(request, metadata=metadata())
+    response = post_model_outputs_with_retries(stub, request, metadata=metadata())
 
     assert response.status.code == status_code_pb2.MIXED_STATUS
 
