@@ -9,7 +9,7 @@ from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
-    post_model_outputs_with_retries,
+    post_model_outputs_and_maybe_allow_retries,
 )
 
 URLS = [
@@ -182,7 +182,7 @@ def test_deep_classification_training_with_queries():
         ],
     )
 
-    post_model_outputs_response = post_model_outputs_with_retries(
+    post_model_outputs_response = post_model_outputs_and_maybe_allow_retries(
         stub, post_model_outputs_request, metadata=api_key_metadata(api_key)
     )
     raise_on_failure(post_model_outputs_response)

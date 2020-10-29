@@ -161,7 +161,7 @@ def raise_on_failure(response, custom_message=""):
         )
 
 
-def post_model_outputs_with_retries(
+def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub, request: service_pb2.PostModelOutputsRequest, metadata: Tuple
 ):
     return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
