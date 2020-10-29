@@ -189,5 +189,4 @@ def _retry_on_504_on_non_prod(func):
                 raise e
 
             print(f"Received 504, doing retry #{i}")
-            time.sleep(2 ** (i - 1))
     return response
