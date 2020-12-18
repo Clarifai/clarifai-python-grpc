@@ -10,8 +10,8 @@ from tests.common import (
     both_channels,
     metadata,
     raise_on_failure,
-    wait_for_inputs_upload,
 )
+from tests.test_input_searches import SetupImage
 
 
 @both_channels
@@ -571,51 +571,3 @@ def test_save_and_execute_annotations_search_by_id(channel):
         assert input1.id in [hit.input.id for hit in hits]
         assert input2.id in [hit.input.id for hit in hits]
         assert all(hit.score == 1 for hit in hits)
-
-
-class SetupImage:
-    def __init__(self, stub: service_pb2_grpc.V2Stub) -> None:
-        self._stub = stub
-
-    def __enter__(self) -> resources_pb2.Input:
-        my_concept_id = "my-concept-id-" + uuid.uuid4().hex
-        my_concept_name = "my concept name " + uuid.uuid4().hex
-
-        image_metadata = struct_pb2.Struct()
-        image_metadata.update(
-            {"some-key": "some-value", "another-key": {"inner-key": "inner-value"}}
-        )
-
-        post_response = self._stub.PostInputs(
-            service_pb2.PostInputsRequest(
-                inputs=[
-                    resources_pb2.Input(
-                        data=resources_pb2.Data(
-                            image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
-                            concepts=[
-                                resources_pb2.Concept(
-                                    id=my_concept_id, name=my_concept_name, value=1
-                                )
-                            ],
-                            metadata=image_metadata,
-                            geo=resources_pb2.Geo(
-                                geo_point=resources_pb2.GeoPoint(longitude=44, latitude=55)
-                            ),
-                        ),
-                    )
-                ]
-            ),
-            metadata=metadata(),
-        )
-        raise_on_failure(post_response)
-        self._input = post_response.inputs[0]
-
-        wait_for_inputs_upload(self._stub, metadata(), [self._input.id])
-
-        return self._input
-
-    def __exit__(self, type_, value, traceback) -> None:
-        delete_response = self._stub.DeleteInput(
-            service_pb2.DeleteInputRequest(input_id=self._input.id), metadata=metadata()
-        )
-        raise_on_failure(delete_response)
