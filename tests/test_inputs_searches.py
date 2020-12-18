@@ -4,11 +4,24 @@ import uuid
 from google.protobuf import struct_pb2
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
-from clarifai_grpc.grpc.api.resources_pb2 import Search, Query, Rank, Annotation, Data, Concept, \
-    Filter, Image
+from clarifai_grpc.grpc.api.resources_pb2 import (
+    Search,
+    Query,
+    Rank,
+    Annotation,
+    Data,
+    Concept,
+    Filter,
+    Image,
+)
 from clarifai_grpc.grpc.api.service_pb2 import PostInputsSearchesRequest
-from tests.common import both_channels, metadata, raise_on_failure, DOG_IMAGE_URL, \
-    wait_for_inputs_upload
+from tests.common import (
+    both_channels,
+    metadata,
+    raise_on_failure,
+    DOG_IMAGE_URL,
+    wait_for_inputs_upload,
+)
 
 
 @both_channels
@@ -25,7 +38,8 @@ def test_search_by_custom_concept_id(channel):
                             filters=[
                                 Filter(
                                     annotation=Annotation(
-                                        data=Data(concepts=[Concept(id=concept_id, value=1)]))
+                                        data=Data(concepts=[Concept(id=concept_id, value=1)])
+                                    )
                                 )
                             ]
                         )
@@ -33,7 +47,7 @@ def test_search_by_custom_concept_id(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert input_.id in [hit.input.id for hit in response.hits]
@@ -53,7 +67,8 @@ def test_search_by_custom_concept_name(channel):
                             filters=[
                                 Filter(
                                     annotation=Annotation(
-                                        data=Data(concepts=[Concept(name=concept_name, value=1)]))
+                                        data=Data(concepts=[Concept(name=concept_name, value=1)])
+                                    )
                                 )
                             ]
                         )
@@ -61,7 +76,7 @@ def test_search_by_custom_concept_name(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert input_.id in [hit.input.id for hit in response.hits]
@@ -81,7 +96,8 @@ def test_search_by_predicted_concept_id(channel):
                                 Rank(
                                     annotation=Annotation(
                                         # The ID of the "dog" concept in clarifai/main
-                                        data=Data(concepts=[Concept(id="ai_8S2Vq3cR", value=1)]))
+                                        data=Data(concepts=[Concept(id="ai_8S2Vq3cR", value=1)])
+                                    )
                                 )
                             ]
                         )
@@ -89,7 +105,7 @@ def test_search_by_predicted_concept_id(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -109,7 +125,8 @@ def test_search_by_predicted_concept_name(channel):
                             ranks=[
                                 Rank(
                                     annotation=Annotation(
-                                        data=Data(concepts=[Concept(name="dog", value=1)]))
+                                        data=Data(concepts=[Concept(name="dog", value=1)])
+                                    )
                                 )
                             ]
                         )
@@ -117,7 +134,7 @@ def test_search_by_predicted_concept_name(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -137,16 +154,17 @@ def test_search_by_predicted_concept_name_in_chinese(channel):
                             ranks=[
                                 Rank(
                                     annotation=Annotation(
-                                        data=Data(concepts=[Concept(name="狗", value=1)]))
+                                        data=Data(concepts=[Concept(name="狗", value=1)])
+                                    )
                                 )
                             ],
-                            language="zh"
+                            language="zh",
                         ),
                     )
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -175,7 +193,7 @@ def test_search_by_image_url(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -197,8 +215,7 @@ def test_search_by_image_bytes(channel):
                         query=Query(
                             ranks=[
                                 Rank(
-                                    annotation=Annotation(
-                                        data=Data(image=Image(base64=url_bytes)))
+                                    annotation=Annotation(data=Data(image=Image(base64=url_bytes)))
                                 )
                             ]
                         )
@@ -206,7 +223,7 @@ def test_search_by_image_bytes(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -227,17 +244,14 @@ def test_search_by_metadata(channel):
                     Search(
                         query=Query(
                             ranks=[
-                                Rank(
-                                    annotation=Annotation(
-                                        data=Data(metadata=search_metadata))
-                                )
+                                Rank(annotation=Annotation(data=Data(metadata=search_metadata)))
                             ]
                         )
                     )
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -266,7 +280,6 @@ def test_search_by_geo_point_and_limit(channel):
                                                     value=1000, type="withinKilometers"
                                                 ),
                                             )
-
                                         )
                                     )
                                 )
@@ -276,7 +289,7 @@ def test_search_by_geo_point_and_limit(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -320,7 +333,7 @@ def test_search_by_geo_box(channel):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -362,14 +375,14 @@ def test_search_by_image_url_and_geo_box(channel):
                                             )
                                         )
                                     )
-                                )
+                                ),
                             ]
                         )
                     )
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
