@@ -10,6 +10,7 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
+TRAVEL_IMAGE_URL = "https://samples.clarifai.com/travel.jpg"
 NON_EXISTING_IMAGE_URL = "http://example.com/non-existing.jpg"
 RED_TRUCK_IMAGE_FILE_PATH = os.path.dirname(__file__) + "/assets/red-truck.png"
 
