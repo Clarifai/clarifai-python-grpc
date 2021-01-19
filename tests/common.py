@@ -18,6 +18,8 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+WEATHER_AUDIO_URL = "https://samples.clarifai.com/whatstheweatherlike.wav"
+
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
 DEMOGRAPHICS_MODEL_ID = "c0c0ac362b03416da06ab3fa36fb58e3"
