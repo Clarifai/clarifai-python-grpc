@@ -11,6 +11,7 @@ from clarifai_grpc.channel import http_client
 from clarifai_grpc.channel.custom_converters.custom_dict_to_message import dict_to_protobuf
 from clarifai_grpc.channel.custom_converters.custom_message_to_dict import protobuf_to_dict
 from clarifai_grpc.channel.errors import UsageError
+from clarifai_grpc.channel.exceptions import ClarifaiException
 from clarifai_grpc.grpc.api.service_pb2 import _V2
 
 BASE_URL = "https://api.clarifai.com"
@@ -219,13 +220,15 @@ def _read_app_info(data):
                 return vals
     elif type(data) is dict:
         for k, v in data.items():
-            if k == "apps":
+            if k == "user_app_id":
+                return v["app_id"], v.get("user_id", "me")
+            elif k == "apps":
                 if len(v) == 1:
                     return v[0]["id"], v[0].get("user_id", "me")
                 elif len(v) == 0:
                     return None
                 else:
-                    raise
+                    raise ClarifaiException("Only one app has to be specified")
             elif k == "metadata":
                 continue
             vals = _read_app_info(v)
