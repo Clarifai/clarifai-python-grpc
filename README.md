@@ -22,6 +22,13 @@ and natural language processing.
 pip install clarifai-grpc
 ```
 
+## Versioning
+
+This library doesn't use semantic versioning. The first two version numbers (`X.Y` out of `X.Y.Z`) follow the API (backend) versioning, and
+whenever the API gets updated, this library follows it.
+
+The third version number (`Z` out of `X.Y.Z`) is used by this library for any independent releases of library-specific improvements and bug fixes.
+
 ## Getting started
 
 Construct the `V2Stub` object using which you'll access all the Clarifai API functionality:
