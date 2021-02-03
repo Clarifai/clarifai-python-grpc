@@ -9,9 +9,9 @@ from tests.common import both_channels, metadata, raise_on_failure
 def test_concept_post_get_patch(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    random_string = uuid.uuid4().hex
-    random_concept_id = "some-concept-id-狗-" + random_string
-    random_concept_name = "some-concept-name-的な-" + random_string
+    random_string = uuid.uuid4().hex[:10]
+    random_concept_id = "con-id-狗-" + random_string
+    random_concept_name = "concept-name-的な-" + random_string
 
     post_concepts_response = stub.PostConcepts(
         service_pb2.PostConceptsRequest(

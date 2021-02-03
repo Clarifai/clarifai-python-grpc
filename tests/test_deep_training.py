@@ -69,7 +69,7 @@ def test_deep_classification_training_with_queries():
 
     template_name = "classification_cifar10_v1"
 
-    model_id = "my-deep-classification-" + uuid.uuid4().hex
+    model_id = "my-deep-classif-" + uuid.uuid4().hex[:15]
     model_type = _get_model_type_for_template(stub, api_key, template_name)
 
     train_info_params = struct_pb2.Struct()
