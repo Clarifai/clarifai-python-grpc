@@ -446,7 +446,7 @@ def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel):
 def test_save_and_execute_search_by_id(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    search_id = "my-search-id-" + uuid.uuid4().hex
+    search_id = "my-search-id-" + uuid.uuid4().hex[:15]
 
     with SetupImage(stub) as input_:
         my_concept_id = input_.data.concepts[0].id
@@ -491,7 +491,7 @@ def test_save_and_execute_search_by_id(channel):
 def test_save_and_execute_annotations_search_by_id(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    my_search_id = "my-search-id-" + uuid.uuid4().hex
+    my_search_id = "my-search-id-" + uuid.uuid4().hex[:15]
     my_concept_id = "my-annotation-concept-" + uuid.uuid4().hex
 
     with SetupImage(stub) as input1, SetupImage(stub) as input2:
