@@ -70,7 +70,7 @@ def test_post_patch_get_train_evaluate_delete_model(channel):
     input_id_2 = post_inputs_response.inputs[1].id
     wait_for_inputs_upload(stub, metadata(), [input_id_1, input_id_2])
 
-    model_id = u"我的新模型-" + uuid.uuid4().hex
+    model_id = u"mod-id-狗-" + uuid.uuid4().hex[:10]
 
     post_response = stub.PostModels(
         service_pb2.PostModelsRequest(

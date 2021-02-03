@@ -394,8 +394,8 @@ class SetupImage:
         self._stub = stub
 
     def __enter__(self) -> resources_pb2.Input:
-        my_concept_id = "my-concept-id-" + uuid.uuid4().hex
-        my_concept_name = "my concept name " + uuid.uuid4().hex
+        my_concept_id = "my-concept-id-" + uuid.uuid4().hex[:15]
+        my_concept_name = "my concept name " + uuid.uuid4().hex[:15]
 
         image_metadata = struct_pb2.Struct()
         image_metadata.update(
