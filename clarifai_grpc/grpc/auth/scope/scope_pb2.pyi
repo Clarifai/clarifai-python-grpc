@@ -114,6 +114,9 @@ class S(object):
     LabelOrders_Add = typing___cast(SValue, 68)
     LabelOrders_Delete = typing___cast(SValue, 69)
     UserFeatureConfigs_Get = typing___cast(SValue, 71)
+    FindDuplicateAnnotationsJobs_Add = typing___cast(SValue, 102)
+    FindDuplicateAnnotationsJobs_Get = typing___cast(SValue, 103)
+    FindDuplicateAnnotationsJobs_Delete = typing___cast(SValue, 104)
 undef = typing___cast(SValue, 0)
 All = typing___cast(SValue, 1)
 Predict = typing___cast(SValue, 2)
@@ -171,6 +174,9 @@ LabelOrders_Get = typing___cast(SValue, 67)
 LabelOrders_Add = typing___cast(SValue, 68)
 LabelOrders_Delete = typing___cast(SValue, 69)
 UserFeatureConfigs_Get = typing___cast(SValue, 71)
+FindDuplicateAnnotationsJobs_Add = typing___cast(SValue, 102)
+FindDuplicateAnnotationsJobs_Get = typing___cast(SValue, 103)
+FindDuplicateAnnotationsJobs_Delete = typing___cast(SValue, 104)
 type___S = S
 
 class ScopeList(google___protobuf___message___Message):

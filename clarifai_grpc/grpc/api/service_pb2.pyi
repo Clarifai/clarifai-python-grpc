@@ -2,6 +2,7 @@
 import sys
 from google.protobuf.descriptor import (
     Descriptor as google___protobuf___descriptor___Descriptor,
+    EnumDescriptor as google___protobuf___descriptor___EnumDescriptor,
     FileDescriptor as google___protobuf___descriptor___FileDescriptor,
 )
 
@@ -71,9 +72,13 @@ from proto.clarifai.api.status.status_pb2 import (
 
 from typing import (
     Iterable as typing___Iterable,
+    List as typing___List,
+    NewType as typing___NewType,
     Optional as typing___Optional,
     Text as typing___Text,
+    Tuple as typing___Tuple,
     Union as typing___Union,
+    cast as typing___cast,
 )
 
 from typing_extensions import (
@@ -85,12 +90,41 @@ builtin___bool = bool
 builtin___bytes = bytes
 builtin___float = float
 builtin___int = int
+builtin___str = str
 if sys.version_info < (3,):
     builtin___buffer = buffer
     builtin___unicode = unicode
 
 
 DESCRIPTOR: google___protobuf___descriptor___FileDescriptor = ...
+
+OrganizationInvitationStatusValue = typing___NewType('OrganizationInvitationStatusValue', builtin___int)
+type___OrganizationInvitationStatusValue = OrganizationInvitationStatusValue
+class OrganizationInvitationStatus(object):
+    DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+    @classmethod
+    def Name(cls, number: builtin___int) -> builtin___str: ...
+    @classmethod
+    def Value(cls, name: builtin___str) -> OrganizationInvitationStatusValue: ...
+    @classmethod
+    def keys(cls) -> typing___List[builtin___str]: ...
+    @classmethod
+    def values(cls) -> typing___List[OrganizationInvitationStatusValue]: ...
+    @classmethod
+    def items(cls) -> typing___List[typing___Tuple[builtin___str, OrganizationInvitationStatusValue]]: ...
+    NOT_SET = typing___cast(OrganizationInvitationStatusValue, 0)
+    PENDING = typing___cast(OrganizationInvitationStatusValue, 1)
+    ACCEPTED = typing___cast(OrganizationInvitationStatusValue, 2)
+    CANCELLED = typing___cast(OrganizationInvitationStatusValue, 3)
+    DECLINED = typing___cast(OrganizationInvitationStatusValue, 4)
+    EXPIRED = typing___cast(OrganizationInvitationStatusValue, 5)
+NOT_SET = typing___cast(OrganizationInvitationStatusValue, 0)
+PENDING = typing___cast(OrganizationInvitationStatusValue, 1)
+ACCEPTED = typing___cast(OrganizationInvitationStatusValue, 2)
+CANCELLED = typing___cast(OrganizationInvitationStatusValue, 3)
+DECLINED = typing___cast(OrganizationInvitationStatusValue, 4)
+EXPIRED = typing___cast(OrganizationInvitationStatusValue, 5)
+type___OrganizationInvitationStatus = OrganizationInvitationStatus
 
 class Pagination(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
