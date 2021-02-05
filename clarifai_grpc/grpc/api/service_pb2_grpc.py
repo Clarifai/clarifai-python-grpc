@@ -21,6 +21,21 @@ class V2Stub(object):
     Args:
       channel: A grpc.Channel.
     """
+    self.ListConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/ListConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
+        )
+    self.PostConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/PostConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
+        )
+    self.DeleteConceptRelations = channel.unary_unary(
+        '/clarifai.api.V2/DeleteConceptRelations',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
     self.GetConceptCounts = channel.unary_unary(
         '/clarifai.api.V2/GetConceptCounts',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptCountsRequest.SerializeToString,
@@ -71,21 +86,6 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse),
         )
-    self.ListConceptRelations = channel.unary_unary(
-        '/clarifai.api.V2/ListConceptRelations',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.SerializeToString,
-        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
-        )
-    self.PostConceptRelations = channel.unary_unary(
-        '/clarifai.api.V2/PostConceptRelations',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.SerializeToString,
-        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse),
-        )
-    self.DeleteConceptRelations = channel.unary_unary(
-        '/clarifai.api.V2/DeleteConceptRelations',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.SerializeToString,
-        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
-        )
     self.ListKnowledgeGraphs = channel.unary_unary(
         '/clarifai.api.V2/ListKnowledgeGraphs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.SerializeToString,
@@ -121,6 +121,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
         )
+    self.PatchAnnotationsStatus = channel.unary_unary(
+        '/clarifai.api.V2/PatchAnnotationsStatus',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsStatusRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsStatusResponse),
+        )
     self.DeleteAnnotation = channel.unary_unary(
         '/clarifai.api.V2/DeleteAnnotation',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationRequest.SerializeToString,
@@ -145,6 +150,11 @@ class V2Stub(object):
         '/clarifai.api.V2/StreamInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamInputsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+        )
+    self.GetInputSamples = channel.unary_unary(
+        '/clarifai.api.V2/GetInputSamples',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputSamplesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputAnnotationResponse),
         )
     self.GetInput = channel.unary_unary(
         '/clarifai.api.V2/GetInput',
@@ -486,10 +496,15 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse),
         )
-    self.GetTaskAnnotationsCount = channel.unary_unary(
-        '/clarifai.api.V2/GetTaskAnnotationsCount',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskAnnotationsCountRequest.SerializeToString,
-        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskAnnotationsCountResponse),
+    self.GetTaskAnnotationCount = channel.unary_unary(
+        '/clarifai.api.V2/GetTaskAnnotationCount',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskCountRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskCountResponse),
+        )
+    self.GetTaskInputCount = channel.unary_unary(
+        '/clarifai.api.V2/GetTaskInputCount',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskCountRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskCountResponse),
         )
     self.GetTask = channel.unary_unary(
         '/clarifai.api.V2/GetTask',
@@ -556,6 +571,33 @@ class V2Servicer(object):
   https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
 
   """
+
+  def ListConceptRelations(self, request, context):
+    """//////////////////////////////////////
+    Concept Relationships
+    //////////////////////////////////////
+
+    List concept relations between concepts in the platform.
+    MUST be above ListConcepts so that if concept_id is empty this will still match
+    /concepts/relations to list all the concept relations in the app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostConceptRelations(self, request, context):
+    """Post concept relations to create relations between concepts in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteConceptRelations(self, request, context):
+    """Post concept relations to create relations between concepts in the platform.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
 
   def GetConceptCounts(self, request, context):
     """//////////////////////////////////////
@@ -640,31 +682,6 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ListConceptRelations(self, request, context):
-    """//////////////////////////////////////
-    Concept Relationships
-    //////////////////////////////////////
-
-    List concept relations between concepts in the platform.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def PostConceptRelations(self, request, context):
-    """Post concept relations to create relations between concepts in the platform.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
-  def DeleteConceptRelations(self, request, context):
-    """Post concept relations to create relations between concepts in the platform.
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
   def ListKnowledgeGraphs(self, request, context):
     """//////////////////////////////////////
     Knowledge Graph
@@ -722,6 +739,13 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PatchAnnotationsStatus(self, request, context):
+    """Patch annotations status by worker id and task id.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def DeleteAnnotation(self, request, context):
     """Delete a single annotation.
     """
@@ -748,7 +772,7 @@ class V2Servicer(object):
     Inputs
     //////////////////////////////////////
 
-    Patch one or more inputs.
+    Get input count per status.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -756,6 +780,13 @@ class V2Servicer(object):
 
   def StreamInputs(self, request, context):
     """Streams all the inputs starting from oldest assets.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetInputSamples(self, request, context):
+    """Get a specific input from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -835,6 +866,7 @@ class V2Servicer(object):
 
   def ListModelTypes(self, request, context):
     """List all the model types available in the platform.
+    This MUST be above ListModels so that the /models/types endpoint takes precedence.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1023,8 +1055,6 @@ class V2Servicer(object):
 
   def GetKey(self, request, context):
     """//////////////////////////////////////
-
-    //////////////////////////////////////
     API Keys
     //////////////////////////////////////
 
@@ -1313,8 +1343,15 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def GetTaskAnnotationsCount(self, request, context):
-    """Task annotation counts
+  def GetTaskAnnotationCount(self, request, context):
+    """Task annotation count
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetTaskInputCount(self, request, context):
+    """Task Input count
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1413,6 +1450,21 @@ class V2Servicer(object):
 
 def add_V2Servicer_to_server(servicer, server):
   rpc_method_handlers = {
+      'ListConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.ListConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
+      ),
+      'PostConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.PostConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
+      ),
+      'DeleteConceptRelations': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteConceptRelations,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
       'GetConceptCounts': grpc.unary_unary_rpc_method_handler(
           servicer.GetConceptCounts,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptCountsRequest.FromString,
@@ -1463,21 +1515,6 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse.SerializeToString,
       ),
-      'ListConceptRelations': grpc.unary_unary_rpc_method_handler(
-          servicer.ListConceptRelations,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.FromString,
-          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
-      ),
-      'PostConceptRelations': grpc.unary_unary_rpc_method_handler(
-          servicer.PostConceptRelations,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptRelationsRequest.FromString,
-          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptRelationResponse.SerializeToString,
-      ),
-      'DeleteConceptRelations': grpc.unary_unary_rpc_method_handler(
-          servicer.DeleteConceptRelations,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteConceptRelationsRequest.FromString,
-          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-      ),
       'ListKnowledgeGraphs': grpc.unary_unary_rpc_method_handler(
           servicer.ListKnowledgeGraphs,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.FromString,
@@ -1513,6 +1550,11 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
       ),
+      'PatchAnnotationsStatus': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchAnnotationsStatus,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsStatusRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsStatusResponse.SerializeToString,
+      ),
       'DeleteAnnotation': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteAnnotation,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationRequest.FromString,
@@ -1537,6 +1579,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.StreamInputs,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamInputsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+      ),
+      'GetInputSamples': grpc.unary_unary_rpc_method_handler(
+          servicer.GetInputSamples,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputSamplesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputAnnotationResponse.SerializeToString,
       ),
       'GetInput': grpc.unary_unary_rpc_method_handler(
           servicer.GetInput,
@@ -1878,10 +1925,15 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTasksRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskResponse.SerializeToString,
       ),
-      'GetTaskAnnotationsCount': grpc.unary_unary_rpc_method_handler(
-          servicer.GetTaskAnnotationsCount,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskAnnotationsCountRequest.FromString,
-          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskAnnotationsCountResponse.SerializeToString,
+      'GetTaskAnnotationCount': grpc.unary_unary_rpc_method_handler(
+          servicer.GetTaskAnnotationCount,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskCountRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskCountResponse.SerializeToString,
+      ),
+      'GetTaskInputCount': grpc.unary_unary_rpc_method_handler(
+          servicer.GetTaskInputCount,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTaskCountRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTaskCountResponse.SerializeToString,
       ),
       'GetTask': grpc.unary_unary_rpc_method_handler(
           servicer.GetTask,
