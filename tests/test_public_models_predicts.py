@@ -41,11 +41,6 @@ MODEL_TITLE_AND_ID_PAIRS = [
 ]
 
 
-# These tests have been written before the "test predict on all public models" was done,
-# so they may not be needed any more. Still, they provide some value by breaking the test run
-# if one of the above models were to disappear.
-
-
 @both_channels
 def test_image_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
