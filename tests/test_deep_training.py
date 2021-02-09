@@ -28,7 +28,7 @@ URLS = [
 
 
 def pat_key_metadata():
-    return (("authorization", "Key %s" % os.environ.get("INTERNAL_USER_PAT")),)
+    return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
 
 
 def api_key_metadata(api_key: str):
