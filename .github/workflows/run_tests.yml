@@ -43,7 +43,6 @@ jobs:
       env:
         CLARIFAI_USER_EMAIL: ${{ secrets.CLARIFAI_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.CLARIFAI_USER_PASSWORD }}
-        INTERNAL_USER_PAT: ${{ secrets.INTERNAL_USER_PAT }}
       shell: bash
       run: |
         export PYTHONPATH=.
