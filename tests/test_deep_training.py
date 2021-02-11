@@ -79,7 +79,6 @@ def test_deep_classification_training_with_queries():
         {
             "template": template_name,
             "num_epochs": 2,
-            "num_gpus": 0,
         }
     )
 
