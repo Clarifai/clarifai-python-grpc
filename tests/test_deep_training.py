@@ -1,6 +1,7 @@
 import os
 import uuid
 
+import pytest
 from google.protobuf import struct_pb2
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
@@ -35,6 +36,7 @@ def api_key_metadata(api_key: str):
     return (("authorization", "Key %s" % api_key),)
 
 
+@pytest.mark.skip(reason="internal user needs to test this")
 def test_deep_classification_training_with_queries():
     stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
 
