@@ -113,7 +113,7 @@ def test_post_delete_batch_images(channel):
 def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    input_id = uuid.uuid4().hex
+    input_id = uuid.uuid4().hex[:15]
 
     input_metadata = Struct()
     input_metadata.update(
