@@ -149,7 +149,7 @@ def test_post_patch_get_train_evaluate_delete_model(channel):
 def test_post_model_with_hyper_params(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    model_id = uuid.uuid4().hex
+    model_id = uuid.uuid4().hex[:30]
 
     hyper_params = struct_pb2.Struct()
     hyper_params.update(
@@ -194,7 +194,7 @@ def test_post_model_with_hyper_params(channel):
 )
 @both_channels
 def test_model_creation_training_and_evaluation(channel):
-    model_id = str(uuid.uuid4())
+    model_id = str(uuid.uuid4()[:30])
 
     stub = service_pb2_grpc.V2Stub(channel)
 
