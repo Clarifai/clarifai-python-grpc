@@ -9,7 +9,14 @@ def test_list_collaborators_with_pat(channel):
     stub = service_pb2_grpc.V2Stub(channel)
     metadata = (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
 
-    list_apps_response = stub.ListApps(service_pb2.ListAppsRequest(), metadata=metadata)
+    list_apps_response = stub.ListApps(
+        service_pb2.ListAppsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="me",
+            )
+        ),
+        metadata=metadata,
+    )
     # We should have at least one app. If this turns out not to be the case and the
     # test fails, we should create it in this test.
     assert list_apps_response.apps
