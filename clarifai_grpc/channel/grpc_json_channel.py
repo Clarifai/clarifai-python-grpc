@@ -221,7 +221,7 @@ def _read_app_info(data):
     elif type(data) is dict:
         for k, v in data.items():
             if k == "user_app_id":
-                return v["app_id"], v.get("user_id", "me")
+                return v.get("app_id", ""), v.get("user_id", "me")
             elif k == "apps":
                 if len(v) == 1:
                     return v[0]["id"], v[0].get("user_id", "me")
