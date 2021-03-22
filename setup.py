@@ -24,10 +24,10 @@ setuptools.setup(
     license="Apache 2.0",
     python_requires='>=3.6',
     install_requires=[
-        "grpcio>=1.25.0",
-        "protobuf>=3.10.0",
-        "googleapis-common-protos>=1.6.0",
-        "requests>=2.22.0",
+        "grpcio>=1.36.0",
+        "protobuf>=3.15.6",
+        "googleapis-common-protos>=1.53.0",
+        "requests>=2.25.1",
     ],
     package_data={p: ["*.pyi"] for p in packages},
     include_package_data=True

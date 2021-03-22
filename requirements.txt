@@ -1,5 +1,4 @@
-# TODO: Switch to range versions.
-grpcio==1.25.0
-protobuf==3.10.0
-googleapis-common-protos==1.6.0
-requests==2.22.0
+googleapis-common-protos==1.53.0
+grpcio==1.36.1
+protobuf==3.15.6
+requests==2.25.1
