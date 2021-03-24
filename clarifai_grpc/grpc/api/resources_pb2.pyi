@@ -341,6 +341,9 @@ class App(google___protobuf___message___Message):
     @property
     def metadata(self) -> google___protobuf___struct_pb2___Struct: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -353,6 +356,7 @@ class App(google___protobuf___message___Message):
         metadata : typing___Optional[google___protobuf___struct_pb2___Struct] = None,
         description : typing___Optional[typing___Text] = None,
         sample_ms : typing___Optional[builtin___int] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -360,8 +364,8 @@ class App(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> App: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"metadata",b"metadata"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"default_language",b"default_language",u"default_workflow_id",b"default_workflow_id",u"description",b"description",u"id",b"id",u"legal_consent_status",b"legal_consent_status",u"metadata",b"metadata",u"name",b"name",u"sample_ms",b"sample_ms",u"user_id",b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"metadata",b"metadata",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"default_language",b"default_language",u"default_workflow_id",b"default_workflow_id",u"description",b"description",u"id",b"id",u"legal_consent_status",b"legal_consent_status",u"metadata",b"metadata",u"name",b"name",u"sample_ms",b"sample_ms",u"user_id",b"user_id",u"visibility",b"visibility"]) -> None: ...
 type___App = App
 
 class AppQuery(google___protobuf___message___Message):
@@ -658,6 +662,9 @@ class Concept(google___protobuf___message___Message):
     @property
     def created_at(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -668,6 +675,7 @@ class Concept(google___protobuf___message___Message):
         app_id : typing___Optional[typing___Text] = None,
         definition : typing___Optional[typing___Text] = None,
         vocab_id : typing___Optional[typing___Text] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -675,8 +683,8 @@ class Concept(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Concept: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"definition",b"definition",u"id",b"id",u"language",b"language",u"name",b"name",u"value",b"value",u"vocab_id",b"vocab_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"definition",b"definition",u"id",b"id",u"language",b"language",u"name",b"name",u"value",b"value",u"visibility",b"visibility",u"vocab_id",b"vocab_id"]) -> None: ...
 type___Concept = Concept
 
 class ConceptCount(google___protobuf___message___Message):
@@ -791,6 +799,9 @@ class ConceptRelation(google___protobuf___message___Message):
     @property
     def object_concept(self) -> type___Concept: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -798,6 +809,7 @@ class ConceptRelation(google___protobuf___message___Message):
         object_concept : typing___Optional[type___Concept] = None,
         predicate : typing___Optional[typing___Text] = None,
         knowledge_graph_id : typing___Optional[typing___Text] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -805,8 +817,8 @@ class ConceptRelation(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ConceptRelation: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"object_concept",b"object_concept",u"subject_concept",b"subject_concept"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"id",b"id",u"knowledge_graph_id",b"knowledge_graph_id",u"object_concept",b"object_concept",u"predicate",b"predicate",u"subject_concept",b"subject_concept"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"object_concept",b"object_concept",u"subject_concept",b"subject_concept",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"id",b"id",u"knowledge_graph_id",b"knowledge_graph_id",u"object_concept",b"object_concept",u"predicate",b"predicate",u"subject_concept",b"subject_concept",u"visibility",b"visibility"]) -> None: ...
 type___ConceptRelation = ConceptRelation
 
 class KnowledgeGraph(google___protobuf___message___Message):
@@ -1441,6 +1453,9 @@ class Model(google___protobuf___message___Message):
     @property
     def train_info(self) -> type___TrainInfo: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -1454,6 +1469,7 @@ class Model(google___protobuf___message___Message):
         input_info : typing___Optional[type___InputInfo] = None,
         train_info : typing___Optional[type___TrainInfo] = None,
         model_type_id : typing___Optional[typing___Text] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -1461,8 +1477,8 @@ class Model(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Model: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"input_info",b"input_info",u"model_version",b"model_version",u"output_info",b"output_info",u"train_info",b"train_info"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"display_name",b"display_name",u"id",b"id",u"input_info",b"input_info",u"model_type_id",b"model_type_id",u"model_version",b"model_version",u"name",b"name",u"output_info",b"output_info",u"train_info",b"train_info",u"user_id",b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"input_info",b"input_info",u"model_version",b"model_version",u"output_info",b"output_info",u"train_info",b"train_info",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"display_name",b"display_name",u"id",b"id",u"input_info",b"input_info",u"model_type_id",b"model_type_id",u"model_version",b"model_version",u"name",b"name",u"output_info",b"output_info",u"train_info",b"train_info",u"user_id",b"user_id",u"visibility",b"visibility"]) -> None: ...
 type___Model = Model
 
 class OutputInfo(google___protobuf___message___Message):
@@ -1610,6 +1626,7 @@ class ModelType(google___protobuf___message___Message):
     internal_only: builtin___bool = ...
     requires_sequential_frames: builtin___bool = ...
     evaluable: builtin___bool = ...
+    is_operator: builtin___bool = ...
 
     @property
     def model_type_fields(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[type___ModelTypeField]: ...
@@ -1636,6 +1653,7 @@ class ModelType(google___protobuf___message___Message):
         evaluable : typing___Optional[builtin___bool] = None,
         expected_pretrained_input_fields : typing___Optional[google___protobuf___struct_pb2___Struct] = None,
         expected_pretrained_output_fields : typing___Optional[google___protobuf___struct_pb2___Struct] = None,
+        is_operator : typing___Optional[builtin___bool] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -1644,7 +1662,7 @@ class ModelType(google___protobuf___message___Message):
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ModelType: ...
     def HasField(self, field_name: typing_extensions___Literal[u"expected_pretrained_input_fields",b"expected_pretrained_input_fields",u"expected_pretrained_output_fields",b"expected_pretrained_output_fields"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"creatable",b"creatable",u"description",b"description",u"evaluable",b"evaluable",u"expected_pretrained_input_fields",b"expected_pretrained_input_fields",u"expected_pretrained_output_fields",b"expected_pretrained_output_fields",u"id",b"id",u"input_fields",b"input_fields",u"internal_only",b"internal_only",u"model_type_fields",b"model_type_fields",u"output_fields",b"output_fields",u"requires_sequential_frames",b"requires_sequential_frames",u"title",b"title",u"trainable",b"trainable",u"type",b"type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"creatable",b"creatable",u"description",b"description",u"evaluable",b"evaluable",u"expected_pretrained_input_fields",b"expected_pretrained_input_fields",u"expected_pretrained_output_fields",b"expected_pretrained_output_fields",u"id",b"id",u"input_fields",b"input_fields",u"internal_only",b"internal_only",u"is_operator",b"is_operator",u"model_type_fields",b"model_type_fields",u"output_fields",b"output_fields",u"requires_sequential_frames",b"requires_sequential_frames",u"title",b"title",u"trainable",b"trainable",u"type",b"type"]) -> None: ...
 type___ModelType = ModelType
 
 class ModelTypeField(google___protobuf___message___Message):
@@ -1675,6 +1693,7 @@ class ModelTypeField(google___protobuf___message___Message):
         JSON = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 10)
         ARRAY_OF_NUMBERS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 11)
         WORKFLOW_EMBED_MODELS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 12)
+        ARRAY_OF_STRINGS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 13)
     INVALID_MODEL_TYPE_FIELD_TYPE = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 0)
     BOOLEAN = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 1)
     STRING = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 2)
@@ -1687,6 +1706,7 @@ class ModelTypeField(google___protobuf___message___Message):
     JSON = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 10)
     ARRAY_OF_NUMBERS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 11)
     WORKFLOW_EMBED_MODELS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 12)
+    ARRAY_OF_STRINGS = typing___cast(ModelTypeField.ModelTypeFieldTypeValue, 13)
     type___ModelTypeFieldType = ModelTypeFieldType
 
     path: typing___Text = ...
@@ -1813,6 +1833,9 @@ class ModelVersion(google___protobuf___message___Message):
     @property
     def completed_at(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -1823,6 +1846,7 @@ class ModelVersion(google___protobuf___message___Message):
         total_input_count : typing___Optional[builtin___int] = None,
         completed_at : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
         description : typing___Optional[typing___Text] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -1830,8 +1854,8 @@ class ModelVersion(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> ModelVersion: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"completed_at",b"completed_at",u"created_at",b"created_at",u"metrics",b"metrics",u"status",b"status"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"active_concept_count",b"active_concept_count",u"completed_at",b"completed_at",u"created_at",b"created_at",u"description",b"description",u"id",b"id",u"metrics",b"metrics",u"status",b"status",u"total_input_count",b"total_input_count"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"completed_at",b"completed_at",u"created_at",b"created_at",u"metrics",b"metrics",u"status",b"status",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"active_concept_count",b"active_concept_count",u"completed_at",b"completed_at",u"created_at",b"created_at",u"description",b"description",u"id",b"id",u"metrics",b"metrics",u"status",b"status",u"total_input_count",b"total_input_count",u"visibility",b"visibility"]) -> None: ...
 type___ModelVersion = ModelVersion
 
 class PretrainedModelConfig(google___protobuf___message___Message):
@@ -2350,6 +2374,9 @@ class Output(google___protobuf___message___Message):
     def model(self) -> type___Model: ...
 
     @property
+    def operator(self) -> type___Operator: ...
+
+    @property
     def input(self) -> type___Input: ...
 
     @property
@@ -2361,6 +2388,7 @@ class Output(google___protobuf___message___Message):
         status : typing___Optional[proto___clarifai___api___status___status_pb2___Status] = None,
         created_at : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
         model : typing___Optional[type___Model] = None,
+        operator : typing___Optional[type___Operator] = None,
         input : typing___Optional[type___Input] = None,
         data : typing___Optional[type___Data] = None,
         ) -> None: ...
@@ -2370,8 +2398,8 @@ class Output(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Output: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"data",b"data",u"input",b"input",u"model",b"model",u"status",b"status"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"data",b"data",u"id",b"id",u"input",b"input",u"model",b"model",u"status",b"status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"data",b"data",u"input",b"input",u"model",b"model",u"operator",b"operator",u"status",b"status"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"data",b"data",u"id",b"id",u"input",b"input",u"model",b"model",u"operator",b"operator",u"status",b"status"]) -> None: ...
 type___Output = Output
 
 class ScopeDeps(google___protobuf___message___Message):
@@ -2519,6 +2547,9 @@ class Search(google___protobuf___message___Message):
     @property
     def modified_at(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         query : typing___Optional[type___Query] = None,
@@ -2532,6 +2563,7 @@ class Search(google___protobuf___message___Message):
         algorithm : typing___Optional[typing___Text] = None,
         save : typing___Optional[builtin___bool] = None,
         min_value : typing___Optional[builtin___float] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -2539,8 +2571,8 @@ class Search(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Search: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"as_of",b"as_of",u"created_at",b"created_at",u"modified_at",b"modified_at",u"query",b"query"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"algorithm",b"algorithm",u"application_id",b"application_id",u"as_of",b"as_of",u"created_at",b"created_at",u"git_hash",b"git_hash",u"id",b"id",u"min_value",b"min_value",u"modified_at",b"modified_at",u"name",b"name",u"query",b"query",u"save",b"save"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"as_of",b"as_of",u"created_at",b"created_at",u"modified_at",b"modified_at",u"query",b"query",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"algorithm",b"algorithm",u"application_id",b"application_id",u"as_of",b"as_of",u"created_at",b"created_at",u"git_hash",b"git_hash",u"id",b"id",u"min_value",b"min_value",u"modified_at",b"modified_at",u"name",b"name",u"query",b"query",u"save",b"save",u"visibility",b"visibility"]) -> None: ...
 type___Search = Search
 
 class Filter(google___protobuf___message___Message):
@@ -2607,6 +2639,9 @@ class AnnotationSearchMetrics(google___protobuf___message___Message):
     @property
     def data(self) -> type___Data: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         ground_truth : typing___Optional[type___Search] = None,
@@ -2614,6 +2649,7 @@ class AnnotationSearchMetrics(google___protobuf___message___Message):
         metrics : typing___Optional[type___EvalMetrics] = None,
         data : typing___Optional[type___Data] = None,
         active_concept_count : typing___Optional[builtin___int] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -2621,8 +2657,8 @@ class AnnotationSearchMetrics(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> AnnotationSearchMetrics: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"data",b"data",u"ground_truth",b"ground_truth",u"metrics",b"metrics",u"search_to_eval",b"search_to_eval"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"active_concept_count",b"active_concept_count",u"data",b"data",u"ground_truth",b"ground_truth",u"metrics",b"metrics",u"search_to_eval",b"search_to_eval"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"data",b"data",u"ground_truth",b"ground_truth",u"metrics",b"metrics",u"search_to_eval",b"search_to_eval",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"active_concept_count",b"active_concept_count",u"data",b"data",u"ground_truth",b"ground_truth",u"metrics",b"metrics",u"search_to_eval",b"search_to_eval",u"visibility",b"visibility"]) -> None: ...
 type___AnnotationSearchMetrics = AnnotationSearchMetrics
 
 class Text(google___protobuf___message___Message):
@@ -2681,6 +2717,12 @@ class User(google___protobuf___message___Message):
     @property
     def email_addresses(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[type___EmailAddress]: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
+    @property
+    def user_detail(self) -> type___UserDetail: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -2698,6 +2740,8 @@ class User(google___protobuf___message___Message):
         is_org_admin : typing___Optional[builtin___bool] = None,
         two_factor_auth_enabled : typing___Optional[builtin___bool] = None,
         teams_count : typing___Optional[builtin___int] = None,
+        visibility : typing___Optional[type___Visibility] = None,
+        user_detail : typing___Optional[type___UserDetail] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -2705,9 +2749,55 @@ class User(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> User: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"metadata",b"metadata"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"bill_type",b"bill_type",u"company_name",b"company_name",u"created_at",b"created_at",u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"email_addresses",b"email_addresses",u"first_name",b"first_name",u"id",b"id",u"is_org_admin",b"is_org_admin",u"last_name",b"last_name",u"metadata",b"metadata",u"primary_email",b"primary_email",u"teams_count",b"teams_count",u"two_factor_auth_enabled",b"two_factor_auth_enabled"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"metadata",b"metadata",u"user_detail",b"user_detail",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"bill_type",b"bill_type",u"company_name",b"company_name",u"created_at",b"created_at",u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"email_addresses",b"email_addresses",u"first_name",b"first_name",u"id",b"id",u"is_org_admin",b"is_org_admin",u"last_name",b"last_name",u"metadata",b"metadata",u"primary_email",b"primary_email",u"teams_count",b"teams_count",u"two_factor_auth_enabled",b"two_factor_auth_enabled",u"user_detail",b"user_detail",u"visibility",b"visibility"]) -> None: ...
 type___User = User
+
+class UserDetail(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    primary_email: typing___Text = ...
+    bill_type: typing___Text = ...
+    is_org_admin: builtin___bool = ...
+    two_factor_auth_enabled: builtin___bool = ...
+    teams_count: builtin___int = ...
+
+    @property
+    def date_gdpr_consent(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
+
+    @property
+    def date_tos_consent(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
+
+    @property
+    def date_marketing_consent(self) -> google___protobuf___timestamp_pb2___Timestamp: ...
+
+    @property
+    def metadata(self) -> google___protobuf___struct_pb2___Struct: ...
+
+    @property
+    def email_addresses(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[type___EmailAddress]: ...
+
+    def __init__(self,
+        *,
+        primary_email : typing___Optional[typing___Text] = None,
+        bill_type : typing___Optional[typing___Text] = None,
+        date_gdpr_consent : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        date_tos_consent : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        date_marketing_consent : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
+        metadata : typing___Optional[google___protobuf___struct_pb2___Struct] = None,
+        email_addresses : typing___Optional[typing___Iterable[type___EmailAddress]] = None,
+        is_org_admin : typing___Optional[builtin___bool] = None,
+        two_factor_auth_enabled : typing___Optional[builtin___bool] = None,
+        teams_count : typing___Optional[builtin___int] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> UserDetail: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> UserDetail: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"metadata",b"metadata"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"bill_type",b"bill_type",u"date_gdpr_consent",b"date_gdpr_consent",u"date_marketing_consent",b"date_marketing_consent",u"date_tos_consent",b"date_tos_consent",u"email_addresses",b"email_addresses",u"is_org_admin",b"is_org_admin",u"metadata",b"metadata",u"primary_email",b"primary_email",u"teams_count",b"teams_count",u"two_factor_auth_enabled",b"two_factor_auth_enabled"]) -> None: ...
+type___UserDetail = UserDetail
 
 class EmailAddress(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -2832,6 +2922,9 @@ class Workflow(google___protobuf___message___Message):
     @property
     def metadata(self) -> google___protobuf___struct_pb2___Struct: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -2839,6 +2932,7 @@ class Workflow(google___protobuf___message___Message):
         created_at : typing___Optional[google___protobuf___timestamp_pb2___Timestamp] = None,
         nodes : typing___Optional[typing___Iterable[type___WorkflowNode]] = None,
         metadata : typing___Optional[google___protobuf___struct_pb2___Struct] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -2846,8 +2940,8 @@ class Workflow(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Workflow: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"metadata",b"metadata"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"id",b"id",u"metadata",b"metadata",u"nodes",b"nodes"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"created_at",b"created_at",u"metadata",b"metadata",u"visibility",b"visibility"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"app_id",b"app_id",u"created_at",b"created_at",u"id",b"id",u"metadata",b"metadata",u"nodes",b"nodes",u"visibility",b"visibility"]) -> None: ...
 type___Workflow = Workflow
 
 class WorkflowNode(google___protobuf___message___Message):
@@ -2859,12 +2953,16 @@ class WorkflowNode(google___protobuf___message___Message):
     def model(self) -> type___Model: ...
 
     @property
+    def operator(self) -> type___Operator: ...
+
+    @property
     def node_inputs(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[type___NodeInput]: ...
 
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
         model : typing___Optional[type___Model] = None,
+        operator : typing___Optional[type___Operator] = None,
         node_inputs : typing___Optional[typing___Iterable[type___NodeInput]] = None,
         suppress_output : typing___Optional[builtin___bool] = None,
         ) -> None: ...
@@ -2874,9 +2972,31 @@ class WorkflowNode(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> WorkflowNode: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"model",b"model"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"id",b"id",u"model",b"model",u"node_inputs",b"node_inputs",u"suppress_output",b"suppress_output"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"model",b"model",u"operator",b"operator"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"id",b"id",u"model",b"model",u"node_inputs",b"node_inputs",u"operator",b"operator",u"suppress_output",b"suppress_output"]) -> None: ...
 type___WorkflowNode = WorkflowNode
+
+class Operator(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    type_id: typing___Text = ...
+
+    @property
+    def output_info(self) -> type___OutputInfo: ...
+
+    def __init__(self,
+        *,
+        type_id : typing___Optional[typing___Text] = None,
+        output_info : typing___Optional[type___OutputInfo] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> Operator: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Operator: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"output_info",b"output_info"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"output_info",b"output_info",u"type_id",b"type_id"]) -> None: ...
+type___Operator = Operator
 
 class NodeInput(google___protobuf___message___Message):
     DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
@@ -3055,6 +3175,9 @@ class Task(google___protobuf___message___Message):
     @property
     def ai_assist_params(self) -> type___AiAssistParameters: ...
 
+    @property
+    def visibility(self) -> type___Visibility: ...
+
     def __init__(self,
         *,
         id : typing___Optional[typing___Text] = None,
@@ -3071,6 +3194,7 @@ class Task(google___protobuf___message___Message):
         status : typing___Optional[proto___clarifai___api___status___status_pb2___Status] = None,
         name : typing___Optional[typing___Text] = None,
         ai_assist_params : typing___Optional[type___AiAssistParameters] = None,
+        visibility : typing___Optional[type___Visibility] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -3078,8 +3202,8 @@ class Task(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Task: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"ai_assist_params",b"ai_assist_params",u"ai_assistant",b"ai_assistant",u"created_at",b"created_at",u"input_source",b"input_source",u"modified_at",b"modified_at",u"review",b"review",u"status",b"status",u"worker",b"worker"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"ai_assist_params",b"ai_assist_params",u"ai_assistant",b"ai_assistant",u"concept_ids",b"concept_ids",u"created_at",b"created_at",u"description",b"description",u"id",b"id",u"input_source",b"input_source",u"modified_at",b"modified_at",u"name",b"name",u"review",b"review",u"sample_ms",b"sample_ms",u"status",b"status",u"type",b"type",u"worker",b"worker"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"ai_assist_params",b"ai_assist_params",u"ai_assistant",b"ai_assistant",u"created_at",b"created_at",u"input_source",b"input_source",u"modified_at",b"modified_at",u"review",b"review",u"status",b"status",u"visibility",b"visibility",u"worker",b"worker"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"ai_assist_params",b"ai_assist_params",u"ai_assistant",b"ai_assistant",u"concept_ids",b"concept_ids",u"created_at",b"created_at",u"description",b"description",u"id",b"id",u"input_source",b"input_source",u"modified_at",b"modified_at",u"name",b"name",u"review",b"review",u"sample_ms",b"sample_ms",u"status",b"status",u"type",b"type",u"visibility",b"visibility",u"worker",b"worker"]) -> None: ...
 type___Task = Task
 
 class AiAssistParameters(google___protobuf___message___Message):
@@ -3554,3 +3678,44 @@ class StatValueAggregateQuery(google___protobuf___message___Message):
     def HasField(self, field_name: typing_extensions___Literal[u"end_time",b"end_time",u"start_time",b"start_time"]) -> builtin___bool: ...
     def ClearField(self, field_name: typing_extensions___Literal[u"end_time",b"end_time",u"start_time",b"start_time",u"stat_time_agg_type",b"stat_time_agg_type",u"stat_value_agg_type",b"stat_value_agg_type",u"tag_groups",b"tag_groups",u"tags",b"tags"]) -> None: ...
 type___StatValueAggregateQuery = StatValueAggregateQuery
+
+class Visibility(google___protobuf___message___Message):
+    DESCRIPTOR: google___protobuf___descriptor___Descriptor = ...
+    GettableValue = typing___NewType('GettableValue', builtin___int)
+    type___GettableValue = GettableValue
+    class Gettable(object):
+        DESCRIPTOR: google___protobuf___descriptor___EnumDescriptor = ...
+        @classmethod
+        def Name(cls, number: builtin___int) -> builtin___str: ...
+        @classmethod
+        def Value(cls, name: builtin___str) -> Visibility.GettableValue: ...
+        @classmethod
+        def keys(cls) -> typing___List[builtin___str]: ...
+        @classmethod
+        def values(cls) -> typing___List[Visibility.GettableValue]: ...
+        @classmethod
+        def items(cls) -> typing___List[typing___Tuple[builtin___str, Visibility.GettableValue]]: ...
+        UNKNOWN_VISIBILITY = typing___cast(Visibility.GettableValue, 0)
+        PRIVATE = typing___cast(Visibility.GettableValue, 10)
+        ORG = typing___cast(Visibility.GettableValue, 30)
+        PUBLIC = typing___cast(Visibility.GettableValue, 50)
+    UNKNOWN_VISIBILITY = typing___cast(Visibility.GettableValue, 0)
+    PRIVATE = typing___cast(Visibility.GettableValue, 10)
+    ORG = typing___cast(Visibility.GettableValue, 30)
+    PUBLIC = typing___cast(Visibility.GettableValue, 50)
+    type___Gettable = Gettable
+
+    gettable: type___Visibility.GettableValue = ...
+
+    def __init__(self,
+        *,
+        gettable : typing___Optional[type___Visibility.GettableValue] = None,
+        ) -> None: ...
+    if sys.version_info >= (3,):
+        @classmethod
+        def FromString(cls, s: builtin___bytes) -> Visibility: ...
+    else:
+        @classmethod
+        def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> Visibility: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"gettable",b"gettable"]) -> None: ...
+type___Visibility = Visibility
