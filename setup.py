@@ -7,7 +7,7 @@ packages = setuptools.find_packages(include=["clarifai_grpc*"])
 
 setuptools.setup(
     name="clarifai-grpc",
-    version="7.2.0",
+    version="7.3.0",
     author="Clarifai",
     author_email="support@clarifai.com",
     description="Clarifai gRPC API Client",

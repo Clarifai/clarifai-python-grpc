@@ -266,6 +266,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse),
         )
+    self.PatchModelVersions = channel.unary_unary(
+        '/clarifai.api.V2/PatchModelVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse),
+        )
     self.DeleteModelVersion = channel.unary_unary(
         '/clarifai.api.V2/DeleteModelVersion',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionRequest.SerializeToString,
@@ -823,7 +828,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def DeleteInput(self, request, context):
-    """Delete a single input.  This call is synchronous.
+    """Delete a single input asynchronously.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -831,7 +836,7 @@ class V2Servicer(object):
 
   def DeleteInputs(self, request, context):
     """Delete multiple inputs in one request.
-    This call is asynchronous. Use DeleteInput if you want a synchronous version.
+    This call is asynchronous.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -965,6 +970,13 @@ class V2Servicer(object):
     Create a new model version to trigger training of the model.
     FIXME(zeiler): this should have been a plural response.
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchModelVersions(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1111,7 +1123,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def ListScopes(self, request, context):
-    """List all auth scopes available.
+    """List all auth scopes available to me as a user.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1694,6 +1706,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.PostModelVersions,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
+      ),
+      'PatchModelVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModelVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse.SerializeToString,
       ),
       'DeleteModelVersion': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteModelVersion,
