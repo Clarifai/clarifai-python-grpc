@@ -18,8 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='proto/clarifai/api/utils/extensions.proto',
   package='clarifai.api.utils',
   syntax='proto3',
-  serialized_options=b'\n\033com.clarifai.grpc.api.utilsP\001Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\242\002\004CAIP',
-  serialized_pb=b'\n)proto/clarifai/api/utils/extensions.proto\x12\x12\x63larifai.api.utils\x1a google/protobuf/descriptor.proto:9\n\x10\x63l_show_if_empty\x12\x1d.google.protobuf.FieldOptions\x18\xd0\x86\x03 \x01(\x08:4\n\x0b\x63l_moretags\x12\x1d.google.protobuf.FieldOptions\x18\xd1\x86\x03 \x01(\t:9\n\x10\x63l_default_float\x12\x1d.google.protobuf.FieldOptions\x18\xda\x86\x03 \x01(\x02\x42\x65\n\x1b\x63om.clarifai.grpc.api.utilsP\x01Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\xa2\x02\x04\x43\x41IPb\x06proto3'
+  serialized_options=b'\n\033com.clarifai.grpc.api.utilsP\001Zugithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\242\002\004CAIP',
+  serialized_pb=b'\n)proto/clarifai/api/utils/extensions.proto\x12\x12\x63larifai.api.utils\x1a google/protobuf/descriptor.proto:9\n\x10\x63l_show_if_empty\x12\x1d.google.protobuf.FieldOptions\x18\xd0\x86\x03 \x01(\x08:4\n\x0b\x63l_moretags\x12\x1d.google.protobuf.FieldOptions\x18\xd1\x86\x03 \x01(\t:9\n\x10\x63l_default_float\x12\x1d.google.protobuf.FieldOptions\x18\xda\x86\x03 \x01(\x02\x42\x9d\x01\n\x1b\x63om.clarifai.grpc.api.utilsP\x01Zugithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\xa2\x02\x04\x43\x41IPb\x06proto3'
   ,
   dependencies=[google_dot_protobuf_dot_descriptor__pb2.DESCRIPTOR,])
 

@@ -23,8 +23,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='proto/clarifai/api/resources.proto',
   package='clarifai.api',
   syntax='proto3',
-  serialized_options=b'\n\025com.clarifai.grpc.apiP\001Z;github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/api\242\002\004CAIP',
-  serialized_pb=b'\n\"proto/clarifai/api/resources.proto\x12\x0c\x63larifai.api\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe5\x03\n\nAnnotation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x30\n\x0f\x61nnotation_info\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\x0f \x01(\t\x12\x18\n\x10model_version_id\x18\x10 \x01(\t\x12\"\n\x16\x65mbed_model_version_id\x18\x0e \x01(\tB\x02\x18\x01\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x07trusted\x18\n \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0binput_level\x18\x11 \x01(\x08\x12/\n\x0e\x63onsensus_info\x18\x12 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07task_id\x18\x13 \x01(\tJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\xc8\x02\n\x03\x41pp\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x10\x64\x65\x66\x61ult_language\x18\x03 \x01(\t\x12\x1b\n\x13\x64\x65\x66\x61ult_workflow_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1c\n\x14legal_consent_status\x18\x07 \x01(\r\x12)\n\x08metadata\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x11\n\tsample_ms\x18\x0f \x01(\r\x12,\n\nvisibility\x18\x10 \x01(\x0b\x32\x18.clarifai.api.VisibilityJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\x18\n\x08\x41ppQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x90\x02\n\x0c\x43ollaborator\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12 \n\x04user\x18\x03 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x04 \x03(\t\x12\x11\n\tendpoints\x18\x05 \x03(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ndeleted_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\rCollaboration\x12\x1e\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x11.clarifai.api.App\x12%\n\tapp_owner\x18\x02 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"j\n\x05\x41udio\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\xf9\x01\n\x05Track\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\ntrack_info\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.Track.TrackInfo\x1a\x8e\x01\n\tTrackInfo\x12\x12\n\nnum_frames\x18\x01 \x01(\r\x12.\n\nbegin_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07quality\x18\x04 \x01(\x02\"h\n\x07\x43luster\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\x12\r\n\x05score\x18\x03 \x01(\x02\x12\x1f\n\x04hits\x18\x04 \x03(\x0b\x32\x11.clarifai.api.Hit\x12\x12\n\nprojection\x18\x05 \x03(\x02\"M\n\x05\x43olor\x12\x0f\n\x07raw_hex\x18\x01 \x01(\t\x12\x1e\n\x03w3c\x18\x02 \x01(\x0b\x32\x11.clarifai.api.W3C\x12\x13\n\x05value\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\" \n\x03W3C\x12\x0b\n\x03hex\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"/\n\x0cUserAppIDSet\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\"J\n\x0bPatchAction\x12\n\n\x02op\x18\x01 \x01(\t\x12!\n\x19merge_conflict_resolution\x18\x02 \x01(\t\x12\x0c\n\x04path\x18\x03 \x01(\t\"\xe5\x01\n\x07\x43oncept\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1a\n\x05value\x18\x03 \x01(\x02\x42\x0b\xd5\xb5\x18\x00\x00\x80?\x80\xb5\x18\x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08language\x18\x05 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\t\x12\x12\n\ndefinition\x18\x07 \x01(\t\x12\x10\n\x08vocab_id\x18\x08 \x01(\t\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xa4\x01\n\x0c\x43onceptCount\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12:\n\x12\x63oncept_type_count\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12>\n\x14\x64\x65tail_concept_count\x18\x04 \x01(\x0b\x32 .clarifai.api.DetailConceptCount\"B\n\x10\x43onceptTypeCount\x12\x16\n\x08positive\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08negative\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"\xdf\x01\n\x12\x44\x65tailConceptCount\x12\x31\n\tprocessed\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nto_process\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12.\n\x06\x65rrors\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nprocessing\x18\x04 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\"C\n\x0c\x43onceptQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x03 \x01(\t\"\xd9\x01\n\x0f\x43onceptRelation\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\x0fsubject_concept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\x12-\n\x0eobject_concept\x18\x03 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x11\n\tpredicate\x18\x04 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x05 \x01(\t\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"y\n\x0eKnowledgeGraph\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x17\n\x0f\x65xamples_app_id\x18\x04 \x01(\t\x12\x1f\n\x17sampled_examples_app_id\x18\x05 \x01(\t\"D\n\x11\x43onceptMappingJob\x12\x1a\n\x12knowledge_graph_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"?\n\x0f\x43onceptLanguage\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\ndefinition\x18\x03 \x01(\t\"\x80\x04\n\x04\x44\x61ta\x12\"\n\x05image\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Image\x12\"\n\x05video\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Video\x12\'\n\x08\x63oncepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x03geo\x18\x06 \x01(\x0b\x32\x11.clarifai.api.Geo\x12#\n\x06\x63olors\x18\x07 \x03(\x0b\x32\x13.clarifai.api.Color\x12\'\n\x08\x63lusters\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Cluster\x12+\n\nembeddings\x18\t \x03(\x0b\x32\x17.clarifai.api.Embedding\x12%\n\x07regions\x18\x0b \x03(\x0b\x32\x14.clarifai.api.Region\x12#\n\x06\x66rames\x18\x0c \x03(\x0b\x32\x13.clarifai.api.Frame\x12 \n\x04text\x18\r \x01(\x0b\x32\x12.clarifai.api.Text\x12\"\n\x05\x61udio\x18\x0e \x01(\x0b\x32\x13.clarifai.api.Audio\x12#\n\x06tracks\x18\x0f \x03(\x0b\x32\x13.clarifai.api.TrackJ\x04\x08\x04\x10\x05J\x04\x08\n\x10\x0b\"\x86\x01\n\x06Region\x12\n\n\x02id\x18\x01 \x01(\t\x12-\n\x0bregion_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.RegionInfo\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\r\n\x05value\x18\x04 \x01(\x02\x12\x10\n\x08track_id\x18\x05 \x01(\t\"\xb7\x01\n\nRegionInfo\x12/\n\x0c\x62ounding_box\x18\x01 \x01(\x0b\x32\x19.clarifai.api.BoundingBox\x12 \n\x04mask\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Mask\x12&\n\x07polygon\x18\x05 \x01(\x0b\x32\x15.clarifai.api.Polygon\x12\"\n\x05point\x18\x06 \x01(\x0b\x32\x13.clarifai.api.PointJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04\"o\n\x0b\x42oundingBox\x12\x15\n\x07top_row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08left_col\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nbottom_row\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tright_col\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"4\n\tFrameInfo\x12\x13\n\x05index\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x12\n\x04time\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"b\n\x05\x46rame\x12+\n\nframe_info\x18\x01 \x01(\x0b\x32\x17.clarifai.api.FrameInfo\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\n\n\x02id\x18\x03 \x01(\t\"N\n\x04Mask\x12\"\n\x05\x63olor\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Color\x12\"\n\x05image\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Image\".\n\x07Polygon\x12#\n\x06points\x18\x01 \x03(\x0b\x32\x13.clarifai.api.Point\"8\n\x05Point\x12\x11\n\x03row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03\x63ol\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\t\n\x01z\x18\x03 \x01(\x02\"7\n\tEmbedding\x12\x12\n\x06vector\x18\x01 \x03(\x02\x42\x02\x10\x01\x12\x16\n\x0enum_dimensions\x18\x02 \x01(\r\";\n\x08GeoPoint\x12\x17\n\tlongitude\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08latitude\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\"-\n\x08GeoLimit\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x13\n\x05value\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\":\n\rGeoBoxedPoint\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\"\x89\x01\n\x03Geo\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\x12)\n\tgeo_limit\x18\x02 \x01(\x0b\x32\x16.clarifai.api.GeoLimit\x12,\n\x07geo_box\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.GeoBoxedPoint\"p\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURLJ\x04\x08\x03\x10\x04\"O\n\tHostedURL\x12\x0e\n\x06prefix\x18\x01 \x01(\t\x12\x0e\n\x06suffix\x18\x02 \x01(\t\x12\r\n\x05sizes\x18\x03 \x03(\t\x12\x13\n\x0b\x63rossorigin\x18\x04 \x01(\t\"\xc9\x01\n\x05Input\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.status.StatusJ\x04\x08\x03\x10\x04\"\xda\x01\n\nInputCount\x12\x17\n\tprocessed\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_process\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x14\n\x06\x65rrors\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nprocessing\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\treindexed\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_reindex\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1c\n\x0ereindex_errors\x18\x07 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nreindexing\x18\x08 \x01(\rB\x04\x80\xb5\x18\x01\"n\n\x19WorkflowResultsSimilarity\x12(\n\x0bprobe_input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12\'\n\x0cpool_results\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Hit\"\xd8\x01\n\x03Key\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x07 \x03(\t\x12\x1f\n\x04\x61pps\x18\x04 \x03(\x0b\x32\x11.clarifai.api.App\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa1\x03\n\x05Model\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x06\x61pp_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01\x12-\n\x0boutput_info\x18\x05 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\x12\x31\n\rmodel_version\x18\x06 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x14\n\x0c\x64isplay_name\x18\x07 \x01(\t\x12\x0f\n\x07user_id\x18\t \x01(\t\x12+\n\ninput_info\x18\x0c \x01(\x0b\x32\x17.clarifai.api.InputInfo\x12+\n\ntrain_info\x18\r \x01(\x0b\x32\x17.clarifai.api.TrainInfo\x12\x15\n\rmodel_type_id\x18\x0e \x01(\t\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.VisibilityJ\x04\x08\x08\x10\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0c\"\xe8\x01\n\nOutputInfo\x12 \n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\routput_config\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\x10\n\x08type_ext\x18\x05 \x01(\t\x12+\n\nfields_map\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\"a\n\tInputInfo\x12+\n\nfields_map\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"4\n\tTrainInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x83\x04\n\x0cOutputConfig\x12)\n\x1b\x63oncepts_mutually_exclusive\x18\x01 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12 \n\x12\x63losed_environment\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x1d\n\x11\x65xisting_model_id\x18\x03 \x01(\tB\x02\x18\x01\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x1c\n\x10hyper_parameters\x18\x05 \x01(\tB\x02\x18\x01\x12\x1a\n\x0cmax_concepts\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\tmin_value\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12.\n\x0fselect_concepts\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x18\n\x10training_timeout\x18\t \x01(\r\x12\x11\n\tsample_ms\x18\n \x01(\r\x12-\n\x0chyper_params\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x16\x65mbed_model_version_id\x18\x0e \x01(\t\x12)\n!fail_on_missing_positive_examples\x18\x0f \x01(\x08\x12\x33\n\x0emodel_metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\rJ\x04\x08\x10\x10\x11J\x04\x08\x12\x10\x13\"\xc5\x03\n\tModelType\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\x14\n\x0cinput_fields\x18\x05 \x03(\t\x12\x15\n\routput_fields\x18\x06 \x03(\t\x12\x11\n\ttrainable\x18\x08 \x01(\x08\x12\x11\n\tcreatable\x18\t \x01(\x08\x12\x15\n\rinternal_only\x18\n \x01(\x08\x12\x37\n\x11model_type_fields\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\"\n\x1arequires_sequential_frames\x18\x0c \x01(\x08\x12\x11\n\tevaluable\x18\r \x01(\x08\x12\x41\n expected_pretrained_input_fields\x18\x0e \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x42\n!expected_pretrained_output_fields\x18\x0f \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0bis_operator\x18\x10 \x01(\x08J\x04\x08\x07\x10\x08\"\x85\x05\n\x0eModelTypeField\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x43\n\nfield_type\x18\x02 \x01(\x0e\x32/.clarifai.api.ModelTypeField.ModelTypeFieldType\x12-\n\rdefault_value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bplaceholder\x18\x05 \x01(\t\x12\x42\n\x17model_type_enum_options\x18\x06 \x03(\x0b\x32!.clarifai.api.ModelTypeEnumOption\x12\x15\n\rinternal_only\x18\x07 \x01(\x08\x12\x10\n\x08required\x18\x08 \x01(\x08\x12?\n\x15model_type_range_info\x18\t \x01(\x0b\x32 .clarifai.api.ModelTypeRangeInfo\"\x98\x02\n\x12ModelTypeFieldType\x12!\n\x1dINVALID_MODEL_TYPE_FIELD_TYPE\x10\x00\x12\x0b\n\x07\x42OOLEAN\x10\x01\x12\n\n\x06STRING\x10\x02\x12\n\n\x06NUMBER\x10\x03\x12\x15\n\x11\x41RRAY_OF_CONCEPTS\x10\x04\x12$\n ARRAY_OF_CONCEPTS_WITH_THRESHOLD\x10\x05\x12\t\n\x05RANGE\x10\x07\x12\x08\n\x04\x45NUM\x10\x08\x12\x11\n\rCOLLABORATORS\x10\t\x12\x08\n\x04JSON\x10\n\x12\x14\n\x10\x41RRAY_OF_NUMBERS\x10\x0b\x12\x19\n\x15WORKFLOW_EMBED_MODELS\x10\x0c\x12\x14\n\x10\x41RRAY_OF_STRINGS\x10\r\"\x04\x08\x06\x10\x06\"<\n\x12ModelTypeRangeInfo\x12\x0b\n\x03min\x18\x01 \x01(\x02\x12\x0b\n\x03max\x18\x02 \x01(\x02\x12\x0c\n\x04step\x18\x03 \x01(\x02\"\x86\x01\n\x13ModelTypeEnumOption\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x11model_type_fields\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\x15\n\rinternal_only\x18\x04 \x01(\x08\"C\n\nModelQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x04type\x18\x02 \x01(\tB\x02\x18\x01\x12\x15\n\rmodel_type_id\x18\x03 \x01(\t\"\xd7\x02\n\x0cModelVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x04 \x01(\r\x12*\n\x07metrics\x18\x05 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12\x19\n\x11total_input_count\x18\x06 \x01(\r\x12\x30\n\x0c\x63ompleted_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x64\x65scription\x18\x0b \x01(\t\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.VisibilityJ\x04\x08\t\x10\n\"\xe0\x01\n\x15PretrainedModelConfig\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x02 \x01(\t\x12\x31\n\x10input_fields_map\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x32\n\x11output_fields_map\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1c\n\x14\x64\x61ta_provider_params\x18\x05 \x01(\t\x12\x15\n\rmodel_zip_url\x18\x06 \x01(\t\x12\x11\n\toverwrite\x18\x07 \x01(\x08\">\n\nTrainStats\x12\x30\n\nloss_curve\x18\x01 \x03(\x0b\x32\x1c.clarifai.api.LossCurveEntry\"B\n\x0eLossCurveEntry\x12\r\n\x05\x65poch\x18\x01 \x01(\r\x12\x13\n\x0bglobal_step\x18\x02 \x01(\r\x12\x0c\n\x04\x63ost\x18\x03 \x01(\x02\"1\n\nLabelCount\x12\x14\n\x0c\x63oncept_name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"L\n\x11LabelDistribution\x12\x37\n\x15positive_label_counts\x18\x01 \x03(\x0b\x32\x18.clarifai.api.LabelCount\"B\n\x17\x43ooccurrenceMatrixEntry\x12\x0b\n\x03row\x18\x01 \x01(\t\x12\x0b\n\x03\x63ol\x18\x02 \x01(\t\x12\r\n\x05\x63ount\x18\x03 \x01(\r\"`\n\x12\x43ooccurrenceMatrix\x12\x35\n\x06matrix\x18\x01 \x03(\x0b\x32%.clarifai.api.CooccurrenceMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"N\n\x14\x43onfusionMatrixEntry\x12\x11\n\tpredicted\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tual\x18\x02 \x01(\t\x12\x13\n\x05value\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"Z\n\x0f\x43onfusionMatrix\x12\x32\n\x06matrix\x18\x01 \x03(\x0b\x32\".clarifai.api.ConfusionMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"t\n\x03ROC\x12\x11\n\x03\x66pr\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03tpr\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x15\n\rfpr_per_image\x18\x04 \x03(\x02\x12\x16\n\x0e\x66pr_per_object\x18\x05 \x03(\x02\"_\n\x14PrecisionRecallCurve\x12\x14\n\x06recall\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tprecision\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\"\xea\x02\n\rBinaryMetrics\x12\x15\n\x07num_pos\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_neg\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_tot\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x10\n\x02\x66\x31\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12&\n\x07\x63oncept\x18\x06 \x01(\x0b\x32\x15.clarifai.api.Concept\x12$\n\troc_curve\x18\x07 \x01(\x0b\x32\x11.clarifai.api.ROC\x12\x42\n\x16precision_recall_curve\x18\x08 \x01(\x0b\x32\".clarifai.api.PrecisionRecallCurve\x12\x15\n\ravg_precision\x18\t \x01(\x02\x12\x11\n\tarea_name\x18\n \x01(\t\x12\x10\n\x08\x61rea_min\x18\x0b \x01(\x01\x12\x10\n\x08\x61rea_max\x18\x0c \x01(\x01\x12\x0b\n\x03iou\x18\r \x01(\x02\"\x91\x01\n\x0eTrackerMetrics\x12\x10\n\x08mot_mota\x18\x01 \x01(\x02\x12\x18\n\x10mot_num_switches\x18\x02 \x01(\x05\x12\x12\n\nmorse_frag\x18\x03 \x01(\x02\x12\x15\n\ravg_precision\x18\x04 \x01(\x02\x12\x0c\n\x04\x61iid\x18\x05 \x01(\t\x12\x1a\n\x12unique_switch_rate\x18\x06 \x01(\x02\"\xc2\x01\n\x10\x45valTestSetEntry\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x31\n\x12predicted_concepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x34\n\x15ground_truth_concepts\x18\x04 \x03(\x0b\x32\x15.clarifai.api.Concept\x12,\n\nannotation\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\xcd\x01\n\x0eLOPQEvalResult\x12\t\n\x01k\x18\x01 \x01(\x05\x12#\n\x15recall_vs_brute_force\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1akendall_tau_vs_brute_force\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1amost_frequent_code_percent\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tlopq_ndcg\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10\x62rute_force_ndcg\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\"\x8c\x03\n\x0eMetricsSummary\x12\x19\n\rtop1_accuracy\x18\x01 \x01(\x02\x42\x02\x18\x01\x12\x19\n\rtop5_accuracy\x18\x02 \x01(\x02\x42\x02\x18\x01\x12\x1f\n\x11macro_avg_roc_auc\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1f\n\x11macro_std_roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_avg_f1_score\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_std_f1_score\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x13macro_avg_precision\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10macro_avg_recall\x18\x08 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x19mean_avg_precision_iou_50\x18\n \x01(\x02\x12$\n\x1cmean_avg_precision_iou_range\x18\x0b \x01(\x02\x12\x32\n\x0clopq_metrics\x18\t \x03(\x0b\x32\x1c.clarifai.api.LOPQEvalResult\"\xaf\x04\n\x0b\x45valMetrics\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\n \x01(\t\x12-\n\x07summary\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.MetricsSummary\x12\x37\n\x10\x63onfusion_matrix\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.ConfusionMatrix\x12=\n\x13\x63ooccurrence_matrix\x18\x04 \x01(\x0b\x32 .clarifai.api.CooccurrenceMatrix\x12\x35\n\x0clabel_counts\x18\x05 \x01(\x0b\x32\x1f.clarifai.api.LabelDistribution\x12\x33\n\x0e\x62inary_metrics\x18\x06 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x30\n\x08test_set\x18\x07 \x03(\x0b\x32\x1e.clarifai.api.EvalTestSetEntry\x12\x34\n\x0fmetrics_by_area\x18\x08 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x10metrics_by_class\x18\t \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x0ftracker_metrics\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.TrackerMetrics\"\xb7\x01\n\x0b\x46ieldsValue\x12\x18\n\x10\x63onfusion_matrix\x18\x01 \x01(\x08\x12\x1b\n\x13\x63ooccurrence_matrix\x18\x02 \x01(\x08\x12\x14\n\x0clabel_counts\x18\x03 \x01(\x08\x12\x16\n\x0e\x62inary_metrics\x18\x04 \x01(\x08\x12\x10\n\x08test_set\x18\x05 \x01(\x08\x12\x17\n\x0fmetrics_by_area\x18\x06 \x01(\x08\x12\x18\n\x10metrics_by_class\x18\x07 \x01(\x08\"\x85\x02\n\x06Output\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12(\n\x08operator\x18\x07 \x01(\x0b\x32\x16.clarifai.api.Operator\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12 \n\x04\x64\x61ta\x18\x06 \x01(\x0b\x32\x12.clarifai.api.Data\"4\n\tScopeDeps\x12\r\n\x05scope\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\":\n\x0c\x45ndpointDeps\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\"l\n\x03Hit\x12\x13\n\x05score\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\x12,\n\nannotation\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x01\n\x03\x41nd\x12\"\n\x05input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12$\n\x06output\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Output\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x84\x01\n\x05Query\x12\x1f\n\x04\x61nds\x18\x01 \x03(\x0b\x32\x11.clarifai.api.And\x12\x10\n\x08language\x18\x02 \x01(\t\x12%\n\x07\x66ilters\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Filter\x12!\n\x05ranks\x18\x04 \x03(\x0b\x32\x12.clarifai.api.Rank\"\xde\x02\n\x06Search\x12\"\n\x05query\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Query\x12\n\n\x02id\x18\x02 \x01(\t\x12\x16\n\x0e\x61pplication_id\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x05\x61s_of\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08git_hash\x18\x06 \x01(\t\x12.\n\ncreated_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\talgorithm\x18\t \x01(\t\x12\x0c\n\x04save\x18\n \x01(\x08\x12\x11\n\tmin_value\x18\x0b \x01(\x02\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\"j\n\x06\x46ilter\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\"D\n\x04Rank\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x02\n\x17\x41nnotationSearchMetrics\x12*\n\x0cground_truth\x18\x01 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Search\x12*\n\x07metrics\x18\x03 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x05 \x01(\r\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"f\n\x04Text\x12\x0b\n\x03raw\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x1b\n\x13\x61llow_duplicate_url\x18\x03 \x01(\x08\x12\'\n\x06hosted\x18\x04 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\x89\x05\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\rprimary_email\x18\x02 \x01(\tB\x02\x18\x01\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x15\n\tbill_type\x18\x07 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x11\x64\x61te_gdpr_consent\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_tos_consent\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12>\n\x16\x64\x61te_marketing_consent\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12-\n\x08metadata\x18\x0b \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01\x12\x37\n\x0f\x65mail_addresses\x18\x0c \x03(\x0b\x32\x1a.clarifai.api.EmailAddressB\x02\x18\x01\x12\x18\n\x0cis_org_admin\x18\x0e \x01(\x08\x42\x02\x18\x01\x12#\n\x17two_factor_auth_enabled\x18\x0f \x01(\x08\x42\x02\x18\x01\x12\x17\n\x0bteams_count\x18\x10 \x01(\rB\x02\x18\x01\x12,\n\nvisibility\x18\x11 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12-\n\x0buser_detail\x18\x12 \x01(\x0b\x32\x18.clarifai.api.UserDetailJ\x04\x08\r\x10\x0e\"\x8b\x03\n\nUserDetail\x12\x15\n\rprimary_email\x18\x01 \x01(\t\x12\x11\n\tbill_type\x18\x02 \x01(\t\x12\x35\n\x11\x64\x61te_gdpr_consent\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_tos_consent\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\x16\x64\x61te_marketing_consent\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x33\n\x0f\x65mail_addresses\x18\x07 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\x12\x14\n\x0cis_org_admin\x18\x08 \x01(\x08\x12\x1f\n\x17two_factor_auth_enabled\x18\t \x01(\x08\x12\x13\n\x0bteams_count\x18\n \x01(\r\"R\n\x0c\x45mailAddress\x12\x13\n\x05\x65mail\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07primary\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08verified\x18\x03 \x01(\x08\x42\x04\x80\xb5\x18\x01\"\x1d\n\x08Password\x12\x11\n\tplaintext\x18\x01 \x01(\t\"\x86\x03\n\x12PasswordViolations\x12\x16\n\x0eminimum_length\x18\x01 \x01(\x08\x12\x16\n\x0emaximum_length\x18\x02 \x01(\x08\x12\x19\n\x11upper_case_needed\x18\x03 \x01(\x08\x12\x19\n\x11lower_case_needed\x18\x04 \x01(\x08\x12\x16\n\x0enumeric_needed\x18\x05 \x01(\x08\x12\x1f\n\x17non_alphanumeric_needed\x18\x06 \x01(\x08\x12\x16\n\x0epassword_reuse\x18\x07 \x01(\x08\x12\x15\n\rexclude_names\x18\x08 \x01(\x08\x12\x15\n\rexclude_email\x18\t \x01(\x08\x12\x1c\n\x14no_confusing_letters\x18\n \x01(\x08\x12\x1b\n\x13no_simple_passwords\x18\x0b \x01(\x08\x12\x18\n\x10no_common_vocabs\x18\x0c \x01(\x08\x12\x1b\n\x13no_overlap_with_old\x18\r \x01(\x08\x12\x19\n\x11password_lifespan\x18\x0e \x01(\x08\"\x81\x01\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\'\n\x06hosted\x18\x06 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\xda\x01\n\x08Workflow\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x05nodes\x18\x04 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xaf\x01\n\x0cWorkflowNode\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\x12(\n\x08operator\x18\x05 \x01(\x0b\x32\x16.clarifai.api.Operator\x12,\n\x0bnode_inputs\x18\x03 \x03(\x0b\x32\x17.clarifai.api.NodeInput\x12\x17\n\x0fsuppress_output\x18\x04 \x01(\x08\"J\n\x08Operator\x12\x0f\n\x07type_id\x18\x01 \x01(\t\x12-\n\x0boutput_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\"\x1c\n\tNodeInput\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\x81\x02\n\x0eWorkflowResult\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12%\n\x07outputs\x18\x06 \x03(\x0b\x32\x14.clarifai.api.Output\x12\x17\n\x0fsuppress_output\x18\x07 \x01(\x08\"\x8e\x02\n\x0e\x41ppDuplication\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\nnew_app_id\x18\x02 \x01(\t\x12\x14\n\x0cnew_app_name\x18\x03 \x01(\t\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x06\x66ilter\x18\x07 \x01(\x0b\x32#.clarifai.api.AppDuplicationFilters\"\x8a\x01\n\x15\x41ppDuplicationFilters\x12\x13\n\x0b\x63opy_inputs\x18\x01 \x01(\x08\x12\x15\n\rcopy_concepts\x18\x02 \x01(\x08\x12\x18\n\x10\x63opy_annotations\x18\x03 \x01(\x08\x12\x13\n\x0b\x63opy_models\x18\x04 \x01(\x08\x12\x16\n\x0e\x63opy_workflows\x18\x05 \x01(\x08\"\xac\x05\n\x04Task\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x04type\x18\x04 \x01(\x0e\x32\x1b.clarifai.api.Task.TaskType\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12(\n\x06worker\x18\x06 \x01(\x0b\x32\x18.clarifai.api.TaskWorker\x12\x13\n\x0b\x63oncept_ids\x18\x07 \x03(\t\x12\x33\n\x0cinput_source\x18\x08 \x01(\x0b\x32\x1d.clarifai.api.TaskInputSource\x12\x11\n\tsample_ms\x18\t \x01(\r\x12\x33\n\x0c\x61i_assistant\x18\n \x01(\x0b\x32\x1d.clarifai.api.TaskAIAssistant\x12(\n\x06review\x18\x0b \x01(\x0b\x32\x18.clarifai.api.TaskReview\x12+\n\x06status\x18\x0c \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0c\n\x04name\x18\r \x01(\t\x12:\n\x10\x61i_assist_params\x18\x0e \x01(\x0b\x32 .clarifai.api.AiAssistParameters\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\"l\n\x08TaskType\x12\x10\n\x0cTYPE_NOT_SET\x10\x00\x12\x1b\n\x17\x43ONCEPTS_CLASSIFICATION\x10\x01\x12\x1a\n\x16\x42OUNDING_BOX_DETECTION\x10\x02\x12\x15\n\x11POLYGON_DETECTION\x10\x03\"`\n\x12\x41iAssistParameters\x12\x15\n\rmin_threshold\x18\x01 \x01(\x02\x12\x15\n\rmax_threshold\x18\x02 \x01(\x02\x12\x1c\n\x14\x63oncept_relation_ids\x18\x03 \x03(\t\"\x98\x02\n\nTaskWorker\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskWorker.TaskWorkerStrategy\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12T\n\x19partitioned_strategy_info\x18\x03 \x01(\x0b\x32/.clarifai.api.TaskWorkerPartitionedStrategyInfoH\x00\"R\n\x12TaskWorkerStrategy\x12\x1b\n\x17WORKER_STRATEGY_NOT_SET\x10\x00\x12\x0f\n\x0bPARTITIONED\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\x04\x08\x01\x10\x01\x42\x0f\n\rstrategy_info\"\xa9\x02\n!TaskWorkerPartitionedStrategyInfo\x12[\n\x04type\x18\x01 \x01(\x0e\x32M.clarifai.api.TaskWorkerPartitionedStrategyInfo.TaskWorkerPartitionedStrategy\x12\x19\n\x11workers_per_input\x18\x02 \x01(\x05\x12(\n\x07weights\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"b\n\x1dTaskWorkerPartitionedStrategy\x12\'\n#PARTITIONED_WORKER_STRATEGY_NOT_SET\x10\x00\x12\n\n\x06\x45VENLY\x10\x01\x12\x0c\n\x08WEIGHTED\x10\x02\"\xb6\x01\n\x0fTaskInputSource\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.clarifai.api.TaskInputSource.TaskInputSourceType\x12\n\n\x02id\x18\x02 \x01(\t\"V\n\x13TaskInputSourceType\x12\x1d\n\x19INPUT_SOURCE_TYPE_NOT_SET\x10\x00\x12\x0e\n\nALL_INPUTS\x10\x01\x12\x10\n\x0cSAVED_SEARCH\x10\x02\"\xe9\x02\n\nTaskReview\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskReview.TaskReviewStrategy\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12J\n\x14manual_strategy_info\x18\x03 \x01(\x0b\x32*.clarifai.api.TaskReviewManualStrategyInfoH\x00\x12P\n\x17\x63onsensus_strategy_info\x18\x04 \x01(\x0b\x32-.clarifai.api.TaskReviewConsensusStrategyInfoH\x00\"[\n\x12TaskReviewStrategy\x12 \n\x1cTASK_REVIEW_STRATEGY_NOT_SET\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06MANUAL\x10\x02\x12\r\n\tCONSENSUS\x10\x03\x42\x0f\n\rstrategy_info\"9\n\x1cTaskReviewManualStrategyInfo\x12\x19\n\x11sample_percentage\x18\x01 \x01(\x02\"C\n\x1fTaskReviewConsensusStrategyInfo\x12\x1a\n\x12\x61pproval_threshold\x18\x02 \x01(\rJ\x04\x08\x01\x10\x02\"&\n\x0fTaskAIAssistant\x12\x13\n\x0bworkflow_id\x18\x01 \x01(\t\"\xbc\x01\n\x16TaskStatusCountPerUser\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x15\n\x07pending\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1d\n\x0f\x61waiting_review\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07success\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1b\n\rreview_denied\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\'\n\x19\x61waiting_consensus_review\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\"\x81\x02\n\tCollector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1d\n\x15pre_queue_workflow_id\x18\x04 \x01(\t\x12\x1e\n\x16post_queue_workflow_id\x18\x05 \x01(\t\x12\x37\n\x10\x63ollector_source\x18\x06 \x01(\x0b\x32\x1d.clarifai.api.CollectorSource\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"t\n\x0f\x43ollectorSource\x12\x61\n\'api_post_model_outputs_collector_source\x18\x02 \x01(\x0b\x32\x30.clarifai.api.APIPostModelOutputsCollectorSource\"\x99\x01\n\"APIPostModelOutputsCollectorSource\x12\x15\n\rmodel_user_id\x18\x01 \x01(\t\x12\x14\n\x0cmodel_app_id\x18\x02 \x01(\t\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x18\n\x10model_version_id\x18\x04 \x01(\t\x12\x1a\n\x12post_inputs_key_id\x18\x05 \x01(\t\"R\n\tStatValue\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05value\x18\x02 \x01(\x02\x12\x0c\n\x04tags\x18\x03 \x03(\t\"\xa6\x01\n\x18StatValueAggregateResult\x12?\n\x15stat_value_aggregates\x18\x01 \x03(\x0b\x32 .clarifai.api.StatValueAggregate\x12I\n\x1astat_value_aggregate_query\x18\x02 \x01(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"t\n\x12StatValueAggregate\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\x0f\x61ggregate_value\x18\x02 \x01(\x02\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\x12\x0c\n\x04tags\x18\x04 \x03(\t\"\x91\x02\n\x17StatValueAggregateQuery\x12\x0c\n\x04tags\x18\x01 \x03(\t\x12\x12\n\ntag_groups\x18\x02 \x03(\t\x12;\n\x13stat_value_agg_type\x18\x03 \x01(\x0e\x32\x1e.clarifai.api.StatValueAggType\x12\x39\n\x12stat_time_agg_type\x18\x04 \x01(\x0e\x32\x1d.clarifai.api.StatTimeAggType\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x87\x01\n\nVisibility\x12\x33\n\x08gettable\x18\x01 \x01(\x0e\x32!.clarifai.api.Visibility.Gettable\"D\n\x08Gettable\x12\x16\n\x12UNKNOWN_VISIBILITY\x10\x00\x12\x0b\n\x07PRIVATE\x10\n\x12\x07\n\x03ORG\x10\x1e\x12\n\n\x06PUBLIC\x10\x32*H\n\x10\x45xpirationAction\x12\x1d\n\x19\x45XPIRATION_ACTION_NOT_SET\x10\x00\x12\t\n\x05\x44\x45LAY\x10\x01\x12\n\n\x06\x45XPIRY\x10\x02*M\n\x0cLicenseScope\x12\x19\n\x15LICENSE_SCOPE_NOT_SET\x10\x00\x12\x0b\n\x07PREDICT\x10\x01\x12\t\n\x05TRAIN\x10\x02\x12\n\n\x06SEARCH\x10\x03*\x8f\x01\n\x0fValueComparator\x12\x1d\n\x19\x43ONCEPT_THRESHOLD_NOT_SET\x10\x00\x12\x10\n\x0cGREATER_THAN\x10\x01\x12\x19\n\x15GREATER_THAN_OR_EQUAL\x10\x02\x12\r\n\tLESS_THAN\x10\x03\x12\x16\n\x12LESS_THAN_OR_EQUAL\x10\x04\x12\t\n\x05\x45QUAL\x10\x05*3\n\x0e\x45valuationType\x12\x12\n\x0e\x43lassification\x10\x00\x12\r\n\tDetection\x10\x01*f\n\x0c\x41PIEventType\x12\x1a\n\x16\x41PI_EVENT_TYPE_NOT_SET\x10\x00\x12\x13\n\x0fON_PREM_PREDICT\x10\x01\x12\x11\n\rON_PREM_TRAIN\x10\x02\x12\x12\n\x0eON_PREM_SEARCH\x10\x03*<\n\x11UsageIntervalType\x12\t\n\x05undef\x10\x00\x12\x07\n\x03\x64\x61y\x10\x01\x12\t\n\x05month\x10\x02\x12\x08\n\x04year\x10\x03*\x1d\n\x08RoleType\x12\x08\n\x04TEAM\x10\x00\x12\x07\n\x03ORG\x10\x01*$\n\x10StatValueAggType\x12\x07\n\x03SUM\x10\x00\x12\x07\n\x03\x41VG\x10\x01*`\n\x0fStatTimeAggType\x12\x0f\n\x0bNO_TIME_AGG\x10\x00\x12\x08\n\x04YEAR\x10\x01\x12\t\n\x05MONTH\x10\x02\x12\x08\n\x04WEEK\x10\x03\x12\x07\n\x03\x44\x41Y\x10\x04\x12\x08\n\x04HOUR\x10\x05\x12\n\n\x06MINUTE\x10\x06\x42]\n\x15\x63om.clarifai.grpc.apiP\x01Z;github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/api\xa2\x02\x04\x43\x41IPb\x06proto3'
+  serialized_options=b'\n\025com.clarifai.grpc.apiP\001Zsgithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/api\242\002\004CAIP',
+  serialized_pb=b'\n\"proto/clarifai/api/resources.proto\x12\x0c\x63larifai.api\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xe5\x03\n\nAnnotation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x30\n\x0f\x61nnotation_info\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\x0f \x01(\t\x12\x18\n\x10model_version_id\x18\x10 \x01(\t\x12\"\n\x16\x65mbed_model_version_id\x18\x0e \x01(\tB\x02\x18\x01\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x07trusted\x18\n \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0binput_level\x18\x11 \x01(\x08\x12/\n\x0e\x63onsensus_info\x18\x12 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07task_id\x18\x13 \x01(\tJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\xc8\x02\n\x03\x41pp\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x10\x64\x65\x66\x61ult_language\x18\x03 \x01(\t\x12\x1b\n\x13\x64\x65\x66\x61ult_workflow_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1c\n\x14legal_consent_status\x18\x07 \x01(\r\x12)\n\x08metadata\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x11\n\tsample_ms\x18\x0f \x01(\r\x12,\n\nvisibility\x18\x10 \x01(\x0b\x32\x18.clarifai.api.VisibilityJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\x18\n\x08\x41ppQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x90\x02\n\x0c\x43ollaborator\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12 \n\x04user\x18\x03 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x04 \x03(\t\x12\x11\n\tendpoints\x18\x05 \x03(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ndeleted_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\rCollaboration\x12\x1e\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x11.clarifai.api.App\x12%\n\tapp_owner\x18\x02 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"j\n\x05\x41udio\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\xf9\x01\n\x05Track\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\ntrack_info\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.Track.TrackInfo\x1a\x8e\x01\n\tTrackInfo\x12\x12\n\nnum_frames\x18\x01 \x01(\r\x12.\n\nbegin_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07quality\x18\x04 \x01(\x02\"h\n\x07\x43luster\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\x12\r\n\x05score\x18\x03 \x01(\x02\x12\x1f\n\x04hits\x18\x04 \x03(\x0b\x32\x11.clarifai.api.Hit\x12\x12\n\nprojection\x18\x05 \x03(\x02\"M\n\x05\x43olor\x12\x0f\n\x07raw_hex\x18\x01 \x01(\t\x12\x1e\n\x03w3c\x18\x02 \x01(\x0b\x32\x11.clarifai.api.W3C\x12\x13\n\x05value\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\" \n\x03W3C\x12\x0b\n\x03hex\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"/\n\x0cUserAppIDSet\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\"J\n\x0bPatchAction\x12\n\n\x02op\x18\x01 \x01(\t\x12!\n\x19merge_conflict_resolution\x18\x02 \x01(\t\x12\x0c\n\x04path\x18\x03 \x01(\t\"\xf6\x01\n\x07\x43oncept\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1a\n\x05value\x18\x03 \x01(\x02\x42\x0b\xd5\xb5\x18\x00\x00\x80?\x80\xb5\x18\x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08language\x18\x05 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\t\x12\x12\n\ndefinition\x18\x07 \x01(\t\x12\x10\n\x08vocab_id\x18\x08 \x01(\t\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\n \x01(\t\"\xa4\x01\n\x0c\x43onceptCount\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12:\n\x12\x63oncept_type_count\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12>\n\x14\x64\x65tail_concept_count\x18\x04 \x01(\x0b\x32 .clarifai.api.DetailConceptCount\"B\n\x10\x43onceptTypeCount\x12\x16\n\x08positive\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08negative\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"\xdf\x01\n\x12\x44\x65tailConceptCount\x12\x31\n\tprocessed\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nto_process\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12.\n\x06\x65rrors\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nprocessing\x18\x04 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\"C\n\x0c\x43onceptQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x03 \x01(\t\"\xd9\x01\n\x0f\x43onceptRelation\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\x0fsubject_concept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\x12-\n\x0eobject_concept\x18\x03 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x11\n\tpredicate\x18\x04 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x05 \x01(\t\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"y\n\x0eKnowledgeGraph\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x17\n\x0f\x65xamples_app_id\x18\x04 \x01(\t\x12\x1f\n\x17sampled_examples_app_id\x18\x05 \x01(\t\"D\n\x11\x43onceptMappingJob\x12\x1a\n\x12knowledge_graph_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"?\n\x0f\x43onceptLanguage\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\ndefinition\x18\x03 \x01(\t\"\x80\x04\n\x04\x44\x61ta\x12\"\n\x05image\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Image\x12\"\n\x05video\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Video\x12\'\n\x08\x63oncepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x03geo\x18\x06 \x01(\x0b\x32\x11.clarifai.api.Geo\x12#\n\x06\x63olors\x18\x07 \x03(\x0b\x32\x13.clarifai.api.Color\x12\'\n\x08\x63lusters\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Cluster\x12+\n\nembeddings\x18\t \x03(\x0b\x32\x17.clarifai.api.Embedding\x12%\n\x07regions\x18\x0b \x03(\x0b\x32\x14.clarifai.api.Region\x12#\n\x06\x66rames\x18\x0c \x03(\x0b\x32\x13.clarifai.api.Frame\x12 \n\x04text\x18\r \x01(\x0b\x32\x12.clarifai.api.Text\x12\"\n\x05\x61udio\x18\x0e \x01(\x0b\x32\x13.clarifai.api.Audio\x12#\n\x06tracks\x18\x0f \x03(\x0b\x32\x13.clarifai.api.TrackJ\x04\x08\x04\x10\x05J\x04\x08\n\x10\x0b\"\x86\x01\n\x06Region\x12\n\n\x02id\x18\x01 \x01(\t\x12-\n\x0bregion_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.RegionInfo\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\r\n\x05value\x18\x04 \x01(\x02\x12\x10\n\x08track_id\x18\x05 \x01(\t\"\xb7\x01\n\nRegionInfo\x12/\n\x0c\x62ounding_box\x18\x01 \x01(\x0b\x32\x19.clarifai.api.BoundingBox\x12 \n\x04mask\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Mask\x12&\n\x07polygon\x18\x05 \x01(\x0b\x32\x15.clarifai.api.Polygon\x12\"\n\x05point\x18\x06 \x01(\x0b\x32\x13.clarifai.api.PointJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04\"o\n\x0b\x42oundingBox\x12\x15\n\x07top_row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08left_col\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nbottom_row\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tright_col\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"4\n\tFrameInfo\x12\x13\n\x05index\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x12\n\x04time\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"b\n\x05\x46rame\x12+\n\nframe_info\x18\x01 \x01(\x0b\x32\x17.clarifai.api.FrameInfo\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\n\n\x02id\x18\x03 \x01(\t\"N\n\x04Mask\x12\"\n\x05\x63olor\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Color\x12\"\n\x05image\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Image\".\n\x07Polygon\x12#\n\x06points\x18\x01 \x03(\x0b\x32\x13.clarifai.api.Point\"8\n\x05Point\x12\x11\n\x03row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03\x63ol\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\t\n\x01z\x18\x03 \x01(\x02\"7\n\tEmbedding\x12\x12\n\x06vector\x18\x01 \x03(\x02\x42\x02\x10\x01\x12\x16\n\x0enum_dimensions\x18\x02 \x01(\r\";\n\x08GeoPoint\x12\x17\n\tlongitude\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08latitude\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\"-\n\x08GeoLimit\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x13\n\x05value\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\":\n\rGeoBoxedPoint\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\"\x89\x01\n\x03Geo\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\x12)\n\tgeo_limit\x18\x02 \x01(\x0b\x32\x16.clarifai.api.GeoLimit\x12,\n\x07geo_box\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.GeoBoxedPoint\"p\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURLJ\x04\x08\x03\x10\x04\"O\n\tHostedURL\x12\x0e\n\x06prefix\x18\x01 \x01(\t\x12\x0e\n\x06suffix\x18\x02 \x01(\t\x12\r\n\x05sizes\x18\x03 \x03(\t\x12\x13\n\x0b\x63rossorigin\x18\x04 \x01(\t\"\xc9\x01\n\x05Input\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.status.StatusJ\x04\x08\x03\x10\x04\"\xda\x01\n\nInputCount\x12\x17\n\tprocessed\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_process\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x14\n\x06\x65rrors\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nprocessing\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\treindexed\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_reindex\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1c\n\x0ereindex_errors\x18\x07 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nreindexing\x18\x08 \x01(\rB\x04\x80\xb5\x18\x01\"n\n\x19WorkflowResultsSimilarity\x12(\n\x0bprobe_input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12\'\n\x0cpool_results\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Hit\"\xd8\x01\n\x03Key\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x07 \x03(\t\x12\x1f\n\x04\x61pps\x18\x04 \x03(\x0b\x32\x11.clarifai.api.App\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xb6\x03\n\x05Model\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x06\x61pp_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01\x12-\n\x0boutput_info\x18\x05 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\x12\x31\n\rmodel_version\x18\x06 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x14\n\x0c\x64isplay_name\x18\x07 \x01(\t\x12\x0f\n\x07user_id\x18\t \x01(\t\x12+\n\ninput_info\x18\x0c \x01(\x0b\x32\x17.clarifai.api.InputInfo\x12+\n\ntrain_info\x18\r \x01(\x0b\x32\x17.clarifai.api.TrainInfo\x12\x15\n\rmodel_type_id\x18\x0e \x01(\t\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x13\n\x0b\x64\x65scription\x18\x10 \x01(\tJ\x04\x08\x08\x10\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0c\"\xe8\x01\n\nOutputInfo\x12 \n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\routput_config\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12\x0f\n\x07message\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\x10\n\x08type_ext\x18\x05 \x01(\t\x12+\n\nfields_map\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\"a\n\tInputInfo\x12+\n\nfields_map\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"4\n\tTrainInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x83\x04\n\x0cOutputConfig\x12)\n\x1b\x63oncepts_mutually_exclusive\x18\x01 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12 \n\x12\x63losed_environment\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x1d\n\x11\x65xisting_model_id\x18\x03 \x01(\tB\x02\x18\x01\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x1c\n\x10hyper_parameters\x18\x05 \x01(\tB\x02\x18\x01\x12\x1a\n\x0cmax_concepts\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\tmin_value\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12.\n\x0fselect_concepts\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x18\n\x10training_timeout\x18\t \x01(\r\x12\x11\n\tsample_ms\x18\n \x01(\r\x12-\n\x0chyper_params\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x16\x65mbed_model_version_id\x18\x0e \x01(\t\x12)\n!fail_on_missing_positive_examples\x18\x0f \x01(\x08\x12\x33\n\x0emodel_metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\rJ\x04\x08\x10\x10\x11J\x04\x08\x12\x10\x13\"\xc5\x03\n\tModelType\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0c\n\x04type\x18\x04 \x01(\t\x12\x14\n\x0cinput_fields\x18\x05 \x03(\t\x12\x15\n\routput_fields\x18\x06 \x03(\t\x12\x11\n\ttrainable\x18\x08 \x01(\x08\x12\x11\n\tcreatable\x18\t \x01(\x08\x12\x15\n\rinternal_only\x18\n \x01(\x08\x12\x37\n\x11model_type_fields\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\"\n\x1arequires_sequential_frames\x18\x0c \x01(\x08\x12\x11\n\tevaluable\x18\r \x01(\x08\x12\x41\n expected_pretrained_input_fields\x18\x0e \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x42\n!expected_pretrained_output_fields\x18\x0f \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0bis_operator\x18\x10 \x01(\x08J\x04\x08\x07\x10\x08\"\x85\x05\n\x0eModelTypeField\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x43\n\nfield_type\x18\x02 \x01(\x0e\x32/.clarifai.api.ModelTypeField.ModelTypeFieldType\x12-\n\rdefault_value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bplaceholder\x18\x05 \x01(\t\x12\x42\n\x17model_type_enum_options\x18\x06 \x03(\x0b\x32!.clarifai.api.ModelTypeEnumOption\x12\x15\n\rinternal_only\x18\x07 \x01(\x08\x12\x10\n\x08required\x18\x08 \x01(\x08\x12?\n\x15model_type_range_info\x18\t \x01(\x0b\x32 .clarifai.api.ModelTypeRangeInfo\"\x98\x02\n\x12ModelTypeFieldType\x12!\n\x1dINVALID_MODEL_TYPE_FIELD_TYPE\x10\x00\x12\x0b\n\x07\x42OOLEAN\x10\x01\x12\n\n\x06STRING\x10\x02\x12\n\n\x06NUMBER\x10\x03\x12\x15\n\x11\x41RRAY_OF_CONCEPTS\x10\x04\x12$\n ARRAY_OF_CONCEPTS_WITH_THRESHOLD\x10\x05\x12\t\n\x05RANGE\x10\x07\x12\x08\n\x04\x45NUM\x10\x08\x12\x11\n\rCOLLABORATORS\x10\t\x12\x08\n\x04JSON\x10\n\x12\x14\n\x10\x41RRAY_OF_NUMBERS\x10\x0b\x12\x19\n\x15WORKFLOW_EMBED_MODELS\x10\x0c\x12\x14\n\x10\x41RRAY_OF_STRINGS\x10\r\"\x04\x08\x06\x10\x06\"<\n\x12ModelTypeRangeInfo\x12\x0b\n\x03min\x18\x01 \x01(\x02\x12\x0b\n\x03max\x18\x02 \x01(\x02\x12\x0c\n\x04step\x18\x03 \x01(\x02\"\x86\x01\n\x13ModelTypeEnumOption\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x11model_type_fields\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\x15\n\rinternal_only\x18\x04 \x01(\x08\"C\n\nModelQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x04type\x18\x02 \x01(\tB\x02\x18\x01\x12\x15\n\rmodel_type_id\x18\x03 \x01(\t\"\xf8\x02\n\x0cModelVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x04 \x01(\r\x12*\n\x07metrics\x18\x05 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12\x19\n\x11total_input_count\x18\x06 \x01(\r\x12\x30\n\x0c\x63ompleted_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x64\x65scription\x18\x0b \x01(\t\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\r \x01(\t\x12\x0f\n\x07user_id\x18\x0e \x01(\tJ\x04\x08\t\x10\n\"1\n\nLabelCount\x12\x14\n\x0c\x63oncept_name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"L\n\x11LabelDistribution\x12\x37\n\x15positive_label_counts\x18\x01 \x03(\x0b\x32\x18.clarifai.api.LabelCount\"B\n\x17\x43ooccurrenceMatrixEntry\x12\x0b\n\x03row\x18\x01 \x01(\t\x12\x0b\n\x03\x63ol\x18\x02 \x01(\t\x12\r\n\x05\x63ount\x18\x03 \x01(\r\"`\n\x12\x43ooccurrenceMatrix\x12\x35\n\x06matrix\x18\x01 \x03(\x0b\x32%.clarifai.api.CooccurrenceMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"N\n\x14\x43onfusionMatrixEntry\x12\x11\n\tpredicted\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tual\x18\x02 \x01(\t\x12\x13\n\x05value\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"Z\n\x0f\x43onfusionMatrix\x12\x32\n\x06matrix\x18\x01 \x03(\x0b\x32\".clarifai.api.ConfusionMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"t\n\x03ROC\x12\x11\n\x03\x66pr\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03tpr\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x15\n\rfpr_per_image\x18\x04 \x03(\x02\x12\x16\n\x0e\x66pr_per_object\x18\x05 \x03(\x02\"_\n\x14PrecisionRecallCurve\x12\x14\n\x06recall\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tprecision\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\"\xea\x02\n\rBinaryMetrics\x12\x15\n\x07num_pos\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_neg\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_tot\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x10\n\x02\x66\x31\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12&\n\x07\x63oncept\x18\x06 \x01(\x0b\x32\x15.clarifai.api.Concept\x12$\n\troc_curve\x18\x07 \x01(\x0b\x32\x11.clarifai.api.ROC\x12\x42\n\x16precision_recall_curve\x18\x08 \x01(\x0b\x32\".clarifai.api.PrecisionRecallCurve\x12\x15\n\ravg_precision\x18\t \x01(\x02\x12\x11\n\tarea_name\x18\n \x01(\t\x12\x10\n\x08\x61rea_min\x18\x0b \x01(\x01\x12\x10\n\x08\x61rea_max\x18\x0c \x01(\x01\x12\x0b\n\x03iou\x18\r \x01(\x02\"\x91\x01\n\x0eTrackerMetrics\x12\x10\n\x08mot_mota\x18\x01 \x01(\x02\x12\x18\n\x10mot_num_switches\x18\x02 \x01(\x05\x12\x12\n\nmorse_frag\x18\x03 \x01(\x02\x12\x15\n\ravg_precision\x18\x04 \x01(\x02\x12\x0c\n\x04\x61iid\x18\x05 \x01(\t\x12\x1a\n\x12unique_switch_rate\x18\x06 \x01(\x02\"\xc2\x01\n\x10\x45valTestSetEntry\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x31\n\x12predicted_concepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x34\n\x15ground_truth_concepts\x18\x04 \x03(\x0b\x32\x15.clarifai.api.Concept\x12,\n\nannotation\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\xcd\x01\n\x0eLOPQEvalResult\x12\t\n\x01k\x18\x01 \x01(\x05\x12#\n\x15recall_vs_brute_force\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1akendall_tau_vs_brute_force\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1amost_frequent_code_percent\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tlopq_ndcg\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10\x62rute_force_ndcg\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\"\x8c\x03\n\x0eMetricsSummary\x12\x19\n\rtop1_accuracy\x18\x01 \x01(\x02\x42\x02\x18\x01\x12\x19\n\rtop5_accuracy\x18\x02 \x01(\x02\x42\x02\x18\x01\x12\x1f\n\x11macro_avg_roc_auc\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1f\n\x11macro_std_roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_avg_f1_score\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_std_f1_score\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x13macro_avg_precision\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10macro_avg_recall\x18\x08 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x19mean_avg_precision_iou_50\x18\n \x01(\x02\x12$\n\x1cmean_avg_precision_iou_range\x18\x0b \x01(\x02\x12\x32\n\x0clopq_metrics\x18\t \x03(\x0b\x32\x1c.clarifai.api.LOPQEvalResult\"\xaf\x04\n\x0b\x45valMetrics\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\n \x01(\t\x12-\n\x07summary\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.MetricsSummary\x12\x37\n\x10\x63onfusion_matrix\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.ConfusionMatrix\x12=\n\x13\x63ooccurrence_matrix\x18\x04 \x01(\x0b\x32 .clarifai.api.CooccurrenceMatrix\x12\x35\n\x0clabel_counts\x18\x05 \x01(\x0b\x32\x1f.clarifai.api.LabelDistribution\x12\x33\n\x0e\x62inary_metrics\x18\x06 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x30\n\x08test_set\x18\x07 \x03(\x0b\x32\x1e.clarifai.api.EvalTestSetEntry\x12\x34\n\x0fmetrics_by_area\x18\x08 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x10metrics_by_class\x18\t \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x0ftracker_metrics\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.TrackerMetrics\"\xb7\x01\n\x0b\x46ieldsValue\x12\x18\n\x10\x63onfusion_matrix\x18\x01 \x01(\x08\x12\x1b\n\x13\x63ooccurrence_matrix\x18\x02 \x01(\x08\x12\x14\n\x0clabel_counts\x18\x03 \x01(\x08\x12\x16\n\x0e\x62inary_metrics\x18\x04 \x01(\x08\x12\x10\n\x08test_set\x18\x05 \x01(\x08\x12\x17\n\x0fmetrics_by_area\x18\x06 \x01(\x08\x12\x18\n\x10metrics_by_class\x18\x07 \x01(\x08\"\x85\x02\n\x06Output\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12(\n\x08operator\x18\x07 \x01(\x0b\x32\x16.clarifai.api.Operator\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12 \n\x04\x64\x61ta\x18\x06 \x01(\x0b\x32\x12.clarifai.api.Data\"4\n\tScopeDeps\x12\r\n\x05scope\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\":\n\x0c\x45ndpointDeps\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\"l\n\x03Hit\x12\x13\n\x05score\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\x12,\n\nannotation\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x01\n\x03\x41nd\x12\"\n\x05input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12$\n\x06output\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Output\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x84\x01\n\x05Query\x12\x1f\n\x04\x61nds\x18\x01 \x03(\x0b\x32\x11.clarifai.api.And\x12\x10\n\x08language\x18\x02 \x01(\t\x12%\n\x07\x66ilters\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Filter\x12!\n\x05ranks\x18\x04 \x03(\x0b\x32\x12.clarifai.api.Rank\"\xde\x02\n\x06Search\x12\"\n\x05query\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Query\x12\n\n\x02id\x18\x02 \x01(\t\x12\x16\n\x0e\x61pplication_id\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x05\x61s_of\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08git_hash\x18\x06 \x01(\t\x12.\n\ncreated_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\talgorithm\x18\t \x01(\t\x12\x0c\n\x04save\x18\n \x01(\x08\x12\x11\n\tmin_value\x18\x0b \x01(\x02\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\"j\n\x06\x46ilter\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\"D\n\x04Rank\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x02\n\x17\x41nnotationSearchMetrics\x12*\n\x0cground_truth\x18\x01 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Search\x12*\n\x07metrics\x18\x03 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x05 \x01(\r\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"f\n\x04Text\x12\x0b\n\x03raw\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x1b\n\x13\x61llow_duplicate_url\x18\x03 \x01(\x08\x12\'\n\x06hosted\x18\x04 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\x89\x05\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\rprimary_email\x18\x02 \x01(\tB\x02\x18\x01\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x15\n\tbill_type\x18\x07 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x11\x64\x61te_gdpr_consent\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_tos_consent\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12>\n\x16\x64\x61te_marketing_consent\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12-\n\x08metadata\x18\x0b \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01\x12\x37\n\x0f\x65mail_addresses\x18\x0c \x03(\x0b\x32\x1a.clarifai.api.EmailAddressB\x02\x18\x01\x12\x18\n\x0cis_org_admin\x18\x0e \x01(\x08\x42\x02\x18\x01\x12#\n\x17two_factor_auth_enabled\x18\x0f \x01(\x08\x42\x02\x18\x01\x12\x17\n\x0bteams_count\x18\x10 \x01(\rB\x02\x18\x01\x12,\n\nvisibility\x18\x11 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12-\n\x0buser_detail\x18\x12 \x01(\x0b\x32\x18.clarifai.api.UserDetailJ\x04\x08\r\x10\x0e\"\x8b\x03\n\nUserDetail\x12\x15\n\rprimary_email\x18\x01 \x01(\t\x12\x11\n\tbill_type\x18\x02 \x01(\t\x12\x35\n\x11\x64\x61te_gdpr_consent\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_tos_consent\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\x16\x64\x61te_marketing_consent\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x33\n\x0f\x65mail_addresses\x18\x07 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\x12\x14\n\x0cis_org_admin\x18\x08 \x01(\x08\x12\x1f\n\x17two_factor_auth_enabled\x18\t \x01(\x08\x12\x13\n\x0bteams_count\x18\n \x01(\r\"R\n\x0c\x45mailAddress\x12\x13\n\x05\x65mail\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07primary\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08verified\x18\x03 \x01(\x08\x42\x04\x80\xb5\x18\x01\"\x1d\n\x08Password\x12\x11\n\tplaintext\x18\x01 \x01(\t\"\x86\x03\n\x12PasswordViolations\x12\x16\n\x0eminimum_length\x18\x01 \x01(\x08\x12\x16\n\x0emaximum_length\x18\x02 \x01(\x08\x12\x19\n\x11upper_case_needed\x18\x03 \x01(\x08\x12\x19\n\x11lower_case_needed\x18\x04 \x01(\x08\x12\x16\n\x0enumeric_needed\x18\x05 \x01(\x08\x12\x1f\n\x17non_alphanumeric_needed\x18\x06 \x01(\x08\x12\x16\n\x0epassword_reuse\x18\x07 \x01(\x08\x12\x15\n\rexclude_names\x18\x08 \x01(\x08\x12\x15\n\rexclude_email\x18\t \x01(\x08\x12\x1c\n\x14no_confusing_letters\x18\n \x01(\x08\x12\x1b\n\x13no_simple_passwords\x18\x0b \x01(\x08\x12\x18\n\x10no_common_vocabs\x18\x0c \x01(\x08\x12\x1b\n\x13no_overlap_with_old\x18\r \x01(\x08\x12\x19\n\x11password_lifespan\x18\x0e \x01(\x08\"\x81\x01\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\'\n\x06hosted\x18\x06 \x01(\x0b\x32\x17.clarifai.api.HostedURL\"\xeb\x01\n\x08Workflow\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x05nodes\x18\x04 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\x07 \x01(\t\"\xaf\x01\n\x0cWorkflowNode\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\x12(\n\x08operator\x18\x05 \x01(\x0b\x32\x16.clarifai.api.Operator\x12,\n\x0bnode_inputs\x18\x03 \x03(\x0b\x32\x17.clarifai.api.NodeInput\x12\x17\n\x0fsuppress_output\x18\x04 \x01(\x08\"J\n\x08Operator\x12\x0f\n\x07type_id\x18\x01 \x01(\t\x12-\n\x0boutput_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\"\x1c\n\tNodeInput\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\x81\x02\n\x0eWorkflowResult\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12%\n\x07outputs\x18\x06 \x03(\x0b\x32\x14.clarifai.api.Output\x12\x17\n\x0fsuppress_output\x18\x07 \x01(\x08\"\x8e\x02\n\x0e\x41ppDuplication\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\nnew_app_id\x18\x02 \x01(\t\x12\x14\n\x0cnew_app_name\x18\x03 \x01(\t\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x06\x66ilter\x18\x07 \x01(\x0b\x32#.clarifai.api.AppDuplicationFilters\"\x8a\x01\n\x15\x41ppDuplicationFilters\x12\x13\n\x0b\x63opy_inputs\x18\x01 \x01(\x08\x12\x15\n\rcopy_concepts\x18\x02 \x01(\x08\x12\x18\n\x10\x63opy_annotations\x18\x03 \x01(\x08\x12\x13\n\x0b\x63opy_models\x18\x04 \x01(\x08\x12\x16\n\x0e\x63opy_workflows\x18\x05 \x01(\x08\"\xcd\x05\n\x04Task\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x04type\x18\x04 \x01(\x0e\x32\x1b.clarifai.api.Task.TaskType\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12(\n\x06worker\x18\x06 \x01(\x0b\x32\x18.clarifai.api.TaskWorker\x12\x13\n\x0b\x63oncept_ids\x18\x07 \x03(\t\x12\x33\n\x0cinput_source\x18\x08 \x01(\x0b\x32\x1d.clarifai.api.TaskInputSource\x12\x11\n\tsample_ms\x18\t \x01(\r\x12\x33\n\x0c\x61i_assistant\x18\n \x01(\x0b\x32\x1d.clarifai.api.TaskAIAssistant\x12(\n\x06review\x18\x0b \x01(\x0b\x32\x18.clarifai.api.TaskReview\x12+\n\x06status\x18\x0c \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0c\n\x04name\x18\r \x01(\t\x12:\n\x10\x61i_assist_params\x18\x0e \x01(\x0b\x32 .clarifai.api.AiAssistParameters\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\x10 \x01(\t\x12\x0f\n\x07user_id\x18\x11 \x01(\t\"l\n\x08TaskType\x12\x10\n\x0cTYPE_NOT_SET\x10\x00\x12\x1b\n\x17\x43ONCEPTS_CLASSIFICATION\x10\x01\x12\x1a\n\x16\x42OUNDING_BOX_DETECTION\x10\x02\x12\x15\n\x11POLYGON_DETECTION\x10\x03\"`\n\x12\x41iAssistParameters\x12\x15\n\rmin_threshold\x18\x01 \x01(\x02\x12\x15\n\rmax_threshold\x18\x02 \x01(\x02\x12\x1c\n\x14\x63oncept_relation_ids\x18\x03 \x03(\t\"\x98\x02\n\nTaskWorker\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskWorker.TaskWorkerStrategy\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12T\n\x19partitioned_strategy_info\x18\x03 \x01(\x0b\x32/.clarifai.api.TaskWorkerPartitionedStrategyInfoH\x00\"R\n\x12TaskWorkerStrategy\x12\x1b\n\x17WORKER_STRATEGY_NOT_SET\x10\x00\x12\x0f\n\x0bPARTITIONED\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\x04\x08\x01\x10\x01\x42\x0f\n\rstrategy_info\"\xa9\x02\n!TaskWorkerPartitionedStrategyInfo\x12[\n\x04type\x18\x01 \x01(\x0e\x32M.clarifai.api.TaskWorkerPartitionedStrategyInfo.TaskWorkerPartitionedStrategy\x12\x19\n\x11workers_per_input\x18\x02 \x01(\x05\x12(\n\x07weights\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"b\n\x1dTaskWorkerPartitionedStrategy\x12\'\n#PARTITIONED_WORKER_STRATEGY_NOT_SET\x10\x00\x12\n\n\x06\x45VENLY\x10\x01\x12\x0c\n\x08WEIGHTED\x10\x02\"\xb6\x01\n\x0fTaskInputSource\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.clarifai.api.TaskInputSource.TaskInputSourceType\x12\n\n\x02id\x18\x02 \x01(\t\"V\n\x13TaskInputSourceType\x12\x1d\n\x19INPUT_SOURCE_TYPE_NOT_SET\x10\x00\x12\x0e\n\nALL_INPUTS\x10\x01\x12\x10\n\x0cSAVED_SEARCH\x10\x02\"\xe9\x02\n\nTaskReview\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskReview.TaskReviewStrategy\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12J\n\x14manual_strategy_info\x18\x03 \x01(\x0b\x32*.clarifai.api.TaskReviewManualStrategyInfoH\x00\x12P\n\x17\x63onsensus_strategy_info\x18\x04 \x01(\x0b\x32-.clarifai.api.TaskReviewConsensusStrategyInfoH\x00\"[\n\x12TaskReviewStrategy\x12 \n\x1cTASK_REVIEW_STRATEGY_NOT_SET\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06MANUAL\x10\x02\x12\r\n\tCONSENSUS\x10\x03\x42\x0f\n\rstrategy_info\"9\n\x1cTaskReviewManualStrategyInfo\x12\x19\n\x11sample_percentage\x18\x01 \x01(\x02\"C\n\x1fTaskReviewConsensusStrategyInfo\x12\x1a\n\x12\x61pproval_threshold\x18\x02 \x01(\rJ\x04\x08\x01\x10\x02\"&\n\x0fTaskAIAssistant\x12\x13\n\x0bworkflow_id\x18\x01 \x01(\t\"\xbc\x01\n\x16TaskStatusCountPerUser\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x15\n\x07pending\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1d\n\x0f\x61waiting_review\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07success\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1b\n\rreview_denied\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\'\n\x19\x61waiting_consensus_review\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\"\x81\x02\n\tCollector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1d\n\x15pre_queue_workflow_id\x18\x04 \x01(\t\x12\x1e\n\x16post_queue_workflow_id\x18\x05 \x01(\t\x12\x37\n\x10\x63ollector_source\x18\x06 \x01(\x0b\x32\x1d.clarifai.api.CollectorSource\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"t\n\x0f\x43ollectorSource\x12\x61\n\'api_post_model_outputs_collector_source\x18\x02 \x01(\x0b\x32\x30.clarifai.api.APIPostModelOutputsCollectorSource\"\x99\x01\n\"APIPostModelOutputsCollectorSource\x12\x15\n\rmodel_user_id\x18\x01 \x01(\t\x12\x14\n\x0cmodel_app_id\x18\x02 \x01(\t\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x18\n\x10model_version_id\x18\x04 \x01(\t\x12\x1a\n\x12post_inputs_key_id\x18\x05 \x01(\t\"R\n\tStatValue\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05value\x18\x02 \x01(\x02\x12\x0c\n\x04tags\x18\x03 \x03(\t\"\xa6\x01\n\x18StatValueAggregateResult\x12?\n\x15stat_value_aggregates\x18\x01 \x03(\x0b\x32 .clarifai.api.StatValueAggregate\x12I\n\x1astat_value_aggregate_query\x18\x02 \x01(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"t\n\x12StatValueAggregate\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\x0f\x61ggregate_value\x18\x02 \x01(\x02\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\x12\x0c\n\x04tags\x18\x04 \x03(\t\"\x91\x02\n\x17StatValueAggregateQuery\x12\x0c\n\x04tags\x18\x01 \x03(\t\x12\x12\n\ntag_groups\x18\x02 \x03(\t\x12;\n\x13stat_value_agg_type\x18\x03 \x01(\x0e\x32\x1e.clarifai.api.StatValueAggType\x12\x39\n\x12stat_time_agg_type\x18\x04 \x01(\x0e\x32\x1d.clarifai.api.StatTimeAggType\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x87\x01\n\nVisibility\x12\x33\n\x08gettable\x18\x01 \x01(\x0e\x32!.clarifai.api.Visibility.Gettable\"D\n\x08Gettable\x12\x16\n\x12UNKNOWN_VISIBILITY\x10\x00\x12\x0b\n\x07PRIVATE\x10\n\x12\x07\n\x03ORG\x10\x1e\x12\n\n\x06PUBLIC\x10\x32*H\n\x10\x45xpirationAction\x12\x1d\n\x19\x45XPIRATION_ACTION_NOT_SET\x10\x00\x12\t\n\x05\x44\x45LAY\x10\x01\x12\n\n\x06\x45XPIRY\x10\x02*M\n\x0cLicenseScope\x12\x19\n\x15LICENSE_SCOPE_NOT_SET\x10\x00\x12\x0b\n\x07PREDICT\x10\x01\x12\t\n\x05TRAIN\x10\x02\x12\n\n\x06SEARCH\x10\x03*\x8f\x01\n\x0fValueComparator\x12\x1d\n\x19\x43ONCEPT_THRESHOLD_NOT_SET\x10\x00\x12\x10\n\x0cGREATER_THAN\x10\x01\x12\x19\n\x15GREATER_THAN_OR_EQUAL\x10\x02\x12\r\n\tLESS_THAN\x10\x03\x12\x16\n\x12LESS_THAN_OR_EQUAL\x10\x04\x12\t\n\x05\x45QUAL\x10\x05*3\n\x0e\x45valuationType\x12\x12\n\x0e\x43lassification\x10\x00\x12\r\n\tDetection\x10\x01*f\n\x0c\x41PIEventType\x12\x1a\n\x16\x41PI_EVENT_TYPE_NOT_SET\x10\x00\x12\x13\n\x0fON_PREM_PREDICT\x10\x01\x12\x11\n\rON_PREM_TRAIN\x10\x02\x12\x12\n\x0eON_PREM_SEARCH\x10\x03*<\n\x11UsageIntervalType\x12\t\n\x05undef\x10\x00\x12\x07\n\x03\x64\x61y\x10\x01\x12\t\n\x05month\x10\x02\x12\x08\n\x04year\x10\x03*\x1d\n\x08RoleType\x12\x08\n\x04TEAM\x10\x00\x12\x07\n\x03ORG\x10\x01*$\n\x10StatValueAggType\x12\x07\n\x03SUM\x10\x00\x12\x07\n\x03\x41VG\x10\x01*`\n\x0fStatTimeAggType\x12\x0f\n\x0bNO_TIME_AGG\x10\x00\x12\x08\n\x04YEAR\x10\x01\x12\t\n\x05MONTH\x10\x02\x12\x08\n\x04WEEK\x10\x03\x12\x07\n\x03\x44\x41Y\x10\x04\x12\x08\n\x04HOUR\x10\x05\x12\n\n\x06MINUTE\x10\x06\x42\x95\x01\n\x15\x63om.clarifai.grpc.apiP\x01Zsgithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/api\xa2\x02\x04\x43\x41IPb\x06proto3'
   ,
   dependencies=[proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.DESCRIPTOR,proto_dot_clarifai_dot_api_dot_utils_dot_extensions__pb2.DESCRIPTOR,proto_dot_clarifai_dot_auth_dot_util_dot_extension__pb2.DESCRIPTOR,google_dot_protobuf_dot_struct__pb2.DESCRIPTOR,google_dot_protobuf_dot_timestamp__pb2.DESCRIPTOR,])
 
@@ -49,8 +49,8 @@ _EXPIRATIONACTION = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20371,
-  serialized_end=20443,
+  serialized_start=20133,
+  serialized_end=20205,
 )
 _sym_db.RegisterEnumDescriptor(_EXPIRATIONACTION)
 
@@ -80,8 +80,8 @@ _LICENSESCOPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20445,
-  serialized_end=20522,
+  serialized_start=20207,
+  serialized_end=20284,
 )
 _sym_db.RegisterEnumDescriptor(_LICENSESCOPE)
 
@@ -119,8 +119,8 @@ _VALUECOMPARATOR = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20525,
-  serialized_end=20668,
+  serialized_start=20287,
+  serialized_end=20430,
 )
 _sym_db.RegisterEnumDescriptor(_VALUECOMPARATOR)
 
@@ -142,8 +142,8 @@ _EVALUATIONTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20670,
-  serialized_end=20721,
+  serialized_start=20432,
+  serialized_end=20483,
 )
 _sym_db.RegisterEnumDescriptor(_EVALUATIONTYPE)
 
@@ -173,8 +173,8 @@ _APIEVENTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20723,
-  serialized_end=20825,
+  serialized_start=20485,
+  serialized_end=20587,
 )
 _sym_db.RegisterEnumDescriptor(_APIEVENTTYPE)
 
@@ -204,8 +204,8 @@ _USAGEINTERVALTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20827,
-  serialized_end=20887,
+  serialized_start=20589,
+  serialized_end=20649,
 )
 _sym_db.RegisterEnumDescriptor(_USAGEINTERVALTYPE)
 
@@ -227,8 +227,8 @@ _ROLETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20889,
-  serialized_end=20918,
+  serialized_start=20651,
+  serialized_end=20680,
 )
 _sym_db.RegisterEnumDescriptor(_ROLETYPE)
 
@@ -250,8 +250,8 @@ _STATVALUEAGGTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20920,
-  serialized_end=20956,
+  serialized_start=20682,
+  serialized_end=20718,
 )
 _sym_db.RegisterEnumDescriptor(_STATVALUEAGGTYPE)
 
@@ -293,8 +293,8 @@ _STATTIMEAGGTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20958,
-  serialized_end=21054,
+  serialized_start=20720,
+  serialized_end=20816,
 )
 _sym_db.RegisterEnumDescriptor(_STATTIMEAGGTYPE)
 
@@ -396,8 +396,8 @@ _MODELTYPEFIELD_MODELTYPEFIELDTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=8231,
-  serialized_end=8511,
+  serialized_start=8269,
+  serialized_end=8549,
 )
 _sym_db.RegisterEnumDescriptor(_MODELTYPEFIELD_MODELTYPEFIELDTYPE)
 
@@ -426,8 +426,8 @@ _TASK_TASKTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=17353,
-  serialized_end=17461,
+  serialized_start=17115,
+  serialized_end=17223,
 )
 _sym_db.RegisterEnumDescriptor(_TASK_TASKTYPE)
 
@@ -452,8 +452,8 @@ _TASKWORKER_TASKWORKERSTRATEGY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=17743,
-  serialized_end=17825,
+  serialized_start=17505,
+  serialized_end=17587,
 )
 _sym_db.RegisterEnumDescriptor(_TASKWORKER_TASKWORKERSTRATEGY)
 
@@ -478,8 +478,8 @@ _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY = _descriptor.E
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=18044,
-  serialized_end=18142,
+  serialized_start=17806,
+  serialized_end=17904,
 )
 _sym_db.RegisterEnumDescriptor(_TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY)
 
@@ -504,8 +504,8 @@ _TASKINPUTSOURCE_TASKINPUTSOURCETYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=18241,
-  serialized_end=18327,
+  serialized_start=18003,
+  serialized_end=18089,
 )
 _sym_db.RegisterEnumDescriptor(_TASKINPUTSOURCE_TASKINPUTSOURCETYPE)
 
@@ -534,8 +534,8 @@ _TASKREVIEW_TASKREVIEWSTRATEGY = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=18583,
-  serialized_end=18674,
+  serialized_start=18345,
+  serialized_end=18436,
 )
 _sym_db.RegisterEnumDescriptor(_TASKREVIEW_TASKREVIEWSTRATEGY)
 
@@ -564,8 +564,8 @@ _VISIBILITY_GETTABLE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=20301,
-  serialized_end=20369,
+  serialized_start=20063,
+  serialized_end=20131,
 )
 _sym_db.RegisterEnumDescriptor(_VISIBILITY_GETTABLE)
 
@@ -1406,6 +1406,13 @@ _CONCEPT = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='clarifai.api.Concept.user_id', index=9,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -1419,7 +1426,7 @@ _CONCEPT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=2237,
-  serialized_end=2466,
+  serialized_end=2483,
 )
 
 
@@ -1470,8 +1477,8 @@ _CONCEPTCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2469,
-  serialized_end=2633,
+  serialized_start=2486,
+  serialized_end=2650,
 )
 
 
@@ -1508,8 +1515,8 @@ _CONCEPTTYPECOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2635,
-  serialized_end=2701,
+  serialized_start=2652,
+  serialized_end=2718,
 )
 
 
@@ -1560,8 +1567,8 @@ _DETAILCONCEPTCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2704,
-  serialized_end=2927,
+  serialized_start=2721,
+  serialized_end=2944,
 )
 
 
@@ -1605,8 +1612,8 @@ _CONCEPTQUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2929,
-  serialized_end=2996,
+  serialized_start=2946,
+  serialized_end=3013,
 )
 
 
@@ -1671,8 +1678,8 @@ _CONCEPTRELATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2999,
-  serialized_end=3216,
+  serialized_start=3016,
+  serialized_end=3233,
 )
 
 
@@ -1730,8 +1737,8 @@ _KNOWLEDGEGRAPH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3218,
-  serialized_end=3339,
+  serialized_start=3235,
+  serialized_end=3356,
 )
 
 
@@ -1768,8 +1775,8 @@ _CONCEPTMAPPINGJOB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3341,
-  serialized_end=3409,
+  serialized_start=3358,
+  serialized_end=3426,
 )
 
 
@@ -1813,8 +1820,8 @@ _CONCEPTLANGUAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3411,
-  serialized_end=3474,
+  serialized_start=3428,
+  serialized_end=3491,
 )
 
 
@@ -1928,8 +1935,8 @@ _DATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3477,
-  serialized_end=3989,
+  serialized_start=3494,
+  serialized_end=4006,
 )
 
 
@@ -1987,8 +1994,8 @@ _REGION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3992,
-  serialized_end=4126,
+  serialized_start=4009,
+  serialized_end=4143,
 )
 
 
@@ -2039,8 +2046,8 @@ _REGIONINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4129,
-  serialized_end=4312,
+  serialized_start=4146,
+  serialized_end=4329,
 )
 
 
@@ -2091,8 +2098,8 @@ _BOUNDINGBOX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4314,
-  serialized_end=4425,
+  serialized_start=4331,
+  serialized_end=4442,
 )
 
 
@@ -2129,8 +2136,8 @@ _FRAMEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4427,
-  serialized_end=4479,
+  serialized_start=4444,
+  serialized_end=4496,
 )
 
 
@@ -2174,8 +2181,8 @@ _FRAME = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4481,
-  serialized_end=4579,
+  serialized_start=4498,
+  serialized_end=4596,
 )
 
 
@@ -2212,8 +2219,8 @@ _MASK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4581,
-  serialized_end=4659,
+  serialized_start=4598,
+  serialized_end=4676,
 )
 
 
@@ -2243,8 +2250,8 @@ _POLYGON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4661,
-  serialized_end=4707,
+  serialized_start=4678,
+  serialized_end=4724,
 )
 
 
@@ -2288,8 +2295,8 @@ _POINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4709,
-  serialized_end=4765,
+  serialized_start=4726,
+  serialized_end=4782,
 )
 
 
@@ -2326,8 +2333,8 @@ _EMBEDDING = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4767,
-  serialized_end=4822,
+  serialized_start=4784,
+  serialized_end=4839,
 )
 
 
@@ -2364,8 +2371,8 @@ _GEOPOINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4824,
-  serialized_end=4883,
+  serialized_start=4841,
+  serialized_end=4900,
 )
 
 
@@ -2402,8 +2409,8 @@ _GEOLIMIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4885,
-  serialized_end=4930,
+  serialized_start=4902,
+  serialized_end=4947,
 )
 
 
@@ -2433,8 +2440,8 @@ _GEOBOXEDPOINT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4932,
-  serialized_end=4990,
+  serialized_start=4949,
+  serialized_end=5007,
 )
 
 
@@ -2478,8 +2485,8 @@ _GEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=4993,
-  serialized_end=5130,
+  serialized_start=5010,
+  serialized_end=5147,
 )
 
 
@@ -2530,8 +2537,8 @@ _IMAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5132,
-  serialized_end=5244,
+  serialized_start=5149,
+  serialized_end=5261,
 )
 
 
@@ -2582,8 +2589,8 @@ _HOSTEDURL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5246,
-  serialized_end=5325,
+  serialized_start=5263,
+  serialized_end=5342,
 )
 
 
@@ -2641,8 +2648,8 @@ _INPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5328,
-  serialized_end=5529,
+  serialized_start=5345,
+  serialized_end=5546,
 )
 
 
@@ -2721,8 +2728,8 @@ _INPUTCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5532,
-  serialized_end=5750,
+  serialized_start=5549,
+  serialized_end=5767,
 )
 
 
@@ -2759,8 +2766,8 @@ _WORKFLOWRESULTSSIMILARITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5752,
-  serialized_end=5862,
+  serialized_start=5769,
+  serialized_end=5879,
 )
 
 
@@ -2839,8 +2846,8 @@ _KEY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=5865,
-  serialized_end=6081,
+  serialized_start=5882,
+  serialized_end=6098,
 )
 
 
@@ -2935,6 +2942,13 @@ _MODEL = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='description', full_name='clarifai.api.Model.description', index=12,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -2947,8 +2961,8 @@ _MODEL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6084,
-  serialized_end=6501,
+  serialized_start=6101,
+  serialized_end=6539,
 )
 
 
@@ -3020,8 +3034,8 @@ _OUTPUTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6504,
-  serialized_end=6736,
+  serialized_start=6542,
+  serialized_end=6774,
 )
 
 
@@ -3058,8 +3072,8 @@ _INPUTINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6738,
-  serialized_end=6835,
+  serialized_start=6776,
+  serialized_end=6873,
 )
 
 
@@ -3089,8 +3103,8 @@ _TRAININFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6837,
-  serialized_end=6889,
+  serialized_start=6875,
+  serialized_end=6927,
 )
 
 
@@ -3211,8 +3225,8 @@ _OUTPUTCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=6892,
-  serialized_end=7407,
+  serialized_start=6930,
+  serialized_end=7445,
 )
 
 
@@ -3340,8 +3354,8 @@ _MODELTYPE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7410,
-  serialized_end=7863,
+  serialized_start=7448,
+  serialized_end=7901,
 )
 
 
@@ -3428,8 +3442,8 @@ _MODELTYPEFIELD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=7866,
-  serialized_end=8511,
+  serialized_start=7904,
+  serialized_end=8549,
 )
 
 
@@ -3473,8 +3487,8 @@ _MODELTYPERANGEINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8513,
-  serialized_end=8573,
+  serialized_start=8551,
+  serialized_end=8611,
 )
 
 
@@ -3525,8 +3539,8 @@ _MODELTYPEENUMOPTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8576,
-  serialized_end=8710,
+  serialized_start=8614,
+  serialized_end=8748,
 )
 
 
@@ -3570,8 +3584,8 @@ _MODELQUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=8712,
-  serialized_end=8779,
+  serialized_start=8750,
+  serialized_end=8817,
 )
 
 
@@ -3645,76 +3659,17 @@ _MODELVERSION = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=8782,
-  serialized_end=9125,
-)
-
-
-_PRETRAINEDMODELCONFIG = _descriptor.Descriptor(
-  name='PretrainedModelConfig',
-  full_name='clarifai.api.PretrainedModelConfig',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='clarifai.api.PretrainedModelConfig.id', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='app_id', full_name='clarifai.api.ModelVersion.app_id', index=9,
+      number=13, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
-      name='type', full_name='clarifai.api.PretrainedModelConfig.type', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='user_id', full_name='clarifai.api.ModelVersion.user_id', index=10,
+      number=14, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='input_fields_map', full_name='clarifai.api.PretrainedModelConfig.input_fields_map', index=2,
-      number=3, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='output_fields_map', full_name='clarifai.api.PretrainedModelConfig.output_fields_map', index=3,
-      number=4, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data_provider_params', full_name='clarifai.api.PretrainedModelConfig.data_provider_params', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='model_zip_url', full_name='clarifai.api.PretrainedModelConfig.model_zip_url', index=5,
-      number=6, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='overwrite', full_name='clarifai.api.PretrainedModelConfig.overwrite', index=6,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
@@ -3730,84 +3685,8 @@ _PRETRAINEDMODELCONFIG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9128,
-  serialized_end=9352,
-)
-
-
-_TRAINSTATS = _descriptor.Descriptor(
-  name='TrainStats',
-  full_name='clarifai.api.TrainStats',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='loss_curve', full_name='clarifai.api.TrainStats.loss_curve', index=0,
-      number=1, type=11, cpp_type=10, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9354,
-  serialized_end=9416,
-)
-
-
-_LOSSCURVEENTRY = _descriptor.Descriptor(
-  name='LossCurveEntry',
-  full_name='clarifai.api.LossCurveEntry',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='epoch', full_name='clarifai.api.LossCurveEntry.epoch', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='global_step', full_name='clarifai.api.LossCurveEntry.global_step', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='cost', full_name='clarifai.api.LossCurveEntry.cost', index=2,
-      number=3, type=2, cpp_type=6, label=1,
-      has_default_value=False, default_value=float(0),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=9418,
-  serialized_end=9484,
+  serialized_start=8820,
+  serialized_end=9196,
 )
 
 
@@ -3844,8 +3723,8 @@ _LABELCOUNT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9486,
-  serialized_end=9535,
+  serialized_start=9198,
+  serialized_end=9247,
 )
 
 
@@ -3875,8 +3754,8 @@ _LABELDISTRIBUTION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9537,
-  serialized_end=9613,
+  serialized_start=9249,
+  serialized_end=9325,
 )
 
 
@@ -3920,8 +3799,8 @@ _COOCCURRENCEMATRIXENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9615,
-  serialized_end=9681,
+  serialized_start=9327,
+  serialized_end=9393,
 )
 
 
@@ -3958,8 +3837,8 @@ _COOCCURRENCEMATRIX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9683,
-  serialized_end=9779,
+  serialized_start=9395,
+  serialized_end=9491,
 )
 
 
@@ -4003,8 +3882,8 @@ _CONFUSIONMATRIXENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9781,
-  serialized_end=9859,
+  serialized_start=9493,
+  serialized_end=9571,
 )
 
 
@@ -4041,8 +3920,8 @@ _CONFUSIONMATRIX = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9861,
-  serialized_end=9951,
+  serialized_start=9573,
+  serialized_end=9663,
 )
 
 
@@ -4100,8 +3979,8 @@ _ROC = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=9953,
-  serialized_end=10069,
+  serialized_start=9665,
+  serialized_end=9781,
 )
 
 
@@ -4145,8 +4024,8 @@ _PRECISIONRECALLCURVE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10071,
-  serialized_end=10166,
+  serialized_start=9783,
+  serialized_end=9878,
 )
 
 
@@ -4260,8 +4139,8 @@ _BINARYMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10169,
-  serialized_end=10531,
+  serialized_start=9881,
+  serialized_end=10243,
 )
 
 
@@ -4326,8 +4205,8 @@ _TRACKERMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10534,
-  serialized_end=10679,
+  serialized_start=10246,
+  serialized_end=10391,
 )
 
 
@@ -4385,8 +4264,8 @@ _EVALTESTSETENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10682,
-  serialized_end=10876,
+  serialized_start=10394,
+  serialized_end=10588,
 )
 
 
@@ -4451,8 +4330,8 @@ _LOPQEVALRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=10879,
-  serialized_end=11084,
+  serialized_start=10591,
+  serialized_end=10796,
 )
 
 
@@ -4552,8 +4431,8 @@ _METRICSSUMMARY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11087,
-  serialized_end=11483,
+  serialized_start=10799,
+  serialized_end=11195,
 )
 
 
@@ -4653,8 +4532,8 @@ _EVALMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=11486,
-  serialized_end=12045,
+  serialized_start=11198,
+  serialized_end=11757,
 )
 
 
@@ -4726,8 +4605,8 @@ _FIELDSVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12048,
-  serialized_end=12231,
+  serialized_start=11760,
+  serialized_end=11943,
 )
 
 
@@ -4799,8 +4678,8 @@ _OUTPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12234,
-  serialized_end=12495,
+  serialized_start=11946,
+  serialized_end=12207,
 )
 
 
@@ -4837,8 +4716,8 @@ _SCOPEDEPS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12497,
-  serialized_end=12549,
+  serialized_start=12209,
+  serialized_end=12261,
 )
 
 
@@ -4875,8 +4754,8 @@ _ENDPOINTDEPS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12551,
-  serialized_end=12609,
+  serialized_start=12263,
+  serialized_end=12321,
 )
 
 
@@ -4920,8 +4799,8 @@ _HIT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12611,
-  serialized_end=12719,
+  serialized_start=12323,
+  serialized_end=12431,
 )
 
 
@@ -4972,8 +4851,8 @@ _AND = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12722,
-  serialized_end=12863,
+  serialized_start=12434,
+  serialized_end=12575,
 )
 
 
@@ -5024,8 +4903,8 @@ _QUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=12866,
-  serialized_end=12998,
+  serialized_start=12578,
+  serialized_end=12710,
 )
 
 
@@ -5132,8 +5011,8 @@ _SEARCH = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13001,
-  serialized_end=13351,
+  serialized_start=12713,
+  serialized_end=13063,
 )
 
 
@@ -5177,8 +5056,8 @@ _FILTER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13353,
-  serialized_end=13459,
+  serialized_start=13065,
+  serialized_end=13171,
 )
 
 
@@ -5215,8 +5094,8 @@ _RANK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13461,
-  serialized_end=13529,
+  serialized_start=13173,
+  serialized_end=13241,
 )
 
 
@@ -5281,8 +5160,8 @@ _ANNOTATIONSEARCHMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13532,
-  serialized_end=13801,
+  serialized_start=13244,
+  serialized_end=13513,
 )
 
 
@@ -5333,8 +5212,8 @@ _TEXT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13803,
-  serialized_end=13905,
+  serialized_start=13515,
+  serialized_end=13617,
 )
 
 
@@ -5476,8 +5355,8 @@ _USER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=13908,
-  serialized_end=14557,
+  serialized_start=13620,
+  serialized_end=14269,
 )
 
 
@@ -5570,8 +5449,8 @@ _USERDETAIL = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14560,
-  serialized_end=14955,
+  serialized_start=14272,
+  serialized_end=14667,
 )
 
 
@@ -5615,8 +5494,8 @@ _EMAILADDRESS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=14957,
-  serialized_end=15039,
+  serialized_start=14669,
+  serialized_end=14751,
 )
 
 
@@ -5646,8 +5525,8 @@ _PASSWORD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15041,
-  serialized_end=15070,
+  serialized_start=14753,
+  serialized_end=14782,
 )
 
 
@@ -5768,8 +5647,8 @@ _PASSWORDVIOLATIONS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15073,
-  serialized_end=15463,
+  serialized_start=14785,
+  serialized_end=15175,
 )
 
 
@@ -5827,8 +5706,8 @@ _VIDEO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15466,
-  serialized_end=15595,
+  serialized_start=15178,
+  serialized_end=15307,
 )
 
 
@@ -5881,6 +5760,13 @@ _WORKFLOW = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='clarifai.api.Workflow.user_id', index=6,
+      number=7, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -5893,8 +5779,8 @@ _WORKFLOW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15598,
-  serialized_end=15816,
+  serialized_start=15310,
+  serialized_end=15545,
 )
 
 
@@ -5952,8 +5838,8 @@ _WORKFLOWNODE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15819,
-  serialized_end=15994,
+  serialized_start=15548,
+  serialized_end=15723,
 )
 
 
@@ -5990,8 +5876,8 @@ _OPERATOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=15996,
-  serialized_end=16070,
+  serialized_start=15725,
+  serialized_end=15799,
 )
 
 
@@ -6021,8 +5907,8 @@ _NODEINPUT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16072,
-  serialized_end=16100,
+  serialized_start=15801,
+  serialized_end=15829,
 )
 
 
@@ -6094,8 +5980,8 @@ _WORKFLOWRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16103,
-  serialized_end=16360,
+  serialized_start=15832,
+  serialized_end=16089,
 )
 
 
@@ -6167,8 +6053,8 @@ _APPDUPLICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16363,
-  serialized_end=16633,
+  serialized_start=16092,
+  serialized_end=16362,
 )
 
 
@@ -6226,8 +6112,8 @@ _APPDUPLICATIONFILTERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16636,
-  serialized_end=16774,
+  serialized_start=16365,
+  serialized_end=16503,
 )
 
 
@@ -6343,6 +6229,20 @@ _TASK = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='app_id', full_name='clarifai.api.Task.app_id', index=15,
+      number=16, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='user_id', full_name='clarifai.api.Task.user_id', index=16,
+      number=17, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -6356,8 +6256,8 @@ _TASK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=16777,
-  serialized_end=17461,
+  serialized_start=16506,
+  serialized_end=17223,
 )
 
 
@@ -6401,8 +6301,8 @@ _AIASSISTPARAMETERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17463,
-  serialized_end=17559,
+  serialized_start=17225,
+  serialized_end=17321,
 )
 
 
@@ -6450,8 +6350,8 @@ _TASKWORKER = _descriptor.Descriptor(
       name='strategy_info', full_name='clarifai.api.TaskWorker.strategy_info',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=17562,
-  serialized_end=17842,
+  serialized_start=17324,
+  serialized_end=17604,
 )
 
 
@@ -6496,8 +6396,8 @@ _TASKWORKERPARTITIONEDSTRATEGYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=17845,
-  serialized_end=18142,
+  serialized_start=17607,
+  serialized_end=17904,
 )
 
 
@@ -6535,8 +6435,8 @@ _TASKINPUTSOURCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18145,
-  serialized_end=18327,
+  serialized_start=17907,
+  serialized_end=18089,
 )
 
 
@@ -6591,8 +6491,8 @@ _TASKREVIEW = _descriptor.Descriptor(
       name='strategy_info', full_name='clarifai.api.TaskReview.strategy_info',
       index=0, containing_type=None, fields=[]),
   ],
-  serialized_start=18330,
-  serialized_end=18691,
+  serialized_start=18092,
+  serialized_end=18453,
 )
 
 
@@ -6622,8 +6522,8 @@ _TASKREVIEWMANUALSTRATEGYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18693,
-  serialized_end=18750,
+  serialized_start=18455,
+  serialized_end=18512,
 )
 
 
@@ -6653,8 +6553,8 @@ _TASKREVIEWCONSENSUSSTRATEGYINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18752,
-  serialized_end=18819,
+  serialized_start=18514,
+  serialized_end=18581,
 )
 
 
@@ -6684,8 +6584,8 @@ _TASKAIASSISTANT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18821,
-  serialized_end=18859,
+  serialized_start=18583,
+  serialized_end=18621,
 )
 
 
@@ -6750,8 +6650,8 @@ _TASKSTATUSCOUNTPERUSER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=18862,
-  serialized_end=19050,
+  serialized_start=18624,
+  serialized_end=18812,
 )
 
 
@@ -6823,8 +6723,8 @@ _COLLECTOR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19053,
-  serialized_end=19310,
+  serialized_start=18815,
+  serialized_end=19072,
 )
 
 
@@ -6854,8 +6754,8 @@ _COLLECTORSOURCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19312,
-  serialized_end=19428,
+  serialized_start=19074,
+  serialized_end=19190,
 )
 
 
@@ -6913,8 +6813,8 @@ _APIPOSTMODELOUTPUTSCOLLECTORSOURCE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19431,
-  serialized_end=19584,
+  serialized_start=19193,
+  serialized_end=19346,
 )
 
 
@@ -6958,8 +6858,8 @@ _STATVALUE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19586,
-  serialized_end=19668,
+  serialized_start=19348,
+  serialized_end=19430,
 )
 
 
@@ -6996,8 +6896,8 @@ _STATVALUEAGGREGATERESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19671,
-  serialized_end=19837,
+  serialized_start=19433,
+  serialized_end=19599,
 )
 
 
@@ -7048,8 +6948,8 @@ _STATVALUEAGGREGATE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19839,
-  serialized_end=19955,
+  serialized_start=19601,
+  serialized_end=19717,
 )
 
 
@@ -7114,8 +7014,8 @@ _STATVALUEAGGREGATEQUERY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=19958,
-  serialized_end=20231,
+  serialized_start=19720,
+  serialized_end=19993,
 )
 
 
@@ -7146,8 +7046,8 @@ _VISIBILITY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=20234,
-  serialized_end=20369,
+  serialized_start=19996,
+  serialized_end=20131,
 )
 
 _ANNOTATION.fields_by_name['data'].message_type = _DATA
@@ -7254,9 +7154,6 @@ _MODELVERSION.fields_by_name['status'].message_type = proto_dot_clarifai_dot_api
 _MODELVERSION.fields_by_name['metrics'].message_type = _EVALMETRICS
 _MODELVERSION.fields_by_name['completed_at'].message_type = google_dot_protobuf_dot_timestamp__pb2._TIMESTAMP
 _MODELVERSION.fields_by_name['visibility'].message_type = _VISIBILITY
-_PRETRAINEDMODELCONFIG.fields_by_name['input_fields_map'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_PRETRAINEDMODELCONFIG.fields_by_name['output_fields_map'].message_type = google_dot_protobuf_dot_struct__pb2._STRUCT
-_TRAINSTATS.fields_by_name['loss_curve'].message_type = _LOSSCURVEENTRY
 _LABELDISTRIBUTION.fields_by_name['positive_label_counts'].message_type = _LABELCOUNT
 _COOCCURRENCEMATRIX.fields_by_name['matrix'].message_type = _COOCCURRENCEMATRIXENTRY
 _CONFUSIONMATRIX.fields_by_name['matrix'].message_type = _CONFUSIONMATRIXENTRY
@@ -7434,9 +7331,6 @@ DESCRIPTOR.message_types_by_name['ModelTypeRangeInfo'] = _MODELTYPERANGEINFO
 DESCRIPTOR.message_types_by_name['ModelTypeEnumOption'] = _MODELTYPEENUMOPTION
 DESCRIPTOR.message_types_by_name['ModelQuery'] = _MODELQUERY
 DESCRIPTOR.message_types_by_name['ModelVersion'] = _MODELVERSION
-DESCRIPTOR.message_types_by_name['PretrainedModelConfig'] = _PRETRAINEDMODELCONFIG
-DESCRIPTOR.message_types_by_name['TrainStats'] = _TRAINSTATS
-DESCRIPTOR.message_types_by_name['LossCurveEntry'] = _LOSSCURVEENTRY
 DESCRIPTOR.message_types_by_name['LabelCount'] = _LABELCOUNT
 DESCRIPTOR.message_types_by_name['LabelDistribution'] = _LABELDISTRIBUTION
 DESCRIPTOR.message_types_by_name['CooccurrenceMatrixEntry'] = _COOCCURRENCEMATRIXENTRY
@@ -7876,27 +7770,6 @@ ModelVersion = _reflection.GeneratedProtocolMessageType('ModelVersion', (_messag
   # @@protoc_insertion_point(class_scope:clarifai.api.ModelVersion)
   })
 _sym_db.RegisterMessage(ModelVersion)
-
-PretrainedModelConfig = _reflection.GeneratedProtocolMessageType('PretrainedModelConfig', (_message.Message,), {
-  'DESCRIPTOR' : _PRETRAINEDMODELCONFIG,
-  '__module__' : 'proto.clarifai.api.resources_pb2'
-  # @@protoc_insertion_point(class_scope:clarifai.api.PretrainedModelConfig)
-  })
-_sym_db.RegisterMessage(PretrainedModelConfig)
-
-TrainStats = _reflection.GeneratedProtocolMessageType('TrainStats', (_message.Message,), {
-  'DESCRIPTOR' : _TRAINSTATS,
-  '__module__' : 'proto.clarifai.api.resources_pb2'
-  # @@protoc_insertion_point(class_scope:clarifai.api.TrainStats)
-  })
-_sym_db.RegisterMessage(TrainStats)
-
-LossCurveEntry = _reflection.GeneratedProtocolMessageType('LossCurveEntry', (_message.Message,), {
-  'DESCRIPTOR' : _LOSSCURVEENTRY,
-  '__module__' : 'proto.clarifai.api.resources_pb2'
-  # @@protoc_insertion_point(class_scope:clarifai.api.LossCurveEntry)
-  })
-_sym_db.RegisterMessage(LossCurveEntry)
 
 LabelCount = _reflection.GeneratedProtocolMessageType('LabelCount', (_message.Message,), {
   'DESCRIPTOR' : _LABELCOUNT,
