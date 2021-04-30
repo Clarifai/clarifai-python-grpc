@@ -18,8 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   name='proto/clarifai/auth/types/types.proto',
   package='clarifai.auth.types',
   syntax='proto3',
-  serialized_options=b'\n\034com.clarifai.grpc.auth.typesP\001Zwgithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\242\002\004CAIP',
-  serialized_pb=b'\n%proto/clarifai/auth/types/types.proto\x12\x13\x63larifai.auth.types*`\n\x08\x41uthType\x12\t\n\x05undef\x10\x00\x12\n\n\x06NoAuth\x10\x01\x12\x0b\n\x07KeyAuth\x10\x02\x12\x14\n\x10SessionTokenAuth\x10\x03\x12\r\n\tAdminAuth\x10\x04\x12\x0b\n\x07PATAuth\x10\x05\x42\xa0\x01\n\x1c\x63om.clarifai.grpc.auth.typesP\x01Zwgithub.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\xa2\x02\x04\x43\x41IPb\x06proto3'
+  serialized_options=b'\n\034com.clarifai.grpc.auth.typesP\001Z>github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\242\002\004CAIP',
+  serialized_pb=b'\n%proto/clarifai/auth/types/types.proto\x12\x13\x63larifai.auth.types*`\n\x08\x41uthType\x12\t\n\x05undef\x10\x00\x12\n\n\x06NoAuth\x10\x01\x12\x0b\n\x07KeyAuth\x10\x02\x12\x14\n\x10SessionTokenAuth\x10\x03\x12\r\n\tAdminAuth\x10\x04\x12\x0b\n\x07PATAuth\x10\x05\x42g\n\x1c\x63om.clarifai.grpc.auth.typesP\x01Z>github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\xa2\x02\x04\x43\x41IPb\x06proto3'
 )
 
 _AUTHTYPE = _descriptor.EnumDescriptor(

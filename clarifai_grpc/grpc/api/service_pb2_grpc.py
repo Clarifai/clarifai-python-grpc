@@ -286,6 +286,21 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse),
         )
+    self.ListModelReferences = channel.unary_unary(
+        '/clarifai.api.V2/ListModelReferences',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelReferencesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse),
+        )
+    self.GetModelVersionInputExample = channel.unary_unary(
+        '/clarifai.api.V2/GetModelVersionInputExample',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionInputExampleRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionInputExampleResponse),
+        )
+    self.ListModelVersionInputExamples = channel.unary_unary(
+        '/clarifai.api.V2/ListModelVersionInputExamples',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionInputExamplesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse),
+        )
     self.GetWorkflow = channel.unary_unary(
         '/clarifai.api.V2/GetWorkflow',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest.SerializeToString,
@@ -998,6 +1013,38 @@ class V2Servicer(object):
   def PostModelVersionMetrics(self, request, context):
     """Run the evaluation metrics for a model version.
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListModelReferences(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Model References
+    //////////////////////////////////////
+
+    Lists model references tied to a particular model id.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetModelVersionInputExample(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Model Version Input Examples
+    //////////////////////////////////////
+
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListModelVersionInputExamples(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1726,6 +1773,21 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.PostModelVersionMetrics,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.SerializeToString,
+      ),
+      'ListModelReferences': grpc.unary_unary_rpc_method_handler(
+          servicer.ListModelReferences,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelReferencesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse.SerializeToString,
+      ),
+      'GetModelVersionInputExample': grpc.unary_unary_rpc_method_handler(
+          servicer.GetModelVersionInputExample,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionInputExampleRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionInputExampleResponse.SerializeToString,
+      ),
+      'ListModelVersionInputExamples': grpc.unary_unary_rpc_method_handler(
+          servicer.ListModelVersionInputExamples,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionInputExamplesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse.SerializeToString,
       ),
       'GetWorkflow': grpc.unary_unary_rpc_method_handler(
           servicer.GetWorkflow,
