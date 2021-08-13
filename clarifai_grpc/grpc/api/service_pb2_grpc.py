@@ -201,6 +201,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelTypeRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelTypeResponse),
         )
+    self.ListOpenSourceLicenses = channel.unary_unary(
+        '/clarifai.api.V2/ListOpenSourceLicenses',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOpenSourceLicensesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListOpenSourceLicensesResponse),
+        )
     self.ListModelTypes = channel.unary_unary(
         '/clarifai.api.V2/ListModelTypes',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelTypesRequest.SerializeToString,
@@ -879,6 +884,13 @@ class V2Servicer(object):
     //////////////////////////////////////
 
     Get a specific model type.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListOpenSourceLicenses(self, request, context):
+    """List all the supported open source licenses in the platform.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1688,6 +1700,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.GetModelType,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelTypeRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelTypeResponse.SerializeToString,
+      ),
+      'ListOpenSourceLicenses': grpc.unary_unary_rpc_method_handler(
+          servicer.ListOpenSourceLicenses,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOpenSourceLicensesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOpenSourceLicensesResponse.SerializeToString,
       ),
       'ListModelTypes': grpc.unary_unary_rpc_method_handler(
           servicer.ListModelTypes,
