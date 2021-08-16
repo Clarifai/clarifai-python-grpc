@@ -346,6 +346,26 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse),
         )
+    self.ListWorkflowVersions = channel.unary_unary(
+        '/clarifai.api.V2/ListWorkflowVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse),
+        )
+    self.GetWorkflowVersion = channel.unary_unary(
+        '/clarifai.api.V2/GetWorkflowVersion',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowVersionRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowVersionResponse),
+        )
+    self.DeleteWorkflowVersions = channel.unary_unary(
+        '/clarifai.api.V2/DeleteWorkflowVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PatchWorkflowVersions = channel.unary_unary(
+        '/clarifai.api.V2/PatchWorkflowVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse),
+        )
     self.GetKey = channel.unary_unary(
         '/clarifai.api.V2/GetKey',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.SerializeToString,
@@ -585,6 +605,16 @@ class V2Stub(object):
         '/clarifai.api.V2/PostStatValuesAggregate',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse),
+        )
+    self.PostTrendingMetricsView = channel.unary_unary(
+        '/clarifai.api.V2/PostTrendingMetricsView',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.ListTrendingMetricsViews = channel.unary_unary(
+        '/clarifai.api.V2/ListTrendingMetricsViews',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
         )
 
 
@@ -1124,6 +1154,40 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def ListWorkflowVersions(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Workflow Versions
+    //////////////////////////////////////
+
+    List workflow versions.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetWorkflowVersion(self, request, context):
+    """Get single workflow version.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteWorkflowVersions(self, request, context):
+    """Delete workflow versions.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchWorkflowVersions(self, request, context):
+    """Patch workflow versions.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def GetKey(self, request, context):
     """//////////////////////////////////////
     API Keys
@@ -1518,6 +1582,26 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PostTrendingMetricsView(self, request, context):
+    """//////////////////////////////////////
+
+    //////////////////////////////////////
+    Trending Metrics
+    //////////////////////////////////////
+
+    Increase the view metric for a detail view
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListTrendingMetricsViews(self, request, context):
+    """List the view metrics for a detail view
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -1846,6 +1930,26 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse.SerializeToString,
       ),
+      'ListWorkflowVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.ListWorkflowVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse.SerializeToString,
+      ),
+      'GetWorkflowVersion': grpc.unary_unary_rpc_method_handler(
+          servicer.GetWorkflowVersion,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowVersionRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowVersionResponse.SerializeToString,
+      ),
+      'DeleteWorkflowVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteWorkflowVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PatchWorkflowVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchWorkflowVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse.SerializeToString,
+      ),
       'GetKey': grpc.unary_unary_rpc_method_handler(
           servicer.GetKey,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetKeyRequest.FromString,
@@ -2085,6 +2189,16 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.PostStatValuesAggregate,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.SerializeToString,
+      ),
+      'PostTrendingMetricsView': grpc.unary_unary_rpc_method_handler(
+          servicer.PostTrendingMetricsView,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'ListTrendingMetricsViews': grpc.unary_unary_rpc_method_handler(
+          servicer.ListTrendingMetricsViews,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
