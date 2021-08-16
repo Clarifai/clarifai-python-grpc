@@ -611,11 +611,6 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
-    self.ListTrendingMetricsViews = channel.unary_unary(
-        '/clarifai.api.V2/ListTrendingMetricsViews',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
-        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
-        )
 
 
 class V2Servicer(object):
@@ -1595,13 +1590,6 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def ListTrendingMetricsViews(self, request, context):
-    """List the view metrics for a detail view
-    """
-    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-    context.set_details('Method not implemented!')
-    raise NotImplementedError('Method not implemented!')
-
 
 def add_V2Servicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -2194,11 +2182,6 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.PostTrendingMetricsView,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-      ),
-      'ListTrendingMetricsViews': grpc.unary_unary_rpc_method_handler(
-          servicer.ListTrendingMetricsViews,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
-          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
