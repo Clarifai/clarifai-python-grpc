@@ -61,8 +61,8 @@ class ClarifaiChannel:
         global wrap_response_deserializer
         wrap_response_deserializer = _response_deserializer_for_grpc
         channel_address = "{}:{}".format(
-            os.environ.get("CLARIFAI_GRPC_BASE", "api-grpc.clarifai.com"),
-            os.environ.get("CLARIFAI_GRPC_PORT", "18080")
+            os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com"),
+            os.environ.get("CLARIFAI_GRPC_PORT", "18080"),
         )
 
         return service_pb2_grpc.grpc.insecure_channel(channel_address)
