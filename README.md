@@ -64,6 +64,10 @@ request = service_pb2.PostModelOutputsRequest(
 response = stub.PostModelOutputs(request, metadata=metadata)
 
 if response.status.code != status_code_pb2.SUCCESS:
+    print("There was an error with your request!")
+    print("\tCode: {}".format(response.outputs[0].status.code))
+    print("\tDescription: {}".format(response.outputs[0].status.description))
+    print("\tDetails: {}".format(response.outputs[0].status.details))
     raise Exception("Request failed, status code: " + str(response.status.code))
 
 for concept in response.outputs[0].data.concepts:
