@@ -1,6 +1,6 @@
 ![Clarifai logo](docs/logo.png)
 
-# Clarifai Python gRPC Client
+# Clarifai Python gRPC Clientt
 
 This is the official Clarifai gRPC Python client for interacting with our powerful recognition
 [API](https://docs.clarifai.com).
