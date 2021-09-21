@@ -378,7 +378,7 @@ def test_search_by_image_url_and_geo_box(channel):
                                         )
                                     )
                                 ),
-                            ]
+                            ],
                         )
                     )
                 ],
