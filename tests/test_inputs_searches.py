@@ -268,8 +268,8 @@ def test_search_by_geo_point_and_limit(channel):
                 searches=[
                     Search(
                         query=Query(
-                            ranks=[
-                                Rank(
+                            filters=[
+                                Filter(
                                     annotation=Annotation(
                                         data=Data(
                                             geo=resources_pb2.Geo(
@@ -306,8 +306,8 @@ def test_search_by_geo_box(channel):
                 searches=[
                     Search(
                         query=Query(
-                            ranks=[
-                                Rank(
+                            filters=[
+                                Filter(
                                     annotation=Annotation(
                                         data=Data(
                                             geo=resources_pb2.Geo(
@@ -356,7 +356,9 @@ def test_search_by_image_url_and_geo_box(channel):
                                         data=Data(image=Image(url=DOG_IMAGE_URL))
                                     )
                                 ),
-                                Rank(
+                            ],
+                            filters=[
+                                Filter(
                                     annotation=Annotation(
                                         data=Data(
                                             geo=resources_pb2.Geo(
@@ -376,7 +378,7 @@ def test_search_by_image_url_and_geo_box(channel):
                                         )
                                     )
                                 ),
-                            ]
+                            ],
                         )
                     )
                 ],
