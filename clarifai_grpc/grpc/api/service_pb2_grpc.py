@@ -266,6 +266,16 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse),
         )
+    self.PostModelVersionsPublish = channel.unary_unary(
+        '/clarifai.api.V2/PostModelVersionsPublish',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsPublishRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.DeleteModelVersionsUnPublish = channel.unary_unary(
+        '/clarifai.api.V2/DeleteModelVersionsUnPublish',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionsUnpublishRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
     self.PostModelVersions = channel.unary_unary(
         '/clarifai.api.V2/PostModelVersions',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.SerializeToString,
@@ -400,6 +410,16 @@ class V2Stub(object):
         '/clarifai.api.V2/MyScopes',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeResponse),
+        )
+    self.MyScopesUser = channel.unary_unary(
+        '/clarifai.api.V2/MyScopesUser',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesUserRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeUserResponse),
+        )
+    self.MyScopesRoot = channel.unary_unary(
+        '/clarifai.api.V2/MyScopesRoot',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRootRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeRootResponse),
         )
     self.ListScopes = channel.unary_unary(
         '/clarifai.api.V2/ListScopes',
@@ -1019,6 +1039,20 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PostModelVersionsPublish(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteModelVersionsUnPublish(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def PostModelVersions(self, request, context):
     """NOTE: inconsistency: do we want this to return a SingleModelResponse?
 
@@ -1239,6 +1273,20 @@ class V2Servicer(object):
     the user the scopes/access of the key/credential they're providing, as computed by
     our authorizer:
     """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MyScopesUser(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def MyScopesRoot(self, request, context):
+    # missing associated documentation comment in .proto file
+    pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1846,6 +1894,16 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionResponse.SerializeToString,
       ),
+      'PostModelVersionsPublish': grpc.unary_unary_rpc_method_handler(
+          servicer.PostModelVersionsPublish,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsPublishRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'DeleteModelVersionsUnPublish': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteModelVersionsUnPublish,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionsUnpublishRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
       'PostModelVersions': grpc.unary_unary_rpc_method_handler(
           servicer.PostModelVersions,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsRequest.FromString,
@@ -1980,6 +2038,16 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.MyScopes,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeResponse.SerializeToString,
+      ),
+      'MyScopesUser': grpc.unary_unary_rpc_method_handler(
+          servicer.MyScopesUser,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesUserRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeUserResponse.SerializeToString,
+      ),
+      'MyScopesRoot': grpc.unary_unary_rpc_method_handler(
+          servicer.MyScopesRoot,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MyScopesRootRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiScopeRootResponse.SerializeToString,
       ),
       'ListScopes': grpc.unary_unary_rpc_method_handler(
           servicer.ListScopes,
