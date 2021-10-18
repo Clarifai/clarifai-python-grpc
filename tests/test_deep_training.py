@@ -8,7 +8,8 @@ from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
-    post_model_outputs_and_maybe_allow_retries, both_channels,
+    post_model_outputs_and_maybe_allow_retries,
+    both_channels,
 )
 
 URLS = [
