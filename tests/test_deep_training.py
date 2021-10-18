@@ -9,7 +9,7 @@ from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
-    post_model_outputs_and_maybe_allow_retries,
+    post_model_outputs_and_maybe_allow_retries, both_channels,
 )
 
 URLS = [
@@ -35,8 +35,9 @@ def api_key_metadata(api_key: str):
     return (("authorization", "Key %s" % api_key),)
 
 
-def test_deep_classification_training_with_queries():
-    stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
+@both_channels
+def test_deep_classification_training_with_queries(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
 
     app_id = "my-app-" + uuid.uuid4().hex[:20]
     post_apps_response = stub.PostApps(
