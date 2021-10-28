@@ -84,7 +84,7 @@ def get_annotations(args, metadata, input_ids):
     list_annotations_response = stub.ListAnnotations(
                                 service_pb2.ListAnnotationsRequest(
                                 input_ids=[input_id], 
-                                per_page=20
+                                per_page=25
                                 ),
       metadata=metadata
     )
@@ -161,7 +161,7 @@ def compute_consensus(args, input_ids, aggregated_annotations):
   # Variable to count how many times no full consensus has been reached
   no_consensus_count = 0
 
-  def consesuns(value):
+  def consesus_fun(value):
     return True if value >= args.consensus_count else False
 
   consensus = {}
@@ -169,7 +169,7 @@ def compute_consensus(args, input_ids, aggregated_annotations):
       if input_id in aggregated_annotations:
         # Compute consensus
         aa = aggregated_annotations[input_id]
-        consensus_exists = {k:consesuns(v) for k, v in aa.items()}
+        consensus_exists = {k:consesus_fun(v) for k, v in aa.items()}
 
         # If no consensus exists, set consensus to None
         if not True in consensus_exists.values():
@@ -182,11 +182,11 @@ def compute_consensus(args, input_ids, aggregated_annotations):
         for concept, exists in consensus_exists.items():
           if (args.positive_concept_key in concept) and exists:
             positive_concepts_concensus.append(concept)
-        
-        # If consenus for any positive concept exists, chose the first positive concept
-        # If not, chose negative concept
+
+        # Store all positive concepts with consensus, 
+        # If no exists, chose negative concept as consensus
         if positive_concepts_concensus:
-          consensus[input_id] = positive_concepts_concensus[0]
+          consensus[input_id] = positive_concepts_concensus
         else:
           consensus[input_id] = args.negative_concept
 
@@ -203,15 +203,14 @@ def compute_stats(args, input_ids, consensus, ground_truth):
     # Check first if this input was annotated (consensus varible contains only anotated inputs)
     if input_id in consensus:
       if consensus[input_id] is not None:
-        if args.positive_concept_key in consensus[input_id]: # annotation is positive
-        # if any(key in concept for key in args.positive_concept_keys): # annotation is positive
+        if any([True for concept in consensus[input_id] if args.positive_concept_key in concept]): # annotation is positive
           if args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
             stats[input_id] = 'TP'
             TP_count += 1
           else: # ground truth is negative
             stats[input_id] = 'FP'
             FP_count += 1 
-        elif consensus[input_id] == args.negative_concept: # annotation is negative
+        elif args.negative_concept in consensus[input_id]: # annotation is negative
           if args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
             stats[input_id] = 'FN'
             FN_count += 1
@@ -248,7 +247,7 @@ def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, 
 
         # Add information about results
         input['marker'] = stats[input_id]
-        input['ground_truth'] = ground_truth[input_id][0]
+        input['ground_truth'] = ground_truth[input_id]
         input['consensus'] = consensus[input_id]
 
         # Count different concepts
@@ -285,7 +284,7 @@ def save_misannotated_data(args, misannotated_ids):
 
 def main(args, metadata):
 
-  print("------- Experiment {}-{} running -------".format(args.app_name, args.experiment_name))
+  print("----- Experiment {} - {} running -----".format(args.app_name, args.experiment_name))
 
   # Get input ids
   input_ids = get_input_ids(args, metadata)
@@ -306,7 +305,7 @@ def main(args, metadata):
   stats, TP_count, TN_count, FP_count, FN_count = compute_stats(args, input_ids, consensus, ground_truth) 
 
   # Plot statistics using computed values
-  print("------- Results -------")
+  print("--------- Results ---------")
   plot_statistics(args, not_annotated_count, no_full_consensus_count, 
                   TP_count, TN_count, FP_count, FN_count,
                   positive_count, negative_count)
@@ -325,7 +324,7 @@ if __name__ == '__main__':
                       default='',
                       help="API key to the required application.")                     
   parser.add_argument('--experiment', 
-                      default=2, 
+                      default=1, 
                       choices={1, 2, 3, 4},
                       type=int, 
                       help="Which experiment to analyize. Depends on the app.")
