@@ -26,7 +26,7 @@ def get_input_ids(args, metadata):
   input_ids = {}
   for input_object in list_inputs_response.inputs:
     json_obj = MessageToDict(input_object)
-    input_ids[json_obj["id"]] = json_obj["data"]["metadata"]
+    input_ids[json_obj['id']] = json_obj['data']['metadata']
   print("Input ids fetched. Number of fetched inputs {}".format(len(input_ids)))
 
   # # ------ DEBUG CODE
@@ -48,7 +48,7 @@ def get_ground_truth(args, input_ids):
   for input_id, input_val in input_ids.items():
     gt_keys = []
     # Extract all positive labels from results fields
-    for gt_key, gt_val in input_val["results"].items():
+    for gt_key, gt_val in input_val['results'].items():
       if gt_val == True:
         gt_keys.append(gt_key)
     ground_truth[input_id] = gt_keys
@@ -76,15 +76,15 @@ def get_annotations(args, metadata, input_ids):
   # Variable to check if number of annotations per page is sufficient
   annotation_nb_max = 0
 
-  annotations = {} # list of concepts only
-  annotations_meta = {} # all annotation-related metadata
+  annotations = {} # list of concepts
+  annotations_meta = {} # store metadata
 
   # Get annotations for every input id
   for input_id in input_ids:
     list_annotations_response = stub.ListAnnotations(
                                 service_pb2.ListAnnotationsRequest(
                                 input_ids=[input_id], 
-                                per_page=10
+                                per_page=20
                                 ),
       metadata=metadata
     )
@@ -95,18 +95,17 @@ def get_annotations(args, metadata, input_ids):
     annotation_meta = []
     for annotation_object in list_annotations_response.annotations:
       ao = MessageToDict(annotation_object)
-      if "concepts" in ao["data"] and len(ao["data"]["concepts"])>0:
-        # Store meta
-        annotation_meta.append(ao)
+      if 'concepts' in ao['data'] and len(ao['data']['concepts'])>0:
         # Store actual concept
-        concept = ao["data"]["concepts"][0]["id"]
+        concept = ao['data']['concepts'][0]['name'] # TODO: check if id always = name
         if not args.label_2_only:
           annotation.append(concept)
-        elif "2-" in concept:
+        elif '2-' in concept:
             annotation.append(concept)
-        # TODO: check whether id==name always 
-        # TODO: adapt to a possible multi-concept case
-      
+        # Store metadata
+        meta = {'concept': concept, 'userId': ao['userId'], 'taskId': ao['taskId']}
+        annotation_meta.append(meta)
+        
     annotations[input_id] = annotation
     annotations_meta[input_id] = annotation_meta
 
@@ -114,7 +113,6 @@ def get_annotations(args, metadata, input_ids):
     annotation_nb_max = max(annotation_nb_max, len(list_annotations_response.annotations))
 
   print("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
-  # TODO: save annotations metadata
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
@@ -124,7 +122,7 @@ def get_annotations(args, metadata, input_ids):
   # [print("\t{}: {}".format(k, v)) for k, v in concepts_count.items()]
   # # ------ DEBUG CODE
 
-  return annotations
+  return annotations, annotations_meta
 
 
 def aggregate_annotations(args, input_ids, annotations):
@@ -237,20 +235,57 @@ def plot_statistics(args, not_annotated_count, no_full_consensus_count,
     print(" (FN) {} but not labeled as {}: {}/{}".format(args.experiment_name, args.experiment_name, FN_count, positive_count))
     print(" ")
 
+def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats):
+  ''' Get information about inputs that were mislabelled '''
+
+  misannotated_ids = {}
+  for input_id in input_ids:
+    if input_id in stats:
+      if stats[input_id] == 'FP' or stats[input_id] == 'FN':
+        # Get initial information minus some fields
+        input = input_ids[input_id]
+        [input.pop(key) for key in ['results', 'source-file-line', 'group']]
+
+        # Add information about results
+        input['marker'] = stats[input_id]
+        input['ground_truth'] = ground_truth[input_id][0]
+        input['consensus'] = consensus[input_id]
+
+        # Count different concepts
+        concepts = [annotation['concept'] for annotation in annotations_meta[input_id]]
+        input['annotations'] = {concept:concepts.count(concept) for concept in concepts}
+        misannotated_ids[input_id] = input
+
+        # Add raw information about annotations
+        input['annotation_meta'] = annotations_meta[input_id]
+  
+  return misannotated_ids
+        
 
 def save_input_metadata(args, input_ids):
-  ''' Dumps metadata about inputs (including ground truth) to a json file '''
+  ''' Dump metadata about inputs (including ground truth) to a json file '''
 
-  if args.save_meta:
-    with open("{}/{}_{}_metadata.json".format(args.out_path, 
+  if args.save_input_meta:
+    with open("{}/{}_{}_input_metadata.json".format(args.out_path, 
                                               args.app_name.lower(), 
-                                              args.experiment_name.lower().replace(" ", "-")
-                                              ), "w") as f:
+                                              args.experiment_name.replace(' ', '-')
+                                              ), 'w') as f:
       json.dump(input_ids, f)
+
+def save_misannotated_data(args, misannotated_ids):
+  ''' Dump data about misannotated inputa to a json file '''
+
+  if args.save_misannotations:
+    with open("{}/{}_{}_misannotations.json".format(args.out_path, 
+                                              args.app_name.lower(), 
+                                              args.experiment_name.replace(' ', '-')
+                                              ), 'w') as f:
+      json.dump(misannotated_ids, f)
+
 
 def main(args, metadata):
 
-  print('------- Experiment {}-{} running -------'.format(args.app_name, args.experiment_name))
+  print("------- Experiment {}-{} running -------".format(args.app_name, args.experiment_name))
 
   # Get input ids
   input_ids = get_input_ids(args, metadata)
@@ -261,24 +296,28 @@ def main(args, metadata):
   ground_truth, positive_count, negative_count = get_ground_truth(args, input_ids)
 
   # Get annotations for every id together with their aggregations
-  annotations = get_annotations(args, metadata, input_ids)
+  annotations, annotations_meta = get_annotations(args, metadata, input_ids)
   aggregated_annotations, not_annotated_count = aggregate_annotations(args, input_ids, annotations)
 
   # Compute consensus
   consensus, no_full_consensus_count = compute_consensus(args, input_ids, aggregated_annotations)
 
   # Compute matches with ground truth
-  statistics, TP_count, TN_count, FP_count, FN_count = compute_stats(args, input_ids, consensus, ground_truth) 
+  stats, TP_count, TN_count, FP_count, FN_count = compute_stats(args, input_ids, consensus, ground_truth) 
 
   # Plot statistics using computed values
-  print('------- Results -------')
+  print("------- Results -------")
   plot_statistics(args, not_annotated_count, no_full_consensus_count, 
                   TP_count, TN_count, FP_count, FN_count,
                   positive_count, negative_count)
 
+  # Get and save fails
+  misannotated_ids = get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats)
+  save_misannotated_data(args, misannotated_ids)
+
 
 if __name__ == '__main__':  
-  parser = argparse.ArgumentParser(description='Run tracking.')
+  parser = argparse.ArgumentParser(description="Run tracking.")
   parser.add_argument('--app_name',
                       default='',
                       help="Name of the app in Clarifai UI.")
@@ -286,7 +325,7 @@ if __name__ == '__main__':
                       default='',
                       help="API key to the required application.")                     
   parser.add_argument('--experiment', 
-                      default=1, 
+                      default=2, 
                       choices={1, 2, 3, 4},
                       type=int, 
                       help="Which experiment to analyize. Depends on the app.")
@@ -299,16 +338,20 @@ if __name__ == '__main__':
                       type=int,
                       help="How many of the same definition to require for consensus.")
   parser.add_argument('--broad_consensus',
-                      default=False,
+                      default=True,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Attempt to allow for a broad consensus (i.e. multiple hate speech labels all pool to hate speech.")
   parser.add_argument('--out_path', 
                       default="ias/annotation/output", 
                       help="Path to general output directory for this script.")
-  parser.add_argument('--save_meta',
+  parser.add_argument('--save_input_meta',
                       default=False,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save input metadata in file or not.")
+  parser.add_argument('--save_misannotations',
+                      default=True,
+                      type=lambda x: (str(x).lower() == 'true'),
+                      help="Save information about misannotated inputs in file or not.")
 
   args = parser.parse_args()
 
