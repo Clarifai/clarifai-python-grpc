@@ -6,12 +6,20 @@ import itertools
 # Import in the Clarifai gRPC based objects needed
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+from clarifai_grpc.grpc.api.status import status_code_pb2
 from google.protobuf.json_format import MessageToDict
+# import load_ground_truth
 
 # Construct the communications channel and the object stub to call requests on.
 channel = ClarifaiChannel.get_json_channel()
 stub = service_pb2_grpc.V2Stub(channel)
 
+def process_response(response):
+    if response.status.code != status_code_pb2.SUCCESS:
+        print("There was an error with your request!")
+        print("\tDescription: {}".format(response.status.description))
+        print("\tDetails: {}".format(response.status.details))
+        raise Exception("Request failed, status code: " + str(response.status.code))
 
 def get_input_ids(args, metadata):
   ''' Get list of all inputs (ids of videos that were uploaded) from the app '''
@@ -21,6 +29,7 @@ def get_input_ids(args, metadata):
                          service_pb2.ListInputsRequest(page=1, per_page=1000),
                          metadata=metadata
   )
+  process_response(list_inputs_response)
 
   # Extract input ids
   input_ids = {}
@@ -46,18 +55,18 @@ def get_ground_truth(args, input_ids):
   ground_truth = {}
 
   for input_id, input_val in input_ids.items():
-    gt_keys = []
-    # Extract all positive labels from results fields
-    for gt_key, gt_val in input_val['results'].items():
-      if gt_val == True:
-        gt_keys.append(gt_key)
-    ground_truth[input_id] = gt_keys
+      gt_keys = []
+      # Extract all positive labels from results fields
+      for gt_key, gt_val in input_val['results'].items():
+          if gt_val == True:
+              gt_keys.append(gt_key)
+          ground_truth[input_id] = gt_keys
+
+  print('Ground truth extracted from metadata.')
 
   # Count the number of positive and negative labels
   positive_count = sum([1 for input_id in input_ids if args.positive_gt_label in ground_truth[input_id]])
   negative_count = sum([1 for input_id in input_ids if args.positive_gt_label not in ground_truth[input_id]])
-
-  print("Ground truth extracted.")
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
@@ -68,7 +77,6 @@ def get_ground_truth(args, input_ids):
   # # ------ DEBUG CODE
 
   return ground_truth, positive_count, negative_count
-
 
 def get_annotations(args, metadata, input_ids):
   ''' Get list of annotations for every input id'''
@@ -88,6 +96,7 @@ def get_annotations(args, metadata, input_ids):
                                 ),
       metadata=metadata
     )
+    process_response(list_annotations_response)
     # TODO: make requests in batches
 
     # Store annotations
@@ -103,7 +112,7 @@ def get_annotations(args, metadata, input_ids):
         elif '2-' in concept:
             annotation.append(concept)
         # Store metadata
-        meta = {'concept': concept, 'userId': ao['userId'], 'taskId': ao['taskId']}
+        meta = {'concept': concept, 'userId': ao['userId']}
         annotation_meta.append(meta)
         
     annotations[input_id] = annotation
@@ -266,7 +275,7 @@ def save_input_metadata(args, input_ids):
 
   if args.save_input_meta:
     with open("{}/{}_{}_input_metadata.json".format(args.out_path, 
-                                              args.app_name.lower(), 
+                                              args.app_name, 
                                               args.experiment_name.replace(' ', '-')
                                               ), 'w') as f:
       json.dump(input_ids, f)
@@ -276,7 +285,7 @@ def save_misannotated_data(args, misannotated_ids):
 
   if args.save_misannotations:
     with open("{}/{}_{}_misannotations.json".format(args.out_path, 
-                                              args.app_name.lower(), 
+                                              args.app_name, 
                                               args.experiment_name.replace(' ', '-')
                                               ), 'w') as f:
       json.dump(misannotated_ids, f)
@@ -340,8 +349,11 @@ if __name__ == '__main__':
                       default=True,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Attempt to allow for a broad consensus (i.e. multiple hate speech labels all pool to hate speech.")
+  parser.add_argument('--ground_truth', 
+                      default='ias/annotation/input/ENG_ground_truth.csv', 
+                      help="Path to csv file containing ground truth.")                    
   parser.add_argument('--out_path', 
-                      default="ias/annotation/output", 
+                      default='ias/annotation/output', 
                       help="Path to general output directory for this script.")
   parser.add_argument('--save_input_meta',
                       default=False,
