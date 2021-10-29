@@ -8,7 +8,7 @@ from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from google.protobuf.json_format import MessageToDict
-# import load_ground_truth
+import load_ground_truth
 
 # Construct the communications channel and the object stub to call requests on.
 channel = ClarifaiChannel.get_json_channel()
@@ -52,17 +52,10 @@ def get_input_ids(args, metadata):
 def get_ground_truth(args, input_ids):
   ''' Get list of ground truth concepts for every input id'''
 
-  ground_truth = {}
-
-  for input_id, input_val in input_ids.items():
-      gt_keys = []
-      # Extract all positive labels from results fields
-      for gt_key, gt_val in input_val['results'].items():
-          if gt_val == True:
-              gt_keys.append(gt_key)
-          ground_truth[input_id] = gt_keys
-
-  print('Ground truth extracted from metadata.')
+  if os.path.exists(args.ground_truth):
+    ground_truth = load_ground_truth.load_from_csv(input_ids, args.ground_truth)
+  else:
+    ground_truth = load_ground_truth.load_from_metadata(input_ids)
 
   # Count the number of positive and negative labels
   positive_count = sum([1 for input_id in input_ids if args.positive_gt_label in ground_truth[input_id]])
@@ -350,7 +343,7 @@ if __name__ == '__main__':
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Attempt to allow for a broad consensus (i.e. multiple hate speech labels all pool to hate speech.")
   parser.add_argument('--ground_truth', 
-                      default='ias/annotation/input/ENG_ground_truth.csv', 
+                      default='', 
                       help="Path to csv file containing ground truth.")                    
   parser.add_argument('--out_path', 
                       default='ias/annotation/output', 
@@ -360,7 +353,7 @@ if __name__ == '__main__':
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save input metadata in file or not.")
   parser.add_argument('--save_misannotations',
-                      default=True,
+                      default=False,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save information about misannotated inputs in file or not.")
 
