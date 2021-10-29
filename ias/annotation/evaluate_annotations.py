@@ -53,7 +53,7 @@ def get_ground_truth(args, input_ids):
   ''' Get list of ground truth concepts for every input id'''
 
   if os.path.exists(args.ground_truth):
-    ground_truth = load_ground_truth.load_from_csv(input_ids, args.ground_truth)
+    ground_truth = load_ground_truth.load_from_csv(input_ids, args.ground_truth, args.negative_concept)
   else:
     ground_truth = load_ground_truth.load_from_metadata(input_ids)
 
@@ -85,7 +85,8 @@ def get_annotations(args, metadata, input_ids):
     list_annotations_response = stub.ListAnnotations(
                                 service_pb2.ListAnnotationsRequest(
                                 input_ids=[input_id], 
-                                per_page=25
+                                per_page=25,
+                                list_all_annotations=True
                                 ),
       metadata=metadata
     )
@@ -190,7 +191,7 @@ def compute_consensus(args, input_ids, aggregated_annotations):
         if positive_concepts_concensus:
           consensus[input_id] = positive_concepts_concensus
         else:
-          consensus[input_id] = args.negative_concept
+          consensus[input_id] = [args.negative_concept]
 
   return consensus, no_consensus_count
 
@@ -344,9 +345,9 @@ if __name__ == '__main__':
                       help="Attempt to allow for a broad consensus (i.e. multiple hate speech labels all pool to hate speech.")
   parser.add_argument('--ground_truth', 
                       default='', 
-                      help="Path to csv file containing ground truth.")                    
+                      help="Path to csv file with ground truth.")                    
   parser.add_argument('--out_path', 
-                      default='ias/annotation/output', 
+                      default='', 
                       help="Path to general output directory for this script.")
   parser.add_argument('--save_input_meta',
                       default=False,

@@ -12,7 +12,7 @@ GT_LABELS = ['adult_&_explicit_sexual_content',
              'terrorism',
              'debated_sensitive_social_issue']
 
-def load_from_csv(input_ids, csv_path):
+def load_from_csv(input_ids, csv_path, negative_concept):
 
     # Map video ids to their input hash
     id_to_hash = {}
@@ -29,6 +29,8 @@ def load_from_csv(input_ids, csv_path):
                 for key in line:
                     if key in GT_LABELS and int(line[key]):
                         gt_keys.append(key)
+                if not gt_keys:
+                    gt_keys = [negative_concept]
                 ground_truth[id_to_hash[line['VIDEO_ID']]] = gt_keys
     
     # In case some inputs are not in the file, create empty lists
