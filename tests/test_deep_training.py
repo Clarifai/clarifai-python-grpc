@@ -1,16 +1,15 @@
 import os
 import uuid
 
-import pytest
 from google.protobuf import struct_pb2
 
-from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
     post_model_outputs_and_maybe_allow_retries,
+    both_channels,
 )
 
 URLS = [
@@ -36,10 +35,9 @@ def api_key_metadata(api_key: str):
     return (("authorization", "Key %s" % api_key),)
 
 
-@pytest.mark.skip(reason="internal user needs to test this")
-def test_deep_classification_training_with_queries():
-    stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
-
+@both_channels
+def test_deep_classification_training_with_queries(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
     app_id = "my-app-" + uuid.uuid4().hex[:20]
     post_apps_response = stub.PostApps(
         service_pb2.PostAppsRequest(
@@ -47,6 +45,7 @@ def test_deep_classification_training_with_queries():
                 resources_pb2.App(
                     id=app_id,
                     default_workflow_id="General",
+                    user_id="me"
                 )
             ]
         ),
@@ -204,11 +203,11 @@ def test_deep_classification_training_with_queries():
 
 
 def _get_model_type_for_template(
-    stub: service_pb2_grpc.V2Stub, api_key: str, template_name: str
+    stub: service_pb2_grpc.V2Stub, template_name: str
 ) -> resources_pb2.ModelType:
     list_model_types_response = stub.ListModelTypes(
         service_pb2.ListModelTypesRequest(page=1, per_page=1000),
-        metadata=api_key_metadata(api_key),
+        metadata=api_key_metadata(),
     )
     raise_on_failure(list_model_types_response)
     for model_type in list_model_types_response.model_types:
