@@ -251,6 +251,21 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
+    self.PatchModelToolkits = channel.unary_unary(
+        '/clarifai.api.V2/PatchModelToolkits',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelToolkitsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelToolkitResponse),
+        )
+    self.PatchModelUseCases = channel.unary_unary(
+        '/clarifai.api.V2/PatchModelUseCases',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelUseCasesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelUseCaseResponse),
+        )
+    self.PatchModelLanguages = channel.unary_unary(
+        '/clarifai.api.V2/PatchModelLanguages',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelLanguagesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelLanguageResponse),
+        )
     self.ListModelInputs = channel.unary_unary(
         '/clarifai.api.V2/ListModelInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelInputsRequest.SerializeToString,
@@ -271,9 +286,9 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsPublishRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
-    self.DeleteModelVersionsUnPublish = channel.unary_unary(
-        '/clarifai.api.V2/DeleteModelVersionsUnPublish',
-        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionsUnpublishRequest.SerializeToString,
+    self.PostModelVersionsUnPublish = channel.unary_unary(
+        '/clarifai.api.V2/PostModelVersionsUnPublish',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUnPublishRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
     self.PostModelVersions = channel.unary_unary(
@@ -1012,6 +1027,27 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PatchModelToolkits(self, request, context):
+    """Update model toolkits tags
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchModelUseCases(self, request, context):
+    """Update model use_cases tags
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchModelLanguages(self, request, context):
+    """Update model languages tags
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def ListModelInputs(self, request, context):
     """List all the inputs.
     """
@@ -1046,7 +1082,7 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
-  def DeleteModelVersionsUnPublish(self, request, context):
+  def PostModelVersionsUnPublish(self, request, context):
     # missing associated documentation comment in .proto file
     pass
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1879,6 +1915,21 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
+      'PatchModelToolkits': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModelToolkits,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelToolkitsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelToolkitResponse.SerializeToString,
+      ),
+      'PatchModelUseCases': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModelUseCases,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelUseCasesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelUseCaseResponse.SerializeToString,
+      ),
+      'PatchModelLanguages': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModelLanguages,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelLanguagesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelLanguageResponse.SerializeToString,
+      ),
       'ListModelInputs': grpc.unary_unary_rpc_method_handler(
           servicer.ListModelInputs,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelInputsRequest.FromString,
@@ -1899,9 +1950,9 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsPublishRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
-      'DeleteModelVersionsUnPublish': grpc.unary_unary_rpc_method_handler(
-          servicer.DeleteModelVersionsUnPublish,
-          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionsUnpublishRequest.FromString,
+      'PostModelVersionsUnPublish': grpc.unary_unary_rpc_method_handler(
+          servicer.PostModelVersionsUnPublish,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUnPublishRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostModelVersions': grpc.unary_unary_rpc_method_handler(
