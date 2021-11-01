@@ -41,13 +41,7 @@ def test_deep_classification_training_with_queries(channel):
     app_id = "my-app-" + uuid.uuid4().hex[:20]
     post_apps_response = stub.PostApps(
         service_pb2.PostAppsRequest(
-            apps=[
-                resources_pb2.App(
-                    id=app_id,
-                    default_workflow_id="General",
-                    user_id="me"
-                )
-            ]
+            apps=[resources_pb2.App(id=app_id, default_workflow_id="General", user_id="me")]
         ),
         metadata=pat_key_metadata(),
     )
