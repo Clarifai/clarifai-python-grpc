@@ -205,11 +205,11 @@ def test_deep_classification_training_with_queries(channel):
 
 
 def _get_model_type_for_template(
-    stub: service_pb2_grpc.V2Stub, template_name: str
+    stub: service_pb2_grpc.V2Stub, api_key: str, template_name: str
 ) -> resources_pb2.ModelType:
     list_model_types_response = stub.ListModelTypes(
         service_pb2.ListModelTypesRequest(page=1, per_page=1000),
-        metadata=api_key_metadata(),
+        metadata=api_key_metadata(api_key),
     )
     raise_on_failure(list_model_types_response)
     for model_type in list_model_types_response.model_types:
