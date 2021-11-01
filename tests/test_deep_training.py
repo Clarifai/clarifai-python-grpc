@@ -53,6 +53,10 @@ def test_deep_classification_training_with_queries(channel):
 
     post_keys_response = stub.PostKeys(
         service_pb2.PostKeysRequest(
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="me",
+                app_id=app_id,
+            ),
             keys=[
                 resources_pb2.Key(
                     description="All scopes",
