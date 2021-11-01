@@ -1,4 +1,5 @@
 import csv
+import logging
 
 GT_LABELS = ['adult_&_explicit_sexual_content',
              'arms_&_ammunition',
@@ -16,34 +17,48 @@ def load_from_csv(input_ids, csv_path, negative_concept):
 
     # Map video ids to their input hash
     id_to_hash = {}
+    sfl_to_hash = {} # source-file-line
     for hash, value in input_ids.items():
         id_to_hash[value['id']] = hash
+        sfl_to_hash[value['source-file-line']] = hash
 
     # Extract ground truth labels for every input present in the file
     ground_truth = {}
     with open(csv_path, 'r') as f:
         reader = csv.DictReader(f)
         for line in reader:
-            if line['VIDEO_ID'] in id_to_hash:
-                gt_keys = []
+            line = {k.lower(): v for k, v in line.items()}
+
+            # Check if exists in ground truth file 
+            hash = None
+            if line['video_id'] in id_to_hash:
+                hash = id_to_hash[line['video_id']]
+            elif line['video_id'] in sfl_to_hash:
+                hash = sfl_to_hash[line['video_id']]
+
+            # If exists, extract gt keys
+            if hash:
+                gt_labels = []
                 for key in line:
                     if key in GT_LABELS and int(line[key]):
-                        gt_keys.append(key)
-                if not gt_keys:
-                    gt_keys = [negative_concept]
-                ground_truth[id_to_hash[line['VIDEO_ID']]] = gt_keys
+                        gt_labels.append(key)
+                if not gt_labels:
+                    gt_labels = [negative_concept]
+                ground_truth[hash] = gt_labels
     
     # In case some inputs are not in the file, create empty lists
     no_gt_count = 0
     for input_id in input_ids:
         if not input_id in ground_truth:
             ground_truth[input_id] = []
+            # video_id = input_ids[input_id]['id']
+            # stl = input_ids[input_id]['source-file-line']
             no_gt_count += 1
     
     if no_gt_count > 0:
-        print("Ground truth was extracted from csv. {} inputs do not have ground truth.". format(no_gt_count)) 
+        logging.info("Ground truth was extracted from csv. {} inputs do not have ground truth.". format(no_gt_count)) 
     else:
-        print("Ground truth was extracted from csv for all inputs.")
+        logging.info("Ground truth was extracted from csv for all inputs.")
 
     return ground_truth
         
@@ -60,6 +75,6 @@ def load_from_metadata(input_ids):
                 gt_labels.append(key)
             ground_truth[input_id] = gt_labels
 
-    print('Ground truth extracted from metadata.')
+    logging.info('Ground truth extracted from metadata.')
 
     return ground_truth

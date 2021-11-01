@@ -2,6 +2,7 @@ import os
 import json
 import argparse
 import itertools
+import logging
 
 # Import in the Clarifai gRPC based objects needed
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
@@ -10,15 +11,18 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from google.protobuf.json_format import MessageToDict
 import load_ground_truth
 
+# Setup logging
+logging.basicConfig(format='%(asctime)s %(message)s')
+
 # Construct the communications channel and the object stub to call requests on.
 channel = ClarifaiChannel.get_json_channel()
 stub = service_pb2_grpc.V2Stub(channel)
 
 def process_response(response):
     if response.status.code != status_code_pb2.SUCCESS:
-        print("There was an error with your request!")
-        print("\tDescription: {}".format(response.status.description))
-        print("\tDetails: {}".format(response.status.details))
+        logging.error("There was an error with your request!")
+        logging.error("\tDescription: {}".format(response.status.description))
+        logging.error("\tDetails: {}".format(response.status.details))
         raise Exception("Request failed, status code: " + str(response.status.code))
 
 def get_input_ids(args, metadata):
@@ -36,11 +40,11 @@ def get_input_ids(args, metadata):
   for input_object in list_inputs_response.inputs:
     json_obj = MessageToDict(input_object)
     input_ids[json_obj['id']] = json_obj['data']['metadata']
-  print("Input ids fetched. Number of fetched inputs {}".format(len(input_ids)))
+  logging.info("Input ids fetched. Number of fetched inputs {}".format(len(input_ids)))
 
   # # ------ DEBUG CODE
   # input_ids_ = {}
-  # for id in list(input_ids.keys())[0:50]:
+  # for id in list(input_ids.keys())[200:250]:
   #   input_ids_[id] = input_ids[id]
   # input_ids = input_ids_
   # print("Number of selected inputs: ".format(len(input_ids)))
@@ -59,7 +63,7 @@ def get_ground_truth(args, input_ids):
 
   # Count the number of positive and negative labels
   positive_count = sum([1 for input_id in input_ids if args.positive_gt_label in ground_truth[input_id]])
-  negative_count = sum([1 for input_id in input_ids if args.positive_gt_label not in ground_truth[input_id]])
+  negative_count = sum([1 for input_id in input_ids if ground_truth[input_id] == [args.negative_concept]])
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
@@ -70,6 +74,7 @@ def get_ground_truth(args, input_ids):
   # # ------ DEBUG CODE
 
   return ground_truth, positive_count, negative_count
+
 
 def get_annotations(args, metadata, input_ids):
   ''' Get list of annotations for every input id'''
@@ -107,7 +112,7 @@ def get_annotations(args, metadata, input_ids):
             annotation.append(concept)
         # Store metadata
         meta = {'concept': concept, 'userId': ao['userId']}
-        annotation_meta.append(meta)
+        annotation_meta.append(meta)  
         
     annotations[input_id] = annotation
     annotations_meta[input_id] = annotation_meta
@@ -115,7 +120,7 @@ def get_annotations(args, metadata, input_ids):
     # Update max count variable
     annotation_nb_max = max(annotation_nb_max, len(list_annotations_response.annotations))
 
-  print("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
+  logging.info("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
@@ -153,6 +158,8 @@ def aggregate_annotations(args, input_ids, annotations):
         not_annotated_count += 1
     else:
       aggregated_annotations[input_id] = aggregation
+
+  logging.info("Annotations aggregated.")
 
   # TODO: store aggregated annotations
   return aggregated_annotations, not_annotated_count
@@ -193,6 +200,7 @@ def compute_consensus(args, input_ids, aggregated_annotations):
         else:
           consensus[input_id] = [args.negative_concept]
 
+  logging.info("Consensus computed.")
   return consensus, no_consensus_count
 
 
@@ -206,36 +214,72 @@ def compute_stats(args, input_ids, consensus, ground_truth):
     # Check first if this input was annotated (consensus varible contains only anotated inputs)
     if input_id in consensus:
       if consensus[input_id] is not None:
+
+        consensus_ = consensus[input_id]
+        ground_truth_ = ground_truth[input_id]
+
         if any([True for concept in consensus[input_id] if args.positive_concept_key in concept]): # annotation is positive
           if args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
             stats[input_id] = 'TP'
             TP_count += 1
-          else: # ground truth is negative
+          else: # ground truth is negative or something else
             stats[input_id] = 'FP'
             FP_count += 1 
         elif args.negative_concept in consensus[input_id]: # annotation is negative
-          if args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
-            stats[input_id] = 'FN'
-            FN_count += 1
-          else: # ground truth is negative
+          if ground_truth[input_id] == [args.negative_concept]: # ground truth is negative
             stats[input_id] = 'TN'
             TN_count += 1
+          elif args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
+            stats[input_id] = 'FN'
+            FN_count += 1
+        else: # annotaion is something else
+          if (args.positive_gt_label in ground_truth[input_id]): # ground truth is positive
+            stats[input_id] = 'FN'
+            FN_count += 1
 
+  logging.info("Stats computed.")
   return stats, TP_count, TN_count, FP_count, FN_count
 
 
-def plot_statistics(args, not_annotated_count, no_full_consensus_count, 
+def compute_non_positives(args, input_ids, consensus, ground_truth):
+  ''' Compute how many times 3 or more labellers had not flaged any of positive labels '''
+
+  # Count number of non positives from consensus 
+  non_positive_count = 0
+  for input_id in input_ids:
+    if input_id in consensus:
+      if consensus[input_id] is None:
+        non_positive_count += 1
+      elif not args.positive_concept_key in consensus[input_id]:
+        non_positive_count += 1
+
+  # Count number of non positives in ground_truth
+  non_positive_count_gt = 0
+  for input_id in input_ids:
+    if input_id in ground_truth and (not args.positive_gt_label in ground_truth[input_id]):
+      non_positive_count_gt += 1 
+
+  logging.info("Non positives computed.")
+  return non_positive_count, non_positive_count_gt
+
+
+def plot_results(args, not_annotated_count, no_consensus_count, 
                     TP_count, TN_count, FP_count, FN_count,
-                    positive_count, negative_count):
+                    positive_gt_count, negative_gt_count, 
+                    non_positive_count, non_positive_count_gt):
     ''' Print basic statistics in the console '''
                
-    print(" Not Annotated: {}".format(not_annotated_count))
-    print(" No Consensus: {}".format(no_full_consensus_count))
-    print(" (TP) {} match: {}/{}".format(args.experiment_name, TP_count, positive_count))
-    print(" (TN) Not {} match: {}/{}".format(args.experiment_name, TN_count, negative_count))
-    print(" (FP) Not {} but labeled as {}: {}/{}".format(args.experiment_name, args.experiment_name, FP_count, negative_count))
-    print(" (FN) {} but not labeled as {}: {}/{}".format(args.experiment_name, args.experiment_name, FN_count, positive_count))
-    print(" ")
+    print(" Groud truth --- {}: {} | {}: {} | not {}: {}".
+          format(args.negative_concept[2:], negative_gt_count,
+                 args.positive_concept_key[2:], positive_gt_count,
+                 args.positive_concept_key[2:], non_positive_count_gt))
+    print(" Labels --- not annotated: {} | no consensus: {} | not {}: {}".
+          format(not_annotated_count, no_consensus_count, args.positive_concept_key[2:], non_positive_count))
+    print(" (TP) {} match: {}".format(args.positive_concept_key[2:], TP_count))
+    print(" (TN) {} match: {}".format(args.negative_concept[2:], TN_count))
+    print(" (FP) not {} but labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FP_count))
+    print(" (FN) {} but not labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FN_count))
+
 
 def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats):
   ''' Get information about inputs that were mislabelled '''
@@ -261,6 +305,8 @@ def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, 
         # Add raw information about annotations
         input['annotation_meta'] = annotations_meta[input_id]
   
+  logging.info("Misannotated data extracted and stored.")
+
   return misannotated_ids
         
 
@@ -287,7 +333,7 @@ def save_misannotated_data(args, misannotated_ids):
 
 def main(args, metadata):
 
-  print("----- Experiment {} - {} running -----".format(args.app_name, args.experiment_name))
+  logging.info("----- Experiment {} - {} running -----".format(args.app_name, args.experiment_name))
 
   # Get input ids
   input_ids = get_input_ids(args, metadata)
@@ -295,23 +341,27 @@ def main(args, metadata):
   save_input_metadata(args, input_ids)
 
   # Get ground truth labels for every id
-  ground_truth, positive_count, negative_count = get_ground_truth(args, input_ids)
+  ground_truth, positive_gt_count, negative_gt_count = get_ground_truth(args, input_ids)
 
   # Get annotations for every id together with their aggregations
   annotations, annotations_meta = get_annotations(args, metadata, input_ids)
   aggregated_annotations, not_annotated_count = aggregate_annotations(args, input_ids, annotations)
 
   # Compute consensus
-  consensus, no_full_consensus_count = compute_consensus(args, input_ids, aggregated_annotations)
+  consensus, no_consensus_count = compute_consensus(args, input_ids, aggregated_annotations)
 
   # Compute matches with ground truth
   stats, TP_count, TN_count, FP_count, FN_count = compute_stats(args, input_ids, consensus, ground_truth) 
 
+  # Count non positives
+  non_positive_count, non_positive_count_gt = compute_non_positives(args, input_ids, consensus, ground_truth)
+
   # Plot statistics using computed values
   print("--------- Results ---------")
-  plot_statistics(args, not_annotated_count, no_full_consensus_count, 
+  plot_results(args, not_annotated_count, no_consensus_count, 
                   TP_count, TN_count, FP_count, FN_count,
-                  positive_count, negative_count)
+                  positive_gt_count, negative_gt_count, 
+                  non_positive_count, non_positive_count_gt)
 
   # Get and save fails
   misannotated_ids = get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats)
@@ -321,13 +371,13 @@ def main(args, metadata):
 if __name__ == '__main__':  
   parser = argparse.ArgumentParser(description="Run tracking.")
   parser.add_argument('--app_name',
-                      default='',
+                      default='ENG',
                       help="Name of the app in Clarifai UI.")
   parser.add_argument('--api_key',
                       default='',
                       help="API key to the required application.")                     
   parser.add_argument('--experiment', 
-                      default=1, 
+                      default=2, 
                       choices={1, 2, 3, 4},
                       type=int, 
                       help="Which experiment to analyize. Depends on the app.")
@@ -354,7 +404,7 @@ if __name__ == '__main__':
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save input metadata in file or not.")
   parser.add_argument('--save_misannotations',
-                      default=False,
+                      default=True,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save information about misannotated inputs in file or not.")
 
