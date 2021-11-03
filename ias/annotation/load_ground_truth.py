@@ -46,21 +46,15 @@ def load_from_csv(input_ids, csv_path, negative_concept):
                     gt_labels = [negative_concept]
                 ground_truth[hash] = gt_labels
     
-    # In case some inputs are not in the file, create empty lists
-    no_gt_count = 0
-    for input_id in input_ids:
-        if not input_id in ground_truth:
-            ground_truth[input_id] = []
-            # video_id = input_ids[input_id]['id']
-            # stl = input_ids[input_id]['source-file-line']
-            no_gt_count += 1
+    # Count number of inputs with no ground truth
+    no_gt_count = sum([1 for input_id in input_ids if not input_id in ground_truth]) 
     
     if no_gt_count > 0:
         logging.info("Ground truth was extracted from csv. {} inputs do not have ground truth.". format(no_gt_count)) 
     else:
         logging.info("Ground truth was extracted from csv for all inputs.")
 
-    return ground_truth
+    return ground_truth, no_gt_count
         
 
 def load_from_metadata(input_ids):

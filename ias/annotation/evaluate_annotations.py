@@ -12,7 +12,10 @@ from google.protobuf.json_format import MessageToDict
 import load_ground_truth
 
 # Setup logging
-logging.basicConfig(format='%(asctime)s %(message)s')
+logging.basicConfig(format='%(asctime)s %(message)s \t')
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
 
 # Construct the communications channel and the object stub to call requests on.
 channel = ClarifaiChannel.get_json_channel()
@@ -20,9 +23,9 @@ stub = service_pb2_grpc.V2Stub(channel)
 
 def process_response(response):
     if response.status.code != status_code_pb2.SUCCESS:
-        logging.error("There was an error with your request!")
-        logging.error("\tDescription: {}".format(response.status.description))
-        logging.error("\tDetails: {}".format(response.status.details))
+        logger.error("There was an error with your request!")
+        logger.error("\tDescription: {}".format(response.status.description))
+        logger.error("\tDetails: {}".format(response.status.details))
         raise Exception("Request failed, status code: " + str(response.status.code))
 
 def get_input_ids(args, metadata):
@@ -40,40 +43,56 @@ def get_input_ids(args, metadata):
   for input_object in list_inputs_response.inputs:
     json_obj = MessageToDict(input_object)
     input_ids[json_obj['id']] = json_obj['data']['metadata']
-  logging.info("Input ids fetched. Number of fetched inputs {}".format(len(input_ids)))
+  logger.info("Input ids fetched. Number of fetched inputs: {}".format(len(input_ids)))
 
   # # ------ DEBUG CODE
   # input_ids_ = {}
-  # for id in list(input_ids.keys())[200:250]:
+  # for id in list(input_ids.keys())[0:100]:
   #   input_ids_[id] = input_ids[id]
   # input_ids = input_ids_
-  # print("Number of selected inputs: ".format(len(input_ids)))
+  # logger.info("Number of selected inputs: {}".format(len(input_ids)))
   # # ------ DEBUG CODE
 
-  return input_ids
+  return input_ids, len(input_ids)
 
 
 def get_ground_truth(args, input_ids):
   ''' Get list of ground truth concepts for every input id'''
 
   if os.path.exists(args.ground_truth):
-    ground_truth = load_ground_truth.load_from_csv(input_ids, args.ground_truth, args.negative_concept)
+    ground_truth, no_gt_count = load_ground_truth.load_from_csv(input_ids, args.ground_truth, args.negative_concept)
   else:
-    ground_truth = load_ground_truth.load_from_metadata(input_ids)
+    ground_truth, no_gt_count = load_ground_truth.load_from_metadata(input_ids)
 
   # Count the number of positive and negative labels
-  positive_count = sum([1 for input_id in input_ids if args.positive_gt_label in ground_truth[input_id]])
-  negative_count = sum([1 for input_id in input_ids if ground_truth[input_id] == [args.negative_concept]])
+  positive_count, negative_count = 0, 0
+  for input_id in input_ids:
+    if input_id in ground_truth:
+      if args.positive_gt_label in ground_truth[input_id]:
+        positive_count += 1
+      if ground_truth[input_id] == [args.negative_concept]:
+        negative_count += 1
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
   # labels = list(itertools.chain(*[ground_truth[input_id] for input_id in input_ids]))
   # labels_count = {l:labels.count(l) for l in labels}
-  # print("Ground truth labels are: ")
-  # [print("\t{}: {}".format(k, v)) for k, v in labels_count.items()]
+  # logger.info("Ground truth labels are: ")
+  # [logger.info("\t{}: {}".format(k, v)) for k, v in labels_count.items()]
   # # ------ DEBUG CODE
 
-  return ground_truth, positive_count, negative_count
+  return ground_truth, positive_count, negative_count, no_gt_count
+
+
+def remove_inputs_without_gt(input_ids, ground_truth):
+  ''' Eliminate inputs that do not have any ground truth'''
+
+  input_ids_with_gt = {}
+  for input_id in input_ids:
+    if input_id in ground_truth:
+      input_ids_with_gt[input_id] = input_ids[input_id]
+
+  return input_ids_with_gt
 
 
 def get_annotations(args, metadata, input_ids):
@@ -90,7 +109,7 @@ def get_annotations(args, metadata, input_ids):
     list_annotations_response = stub.ListAnnotations(
                                 service_pb2.ListAnnotationsRequest(
                                 input_ids=[input_id], 
-                                per_page=25,
+                                per_page=30,
                                 list_all_annotations=True
                                 ),
       metadata=metadata
@@ -103,9 +122,17 @@ def get_annotations(args, metadata, input_ids):
     annotation_meta = []
     for annotation_object in list_annotations_response.annotations:
       ao = MessageToDict(annotation_object)
+
+      # Check for concepts in data but also time segments
+      concepts = []
       if 'concepts' in ao['data'] and len(ao['data']['concepts'])>0:
-        # Store actual concept
-        concept = ao['data']['concepts'][0]['name'] # TODO: check if id always = name
+        concepts.append(ao['data']['concepts'][0]['name']) # TODO: check if id always = name
+      elif 'timeSegments' in ao['data'] and 'concepts' in ao['data']['timeSegments'][0]['data'] and \
+           len(ao['data']['timeSegments'][0]['data'])>0:
+        concepts.append(ao['data']['timeSegments'][0]['data']['concepts'][0]['name'])
+
+      # Store all found concepts
+      for concept in concepts:
         if not args.label_2_only:
           annotation.append(concept)
         elif '2-' in concept:
@@ -120,14 +147,14 @@ def get_annotations(args, metadata, input_ids):
     # Update max count variable
     annotation_nb_max = max(annotation_nb_max, len(list_annotations_response.annotations))
 
-  logging.info("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
+  logger.info("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
   # concepts = list(itertools.chain(*[annotations[input_id] for input_id in input_ids]))
   # concepts_count = {c:concepts.count(c) for c in concepts}
-  # print("Annotation concepts are: ")
-  # [print("\t{}: {}".format(k, v)) for k, v in concepts_count.items()]
+  # logger.info("Annotation concepts are: ")
+  # [logger.info("\t{}: {}".format(k, v)) for k, v in concepts_count.items()]
   # # ------ DEBUG CODE
 
   return annotations, annotations_meta
@@ -159,7 +186,7 @@ def aggregate_annotations(args, input_ids, annotations):
     else:
       aggregated_annotations[input_id] = aggregation
 
-  logging.info("Annotations aggregated.")
+  logger.info("Annotations aggregated.")
 
   # TODO: store aggregated annotations
   return aggregated_annotations, not_annotated_count
@@ -200,7 +227,7 @@ def compute_consensus(args, input_ids, aggregated_annotations):
         else:
           consensus[input_id] = [args.negative_concept]
 
-  logging.info("Consensus computed.")
+  logger.info("Consensus computed.")
   return consensus, no_consensus_count
 
 
@@ -211,13 +238,11 @@ def compute_stats(args, input_ids, consensus, ground_truth):
 
   stats = {}
   for input_id in input_ids:
-    # Check first if this input was annotated (consensus varible contains only anotated inputs)
-    if input_id in consensus:
-      if consensus[input_id] is not None:
-
-        consensus_ = consensus[input_id]
-        ground_truth_ = ground_truth[input_id]
-
+    # Check first if this input was annotated (consensus varible contains only annotated inputs)
+    # and check if ground truth exists for this input
+    if input_id in consensus and input_id in ground_truth:
+      # Check if consensus was reached
+      if consensus[input_id] is not None: 
         if any([True for concept in consensus[input_id] if args.positive_concept_key in concept]): # annotation is positive
           if args.positive_gt_label in ground_truth[input_id]: # ground truth is positive
             stats[input_id] = 'TP'
@@ -237,7 +262,7 @@ def compute_stats(args, input_ids, consensus, ground_truth):
             stats[input_id] = 'FN'
             FN_count += 1
 
-  logging.info("Stats computed.")
+  logger.info("Stats computed.")
   return stats, TP_count, TN_count, FP_count, FN_count
 
 
@@ -256,30 +281,35 @@ def compute_non_positives(args, input_ids, consensus, ground_truth):
   # Count number of non positives in ground_truth
   non_positive_count_gt = 0
   for input_id in input_ids:
-    if input_id in ground_truth and (not args.positive_gt_label in ground_truth[input_id]):
+    if not args.positive_gt_label in ground_truth[input_id]:
       non_positive_count_gt += 1 
 
-  logging.info("Non positives computed.")
+  logger.info("Non positives computed.")
   return non_positive_count, non_positive_count_gt
 
 
-def plot_results(args, not_annotated_count, no_consensus_count, 
-                    TP_count, TN_count, FP_count, FN_count,
-                    positive_gt_count, negative_gt_count, 
-                    non_positive_count, non_positive_count_gt):
+def plot_results(args, input_count, no_gt_count, 
+                 not_annotated_count, no_consensus_count,
+                 TP_count, TN_count, FP_count, FN_count,
+                 positive_gt_count, negative_gt_count, 
+                 non_positive_count, non_positive_gt_count):
     ''' Print basic statistics in the console '''
-               
-    print(" Groud truth --- {}: {} | {}: {} | not {}: {}".
-          format(args.negative_concept[2:], negative_gt_count,
+    
+    print("\n--------- Results ---------")
+    print("Inputs --- total retrieved: {} | total kept: {}".
+          format(input_count, input_count-no_gt_count))
+    print("Groud truth --- not available {} | {}: {} | {}: {} | not {}: {}".
+          format(no_gt_count,
+                 args.negative_concept[2:], negative_gt_count,
                  args.positive_concept_key[2:], positive_gt_count,
-                 args.positive_concept_key[2:], non_positive_count_gt))
-    print(" Labels --- not annotated: {} | no consensus: {} | not {}: {}".
+                 args.positive_concept_key[2:], non_positive_gt_count))
+    print("Labels --- not annotated: {} | no consensus: {} | not {}: {}".
           format(not_annotated_count, no_consensus_count, args.positive_concept_key[2:], non_positive_count))
-    print(" (TP) {} match: {}".format(args.positive_concept_key[2:], TP_count))
-    print(" (TN) {} match: {}".format(args.negative_concept[2:], TN_count))
-    print(" (FP) not {} but labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FP_count))
-    print(" (FN) {} but not labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FN_count))
-
+    print("(TP) {} match: {}".format(args.positive_concept_key[2:], TP_count))
+    print("(TN) {} match: {}".format(args.negative_concept[2:], TN_count))
+    print("(FP) not {} but labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FP_count))
+    print("(FN) {} but not labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FN_count))
+    print("\n")
 
 def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats):
   ''' Get information about inputs that were mislabelled '''
@@ -305,7 +335,7 @@ def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, 
         # Add raw information about annotations
         input['annotation_meta'] = annotations_meta[input_id]
   
-  logging.info("Misannotated data extracted and stored.")
+  logger.info("Misannotated data extracted and stored.")
 
   return misannotated_ids
         
@@ -333,15 +363,16 @@ def save_misannotated_data(args, misannotated_ids):
 
 def main(args, metadata):
 
-  logging.info("----- Experiment {} - {} running -----".format(args.app_name, args.experiment_name))
+  logger.info("----- Experiment {} - {} running -----".format(args.app_name, args.experiment_name))
 
   # Get input ids
-  input_ids = get_input_ids(args, metadata)
+  input_ids, input_count = get_input_ids(args, metadata)
   # Save metadata to re-use later if needed
   save_input_metadata(args, input_ids)
 
-  # Get ground truth labels for every id
-  ground_truth, positive_gt_count, negative_gt_count = get_ground_truth(args, input_ids)
+  # Get ground truth labels for every input and eliminate those that do not have it
+  ground_truth, positive_gt_count, negative_gt_count, no_gt_count = get_ground_truth(args, input_ids)
+  input_ids = remove_inputs_without_gt(input_ids, ground_truth)
 
   # Get annotations for every id together with their aggregations
   annotations, annotations_meta = get_annotations(args, metadata, input_ids)
@@ -357,11 +388,11 @@ def main(args, metadata):
   non_positive_count, non_positive_count_gt = compute_non_positives(args, input_ids, consensus, ground_truth)
 
   # Plot statistics using computed values
-  print("--------- Results ---------")
-  plot_results(args, not_annotated_count, no_consensus_count, 
-                  TP_count, TN_count, FP_count, FN_count,
-                  positive_gt_count, negative_gt_count, 
-                  non_positive_count, non_positive_count_gt)
+  plot_results(args, input_count, no_gt_count,
+               not_annotated_count, no_consensus_count, 
+               TP_count, TN_count, FP_count, FN_count,
+               positive_gt_count, negative_gt_count, 
+               non_positive_count, non_positive_count_gt)
 
   # Get and save fails
   misannotated_ids = get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats)
@@ -371,13 +402,13 @@ def main(args, metadata):
 if __name__ == '__main__':  
   parser = argparse.ArgumentParser(description="Run tracking.")
   parser.add_argument('--app_name',
-                      default='ENG',
+                      default='',
                       help="Name of the app in Clarifai UI.")
   parser.add_argument('--api_key',
                       default='',
                       help="API key to the required application.")                     
   parser.add_argument('--experiment', 
-                      default=2, 
+                      default=1, 
                       choices={1, 2, 3, 4},
                       type=int, 
                       help="Which experiment to analyize. Depends on the app.")
