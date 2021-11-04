@@ -100,6 +100,8 @@ def get_annotations(args, metadata, input_ids):
 
   # Variable to check if number of annotations per page is sufficient
   annotation_nb_max = 0
+  # Number of inputs with duplicated annotations
+  duplicate_count = 0 
 
   annotations = {} # list of concepts
   annotations_meta = {} # store metadata
@@ -117,9 +119,9 @@ def get_annotations(args, metadata, input_ids):
     process_response(list_annotations_response)
     # TODO: make requests in batches
 
-    # Store annotations
-    annotation = []
-    annotation_meta = []
+    meta_ = []
+
+    # Loop through all annotations
     for annotation_object in list_annotations_response.annotations:
       ao = MessageToDict(annotation_object)
 
@@ -131,23 +133,31 @@ def get_annotations(args, metadata, input_ids):
            len(ao['data']['timeSegments'][0]['data'])>0:
         concepts.append(ao['data']['timeSegments'][0]['data']['concepts'][0]['name'])
 
-      # Store all found concepts
+      # Get meta about all found concepts besides duplicates
       for concept in concepts:
-        if not args.label_2_only:
-          annotation.append(concept)
-        elif '2-' in concept:
-            annotation.append(concept)
-        # Store metadata
-        meta = {'concept': concept, 'userId': ao['userId']}
-        annotation_meta.append(meta)  
-        
-    annotations[input_id] = annotation
-    annotations_meta[input_id] = annotation_meta
+        meta_.append((concept, ao['userId']))
+
+    # Remove duplicates from meta, transform it into dictionary (for further convenience) and store
+    meta = set(meta_)
+    meta = [{'concept': m[0], 'userId': m[1]} for m in meta]
+    annotations_meta[input_id] = meta
+
+    # Singal potential duplicates
+    if len(meta_) > len(meta):
+        duplicate_count += 1
+
+    # Extract concepts only
+    if args.label_2_only:
+      annotations[input_id] = [m['concept'] for m in meta if '2-' in m['concept']]
+    else:
+      annotations[input_id] = [m['concept'] for m in meta]
 
     # Update max count variable
     annotation_nb_max = max(annotation_nb_max, len(list_annotations_response.annotations))
 
-  logger.info("Annotations fetched. Maximum number of annotation entries per input: {}".format(annotation_nb_max))
+  logger.info("Annotations fetched")
+  logger.info("\tMaximum number of annotation entries per input: {}".format(annotation_nb_max))
+  logger.info("\tNumber of annotated inputs with duplicates: {}".format(duplicate_count))
 
   # # ------ DEBUG CODE
   # # Compute list of unique labels
