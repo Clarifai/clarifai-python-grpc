@@ -13,6 +13,9 @@ GT_LABELS = ['adult_&_explicit_sexual_content',
              'terrorism',
              'debated_sensitive_social_issue']
 
+GT_LABELS_ = [label + '_y' for label in GT_LABELS]
+
+
 def load_from_csv(input_ids, csv_path, negative_concept):
 
     # Map video ids to their input hash
@@ -40,8 +43,14 @@ def load_from_csv(input_ids, csv_path, negative_concept):
             if hash:
                 gt_labels = []
                 for key in line:
-                    if key in GT_LABELS and int(line[key]):
-                        gt_labels.append(key)
+                    if _clean_key(key) is not None:
+                        # Catch exceptions to avoid errors related to incorrect ground truth entries
+                        try:
+                            if int(line[key]):
+                                gt_labels.append(_clean_key(key))
+                        except:
+                            logging.warning('\t Incorrect ground truth for {}. Input ignored.'.format(line['video_id']))
+                            break
                 if not gt_labels:
                     gt_labels = [negative_concept]
                 ground_truth[hash] = gt_labels
@@ -72,3 +81,13 @@ def load_from_metadata(input_ids):
     logging.info('Ground truth extracted from metadata.')
 
     return ground_truth
+
+
+def _clean_key(key):
+    
+    if key in GT_LABELS:
+        return key
+    elif key in GT_LABELS_:
+        return key[:-2]
+    else:
+        return None

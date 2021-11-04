@@ -298,7 +298,7 @@ def plot_results(args, input_count, no_gt_count,
     print("\n--------- Results ---------")
     print("Inputs --- total retrieved: {} | total kept: {}".
           format(input_count, input_count-no_gt_count))
-    print("Groud truth --- not available {} | {}: {} | {}: {} | not {}: {}".
+    print("Ground truth --- not available {} | {}: {} | {}: {} | not {}: {}".
           format(no_gt_count,
                  args.negative_concept[2:], negative_gt_count,
                  args.positive_concept_key[2:], positive_gt_count,
