@@ -1,16 +1,15 @@
 import os
 import uuid
 
-import pytest
 from google.protobuf import struct_pb2
 
-from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
     raise_on_failure,
     wait_for_inputs_upload,
     wait_for_model_trained,
     post_model_outputs_and_maybe_allow_retries,
+    both_channels,
 )
 
 URLS = [
@@ -36,19 +35,17 @@ def api_key_metadata(api_key: str):
     return (("authorization", "Key %s" % api_key),)
 
 
-@pytest.mark.skip(reason="internal user needs to test this")
-def test_deep_classification_training_with_queries():
-    stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
-
+@both_channels
+def test_deep_classification_training_with_queries(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
     app_id = "my-app-" + uuid.uuid4().hex[:20]
     post_apps_response = stub.PostApps(
         service_pb2.PostAppsRequest(
-            apps=[
-                resources_pb2.App(
-                    id=app_id,
-                    default_workflow_id="General",
-                )
-            ]
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="me",
+                app_id=app_id,
+            ),
+            apps=[resources_pb2.App(id=app_id, default_workflow_id="General", user_id="me")],
         ),
         metadata=pat_key_metadata(),
     )
@@ -56,6 +53,10 @@ def test_deep_classification_training_with_queries():
 
     post_keys_response = stub.PostKeys(
         service_pb2.PostKeysRequest(
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="me",
+                app_id=app_id,
+            ),
             keys=[
                 resources_pb2.Key(
                     description="All scopes",
