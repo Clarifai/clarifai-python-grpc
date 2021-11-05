@@ -47,10 +47,10 @@ def get_input_ids(args, metadata):
 
   # # ------ DEBUG CODE
   # input_ids_ = {}
-  # for id in list(input_ids.keys())[0:100]:
+  # for id in list(input_ids.keys())[200:250]:
   #   input_ids_[id] = input_ids[id]
   # input_ids = input_ids_
-  # logger.info("Number of selected inputs: {}".format(len(input_ids)))
+  # print("Number of selected inputs: {}".format(len(input_ids)))
   # # ------ DEBUG CODE
 
   return input_ids, len(input_ids)
@@ -77,8 +77,8 @@ def get_ground_truth(args, input_ids):
   # # Compute list of unique labels
   # labels = list(itertools.chain(*[ground_truth[input_id] for input_id in input_ids]))
   # labels_count = {l:labels.count(l) for l in labels}
-  # logger.info("Ground truth labels are: ")
-  # [logger.info("\t{}: {}".format(k, v)) for k, v in labels_count.items()]
+  # print("Ground truth labels are: ")
+  # [print("\t{}: {}".format(k, v)) for k, v in labels_count.items()]
   # # ------ DEBUG CODE
 
   return ground_truth, positive_count, negative_count, no_gt_count
@@ -102,6 +102,7 @@ def get_annotations(args, metadata, input_ids):
   annotation_nb_max = 0
   # Number of inputs with duplicated annotations
   duplicate_count = 0 
+  duplicated_inputs = []
 
   annotations = {} # list of concepts
   annotations_meta = {} # store metadata
@@ -145,6 +146,9 @@ def get_annotations(args, metadata, input_ids):
     # Singal potential duplicates
     if len(meta_) > len(meta):
         duplicate_count += 1
+        duplicated_inputs.append({'input_id': input_id, 
+                                  'video_id': input_ids[input_id]['source-file-line'],  
+                                  'duplicates': len(meta_) - len(meta)})
 
     # Extract concepts only
     if args.label_2_only:
@@ -160,11 +164,19 @@ def get_annotations(args, metadata, input_ids):
   logger.info("\tNumber of annotated inputs with duplicates: {}".format(duplicate_count))
 
   # # ------ DEBUG CODE
+  # # Print duplicates
+  # print('\nInput id - Video id - Duplicates')
+  # for input in duplicated_inputs:
+  #   print("{} - {} - {}".format(input['input_id'], input['video_id'], input['duplicates']))
+  # print('\n')
+  # # ------ DEBUG CODE
+
+  # # ------ DEBUG CODE
   # # Compute list of unique labels
   # concepts = list(itertools.chain(*[annotations[input_id] for input_id in input_ids]))
   # concepts_count = {c:concepts.count(c) for c in concepts}
-  # logger.info("Annotation concepts are: ")
-  # [logger.info("\t{}: {}".format(k, v)) for k, v in concepts_count.items()]
+  # print("Annotation concepts are: ")
+  # [print("\t{}: {}".format(k, v)) for k, v in concepts_count.items()]
   # # ------ DEBUG CODE
 
   return annotations, annotations_meta
@@ -207,6 +219,8 @@ def compute_consensus(args, input_ids, aggregated_annotations):
 
   # Variable to count how many times no full consensus has been reached
   no_consensus_count = 0
+  # Varibale to store ids for inputs that had conflicting annotations in consensus
+  conflict_ids = []
 
   def consesus_fun(value):
     return True if value >= args.consensus_count else False
@@ -237,8 +251,14 @@ def compute_consensus(args, input_ids, aggregated_annotations):
         else:
           consensus[input_id] = [args.negative_concept]
 
+        # Store inputs with conflicting positive and negative consensus
+        if positive_concepts_concensus and \
+           args.negative_concept in consensus_exists and \
+           consensus_exists[args.negative_concept]:
+          conflict_ids.append(input_id)
+
   logger.info("Consensus computed.")
-  return consensus, no_consensus_count
+  return consensus, no_consensus_count, conflict_ids
 
 
 def compute_stats(args, input_ids, consensus, ground_truth):
@@ -321,10 +341,11 @@ def plot_results(args, input_count, no_gt_count,
     print("(FN) {} but not labeled as {}: {}".format(args.positive_concept_key[2:], args.positive_concept_key[2:], FN_count))
     print("\n")
 
-def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats):
+
+def get_misannotations(input_ids, ground_truth, annotations_meta, consensus, stats):
   ''' Get information about inputs that were mislabelled '''
 
-  misannotated_ids = {}
+  misannotations = {}
   for input_id in input_ids:
     if input_id in stats:
       if stats[input_id] == 'FP' or stats[input_id] == 'FN':
@@ -340,35 +361,52 @@ def get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, 
         # Count different concepts
         concepts = [annotation['concept'] for annotation in annotations_meta[input_id]]
         input['annotations'] = {concept:concepts.count(concept) for concept in concepts}
-        misannotated_ids[input_id] = input
+        misannotations[input_id] = input
 
         # Add raw information about annotations
         input['annotation_meta'] = annotations_meta[input_id]
   
   logger.info("Misannotated data extracted and stored.")
 
-  return misannotated_ids
+  return misannotations
         
 
-def save_input_metadata(args, input_ids):
-  ''' Dump metadata about inputs (including ground truth) to a json file '''
+def get_conflicting_annotations(input_ids, conflict_ids, ground_truth, annotations_meta, consensus):
+  ''' Get information about annotations with conflicting consensus'''
 
-  if args.save_input_meta:
-    with open("{}/{}_{}_input_metadata.json".format(args.out_path, 
-                                              args.app_name, 
-                                              args.experiment_name.replace(' ', '-')
-                                              ), 'w') as f:
-      json.dump(input_ids, f)
+  conflicts = {}
+  for input_id in conflict_ids:
 
-def save_misannotated_data(args, misannotated_ids):
-  ''' Dump data about misannotated inputa to a json file '''
+    # Get initial information minus some fields
+    input = input_ids[input_id]
+    [input.pop(key) for key in ['results', 'source-file-line', 'group']]
 
-  if args.save_misannotations:
-    with open("{}/{}_{}_misannotations.json".format(args.out_path, 
-                                              args.app_name, 
-                                              args.experiment_name.replace(' ', '-')
-                                              ), 'w') as f:
-      json.dump(misannotated_ids, f)
+    # Add information about results
+    input['ground_truth'] = ground_truth[input_id]
+    input['consensus'] = consensus[input_id]
+
+    # Count different concepts
+    concepts = [annotation['concept'] for annotation in annotations_meta[input_id]]
+    input['annotations'] = {concept:concepts.count(concept) for concept in concepts}
+    conflicts[input_id] = input
+
+    # Add raw information about annotations
+    input['annotation_meta'] = annotations_meta[input_id]
+  
+  logger.info("Data about conflicting annotations is extracted and stored.")
+
+  return conflicts
+
+
+def save_data(args, to_save, data, name):
+  ''' Dump provided data to a json file '''
+
+  if to_save:
+    with open("{}/{}_{}_{}.json".format(args.out_path, 
+                                        args.app_name, 
+                                        args.experiment_name.replace(' ', '-'),
+                                        name), 'w') as f:
+      json.dump(data, f)
 
 
 def main(args, metadata):
@@ -378,7 +416,7 @@ def main(args, metadata):
   # Get input ids
   input_ids, input_count = get_input_ids(args, metadata)
   # Save metadata to re-use later if needed
-  save_input_metadata(args, input_ids)
+  save_data(args, args.save_input_meta, input_ids, 'input_metadata')
 
   # Get ground truth labels for every input and eliminate those that do not have it
   ground_truth, positive_gt_count, negative_gt_count, no_gt_count = get_ground_truth(args, input_ids)
@@ -389,7 +427,7 @@ def main(args, metadata):
   aggregated_annotations, not_annotated_count = aggregate_annotations(args, input_ids, annotations)
 
   # Compute consensus
-  consensus, no_consensus_count = compute_consensus(args, input_ids, aggregated_annotations)
+  consensus, no_consensus_count, conflict_ids = compute_consensus(args, input_ids, aggregated_annotations)
 
   # Compute matches with ground truth
   stats, TP_count, TN_count, FP_count, FN_count = compute_stats(args, input_ids, consensus, ground_truth) 
@@ -405,17 +443,22 @@ def main(args, metadata):
                non_positive_count, non_positive_count_gt)
 
   # Get and save fails
-  misannotated_ids = get_misannotated_data(input_ids, ground_truth, annotations_meta, consensus, stats)
-  save_misannotated_data(args, misannotated_ids)
+  misannotations = get_misannotations(input_ids, ground_truth, annotations_meta, consensus, stats)
+  save_data(args, args.save_misannotations, misannotations, 'misannotations')
+  if conflict_ids:
+    conflicts = get_conflicting_annotations(input_ids, conflict_ids, ground_truth, annotations_meta, consensus)
+    save_data(args, args.save_conflicts, conflicts, 'conflicts')
+  else:
+    logger.info("No conflicts in annotations. Nothing to dump.")
 
 
 if __name__ == '__main__':  
   parser = argparse.ArgumentParser(description="Run tracking.")
   parser.add_argument('--app_name',
-                      default='',
+                      default='ENG',
                       help="Name of the app in Clarifai UI.")
   parser.add_argument('--api_key',
-                      default='',
+                      default='b5c4da9e16484908a43921286b9ca7e9',
                       help="API key to the required application.")                     
   parser.add_argument('--experiment', 
                       default=1, 
@@ -435,10 +478,10 @@ if __name__ == '__main__':
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Attempt to allow for a broad consensus (i.e. multiple hate speech labels all pool to hate speech.")
   parser.add_argument('--ground_truth', 
-                      default='', 
+                      default='/Users/olgadergachyova/work/ias/clarifai-python-grpc/ias/annotation/input/ENG_ground_truth.csv', 
                       help="Path to csv file with ground truth.")                    
   parser.add_argument('--out_path', 
-                      default='', 
+                      default='/Users/olgadergachyova/work/ias/clarifai-python-grpc/ias/annotation/output', 
                       help="Path to general output directory for this script.")
   parser.add_argument('--save_input_meta',
                       default=False,
@@ -448,6 +491,10 @@ if __name__ == '__main__':
                       default=True,
                       type=lambda x: (str(x).lower() == 'true'),
                       help="Save information about misannotated inputs in file or not.")
+  parser.add_argument('--save_conflicts',
+                      default=True,
+                      type=lambda x: (str(x).lower() == 'true'),
+                      help="Save information about annotations with conflicting consensus.")
 
   args = parser.parse_args()
 
