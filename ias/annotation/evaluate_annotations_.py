@@ -45,13 +45,13 @@ def get_input_ids(metadata):
     input_ids[json_obj['id']] = json_obj['data']['metadata']
   logger.info("Input ids fetched. Number of fetched inputs: {}".format(len(input_ids)))
 
-  # ------ DEBUG CODE
-  input_ids_ = {}
-  for id in list(input_ids.keys())[200:250]:
-    input_ids_[id] = input_ids[id]
-  input_ids = input_ids_
-  print("Number of selected inputs: {}".format(len(input_ids)))
-  # ------ DEBUG CODE
+  # # ------ DEBUG CODE
+  # input_ids_ = {}
+  # for id in list(input_ids.keys())[200:250]:
+  #   input_ids_[id] = input_ids[id]
+  # input_ids = input_ids_
+  # print("Number of selected inputs: {}".format(len(input_ids)))
+  # # ------ DEBUG CODE
 
   return input_ids, len(input_ids)
 
@@ -227,19 +227,17 @@ def compute_consensus(args, input_ids, aggregated_annotations):
           continue
 
         # If conflict between consenuses exist,
-        # save only positive consensus
+        # keep only positive consensus
         if args.positive_annotation in consensus_exists and \
            args.safe_annotation in consensus_exists and \
            consensus_exists[args.positive_annotation] and \
            consensus_exists[args.safe_annotation]:
             # Save only consensus for positive annotations
             consensus_exists.pop(args.safe_annotation)
-            consensus[input_id] = consensus_exists
-            # Store input id
             conflict_ids.append(input_id)
-        # If not, save all
-        else:
-          consensus[input_id] = consensus_exists
+       
+        # Store consensus
+        consensus[input_id] = [concept for concept, exists in consensus_exists.items() if exists]
 
   logger.info("Consensus computed.")
   return consensus, no_consensus_count, conflict_ids
@@ -275,8 +273,9 @@ def compute_classes(args, input_ids, consensus, ground_truth):
 
     classes[input_id] = classes_
 
-    logger.info("Classes computed.")
-    return classes
+  
+  logger.info("Classes computed.")
+  return classes
 
 
 def compute_totals(input_ids, classes):
@@ -299,8 +298,8 @@ def compute_totals(input_ids, classes):
       if '_LS_' in classes[input_id]:
         totals['_LS_'] += 1
 
-    logger.info("Totals computed.")
-    return totals
+  logger.info("Totals computed.")
+  return totals
   
 
 def compute_metrics(input_ids, classes, totals):
@@ -317,72 +316,64 @@ def compute_metrics(input_ids, classes, totals):
         metric_counts['TP'] += 1
         markers[input_id] = 'TP'
       # True Negative (negative annotation and negative ground truth)
-      elif '_LN_' in classes[input_id] and '_GN_' in classes[input_id]:
+      if '_LN_' in classes[input_id] and '_GN_' in classes[input_id]:
         metric_counts['TN'] += 1
         markers[input_id] = 'TN'
       # True Safe (safe annotation and safe ground truth)
-      elif '_LS_' in classes[input_id] and '_GS_' in classes[input_id]:
+      if '_LS_' in classes[input_id] and '_GS_' in classes[input_id]:
         metric_counts['TS'] += 1
         markers[input_id] = 'TS'
       # Negative False Positive (positive annotation and negative ground truth)
-      elif '_LP_' in classes[input_id] and '_GN_' in classes[input_id]:
+      if '_LP_' in classes[input_id] and '_GN_' in classes[input_id]:
         metric_counts['NFP'] += 1
         markers[input_id] = 'NFP'
       # Safe False Positive (positive annotation and safe ground truth)
-      elif '_LP_' in classes[input_id] and '_GS_' in classes[input_id]:
+      if '_LP_' in classes[input_id] and '_GS_' in classes[input_id]:
         metric_counts['SFP'] += 1
         markers[input_id] = 'SFP'
       # False Negative (negative annotation and positive ground truth)
-      elif '_LN_' in classes[input_id] and '_GP_' in classes[input_id]:
+      if '_LN_' in classes[input_id] and '_GP_' in classes[input_id]:
         metric_counts['FN'] += 1
         markers[input_id] = 'FN'
       # False Safe (safe annotation and positive ground truth)
-      elif '_LS_' in classes[input_id] and '_GP_' in classes[input_id]:
+      if '_LS_' in classes[input_id] and '_GP_' in classes[input_id]:
         metric_counts['FS'] += 1
         markers[input_id] = 'FS'
     
   # Compute rates
   metric_rates = {}
-  metric_rates['TP'] = metric_counts['TP'] / totals['_GP_']
-  metric_rates['TN'] = metric_counts['TN'] / totals['_GN_']
-  metric_rates['TS'] = metric_counts['TS'] / totals['_GS_']
-  metric_rates['NFP'] = metric_counts['NFP'] / totals['_GN_']
-  metric_rates['SFP'] = metric_counts['SFP'] / totals['_GS_']
-  metric_rates['FN'] = metric_counts['FN'] / totals['_GP_']
-  metric_rates['FS'] = metric_counts['FS'] / totals['_GP_']
-  # TODO: handle division by zero
+  metric_rates['TP'] = metric_counts['TP'] / totals['_GP_'] if metric_counts['TP'] != 0 else 0
+  metric_rates['TN'] = metric_counts['TN'] / totals['_GN_'] if metric_counts['TN'] != 0 else 0
+  metric_rates['TS'] = metric_counts['TS'] / totals['_GS_'] if metric_counts['TS'] != 0 else 0
+  metric_rates['NFP'] = metric_counts['NFP'] / totals['_GN_'] if metric_counts['NFP'] != 0 else 0
+  metric_rates['SFP'] = metric_counts['SFP'] / totals['_GS_'] if metric_counts['SFP'] != 0 else 0
+  metric_rates['FN'] = metric_counts['FN'] / totals['_GP_'] if metric_counts['FN'] != 0 else 0
+  metric_rates['FS'] = metric_counts['FS'] / totals['_GP_'] if metric_counts['FS'] != 0 else 0
 
   logger.info("Metrics computed.")
-  return metric_rates, markers
+  return metric_counts, metric_rates, markers
 
 
-def plot_results(input_count, no_gt_count, 
-                 not_annotated_count, no_consensus_count,
-                 totals, metric_rates):
+def plot_results(input_count, no_gt_count, not_annotated_count, no_consensus_count,
+                 metric_counts, metric_rates, totals):
     ''' Print results in the console '''
     
-    print("\n***************** Results *****************")
-    print("--------- Ground truth")
+    print("\n*******************************************")
+    print("--------------- Ground truth --------------\n")
     print("Not available: {}".format(no_gt_count))
-    print("- Positives: {}".format(totals['_GP_']))
-    print("- Negatives: {}".format(totals['_GN_']))
-    print("- Safe: {}".format(totals['_GS_']))
-    print("--------- Labels")
-    print("Total retrieved: {}".format(input_count))
-    print("Kept: {}".format(input_count-no_gt_count))
-    print("Not annotated: {}".format(not_annotated_count))
-    print("No consensus: {}".format(no_consensus_count))
-    print("- Positives: {}".format(totals['_LP_']))
-    print("- Negatives: {}".format(totals['_LN_']))
-    print("- Safe: {}".format(totals['_LS_']))
-    print("--------- Metrics (rates)")
-    print("TP: {}".format(metric_rates['TP']))
-    print("TN: {}".format(metric_rates['TN']))
-    print("TS: {}".format(metric_rates['TS']))
-    print("NFP: {}".format(metric_rates['NFP']))
-    print("SFP: {}".format(metric_rates['SFP']))
-    print("FN: {}".format(metric_rates['FN']))
-    print("FS: {}".format(metric_rates['FS']))
+    print("Positives: {} | Negatives: {} | Safe: {}".format(totals['_GP_'], totals['_GN_'], totals['_GS_']))
+    print("\n------------------ Labels -----------------\n")
+    print("Retrieved: {} | Kept: {}".format(input_count, input_count-no_gt_count))
+    print("Not annotated: {} | No consensus: {}".format(not_annotated_count, no_consensus_count))
+    print("Positives: {} | Negatives: {} | Safe: {}".format(totals['_LP_'], totals['_LN_'], totals['_LS_']))
+    print("\n-------------- Metrics (rates) ------------\n")
+    print("TP: \t{}/{}\t\t= {:.2f}".format(metric_counts['TP'], totals['_GP_'], metric_rates['TP']))
+    print("TN: \t{}/{}\t\t= {:.2f}".format(metric_counts['TN'], totals['_GN_'], metric_rates['TN']))
+    print("TS: \t{}/{}\t\t= {:.2f}".format(metric_counts['TS'], totals['_GS_'], metric_rates['TS']))
+    print("NFP: \t{}/{}\t\t= {:.2f}".format(metric_counts['NFP'], totals['_GN_'], metric_rates['NFP']))
+    print("SFP: \t{}/{}\t\t= {:.2f}".format(metric_counts['SFP'], totals['_GS_'], metric_rates['SFP']))
+    print("FN: \t{}/{}\t\t= {:.2f}".format(metric_counts['FN'], totals['_GP_'], metric_rates['FN']))
+    print("FS: \t{}/{}\t\t= {:.2f}".format(metric_counts['FS'], totals['_GP_'], metric_rates['FS']))
     print("*******************************************\n")
     
 
@@ -477,12 +468,11 @@ def main(args, metadata):
   # Compute results
   classes = compute_classes(args, input_ids, consensus, ground_truth)
   totals = compute_totals(input_ids, classes)
-  metric_rates, markers = compute_metrics(input_ids, classes, totals)
+  metric_counts, metric_rates, markers = compute_metrics(input_ids, classes, totals)
 
   # Plot statistics using computed values
-  plot_results(args, input_count, no_gt_count,
-               not_annotated_count, no_consensus_count,
-               totals, metric_rates) 
+  plot_results(input_count, no_gt_count, not_annotated_count, no_consensus_count,
+               metric_counts, metric_rates, totals) 
 
   # Get and save fails
   false_annotations = get_false_annotations(input_ids, ground_truth, annotations_meta, consensus, markers)
