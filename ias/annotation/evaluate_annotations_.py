@@ -251,18 +251,18 @@ def compute_classes(args, input_ids, consensus, ground_truth):
   classes = {}
   for input_id in input_ids:
     classes_ = []
+
+    # Ground truth first
+    if args.positive_gt in ground_truth[input_id]:
+      classes_.append('_GP_')
+    elif args.safe_gt in ground_truth[input_id]:
+      classes_.append('_GN_')
+      classes_.append('_GS_')
+    else:
+      classes_.append('_GN_')
+
+    # Labels
     if input_id in consensus and consensus[input_id] is not None:
-
-      # Ground truth first
-      if args.positive_gt in ground_truth[input_id]:
-        classes_.append('_GP_')
-      elif args.safe_gt in ground_truth[input_id]:
-        classes_.append('_GN_')
-        classes_.append('_GS_')
-      else:
-        classes_.append('_GN_')
-
-      # Labels
       if args.positive_annotation in consensus[input_id]:
         classes_.append('_LP_')
       elif args.safe_annotation in consensus[input_id]:
@@ -273,7 +273,6 @@ def compute_classes(args, input_ids, consensus, ground_truth):
 
     classes[input_id] = classes_
 
-  
   logger.info("Classes computed.")
   return classes
 
@@ -415,7 +414,7 @@ def get_conflicting_annotations(input_ids, conflict_ids, ground_truth, annotatio
 
     # Get initial information minus some fields
     input = input_ids[input_id]
-    [input.pop(key) for key in ['results', 'source-file-line', 'group']]
+    [input.pop(key) for key in ['results', 'source-file-line', 'group'] if key in input]
 
     # Add information about results
     input['ground_truth'] = ground_truth[input_id]
