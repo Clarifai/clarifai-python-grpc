@@ -86,7 +86,7 @@ def remove_inputs_without_gt(input_ids, ground_truth):
   return input_ids_with_gt
 
 
-def get_annotations(metadata, input_ids):
+def get_annotations(args, metadata, input_ids):
   ''' Get list of annotations for every input id'''
 
   # Variable to check if number of annotations per page is sufficient
@@ -125,7 +125,7 @@ def get_annotations(metadata, input_ids):
            len(ao['data']['timeSegments'][0]['data'])>0:
         concepts.append(ao['data']['timeSegments'][0]['data']['concepts'][0]['name'])
 
-      # Get meta about all found concepts besides duplicates
+      # Get meta about all found concepts
       for concept in concepts:
         meta_.append((concept, ao['userId']))
 
@@ -142,7 +142,25 @@ def get_annotations(metadata, input_ids):
                                   'duplicates': len(meta_) - len(meta)})
 
     # Extract concepts only
-    annotations[input_id] = [m['concept'] for m in meta if '2-' in m['concept']]
+    if args.broad_consensus:
+      user_annotations = {}
+      for m in meta_:
+        # Extract '2-' only
+        if '2-' in m[0]:
+          annotation = m[0] if m[0] == args.safe_annotation else m[0][0:4] # TODO: eliminate 0:4 notation
+          if m[1] in user_annotations:
+            user_annotations[m[1]].append(annotation)
+          else:
+            user_annotations[m[1]] = [annotation]
+
+      # Eliminate duplicate concepts within a user      
+      annotation = []
+      for user in user_annotations:
+        annotation += list(set(user_annotations[user]))
+      annotations[input_id] = annotation
+
+    else:
+      annotations[input_id] = [m['concept'] for m in meta if '2-' in m['concept']]
 
     # Update max count variable
     annotation_nb_max = max(annotation_nb_max, len(list_annotations_response.annotations))
@@ -177,20 +195,7 @@ def aggregate_annotations(args, input_ids, annotations):
   not_annotated_count = 0
 
   for input_id in input_ids:
-    if args.broad_consensus:
-      # Abbreviate concepts to a common key is they contain that key (ex. 2-HB)
-      aggregation = []
-      for annotation in annotations[input_id]:
-        if args.positive_annotation in annotation:
-          aggregation.append(args.positive_annotation)
-        else:
-          aggregation.append(annotation)
-      # Aggregate (count number of occurences of each concept)
-      aggregation = {a:aggregation.count(a) for a in aggregation}
-    else:
-      # Aggregate without abbreviation 
-      aggregation = {a:annotations[input_id].count(a) for a in annotations[input_id]}
-      
+    aggregation = {a:annotations[input_id].count(a) for a in annotations[input_id]}
     if not aggregation:
         not_annotated_count += 1
     else:
@@ -269,7 +274,9 @@ def compute_classes(args, input_ids, consensus, ground_truth):
         classes_.append('_LN_')
         classes_.append('_LS_')
       else:
-        classes_.append('_LN_')  
+        classes_.append('_LN_') 
+    if input_id in consensus and consensus[input_id] is None:
+      classes_.append('_LN_') 
 
     classes[input_id] = classes_
 
@@ -307,7 +314,7 @@ def compute_metrics(input_ids, classes, totals):
   markers = {}
 
   # Compute counts
-  metric_counts = {'TP': 0, 'TN': 0, 'TS': 0, 'NFP': 0, 'SFP': 0, 'FN': 0, 'FS': 0}
+  metric_counts = {'TP': 0, 'TN': 0, 'STN': 0, 'FP': 0, 'SFP': 0, 'FN': 0, 'SFN': 0}
   for input_id in input_ids: 
     if input_id in classes:
       # True Positive (positive annotation and positive ground truth)
@@ -318,14 +325,14 @@ def compute_metrics(input_ids, classes, totals):
       if '_LN_' in classes[input_id] and '_GN_' in classes[input_id]:
         metric_counts['TN'] += 1
         markers[input_id] = 'TN'
-      # True Safe (safe annotation and safe ground truth)
+      # Safe True Negative (safe annotation and safe ground truth)
       if '_LS_' in classes[input_id] and '_GS_' in classes[input_id]:
-        metric_counts['TS'] += 1
-        markers[input_id] = 'TS'
-      # Negative False Positive (positive annotation and negative ground truth)
+        metric_counts['STN'] += 1
+        markers[input_id] = 'STN'
+      # False Positive (positive annotation and negative ground truth)
       if '_LP_' in classes[input_id] and '_GN_' in classes[input_id]:
-        metric_counts['NFP'] += 1
-        markers[input_id] = 'NFP'
+        metric_counts['FP'] += 1
+        markers[input_id] = 'FP'
       # Safe False Positive (positive annotation and safe ground truth)
       if '_LP_' in classes[input_id] and '_GS_' in classes[input_id]:
         metric_counts['SFP'] += 1
@@ -334,20 +341,20 @@ def compute_metrics(input_ids, classes, totals):
       if '_LN_' in classes[input_id] and '_GP_' in classes[input_id]:
         metric_counts['FN'] += 1
         markers[input_id] = 'FN'
-      # False Safe (safe annotation and positive ground truth)
+      # Safe False Safe (safe annotation and positive ground truth)
       if '_LS_' in classes[input_id] and '_GP_' in classes[input_id]:
-        metric_counts['FS'] += 1
-        markers[input_id] = 'FS'
+        metric_counts['SFN'] += 1
+        markers[input_id] = 'SFN'
     
   # Compute rates
   metric_rates = {}
   metric_rates['TP'] = metric_counts['TP'] / totals['_GP_'] if metric_counts['TP'] != 0 else 0
   metric_rates['TN'] = metric_counts['TN'] / totals['_GN_'] if metric_counts['TN'] != 0 else 0
-  metric_rates['TS'] = metric_counts['TS'] / totals['_GS_'] if metric_counts['TS'] != 0 else 0
-  metric_rates['NFP'] = metric_counts['NFP'] / totals['_GN_'] if metric_counts['NFP'] != 0 else 0
+  metric_rates['STN'] = metric_counts['STN'] / totals['_GS_'] if metric_counts['STN'] != 0 else 0
+  metric_rates['FP'] = metric_counts['FP'] / totals['_GN_'] if metric_counts['FP'] != 0 else 0
   metric_rates['SFP'] = metric_counts['SFP'] / totals['_GS_'] if metric_counts['SFP'] != 0 else 0
   metric_rates['FN'] = metric_counts['FN'] / totals['_GP_'] if metric_counts['FN'] != 0 else 0
-  metric_rates['FS'] = metric_counts['FS'] / totals['_GP_'] if metric_counts['FS'] != 0 else 0
+  metric_rates['SFN'] = metric_counts['SFN'] / totals['_GP_'] if metric_counts['SFN'] != 0 else 0
 
   logger.info("Metrics computed.")
   return metric_counts, metric_rates, markers
@@ -368,11 +375,11 @@ def plot_results(input_count, no_gt_count, not_annotated_count, no_consensus_cou
     print("\n-------------- Metrics (rates) ------------\n")
     print("TP: \t{}/{}\t\t= {:.2f}".format(metric_counts['TP'], totals['_GP_'], metric_rates['TP']))
     print("TN: \t{}/{}\t\t= {:.2f}".format(metric_counts['TN'], totals['_GN_'], metric_rates['TN']))
-    print("TS: \t{}/{}\t\t= {:.2f}".format(metric_counts['TS'], totals['_GS_'], metric_rates['TS']))
-    print("NFP: \t{}/{}\t\t= {:.2f}".format(metric_counts['NFP'], totals['_GN_'], metric_rates['NFP']))
+    print("STN: \t{}/{}\t\t= {:.2f}".format(metric_counts['STN'], totals['_GS_'], metric_rates['STN']))
+    print("FP: \t{}/{}\t\t= {:.2f}".format(metric_counts['FP'], totals['_GN_'], metric_rates['FP']))
     print("SFP: \t{}/{}\t\t= {:.2f}".format(metric_counts['SFP'], totals['_GS_'], metric_rates['SFP']))
     print("FN: \t{}/{}\t\t= {:.2f}".format(metric_counts['FN'], totals['_GP_'], metric_rates['FN']))
-    print("FS: \t{}/{}\t\t= {:.2f}".format(metric_counts['FS'], totals['_GP_'], metric_rates['FS']))
+    print("SFN: \t{}/{}\t\t= {:.2f}".format(metric_counts['SFN'], totals['_GP_'], metric_rates['SFN']))
     print("*******************************************\n")
     
 
@@ -382,8 +389,8 @@ def get_false_annotations(input_ids, ground_truth, annotations_meta, consensus, 
   false_annotations = {}
   for input_id in input_ids:
     if input_id in markers:
-      if markers[input_id] == 'NFP' or markers[input_id] == 'SFP' or \
-         markers[input_id] == 'FN' or markers[input_id] == 'FS':
+      if markers[input_id] == 'FP' or markers[input_id] == 'SFP' or \
+         markers[input_id] == 'FN' or markers[input_id] == 'SFN':
         # Get initial information minus some fields
         input = input_ids[input_id]
         [input.pop(key) for key in ['results', 'source-file-line', 'group']]
@@ -437,7 +444,7 @@ def save_data(args, to_save, data, name):
   ''' Dump provided data to a json file '''
 
   if to_save:
-    with open("{}/{}_{}_{}.json".format(args.out_path, 
+    with open("{}/{}/{}_{}_{}.json".format(args.out_path, name, 
                                         args.app_name, 
                                         args.experiment_name.replace(' ', '-'),
                                         name), 'w') as f:
@@ -458,7 +465,7 @@ def main(args, metadata):
   input_ids = remove_inputs_without_gt(input_ids, ground_truth)
 
   # Get annotations for every id together with their aggregations
-  annotations, annotations_meta = get_annotations(metadata, input_ids)
+  annotations, annotations_meta = get_annotations(args, metadata, input_ids)
   aggregated_annotations, not_annotated_count = aggregate_annotations(args, input_ids, annotations)
 
   # Compute consensus
