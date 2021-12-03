@@ -31,6 +31,8 @@ The third version number (`Z` out of `X.Y.Z`) is used by this library for any in
 
 ## Getting started
 
+### Constructing the Stub
+
 Construct the `V2Stub` object using which you'll access all the Clarifai API functionality:
 
 ```python
@@ -46,16 +48,43 @@ stub = service_pb2_grpc.V2Stub(ClarifaiChannel.get_grpc_channel())
 >
 > We only recommend them in special cases.
 
+### Additional Steps for Enterprise Users
+
+If you're using the SaaS platform at Clarifai.com, you're good - there is nothing more you need to do.  If you're using a custom install of the Clarifai platform as an enterprise user, there are several environmental variables that should be set as necessary to communicate to the client where it should reach out to for the connection with the appropriate platform.
+
+```bash
+# For REST calls, you want to set the private IP address of the platform install
+export CLARIFAI_API_BASE=<PLATFORM IP ADDRESS>
+
+# For gRPC calls, you want to set the private IP address of the platform install
+# You may optionally also want to set the gRPC accessible port if you are planning to
+# use the insecure channel.
+
+export CLARIFAI_GRPC_BASE=<PLATFORM IP ADDRESS>
+export CLARIFAI_GRPC_PORT=<PLATFORM gRPC PORT>
+```
+
+## Example Predict Call
+
 Predict concepts in an image:
 
 ```python
 from clarifai_grpc.grpc.api import service_pb2, resources_pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2
 
-# This is how you authenticate.
-metadata = (('authorization', f'Key {YOUR_CLARIFAI_API_KEY}'),)
+# This is how you authenticate.  You should use your Personal Authentication Token
+# that has the appropriate permissions assigned to it.  This can be generated in the
+# portal under your account.
+metadata = (('authorization', f'Key {YOUR_CLARIFAI_PAT}'),)
 
 request = service_pb2.PostModelOutputsRequest(
+    # This is the authentication information. You will need to provide your user id
+    # as well as the application id which contains the model of interest.  For publically
+    # accessible models, any application you've generated will work.
+    'user_app_id' => new UserAppIDSet([
+            'user_id' => '{YOUR USER NAME HERE}', 
+            'app_id' => '{YOUR APPLICATION ID HERE}' 
+        ]),
     # This is the model ID of a publicly available General model. You may use any other public or custom model ID.
     model_id='aaa03c23b3724a16a56b629203edc62c',
     inputs=[
