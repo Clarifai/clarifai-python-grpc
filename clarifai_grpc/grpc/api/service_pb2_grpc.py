@@ -663,11 +663,7 @@ class V2Servicer(object):
   """
 
   def ListConceptRelations(self, request, context):
-    """//////////////////////////////////////
-    Concept Relationships
-    //////////////////////////////////////
-
-    List concept relations between concepts in the platform.
+    """List concept relations between concepts in the platform.
     MUST be above ListConcepts so that if concept_id is empty this will still match
     /concepts/relations to list all the concept relations in the app.
     """
@@ -690,11 +686,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetConceptCounts(self, request, context):
-    """//////////////////////////////////////
-    Concepts
-    //////////////////////////////////////
-
-    List all the concepts with their positive and negative counts
+    """List all the concepts with their positive and negative counts
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -738,13 +730,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetConceptLanguage(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Concept Languages
-    //////////////////////////////////////
-
-    Get a specific concept from an app.
+    """Get a specific concept from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -758,7 +744,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostConceptLanguages(self, request, context):
-    """Add a new tranlsation for this concept.
+    """Add a new translation for this concept.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -773,11 +759,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def ListKnowledgeGraphs(self, request, context):
-    """//////////////////////////////////////
-    Knowledge Graph
-    //////////////////////////////////////
-
-    List all domain graphs.
+    """List all domain graphs.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -798,11 +780,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetAnnotation(self, request, context):
-    """//////////////////////////////////////
-    annotations
-    //////////////////////////////////////
-
-    Get a specific annotation from an app.
+    """Get a specific annotation from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -858,11 +836,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetInputCount(self, request, context):
-    """//////////////////////////////////////
-    Inputs
-    //////////////////////////////////////
-
-    Get input count per status.
+    """Get input count per status.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1000,7 +974,6 @@ class V2Servicer(object):
 
   def PostModels(self, request, context):
     """Add a models to an app.
-    FIXME(zeiler): this should have been a plural response.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1056,13 +1029,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetModelVersion(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Model versions
-    //////////////////////////////////////
-
-    Get a specific model from an app.
+    """Get a specific model from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1076,15 +1043,15 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostModelVersionsPublish(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """PostModelVersionsPublish
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def PostModelVersionsUnPublish(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """PostModelVersionsUnPublish
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1093,15 +1060,14 @@ class V2Servicer(object):
     """NOTE: inconsistency: do we want this to return a SingleModelResponse?
 
     Create a new model version to trigger training of the model.
-    FIXME(zeiler): this should have been a plural response.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def PatchModelVersions(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """PatchModelVersions
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1128,33 +1094,22 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def ListModelReferences(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Model References
-    //////////////////////////////////////
-
-    Lists model references tied to a particular model id.
+    """Lists model references tied to a particular model id.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def GetModelVersionInputExample(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Model Version Input Examples
-    //////////////////////////////////////
-
+    """GetModelVersionInputExample
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def ListModelVersionInputExamples(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """ListModelVersionInputExamples
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1216,20 +1171,13 @@ class V2Servicer(object):
 
   def PostWorkflowResultsSimilarity(self, request, context):
     """Compare embeddings distances using a workflow
-
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def ListWorkflowVersions(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Workflow Versions
-    //////////////////////////////////////
-
-    List workflow versions.
+    """List workflow versions.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1257,11 +1205,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetKey(self, request, context):
-    """//////////////////////////////////////
-    API Keys
-    //////////////////////////////////////
-
-    Get a specific key from an app.
+    """Get a specific key from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1335,11 +1279,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetApp(self, request, context):
-    """//////////////////////////////////////
-    Apps
-    //////////////////////////////////////
-
-    Get a specific app from an app.
+    """Get a specific app from an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1385,24 +1325,14 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostValidatePassword(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Password
-    //////////////////////////////////////
-
-    Validate new password in real-time for a user
+    """Validate new password in real-time for a user
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def GetSearch(self, request, context):
-    """//////////////////////////////////////
-    Searches
-    //////////////////////////////////////
-
-    Get a saved search.
+    """Get a saved search.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1451,8 +1381,8 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def DeleteAnnotationSearchMetrics(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """DeleteAnnotationSearchMetrics
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
@@ -1465,13 +1395,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def ListStatusCodes(self, request, context):
-    """//////////////////////////////////////
-
-    //////////////////////////////////////
-    Status Codes
-    //////////////////////////////////////
-
-    List all status codes.
+    """List all status codes.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1485,11 +1409,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def ListCollaborators(self, request, context):
-    """//////////////////////////////////////
-    App Sharing
-    //////////////////////////////////////
-
-    owner list users who the app is shared with
+    """owner list users who the app is shared with
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1524,11 +1444,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostAppDuplications(self, request, context):
-    """//////////////////////////////////////
-    App duplication
-    //////////////////////////////////////
-
-    start to duplicate an app which copies all the inputs, annotations, models, concepts etc. to a new app.
+    """start to duplicate an app which copies all the inputs, annotations, models, concepts etc. to a new app.
     this is an async process, you should use ListAppDuplications or GetAppDuplication to check the status.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1550,11 +1466,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostTasks(self, request, context):
-    """//////////////////////////////////////
-    Tasks
-    //////////////////////////////////////
-
-    Add tasks to an app.
+    """Add tasks to an app.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1603,11 +1515,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostCollectors(self, request, context):
-    """//////////////////////////////////////
-    Collectors
-    //////////////////////////////////////
-
-    Add a list of Collectors to an app.
+    """Add a list of Collectors to an app.
     In the handler of this endpoint we also check for all the scopes of the  POST /inputs
     endpoint.
     Those current scopes are listed here as a hard requirement.
@@ -1648,28 +1556,21 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostStatValues(self, request, context):
-    """//////////////////////////////////////////////////////////////////////////////
-    Stats Collection Endpoints.
-    //////////////////////////////////////////////////////////////////////////////
-
+    """PostStatValues
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def PostStatValuesAggregate(self, request, context):
-    # missing associated documentation comment in .proto file
-    pass
+    """PostStatValuesAggregate
+    """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def PostTrendingMetricsView(self, request, context):
-    """//////////////////////////////////////
-    Trending Metrics
-    //////////////////////////////////////
-
-    Increase the view metric for a detail view
+    """Increase the view metric for a detail view
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
