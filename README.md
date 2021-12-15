@@ -19,7 +19,7 @@ and natural language processing.
 ## Installation
 
 ```cmd
-pip install clarifai-grpc
+python -m pip install clarifai-grpc
 ```
 
 ## Versioning
