@@ -55,14 +55,16 @@ class ClarifaiChannel:
         )
 
     @staticmethod
-    def get_insecure_grpc_channel(base=None, port=None):
+    def get_insecure_grpc_channel(base=None, port=18080):
         global wrap_response_deserializer
         wrap_response_deserializer = _response_deserializer_for_grpc
 
         if not base:
-            base = os.environ.get("CLARIFAI_GRPC_BASE", "api-grpc.clarifai.com")
-        if not port:
-            port = "18080"
+            base = os.environ.get("CLARIFAI_GRPC_BASE", None)
+
+        if not base:
+            raise ValueError("Please set 'base' via arguments or env variable CLARIFAI_GRPC_BASE")
+
         channel_address = "{}:{}".format(base, port)
 
         return service_pb2_grpc.grpc.insecure_channel(channel_address)
