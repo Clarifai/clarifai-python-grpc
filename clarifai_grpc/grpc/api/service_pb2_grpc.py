@@ -651,6 +651,66 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
         )
+    self.GetModule = channel.unary_unary(
+        '/clarifai.api.V2/GetModule',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleResponse),
+        )
+    self.ListModules = channel.unary_unary(
+        '/clarifai.api.V2/ListModules',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModulesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse),
+        )
+    self.PostModules = channel.unary_unary(
+        '/clarifai.api.V2/PostModules',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModulesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse),
+        )
+    self.PatchModules = channel.unary_unary(
+        '/clarifai.api.V2/PatchModules',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModulesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse),
+        )
+    self.DeleteModules = channel.unary_unary(
+        '/clarifai.api.V2/DeleteModules',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModulesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.GetModuleVersion = channel.unary_unary(
+        '/clarifai.api.V2/GetModuleVersion',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleVersionRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleVersionResponse),
+        )
+    self.ListModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/ListModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse),
+        )
+    self.PostModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/PostModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse),
+        )
+    self.DeleteModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/DeleteModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.ListInstalledModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/ListInstalledModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstalledModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInstalledModuleVersionResponse),
+        )
+    self.PostInstalledModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/PostInstalledModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInstalledModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInstalledModuleVersionResponse),
+        )
+    self.DeleteInstalledModuleVersions = channel.unary_unary(
+        '/clarifai.api.V2/DeleteInstalledModuleVersions',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInstalledModuleVersionsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
 
 
 class V2Servicer(object):
@@ -1583,6 +1643,90 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def GetModule(self, request, context):
+    """Get a specific module from an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListModules(self, request, context):
+    """List all the modules in community, by user or by app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostModules(self, request, context):
+    """Add a modules to an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchModules(self, request, context):
+    """Patch one or more modules.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteModules(self, request, context):
+    """Delete multiple modules in one request.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetModuleVersion(self, request, context):
+    """Get a specific module version for a module.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListModuleVersions(self, request, context):
+    """List all the modules versions for a given module.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostModuleVersions(self, request, context):
+    """Create a new module version to trigger training of the module.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteModuleVersions(self, request, context):
+    """Delete a multiple module version.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListInstalledModuleVersions(self, request, context):
+    """List installed modules vesrions for an app.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PostInstalledModuleVersions(self, request, context):
+    """Install a new module version which will deploy the specific ModuleVersion to the app in the url.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteInstalledModuleVersions(self, request, context):
+    """Uninstall an installed module version which will deploy the specific ModuleVersion to the app in the url.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
   rpc_method_handlers = {
@@ -2215,6 +2359,66 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.ListTrendingMetricsViews,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
+      ),
+      'GetModule': grpc.unary_unary_rpc_method_handler(
+          servicer.GetModule,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleResponse.SerializeToString,
+      ),
+      'ListModules': grpc.unary_unary_rpc_method_handler(
+          servicer.ListModules,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModulesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse.SerializeToString,
+      ),
+      'PostModules': grpc.unary_unary_rpc_method_handler(
+          servicer.PostModules,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModulesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse.SerializeToString,
+      ),
+      'PatchModules': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModules,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModulesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleResponse.SerializeToString,
+      ),
+      'DeleteModules': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteModules,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModulesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'GetModuleVersion': grpc.unary_unary_rpc_method_handler(
+          servicer.GetModuleVersion,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleVersionRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleVersionResponse.SerializeToString,
+      ),
+      'ListModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.ListModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.SerializeToString,
+      ),
+      'PostModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.PostModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.SerializeToString,
+      ),
+      'DeleteModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'ListInstalledModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.ListInstalledModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstalledModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInstalledModuleVersionResponse.SerializeToString,
+      ),
+      'PostInstalledModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.PostInstalledModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInstalledModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInstalledModuleVersionResponse.SerializeToString,
+      ),
+      'DeleteInstalledModuleVersions': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteInstalledModuleVersions,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInstalledModuleVersionsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
   }
   generic_handler = grpc.method_handlers_generic_handler(
