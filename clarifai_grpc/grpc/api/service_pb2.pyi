@@ -44,6 +44,7 @@ from proto.clarifai.api.resources_pb2 import (
     ModelQuery as proto___clarifai___api___resources_pb2___ModelQuery,
     ModelReference as proto___clarifai___api___resources_pb2___ModelReference,
     ModelType as proto___clarifai___api___resources_pb2___ModelType,
+    ModelTypeField as proto___clarifai___api___resources_pb2___ModelTypeField,
     ModelVersion as proto___clarifai___api___resources_pb2___ModelVersion,
     ModelVersionInputExample as proto___clarifai___api___resources_pb2___ModelVersionInputExample,
     Output as proto___clarifai___api___resources_pb2___Output,
@@ -2887,10 +2888,14 @@ class MultiModelTypeResponse(google___protobuf___message___Message):
     @property
     def model_types(self) -> google___protobuf___internal___containers___RepeatedCompositeFieldContainer[proto___clarifai___api___resources_pb2___ModelType]: ...
 
+    @property
+    def model_importers(self) -> proto___clarifai___api___resources_pb2___ModelTypeField: ...
+
     def __init__(self,
         *,
         status : typing___Optional[proto___clarifai___api___status___status_pb2___Status] = None,
         model_types : typing___Optional[typing___Iterable[proto___clarifai___api___resources_pb2___ModelType]] = None,
+        model_importers : typing___Optional[proto___clarifai___api___resources_pb2___ModelTypeField] = None,
         ) -> None: ...
     if sys.version_info >= (3,):
         @classmethod
@@ -2898,8 +2903,8 @@ class MultiModelTypeResponse(google___protobuf___message___Message):
     else:
         @classmethod
         def FromString(cls, s: typing___Union[builtin___bytes, builtin___buffer, builtin___unicode]) -> MultiModelTypeResponse: ...
-    def HasField(self, field_name: typing_extensions___Literal[u"status",b"status"]) -> builtin___bool: ...
-    def ClearField(self, field_name: typing_extensions___Literal[u"model_types",b"model_types",u"status",b"status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions___Literal[u"model_importers",b"model_importers",u"status",b"status"]) -> builtin___bool: ...
+    def ClearField(self, field_name: typing_extensions___Literal[u"model_importers",b"model_importers",u"model_types",b"model_types",u"status",b"status"]) -> None: ...
 type___MultiModelTypeResponse = MultiModelTypeResponse
 
 class GetModelVersionInputExampleRequest(google___protobuf___message___Message):
