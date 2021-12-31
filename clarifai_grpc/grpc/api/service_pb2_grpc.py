@@ -606,6 +606,31 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
+    self.PostLabelOrders = channel.unary_unary(
+        '/clarifai.api.V2/PostLabelOrders',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLabelOrdersRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse),
+        )
+    self.GetLabelOrder = channel.unary_unary(
+        '/clarifai.api.V2/GetLabelOrder',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLabelOrderRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLabelOrderResponse),
+        )
+    self.ListLabelOrders = channel.unary_unary(
+        '/clarifai.api.V2/ListLabelOrders',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLabelOrdersRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse),
+        )
+    self.PatchLabelOrders = channel.unary_unary(
+        '/clarifai.api.V2/PatchLabelOrders',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchLabelOrdersRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse),
+        )
+    self.DeleteLabelOrders = channel.unary_unary(
+        '/clarifai.api.V2/DeleteLabelOrders',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
     self.PostCollectors = channel.unary_unary(
         '/clarifai.api.V2/PostCollectors',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.SerializeToString,
@@ -1514,6 +1539,42 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PostLabelOrders(self, request, context):
+    """Add Label orders.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def GetLabelOrder(self, request, context):
+    """Get a label order.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def ListLabelOrders(self, request, context):
+    """List label orders.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchLabelOrders(self, request, context):
+    """Patch one or more label orders.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def DeleteLabelOrders(self, request, context):
+    """Delete multiple label orders in one request.
+    this do not change task status
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def PostCollectors(self, request, context):
     """Add a list of Collectors to an app.
     In the handler of this endpoint we also check for all the scopes of the  POST /inputs
@@ -2169,6 +2230,31 @@ def add_V2Servicer_to_server(servicer, server):
       'DeleteTasks': grpc.unary_unary_rpc_method_handler(
           servicer.DeleteTasks,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PostLabelOrders': grpc.unary_unary_rpc_method_handler(
+          servicer.PostLabelOrders,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLabelOrdersRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse.SerializeToString,
+      ),
+      'GetLabelOrder': grpc.unary_unary_rpc_method_handler(
+          servicer.GetLabelOrder,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLabelOrderRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLabelOrderResponse.SerializeToString,
+      ),
+      'ListLabelOrders': grpc.unary_unary_rpc_method_handler(
+          servicer.ListLabelOrders,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLabelOrdersRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse.SerializeToString,
+      ),
+      'PatchLabelOrders': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchLabelOrders,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchLabelOrdersRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLabelOrderResponse.SerializeToString,
+      ),
+      'DeleteLabelOrders': grpc.unary_unary_rpc_method_handler(
+          servicer.DeleteLabelOrders,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
       'PostCollectors': grpc.unary_unary_rpc_method_handler(
