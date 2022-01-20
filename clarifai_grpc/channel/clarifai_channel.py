@@ -11,20 +11,22 @@ CONNECTIONS = 20  # number of connections to maintain in pool.
 
 wrap_response_deserializer = None
 
-grpc_json_config = json.dumps({
-    "methodConfig": [{
-        "name": [{
-            "service": "MethodName.Default"
-        }],
-        "retryPolicy": {
-            "maxAttempts": 5,
-            "initialBackoff": "1s",
-            "maxBackoff": "5s",
-            "backoffMultiplier": 1.5,
-            "retryableStatusCodes": ["UNAVAILABLE"],
-        },
-    }]
-})
+grpc_json_config = json.dumps(
+    {
+        "methodConfig": [
+            {
+                "name": [{"service": "MethodName.Default"}],
+                "retryPolicy": {
+                    "maxAttempts": 5,
+                    "initialBackoff": "1s",
+                    "maxBackoff": "5s",
+                    "backoffMultiplier": 1.5,
+                    "retryableStatusCodes": ["UNAVAILABLE"],
+                },
+            }
+        ]
+    }
+)
 
 
 def _response_deserializer_for_json(response_deserializer):
@@ -69,7 +71,8 @@ class ClarifaiChannel:
         return service_pb2_grpc.grpc.secure_channel(
             base,
             service_pb2_grpc.grpc.ssl_channel_credentials(),
-            options=[("grpc.service_config", grpc_json_config)])
+            options=[("grpc.service_config", grpc_json_config)],
+        )
 
     @staticmethod
     def get_insecure_grpc_channel(base=None, port=18080):
@@ -85,4 +88,5 @@ class ClarifaiChannel:
         channel_address = "{}:{}".format(base, port)
 
         return service_pb2_grpc.grpc.insecure_channel(
-            channel_address, options=[("grpc.service_config", grpc_json_config)])
+            channel_address, options=[("grpc.service_config", grpc_json_config)]
+        )
