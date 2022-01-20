@@ -18,9 +18,9 @@ grpc_json_config = json.dumps({
         }],
         "retryPolicy": {
             "maxAttempts": 5,
-            "initialBackoff": "0.1s",
+            "initialBackoff": "1s",
             "maxBackoff": "5s",
-            "backoffMultiplier": 2,
+            "backoffMultiplier": 1.5,
             "retryableStatusCodes": ["UNAVAILABLE"],
         },
     }]
