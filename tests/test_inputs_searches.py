@@ -243,8 +243,8 @@ def test_search_by_metadata(channel):
                 searches=[
                     Search(
                         query=Query(
-                            ranks=[
-                                Rank(annotation=Annotation(data=Data(metadata=search_metadata)))
+                            filters=[
+                                Filter(annotation=Annotation(data=Data(metadata=search_metadata)))
                             ]
                         )
                     )
