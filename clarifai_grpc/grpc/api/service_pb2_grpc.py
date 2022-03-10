@@ -136,6 +136,11 @@ class V2Stub(object):
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
         )
+    self.PatchAnnotationsSearches = channel.unary_unary(
+        '/clarifai.api.V2/PatchAnnotationsSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
     self.PostAnnotationsSearches = channel.unary_unary(
         '/clarifai.api.V2/PostAnnotationsSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.SerializeToString,
@@ -185,6 +190,11 @@ class V2Stub(object):
         '/clarifai.api.V2/DeleteInputs',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+        )
+    self.PatchInputsSearches = channel.unary_unary(
+        '/clarifai.api.V2/PatchInputsSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchInputsSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
         )
     self.PostInputsSearches = channel.unary_unary(
         '/clarifai.api.V2/PostInputsSearches',
@@ -239,6 +249,11 @@ class V2Stub(object):
     self.PatchModels = channel.unary_unary(
         '/clarifai.api.V2/PatchModels',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelsRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse),
+        )
+    self.PatchModelIds = channel.unary_unary(
+        '/clarifai.api.V2/PatchModelIds',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelIdsRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse),
         )
     self.DeleteModel = channel.unary_unary(
@@ -484,6 +499,11 @@ class V2Stub(object):
     self.ListSearches = channel.unary_unary(
         '/clarifai.api.V2/ListSearches',
         request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSearchesRequest.SerializeToString,
+        response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+        )
+    self.PatchSearches = channel.unary_unary(
+        '/clarifai.api.V2/PatchSearches',
+        request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchSearchesRequest.SerializeToString,
         response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
         )
     self.PostSearches = channel.unary_unary(
@@ -853,8 +873,15 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PatchAnnotationsSearches(self, request, context):
+    """Patch saved annotations searches by ids.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def PostAnnotationsSearches(self, request, context):
-    """Execute a search over annotation
+    """Execute a search over annotations
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -926,8 +953,15 @@ class V2Servicer(object):
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
+  def PatchInputsSearches(self, request, context):
+    """Patch saved inputs searches by ids.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
   def PostInputsSearches(self, request, context):
-    """Execute a search over input
+    """Execute a search over inputs
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1005,6 +1039,13 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PatchModels(self, request, context):
+    """Patch one or more models.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchModelIds(self, request, context):
     """Patch one or more models.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1357,14 +1398,21 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def GetSearch(self, request, context):
-    """Get a saved search.
+    """Get a saved legacy search.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
     raise NotImplementedError('Method not implemented!')
 
   def ListSearches(self, request, context):
-    """List all saved searches.
+    """List all saved legacy searches.
+    """
+    context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+    context.set_details('Method not implemented!')
+    raise NotImplementedError('Method not implemented!')
+
+  def PatchSearches(self, request, context):
+    """Patch saved legacy searches by ids.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1378,7 +1426,7 @@ class V2Servicer(object):
     raise NotImplementedError('Method not implemented!')
 
   def PostSearchesByID(self, request, context):
-    """Execute a previously saved search.
+    """Execute a previously saved legacy search.
     """
     context.set_code(grpc.StatusCode.UNIMPLEMENTED)
     context.set_details('Method not implemented!')
@@ -1762,6 +1810,11 @@ def add_V2Servicer_to_server(servicer, server):
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
       ),
+      'PatchAnnotationsSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchAnnotationsSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
       'PostAnnotationsSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostAnnotationsSearches,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.FromString,
@@ -1811,6 +1864,11 @@ def add_V2Servicer_to_server(servicer, server):
           servicer.DeleteInputs,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInputsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+      ),
+      'PatchInputsSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchInputsSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchInputsSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
       ),
       'PostInputsSearches': grpc.unary_unary_rpc_method_handler(
           servicer.PostInputsSearches,
@@ -1865,6 +1923,11 @@ def add_V2Servicer_to_server(servicer, server):
       'PatchModels': grpc.unary_unary_rpc_method_handler(
           servicer.PatchModels,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelsRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
+      ),
+      'PatchModelIds': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchModelIds,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModelIdsRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
       ),
       'DeleteModel': grpc.unary_unary_rpc_method_handler(
@@ -2110,6 +2173,11 @@ def add_V2Servicer_to_server(servicer, server):
       'ListSearches': grpc.unary_unary_rpc_method_handler(
           servicer.ListSearches,
           request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSearchesRequest.FromString,
+          response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+      ),
+      'PatchSearches': grpc.unary_unary_rpc_method_handler(
+          servicer.PatchSearches,
+          request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchSearchesRequest.FromString,
           response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
       ),
       'PostSearches': grpc.unary_unary_rpc_method_handler(
