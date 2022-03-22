@@ -18,6 +18,11 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+ENGLISH_TEXT = (
+    "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
+)
+SPANISH_TEXT = "No me apetece nada estudiar esta noche."
+
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
 DEMOGRAPHICS_MODEL_ID = "c0c0ac362b03416da06ab3fa36fb58e3"
@@ -29,10 +34,17 @@ LANDSCAPE_QUALITY_MODEL_ID = "bec14810deb94c40a05f1f0eb3c91403"
 LOGO_MODEL_ID = "c443119bf2ed4da98487520d01a0b1e3"
 MODERATION_MODEL_ID = "d16f390eb32cad478c7ae150069bd2c6"
 NSFW_MODEL_ID = "e9576d86d2004ed1a38ba0cf39ecb4b1"
-PORTRAIT_QUALITY_MODEL_ID = "de9bd05cfdbf4534af151beb2a5d0953"
+PORTRAIT_QUALITY_MODEL_ID = "de9bd05c fdbf4534af151beb2a5d0953"
 TEXTURES_AND_PATTERNS_MODEL_ID = "fbefb47f9fdb410e8ce14f24f54b47ff"
 TRAVEL_MODEL_ID = "eee28c313d69466f836ab83287a54ed9"
 WEDDING_MODEL_ID = "c386b7a870114f4a87477c0824499348"
+
+TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
+TEXT_GEN_MODEL_ID = "distilgpt2"
+TEXT_SENTIMENT_MODEL_ID = "bert-multilingual-sentiment"
+TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
+NER_ENGLISH_MODEL_ID = "ner_english_v2"
+TRASLATE_ROMANCE_MODEL_ID = "967b89910f39a91f0b38189fe79775df"
 
 
 def metadata():

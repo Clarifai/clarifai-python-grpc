@@ -1,6 +1,8 @@
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     DOG_IMAGE_URL,
+    ENGLISH_TEXT,
+    SPANISH_TEXT,
     APPAREL_MODEL_ID,
     COLOR_MODEL_ID,
     FACE_MODEL_ID,
@@ -15,6 +17,12 @@ from tests.common import (
     TEXTURES_AND_PATTERNS_MODEL_ID,
     TRAVEL_MODEL_ID,
     WEDDING_MODEL_ID,
+    TEXT_SUM_MODEL_ID,
+    TEXT_GEN_MODEL_ID,
+    TEXT_SENTIMENT_MODEL_ID,
+    TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
+    NER_ENGLISH_MODEL_ID,
+    TRASLATE_ROMANCE_MODEL_ID,
     both_channels,
     metadata,
     raise_on_failure,
@@ -39,6 +47,45 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("travel", TRAVEL_MODEL_ID),
     ("wedding", WEDDING_MODEL_ID),
 ]
+
+TEXT_MODEL_TUTKE_AND_ID_PAIRS = [
+    ("text summarization", TEXT_SUM_MODEL_ID),
+    ("text generation", TEXT_GEN_MODEL_ID),
+    ("text sentiment", TEXT_SENTIMENT_MODEL_ID),
+    ("text multilingual moderation", TEXT_MULTILINGUAL_MODERATION_MODEL_ID),
+    ("ner english", NER_ENGLISH_MODEL_ID),
+    ("translate romance", TRASLATE_ROMANCE_MODEL_ID),
+]
+
+
+@both_channels
+def test_text_predict_on_public_models(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
+        if title == "translate romance":
+            request = service_pb2.PostModelOutputsRequest(
+                model_id=model_id,
+                inputs=[
+                    resources_pb2.Input(
+                        data=resources_pb2.Data(text=resources_pb2.Text(raw=SPANISH_TEXT))
+                    )
+                ],
+            )
+        else:
+            request = service_pb2.PostModelOutputsRequest(
+                model_id=model_id,
+                inputs=[
+                    resources_pb2.Input(
+                        data=resources_pb2.Data(text=resources_pb2.Text(raw=ENGLISH_TEXT))
+                    )
+                ],
+            )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        raise_on_failure(
+            response,
+            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+        )
 
 
 @both_channels
