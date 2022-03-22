@@ -20,7 +20,7 @@ from tests.common import (
     GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID,
     IMAGE_SUBJECT_SEGMENTATION_MODEL_ID,
     EASYOCR_ENGLISH_MODEL_ID,
-    PADDLEOCR_MULTILINGUAL_MODEL_ID,
+    PADDLEOCR_ENG_CHINESE_MODEL_ID,
     both_channels,
     metadata,
     raise_on_failure,
@@ -49,7 +49,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
     ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
     ("easyocr english", EASYOCR_ENGLISH_MODEL_ID),
-    ("paddleocr multilingual", PADDLEOCR_MULTILINGUAL_MODEL_ID),
+    ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
 ]
 
 
