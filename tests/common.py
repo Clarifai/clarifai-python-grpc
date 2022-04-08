@@ -179,7 +179,7 @@ def _retry_on_504_on_non_prod(func):
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
-    MAX_ATTEMPTS = 100
+    MAX_ATTEMPTS = 5
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
