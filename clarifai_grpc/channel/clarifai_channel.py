@@ -15,7 +15,7 @@ grpc_json_config = json.dumps(
     {
         "methodConfig": [
             {
-                "name": [{"service": "MethodName.Default"}],
+                "name": [{"service": "clarifai.api.V2"}],
                 "retryPolicy": {
                     "maxAttempts": 5,
                     "initialBackoff": "1s",
