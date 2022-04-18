@@ -26,7 +26,7 @@ def test_mmdetection():
     concepts = []
     for i in range(1, 91):
         concepts.append(resources_pb2.Concept(id=str(i)))
-    model_id = "my-deep-classif-" + uuid.uuid4().hex[:15]
+    model_id = "mmdet-coco-" + uuid.uuid4().hex[:15]
     user_app_id = resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
 
     train_info_params = struct_pb2.Struct()
