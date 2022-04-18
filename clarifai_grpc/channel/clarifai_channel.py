@@ -71,7 +71,7 @@ class ClarifaiChannel:
         return service_pb2_grpc.grpc.secure_channel(
             base,
             service_pb2_grpc.grpc.ssl_channel_credentials(),
-            options=[('grpc.enable_http_proxy', 0), ("grpc.service_config", grpc_json_config)],
+            options=[("grpc.service_config", grpc_json_config)],
         )
 
     @staticmethod
