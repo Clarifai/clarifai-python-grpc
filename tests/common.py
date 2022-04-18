@@ -85,10 +85,10 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
     # At this point, all inputs have been downloaded successfully.
 
 
-def wait_for_model_trained(stub, metadata, model_id, model_version_id):
+def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
     while True:
         response = stub.GetModelVersion(
-            service_pb2.GetModelVersionRequest(model_id=model_id, version_id=model_version_id),
+            service_pb2.GetModelVersionRequest(user_app_id=user_app_id, model_id=model_id, version_id=model_version_id),
             metadata=metadata,
         )
         raise_on_failure(response)
