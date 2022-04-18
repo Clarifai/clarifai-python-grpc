@@ -63,7 +63,10 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
             )
             raise_on_failure(get_input_response)
-            if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
+            if (
+                get_input_response.input.status.code
+                == status_code_pb2.INPUT_DOWNLOAD_SUCCESS
+            ):
                 break
             elif get_input_response.input.status.code in (
                 status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -85,10 +88,14 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
     # At this point, all inputs have been downloaded successfully.
 
 
-def wait_for_model_trained(stub, metadata, model_id, model_version_id):
+def wait_for_model_trained(
+    stub, metadata, model_id, model_version_id, user_app_id=None
+):
     while True:
         response = stub.GetModelVersion(
-            service_pb2.GetModelVersionRequest(model_id=model_id, version_id=model_version_id),
+            service_pb2.GetModelVersionRequest(
+                user_app_id=user_app_id, model_id=model_id, version_id=model_version_id
+            ),
             metadata=metadata,
         )
         raise_on_failure(response)
@@ -122,7 +129,10 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             metadata=metadata,
         )
         raise_on_failure(response)
-        if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
+        if (
+            response.model_version.metrics.status.code
+            == status_code_pb2.MODEL_EVALUATED
+        ):
             break
         elif response.model_version.metrics.status.code in (
             status_code_pb2.MODEL_NOT_EVALUATED,
@@ -163,9 +173,13 @@ def raise_on_failure(response, custom_message=""):
 
 
 def post_model_outputs_and_maybe_allow_retries(
-    stub: service_pb2_grpc.V2Stub, request: service_pb2.PostModelOutputsRequest, metadata: Tuple
+    stub: service_pb2_grpc.V2Stub,
+    request: service_pb2.PostModelOutputsRequest,
+    metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
+    return _retry_on_504_on_non_prod(
+        lambda: stub.PostModelOutputs(request, metadata=metadata)
+    )
 
 
 def _retry_on_504_on_non_prod(func):
