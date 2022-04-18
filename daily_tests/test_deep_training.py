@@ -12,8 +12,10 @@ from tests.common import (
     post_model_outputs_and_maybe_allow_retries,
 )
 
+
 def pat_key_metadata():
     return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
+
 
 def test_mmdetection():
     channel = ClarifaiChannel.get_grpc_channel()
@@ -22,10 +24,10 @@ def test_mmdetection():
     template_name = "MMDetection"
     model_type_id = "visual-detector"
     concepts = []
-    for i in range(1,91):
+    for i in range(1, 91):
         concepts.append(resources_pb2.Concept(id=str(i)))
     model_id = "my-deep-classif-" + uuid.uuid4().hex[:15]
-    user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
+    user_app_id = resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
 
     train_info_params = struct_pb2.Struct()
     train_info_params.update(
@@ -44,12 +46,10 @@ def test_mmdetection():
                     model_type_id=model_type_id,
                     train_info=resources_pb2.TrainInfo(params=train_info_params),
                     output_info=resources_pb2.OutputInfo(
-                        data=resources_pb2.Data(
-                            concepts=concepts
-                        ),
+                        data=resources_pb2.Data(concepts=concepts),
                     ),
                 )
-            ]
+            ],
         ),
         metadata=pat_key_metadata(),
     )
@@ -66,19 +66,31 @@ def test_mmdetection():
         raise_on_failure(post_model_versions_response)
         model_version_id = post_model_versions_response.model.model_version.id
 
-        wait_for_model_trained(stub, pat_key_metadata(), model_id, model_version_id, user_app_id=user_app_id)
+        wait_for_model_trained(
+            stub,
+            pat_key_metadata(),
+            model_id,
+            model_version_id,
+            user_app_id=user_app_id,
+        )
 
         post_model_outputs_request = service_pb2.PostModelOutputsRequest(
-             user_app_id=user_app_id,
+            user_app_id=user_app_id,
             model_id=model_id,
             version_id=model_version_id,
             inputs=[
-                resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)))
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        image=resources_pb2.Image(url=DOG_IMAGE_URL)
+                    )
+                )
             ],
         )
 
         post_model_outputs_response = post_model_outputs_and_maybe_allow_retries(
-            stub, post_model_outputs_request, metadata=pat_key_metadata(),
+            stub,
+            post_model_outputs_request,
+            metadata=pat_key_metadata(),
         )
         raise_on_failure(post_model_outputs_response)
 
@@ -87,11 +99,12 @@ def test_mmdetection():
         delete_model_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(
                 user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id),
-                model_id=model_id
+                model_id=model_id,
             ),
             metadata=pat_key_metadata(),
         )
         raise_on_failure(delete_model_response)
+
 
 def get_mmdet_config():
     return """
