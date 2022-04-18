@@ -150,7 +150,7 @@ data=dict(
     classes=''))
 
 img_norm_cfg=dict(mean=[123.675, 116.28, 103.53], to_rgb=True)
-runner = dict(type='EpochBasedRunner', max_epochs=9)
+runner = dict(type='EpochBasedRunner', max_epochs=2)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
