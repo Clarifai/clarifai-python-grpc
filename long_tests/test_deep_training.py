@@ -2,6 +2,7 @@ import os
 import uuid
 
 from google.protobuf import struct_pb2
+import numpy as np
 
 from tests.common import DOG_IMAGE_URL
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
@@ -94,11 +95,25 @@ def test_mmdetection():
         )
         raise_on_failure(post_model_outputs_response)
 
-        print(post_model_outputs_response)
+        first_region = post_model_outputs_response.outputs[0].data.regions[0]
+
+        bounding_box = first_region.region_info.bounding_box
+        np.testing.assert_allclose([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2178, 0.1606, 0.9614, 0.7952], rtol=0.05, atol=0.05)
+
+        assert len(first_region.data.concepts), 1
+        first_region_concept = first_region.data.concepts[0]
+        assert first_region_concept.id == "18"
+        assert first_region_concept.name == "dog"
+        assert first_region_concept.value > 0.5
+
+        for i in range(1, len(post_model_outputs_response.outputs[0].data.regions)):
+            assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts), 1
+            region_concept = post_model_outputs_response.outputs[0].data.regions[i].data.concepts[0]
+            assert region_concept.value < 0.5
     finally:
         delete_model_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(
-                user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id),
+                user_app_id=user_app_id,
                 model_id=model_id,
             ),
             metadata=pat_key_metadata(),
