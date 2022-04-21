@@ -18,7 +18,7 @@ def pat_key_metadata():
 
 
 def test_mmdetection():
-    channel = ClarifaiChannel.get_grpc_channel()
+    channel = ClarifaiChannel.get_json_channel()
     stub = service_pb2_grpc.V2Stub(channel)
     app_id = "coco-2017"
     template_name = "MMDetection"
@@ -117,7 +117,7 @@ optimizer = dict(
   )
 data=dict(
   samples_per_gpu=32,
-  workers_per_gpu=32,
+  workers_per_gpu=4,
   train=dict(
     pipeline=[
         dict(type='LoadImageFromFile'),
