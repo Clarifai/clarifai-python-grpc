@@ -1,35 +1,16 @@
-from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from tests.common import (
-    DOG_IMAGE_URL,
-    ENGLISH_TEXT,
-    SPANISH_TEXT,
-    APPAREL_MODEL_ID,
-    COLOR_MODEL_ID,
-    FACE_MODEL_ID,
-    FOOD_MODEL_ID,
-    GENERAL_EMBEDDING_MODEL_ID,
-    GENERAL_MODEL_ID,
-    LANDSCAPE_QUALITY_MODEL_ID,
-    LOGO_MODEL_ID,
-    MODERATION_MODEL_ID,
-    NSFW_MODEL_ID,
-    PORTRAIT_QUALITY_MODEL_ID,
-    TEXTURES_AND_PATTERNS_MODEL_ID,
-    TRAVEL_MODEL_ID,
-    WEDDING_MODEL_ID,
-    TEXT_SUM_MODEL_ID,
-    TEXT_GEN_MODEL_ID,
-    TEXT_SENTIMENT_MODEL_ID,
-    TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
-    NER_ENGLISH_MODEL_ID,
-    TRASLATE_ROMANCE_MODEL_ID,
-    both_channels,
-    metadata,
-    raise_on_failure,
-    BEER_VIDEO_URL,
-    post_model_outputs_and_maybe_allow_retries,
-)
+import os
 
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+from tests.common import (APPAREL_MODEL_ID, BEER_VIDEO_URL, COLOR_MODEL_ID, DOG_IMAGE_URL,
+                          ENGLISH_TEXT, FACE_MODEL_ID, FOOD_MODEL_ID, GENERAL_EMBEDDING_MODEL_ID,
+                          GENERAL_MODEL_ID, LANDSCAPE_QUALITY_MODEL_ID, LOGO_MODEL_ID,
+                          MODERATION_MODEL_ID, NER_ENGLISH_MODEL_ID, NSFW_MODEL_ID,
+                          PORTRAIT_QUALITY_MODEL_ID, SPANISH_TEXT, TEXT_GEN_MODEL_ID,
+                          TEXT_MULTILINGUAL_MODERATION_MODEL_ID, TEXT_SENTIMENT_MODEL_ID,
+                          TEXT_SUM_MODEL_ID, TEXTURES_AND_PATTERNS_MODEL_ID,
+                          TRASLATE_ROMANCE_MODEL_ID, TRAVEL_MODEL_ID, WEDDING_MODEL_ID,
+                          both_channels, metadata, post_model_outputs_and_maybe_allow_retries,
+                          raise_on_failure)
 
 MODEL_TITLE_AND_ID_PAIRS = [
     ("apparel", APPAREL_MODEL_ID),
@@ -48,13 +29,13 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("wedding", WEDDING_MODEL_ID),
 ]
 
-TEXT_MODEL_TITLE_AND_ID_PAIRS = [
-    ("text summarization", TEXT_SUM_MODEL_ID),
-    ("text generation", TEXT_GEN_MODEL_ID),
-    ("text sentiment", TEXT_SENTIMENT_MODEL_ID),
-    ("text multilingual moderation", TEXT_MULTILINGUAL_MODERATION_MODEL_ID),
-    ("ner english", NER_ENGLISH_MODEL_ID),
-    ("translate romance", TRASLATE_ROMANCE_MODEL_ID),
+TEXT_MODEL_TITLE_IDS_TUPLE = [
+    ("text summarization", TEXT_SUM_MODEL_ID, 'summarization', 'huggingface-research'),
+    ("text generation", TEXT_GEN_MODEL_ID, 'text-generation', 'huggingface-research'),
+    ("text sentiment", TEXT_SENTIMENT_MODEL_ID, 'text-classification', 'huggingface-research'),
+    ("text multilingual moderation", TEXT_MULTILINGUAL_MODERATION_MODEL_ID, os.environ.get("CLARIFAI_APP_ID"), os.environ.get("CLARIFAI_USER_ID")),
+    ("ner english", NER_ENGLISH_MODEL_ID, os.environ.get("CLARIFAI_APP_ID"), os.environ.get("CLARIFAI_USER_ID")),
+    ("translate romance", TRASLATE_ROMANCE_MODEL_ID, 'translation', 'huggingface-research'),
 ]
 
 
@@ -62,9 +43,10 @@ TEXT_MODEL_TITLE_AND_ID_PAIRS = [
 def test_text_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    for title, model_id in TEXT_MODEL_TITLE_AND_ID_PAIRS:
+    for title, model_id, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
         if title == "translate romance":
             request = service_pb2.PostModelOutputsRequest(
+                user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
                 model_id=model_id,
                 inputs=[
                     resources_pb2.Input(
@@ -74,6 +56,7 @@ def test_text_predict_on_public_models(channel):
             )
         else:
             request = service_pb2.PostModelOutputsRequest(
+                user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
                 model_id=model_id,
                 inputs=[
                     resources_pb2.Input(
@@ -81,10 +64,10 @@ def test_text_predict_on_public_models(channel):
                     )
                 ],
             )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata(pat=True))
         raise_on_failure(
             response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
 

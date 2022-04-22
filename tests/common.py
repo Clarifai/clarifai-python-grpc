@@ -47,8 +47,11 @@ NER_ENGLISH_MODEL_ID = "ner_english_v2"
 TRASLATE_ROMANCE_MODEL_ID = "967b89910f39a91f0b38189fe79775df"
 
 
-def metadata():
-    return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
+def metadata(pat=False):
+    if pat:
+        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
+    else:
+        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
 
 
 def both_channels(func):
@@ -185,21 +188,24 @@ def _retry_on_504_on_non_prod(func):
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
-    MAX_ATTEMPTS = 4
+    MAX_ATTEMPTS = 5
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
-            break
+            print(response.status)
+            if response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
+                break
         except _Rendezvous as e:
             grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if "status: 504" not in e._state.details:
+            if "status: 504" not in e._state.details and '10020 Failure' not in e._state.details:
                 raise e
 
             if i == MAX_ATTEMPTS:
                 raise e
 
             print(f"Received 504, doing retry #{i}")
+            time.sleep(1)
     return response
