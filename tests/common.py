@@ -33,6 +33,12 @@ PORTRAIT_QUALITY_MODEL_ID = "de9bd05cfdbf4534af151beb2a5d0953"
 TEXTURES_AND_PATTERNS_MODEL_ID = "fbefb47f9fdb410e8ce14f24f54b47ff"
 TRAVEL_MODEL_ID = "eee28c313d69466f836ab83287a54ed9"
 WEDDING_MODEL_ID = "c386b7a870114f4a87477c0824499348"
+LOGO_V2_MODEL_ID = "006764f775d210080d295e6ea1445f93"
+PEOPLE_DETECTION_YOLOV5_MODEL_ID = "23aa4f9c9767a2fd61e63c55a73790ad"
+GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID = "86039c857a206810679f7f72b82fff54"
+IMAGE_SUBJECT_SEGMENTATION_MODEL_ID = "6a3dc529acf3f720a629cdc8c6ad41a9"
+EASYOCR_ENGLISH_MODEL_ID = "f1b1005c8feaa8d3f34d35f224092915"
+PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
 
 
 def metadata():
@@ -187,17 +193,18 @@ def _retry_on_504_on_non_prod(func):
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
-    MAX_ATTEMPTS = 4
+    MAX_ATTEMPTS = 15
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
-            break
+            if response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
+                break
         except _Rendezvous as e:
             grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if "status: 504" not in e._state.details:
+            if "status: 504" not in e._state.details and '10020 Failure' not in e._state.details :
                 raise e
 
             if i == MAX_ATTEMPTS:
