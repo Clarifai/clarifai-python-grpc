@@ -18,6 +18,11 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+ENGLISH_TEXT = (
+    "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
+)
+SPANISH_TEXT = "No me apetece nada estudiar esta noche."
+
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
 DEMOGRAPHICS_MODEL_ID = "c0c0ac362b03416da06ab3fa36fb58e3"
@@ -40,9 +45,19 @@ IMAGE_SUBJECT_SEGMENTATION_MODEL_ID = "6a3dc529acf3f720a629cdc8c6ad41a9"
 EASYOCR_ENGLISH_MODEL_ID = "f1b1005c8feaa8d3f34d35f224092915"
 PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
 
+TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
+TEXT_GEN_MODEL_ID = "distilgpt2"
+TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
+TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
+NER_ENGLISH_MODEL_ID = "ner_english_v2"
+TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 
-def metadata():
-    return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
+
+def metadata(pat=False):
+    if pat:
+        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
+    else:
+        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
 
 
 def both_channels(func):
@@ -197,7 +212,7 @@ def _retry_on_504_on_non_prod(func):
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
-            if response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
+            if len(response.outputs) > 0 and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
                 break
         except _Rendezvous as e:
             grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
@@ -211,4 +226,5 @@ def _retry_on_504_on_non_prod(func):
                 raise e
 
             print(f"Received 504, doing retry #{i}")
+            time.sleep(1)
     return response
