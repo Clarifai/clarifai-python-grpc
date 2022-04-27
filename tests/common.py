@@ -47,10 +47,10 @@ PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
 
 TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
 TEXT_GEN_MODEL_ID = "distilgpt2"
-TEXT_SENTIMENT_MODEL_ID = "bert-multilingual-sentiment"
+TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
-TRASLATE_ROMANCE_MODEL_ID = "967b89910f39a91f0b38189fe79775df"
+TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 
 
 def metadata(pat=False):
@@ -212,7 +212,7 @@ def _retry_on_504_on_non_prod(func):
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
-            if response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
+            if len(response.outputs) > 0 and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
                 break
         except _Rendezvous as e:
             grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
