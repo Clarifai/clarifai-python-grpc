@@ -35,6 +35,7 @@ def test_mmdetection():
         {
             "template": template_name,
             "custom_config": get_mmdet_config(),
+            "seed": 12345
         }
     )
 
@@ -98,18 +99,18 @@ def test_mmdetection():
         first_region = post_model_outputs_response.outputs[0].data.regions[0]
 
         bounding_box = first_region.region_info.bounding_box
-        np.testing.assert_allclose([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2178, 0.1606, 0.9614, 0.7952], rtol=0.05, atol=0.05)
+        assert calculate_iou([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2289, 0.1643, 1, 0.8023]) > .9, str(post_model_outputs_response)
 
-        assert len(first_region.data.concepts), 1
+        assert len(first_region.data.concepts) == 1, str(post_model_outputs_response)
         first_region_concept = first_region.data.concepts[0]
-        assert first_region_concept.id == "18"
-        assert first_region_concept.name == "dog"
-        assert first_region_concept.value > 0.5
+        assert first_region_concept.id == "18", str(post_model_outputs_response)
+        assert first_region_concept.name == "dog", str(post_model_outputs_response)
+        assert first_region_concept.value > 0.5, str(post_model_outputs_response)
 
         for i in range(1, len(post_model_outputs_response.outputs[0].data.regions)):
-            assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts), 1
+            assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts) == 1, str(post_model_outputs_response)
             region_concept = post_model_outputs_response.outputs[0].data.regions[i].data.concepts[0]
-            assert region_concept.value < 0.5
+            assert region_concept.value < 0.5, str(post_model_outputs_response)
     finally:
         delete_model_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(
@@ -178,7 +179,7 @@ data=dict(
     classes=''))
 
 img_norm_cfg=dict(mean=[123.675, 116.28, 103.53], to_rgb=True)
-runner = dict(type='EpochBasedRunner', max_epochs=2)
+runner = dict(type='EpochBasedRunner', max_epochs=1)
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='LoadAnnotations', with_bbox=True),
@@ -195,3 +196,18 @@ train_pipeline = [
     dict(type='Collect', keys=['img', 'gt_bboxes', 'gt_labels'])
 ]
 """
+
+def calculate_iou(boxes1, boxes2):
+    boxes1 = np.array(boxes1)
+    boxes2 = np.array(boxes2)
+    x11, y11, x12, y12 = np.split(boxes1, 4, axis=0)
+    x21, y21, x22, y22 = np.split(boxes2, 4, axis=0)
+    xA = np.maximum(x11, np.transpose(x21))
+    yA = np.maximum(y11, np.transpose(y21))
+    xB = np.minimum(x12, np.transpose(x22))
+    yB = np.minimum(y12, np.transpose(y22))
+    interArea = np.maximum((xB - xA + 1), 0) * np.maximum((yB - yA + 1), 0)
+    boxAArea = (x12 - x11 + 1) * (y12 - y11 + 1)
+    boxBArea = (x22 - x21 + 1) * (y22 - y21 + 1)
+    iou = interArea / (boxAArea + np.transpose(boxBArea) - interArea)
+    return iou
