@@ -1,5 +1,5 @@
 import os
-from typing import List
+from typing import Tuple
 import uuid
 
 from google.protobuf import struct_pb2
@@ -198,7 +198,7 @@ train_pipeline = [
 ]
 """
 
-def calculate_iou(bounding_box: resources_pb2.BoundingBox, expected_coords: List[float]):
+def calculate_iou(bounding_box: resources_pb2.BoundingBox, expected_coords: Tuple[float, float, float, float]):
     """
     bounding_box - bounding box to compare to expected values
     expected_coords - list of expected coordinates in the order [expected top row, expected left col, expected bottom row, expected right col]
