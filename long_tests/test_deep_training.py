@@ -1,4 +1,5 @@
 import os
+from typing import List
 import uuid
 
 from google.protobuf import struct_pb2
@@ -99,7 +100,7 @@ def test_mmdetection():
         first_region = post_model_outputs_response.outputs[0].data.regions[0]
 
         bounding_box = first_region.region_info.bounding_box
-        assert calculate_iou([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2289, 0.1643, 1, 0.8023]) > .9
+        assert calculate_iou(bounding_box, [0.2289, 0.1643, 1, 0.8023]) > .9
 
         assert len(first_region.data.concepts) == 1
         first_region_concept = first_region.data.concepts[0]
@@ -197,9 +198,13 @@ train_pipeline = [
 ]
 """
 
-def calculate_iou(boxes1, boxes2):
-    boxes1 = np.array(boxes1)
-    boxes2 = np.array(boxes2)
+def calculate_iou(bounding_box: resources_pb2.BoundingBox, expected_coords: List[float]):
+    """
+    bounding_box - bounding box to compare to expected values
+    expected_coords - list of expected coordinates in the order [expected top row, expected left col, expected bottom row, expected right col]
+    """
+    boxes1 = np.array([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col])
+    boxes2 = np.array(expected_coords)
     x11, y11, x12, y12 = np.split(boxes1, 4, axis=0)
     x21, y21, x22, y22 = np.split(boxes2, 4, axis=0)
     xA = np.maximum(x11, np.transpose(x21))
