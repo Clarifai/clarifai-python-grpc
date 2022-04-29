@@ -99,18 +99,18 @@ def test_mmdetection():
         first_region = post_model_outputs_response.outputs[0].data.regions[0]
 
         bounding_box = first_region.region_info.bounding_box
-        assert calculate_iou([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2289, 0.1643, 1, 0.8023]) > .9, str(post_model_outputs_response)
+        assert calculate_iou([bounding_box.top_row, bounding_box.left_col, bounding_box.bottom_row, bounding_box.right_col], [0.2289, 0.1643, 1, 0.8023]) > .9
 
-        assert len(first_region.data.concepts) == 1, str(post_model_outputs_response)
+        assert len(first_region.data.concepts) == 1
         first_region_concept = first_region.data.concepts[0]
-        assert first_region_concept.id == "18", str(post_model_outputs_response)
-        assert first_region_concept.name == "dog", str(post_model_outputs_response)
-        assert first_region_concept.value > 0.5, str(post_model_outputs_response)
+        assert first_region_concept.id == "18"
+        assert first_region_concept.name == "dog"
+        assert first_region_concept.value > 0.5
 
         for i in range(1, len(post_model_outputs_response.outputs[0].data.regions)):
-            assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts) == 1, str(post_model_outputs_response)
+            assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts) == 1
             region_concept = post_model_outputs_response.outputs[0].data.regions[i].data.concepts[0]
-            assert region_concept.value < 0.5, str(post_model_outputs_response)
+            assert region_concept.value < 0.5
     finally:
         delete_model_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(
