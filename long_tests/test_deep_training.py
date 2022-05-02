@@ -106,7 +106,7 @@ def test_mmdetection():
         first_region_concept = first_region.data.concepts[0]
         assert first_region_concept.id == "18"
         assert first_region_concept.name == "dog"
-        assert first_region_concept.value > 0.5
+        assert first_region_concept.value > 0.49
 
         for i in range(1, len(post_model_outputs_response.outputs[0].data.regions)):
             assert len(post_model_outputs_response.outputs[0].data.regions[i].data.concepts) == 1
