@@ -84,10 +84,7 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
             )
             raise_on_failure(get_input_response)
-            if (
-                get_input_response.input.status.code
-                == status_code_pb2.INPUT_DOWNLOAD_SUCCESS
-            ):
+            if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
                 break
             elif get_input_response.input.status.code in (
                 status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -109,9 +106,7 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
     # At this point, all inputs have been downloaded successfully.
 
 
-def wait_for_model_trained(
-    stub, metadata, model_id, model_version_id, user_app_id=None
-):
+def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
     while True:
         response = stub.GetModelVersion(
             service_pb2.GetModelVersionRequest(
@@ -150,10 +145,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             metadata=metadata,
         )
         raise_on_failure(response)
-        if (
-            response.model_version.metrics.status.code
-            == status_code_pb2.MODEL_EVALUATED
-        ):
+        if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
             break
         elif response.model_version.metrics.status.code in (
             status_code_pb2.MODEL_NOT_EVALUATED,
@@ -198,9 +190,7 @@ def post_model_outputs_and_maybe_allow_retries(
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(
-        lambda: stub.PostModelOutputs(request, metadata=metadata)
-    )
+    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
 
 
 def _retry_on_504_on_non_prod(func):
@@ -212,14 +202,17 @@ def _retry_on_504_on_non_prod(func):
     for i in range(1, MAX_ATTEMPTS + 1):
         try:
             response = func()
-            if len(response.outputs) > 0 and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT: # will want to retry
+            if (
+                len(response.outputs) > 0
+                and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
+            ):  # will want to retry
                 break
         except _Rendezvous as e:
             grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if "status: 504" not in e._state.details and '10020 Failure' not in e._state.details :
+            if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
                 raise e
 
             if i == MAX_ATTEMPTS:

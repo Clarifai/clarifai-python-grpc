@@ -26,7 +26,7 @@ jobs:
             python-version: 3.6
         include:
           - os: windows-latest
-              python-version: 3.8.10
+            python-version: 3.8.10
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -52,5 +52,5 @@ jobs:
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
         pip install pytest
-        pytest tests/ -v -n auto
+        pytest tests/ -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}

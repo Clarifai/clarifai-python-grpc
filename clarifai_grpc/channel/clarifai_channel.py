@@ -83,9 +83,7 @@ class ClarifaiChannel:
             base = os.environ.get("CLARIFAI_GRPC_BASE", None)
 
         if not base:
-            raise ValueError(
-                "Please set 'base' via arguments or env variable CLARIFAI_GRPC_BASE"
-            )
+            raise ValueError("Please set 'base' via arguments or env variable CLARIFAI_GRPC_BASE")
 
         channel_address = "{}:{}".format(base, port)
 
