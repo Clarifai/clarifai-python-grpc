@@ -106,7 +106,7 @@ class GRPCJSONChannel(object):
 
     def unary_unary(self, name, request_serializer, response_deserializer):
         # type: (str, typing.Callable, typing.Callable) -> JSONUnaryUnary
-        """ Method to create the callable JSONUnaryUnary. """
+        """Method to create the callable JSONUnaryUnary."""
         request_message_descriptor, resources = self.name_to_resources[name]
         return JSONUnaryUnary(
             self.session,
