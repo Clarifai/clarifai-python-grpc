@@ -73,6 +73,7 @@ def create_key(app_id):
 
 def create_pat():
     session_token, user_id = _login()
+    os.environ['CLARIFAI_USER_ID'] = user_id
 
     url = '/users/%s/keys' % user_id
     payload = {

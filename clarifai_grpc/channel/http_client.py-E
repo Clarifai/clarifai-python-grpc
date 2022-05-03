@@ -79,7 +79,7 @@ class HttpClient:
         return response_json
 
     def _mangle_base64_values(self, params):  # type: (dict) -> dict
-        """Mangle (shorten) the base64 values because they are too long for output."""
+        """ Mangle (shorten) the base64 values because they are too long for output. """
         inputs = (params or {}).get("inputs")
         query = (params or {}).get("query")
         if inputs and len(inputs) > 0:

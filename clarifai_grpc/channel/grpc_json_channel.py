@@ -78,7 +78,7 @@ class GRPCJSONChannel(object):
             protobuf_name = "/" + service_descriptor.full_name + "/" + m.name
             self.name_to_resources[protobuf_name] = (m.input_type, [])
 
-            for http_rule in base_http_rule.additional_bindings or [base_http_rule]:
+            def register_bindings(http_rule):
                 # Get the url template and the method to use for http.
                 if http_rule.HasField("get"):
                     method = "GET"
@@ -100,9 +100,13 @@ class GRPCJSONChannel(object):
 
                 self.name_to_resources[protobuf_name][1].append((url_template, method))
 
+            register_bindings(base_http_rule)
+            for http_rule in base_http_rule.additional_bindings:
+                register_bindings(http_rule)
+
     def unary_unary(self, name, request_serializer, response_deserializer):
         # type: (str, typing.Callable, typing.Callable) -> JSONUnaryUnary
-        """ Method to create the callable JSONUnaryUnary. """
+        """Method to create the callable JSONUnaryUnary."""
         request_message_descriptor, resources = self.name_to_resources[name]
         return JSONUnaryUnary(
             self.session,

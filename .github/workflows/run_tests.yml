@@ -17,16 +17,16 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, macos-latest]
         python-version: [3.6, 3.8]
         exclude:
-          # Python dependency installing fails for some reason here.
-          - os: windows-latest
-            python-version: 3.8
           - os: macos-latest
             python-version: 3.8
           - os: macos-latest
             python-version: 3.6
+        include:
+          - os: windows-latest
+            python-version: 3.8.10
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -52,5 +52,5 @@ jobs:
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
         pip install pytest
-        pytest tests/ -v -n auto
+        pytest tests/ -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
