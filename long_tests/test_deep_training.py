@@ -100,7 +100,7 @@ def test_mmdetection():
         first_region = post_model_outputs_response.outputs[0].data.regions[0]
 
         bounding_box = first_region.region_info.bounding_box
-        assert calculate_iou(bounding_box, [0.2289, 0.1643, 1, 0.8023]) > .9
+        assert calculate_iou(bounding_box, [0.25, 0.2, .95, 0.8]) > .8
 
         assert len(first_region.data.concepts) == 1
         first_region_concept = first_region.data.concepts[0]
@@ -129,9 +129,8 @@ _base_ = '/mmdetection/configs/yolof/yolof_r50_c5_8x8_1x_coco.py'
 model=dict(
   bbox_head=dict(num_classes=0),
   )
-optimizer = dict(
-  lr=0.06
-  )
+optimizer = dict(lr=0.06)
+optimizer_config = dict(_delete_=True, grad_clip=dict(max_norm=35, norm_type=2))
 data=dict(
   samples_per_gpu=32,
   workers_per_gpu=4,
