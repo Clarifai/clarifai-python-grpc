@@ -37,6 +37,7 @@ def test_mmdetection():
     patch_inputs_resp = stub.PatchInputs(
         service_pb2.PatchInputsRequest(
             user_app_id=user_app_id, 
+            action='overwrite',
             inputs=[resources_pb2.Input(id='000000577723', data=resources_pb2.Data(metadata=input_metadata))]
         ),
         metadata=pat_key_metadata(),
