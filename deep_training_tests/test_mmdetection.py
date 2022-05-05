@@ -1,6 +1,7 @@
 import os
 from typing import Tuple
 import uuid
+import time
 
 from google.protobuf import struct_pb2
 import numpy as np
@@ -30,6 +31,17 @@ def test_mmdetection():
         concepts.append(resources_pb2.Concept(id=str(i)))
     model_id = "mmdet-coco-" + uuid.uuid4().hex[:15]
     user_app_id = resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
+
+    input_metadata = struct_pb2.Struct()
+    input_metadata.update({"Time": time.time()})
+    patch_inputs_resp = stub.PatchInputs(
+        service_pb2.PatchInputsRequest(
+            user_app_id=user_app_id, 
+            inputs=[resources_pb2.Input(id='000000577723', data=resources_pb2.Data(metadata=input_metadata))]
+        ),
+        metadata=pat_key_metadata(),
+    )
+    raise_on_failure(patch_inputs_resp)
 
     train_info_params = struct_pb2.Struct()
     train_info_params.update(
