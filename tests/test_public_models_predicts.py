@@ -86,7 +86,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
-    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
+#    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
     ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "huggingface-research"),
     (
         "text multilingual moderation",
