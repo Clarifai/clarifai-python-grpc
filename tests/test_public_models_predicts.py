@@ -125,9 +125,7 @@ def test_text_predict_on_public_models(channel):
                 model_id=model_id,
                 inputs=[
                     resources_pb2.Input(
-                        data=resources_pb2.Data(
-                            text=resources_pb2.Text(raw=SPANISH_TEXT)
-                        )
+                        data=resources_pb2.Data(text=resources_pb2.Text(raw=SPANISH_TEXT))
                     )
                 ],
             )
@@ -137,9 +135,7 @@ def test_text_predict_on_public_models(channel):
                 model_id=model_id,
                 inputs=[
                     resources_pb2.Input(
-                        data=resources_pb2.Data(
-                            text=resources_pb2.Text(raw=ENGLISH_TEXT)
-                        )
+                        data=resources_pb2.Data(text=resources_pb2.Text(raw=ENGLISH_TEXT))
                     )
                 ],
             )
@@ -161,15 +157,11 @@ def test_image_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        image=resources_pb2.Image(url=DOG_IMAGE_URL)
-                    )
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata()
-        )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
@@ -191,15 +183,11 @@ def test_video_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        video=resources_pb2.Video(url=BEER_VIDEO_URL)
-                    )
+                    data=resources_pb2.Data(video=resources_pb2.Video(url=BEER_VIDEO_URL))
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata()
-        )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
         raise_on_failure(
             response,
             custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
