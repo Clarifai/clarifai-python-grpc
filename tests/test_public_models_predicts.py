@@ -47,7 +47,7 @@ from tests.common import (
     NSFW_MODEL_ID,
     PORTRAIT_QUALITY_MODEL_ID,
     SPANISH_TEXT,
-    # TEXT_GEN_MODEL_ID,
+    TEXT_GEN_MODEL_ID,
     TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
     TEXT_SENTIMENT_MODEL_ID,
     TEXT_SUM_MODEL_ID,
@@ -86,13 +86,8 @@ MODEL_TITLE_AND_ID_PAIRS = [
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
-    #    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
-    (
-        "text sentiment",
-        TEXT_SENTIMENT_MODEL_ID,
-        "text-classification",
-        "huggingface-research",
-    ),
+    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
+    ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "huggingface-research"),
     (
         "text multilingual moderation",
         TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
@@ -105,12 +100,7 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
     ),
-    (
-        "translate romance",
-        TRANSLATE_ROMANCE_MODEL_ID,
-        "translation",
-        "huggingface-research",
-    ),
+    ("translate romance", TRANSLATE_ROMANCE_MODEL_ID, "translation", "huggingface-research"),
 ]
 
 
