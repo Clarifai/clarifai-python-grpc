@@ -90,8 +90,10 @@ class HttpClient:
 
     def _mangle_base64_values_in_inputs(self, params):  # type: (dict) -> dict
         params_copy = copy.deepcopy(params)
-        for data in params_copy["inputs"]:
-            data = data["data"]
+        for input in params_copy["inputs"]:
+            if "data" not in input:
+                continue
+            data = input["data"]
             image = data.get("image")
             if image and image.get("base64"):
                 image["base64"] = self._shortened_base64_value(image["base64"])
