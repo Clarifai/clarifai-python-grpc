@@ -1,35 +1,6 @@
 import os
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from tests.common import (
-    DOG_IMAGE_URL,
-    APPAREL_MODEL_ID,
-    COLOR_MODEL_ID,
-    FACE_MODEL_ID,
-    FOOD_MODEL_ID,
-    GENERAL_EMBEDDING_MODEL_ID,
-    GENERAL_MODEL_ID,
-    LANDSCAPE_QUALITY_MODEL_ID,
-    LOGO_MODEL_ID,
-    MODERATION_MODEL_ID,
-    NSFW_MODEL_ID,
-    PORTRAIT_QUALITY_MODEL_ID,
-    TEXTURES_AND_PATTERNS_MODEL_ID,
-    TRAVEL_MODEL_ID,
-    WEDDING_MODEL_ID,
-    LOGO_V2_MODEL_ID,
-    PEOPLE_DETECTION_YOLOV5_MODEL_ID,
-    GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID,
-    IMAGE_SUBJECT_SEGMENTATION_MODEL_ID,
-    EASYOCR_ENGLISH_MODEL_ID,
-    PADDLEOCR_ENG_CHINESE_MODEL_ID,
-    both_channels,
-    metadata,
-    raise_on_failure,
-    BEER_VIDEO_URL,
-    post_model_outputs_and_maybe_allow_retries,
-)
 
-from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     APPAREL_MODEL_ID,
     BEER_VIDEO_URL,
@@ -55,6 +26,14 @@ from tests.common import (
     TRANSLATE_ROMANCE_MODEL_ID,
     TRAVEL_MODEL_ID,
     WEDDING_MODEL_ID,
+    LOGO_V2_MODEL_ID,
+    PEOPLE_DETECTION_YOLOV5_MODEL_ID,
+    GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID,
+    IMAGE_SUBJECT_SEGMENTATION_MODEL_ID,
+    EASYOCR_ENGLISH_MODEL_ID,
+    PADDLEOCR_ENG_CHINESE_MODEL_ID,
+    ENGLISH_AUDIO_URL,
+    ENGLISH_ASR_MODEL_ID,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -103,6 +82,33 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("translate romance", TRANSLATE_ROMANCE_MODEL_ID, "translation", "huggingface-research"),
 ]
 
+AUDIO_MODEL_TITLE_IDS_TUPLE = [
+    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
+]
+
+
+@both_channels
+def test_audio_predict_on_public_models(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in AUDIO_MODEL_TITLE_IDS_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
+                )
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+        print(response)
+        raise_on_failure(
+            response,
+            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+        )
 
 @both_channels
 def test_text_predict_on_public_models(channel):

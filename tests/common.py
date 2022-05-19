@@ -23,6 +23,8 @@ ENGLISH_TEXT = (
 )
 SPANISH_TEXT = "No me apetece nada estudiar esta noche."
 
+ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
+
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
 DEMOGRAPHICS_MODEL_ID = "c0c0ac362b03416da06ab3fa36fb58e3"
@@ -52,6 +54,7 @@ TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
 TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 
+ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 
 def metadata(pat=False):
     if pat:
