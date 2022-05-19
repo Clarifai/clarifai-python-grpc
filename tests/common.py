@@ -56,6 +56,7 @@ TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 
+
 def metadata(pat=False):
     if pat:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
