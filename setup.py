@@ -25,7 +25,7 @@ setuptools.setup(
     python_requires='>=3.6',
     install_requires=[
         "grpcio>=1.36.0",
-        "protobuf>=3.15.6",
+        "protobuf>= 3.15.6, <=3.17.3",
         "googleapis-common-protos>=1.53.0",
         "requests>=2.25.1",
     ],
