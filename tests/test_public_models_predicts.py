@@ -104,10 +104,9 @@ def test_audio_predict_on_public_models(channel):
         response = post_model_outputs_and_maybe_allow_retries(
             stub, request, metadata=metadata(pat=True)
         )
-        print(response)
         raise_on_failure(
             response,
-            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+            custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
         )
 
 
