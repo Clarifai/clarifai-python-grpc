@@ -16,7 +16,7 @@ class V2Stub(object):
     """
 
     def __init__(self, channel):
-    from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
+        from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
         """Constructor.
 
         Args:
