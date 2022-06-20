@@ -79,7 +79,7 @@ class HttpClient:
         return response_json
 
     def _mangle_base64_values(self, params):  # type: (dict) -> dict
-        """ Mangle (shorten) the base64 values because they are too long for output. """
+        """Mangle (shorten) the base64 values because they are too long for output."""
         inputs = (params or {}).get("inputs")
         query = (params or {}).get("query")
         if inputs and len(inputs) > 0:
@@ -90,8 +90,10 @@ class HttpClient:
 
     def _mangle_base64_values_in_inputs(self, params):  # type: (dict) -> dict
         params_copy = copy.deepcopy(params)
-        for data in params_copy["inputs"]:
-            data = data["data"]
+        for input in params_copy["inputs"]:
+            if "data" not in input:
+                continue
+            data = input["data"]
             image = data.get("image")
             if image and image.get("base64"):
                 image["base64"] = self._shortened_base64_value(image["base64"])

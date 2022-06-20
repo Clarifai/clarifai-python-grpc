@@ -22,6 +22,7 @@ class Status(google.protobuf.message.Message):
     TIME_REMAINING_FIELD_NUMBER: builtins.int
     REQ_ID_FIELD_NUMBER: builtins.int
     INTERNAL_DETAILS_FIELD_NUMBER: builtins.int
+    REDIRECT_INFO_FIELD_NUMBER: builtins.int
     code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """Status code from internal codes."""
 
@@ -49,6 +50,10 @@ class Status(google.protobuf.message.Message):
     internal_details: typing.Text
     """Internal Annotation (do not set in production, for internal Clarifai use only)."""
 
+    @property
+    def redirect_info(self) -> global___RedirectInfo:
+        """Resource location info for redirect, when resource location has been changed."""
+        pass
     def __init__(self,
         *,
         code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
@@ -59,9 +64,39 @@ class Status(google.protobuf.message.Message):
         time_remaining: builtins.int = ...,
         req_id: typing.Text = ...,
         internal_details: typing.Text = ...,
+        redirect_info: typing.Optional[global___RedirectInfo] = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["code",b"code","description",b"description","details",b"details","internal_details",b"internal_details","percent_completed",b"percent_completed","req_id",b"req_id","stack_trace",b"stack_trace","time_remaining",b"time_remaining"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["redirect_info",b"redirect_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code",b"code","description",b"description","details",b"details","internal_details",b"internal_details","percent_completed",b"percent_completed","redirect_info",b"redirect_info","req_id",b"req_id","stack_trace",b"stack_trace","time_remaining",b"time_remaining"]) -> None: ...
 global___Status = Status
+
+class RedirectInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    URL_FIELD_NUMBER: builtins.int
+    RESOURCE_TYPE_FIELD_NUMBER: builtins.int
+    OLD_RESOURCE_ID_FIELD_NUMBER: builtins.int
+    NEW_RESOURCE_ID_FIELD_NUMBER: builtins.int
+    url: typing.Text
+    """New location for the resource. Used to set response Location header."""
+
+    resource_type: typing.Text
+    """Resource type"""
+
+    old_resource_id: typing.Text
+    """Old resource id"""
+
+    new_resource_id: typing.Text
+    """New resource id"""
+
+    def __init__(self,
+        *,
+        url: typing.Text = ...,
+        resource_type: typing.Text = ...,
+        old_resource_id: typing.Text = ...,
+        new_resource_id: typing.Text = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["new_resource_id",b"new_resource_id","old_resource_id",b"old_resource_id","resource_type",b"resource_type","url",b"url"]) -> None: ...
+global___RedirectInfo = RedirectInfo
 
 class BaseResponse(google.protobuf.message.Message):
     """Base message to return when there is a internal server error that

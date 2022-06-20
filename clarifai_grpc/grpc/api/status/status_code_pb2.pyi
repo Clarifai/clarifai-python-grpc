@@ -25,12 +25,14 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     FAILURE: _StatusCode.ValueType  # 10020
     TRY_AGAIN: _StatusCode.ValueType  # 10030
     NOT_IMPLEMENTED: _StatusCode.ValueType  # 10040
-    """SUCCESS_WARNING_API_DEPRECATED = 10001;
-    SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
-    """
+    MOVED: _StatusCode.ValueType  # 10050
+    """Resource moved. Respond with Http status 307 and add new Location header to response"""
 
     CONN_ACCOUNT_ISSUES: _StatusCode.ValueType  # 11000
-    """Clarifai Connection Codes: 11xxx
+    """SUCCESS_WARNING_API_DEPRECATED = 10001;
+    SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
+
+    Clarifai Connection Codes: 11xxx
     expired cc, still in trial, feature not supported in your tier
     """
 
@@ -257,6 +259,16 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     MODULE_PERMISSION_DENIED: _StatusCode.ValueType  # 25301
     MODULE_INVALID_ARGUMENT: _StatusCode.ValueType  # 25302
     MODULE_INVALID_REQUEST: _StatusCode.ValueType  # 25303
+    BULK_OPERATION_SUCCESS: _StatusCode.ValueType  # 25400
+    """Bulk Operation related codes 254xx"""
+
+    BULK_OPERATION_FAILED: _StatusCode.ValueType  # 25401
+    BULK_OPERATION_PENDING: _StatusCode.ValueType  # 25402
+    BULK_OPERATION_IN_PROGRESS: _StatusCode.ValueType  # 25403
+    BULK_OPERATION_INVALID_REQUEST: _StatusCode.ValueType  # 25404
+    BULK_OPERATION_CANCELLED: _StatusCode.ValueType  # 25405
+    BULK_OPERATION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25406
+    BULK_OPERATION_DELETED: _StatusCode.ValueType  # 25407
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
 
@@ -493,6 +505,15 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     DATASET_VERSION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64025
     """An unexpected error occurred during the dataset version processing."""
 
+    DATASET_VERSION_CONFLICT: _StatusCode.ValueType  # 64030
+    """An alteration to dataset version would create a conflict"""
+
+    DATASET_INPUT_SUCCESS: _StatusCode.ValueType  # 64100
+    """The dataset input was successfully added."""
+
+    DATASET_INPUT_DUPLICATE: _StatusCode.ValueType  # 64101
+    """The dataset input is a duplicate."""
+
     JOB_QUEUED: _StatusCode.ValueType  # 64000
     """Generic Job status codes"""
 
@@ -545,12 +566,14 @@ MIXED_STATUS: StatusCode.ValueType  # 10010
 FAILURE: StatusCode.ValueType  # 10020
 TRY_AGAIN: StatusCode.ValueType  # 10030
 NOT_IMPLEMENTED: StatusCode.ValueType  # 10040
-"""SUCCESS_WARNING_API_DEPRECATED = 10001;
-SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
-"""
+MOVED: StatusCode.ValueType  # 10050
+"""Resource moved. Respond with Http status 307 and add new Location header to response"""
 
 CONN_ACCOUNT_ISSUES: StatusCode.ValueType  # 11000
-"""Clarifai Connection Codes: 11xxx
+"""SUCCESS_WARNING_API_DEPRECATED = 10001;
+SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
+
+Clarifai Connection Codes: 11xxx
 expired cc, still in trial, feature not supported in your tier
 """
 
@@ -777,6 +800,16 @@ MODULE_DOES_NOT_EXIST: StatusCode.ValueType  # 25300
 MODULE_PERMISSION_DENIED: StatusCode.ValueType  # 25301
 MODULE_INVALID_ARGUMENT: StatusCode.ValueType  # 25302
 MODULE_INVALID_REQUEST: StatusCode.ValueType  # 25303
+BULK_OPERATION_SUCCESS: StatusCode.ValueType  # 25400
+"""Bulk Operation related codes 254xx"""
+
+BULK_OPERATION_FAILED: StatusCode.ValueType  # 25401
+BULK_OPERATION_PENDING: StatusCode.ValueType  # 25402
+BULK_OPERATION_IN_PROGRESS: StatusCode.ValueType  # 25403
+BULK_OPERATION_INVALID_REQUEST: StatusCode.ValueType  # 25404
+BULK_OPERATION_CANCELLED: StatusCode.ValueType  # 25405
+BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
+BULK_OPERATION_DELETED: StatusCode.ValueType  # 25407
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 
@@ -1012,6 +1045,15 @@ DATASET_VERSION_FAILURE: StatusCode.ValueType  # 64020
 
 DATASET_VERSION_UNEXPECTED_ERROR: StatusCode.ValueType  # 64025
 """An unexpected error occurred during the dataset version processing."""
+
+DATASET_VERSION_CONFLICT: StatusCode.ValueType  # 64030
+"""An alteration to dataset version would create a conflict"""
+
+DATASET_INPUT_SUCCESS: StatusCode.ValueType  # 64100
+"""The dataset input was successfully added."""
+
+DATASET_INPUT_DUPLICATE: StatusCode.ValueType  # 64101
+"""The dataset input is a duplicate."""
 
 JOB_QUEUED: StatusCode.ValueType  # 64000
 """Generic Job status codes"""
