@@ -567,6 +567,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
                 )
+        self.PatchApp = channel.unary_unary(
+                '/clarifai.api.V2/PatchApp',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse),
+                )
+        self.PatchAppsIds = channel.unary_unary(
+                '/clarifai.api.V2/PatchAppsIds',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsIdsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
+                )
         self.PostAppsSearches = channel.unary_unary(
                 '/clarifai.api.V2/PostAppsSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.SerializeToString,
@@ -806,6 +816,11 @@ class V2Stub(object):
                 '/clarifai.api.V2/ListTrendingMetricsViews',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
+                )
+        self.GetDatasetInputsSearchAddJob = channel.unary_unary(
+                '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
                 )
 
 
@@ -1142,9 +1157,13 @@ class V2Servicer(object):
 
     def PostDatasetInputs(self, request, context):
         """Add dataset inputs to a dataset.
-        The process is atomic, i.e. either all or no dataset inputs are added.
-        If there is an error for one dataset input,
-        the process will stop, revert the transaction and return the error.
+        The process is not atomic, i.e. if there are errors with some dataset
+        inputs, others might still be added. The response reports
+        - SUCCESS if all dataset inputs were added,
+        - MIXED_STATUS if only some dataset inputs were added, and
+        - FAILURE if no dataset inputs were added.
+        Each individual dataset input in the response has the status set to
+        indicate if it was successful or if there was an error.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1617,6 +1636,20 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchApp(self, request, context):
+        """Patch one app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchAppsIds(self, request, context):
+        """Patch apps ids.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostAppsSearches(self, request, context):
         """Search over the applications to find one or more you're looking for.
         """
@@ -1857,7 +1890,11 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostLabelOrders(self, request, context):
-        """Add Label orders.
+        """//////////////////////////////////////
+        Label Order
+        //////////////////////////////////////
+
+        Add Label orders.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1956,6 +1993,13 @@ class V2Servicer(object):
 
     def ListTrendingMetricsViews(self, request, context):
         """List the view metrics for a detail view
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetDatasetInputsSearchAddJob(self, request, context):
+        """Get a specific job.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2509,6 +2553,16 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
             ),
+            'PatchApp': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchApp,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse.SerializeToString,
+            ),
+            'PatchAppsIds': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchAppsIds,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsIdsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
+            ),
             'PostAppsSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAppsSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.FromString,
@@ -2748,6 +2802,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListTrendingMetricsViews,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
+            ),
+            'GetDatasetInputsSearchAddJob': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDatasetInputsSearchAddJob,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -4619,6 +4678,40 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PatchApp(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchApp',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchAppsIds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchAppsIds',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsIdsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostAppsSearches(request,
             target,
             options=(),
@@ -5431,5 +5524,22 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTrendingMetricsViews',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDatasetInputsSearchAddJob(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
