@@ -7,6 +7,7 @@ from grpc._channel import _Rendezvous
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
+from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
@@ -96,18 +97,20 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
             ):
                 time.sleep(1)
             else:
-                error_message = (
-                    str(get_input_response.status.code)
-                    + " "
-                    + get_input_response.status.description
-                    + " "
-                    + get_input_response.status.details
-                )
+                error_message = get_status_message(get_input_response.status)
                 raise Exception(
                     f"Expected inputs to upload, but got {error_message}. "
                     f"Full response: {get_input_response}"
                 )
     # At this point, all inputs have been downloaded successfully.
+
+
+def get_status_message(status: Status):
+    message = f"{status.code} {status.description}"
+    if status.details:
+        return f"{message} {status.details}"
+    else:
+        return message
 
 
 def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
@@ -127,15 +130,9 @@ def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_
         ):
             time.sleep(1)
         else:
-            error_message = (
-                str(response.status.code)
-                + " "
-                + response.status.description
-                + " "
-                + response.status.details
-            )
+            message = get_status_message(response.model_version.status)
             raise Exception(
-                f"Expected model to train, but got {error_message}. Full response: {response}"
+                f"Expected model to be trained trained, but got model status: {message}. Full response: {response}"
             )
     # At this point, the model has successfully finished training.
 
@@ -158,13 +155,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
         ):
             time.sleep(1)
         else:
-            error_message = (
-                str(response.status.code)
-                + " "
-                + response.status.description
-                + " "
-                + response.status.details
-            )
+            error_message = get_status_message(response.status)
             raise Exception(
                 f"Expected model to evaluate, but got {error_message}. Full response: {response}"
             )
@@ -173,13 +164,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
 
 def raise_on_failure(response, custom_message=""):
     if response.status.code != status_code_pb2.SUCCESS:
-        error_message = (
-            str(response.status.code)
-            + " "
-            + response.status.description
-            + " "
-            + response.status.details
-        )
+        error_message = get_status_message(response.status)
         if custom_message:
             if not str.isspace(custom_message[-1]):
                 custom_message += " "
