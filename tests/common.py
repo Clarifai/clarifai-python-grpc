@@ -132,7 +132,7 @@ def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_
         else:
             message = get_status_message(response.model_version.status)
             raise Exception(
-                f"Expected model to be trained trained, but got model status: {message}. Full response: {response}"
+                f"Expected model to be trained, but got model status: {message}. Full response: {response}"
             )
     # At this point, the model has successfully finished training.
 
