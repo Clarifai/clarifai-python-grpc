@@ -58,6 +58,14 @@ TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 
 
+def get_status_message(status: Status):
+    message = f"{status.code} {status.description}"
+    if status.details:
+        return f"{message} {status.details}"
+    else:
+        return message
+
+
 def metadata(pat=False):
     if pat:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
@@ -103,14 +111,6 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                     f"Full response: {get_input_response}"
                 )
     # At this point, all inputs have been downloaded successfully.
-
-
-def get_status_message(status: Status):
-    message = f"{status.code} {status.description}"
-    if status.details:
-        return f"{message} {status.details}"
-    else:
-        return message
 
 
 def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
