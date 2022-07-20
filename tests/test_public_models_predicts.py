@@ -149,6 +149,7 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
+
 @pytest.mark.skip(
     reason="On Github Actions there's 'Model training had no data' error for some reason"
 )
