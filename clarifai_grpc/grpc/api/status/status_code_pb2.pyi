@@ -97,33 +97,38 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
 
     MODEL_UPLOADING: _StatusCode.ValueType  # 21104
     MODEL_UPLOADING_FAILED: _StatusCode.ValueType  # 21105
+    MODEL_TRAINING_FAILED: _StatusCode.ValueType  # 21106
+    """generic err msg for any type of model training err."""
+
     MODEL_TRAINING_NO_DATA: _StatusCode.ValueType  # 21110
-    """Custom model training had no data."""
+    """Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_NO_POSITIVES: _StatusCode.ValueType  # 21111
-    """Custom model training had no positive examples."""
+    """Custom model training had no positive examples. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS: _StatusCode.ValueType  # 21112
-    """Custom model training was ONE_VS_N but with a single class."""
+    """Custom model training was ONE_VS_N but with a single class. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_TIMED_OUT: _StatusCode.ValueType  # 21113
-    """Training took longer than hard coded timeouts."""
+    """Training took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_WAITING_ERROR: _StatusCode.ValueType  # 21114
-    """Training got error waiting on asset pipeline to finish."""
+    """Training got error waiting on asset pipeline to finish. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_UNKNOWN_ERROR: _StatusCode.ValueType  # 21115
     """Training threw an unknown exception."""
 
     MODEL_TRAINING_MSG_REDELIVER: _StatusCode.ValueType  # 21116
-    """Training message was redelivered."""
+    """Training message was redelivered. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_INSUFFICIENT_DATA: _StatusCode.ValueType  # 21117
-    """Training got error due to insufficient labelled data"""
+    """Training got error due to insufficient labelled data. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_TRAINING_INVALID_PARAMS: _StatusCode.ValueType  # 21118
+    """FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
+
     MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED: _StatusCode.ValueType  # 21119
-    """Training is stopped because too much data was dropped"""
+    """Training is stopped because too much data was dropped. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
     MODEL_MODIFY_SUCCESS: _StatusCode.ValueType  # 21150
     MODEL_MODIFY_PENDING: _StatusCode.ValueType  # 21151
@@ -141,23 +146,26 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     MODEL_NOT_EVALUATED: _StatusCode.ValueType  # 21302
     MODEL_QUEUED_FOR_EVALUATION: _StatusCode.ValueType  # 21303
     MODEL_EVALUATION_TIMED_OUT: _StatusCode.ValueType  # 21310
-    """Evaluation took longer than hard coded timeouts."""
+    """Evaluation took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
     MODEL_EVALUATION_WAITING_ERROR: _StatusCode.ValueType  # 21311
-    """Evaluation got error waiting on asset pipeline to finish."""
+    """Evaluation got error waiting on asset pipeline to finish.FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
     MODEL_EVALUATION_UNKNOWN_ERROR: _StatusCode.ValueType  # 21312
     """EVALUATION THREW AN UNKNOWN EXCEPTION."""
 
     MODEL_PREDICTION_FAILED: _StatusCode.ValueType  # 21313
     MODEL_EVALUATION_MSG_REDELIVER: _StatusCode.ValueType  # 21314
-    """Eval message was redelivered."""
+    """Eval message was redelivered. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
     MODEL_EVALUATION_NEED_LABELS: _StatusCode.ValueType  # 21315
-    """Don't have enough concepts labelled to perform evaluation"""
+    """Don't have enough concepts labelled to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
     MODEL_EVALUATION_NEED_INPUTS: _StatusCode.ValueType  # 21316
-    """Don't have enough inputs per concept to perform evaluation"""
+    """Don't have enough inputs per concept to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
+
+    MODEL_EVALUATION_FAILED: _StatusCode.ValueType  # 21317
+    """Generic err code for eval failure."""
 
     MODEL_DEPLOYMENT_FAILED: _StatusCode.ValueType  # 21350
     """Status codes through 21319 (inclusive) reserved for model eval *errors* (per logic in clients)
@@ -376,6 +384,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     SEARCH_BY_NOT_FULLY_INDEXED_INPUT: _StatusCode.ValueType  # 43004
     SAVED_SEARCH_MODIFY_FAILED: _StatusCode.ValueType  # 43005
     EVALUATION_QUEUED: _StatusCode.ValueType  # 43100
+    """Workflow evaluation err code"""
+
     EVALUATION_IN_PROGRESS: _StatusCode.ValueType  # 43101
     EVALUATION_SUCCESS: _StatusCode.ValueType  # 43102
     EVALUATION_FAILED_TO_RETRIEVE_DATA: _StatusCode.ValueType  # 43103
@@ -525,6 +535,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     TODO: Knowledge graph related 80xxx
     """
 
+    LIST_OBJECTS_FAILED: _StatusCode.ValueType  # 66000
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
 
@@ -638,33 +649,38 @@ MODEL_QUEUED_FOR_TRAINING: StatusCode.ValueType  # 21103
 
 MODEL_UPLOADING: StatusCode.ValueType  # 21104
 MODEL_UPLOADING_FAILED: StatusCode.ValueType  # 21105
+MODEL_TRAINING_FAILED: StatusCode.ValueType  # 21106
+"""generic err msg for any type of model training err."""
+
 MODEL_TRAINING_NO_DATA: StatusCode.ValueType  # 21110
-"""Custom model training had no data."""
+"""Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_NO_POSITIVES: StatusCode.ValueType  # 21111
-"""Custom model training had no positive examples."""
+"""Custom model training had no positive examples. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS: StatusCode.ValueType  # 21112
-"""Custom model training was ONE_VS_N but with a single class."""
+"""Custom model training was ONE_VS_N but with a single class. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_TIMED_OUT: StatusCode.ValueType  # 21113
-"""Training took longer than hard coded timeouts."""
+"""Training took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_WAITING_ERROR: StatusCode.ValueType  # 21114
-"""Training got error waiting on asset pipeline to finish."""
+"""Training got error waiting on asset pipeline to finish. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_UNKNOWN_ERROR: StatusCode.ValueType  # 21115
 """Training threw an unknown exception."""
 
 MODEL_TRAINING_MSG_REDELIVER: StatusCode.ValueType  # 21116
-"""Training message was redelivered."""
+"""Training message was redelivered. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_INSUFFICIENT_DATA: StatusCode.ValueType  # 21117
-"""Training got error due to insufficient labelled data"""
+"""Training got error due to insufficient labelled data. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_TRAINING_INVALID_PARAMS: StatusCode.ValueType  # 21118
+"""FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
+
 MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED: StatusCode.ValueType  # 21119
-"""Training is stopped because too much data was dropped"""
+"""Training is stopped because too much data was dropped. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 
 MODEL_MODIFY_SUCCESS: StatusCode.ValueType  # 21150
 MODEL_MODIFY_PENDING: StatusCode.ValueType  # 21151
@@ -682,23 +698,26 @@ MODEL_EVALUATING: StatusCode.ValueType  # 21301
 MODEL_NOT_EVALUATED: StatusCode.ValueType  # 21302
 MODEL_QUEUED_FOR_EVALUATION: StatusCode.ValueType  # 21303
 MODEL_EVALUATION_TIMED_OUT: StatusCode.ValueType  # 21310
-"""Evaluation took longer than hard coded timeouts."""
+"""Evaluation took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
 MODEL_EVALUATION_WAITING_ERROR: StatusCode.ValueType  # 21311
-"""Evaluation got error waiting on asset pipeline to finish."""
+"""Evaluation got error waiting on asset pipeline to finish.FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
 MODEL_EVALUATION_UNKNOWN_ERROR: StatusCode.ValueType  # 21312
 """EVALUATION THREW AN UNKNOWN EXCEPTION."""
 
 MODEL_PREDICTION_FAILED: StatusCode.ValueType  # 21313
 MODEL_EVALUATION_MSG_REDELIVER: StatusCode.ValueType  # 21314
-"""Eval message was redelivered."""
+"""Eval message was redelivered. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
 MODEL_EVALUATION_NEED_LABELS: StatusCode.ValueType  # 21315
-"""Don't have enough concepts labelled to perform evaluation"""
+"""Don't have enough concepts labelled to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
 
 MODEL_EVALUATION_NEED_INPUTS: StatusCode.ValueType  # 21316
-"""Don't have enough inputs per concept to perform evaluation"""
+"""Don't have enough inputs per concept to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
+
+MODEL_EVALUATION_FAILED: StatusCode.ValueType  # 21317
+"""Generic err code for eval failure."""
 
 MODEL_DEPLOYMENT_FAILED: StatusCode.ValueType  # 21350
 """Status codes through 21319 (inclusive) reserved for model eval *errors* (per logic in clients)
@@ -917,6 +936,8 @@ SEARCH_PREDICTION_FAILURE: StatusCode.ValueType  # 43003
 SEARCH_BY_NOT_FULLY_INDEXED_INPUT: StatusCode.ValueType  # 43004
 SAVED_SEARCH_MODIFY_FAILED: StatusCode.ValueType  # 43005
 EVALUATION_QUEUED: StatusCode.ValueType  # 43100
+"""Workflow evaluation err code"""
+
 EVALUATION_IN_PROGRESS: StatusCode.ValueType  # 43101
 EVALUATION_SUCCESS: StatusCode.ValueType  # 43102
 EVALUATION_FAILED_TO_RETRIEVE_DATA: StatusCode.ValueType  # 43103
@@ -1066,6 +1087,7 @@ AUTH_MISSING_IDP_ASSOC: StatusCode.ValueType  # 65000
 TODO: Knowledge graph related 80xxx
 """
 
+LIST_OBJECTS_FAILED: StatusCode.ValueType  # 66000
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 
