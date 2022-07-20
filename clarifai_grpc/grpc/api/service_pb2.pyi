@@ -2774,6 +2774,36 @@ class PatchModelToolkitsRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["action",b"action","model_id",b"model_id","toolkits",b"toolkits","user_app_id",b"user_app_id"]) -> None: ...
 global___PatchModelToolkitsRequest = PatchModelToolkitsRequest
 
+class PatchModelCheckConsentsRequest(google.protobuf.message.Message):
+    """PatchModelCheckConsentsRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    CHECK_CONSENTS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: typing.Text
+    """the model id"""
+
+    @property
+    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """the consents"""
+        pass
+    action: typing.Text
+    """overwrite supported"""
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        model_id: typing.Text = ...,
+        check_consents: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        action: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","check_consents",b"check_consents","model_id",b"model_id","user_app_id",b"user_app_id"]) -> None: ...
+global___PatchModelCheckConsentsRequest = PatchModelCheckConsentsRequest
+
 class PatchModelUseCasesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_APP_ID_FIELD_NUMBER: builtins.int
@@ -2840,6 +2870,23 @@ class MultiModelToolkitResponse(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["status",b"status","toolkits",b"toolkits"]) -> None: ...
 global___MultiModelToolkitResponse = MultiModelToolkitResponse
+
+class MultiModelCheckConsentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    CHECK_CONSENTS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        check_consents: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_consents",b"check_consents","status",b"status"]) -> None: ...
+global___MultiModelCheckConsentResponse = MultiModelCheckConsentResponse
 
 class MultiModelUseCaseResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -5312,6 +5359,7 @@ class ListTasksRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     WORKER_USER_IDS_FIELD_NUMBER: builtins.int
     REVIEW_USER_IDS_FIELD_NUMBER: builtins.int
+    LABEL_ORDER_IDS_FIELD_NUMBER: builtins.int
     INCLUDING_LABEL_ORDER_TASKS_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
@@ -5334,8 +5382,14 @@ class ListTasksRequest(google.protobuf.message.Message):
     def review_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
         """Get tasks that have ANY user from this list assigned as reviewer."""
         pass
+    @property
+    def label_order_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """Get tasks that are associated to ANY label order from this list."""
+        pass
     including_label_order_tasks: builtins.bool
-    """Get label order tasks as well"""
+    """Get label order tasks as well
+    It is automatically set to true if label_order_ids is set.
+    """
 
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
@@ -5350,11 +5404,12 @@ class ListTasksRequest(google.protobuf.message.Message):
         per_page: builtins.int = ...,
         worker_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         review_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        label_order_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         including_label_order_tasks: builtins.bool = ...,
         additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","including_label_order_tasks",b"including_label_order_tasks","page",b"page","per_page",b"per_page","review_user_ids",b"review_user_ids","user_app_id",b"user_app_id","worker_user_ids",b"worker_user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","including_label_order_tasks",b"including_label_order_tasks","label_order_ids",b"label_order_ids","page",b"page","per_page",b"per_page","review_user_ids",b"review_user_ids","user_app_id",b"user_app_id","worker_user_ids",b"worker_user_ids"]) -> None: ...
 global___ListTasksRequest = ListTasksRequest
 
 class PatchTasksRequest(google.protobuf.message.Message):
@@ -5582,7 +5637,7 @@ class PatchLabelOrdersRequest(google.protobuf.message.Message):
 global___PatchLabelOrdersRequest = PatchLabelOrdersRequest
 
 class DeleteLabelOrdersRequest(google.protobuf.message.Message):
-    """Request to delete a list of tasks."""
+    """Request to delete a list of label orders."""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
@@ -5948,3 +6003,507 @@ class MultiTrendingMetricsViewResponse(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["metrics",b"metrics","status",b"status"]) -> None: ...
 global___MultiTrendingMetricsViewResponse = MultiTrendingMetricsViewResponse
+
+class GetModuleRequest(google.protobuf.message.Message):
+    """GetModuleRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: typing.Text
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        module_id: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","user_app_id",b"user_app_id"]) -> None: ...
+global___GetModuleRequest = GetModuleRequest
+
+class ListModulesRequest(google.protobuf.message.Message):
+    """ListModulesRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+global___ListModulesRequest = ListModulesRequest
+
+class PostModulesRequest(google.protobuf.message.Message):
+    """PostModulesRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULES_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]:
+        """This allows you to create one or more module by posting it to the API."""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["modules",b"modules","user_app_id",b"user_app_id"]) -> None: ...
+global___PostModulesRequest = PostModulesRequest
+
+class PatchModulesRequest(google.protobuf.message.Message):
+    """PatchModulesRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULES_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]: ...
+    action: typing.Text
+    """The action to perform on the patched objects
+    For now actions 'merge', 'overwrite', and 'remove' are supported
+    """
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
+        action: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","modules",b"modules","user_app_id",b"user_app_id"]) -> None: ...
+global___PatchModulesRequest = PatchModulesRequest
+
+class DeleteModulesRequest(google.protobuf.message.Message):
+    """Request to delete several things by the list of ids."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+global___DeleteModulesRequest = DeleteModulesRequest
+
+class SingleModuleResponse(google.protobuf.message.Message):
+    """SingleModuleResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    MODULE_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def module(self) -> proto.clarifai.api.resources_pb2.Module: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        module: typing.Optional[proto.clarifai.api.resources_pb2.Module] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["module",b"module","status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module",b"module","status",b"status"]) -> None: ...
+global___SingleModuleResponse = SingleModuleResponse
+
+class MultiModuleResponse(google.protobuf.message.Message):
+    """MultiModuleResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    MODULES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["modules",b"modules","status",b"status"]) -> None: ...
+global___MultiModuleResponse = MultiModuleResponse
+
+class GetModuleVersionRequest(google.protobuf.message.Message):
+    """request for different endpoints currently."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    MODULE_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: typing.Text
+    module_version_id: typing.Text
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        module_id: typing.Text = ...,
+        module_version_id: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","module_version_id",b"module_version_id","user_app_id",b"user_app_id"]) -> None: ...
+global___GetModuleVersionRequest = GetModuleVersionRequest
+
+class ListModuleVersionsRequest(google.protobuf.message.Message):
+    """ListModuleVersionsRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: typing.Text
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        module_id: typing.Text = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+global___ListModuleVersionsRequest = ListModuleVersionsRequest
+
+class PostModuleVersionsRequest(google.protobuf.message.Message):
+    """PostModuleVersionsRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    MODULE_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: typing.Text
+    @property
+    def module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModuleVersion]:
+        """This allows you to create one or more module by posting it to the API."""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        module_id: typing.Text = ...,
+        module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","module_versions",b"module_versions","user_app_id",b"user_app_id"]) -> None: ...
+global___PostModuleVersionsRequest = PostModuleVersionsRequest
+
+class DeleteModuleVersionsRequest(google.protobuf.message.Message):
+    """Request to delete several module versions by the list of ids."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: typing.Text
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        module_id: typing.Text = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","module_id",b"module_id","user_app_id",b"user_app_id"]) -> None: ...
+global___DeleteModuleVersionsRequest = DeleteModuleVersionsRequest
+
+class SingleModuleVersionResponse(google.protobuf.message.Message):
+    """SingleModuleVersionResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    MODULE_VERSION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def module_version(self) -> proto.clarifai.api.resources_pb2.ModuleVersion: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        module_version: typing.Optional[proto.clarifai.api.resources_pb2.ModuleVersion] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["module_version",b"module_version","status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_version",b"module_version","status",b"status"]) -> None: ...
+global___SingleModuleVersionResponse = SingleModuleVersionResponse
+
+class MultiModuleVersionResponse(google.protobuf.message.Message):
+    """MultiModuleVersionResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    MODULE_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModuleVersion]: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_versions",b"module_versions","status",b"status"]) -> None: ...
+global___MultiModuleVersionResponse = MultiModuleVersionResponse
+
+class ListInstalledModuleVersionsRequest(google.protobuf.message.Message):
+    """ListInstalledModuleVersionsRequest"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+global___ListInstalledModuleVersionsRequest = ListInstalledModuleVersionsRequest
+
+class PostInstalledModuleVersionsRequest(google.protobuf.message.Message):
+    """PostInstalledModuleVersionsRequest to install a module version into the app in the URL"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def installed_module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InstalledModuleVersion]:
+        """This allows you to create one or more module by posting it to the API."""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        installed_module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions",b"installed_module_versions","user_app_id",b"user_app_id"]) -> None: ...
+global___PostInstalledModuleVersionsRequest = PostInstalledModuleVersionsRequest
+
+class DeleteInstalledModuleVersionsRequest(google.protobuf.message.Message):
+    """Request to delete several installed module versions by the list of ids."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+global___DeleteInstalledModuleVersionsRequest = DeleteInstalledModuleVersionsRequest
+
+class MultiInstalledModuleVersionResponse(google.protobuf.message.Message):
+    """MultiInstalledModuleVersionResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def installed_module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InstalledModuleVersion]: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        installed_module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions",b"installed_module_versions","status",b"status"]) -> None: ...
+global___MultiInstalledModuleVersionResponse = MultiInstalledModuleVersionResponse
+
+class PostBulkOperationsRequest(google.protobuf.message.Message):
+    """Request to perform bulk operations on a list of inputs based on input source."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    BULK_OPERATIONS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def bulk_operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.BulkOperation]:
+        """List of bulk operation(s) to be performed e.g bulk update metadata or tags or labels etc."""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        bulk_operations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.BulkOperation]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operations",b"bulk_operations","user_app_id",b"user_app_id"]) -> None: ...
+global___PostBulkOperationsRequest = PostBulkOperationsRequest
+
+class ListBulkOperationsRequest(google.protobuf.message.Message):
+    """Request to list all the bulk operations."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+global___ListBulkOperationsRequest = ListBulkOperationsRequest
+
+class GetBulkOperationRequest(google.protobuf.message.Message):
+    """Request to get the details of a bulk operation by ID."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    id: typing.Text
+    """The bulk operation id"""
+
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        id: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+global___GetBulkOperationRequest = GetBulkOperationRequest
+
+class CancelBulkOperationRequest(google.protobuf.message.Message):
+    """Cancel a list of bulk operation ids"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """List of bulk operation ids to be cancelled"""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+global___CancelBulkOperationRequest = CancelBulkOperationRequest
+
+class DeleteBulkOperationRequest(google.protobuf.message.Message):
+    """Request to delete the terminated bulk operations by ID
+    Only operations in terminated state can be deleted.
+    """
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+        """List of bulk operation ids to be deleted"""
+        pass
+    def __init__(self,
+        *,
+        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+global___DeleteBulkOperationRequest = DeleteBulkOperationRequest
+
+class SingleBulkOperationsResponse(google.protobuf.message.Message):
+    """SingleBulkOperationsResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    BULK_OPERATION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def bulk_operation(self) -> proto.clarifai.api.resources_pb2.BulkOperation: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        bulk_operation: typing.Optional[proto.clarifai.api.resources_pb2.BulkOperation] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> None: ...
+global___SingleBulkOperationsResponse = SingleBulkOperationsResponse
+
+class MultiBulkOperationsResponse(google.protobuf.message.Message):
+    """MultiBulkOperationsResponse"""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    STATUS_FIELD_NUMBER: builtins.int
+    BULK_OPERATION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def bulk_operation(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.BulkOperation]: ...
+    def __init__(self,
+        *,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        bulk_operation: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.BulkOperation]] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> None: ...
+global___MultiBulkOperationsResponse = MultiBulkOperationsResponse

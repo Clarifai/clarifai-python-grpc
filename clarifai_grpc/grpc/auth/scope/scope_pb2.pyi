@@ -215,6 +215,24 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     Datasets_Get: _S.ValueType  # 105
     Datasets_Add: _S.ValueType  # 106
     Datasets_Delete: _S.ValueType  # 107
+    Modules_Add: _S.ValueType  # 108
+    """Write to the modules DB tables."""
+
+    Modules_Get: _S.ValueType  # 109
+    """Read from the modules and modules versions DB tables."""
+
+    Modules_Delete: _S.ValueType  # 110
+    """To delete we need read/write."""
+
+    InstalledModuleVersions_Add: _S.ValueType  # 111
+    """Write to the InstalledModuleVersions DB tables."""
+
+    InstalledModuleVersions_Get: _S.ValueType  # 112
+    """Read from the InstalledModuleVersions and InstalledModuleVersions versions DB tables."""
+
+    InstalledModuleVersions_Delete: _S.ValueType  # 113
+    """To delete we need read/write."""
+
     Search: _S.ValueType  # 3
     """Make an rpc to our search services."""
 
@@ -232,17 +250,26 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     WorkflowPublications_Add: _S.ValueType  # 119
     WorkflowPublications_Delete: _S.ValueType  # 120
     BulkOperation_Add: _S.ValueType  # 121
-    """TODO(Hemanth): Expose Bulk Operation endpoints only after implementation
-    To write bulk operations to the DB
-    """
+    """To write bulk operations to the DB"""
 
     BulkOperation_Get: _S.ValueType  # 122
-    """To Read Bulk Operations from the DB
-    [(clarfai_exposed) = true];
-    """
+    """To Read Bulk Operations from the DB"""
 
     BulkOperation_Delete: _S.ValueType  # 123
     """To Delete Bulk Operations from the DB"""
+
+    HistoricalUsage_Get: _S.ValueType  # 124
+    """To read historical usage from usage.dashboard_items table"""
+
+    InputsAddJobs_Add: _S.ValueType  # 125
+    """TODO(Hemanth): Expose scope after endpoints implementation
+    To write Ingest cloud inputs jobs to the DB
+    """
+
+    InputsAddJobs_Get: _S.ValueType  # 126
+    """To Read Ingest cloud inputs jobs to the DB
+    [(clarfai_exposed) = true];
+    """
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -459,6 +486,24 @@ FindDuplicateAnnotationsJobs_Delete: S.ValueType  # 104
 Datasets_Get: S.ValueType  # 105
 Datasets_Add: S.ValueType  # 106
 Datasets_Delete: S.ValueType  # 107
+Modules_Add: S.ValueType  # 108
+"""Write to the modules DB tables."""
+
+Modules_Get: S.ValueType  # 109
+"""Read from the modules and modules versions DB tables."""
+
+Modules_Delete: S.ValueType  # 110
+"""To delete we need read/write."""
+
+InstalledModuleVersions_Add: S.ValueType  # 111
+"""Write to the InstalledModuleVersions DB tables."""
+
+InstalledModuleVersions_Get: S.ValueType  # 112
+"""Read from the InstalledModuleVersions and InstalledModuleVersions versions DB tables."""
+
+InstalledModuleVersions_Delete: S.ValueType  # 113
+"""To delete we need read/write."""
+
 Search: S.ValueType  # 3
 """Make an rpc to our search services."""
 
@@ -476,17 +521,26 @@ ModelVersionPublications_Delete: S.ValueType  # 118
 WorkflowPublications_Add: S.ValueType  # 119
 WorkflowPublications_Delete: S.ValueType  # 120
 BulkOperation_Add: S.ValueType  # 121
-"""TODO(Hemanth): Expose Bulk Operation endpoints only after implementation
-To write bulk operations to the DB
-"""
+"""To write bulk operations to the DB"""
 
 BulkOperation_Get: S.ValueType  # 122
-"""To Read Bulk Operations from the DB
-[(clarfai_exposed) = true];
-"""
+"""To Read Bulk Operations from the DB"""
 
 BulkOperation_Delete: S.ValueType  # 123
 """To Delete Bulk Operations from the DB"""
+
+HistoricalUsage_Get: S.ValueType  # 124
+"""To read historical usage from usage.dashboard_items table"""
+
+InputsAddJobs_Add: S.ValueType  # 125
+"""TODO(Hemanth): Expose scope after endpoints implementation
+To write Ingest cloud inputs jobs to the DB
+"""
+
+InputsAddJobs_Get: S.ValueType  # 126
+"""To Read Ingest cloud inputs jobs to the DB
+[(clarfai_exposed) = true];
+"""
 
 global___S = S
 
