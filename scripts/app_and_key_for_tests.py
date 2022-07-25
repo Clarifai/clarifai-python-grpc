@@ -39,9 +39,8 @@ def _request(method, url, payload={}, headers={}):
             error_body = json.dumps(json.loads(error_body), indent=4)
         except:
             pass
-        print("ERROR after a HTTP request to: %s %s" % (method, full_url))
-        print("%d %s:\n%s" % (e.code, e.reason, error_body))
-        os._exit(1)
+        raise Exception("ERROR after a HTTP request to: %s %s" % (method, full_url)
+                        + ". Response: %d %s:\n%s" % (e.code, e.reason, error_body))
     return json.loads(response)
 
 
