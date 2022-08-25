@@ -13,10 +13,22 @@ class V2Stub(object):
     for the API.
     https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
 
+    For the cl_depending_scopes in this file, see the docstring that explains the two types of
+    scope dependencies in clarifai/auth/scope/scope.proto
+
+    For new endpoints you should typically only add the fully qualified url that includes the user_id
+    and app_id.
+
+    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
+    for resources not contained in an app or need access from things across apps. See more about the
+    auth types here:
+    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
+
+
     """
 
     def __init__(self, channel):
-        from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
+    from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
         """Constructor.
 
         Args:
@@ -281,6 +293,11 @@ class V2Stub(object):
                 '/clarifai.api.V2/DeleteDatasetVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PutDatasetVersionExports = channel.unary_unary(
+                '/clarifai.api.V2/PutDatasetVersionExports',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutDatasetVersionExportsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetVersionExportResponse),
                 )
         self.GetModelType = channel.unary_unary(
                 '/clarifai.api.V2/GetModelType',
@@ -867,6 +884,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.GetInstalledModuleVersion = channel.unary_unary(
+                '/clarifai.api.V2/GetInstalledModuleVersion',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInstalledModuleVersionRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInstalledModuleVersionResponse),
+                )
         self.ListInstalledModuleVersions = channel.unary_unary(
                 '/clarifai.api.V2/ListInstalledModuleVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstalledModuleVersionsRequest.SerializeToString,
@@ -881,6 +903,11 @@ class V2Stub(object):
                 '/clarifai.api.V2/DeleteInstalledModuleVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInstalledModuleVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostInstalledModuleVersionsKey = channel.unary_unary(
+                '/clarifai.api.V2/PostInstalledModuleVersionsKey',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInstalledModuleVersionsKeyRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse),
                 )
         self.PostBulkOperations = channel.unary_unary(
                 '/clarifai.api.V2/PostBulkOperations',
@@ -912,6 +939,31 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
                 )
+        self.PostUploads = channel.unary_unary(
+                '/clarifai.api.V2/PostUploads',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUploadsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse),
+                )
+        self.PutUploadContentParts = channel.unary_unary(
+                '/clarifai.api.V2/PutUploadContentParts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutUploadContentPartsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse),
+                )
+        self.GetUpload = channel.unary_unary(
+                '/clarifai.api.V2/GetUpload',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUploadRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse),
+                )
+        self.ListUploads = channel.unary_unary(
+                '/clarifai.api.V2/ListUploads',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUploadsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse),
+                )
+        self.DeleteUploads = channel.unary_unary(
+                '/clarifai.api.V2/DeleteUploads',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUploadsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
 
 
 class V2Servicer(object):
@@ -920,6 +972,18 @@ class V2Servicer(object):
     read this before contributing to this file and other *.proto files
     for the API.
     https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
+
+    For the cl_depending_scopes in this file, see the docstring that explains the two types of
+    scope dependencies in clarifai/auth/scope/scope.proto
+
+    For new endpoints you should typically only add the fully qualified url that includes the user_id
+    and app_id.
+
+    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
+    for resources not contained in an app or need access from things across apps. See more about the
+    auth types here:
+    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
+
 
     """
 
@@ -1302,6 +1366,13 @@ class V2Servicer(object):
 
     def DeleteDatasetVersions(self, request, context):
         """Delete one or more dataset versions in a single request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutDatasetVersionExports(self, request, context):
+        """Create export of a dataset version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2158,6 +2229,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetInstalledModuleVersion(self, request, context):
+        """Get installed modules vesrions for an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListInstalledModuleVersions(self, request, context):
         """List installed modules vesrions for an app.
         """
@@ -2173,7 +2251,17 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def DeleteInstalledModuleVersions(self, request, context):
-        """Uninstall an installed module version which will deploy the specific ModuleVersion to the app in the url.
+        """Uninstall an installed module version which will deploy the specific ModuleVersion to the app
+        in the url.
+        This cleaned up any associated caller keys so needs the Keys_Delete scope.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInstalledModuleVersionsKey(self, request, context):
+        """Assign a key that the caller owns to be used when accessing this installed module version
+        If this endpoint is called with a different key then it overwrites what is there.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2219,6 +2307,36 @@ class V2Servicer(object):
     def GetDatasetInputsSearchAddJob(self, request, context):
         """Get a specific job.
         """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostUploads(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutUploadContentParts(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUpload(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUploads(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUploads(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2485,6 +2603,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteDatasetVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PutDatasetVersionExports': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutDatasetVersionExports,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutDatasetVersionExportsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetVersionExportResponse.SerializeToString,
             ),
             'GetModelType': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModelType,
@@ -3071,6 +3194,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'GetInstalledModuleVersion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetInstalledModuleVersion,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInstalledModuleVersionRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInstalledModuleVersionResponse.SerializeToString,
+            ),
             'ListInstalledModuleVersions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInstalledModuleVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstalledModuleVersionsRequest.FromString,
@@ -3085,6 +3213,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteInstalledModuleVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInstalledModuleVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostInstalledModuleVersionsKey': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInstalledModuleVersionsKey,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInstalledModuleVersionsKeyRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse.SerializeToString,
             ),
             'PostBulkOperations': grpc.unary_unary_rpc_method_handler(
                     servicer.PostBulkOperations,
@@ -3116,6 +3249,31 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
             ),
+            'PostUploads': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostUploads,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUploadsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse.SerializeToString,
+            ),
+            'PutUploadContentParts': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutUploadContentParts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutUploadContentPartsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse.SerializeToString,
+            ),
+            'GetUpload': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUpload,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUploadRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse.SerializeToString,
+            ),
+            'ListUploads': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUploads,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUploadsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse.SerializeToString,
+            ),
+            'DeleteUploads': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUploads,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUploadsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'clarifai.api.V2', rpc_method_handlers)
@@ -3129,6 +3287,18 @@ class V2(object):
     read this before contributing to this file and other *.proto files
     for the API.
     https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
+
+    For the cl_depending_scopes in this file, see the docstring that explains the two types of
+    scope dependencies in clarifai/auth/scope/scope.proto
+
+    For new endpoints you should typically only add the fully qualified url that includes the user_id
+    and app_id.
+
+    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
+    for resources not contained in an app or need access from things across apps. See more about the
+    auth types here:
+    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
+
 
     """
 
@@ -4013,6 +4183,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteDatasetVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutDatasetVersionExports(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutDatasetVersionExports',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutDatasetVersionExportsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetVersionExportResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -6006,6 +6193,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetInstalledModuleVersion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInstalledModuleVersion',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetInstalledModuleVersionRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleInstalledModuleVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListInstalledModuleVersions(request,
             target,
             options=(),
@@ -6053,6 +6257,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteInstalledModuleVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteInstalledModuleVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInstalledModuleVersionsKey(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInstalledModuleVersionsKey',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInstalledModuleVersionsKeyRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleKeyResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -6155,5 +6376,90 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostUploads(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostUploads',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUploadsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutUploadContentParts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutUploadContentParts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutUploadContentPartsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUpload(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetUpload',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetUploadRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUploads(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUploads',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUploadsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteUploads(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteUploads',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUploadsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

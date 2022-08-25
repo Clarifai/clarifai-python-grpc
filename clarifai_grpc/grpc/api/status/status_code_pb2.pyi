@@ -254,6 +254,11 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     DATA_DUMP_IN_PROGRESS: _StatusCode.ValueType  # 25153
     DATA_DUMP_NO_DATA: _StatusCode.ValueType  # 25154
     DATA_DUMP_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25155
+    DATA_DUMP_EXPORT_SUCCESS: _StatusCode.ValueType  # 25170
+    DATA_DUMP_EXPORT_PENDING: _StatusCode.ValueType  # 25171
+    DATA_DUMP_EXPORT_FAILED: _StatusCode.ValueType  # 25172
+    DATA_DUMP_EXPORT_IN_PROGRESS: _StatusCode.ValueType  # 25173
+    DATA_DUMP_EXPORT_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25174
     APP_DUPLICATION_SUCCESS: _StatusCode.ValueType  # 25200
     """Duplicate related 252xx"""
 
@@ -277,6 +282,9 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     BULK_OPERATION_CANCELLED: _StatusCode.ValueType  # 25405
     BULK_OPERATION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25406
     BULK_OPERATION_DELETED: _StatusCode.ValueType  # 25407
+    INPUTS_ADD_JOBS_FAILED: _StatusCode.ValueType  # 25501
+    """INPUTS ADD JOBS related codes 255xx"""
+
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
 
@@ -536,6 +544,13 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """
 
     LIST_OBJECTS_FAILED: _StatusCode.ValueType  # 66000
+    ARCHIVE_EXTRACT_FAILED: _StatusCode.ValueType  # 67000
+    UPLOAD_IN_PROGRESS: _StatusCode.ValueType  # 68000
+    """Multipart uploading status codes"""
+
+    UPLOAD_DONE: _StatusCode.ValueType  # 68001
+    UPLOAD_FAILED: _StatusCode.ValueType  # 68002
+    UPLOAD_UNEXPECTED_ERROR: _StatusCode.ValueType  # 68003
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
 
@@ -806,6 +821,11 @@ DATA_DUMP_FAILED: StatusCode.ValueType  # 25152
 DATA_DUMP_IN_PROGRESS: StatusCode.ValueType  # 25153
 DATA_DUMP_NO_DATA: StatusCode.ValueType  # 25154
 DATA_DUMP_UNEXPECTED_ERROR: StatusCode.ValueType  # 25155
+DATA_DUMP_EXPORT_SUCCESS: StatusCode.ValueType  # 25170
+DATA_DUMP_EXPORT_PENDING: StatusCode.ValueType  # 25171
+DATA_DUMP_EXPORT_FAILED: StatusCode.ValueType  # 25172
+DATA_DUMP_EXPORT_IN_PROGRESS: StatusCode.ValueType  # 25173
+DATA_DUMP_EXPORT_UNEXPECTED_ERROR: StatusCode.ValueType  # 25174
 APP_DUPLICATION_SUCCESS: StatusCode.ValueType  # 25200
 """Duplicate related 252xx"""
 
@@ -829,6 +849,9 @@ BULK_OPERATION_INVALID_REQUEST: StatusCode.ValueType  # 25404
 BULK_OPERATION_CANCELLED: StatusCode.ValueType  # 25405
 BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
 BULK_OPERATION_DELETED: StatusCode.ValueType  # 25407
+INPUTS_ADD_JOBS_FAILED: StatusCode.ValueType  # 25501
+"""INPUTS ADD JOBS related codes 255xx"""
+
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 
@@ -1088,6 +1111,13 @@ TODO: Knowledge graph related 80xxx
 """
 
 LIST_OBJECTS_FAILED: StatusCode.ValueType  # 66000
+ARCHIVE_EXTRACT_FAILED: StatusCode.ValueType  # 67000
+UPLOAD_IN_PROGRESS: StatusCode.ValueType  # 68000
+"""Multipart uploading status codes"""
+
+UPLOAD_DONE: StatusCode.ValueType  # 68001
+UPLOAD_FAILED: StatusCode.ValueType  # 68002
+UPLOAD_UNEXPECTED_ERROR: StatusCode.ValueType  # 68003
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 

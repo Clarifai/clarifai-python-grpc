@@ -271,6 +271,13 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     [(clarfai_exposed) = true];
     """
 
+    Uploads_Get: _S.ValueType  # 128
+    """To read uploaded files and archives info from Uploads endpoints"""
+
+    Uploads_Add: _S.ValueType  # 129
+    """To upload files or archives through the Uploads endpoints"""
+
+    Uploads_Delete: _S.ValueType  # 130
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
     NOTE: When updating the list of "clarifai_exposed" scopes, please also
@@ -281,12 +288,24 @@ class S(_S, metaclass=_SEnumTypeWrapper):
     cannot make a key that would be useless. Beyond the key creation they are not enforced
     but rather the scopes are enforce when data is accessed.
 
+
     There is the following conventions in place, make sure you add them to the scopes for all new
     resource types:
 
     1. *_Add requires the corresponding _Get.
     2. *_Delete requires the corresponding _Add and _Get.
     3. *_Patch is deprecated and not check anywhere.
+
+    Think of the dependencies in this file at the DB level. If you cannot make a DB call to Get, Add
+    or Delete a resource without having access to another resource then you should add it here. That
+    should for the most part be the same resource type. In service.proto for the API level you will
+    also specify cl_depending_scopes for each API endpoint. Those cover cases where an endpoint
+    might need to access more than just that one resource type in order to operate (ie. API handlers
+    that make multiple DB calls of various resource types likely have more cl_depending_scopes than
+    the ones listed below). For example: PostCollectors to create a collector we make sure that you
+    can do model predictions, get concepts, etc. so that you don't have a collector that would be
+    useless at the end of that API handler but below you can see that the dependencies of Collector
+    scopes are only on other Collector scopes.
     """
     pass
 
@@ -542,6 +561,13 @@ InputsAddJobs_Get: S.ValueType  # 126
 [(clarfai_exposed) = true];
 """
 
+Uploads_Get: S.ValueType  # 128
+"""To read uploaded files and archives info from Uploads endpoints"""
+
+Uploads_Add: S.ValueType  # 129
+"""To upload files or archives through the Uploads endpoints"""
+
+Uploads_Delete: S.ValueType  # 130
 global___S = S
 
 

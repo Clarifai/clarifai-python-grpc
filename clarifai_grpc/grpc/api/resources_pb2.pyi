@@ -124,6 +124,31 @@ Examples for bin size = 0.1: inputs with [0.5, 0.6) aspect ratio, inputs with [0
 global___DatasetVersionMetricsGroupType = DatasetVersionMetricsGroupType
 
 
+class _DatasetVersionExportFormat:
+    ValueType = typing.NewType('ValueType', builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+class _DatasetVersionExportFormatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionExportFormat.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    DATASET_VERSION_EXPORT_FORMAT_NOT_SET: _DatasetVersionExportFormat.ValueType  # 0
+    CLARIFAI_DATA_EXAMPLE: _DatasetVersionExportFormat.ValueType  # 1
+    """CLARIFAI_DATA_EXAMPLE is the proprietary Clarifai Data Example format. It
+    is a ZIP-archive containing batches of serialized DataExample protobuf
+    messages.
+    """
+
+class DatasetVersionExportFormat(_DatasetVersionExportFormat, metaclass=_DatasetVersionExportFormatEnumTypeWrapper):
+    pass
+
+DATASET_VERSION_EXPORT_FORMAT_NOT_SET: DatasetVersionExportFormat.ValueType  # 0
+CLARIFAI_DATA_EXAMPLE: DatasetVersionExportFormat.ValueType  # 1
+"""CLARIFAI_DATA_EXAMPLE is the proprietary Clarifai Data Example format. It
+is a ZIP-archive containing batches of serialized DataExample protobuf
+messages.
+"""
+
+global___DatasetVersionExportFormat = DatasetVersionExportFormat
+
+
 class _ExpirationAction:
     ValueType = typing.NewType('ValueType', builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -1068,28 +1093,30 @@ class KeypointInfo(google.protobuf.message.Message):
         """Names of the keypoints"""
         pass
     @property
-    def skeleton(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ListOfFloat]:
+    def skeleton(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___KeypointEdge]:
         """Defines the connections between keypoint_names. Each value represents the index in keypoint_names."""
         pass
     def __init__(self,
         *,
         keypoint_names: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        skeleton: typing.Optional[typing.Iterable[global___ListOfFloat]] = ...,
+        skeleton: typing.Optional[typing.Iterable[global___KeypointEdge]] = ...,
         ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["keypoint_names",b"keypoint_names","skeleton",b"skeleton"]) -> None: ...
 global___KeypointInfo = KeypointInfo
 
-class ListOfFloat(google.protobuf.message.Message):
+class KeypointEdge(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    VALUES_FIELD_NUMBER: builtins.int
-    @property
-    def values(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.float]: ...
+    K1_FIELD_NUMBER: builtins.int
+    K2_FIELD_NUMBER: builtins.int
+    k1: builtins.int
+    k2: builtins.int
     def __init__(self,
         *,
-        values: typing.Optional[typing.Iterable[builtins.float]] = ...,
+        k1: builtins.int = ...,
+        k2: builtins.int = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["values",b"values"]) -> None: ...
-global___ListOfFloat = ListOfFloat
+    def ClearField(self, field_name: typing_extensions.Literal["k1",b"k1","k2",b"k2"]) -> None: ...
+global___KeypointEdge = KeypointEdge
 
 class ConceptCount(google.protobuf.message.Message):
     """ConceptCount"""
@@ -1688,27 +1715,33 @@ class Point(google.protobuf.message.Message):
         V: typing_extensions.TypeAlias = ValueType
     class _VisibilityEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Point._Visibility.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        NOT_PRESENT: Point._Visibility.ValueType  # 0
-        """Point is not in the image"""
+        NOT_SET: Point._Visibility.ValueType  # 0
+        """Visibility of the point is not set"""
 
-        NOT_VISIBLE: Point._Visibility.ValueType  # 1
+        VISIBLE: Point._Visibility.ValueType  # 1
+        """Point is visible"""
+
+        NOT_VISIBLE: Point._Visibility.ValueType  # 2
         """Point is occluded"""
 
-        VISIBLE: Point._Visibility.ValueType  # 2
-        """Point is visible"""
+        NOT_PRESENT: Point._Visibility.ValueType  # 3
+        """Point is not in the image"""
 
     class Visibility(_Visibility, metaclass=_VisibilityEnumTypeWrapper):
         """Whether this point is visible or occluded"""
         pass
 
-    NOT_PRESENT: Point.Visibility.ValueType  # 0
-    """Point is not in the image"""
+    NOT_SET: Point.Visibility.ValueType  # 0
+    """Visibility of the point is not set"""
 
-    NOT_VISIBLE: Point.Visibility.ValueType  # 1
+    VISIBLE: Point.Visibility.ValueType  # 1
+    """Point is visible"""
+
+    NOT_VISIBLE: Point.Visibility.ValueType  # 2
     """Point is occluded"""
 
-    VISIBLE: Point.Visibility.ValueType  # 2
-    """Point is visible"""
+    NOT_PRESENT: Point.Visibility.ValueType  # 3
+    """Point is not in the image"""
 
 
     ROW_FIELD_NUMBER: builtins.int
@@ -2238,6 +2271,7 @@ class DatasetVersion(google.protobuf.message.Message):
     STATUS_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     METRICS_FIELD_NUMBER: builtins.int
+    EXPORT_INFO_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     EMBED_MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
@@ -2283,6 +2317,10 @@ class DatasetVersion(google.protobuf.message.Message):
         """Dataset version metrics"""
         pass
     @property
+    def export_info(self) -> global___DatasetVersionExportInfo:
+        """Dataset version exports"""
+        pass
+    @property
     def metadata(self) -> google.protobuf.struct_pb2.Struct:
         """To handle arbitrary json metadata you can use a struct field:
         https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
@@ -2311,12 +2349,13 @@ class DatasetVersion(google.protobuf.message.Message):
         status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
         description: typing.Text = ...,
         metrics: typing.Optional[typing.Mapping[typing.Text, global___DatasetVersionMetrics]] = ...,
+        export_info: typing.Optional[global___DatasetVersionExportInfo] = ...,
         metadata: typing.Optional[google.protobuf.struct_pb2.Struct] = ...,
         visibility: typing.Optional[global___Visibility] = ...,
         embed_model_version_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
         ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotation_filter_config",b"annotation_filter_config","created_at",b"created_at","data_config",b"data_config","metadata",b"metadata","modified_at",b"modified_at","status",b"status","visibility",b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config",b"annotation_filter_config","app_id",b"app_id","created_at",b"created_at","data_config",b"data_config","dataset_id",b"dataset_id","description",b"description","embed_model_version_ids",b"embed_model_version_ids","id",b"id","metadata",b"metadata","metrics",b"metrics","modified_at",b"modified_at","status",b"status","user_id",b"user_id","visibility",b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotation_filter_config",b"annotation_filter_config","created_at",b"created_at","data_config",b"data_config","export_info",b"export_info","metadata",b"metadata","modified_at",b"modified_at","status",b"status","visibility",b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config",b"annotation_filter_config","app_id",b"app_id","created_at",b"created_at","data_config",b"data_config","dataset_id",b"dataset_id","description",b"description","embed_model_version_ids",b"embed_model_version_ids","export_info",b"export_info","id",b"id","metadata",b"metadata","metrics",b"metrics","modified_at",b"modified_at","status",b"status","user_id",b"user_id","visibility",b"visibility"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["data_config",b"data_config"]) -> typing.Optional[typing_extensions.Literal["annotation_filter_config"]]: ...
 global___DatasetVersion = DatasetVersion
 
@@ -2482,6 +2521,57 @@ class DatasetVersionMetricsGroup(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["metrics",b"metrics","value",b"value"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["metrics",b"metrics","parent_path",b"parent_path","type",b"type","value",b"value"]) -> None: ...
 global___DatasetVersionMetricsGroup = DatasetVersionMetricsGroup
+
+class DatasetVersionExportInfo(google.protobuf.message.Message):
+    """DatasetVersionExportInfo contains information about all exports of a dataset version.
+
+    If the dataset version has not been exported in a format, then the DatasetVersionExport
+    field for that format is empty instead of having a "not exported" status.
+    """
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    CLARIFAI_DATA_EXAMPLE_FIELD_NUMBER: builtins.int
+    @property
+    def clarifai_data_example(self) -> global___DatasetVersionExport:
+        """clarifai_data_example is a CLARIFAI_DATA_EXAMPLE export of the dataset version."""
+        pass
+    def __init__(self,
+        *,
+        clarifai_data_example: typing.Optional[global___DatasetVersionExport] = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["clarifai_data_example",b"clarifai_data_example"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["clarifai_data_example",b"clarifai_data_example"]) -> None: ...
+global___DatasetVersionExportInfo = DatasetVersionExportInfo
+
+class DatasetVersionExport(google.protobuf.message.Message):
+    """DatasetVersionExport contains metadata for a single dataset version export."""
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    FORMAT_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
+    format: global___DatasetVersionExportFormat.ValueType
+    """format is the format of the dataset version export."""
+
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """status is the current status of the dataset version export."""
+        pass
+    url: typing.Text
+    """url is the URL from where the dataset version export can be downloaded."""
+
+    size: builtins.int
+    """size is the size of the dataset version export in number of bytes."""
+
+    def __init__(self,
+        *,
+        format: global___DatasetVersionExportFormat.ValueType = ...,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        url: typing.Text = ...,
+        size: builtins.int = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["format",b"format","size",b"size","status",b"status","url",b"url"]) -> None: ...
+global___DatasetVersionExport = DatasetVersionExport
 
 class WorkflowResultsSimilarity(google.protobuf.message.Message):
     """WorkflowResultsSimilarity"""
@@ -3491,14 +3581,19 @@ global___ModelTypeEnumOption = ModelTypeEnumOption
 class ModelTypeEnumOptionAlias(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ID_INT_FIELD_NUMBER: builtins.int
+    WILDCARD_STRING_FIELD_NUMBER: builtins.int
     id_int: builtins.int
     """Integer alias for id."""
+
+    wildcard_string: typing.Text
+    """String that can contain wild cards and the regex needs to match."""
 
     def __init__(self,
         *,
         id_int: builtins.int = ...,
+        wildcard_string: typing.Text = ...,
         ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id_int",b"id_int"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id_int",b"id_int","wildcard_string",b"wildcard_string"]) -> None: ...
 global___ModelTypeEnumOptionAlias = ModelTypeEnumOptionAlias
 
 class ModelQuery(google.protobuf.message.Message):
@@ -6793,6 +6888,7 @@ class InstalledModuleVersion(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     DEPLOY_URL_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
+    KEY_ID_FIELD_NUMBER: builtins.int
     id: typing.Text
     """A unique id for this install. This will be used in the browser url."""
 
@@ -6848,6 +6944,16 @@ class InstalledModuleVersion(google.protobuf.message.Message):
         Defaults to PRIVATE if not provided.
         """
         pass
+    key_id: typing.Text
+    """The key ID to use for making requests to the API for this module.
+    This key is associated to this installed module version by PostInstalledModuleVersionsKey
+    request. The key is associated with the CALLER not the App Owner where this module is installed
+    nor the author of the module. This allows the module to act on behalf of the caller at all
+    times so we get proper permissions the caller has (such as if they are stranger, teammate or
+    collaborator). This key should be a personal access token to enable modules to work across apps
+    and have necessary abilities beyond what app-specific keys offer.
+    """
+
     def __init__(self,
         *,
         id: typing.Text = ...,
@@ -6858,9 +6964,10 @@ class InstalledModuleVersion(google.protobuf.message.Message):
         modified_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
         deploy_url: typing.Text = ...,
         visibility: typing.Optional[global___Visibility] = ...,
+        key_id: typing.Text = ...,
         ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at",b"created_at","modified_at",b"modified_at","module_version",b"module_version","visibility",b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id",b"app_id","created_at",b"created_at","deploy_url",b"deploy_url","id",b"id","modified_at",b"modified_at","module_version",b"module_version","user_id",b"user_id","visibility",b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id",b"app_id","created_at",b"created_at","deploy_url",b"deploy_url","id",b"id","key_id",b"key_id","modified_at",b"modified_at","module_version",b"module_version","user_id",b"user_id","visibility",b"visibility"]) -> None: ...
 global___InstalledModuleVersion = InstalledModuleVersion
 
 class BulkOperation(google.protobuf.message.Message):
@@ -6879,18 +6986,9 @@ class BulkOperation(google.protobuf.message.Message):
     """id of the Bulk Operation task"""
 
     @property
-    def input_ids(self) -> global___InputIDs:
-        """List of input ids to which operation to be applied"""
-        pass
+    def input_ids(self) -> global___InputIDs: ...
     @property
-    def search(self) -> global___Search:
-        """A Search(either filter or rank with min value) to allow filtering down the entire app's
-        sub-assets(image, region in image, frame in video, region in frame in video)
-        and perform operation to only the results of this search query. See our search
-        documentation for more details about the search Query message.
-        For eg., filters the asset/sub-asset matching the search and performs specified operation.
-        """
-        pass
+    def search(self) -> global___Search: ...
     @property
     def operation(self) -> global___Operation:
         """Operation to perform"""
@@ -6975,33 +7073,17 @@ class Operation(google.protobuf.message.Message):
     OVERWRITE_GEO_FIELD_NUMBER: builtins.int
     DELETE_GEO_FIELD_NUMBER: builtins.int
     @property
-    def add_concepts(self) -> global___AddConcepts:
-        """Create a new annotation with the provided concept(s) for all the inputs in input source (mentioned above)."""
-        pass
+    def add_concepts(self) -> global___AddConcepts: ...
     @property
-    def delete_concepts(self) -> global___DeleteConcepts:
-        """Remove the matching concept(s) for all the inputs in input source (mentioned above)."""
-        pass
+    def delete_concepts(self) -> global___DeleteConcepts: ...
     @property
-    def add_metadata(self) -> global___AddMetadata:
-        """Add the provided metadata to the input level annotation for all the inputs in input source (mentioned above).
-        If the key(s) already exists, it will overwrite the key(s) with the corresponding new value(s).
-        """
-        pass
+    def add_metadata(self) -> global___AddMetadata: ...
     @property
-    def delete_metadata(self) -> global___DeleteMetadata:
-        """Remove the key, value pairs that match the given metadata from the existing input level Annotations' metadata
-        for all the inputs in input source (mentioned above).
-        """
-        pass
+    def delete_metadata(self) -> global___DeleteMetadata: ...
     @property
-    def overwrite_geo(self) -> global___OverwriteGeo:
-        """Add the provided geo info for all the inputs in input source (mentioned above)."""
-        pass
+    def overwrite_geo(self) -> global___OverwriteGeo: ...
     @property
-    def delete_geo(self) -> global___DeleteGeo:
-        """Delete Geo info for all the inputs in input source (mentioned above)."""
-        pass
+    def delete_geo(self) -> global___DeleteGeo: ...
     def __init__(self,
         *,
         add_concepts: typing.Optional[global___AddConcepts] = ...,
@@ -7094,3 +7176,77 @@ class DeleteGeo(google.protobuf.message.Message):
     def __init__(self,
         ) -> None: ...
 global___DeleteGeo = DeleteGeo
+
+class Upload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    EXPIRES_AT_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    CONTENT_LENGTH_FIELD_NUMBER: builtins.int
+    CONTENT_URL_FIELD_NUMBER: builtins.int
+    id: typing.Text
+    """ID of upload, name of uploaded file"""
+
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the upload was started.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+        pass
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the upload was updated.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+        pass
+    @property
+    def expires_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the upload will expire and be deleted
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+        pass
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """Status of the upload"""
+        pass
+    content_length: builtins.int
+    """Total size of the upload content"""
+
+    content_url: typing.Text
+    """Url of uploaded content"""
+
+    def __init__(self,
+        *,
+        id: typing.Text = ...,
+        created_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        modified_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        expires_at: typing.Optional[google.protobuf.timestamp_pb2.Timestamp] = ...,
+        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
+        content_length: builtins.int = ...,
+        content_url: typing.Text = ...,
+        ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at",b"created_at","expires_at",b"expires_at","modified_at",b"modified_at","status",b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["content_length",b"content_length","content_url",b"content_url","created_at",b"created_at","expires_at",b"expires_at","id",b"id","modified_at",b"modified_at","status",b"status"]) -> None: ...
+global___Upload = Upload
+
+class UploadContentPart(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    RANGE_START_FIELD_NUMBER: builtins.int
+    PART_NUMBER_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
+    range_start: builtins.int
+    part_number: builtins.int
+    data: builtins.bytes
+    def __init__(self,
+        *,
+        range_start: builtins.int = ...,
+        part_number: builtins.int = ...,
+        data: builtins.bytes = ...,
+        ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data",b"data","part_number",b"part_number","range_start",b"range_start"]) -> None: ...
+global___UploadContentPart = UploadContentPart
