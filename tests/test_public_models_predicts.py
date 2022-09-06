@@ -73,15 +73,60 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
     ("easyocr english", EASYOCR_ENGLISH_MODEL_ID),
     ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
-    ("general-detector-yolov6s-coco", YOLOV6_S_MODEL_ID),
-    ("general-detector-yolov6n-coco", YOLOV6_NANO_MODEL_ID),
-    ("general-detector-yolov6tiny-coco", YOLOV6_TINY_MODEL_ID),
-    ("general-detector-yolov7-coco", YOLOV7_MODEL_ID),
-    ("general-image-detector-yolov7-e6-coco", YOLOV7_E6_MODEL_ID),
-    ("general-image-detector-yolov7-w6-coco", YOLOV7_W6_MODEL_ID),
-    ("general-image-detector-yolov7-d6-coco", YOLOV7_D6_MODEL_ID),
-    ("general-image-detector-yolov7-e6e-coco", YOLOV7_E6E_MODEL_ID),
-    ("general-image-detector-yolov7-x-coco", YOLOV7_X_MODEL_ID)
+    (
+        "general-detector-yolov6s-coco",
+        YOLOV6_S_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-detector-yolov6n-coco",
+        YOLOV6_NANO_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-detector-yolov6tiny-coco",
+        YOLOV6_TINY_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-detector-yolov7-coco",
+        YOLOV7_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-image-detector-yolov7-e6-coco",
+        YOLOV7_E6_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-image-detector-yolov7-w6-coco",
+        YOLOV7_W6_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-image-detector-yolov7-d6-coco",
+        YOLOV7_D6_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-image-detector-yolov7-e6e-coco",
+        YOLOV7_E6E_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ),
+    (
+        "general-image-detector-yolov7-x-coco",
+        YOLOV7_X_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    )
 ]
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
