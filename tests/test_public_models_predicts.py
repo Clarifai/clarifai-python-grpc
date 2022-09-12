@@ -51,6 +51,16 @@ from tests.common import (
     TRANSLATE_CHINESE_EN_MODEL_ID,
     TRANSLATE_ARABIC_EN_MODEL_ID,
     TRANSLATE_WELSH_EN_MODEL_ID,
+    TRANSLATE_GERMAN_EN_FB_MODEL_ID,
+    TRANSLATE_EN_GERMAN_FB_MODEL_ID,
+    TRANSLATE_SPANISH_EN_FB_MODEL_ID,
+    TRANSLATE_EN_SPANISH_FB_MODEL_ID,
+    TRANSLATE_CHINESE_EN_FB_MODEL_ID,
+    TRANSLATE_EN_CHINESE_FB_MODEL_ID,
+    TRANSLATE_ARABIC_EN_FB_MODEL_ID,
+    TRANSLATE_EN_ARABIC_FB_MODEL_ID,
+    TRANSLATE_WELSH_EN_FB_MODEL_ID,
+    TRANSLATE_EN_WELSH_FB_MODEL_ID,
     TRANSLATE_RUSSIAN_EN_MODEL_ID,
     TRANSLATE_EN_RUSSIAN_MODEL_ID,
     TRANSLATE_TURKISH_EN_MODEL_ID,
@@ -59,6 +69,14 @@ from tests.common import (
     TRANSLATE_EN_FRENCH_MODEL_ID,
     TRANSLATE_INDONESIAN_EN_MODEL_ID,
     TRANSLATE_EN_INDONESIAN_MODEL_ID,
+    TRANSLATE_PORTUGESE_EN_MODEL_ID,
+    TRANSLATE_EN_PORTUGESE_MODEL_ID,
+    TRANSLATE_CZECH_EN_MODEL_ID,
+    TRANSLATE_JAPANESE_EN_MODEL_ID,
+    TRANSLATE_DANISH_EN_MODEL_ID,
+    TRANSLATE_CATALAN_EN_MODEL_ID,
+    TRANSLATE_BULGARIAN_EN_MODEL_ID,
+    TRANSLATE_AFRIKAANS_EN_MODEL_ID,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -142,7 +160,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     )
 ]
 
-#use <clarifai-model ID>
+
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
     ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
@@ -243,8 +261,117 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
     ),
+    (
+        "translation-german-to-english-text",
+        TRANSLATE_GERMAN_EN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-german-text",
+        TRANSLATE_EN_GERMAN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-spanish-to-english-text",
+        TRANSLATE_SPANISH_EN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-spanish-text",
+        TRANSLATE_EN_SPANISH_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-chinese-to-english-text",
+        TRANSLATE_CHINESE_EN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-chinese-text",
+        TRANSLATE_EN_CHINESE_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-arabic-to-english-text",
+        TRANSLATE_ARABIC_EN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-arabic-text",
+        TRANSLATE_EN_ARABIC_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-welsh-to-english-text",
+        TRANSLATE_WELSH_EN_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-welsh-text",
+        TRANSLATE_EN_WELSH_FB_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-portuguese-to-english-text",
+        TRANSLATE_PORTUGESE_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-portuguese-text",
+        TRANSLATE_EN_PORTUGESE_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-czech-english",
+        TRANSLATE_CZECH_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-japanese-english",
+        TRANSLATE_JAPANESE_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-danish-english",
+        TRANSLATE_DANISH_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-catalan-english",
+        TRANSLATE_CATALAN_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-bulgarian-english",
+        TRANSLATE_BULGARIAN_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-afrikaans-english",
+        TRANSLATE_AFRIKAANS_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
 
 ]
+
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
     ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
