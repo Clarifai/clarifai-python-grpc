@@ -62,8 +62,26 @@ TEXT_GEN_MODEL_ID = "distilgpt2"
 TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
-TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
+TRANSLATE_ROMANCE_MODEL_ID = "Text Translation: Romance to English" 
 
+#helsinkinlp translation models
+TRANSLATE_EN_SPANISH_MODEL_ID = "Helsinki-NLP/opus-mt-en-es"
+TRANSLATE_GERMAN_EN_MODEL_ID = "Helsinki-NLP/opus-mt-de-en"
+TRANSLATE_CHINESE_EN_MODEL_ID = "Helsinki-NLP/opus-mt-zh-en"
+TRANSLATE_ARABIC_EN_MODEL_ID = "Helsinki-NLP/opus-mt-ar-en"
+TRANSLATE_WELSH_EN_MODEL_ID = "Helsinki-NLP/opus-mt-cy-en"
+
+# facebook translation models
+TRANSLATE_RUSSIAN_EN_MODEL_ID = "translation-russian-to-english-text"
+TRANSLATE_EN_RUSSIAN_MODEL_ID = "translation-english-to-russian-text"
+TRANSLATE_TURKISH_EN_MODEL_ID = "translation-turkish-to-english-text"
+TRANSLATE_EN_TURKISH_MODEL_ID = "translation-english-to-turkish-text"
+TRANSLATE_FRENCH_EN_MODEL_ID = "translation-french-to-english-text"
+TRANSLATE_EN_FRENCH_MODEL_ID = "translation-english-to-french-text"
+TRANSLATE_INDONESIAN_EN_MODEL_ID = "translation-indonesian-to-english-text"
+TRANSLATE_EN_INDONESIAN_MODEL_ID = "translation-english-to-indonesian-text"
+
+#ASR
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 
 

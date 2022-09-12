@@ -46,6 +46,19 @@ from tests.common import (
     YOLOV7_D6_MODEL_ID,
     YOLOV7_E6E_MODEL_ID,
     YOLOV7_X_MODEL_ID,
+    TRANSLATE_EN_SPANISH_MODEL_ID,
+    TRANSLATE_GERMAN_EN_MODEL_ID,
+    TRANSLATE_CHINESE_EN_MODEL_ID,
+    TRANSLATE_ARABIC_EN_MODEL_ID,
+    TRANSLATE_WELSH_EN_MODEL_ID,
+    TRANSLATE_RUSSIAN_EN_MODEL_ID,
+    TRANSLATE_EN_RUSSIAN_MODEL_ID,
+    TRANSLATE_TURKISH_EN_MODEL_ID,
+    TRANSLATE_EN_TURKISH_MODEL_ID,
+    TRANSLATE_FRENCH_EN_MODEL_ID,
+    TRANSLATE_EN_FRENCH_MODEL_ID,
+    TRANSLATE_INDONESIAN_EN_MODEL_ID,
+    TRANSLATE_EN_INDONESIAN_MODEL_ID,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -129,6 +142,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     )
 ]
 
+#use <clarifai-model ID>
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
     ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
@@ -145,7 +159,91 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
     ),
-    ("translate romance", TRANSLATE_ROMANCE_MODEL_ID, "translation", "huggingface-research"),
+    (
+        "text-translation-romance-lang-english",
+        TRANSLATE_ROMANCE_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-english-spanish",
+        TRANSLATE_EN_SPANISH_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-german-english",
+        TRANSLATE_GERMAN_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-chinese-english",
+        TRANSLATE_CHINESE_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-arabic-english",
+        TRANSLATE_ARABIC_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "text-translation-welsh-english",
+        TRANSLATE_WELSH_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-russian-to-english-text",
+        TRANSLATE_RUSSIAN_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-russian-text",
+        TRANSLATE_EN_RUSSIAN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-turkish-to-english-text",
+         TRANSLATE_TURKISH_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-turkish-text",
+        TRANSLATE_EN_TURKISH_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-french-to-english-text",
+        TRANSLATE_FRENCH_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-french-text",
+        TRANSLATE_EN_FRENCH_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-indonesian-to-english-text",
+        TRANSLATE_INDONESIAN_EN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+    (
+        "translation-english-to-indonesian-text",
+        TRANSLATE_EN_INDONESIAN_MODEL_ID,
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID"),
+    ),
+
 ]
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
