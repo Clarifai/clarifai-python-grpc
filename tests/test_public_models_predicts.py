@@ -4,12 +4,11 @@ import pytest as pytest
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 
-from tests.common import (
+from common import (
     APPAREL_MODEL_ID,
     BEER_VIDEO_URL,
     COLOR_MODEL_ID,
     DOG_IMAGE_URL,
-    ENGLISH_TEXT,
     FACE_MODEL_ID,
     FOOD_MODEL_ID,
     GENERAL_EMBEDDING_MODEL_ID,
@@ -20,13 +19,11 @@ from tests.common import (
     NER_ENGLISH_MODEL_ID,
     NSFW_MODEL_ID,
     PORTRAIT_QUALITY_MODEL_ID,
-    SPANISH_TEXT,
     TEXT_GEN_MODEL_ID,
     TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
     TEXT_SENTIMENT_MODEL_ID,
     TEXT_SUM_MODEL_ID,
     TEXTURES_AND_PATTERNS_MODEL_ID,
-    TRANSLATE_ROMANCE_MODEL_ID,
     TRAVEL_MODEL_ID,
     WEDDING_MODEL_ID,
     LOGO_V2_MODEL_ID,
@@ -46,37 +43,8 @@ from tests.common import (
     YOLOV7_D6_MODEL_ID,
     YOLOV7_E6E_MODEL_ID,
     YOLOV7_X_MODEL_ID,
-    TRANSLATE_EN_SPANISH_MODEL_ID,
-    TRANSLATE_GERMAN_EN_MODEL_ID,
-    TRANSLATE_CHINESE_EN_MODEL_ID,
-    TRANSLATE_ARABIC_EN_MODEL_ID,
-    TRANSLATE_WELSH_EN_MODEL_ID,
-    TRANSLATE_GERMAN_EN_FB_MODEL_ID,
-    TRANSLATE_EN_GERMAN_FB_MODEL_ID,
-    TRANSLATE_SPANISH_EN_FB_MODEL_ID,
-    TRANSLATE_EN_SPANISH_FB_MODEL_ID,
-    TRANSLATE_CHINESE_EN_FB_MODEL_ID,
-    TRANSLATE_EN_CHINESE_FB_MODEL_ID,
-    TRANSLATE_ARABIC_EN_FB_MODEL_ID,
-    TRANSLATE_EN_ARABIC_FB_MODEL_ID,
-    TRANSLATE_WELSH_EN_FB_MODEL_ID,
-    TRANSLATE_EN_WELSH_FB_MODEL_ID,
-    TRANSLATE_RUSSIAN_EN_MODEL_ID,
-    TRANSLATE_EN_RUSSIAN_MODEL_ID,
-    TRANSLATE_TURKISH_EN_MODEL_ID,
-    TRANSLATE_EN_TURKISH_MODEL_ID,
-    TRANSLATE_FRENCH_EN_MODEL_ID,
-    TRANSLATE_EN_FRENCH_MODEL_ID,
-    TRANSLATE_INDONESIAN_EN_MODEL_ID,
-    TRANSLATE_EN_INDONESIAN_MODEL_ID,
-    TRANSLATE_PORTUGESE_EN_MODEL_ID,
-    TRANSLATE_EN_PORTUGESE_MODEL_ID,
-    TRANSLATE_CZECH_EN_MODEL_ID,
-    TRANSLATE_JAPANESE_EN_MODEL_ID,
-    TRANSLATE_DANISH_EN_MODEL_ID,
-    TRANSLATE_CATALAN_EN_MODEL_ID,
-    TRANSLATE_BULGARIAN_EN_MODEL_ID,
-    TRANSLATE_AFRIKAANS_EN_MODEL_ID,
+    TRANSLATION_TEST_DATA,
+    TRANSLATION_MODELS,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -160,7 +128,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     )
 ]
 
-
+#use <clarifai-model ID>
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
     ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
@@ -177,201 +145,22 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
     ),
-    (
-        "text-translation-romance-lang-english",
-        TRANSLATE_ROMANCE_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-english-spanish",
-        TRANSLATE_EN_SPANISH_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-german-english",
-        TRANSLATE_GERMAN_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-chinese-english",
-        TRANSLATE_CHINESE_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-arabic-english",
-        TRANSLATE_ARABIC_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-welsh-english",
-        TRANSLATE_WELSH_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-russian-to-english-text",
-        TRANSLATE_RUSSIAN_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-russian-text",
-        TRANSLATE_EN_RUSSIAN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-turkish-to-english-text",
-         TRANSLATE_TURKISH_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-turkish-text",
-        TRANSLATE_EN_TURKISH_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-french-to-english-text",
-        TRANSLATE_FRENCH_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-french-text",
-        TRANSLATE_EN_FRENCH_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-indonesian-to-english-text",
-        TRANSLATE_INDONESIAN_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-indonesian-text",
-        TRANSLATE_EN_INDONESIAN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-german-to-english-text",
-        TRANSLATE_GERMAN_EN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-german-text",
-        TRANSLATE_EN_GERMAN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-spanish-to-english-text",
-        TRANSLATE_SPANISH_EN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-spanish-text",
-        TRANSLATE_EN_SPANISH_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-chinese-to-english-text",
-        TRANSLATE_CHINESE_EN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-chinese-text",
-        TRANSLATE_EN_CHINESE_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-arabic-to-english-text",
-        TRANSLATE_ARABIC_EN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-arabic-text",
-        TRANSLATE_EN_ARABIC_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-welsh-to-english-text",
-        TRANSLATE_WELSH_EN_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-welsh-text",
-        TRANSLATE_EN_WELSH_FB_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-portuguese-to-english-text",
-        TRANSLATE_PORTUGESE_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "translation-english-to-portuguese-text",
-        TRANSLATE_EN_PORTUGESE_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-czech-english",
-        TRANSLATE_CZECH_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-japanese-english",
-        TRANSLATE_JAPANESE_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-danish-english",
-        TRANSLATE_DANISH_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-catalan-english",
-        TRANSLATE_CATALAN_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-bulgarian-english",
-        TRANSLATE_BULGARIAN_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "text-translation-afrikaans-english",
-        TRANSLATE_AFRIKAANS_EN_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-
 ]
 
+# Map corresponding test data to each model in translation_models dict
+# append app_id and user_id vars to model data and then add the data to
+# the text_model_title_ids list of tuple
+for key, values in TRANSLATION_MODELS.items():
+    language = key.split("_")[0]
+    values.append(TRANSLATION_TEST_DATA[language])
+    app_credentials = [
+        os.environ.get("CLARIFAI_APP_ID"),
+        os.environ.get("CLARIFAI_USER_ID")
+    ]
+    values += app_credentials
+    TEXT_MODEL_TITLE_IDS_TUPLE.append(tuple(values))
+
+print(f"TEST TUPLE ADDITIONS: {TEXT_MODEL_TITLE_IDS_TUPLE}")
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
     ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
@@ -408,27 +197,16 @@ def test_audio_predict_on_public_models(channel):
 def test_text_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    for title, model_id, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
-        if title == "translate romance":
-            request = service_pb2.PostModelOutputsRequest(
-                user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-                model_id=model_id,
-                inputs=[
-                    resources_pb2.Input(
-                        data=resources_pb2.Data(text=resources_pb2.Text(raw=SPANISH_TEXT))
-                    )
-                ],
-            )
-        else:
-            request = service_pb2.PostModelOutputsRequest(
-                user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-                model_id=model_id,
-                inputs=[
-                    resources_pb2.Input(
-                        data=resources_pb2.Data(text=resources_pb2.Text(raw=ENGLISH_TEXT))
-                    )
-                ],
-            )
+    for title, model_id, text, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(text=resources_pb2.Text(raw=text))
+                )
+            ],
+        )
         response = post_model_outputs_and_maybe_allow_retries(
             stub, request, metadata=metadata(pat=True)
         )

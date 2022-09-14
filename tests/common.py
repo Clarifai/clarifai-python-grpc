@@ -19,12 +19,28 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
-ENGLISH_TEXT = (
-    "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
-)
-SPANISH_TEXT = "No me apetece nada estudiar esta noche."
-
 ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
+
+TRANSLATION_TEST_DATA = {
+    "ROMANCE": "No me apetece nada estudiar esta noche.",
+    "EN": "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study.",
+    "SPANISH": "No me apetece nada estudiar esta noche.",
+    "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
+    "CHINESE": "我今晚不想學習",
+    "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
+    "WELSH": "Dydw i ddim yn teimlo fel astudio heno.",
+    "FRENCH": "Je n'ai pas envie d'étudier ce soir.",
+    "RUSSIAN": "Я не хочу учиться сегодня вечером",
+    "TURKISH": "bu gece ders çalışmak istemiyorum",
+    "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
+    "PORTUGESE": "Eu não sinto vontade de estudar esta noite",
+    "CZECH": "Dnes večer se mi nechce učit",
+    "JAPANESE": "今夜は勉強したくない",
+    "DANISH": "Jeg har ikke lyst til at studere i aften",
+    "CATALAN": "No tinc ganes d'estudiar aquesta nit",
+    "BULGARIAN": "Тази вечер не ми се учи",
+    "AFRIKAANS": "Ek is nie lus om vanaand te studeer nie",
+}
 
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
@@ -63,41 +79,142 @@ TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
 
-#helsinkinlp translation models
-TRANSLATE_ROMANCE_MODEL_ID = "Text Translation: Romance to English" 
-TRANSLATE_EN_SPANISH_MODEL_ID = "Helsinki-NLP/opus-mt-en-es"
-TRANSLATE_GERMAN_EN_MODEL_ID = "Helsinki-NLP/opus-mt-de-en"
-TRANSLATE_CHINESE_EN_MODEL_ID = "Helsinki-NLP/opus-mt-zh-en"
-TRANSLATE_ARABIC_EN_MODEL_ID = "Helsinki-NLP/opus-mt-ar-en"
-TRANSLATE_WELSH_EN_MODEL_ID = "Helsinki-NLP/opus-mt-cy-en"
-TRANSLATE_CZECH_EN_MODEL_ID = "Helsinki-NLP/opus-mt-cs-en"
-TRANSLATE_JAPANESE_EN_MODEL_ID = "Helsinki-NLP/opus-mt-jap-en"
-TRANSLATE_DANISH_EN_MODEL_ID = "Helsinki-NLP/opus-mt-da-en"
-TRANSLATE_CATALAN_EN_MODEL_ID = "Helsinki-NLP/opus-mt-ca-en"
-TRANSLATE_BULGARIAN_EN_MODEL_ID = "Helsinki-NLP/opus-mt-bg-en"
-TRANSLATE_AFRIKAANS_EN_MODEL_ID = "Helsinki-NLP/opus-mt-af-en"
+## TRANSLATION
 
-# facebook translation models
-TRANSLATE_GERMAN_EN_FB_MODEL_ID = "translation-german-to-english-text"
-TRANSLATE_EN_GERMAN_FB_MODEL_ID = "translation-english-to-german-text"
-TRANSLATE_SPANISH_EN_FB_MODEL_ID = "translation-spanish-to-english-text"
-TRANSLATE_EN_SPANISH_FB_MODEL_ID = "translation-english-to-spanish-text"
-TRANSLATE_CHINESE_EN_FB_MODEL_ID = "translation-chinese-to-english-text"
-TRANSLATE_EN_CHINESE_FB_MODEL_ID = "translation-english-to-chinese-text"
-TRANSLATE_ARABIC_EN_FB_MODEL_ID = "translation-arabic-to-english-text"
-TRANSLATE_EN_ARABIC_FB_MODEL_ID = "translation-english-to-arabic-text"
-TRANSLATE_WELSH_EN_FB_MODEL_ID = "translation-welsh-to-english-text"
-TRANSLATE_EN_WELSH_FB_MODEL_ID = "translation-english-to-welsh-text"
-TRANSLATE_RUSSIAN_EN_MODEL_ID = "translation-russian-to-english-text"
-TRANSLATE_EN_RUSSIAN_MODEL_ID = "translation-english-to-russian-text"
-TRANSLATE_TURKISH_EN_MODEL_ID = "translation-turkish-to-english-text"
-TRANSLATE_EN_TURKISH_MODEL_ID = "translation-english-to-turkish-text"
-TRANSLATE_FRENCH_EN_MODEL_ID = "translation-french-to-english-text"
-TRANSLATE_EN_FRENCH_MODEL_ID = "translation-english-to-french-text"
-TRANSLATE_INDONESIAN_EN_MODEL_ID = "translation-indonesian-to-english-text"
-TRANSLATE_EN_INDONESIAN_MODEL_ID = "translation-english-to-indonesian-text"
-TRANSLATE_PORTUGESE_EN_MODEL_ID = "translation-portuguese-to-english-text"
-TRANSLATE_EN_PORTUGESE_MODEL_ID = "translation-english-to-portuguese-text"
+# Store these in a dict with model_id as key and a list of the
+# clarifai name, and clarifai-id as values
+### Dictionary Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>]}
+
+TRANSLATION_MODELS = {
+    "ROMANCE_EN_MODEL": [
+        "text-translation-romance-lang-english",
+        "Text Translation: Romance to English"
+    ],
+    "EN_SPANISH_MODEL": [
+        "text-translation-english-spanish",
+        "Helsinki-NLP/opus-mt-en-es"
+    ],
+    "GERMAN_EN_MODEL": [
+        "text-translation-german-english",
+        "Helsinki-NLP/opus-mt-de-en"
+    ],
+    "CHINESE_EN_MODEL": [
+        "text-translation-chinese-english",
+        "Helsinki-NLP/opus-mt-zh-en"
+    ],
+    "ARABIC_EN_MODEL": [
+        "text-translation-arabic-english",
+        "Helsinki-NLP/opus-mt-ar-en"
+    ],
+    "WELSH_EN_MODEL": [
+        "text-translation-welsh-english",
+        "Helsinki-NLP/opus-mt-cy-en"
+    ],
+    "GERMAN_EN_FB_MODEL": [
+        "translation-german-to-english-text",
+        "translation-german-to-english-text"
+    ],
+    "EN_GERMAN_FB_MODEL": [
+        "translation-english-to-german-text",
+        "translation-english-to-german-text"
+    ],
+    "SPANISH_EN_FB_MODEL": [
+        "translation-spanish-to-english-text",
+        "translation-spanish-to-english-text"
+    ],
+    "EN_SPANISH_FB_MODEL": [
+        "translation-english-to-spanish-text",
+        "translation-english-to-spanish-text"
+    ],
+    "CHINESE_EN_FB_MODEL": [
+        "translation-chinese-to-english-text",
+        "translation-chinese-to-english-text"
+    ],
+    "EN_CHINESE_FB_MODEL": [
+        "translation-english-to-chinese-text",
+        "translation-english-to-chinese-text"
+    ],
+    "ARABIC_EN_FB_MODEL": [
+        "translation-arabic-to-english-text",
+        "translation-arabic-to-english-text"
+    ],
+    "EN_ARABIC_FB_MODEL": [
+        "translation-english-to-arabic-text",
+        "translation-english-to-arabic-text"
+    ],
+    "WELSH_EN_FB_MODEL": [
+        "translation-welsh-to-english-text",
+        "translation-welsh-to-english-text"
+    ],
+    "EN_WELSH_FB_MODEL": [
+        "translation-english-to-welsh-text",
+        "translation-english-to-welsh-text"
+    ],
+    "RUSSIAN_EN_MODEL": [
+        "translation-russian-to-english-text",
+        "translations-russian-to-english-text"
+    ],
+    "EN_RUSSIAN_MODEL": [
+        "translation-english-to-russian-text",
+        "translation-english-to-russian-text"
+    ],
+    "TURKISH_EN_MODEL": [
+        "translation-turkish-to-english-text",
+        "translation-turkish-to-english-text"
+    ],
+    "EN_TURKISH_MODEL": [
+        "translation-english-to-turkish-text",
+        "translation-english-to-turkish-text"
+    ],
+    "FRENCH_EN_MODEL": [
+        "translation-french-to-english-text",
+        "translation-french-to-english-text"
+    ],
+    "EN_FRENCH_MODEL": [
+        "translation-english-to-french-text",
+        "translation-english-to-french-text"
+    ],
+    "INDONESIAN_EN_MODEL": [
+        "translation-indonesian-to-english-text",
+        "translation-indonesian-to-english-text"
+    ],
+    "EN_INDONESIAN_MODEL": [
+        "translation-english-to-indonesian-text",
+        "translation-english-to-indonesian-text"
+    ],
+    "PORTUGESE_EN_MODEL": [
+        "translation-portuguese-to-english-text",
+        "translation-portuguese-to-english-text"
+    ],
+    "EN_PORTUGESE_MODEL": [
+        "translation-english-to-portuguese-text",
+        "translation-english-to-portuguese-text"
+    ],
+    "CZECH_EN_MODEL": [
+        "text-translation-czech-english",
+        "Helsinki-NLP/opus-mt-cs-en"
+    ],
+    "JAPANESE_EN_MODEL": [
+        "text-translation-japanese-english",
+        "Helsinki-NLP/opus-mt-jap-en"
+    ],
+    "DANISH_EN_MODEL": [
+        "text-translation-danish-english",
+        "Helsinki-NLP/opus-mt-da-en"
+    ],
+    "CATALAN_EN_MODEL": [
+        "text-translation-catalan-english",
+        "Helsinki-NLP/opus-mt-ca-en"
+    ],
+    "BULGARIAN_EN_MODEL": [
+        "text-translation-bulgarian-english",
+        "Helsinki-NLP/opus-mt-bg-en"
+    ],
+    "AFRIKAANS_EN_MODEL": [
+        "text-translation-afrikaans-english",
+        "Helsinki-NLP/opus-mt-af-en"
+    ],
+}
 
 #ASR
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
