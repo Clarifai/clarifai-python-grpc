@@ -215,6 +215,24 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     Datasets_Get: _S.ValueType  # 105
     Datasets_Add: _S.ValueType  # 106
     Datasets_Delete: _S.ValueType  # 107
+    Modules_Add: _S.ValueType  # 108
+    """Write to the modules DB tables."""
+
+    Modules_Get: _S.ValueType  # 109
+    """Read from the modules and modules versions DB tables."""
+
+    Modules_Delete: _S.ValueType  # 110
+    """To delete we need read/write."""
+
+    InstalledModuleVersions_Add: _S.ValueType  # 111
+    """Write to the InstalledModuleVersions DB tables."""
+
+    InstalledModuleVersions_Get: _S.ValueType  # 112
+    """Read from the InstalledModuleVersions and InstalledModuleVersions versions DB tables."""
+
+    InstalledModuleVersions_Delete: _S.ValueType  # 113
+    """To delete we need read/write."""
+
     Search: _S.ValueType  # 3
     """Make an rpc to our search services."""
 
@@ -232,18 +250,34 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     WorkflowPublications_Add: _S.ValueType  # 119
     WorkflowPublications_Delete: _S.ValueType  # 120
     BulkOperation_Add: _S.ValueType  # 121
-    """TODO(Hemanth): Expose Bulk Operation endpoints only after implementation
-    To write bulk operations to the DB
-    """
+    """To write bulk operations to the DB"""
 
     BulkOperation_Get: _S.ValueType  # 122
-    """To Read Bulk Operations from the DB
-    [(clarfai_exposed) = true];
-    """
+    """To Read Bulk Operations from the DB"""
 
     BulkOperation_Delete: _S.ValueType  # 123
     """To Delete Bulk Operations from the DB"""
 
+    HistoricalUsage_Get: _S.ValueType  # 124
+    """To read historical usage from usage.dashboard_items table"""
+
+    InputsAddJobs_Add: _S.ValueType  # 125
+    """TODO(Hemanth): Expose scope after endpoints implementation
+    To write Ingest cloud inputs jobs to the DB
+    """
+
+    InputsAddJobs_Get: _S.ValueType  # 126
+    """To Read Ingest cloud inputs jobs to the DB
+    [(clarfai_exposed) = true];
+    """
+
+    Uploads_Get: _S.ValueType  # 128
+    """To read uploaded files and archives info from Uploads endpoints"""
+
+    Uploads_Add: _S.ValueType  # 129
+    """To upload files or archives through the Uploads endpoints"""
+
+    Uploads_Delete: _S.ValueType  # 130
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
     NOTE: When updating the list of "clarifai_exposed" scopes, please also
@@ -254,12 +288,24 @@ class S(_S, metaclass=_SEnumTypeWrapper):
     cannot make a key that would be useless. Beyond the key creation they are not enforced
     but rather the scopes are enforce when data is accessed.
 
+
     There is the following conventions in place, make sure you add them to the scopes for all new
     resource types:
 
     1. *_Add requires the corresponding _Get.
     2. *_Delete requires the corresponding _Add and _Get.
     3. *_Patch is deprecated and not check anywhere.
+
+    Think of the dependencies in this file at the DB level. If you cannot make a DB call to Get, Add
+    or Delete a resource without having access to another resource then you should add it here. That
+    should for the most part be the same resource type. In service.proto for the API level you will
+    also specify cl_depending_scopes for each API endpoint. Those cover cases where an endpoint
+    might need to access more than just that one resource type in order to operate (ie. API handlers
+    that make multiple DB calls of various resource types likely have more cl_depending_scopes than
+    the ones listed below). For example: PostCollectors to create a collector we make sure that you
+    can do model predictions, get concepts, etc. so that you don't have a collector that would be
+    useless at the end of that API handler but below you can see that the dependencies of Collector
+    scopes are only on other Collector scopes.
     """
     pass
 
@@ -459,6 +505,24 @@ FindDuplicateAnnotationsJobs_Delete: S.ValueType  # 104
 Datasets_Get: S.ValueType  # 105
 Datasets_Add: S.ValueType  # 106
 Datasets_Delete: S.ValueType  # 107
+Modules_Add: S.ValueType  # 108
+"""Write to the modules DB tables."""
+
+Modules_Get: S.ValueType  # 109
+"""Read from the modules and modules versions DB tables."""
+
+Modules_Delete: S.ValueType  # 110
+"""To delete we need read/write."""
+
+InstalledModuleVersions_Add: S.ValueType  # 111
+"""Write to the InstalledModuleVersions DB tables."""
+
+InstalledModuleVersions_Get: S.ValueType  # 112
+"""Read from the InstalledModuleVersions and InstalledModuleVersions versions DB tables."""
+
+InstalledModuleVersions_Delete: S.ValueType  # 113
+"""To delete we need read/write."""
+
 Search: S.ValueType  # 3
 """Make an rpc to our search services."""
 
@@ -476,18 +540,34 @@ ModelVersionPublications_Delete: S.ValueType  # 118
 WorkflowPublications_Add: S.ValueType  # 119
 WorkflowPublications_Delete: S.ValueType  # 120
 BulkOperation_Add: S.ValueType  # 121
-"""TODO(Hemanth): Expose Bulk Operation endpoints only after implementation
-To write bulk operations to the DB
-"""
+"""To write bulk operations to the DB"""
 
 BulkOperation_Get: S.ValueType  # 122
-"""To Read Bulk Operations from the DB
-[(clarfai_exposed) = true];
-"""
+"""To Read Bulk Operations from the DB"""
 
 BulkOperation_Delete: S.ValueType  # 123
 """To Delete Bulk Operations from the DB"""
 
+HistoricalUsage_Get: S.ValueType  # 124
+"""To read historical usage from usage.dashboard_items table"""
+
+InputsAddJobs_Add: S.ValueType  # 125
+"""TODO(Hemanth): Expose scope after endpoints implementation
+To write Ingest cloud inputs jobs to the DB
+"""
+
+InputsAddJobs_Get: S.ValueType  # 126
+"""To Read Ingest cloud inputs jobs to the DB
+[(clarfai_exposed) = true];
+"""
+
+Uploads_Get: S.ValueType  # 128
+"""To read uploaded files and archives info from Uploads endpoints"""
+
+Uploads_Add: S.ValueType  # 129
+"""To upload files or archives through the Uploads endpoints"""
+
+Uploads_Delete: S.ValueType  # 130
 global___S = S
 
 

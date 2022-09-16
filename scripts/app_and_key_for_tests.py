@@ -16,6 +16,12 @@ EMAIL = os.environ['CLARIFAI_USER_EMAIL']
 PASSWORD = os.environ['CLARIFAI_USER_PASSWORD']
 
 
+def _assert_response_success(response):
+    assert 'status' in response, f'Invalid response {response}'
+    assert 'code' in response['status'], f'Invalid response {response}'
+    assert response['status']['code'] == 10000, f'Invalid response {response}'
+
+
 def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get('CLARIFAI_GRPC_BASE', 'api.clarifai.com')
 
@@ -33,9 +39,8 @@ def _request(method, url, payload={}, headers={}):
             error_body = json.dumps(json.loads(error_body), indent=4)
         except:
             pass
-        print("ERROR after a HTTP request to: %s %s" % (method, full_url))
-        print("%d %s:\n%s" % (e.code, e.reason, error_body))
-        os._exit(1)
+        raise Exception("ERROR after a HTTP request to: %s %s" % (method, full_url)
+                        + ". Response: %d %s:\n%s" % (e.code, e.reason, error_body))
     return json.loads(response)
 
 
@@ -46,8 +51,13 @@ def create_app(env_name):
     payload = {'apps': [{'name': 'auto-created-in-%s-ci-test-run' % env_name}]}
 
     data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
+    _assert_response_success(data)
 
+    assert 'apps' in data, f'Invalid response {data}'
+    assert len(data['apps']) == 1, f'Invalid response {data}'
+    assert 'id' in data['apps'][0], f'Invalid response {data}'
     app_id = data['apps'][0]['id']
+    assert app_id, f'Invalid response {data}'
 
     # This print needs to be present so we can read the value in CI.
     print(app_id)
@@ -65,7 +75,13 @@ def create_key(app_id):
         }]
     }
     data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
+    _assert_response_success(data)
+
+    assert 'keys' in data, f'Invalid response {data}'
+    assert len(data['keys']) == 1, f'Invalid response {data}'
+    assert 'id' in data['keys'][0], f'Invalid response {data}'
     key_id = data['keys'][0]['id']
+    assert key_id, f'Invalid response {data}'
 
     # This print needs to be present so we can read the value in CI.
     print(key_id)
@@ -85,7 +101,13 @@ def create_pat():
         }]
     }
     data = _request(method='POST', url=url, payload=payload, headers=_auth_headers(session_token))
+    _assert_response_success(data)
+
+    assert 'keys' in data, f'Invalid response {data}'
+    assert len(data['keys']) == 1, f'Invalid response {data}'
+    assert 'id' in data['keys'][0], f'Invalid response {data}'
     pat_id = data['keys'][0]['id']
+    assert pat_id, f'Invalid response {data}'
 
     # This print needs to be present so we can read the value in CI.
     print(pat_id)
@@ -128,11 +150,13 @@ def create_sample_workflow(api_key):
         ]
     }
     response = _request(method='POST', url=url, payload=payload, headers=_auth_headers_for_api_key_key(api_key))
+    _assert_response_success(response)
 
 
 def _delete_app(session_token, user_id, app_id):
     url = '/users/%s/apps/%s' % (user_id, app_id)
     response = _request(method='DELETE', url=url, headers=_auth_headers(session_token))
+    _assert_response_success(response)
 
 
 def _auth_headers(session_token):
@@ -149,8 +173,16 @@ def _login():
     url = '/login'
     payload = {'email': EMAIL, 'password': PASSWORD}
     data = _request(method='POST', url=url, payload=payload)
+    _assert_response_success(data)
+
+    assert 'v2_user_id' in data, f'Invalid response {data}'
     user_id = data['v2_user_id']
+    assert user_id, f'Invalid response {data}'
+
+    assert 'session_token' in data, f'Invalid response {data}'
     session_token = data['session_token']
+    assert session_token, f'Invalid response {data}'
+
     return session_token, user_id
 
 
