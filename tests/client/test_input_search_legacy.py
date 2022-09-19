@@ -11,7 +11,7 @@ from tests.common import (
     metadata,
     raise_on_failure,
 )
-from tests.test_inputs_searches import SetupImage
+from tests.client.test_inputs_searches import SetupImage
 
 
 @both_channels
