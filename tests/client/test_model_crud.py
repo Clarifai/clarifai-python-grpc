@@ -42,7 +42,7 @@ def test_list_models_with_pagination(channel):
 
 
 @both_channels
-def test_post_patch_get_train_evaluate_delete_model(channel):
+def test_post_patch_get_train_evaluate_predict_delete_model(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     # Add some inputs with the concepts that we'll need in the model.
@@ -133,6 +133,23 @@ def test_post_patch_get_train_evaluate_delete_model(channel):
         )
         raise_on_failure(post_model_version_metrics_response)
         wait_for_model_evaluated(stub, metadata(), model_id, model_version_id)
+
+        post_model_outputs_response = stub.PostModelOutputs(
+            service_pb2.PostModelOutputsRequest(
+                model_id=model_id,
+                version_id=model_version_id,
+                inputs=[
+                    resources_pb2.Input(
+                        data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                    )
+                ],
+            ),
+            metadata=metadata(),
+        )
+        raise_on_failure(post_model_outputs_response)
+        assert len(post_model_outputs_response.outputs) == 1
+        assert len(post_model_outputs_response.outputs[0].data.concepts) == 1
+        assert post_model_outputs_response.outputs[0].data.concepts[0].id == "some-new-concept"
     finally:
         delete_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
