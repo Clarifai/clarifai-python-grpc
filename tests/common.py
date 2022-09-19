@@ -40,6 +40,23 @@ TRANSLATION_TEST_DATA = {
     "CATALAN": "No tinc ganes d'estudiar aquesta nit",
     "BULGARIAN": "Тази вечер не ми се учи",
     "AFRIKAANS": "Ek is nie lus om vanaand te studeer nie",
+    "CROATIAN": "Večeras mi se ne uči, ali moram učiti",
+    "FINNISH": "En halua opiskella tänä iltana, mutta minun täytyy opiskella",
+    "SWEDISH": "Jag känner inte för att plugga ikväll, men jag måste plugga",
+    "NORWEGIAN": "Jeg har ikke lyst til å studere i kveld, men jeg må studere",
+    "HINDI": "मेरा आज रात पढ़ने का मन नहीं है, लेकिन मुझे पढ़ना चाहिए",
+    "URDU": "مجھے آج رات پڑھنا اچھا نہیں لگتا، لیکن مجھے ضرور پڑھنا چاہیے۔",
+    "UKRAINIAN": "Мені не хочеться сьогодні вчитися, але я мушу вчитися",
+    "VIETNAMESE": "Tôi không muốn học tối nay, nhưng tôi phải học",
+    "POLISH": "Nie chce mi się dzisiaj studiować, ale muszę się uczyć",
+    "ITALIAN": "Non ho voglia di studiare stasera, ma devo studiare",
+    "KOREAN": "오늘 밤은 공부하기 싫지만 공부는 해야겠어",
+    "IRISH": "Ní dóigh liom gur mhaith liom staidéar a dhéanamh anocht, ach caithfidh mé staidéar a dhéanamh",
+    "THAI": "คืนนี้ไม่อยากเรียนแต่ต้องเรียน",
+    "SWAHILI": "Sijisikii kusoma usiku wa leo, lakini lazima nisome",
+    "DUTCH": "Ik heb geen zin om te studeren vanavond, maar ik moet studeren",
+    "MALAGASY": "Tsy te hianatra aho anio alina, fa tsy maintsy mianatra",
+    "BURMESE": "ဒီညတော့ စာကျက်ရမလို ခံစားရပေမယ့် စာကျက်ရမယ်။",
 }
 
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
@@ -63,15 +80,69 @@ GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID = "86039c857a206810679f7f72b82fff54"
 IMAGE_SUBJECT_SEGMENTATION_MODEL_ID = "6a3dc529acf3f720a629cdc8c6ad41a9"
 EASYOCR_ENGLISH_MODEL_ID = "f1b1005c8feaa8d3f34d35f224092915"
 PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
-YOLOV6_S_MODEL_ID = "yolov6s-coco"
-YOLOV6_NANO_MODEL_ID = "yolov6n-coco"
-YOLOV6_TINY_MODEL_ID = "yolov6tiny-coco"
-YOLOV7_MODEL_ID = "yolov7"
-YOLOV7_E6_MODEL_ID = "yolov7-e6"
-YOLOV7_W6_MODEL_ID = "yolov7-w6"
-YOLOV7_D6_MODEL_ID = "yolov7-d6"
-YOLOV7_E6E_MODEL_ID = "yolov7-e6e"
-YOLOV7_X_MODEL_ID = "yolov7-x"
+
+# general visual detection models (yolo, detic)
+# Data Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>]}
+OBJECT_DETECTION_MODELS = {
+    "YOLOV6_S": [
+        "general-detector-yolov6s-coco",
+        "yolov6s-coco"
+    ],
+    "YOLOV6_NANO": [
+        "general-detector-yolov6n-coco",
+        "yolov6n-coco"
+    ],
+    "YOLOV6_TINY": [
+        "general-detector-yolov6tiny-coco",
+        "yolov6tiny-coco"
+    ],
+    "YOLOV7": [
+        "general-detector-yolov7-coco",
+        "yolov7"
+    ],
+    "YOLOV7_E6": [
+        "general-image-detector-yolov7-e6-coco",
+        "yolov7-e6"
+    ],
+    "YOLOV7_W6": [
+        "general-image-detector-yolov7-w6-coco",
+        "yolov7-w6"
+    ],
+    "YOLOV7_D6": [
+        "general-image-detector-yolov7-d6-coco",
+        "yolov7-d6"
+    ],
+    "YOLOV7_E6E": [
+        "general-image-detector-yolov7-e6e-coco",
+        "yolov7-e6e"
+    ],
+    "YOLOV7_X": [
+        "general-image-detector-yolov7-x-coco",
+        "yolov7-x"
+    ],
+    "BLAZE_FACE_DETECTOR": [
+        "general-image-detector-blazeface_ssh-widerface",
+        "general-image-detector-blazeface_ssh-widerface"
+    ],
+    "DETIC_CLIP_R50": [
+        "general-image-detector-detic_clipR50Caption-coco",
+        "detic-clip-r50-1x_caption-CPU"
+    ],
+    "DETIC_C2_SWINB_LVIS": [
+        "general-image-detector-detic_C2_SwinB_896_lvis",
+        "general-image-detector-detic_C2_SwinB_896_lvis"
+    ],
+    "DETIC_C2_SWINB_COCO": [
+        "general-image-detector-detic_C2_SwinB-21K_COCO",
+        "general-image-detector-detic_C2_SwinB-21K_COCO"
+    ],
+    "DETIC_C2_IN_L_SWINB_LVIS": [
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis"
+    ]
+
+}
+
 
 TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
 TEXT_GEN_MODEL_ID = "distilgpt2"
@@ -79,7 +150,7 @@ TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
 
-## TRANSLATION
+## LANGUAGE TRANSLATION
 
 # Store these in a dict with model_id as key and a list of the
 # clarifai name, and clarifai-id as values
@@ -88,7 +159,7 @@ NER_ENGLISH_MODEL_ID = "ner_english_v2"
 TRANSLATION_MODELS = {
     "ROMANCE_EN_MODEL": [
         "text-translation-romance-lang-english",
-        "Text Translation: Romance to English"
+        "Text Translation: Romance to English" # prev.TRANSLATE_<model_name>_MODEL_ID
     ],
     "EN_SPANISH_MODEL": [
         "text-translation-english-spanish",
@@ -214,11 +285,148 @@ TRANSLATION_MODELS = {
         "text-translation-afrikaans-english",
         "Helsinki-NLP/opus-mt-af-en"
     ],
+    "CROATIAN_EN_MODEL": [
+        "translation-croatian-to-english-text",
+        "translation-croatian-to-english-text"
+    ],
+    "EN_CROATIAN_MODEL": [
+        "translation-english-to-croatian-text",
+        "translation-english-to-croatian-text"
+    ],
+    "FINNISH_EN_MODEL": [
+        "translation-finnish-to-english-text",
+        "translation-finnish-to-english-text"
+    ],
+    "EN_FINNISH_MODEL": [
+        "translation-english-to-finnish-text",
+        "translation-english-to-finnish-text"
+    ],
+    "SWEDISH_EN_MODEL": [
+        "translation-swedish-to-english-text",
+        "translation-swedish-to-english-text"
+    ],
+    "EN_SWEDISH_MODEL": [
+        "translation-english-to-swedish-text",
+        "translation-english-to-swedish-text"
+    ],
+    "NORWEGIAN_EN_MODEL": [
+        "translation-norwegian-to-english-text",
+        "translation-norwegian-to-english-text"
+    ],
+    "EN_NORWEGIAN_MODEL": [
+        "translation-english-to-norwegian-text",
+        "translation-english-to-norwegian-text"
+    ],
+    "HINDI_EN_MODEL": [
+        "translation-hindi-to-english-text",
+        "translation-hindi-to-english-text"
+    ],
+    "EN_HINDI_MODEL": [
+        "translation-english-to-hindi-text",
+        "translation-english-to-hindi-text"
+    ],
+    "URDU_EN_MODEL": [
+        "translation-urdu-to-english-text",
+        "translation-urdu-to-english-text"
+    ],
+    "EN_URDU_MODEL": [
+        "translation-english-to-urdu-text",
+        "translation-english-to-urdu-text"
+    ],
+    "UKRAINIAN_EN_MODEL": [
+        "translation-ukrainian-to-english-text",
+        "translation-ukrainian-to-english-text"
+    ],
+    "EN_UKRAINIAN_MODEL": [
+        "translation-english-to-ukrainian-text",
+        "translation-english-to-ukrainian-text"
+    ],
+    "VIETNAMESE_EN_MODEL": [
+        "translation-vietnamese-to-english-text",
+        "translation-vietnamese-to-english-text"
+    ],
+    "EN_VIETNAMESE_MODEL": [
+        "translation-english-to-vietnamese-text",
+        "translation-english-to-vietnamese-text"
+    ],
+    "POLISH_EN_MODEL": [
+        "translation-polish-to-english-text",
+        "translation-polish-to-english-text"
+    ],
+    "EN_POLISH_MODEL": [
+        "translation-english-to-polish-text",
+        "translation-english-to-polish-text"
+    ],
+    "ITALIAN_EN_MODEL": [
+        "translation-italian-to-english-text",
+        "translation-italian-to-english-text"
+    ],
+    "EN_ITALIAN_MODEL": [
+        "translation-english-to-italian-text",
+        "translation-english-to-italian-text"
+    ],
+    "KOREAN_EN_MODEL": [
+        "translation-korean-to-english-text",
+        "translation-korean-to-english-text"
+    ],
+    "EN_KOREAN_MODEL": [
+        "translation-english-to-korean-text",
+        "translation-english-to-korean-text"
+    ],
+    "IRISH_EN_MODEL": [
+        "translation-irish-to-english-text",
+        "translation-irish-to-english-text"
+    ],
+    "EN_IRISH_MODEL": [
+        "translation-english-to-irish-text",
+        "translation-english-to-irish-text"
+    ],
+    "THAI_EN_MODEL": [
+        "translation-thai-to-english-text",
+        "translation-thai-to-english-text"
+    ],
+    "EN_THAI_MODEL": [
+        "translation-english-to-thai-text",
+        "translation-english-to-thai-text"
+    ],
+    "SWAHILI_EN_MODEL": [
+        "translation-swahili-to-english-text",
+        "translation-swahili-to-english-text"
+    ],
+    "EN_SWAHILI_MODEL": [
+        "translation-english-to-swahili-text",
+        "translation-english-to-swahili-text"
+    ],
+    "DUTCH_EN_MODEL": [
+        "translation-dutch-flemish-to-english-text",
+        "translation-dutch-flemish-to-english-text"
+    ],
+    "EN_DUTCH_MODEL": [
+        "translation-english-to-dutch-flemish-text",
+        "translation-english-to-dutch-flemish-text"
+    ],
+    "MALAGASY_EN_MODEL": [
+        "translation-malagasy-to-english-text",
+        "translation-malagasy-to-english-text"
+    ],
+    "EN_MALAGASY_MODEL": [
+        "translation-english-to-malagasy-text",
+        "translation-english-to-malagasy-text"
+    ],
+    "BURMESE_EN_MODEL": [
+        "translation-burmese-to-english-text",
+        "translation-burmese-to-english-text"
+    ],
+    "EN_BURMESE_MODEL": [
+        "translation-english-to-burmese-text",
+        "translation-english-to-burmese-text"
+    ],
+
 }
 
 #ASR
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
-
+GENERAL_ASR_NEMO_JASPER_MODEL_ID = "general-asr-nemo_jasper"
 
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
