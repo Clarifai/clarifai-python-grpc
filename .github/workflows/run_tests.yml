@@ -46,7 +46,7 @@ jobs:
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
       shell: bash
       run: |
-        echo ${CLARIFAI_USER_EMAIL}
+        python -c "import os; print('XXX -', os.environ['CLARIFAI_USER_EMAIL'])"
         export PYTHONPATH=.
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
