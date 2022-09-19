@@ -1,7 +1,5 @@
 import os
 
-import pytest as pytest
-
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 
 from tests.common import (
