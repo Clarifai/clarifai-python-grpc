@@ -1,7 +1,5 @@
 import os
 
-import pytest as pytest
-
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 
 from tests.common import (
@@ -67,9 +65,9 @@ MODEL_TITLE_AND_ID_PAIRS = [
 ]
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
-    ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "huggingface-research"),
-    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "huggingface-research"),
-    ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "huggingface-research"),
+    ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
+    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "textgen"),
+    ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "nlptownres"),
     (
         "text multilingual moderation",
         TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
@@ -82,7 +80,7 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
     ),
-    ("translate romance", TRANSLATE_ROMANCE_MODEL_ID, "translation", "huggingface-research"),
+    ("translate romance", TRANSLATE_ROMANCE_MODEL_ID, "translation", "helsinkinlp"),
 ]
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
@@ -113,9 +111,6 @@ def test_audio_predict_on_public_models(channel):
         )
 
 
-@pytest.mark.skip(
-    reason="On Github Actions there's 'Model training had no data' error for some reason"
-)
 @both_channels
 def test_text_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
