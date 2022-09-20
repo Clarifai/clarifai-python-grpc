@@ -392,6 +392,7 @@ TRANSLATION_MODELS = {
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 GENERAL_ASR_NEMO_JASPER_MODEL_ID = "general-asr-nemo_jasper"
 
+
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
     if status.details:
@@ -399,11 +400,13 @@ def get_status_message(status: Status):
     else:
         return message
 
+
 def metadata(pat=False):
     if pat:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
     else:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
+
 
 def both_channels(func):
     """
@@ -418,7 +421,9 @@ def both_channels(func):
 
         channel = ClarifaiChannel.get_json_channel()
         func(channel)
+
     return func_wrapper
+
 
 def wait_for_inputs_upload(stub, metadata, input_ids):
     for input_id in input_ids:
@@ -427,10 +432,7 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
             )
             raise_on_failure(get_input_response)
-            if (
-                get_input_response.input.status.code
-                == status_code_pb2.INPUT_DOWNLOAD_SUCCESS
-            ):
+            if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
                 break
             elif get_input_response.input.status.code in (
                 status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -445,9 +447,8 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 )
     # At this point, all inputs have been downloaded successfully.
 
-def wait_for_model_trained(
-    stub, metadata, model_id, model_version_id, user_app_id=None
-):
+
+def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
     while True:
         response = stub.GetModelVersion(
             service_pb2.GetModelVersionRequest(
@@ -470,6 +471,7 @@ def wait_for_model_trained(
             )
     # At this point, the model has successfully finished training.
 
+
 def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     while True:
         response = stub.GetModelVersionMetrics(
@@ -479,10 +481,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             metadata=metadata,
         )
         raise_on_failure(response)
-        if (
-            response.model_version.metrics.status.code
-            == status_code_pb2.MODEL_EVALUATED
-        ):
+        if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
             break
         elif response.model_version.metrics.status.code in (
             status_code_pb2.MODEL_NOT_EVALUATED,
@@ -497,6 +496,7 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             )
     # At this point, the model has successfully finished evaluation.
 
+
 def raise_on_failure(response, custom_message=""):
     if response.status.code != status_code_pb2.SUCCESS:
         error_message = get_status_message(response.status)
@@ -508,14 +508,14 @@ def raise_on_failure(response, custom_message=""):
             + f"Received failure response `{error_message}`. Whole response object: {response}"
         )
 
+
 def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub,
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(
-        lambda: stub.PostModelOutputs(request, metadata=metadata)
-    )
+    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
+
 
 def _retry_on_504_on_non_prod(func):
     """
@@ -528,8 +528,7 @@ def _retry_on_504_on_non_prod(func):
             response = func()
             if (
                 len(response.outputs) > 0
-                and response.outputs[0].status.code
-                != status_code_pb2.RPC_REQUEST_TIMEOUT
+                and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
             ):  # will want to retry
                 break
         except _Rendezvous as e:
@@ -537,10 +536,7 @@ def _retry_on_504_on_non_prod(func):
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if (
-                "status: 504" not in e._state.details
-                and "10020 Failure" not in e._state.details
-            ):
+            if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
                 raise e
 
             if i == MAX_ATTEMPTS:
