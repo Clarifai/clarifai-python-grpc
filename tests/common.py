@@ -131,6 +131,7 @@ TRANSLATION_MODELS = {
     "ROMANCE_EN_MODEL": [
         "text-translation-romance-lang-english",
         "Text Translation: Romance to English",  # prev.TRANSLATE_<model_name>_MODEL_ID
+<<<<<<< HEAD
     ],
     "EN_SPANISH_MODEL": [
         "text-translation-english-spanish",
@@ -148,6 +149,13 @@ TRANSLATION_MODELS = {
         "text-translation-arabic-english",
         "Helsinki-NLP/opus-mt-ar-en",
     ],
+=======
+    ],
+    "EN_SPANISH_MODEL": ["text-translation-english-spanish", "Helsinki-NLP/opus-mt-en-es"],
+    "GERMAN_EN_MODEL": ["text-translation-german-english", "Helsinki-NLP/opus-mt-de-en"],
+    "CHINESE_EN_MODEL": ["text-translation-chinese-english", "Helsinki-NLP/opus-mt-zh-en"],
+    "ARABIC_EN_MODEL": ["text-translation-arabic-english", "Helsinki-NLP/opus-mt-ar-en"],
+>>>>>>> 87b2d77384b0b4e9f73fe4b4d5645ddf3979855c
     "WELSH_EN_MODEL": ["text-translation-welsh-english", "Helsinki-NLP/opus-mt-cy-en"],
     "GERMAN_EN_FB_MODEL": [
         "translation-german-to-english-text",
@@ -228,6 +236,7 @@ TRANSLATION_MODELS = {
     "EN_PORTUGESE_MODEL": [
         "translation-english-to-portuguese-text",
         "translation-english-to-portuguese-text",
+<<<<<<< HEAD
     ],
     "CZECH_EN_MODEL": ["text-translation-czech-english", "Helsinki-NLP/opus-mt-cs-en"],
     "JAPANESE_EN_MODEL": [
@@ -249,7 +258,15 @@ TRANSLATION_MODELS = {
     "AFRIKAANS_EN_MODEL": [
         "text-translation-afrikaans-english",
         "Helsinki-NLP/opus-mt-af-en",
+=======
+>>>>>>> 87b2d77384b0b4e9f73fe4b4d5645ddf3979855c
     ],
+    "CZECH_EN_MODEL": ["text-translation-czech-english", "Helsinki-NLP/opus-mt-cs-en"],
+    "JAPANESE_EN_MODEL": ["text-translation-japanese-english", "Helsinki-NLP/opus-mt-jap-en"],
+    "DANISH_EN_MODEL": ["text-translation-danish-english", "Helsinki-NLP/opus-mt-da-en"],
+    "CATALAN_EN_MODEL": ["text-translation-catalan-english", "Helsinki-NLP/opus-mt-ca-en"],
+    "BULGARIAN_EN_MODEL": ["text-translation-bulgarian-english", "Helsinki-NLP/opus-mt-bg-en"],
+    "AFRIKAANS_EN_MODEL": ["text-translation-afrikaans-english", "Helsinki-NLP/opus-mt-af-en"],
     "CROATIAN_EN_MODEL": [
         "translation-croatian-to-english-text",
         "translation-croatian-to-english-text",
@@ -281,6 +298,7 @@ TRANSLATION_MODELS = {
     "EN_NORWEGIAN_MODEL": [
         "translation-english-to-norwegian-text",
         "translation-english-to-norwegian-text",
+<<<<<<< HEAD
     ],
     "HINDI_EN_MODEL": [
         "translation-hindi-to-english-text",
@@ -297,7 +315,13 @@ TRANSLATION_MODELS = {
     "EN_URDU_MODEL": [
         "translation-english-to-urdu-text",
         "translation-english-to-urdu-text",
+=======
+>>>>>>> 87b2d77384b0b4e9f73fe4b4d5645ddf3979855c
     ],
+    "HINDI_EN_MODEL": ["translation-hindi-to-english-text", "translation-hindi-to-english-text"],
+    "EN_HINDI_MODEL": ["translation-english-to-hindi-text", "translation-english-to-hindi-text"],
+    "URDU_EN_MODEL": ["translation-urdu-to-english-text", "translation-urdu-to-english-text"],
+    "EN_URDU_MODEL": ["translation-english-to-urdu-text", "translation-english-to-urdu-text"],
     "UKRAINIAN_EN_MODEL": [
         "translation-ukrainian-to-english-text",
         "translation-ukrainian-to-english-text",
@@ -337,6 +361,7 @@ TRANSLATION_MODELS = {
     "EN_KOREAN_MODEL": [
         "translation-english-to-korean-text",
         "translation-english-to-korean-text",
+<<<<<<< HEAD
     ],
     "IRISH_EN_MODEL": [
         "translation-irish-to-english-text",
@@ -353,7 +378,13 @@ TRANSLATION_MODELS = {
     "EN_THAI_MODEL": [
         "translation-english-to-thai-text",
         "translation-english-to-thai-text",
+=======
+>>>>>>> 87b2d77384b0b4e9f73fe4b4d5645ddf3979855c
     ],
+    "IRISH_EN_MODEL": ["translation-irish-to-english-text", "translation-irish-to-english-text"],
+    "EN_IRISH_MODEL": ["translation-english-to-irish-text", "translation-english-to-irish-text"],
+    "THAI_EN_MODEL": ["translation-thai-to-english-text", "translation-thai-to-english-text"],
+    "EN_THAI_MODEL": ["translation-english-to-thai-text", "translation-english-to-thai-text"],
     "SWAHILI_EN_MODEL": [
         "translation-swahili-to-english-text",
         "translation-swahili-to-english-text",
@@ -391,6 +422,7 @@ TRANSLATION_MODELS = {
 # ASR
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
 GENERAL_ASR_NEMO_JASPER_MODEL_ID = "general-asr-nemo_jasper"
+
 
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"

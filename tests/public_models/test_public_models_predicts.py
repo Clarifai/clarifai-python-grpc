@@ -101,12 +101,13 @@ for key, values in TRANSLATION_MODELS.items():
     TEXT_MODEL_TITLE_IDS_TUPLE.append(tuple(values))
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
-    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")(
+    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook"),
+    (
         "general-asr-nemo_jasper",
         GENERAL_ASR_NEMO_JASPER_MODEL_ID,
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
-    )
+    ),
 ]
 
 @both_channels
