@@ -146,7 +146,7 @@ OBJECT_DETECTION_MODELS = {
 
 TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
 TEXT_GEN_MODEL_ID = "distilgpt2"
-TEXT_SENTIMENT_MODEL_ID = "bert-base-multilingual-uncased-sentiment"
+TEXT_SENTIMENT_MODEL_ID = "multilingual-uncased-sentiment"  # bert-based
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
 
