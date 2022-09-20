@@ -2,7 +2,7 @@ import os
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 
-from common import (
+from tests.common import (
     APPAREL_MODEL_ID,
     BEER_VIDEO_URL,
     COLOR_MODEL_ID,
