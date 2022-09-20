@@ -85,7 +85,7 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         NER_ENGLISH_MODEL_ID,
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
-    )
+    ),
 ]
 
 # Map corresponding test data to each model in translation_models dict
@@ -94,21 +94,17 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
 for key, values in TRANSLATION_MODELS.items():
     language = key.split("_")[0]
     values.append(TRANSLATION_TEST_DATA[language])
-    app_credentials = [
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID")
-    ]
+    app_credentials = [os.environ.get("CLARIFAI_APP_ID"), os.environ.get("CLARIFAI_USER_ID")]
     values += app_credentials
     TEXT_MODEL_TITLE_IDS_TUPLE.append(tuple(values))
 
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
-    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
-    (
+    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")(
         "general-asr-nemo_jasper",
         GENERAL_ASR_NEMO_JASPER_MODEL_ID,
         os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID")
+        os.environ.get("CLARIFAI_USER_ID"),
     )
 ]
 
@@ -145,9 +141,7 @@ def test_text_predict_on_public_models(channel):
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
             inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(text=resources_pb2.Text(raw=text))
-                )
+                resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
             ],
         )
         response = post_model_outputs_and_maybe_allow_retries(
