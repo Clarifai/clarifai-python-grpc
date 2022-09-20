@@ -69,7 +69,6 @@ MODEL_TITLE_AND_ID_PAIRS = [
 for _, values in OBJECT_DETECTION_MODELS.items():
     MODEL_TITLE_AND_ID_PAIRS.append(tuple(values))
 
-
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
     ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "textgen"),
@@ -85,7 +84,7 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         NER_ENGLISH_MODEL_ID,
         os.environ.get("CLARIFAI_APP_ID"),
         os.environ.get("CLARIFAI_USER_ID"),
-    )
+    ),
 ]
 
 # Map corresponding test data to each model in translation_models dict
@@ -96,22 +95,19 @@ for key, values in TRANSLATION_MODELS.items():
     values.append(TRANSLATION_TEST_DATA[language])
     app_credentials = [
         os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID")
+        os.environ.get("CLARIFAI_USER_ID"),
     ]
     values += app_credentials
     TEXT_MODEL_TITLE_IDS_TUPLE.append(tuple(values))
 
-
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
-    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
-    (
+    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")(
         "general-asr-nemo_jasper",
         GENERAL_ASR_NEMO_JASPER_MODEL_ID,
         os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID")
+        os.environ.get("CLARIFAI_USER_ID"),
     )
 ]
-
 
 @both_channels
 def test_audio_predict_on_public_models(channel):
@@ -123,7 +119,9 @@ def test_audio_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
+                    data=resources_pb2.Data(
+                        audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL)
+                    )
                 )
             ],
         )
@@ -134,7 +132,6 @@ def test_audio_predict_on_public_models(channel):
             response,
             custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
         )
-
 
 @both_channels
 def test_text_predict_on_public_models(channel):
@@ -158,7 +155,6 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
-
 @both_channels
 def test_image_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
@@ -168,16 +164,19 @@ def test_image_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                    data=resources_pb2.Data(
+                        image=resources_pb2.Image(url=DOG_IMAGE_URL)
+                    )
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata()
+        )
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
         )
-
 
 @both_channels
 def test_video_predict_on_public_models(channel):
@@ -194,7 +193,9 @@ def test_video_predict_on_public_models(channel):
             )
         ],
     )
-    response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata()
+    )
     raise_on_failure(
         response,
         custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
