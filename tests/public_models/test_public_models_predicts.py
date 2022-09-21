@@ -123,6 +123,7 @@ AUDIO_MODEL_TITLE_IDS_TUPLE = [
     ),
 ]
 
+
 @both_channels
 def test_audio_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
@@ -133,9 +134,7 @@ def test_audio_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL)
-                    )
+                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
                 )
             ],
         )
@@ -146,6 +145,7 @@ def test_audio_predict_on_public_models(channel):
             response,
             custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
         )
+
 
 @both_channels
 def test_text_predict_on_public_models(channel):
@@ -174,6 +174,7 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
+
 @both_channels
 def test_text_translation_predict_on_public_models(channel):
     """Test language translation models.
@@ -193,9 +194,7 @@ def test_text_translation_predict_on_public_models(channel):
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
             inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(text=resources_pb2.Text(raw=text))
-                )
+                resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
             ],
         )
         response = post_model_outputs_and_maybe_allow_retries(
@@ -206,6 +205,7 @@ def test_text_translation_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
+
 @both_channels
 def test_image_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
@@ -215,19 +215,16 @@ def test_image_predict_on_public_models(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        image=resources_pb2.Image(url=DOG_IMAGE_URL)
-                    )
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata()
-        )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
         )
+
 
 @both_channels
 def test_video_predict_on_public_models(channel):
@@ -244,9 +241,7 @@ def test_video_predict_on_public_models(channel):
             )
         ],
     )
-    response = post_model_outputs_and_maybe_allow_retries(
-        stub, request, metadata=metadata()
-    )
+    response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
     raise_on_failure(
         response,
         custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
