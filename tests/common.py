@@ -19,12 +19,40 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
-ENGLISH_TEXT = (
-    "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
-)
-SPANISH_TEXT = "No me apetece nada estudiar esta noche."
-
 ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
+
+TRANSLATION_TEST_DATA = {
+    "ROMANCE": "No me apetece nada estudiar esta noche.",
+    "EN": "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study.",
+    "SPANISH": "No me apetece nada estudiar esta noche.",
+    "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
+    "CHINESE": "我今晚不想學習",
+    "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
+    "WELSH": "Dydw i ddim yn teimlo fel astudio heno.",
+    "FRENCH": "Je n'ai pas envie d'étudier ce soir.",
+    "RUSSIAN": "Я не хочу учиться сегодня вечером",
+    "TURKISH": "bu gece ders çalışmak istemiyorum",
+    "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
+    "PORTUGESE": "Eu não sinto vontade de estudar esta noite",
+    "CZECH": "Dnes večer se mi nechce učit",
+    "JAPANESE": "今夜は勉強したくない",
+    "DANISH": "Jeg har ikke lyst til at studere i aften",
+    "CATALAN": "No tinc ganes d'estudiar aquesta nit",
+    "BULGARIAN": "Тази вечер не ми се учи",
+    "AFRIKAANS": "Ek is nie lus om vanaand te studeer nie",
+    "CROATIAN": "Večeras mi se ne uči, ali moram učiti",
+    "FINNISH": "En halua opiskella tänä iltana, mutta minun täytyy opiskella",
+    "SWEDISH": "Jag känner inte för att plugga ikväll, men jag måste plugga",
+    "NORWEGIAN": "Jeg har ikke lyst til å studere i kveld, men jeg må studere",
+    "HINDI": "मेरा आज रात पढ़ने का मन नहीं है, लेकिन मुझे पढ़ना चाहिए",
+    "UKRAINIAN": "Мені не хочеться сьогодні вчитися, але я мушу вчитися",
+    "VIETNAMESE": "Tôi không muốn học tối nay, nhưng tôi phải học",
+    "POLISH": "Nie chce mi się dzisiaj studiować, ale muszę się uczyć",
+    "ITALIAN": "Non ho voglia di studiare stasera, ma devo studiare",
+    "KOREAN": "오늘 밤은 공부하기 싫지만 공부는 해야겠어",
+    "IRISH": "Ní dóigh liom gur mhaith liom staidéar a dhéanamh anocht, ach caithfidh mé staidéar a dhéanamh",
+    "DUTCH": "Ik heb geen zin om te studeren vanavond, maar ik moet studeren",
+}
 
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
@@ -48,15 +76,329 @@ IMAGE_SUBJECT_SEGMENTATION_MODEL_ID = "6a3dc529acf3f720a629cdc8c6ad41a9"
 EASYOCR_ENGLISH_MODEL_ID = "f1b1005c8feaa8d3f34d35f224092915"
 PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
 
+# general visual detection models (yolo, detic)
+# Data Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>, <app_id>, <user_id>]}
+OBJECT_DETECTION_MODELS = {
+    "YOLOV6_S": [
+        "general-detector-yolov6s-coco",
+        "yolov6s-coco",
+        "yolov6",
+        "meituan", 
+    ],
+    "YOLOV6_NANO": [
+        "general-detector-yolov6n-coco",
+        "yolov6n-coco",
+        "yolov6",
+        "meituan",
+    ],
+    "YOLOV6_TINY": [
+        "general-detector-yolov6tiny-coco",
+        "yolov6tiny-coco",
+        "yolov6",
+        "meituan",
+    ],
+    "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
+    "YOLOV7_E6": [
+        "general-image-detector-yolov7-e6-coco",
+        "yolov7-e6",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "YOLOV7_W6": [
+        "general-image-detector-yolov7-w6-coco",
+        "yolov7-w6",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "YOLOV7_D6": [
+        "general-image-detector-yolov7-d6-coco",
+        "yolov7-d6",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "YOLOV7_E6E": [
+        "general-image-detector-yolov7-e6e-coco",
+        "yolov7-e6e",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "YOLOV7_X": [
+        "general-image-detector-yolov7-x-coco",
+        "yolov7-x",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "BLAZE_FACE_DETECTOR": [
+        "general-image-detector-blazeface_ssh-widerface",
+        "general-image-detector-blazeface_ssh-widerface",
+        "face",
+        "paddlepaddle",
+    ],
+    "DETIC_CLIP_R50": [
+        "general-image-detector-detic_clipR50Caption-coco",
+        "detic-clip-r50-1x_caption-CPU",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_SWINB_LVIS": [
+        "general-image-detector-detic_C2_SwinB_896_lvis",
+        "general-image-detector-detic_C2_SwinB_896_lvis",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_SWINB_COCO": [
+        "general-image-detector-detic_C2_SwinB-21K_COCO",
+        "general-image-detector-detic_C2_SwinB-21K_COCO",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_IN_L_SWINB_LVIS": [
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+        "detic",
+        "facebook",
+    ],
+}
+
 TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
 TEXT_GEN_MODEL_ID = "distilgpt2"
 TEXT_SENTIMENT_MODEL_ID = "multilingual-uncased-sentiment"  # bert-based
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
-TRANSLATE_ROMANCE_MODEL_ID = "text-translation-romance-lang-english"
 
+## LANGUAGE TRANSLATION
+
+# Store these in a dict with model_id as key and a list of the
+# clarifai name, and clarifai-id as values
+### Dictionary Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>]}
+
+HELSINKINLP_TRANSLATION_MODELS = {
+    "ROMANCE_EN_MODEL": [
+        "text-translation-romance-lang-english",
+        "Text Translation: Romance to English",
+    ],
+    "EN_SPANISH_MODEL": [
+        "text-translation-english-spanish",
+        "Helsinki-NLP/opus-mt-en-es",
+    ],
+    "GERMAN_EN_MODEL": [
+        "text-translation-german-english",
+        "Helsinki-NLP/opus-mt-de-en",
+    ],
+    "CHINESE_EN_MODEL": [
+        "text-translation-chinese-english",
+        "Helsinki-NLP/opus-mt-zh-en",
+    ],
+    "ARABIC_EN_MODEL": [
+        "text-translation-arabic-english",
+        "Helsinki-NLP/opus-mt-ar-en",
+    ],
+    "WELSH_EN_MODEL": ["text-translation-welsh-english", "Helsinki-NLP/opus-mt-cy-en"],
+    "CZECH_EN_MODEL": ["text-translation-czech-english", "Helsinki-NLP/opus-mt-cs-en"],
+    "JAPANESE_EN_MODEL": [
+        "text-translation-japanese-english",
+        "Helsinki-NLP/opus-mt-jap-en",
+    ],
+    "DANISH_EN_MODEL": [
+        "text-translation-danish-english",
+        "Helsinki-NLP/opus-mt-da-en",
+    ],
+    "CATALAN_EN_MODEL": [
+        "text-translation-catalan-english",
+        "Helsinki-NLP/opus-mt-ca-en",
+    ],
+    "BULGARIAN_EN_MODEL": [
+        "text-translation-bulgarian-english",
+        "Helsinki-NLP/opus-mt-bg-en",
+    ],
+    "AFRIKAANS_EN_MODEL": [
+        "text-translation-afrikaans-english",
+        "Helsinki-NLP/opus-mt-af-en",
+    ],
+}
+
+FACEBOOK_TRANSLATION_MODELS = {
+    "GERMAN_EN_FB_MODEL": [
+        "translation-german-to-english-text",
+        "translation-german-to-english-text",
+    ],
+    "EN_GERMAN_FB_MODEL": [
+        "translation-english-to-german-text",
+        "translation-english-to-german-text",
+    ],
+    "SPANISH_EN_FB_MODEL": [
+        "translation-spanish-to-english-text",
+        "translation-spanish-to-english-text",
+    ],
+    "EN_SPANISH_FB_MODEL": [
+        "translation-english-to-spanish-text",
+        "translation-english-to-spanish-text",
+    ],
+    "CHINESE_EN_FB_MODEL": [
+        "translation-chinese-to-english-text",
+        "translation-chinese-to-english-text",
+    ],
+    "EN_CHINESE_FB_MODEL": [
+        "translation-english-to-chinese-text",
+        "translation-english-to-chinese-text",
+    ],
+    "ARABIC_EN_FB_MODEL": [
+        "translation-arabic-to-english-text",
+        "translation-arabic-to-english-text",
+    ],
+    "EN_ARABIC_FB_MODEL": [
+        "translation-english-to-arabic-text",
+        "translation-english-to-arabic-text",
+    ],
+    "WELSH_EN_FB_MODEL": [
+        "translation-welsh-to-english-text",
+        "translation-welsh-to-english-text",
+    ],
+    "EN_WELSH_FB_MODEL": [
+        "translation-english-to-welsh-text",
+        "translation-english-to-welsh-text",
+    ],
+    "RUSSIAN_EN_MODEL": [
+        "translation-russian-to-english-text",
+        "translations-russian-to-english-text",
+    ],
+    "EN_RUSSIAN_MODEL": [
+        "translation-english-to-russian-text",
+        "translation-english-to-russian-text",
+    ],
+    "TURKISH_EN_MODEL": [
+        "translation-turkish-to-english-text",
+        "translation-turkish-to-english-text",
+    ],
+    "EN_TURKISH_MODEL": [
+        "translation-english-to-turkish-text",
+        "translation-english-to-turkish-text",
+    ],
+    "FRENCH_EN_MODEL": [
+        "translation-french-to-english-text",
+        "translation-french-to-english-text",
+    ],
+    "EN_FRENCH_MODEL": [
+        "translation-english-to-french-text",
+        "translation-english-to-french-text",
+    ],
+    "INDONESIAN_EN_MODEL": [
+        "translation-indonesian-to-english-text",
+        "translation-indonesian-to-english-text",
+    ],
+    "EN_INDONESIAN_MODEL": [
+        "translation-english-to-indonesian-text",
+        "translation-english-to-indonesian-text",
+    ],
+    "PORTUGESE_EN_MODEL": [
+        "translation-portuguese-to-english-text",
+        "translation-portuguese-to-english-text",
+    ],
+    "EN_PORTUGESE_MODEL": [
+        "translation-english-to-portuguese-text",
+        "translation-english-to-portuguese-text",
+    ],
+    "CROATIAN_EN_MODEL": [
+        "translation-croatian-to-english-text",
+        "translation-croatian-to-english-text",
+    ],
+    "EN_CROATIAN_MODEL": [
+        "translation-english-to-croatian-text",
+        "translation-english-to-croatian-text",
+    ],
+    "FINNISH_EN_MODEL": [
+        "translation-finnish-to-english-text",
+        "translation-finnish-to-english-text",
+    ],
+    "EN_FINNISH_MODEL": [
+        "translation-english-to-finnish-text",
+        "translation-english-to-finnish-text",
+    ],
+    "SWEDISH_EN_MODEL": [
+        "translation-swedish-to-english-text",
+        "translation-swedish-to-english-text",
+    ],
+    "EN_SWEDISH_MODEL": [
+        "translation-english-to-swedish-text",
+        "translation-english-to-swedish-text",
+    ],
+    "NORWEGIAN_EN_MODEL": [
+        "translation-norwegian-to-english-text",
+        "translation-norwegian-to-english-text",
+    ],
+    "EN_NORWEGIAN_MODEL": [
+        "translation-english-to-norwegian-text",
+        "translation-english-to-norwegian-text",
+    ],
+    "HINDI_EN_MODEL": [
+        "translation-hindi-to-english-text",
+        "translation-hindi-to-english-text",
+    ],
+    "EN_HINDI_MODEL": [
+        "translation-english-to-hindi-text",
+        "translation-english-to-hindi-text",
+    ],
+    "UKRAINIAN_EN_MODEL": [
+        "translation-ukrainian-to-english-text",
+        "translation-ukrainian-to-english-text",
+    ],
+    "EN_UKRAINIAN_MODEL": [
+        "translation-english-to-ukrainian-text",
+        "translation-english-to-ukrainian-text",
+    ],
+    "VIETNAMESE_EN_MODEL": [
+        "translation-vietnamese-to-english-text",
+        "translation-vietnamese-to-english-text",
+    ],
+    "EN_VIETNAMESE_MODEL": [
+        "translation-english-to-vietnamese-text",
+        "translation-english-to-vietnamese-text",
+    ],
+    "POLISH_EN_MODEL": [
+        "translation-polish-to-english-text",
+        "translation-polish-to-english-text",
+    ],
+    "EN_POLISH_MODEL": [
+        "translation-english-to-polish-text",
+        "translation-english-to-polish-text",
+    ],
+    "ITALIAN_EN_MODEL": [
+        "translation-italian-to-english-text",
+        "translation-italian-to-english-text",
+    ],
+    "EN_ITALIAN_MODEL": [
+        "translation-english-to-italian-text",
+        "translation-english-to-italian-text",
+    ],
+    "KOREAN_EN_MODEL": [
+        "translation-korean-to-english-text",
+        "translation-korean-to-english-text",
+    ],
+    "EN_KOREAN_MODEL": [
+        "translation-english-to-korean-text",
+        "translation-english-to-korean-text",
+    ],
+    "IRISH_EN_MODEL": [
+        "translation-irish-to-english-text",
+        "translation-irish-to-english-text",
+    ],
+    "EN_IRISH_MODEL": [
+        "translation-english-to-irish-text",
+        "translation-english-to-irish-text",
+    ],
+    "DUTCH_EN_MODEL": [
+        "translation-dutch-flemish-to-english-text",
+        "translation-dutch-flemish-to-english-text",
+    ],
+    "EN_DUTCH_MODEL": [
+        "translation-english-to-dutch-flemish-text",
+        "translation-english-to-dutch-flemish-text",
+    ],
+}
+
+# ASR
 ENGLISH_ASR_MODEL_ID = "asr-wav2vec2-base-960h-english"
-
+GENERAL_ASR_NEMO_JASPER_MODEL_ID = "general-asr-nemo_jasper"
 
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
@@ -65,13 +407,11 @@ def get_status_message(status: Status):
     else:
         return message
 
-
 def metadata(pat=False):
     if pat:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
     else:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
-
 
 def both_channels(func):
     """
@@ -86,9 +426,7 @@ def both_channels(func):
 
         channel = ClarifaiChannel.get_json_channel()
         func(channel)
-
     return func_wrapper
-
 
 def wait_for_inputs_upload(stub, metadata, input_ids):
     for input_id in input_ids:
@@ -97,7 +435,10 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
             )
             raise_on_failure(get_input_response)
-            if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
+            if (
+                get_input_response.input.status.code
+                == status_code_pb2.INPUT_DOWNLOAD_SUCCESS
+            ):
                 break
             elif get_input_response.input.status.code in (
                 status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -112,8 +453,9 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 )
     # At this point, all inputs have been downloaded successfully.
 
-
-def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
+def wait_for_model_trained(
+    stub, metadata, model_id, model_version_id, user_app_id=None
+):
     while True:
         response = stub.GetModelVersion(
             service_pb2.GetModelVersionRequest(
@@ -136,7 +478,6 @@ def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_
             )
     # At this point, the model has successfully finished training.
 
-
 def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     while True:
         response = stub.GetModelVersionMetrics(
@@ -146,7 +487,10 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             metadata=metadata,
         )
         raise_on_failure(response)
-        if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
+        if (
+            response.model_version.metrics.status.code
+            == status_code_pb2.MODEL_EVALUATED
+        ):
             break
         elif response.model_version.metrics.status.code in (
             status_code_pb2.MODEL_NOT_EVALUATED,
@@ -161,7 +505,6 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             )
     # At this point, the model has successfully finished evaluation.
 
-
 def raise_on_failure(response, custom_message=""):
     if response.status.code != status_code_pb2.SUCCESS:
         error_message = get_status_message(response.status)
@@ -173,14 +516,14 @@ def raise_on_failure(response, custom_message=""):
             + f"Received failure response `{error_message}`. Whole response object: {response}"
         )
 
-
 def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub,
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
-
+    return _retry_on_504_on_non_prod(
+        lambda: stub.PostModelOutputs(request, metadata=metadata)
+    )
 
 def _retry_on_504_on_non_prod(func):
     """
@@ -193,7 +536,8 @@ def _retry_on_504_on_non_prod(func):
             response = func()
             if (
                 len(response.outputs) > 0
-                and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
+                and response.outputs[0].status.code
+                != status_code_pb2.RPC_REQUEST_TIMEOUT
             ):  # will want to retry
                 break
         except _Rendezvous as e:
@@ -201,7 +545,10 @@ def _retry_on_504_on_non_prod(func):
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
+            if (
+                "status: 504" not in e._state.details
+                and "10020 Failure" not in e._state.details
+            ):
                 raise e
 
             if i == MAX_ATTEMPTS:
