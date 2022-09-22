@@ -44,6 +44,8 @@ jobs:
       env:
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
+        CLARIFAI_DEPLOY: "Dev" # Want to test in dev for now -- don't merge
+        CLARIFAI_GRPC_BASE: "api-dev.clarifai.com" # don't merge
       shell: bash
       run: |
         export PYTHONPATH=.
