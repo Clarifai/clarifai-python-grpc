@@ -44,11 +44,11 @@ jobs:
       env:
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
-        CLARIFAI_DEPLOY: "Dev" # Want to test in dev for now -- don't merge
-        CLARIFAI_GRPC_BASE: "api-dev.clarifai.com" # don't merge
       shell: bash
       run: |
         export PYTHONPATH=.
+        export CLARIFAI_DEPLOY="Dev"
+        export CLARIFAI_GRPC_BASE="api-dev.clarifai.com"
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
