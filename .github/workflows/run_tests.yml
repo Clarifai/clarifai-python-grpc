@@ -48,8 +48,8 @@ jobs:
       run: |
         export PYTHONPATH=.
         export CLARIFAI_DEPLOY="Dev"
-        export CLARIFAI_GRPC_BASE="api-dev.clarifai.com"
-        export CLARIFAI_API_BASE="https://api-dev.clarifai.com"
+        export CLARIFAI_GRPC_BASE="api-staging.clarifai.com"
+        export CLARIFAI_API_BASE="https://api-staging.clarifai.com"
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
