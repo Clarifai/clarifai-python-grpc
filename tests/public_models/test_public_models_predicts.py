@@ -33,15 +33,213 @@ from tests.common import (
     ENGLISH_AUDIO_URL,
     ENGLISH_ASR_MODEL_ID,
     GENERAL_ASR_NEMO_JASPER_MODEL_ID,
-    OBJECT_DETECTION_MODELS,
-    TRANSLATION_TEST_DATA,
-    HELSINKINLP_TRANSLATION_MODELS,
-    FACEBOOK_TRANSLATION_MODELS,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
 )
+
+
+TRANSLATION_TEST_DATA = {
+    "ROMANCE": "No me apetece nada estudiar esta noche",
+    "EN": "I dont feel like studying tonight but I must study",
+    "SPANISH": "No me apetece nada estudiar esta noche",
+    "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
+    "CHINESE": "我今晚不想學習",
+    "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
+    "WELSH": "Dydw i ddim yn teimlo fel astudio heno",
+    "FRENCH": "Je n'ai pas envie d'étudier ce soir",
+    "RUSSIAN": "Я не хочу учиться сегодня вечером",
+    "TURKISH": "bu gece ders çalışmak istemiyorum",
+    "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
+    "PORTUGESE": "Eu não sinto vontade de estudar esta noite",
+    "CZECH": "Dnes večer se mi nechce učit",
+    "JAPANESE": "今夜は勉強したくない",
+    "DANISH": "Jeg har ikke lyst til at studere i aften",
+}
+
+# general visual detection models (yolo, detic)
+# Data Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>, <app_id>, <user_id>]}
+OBJECT_DETECTION_MODELS = {
+    "YOLOV6_S": [
+        "general-detector-yolov6s-coco",
+        "yolov6s-coco",
+        "yolov6",
+        "meituan",
+    ],
+    "YOLOV6_NANO": [
+        "general-detector-yolov6n-coco",
+        "yolov6n-coco",
+        "yolov6",
+        "meituan",
+    ],
+    "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
+    "YOLOV7_E6": [
+        "general-image-detector-yolov7-e6-coco",
+        "yolov7-e6",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "YOLOV7_X": [
+        "general-image-detector-yolov7-x-coco",
+        "yolov7-x",
+        "yolov7",
+        "wongkinyiu",
+    ],
+    "BLAZE_FACE_DETECTOR": [
+        "general-image-detector-blazeface_ssh-widerface",
+        "general-image-detector-blazeface_ssh-widerface",
+        "face",
+        "paddlepaddle",
+    ],
+    "DETIC_CLIP_R50": [
+        "general-image-detector-detic_clipR50Caption-coco",
+        "detic-clip-r50-1x_caption-CPU",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_SWINB_LVIS": [
+        "general-image-detector-detic_C2_SwinB_896_lvis",
+        "general-image-detector-detic_C2_SwinB_896_lvis",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_SWINB_COCO": [
+        "general-image-detector-detic_C2_SwinB-21K_COCO",
+        "general-image-detector-detic_C2_SwinB-21K_COCO",
+        "detic",
+        "facebook",
+    ],
+    "DETIC_C2_IN_L_SWINB_LVIS": [
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+        "detic",
+        "facebook",
+    ],
+}
+
+## LANGUAGE TRANSLATION
+
+# Store these in a dict with model_id as key and a list of the
+# clarifai name, and clarifai-id as values
+### Dictionary Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>]}
+
+HELSINKINLP_TRANSLATION_MODELS = {
+    "ROMANCE_EN_MODEL": [
+        "text-translation-romance-lang-english",
+        "Text Translation: Romance to English",
+    ],
+    "EN_SPANISH_MODEL": [
+        "text-translation-english-spanish",
+        "Helsinki-NLP/opus-mt-en-es",
+    ],
+    "GERMAN_EN_MODEL": [
+        "text-translation-german-english",
+        "Helsinki-NLP/opus-mt-de-en",
+    ],
+    "CHINESE_EN_MODEL": [
+        "text-translation-chinese-english",
+        "Helsinki-NLP/opus-mt-zh-en",
+    ],
+    "ARABIC_EN_MODEL": [
+        "text-translation-arabic-english",
+        "Helsinki-NLP/opus-mt-ar-en",
+    ],
+    "WELSH_EN_MODEL": ["text-translation-welsh-english", "Helsinki-NLP/opus-mt-cy-en"],
+    "CZECH_EN_MODEL": ["text-translation-czech-english", "Helsinki-NLP/opus-mt-cs-en"],
+    "JAPANESE_EN_MODEL": [
+        "text-translation-japanese-english",
+        "Helsinki-NLP/opus-mt-jap-en",
+    ],
+    "DANISH_EN_MODEL": [
+        "text-translation-danish-english",
+        "Helsinki-NLP/opus-mt-da-en",
+    ],
+}
+
+FACEBOOK_TRANSLATION_MODELS = {
+    "GERMAN_EN_FB_MODEL": [
+        "translation-german-to-english-text",
+        "translation-german-to-english-text",
+    ],
+    "EN_GERMAN_FB_MODEL": [
+        "translation-english-to-german-text",
+        "translation-english-to-german-text",
+    ],
+    "SPANISH_EN_FB_MODEL": [
+        "translation-spanish-to-english-text",
+        "translation-spanish-to-english-text",
+    ],
+    "EN_SPANISH_FB_MODEL": [
+        "translation-english-to-spanish-text",
+        "translation-english-to-spanish-text",
+    ],
+    "CHINESE_EN_FB_MODEL": [
+        "translation-chinese-to-english-text",
+        "translation-chinese-to-english-text",
+    ],
+    "EN_CHINESE_FB_MODEL": [
+        "translation-english-to-chinese-text",
+        "translation-english-to-chinese-text",
+    ],
+    "RUSSIAN_EN_MODEL": [
+        "translation-russian-to-english-text",
+        "translation-russian-to-english-text",
+    ],
+    "EN_RUSSIAN_MODEL": [
+        "translation-english-to-russian-text",
+        "translation-english-to-russian-text",
+    ],
+    "TURKISH_EN_MODEL": [
+        "translation-turkish-to-english-text",
+        "translation-turkish-to-english-text",
+    ],
+    "EN_TURKISH_MODEL": [
+        "translation-english-to-turkish-text",
+        "translation-english-to-turkish-text",
+    ],
+    "FRENCH_EN_MODEL": [
+        "translation-french-to-english-text",
+        "translation-french-to-english-text",
+    ],
+    "EN_FRENCH_MODEL": [
+        "translation-english-to-french-text",
+        "translation-english-to-french-text",
+    ],
+    "INDONESIAN_EN_MODEL": [
+        "translation-indonesian-to-english-text",
+        "translation-indonesian-to-english-text",
+    ],
+    "EN_INDONESIAN_MODEL": [
+        "translation-english-to-indonesian-text",
+        "translation-english-to-indonesian-text",
+    ],
+    "ARABIC_EN_FB_MODEL": [
+        "translation-arabic-to-english-text",
+        "translation-arabic-to-english-text",
+    ],
+    "EN_ARABIC_FB_MODEL": [
+        "translation-english-to-arabic-text",
+        "translation-english-to-arabic-text",
+    ],
+    "WELSH_EN_FB_MODEL": [
+        "translation-welsh-to-english-text",
+        "translation-welsh-to-english-text",
+    ],
+    "EN_WELSH_FB_MODEL": [
+        "translation-english-to-welsh-text",
+        "translation-english-to-welsh-text",
+    ],
+    "PORTUGESE_EN_MODEL": [
+        "translation-portuguese-to-english-text",
+        "translation-portuguese-to-english-text",
+    ],
+    "EN_PORTUGESE_MODEL": [
+        "translation-english-to-portuguese-text",
+        "translation-english-to-portuguese-text",
+    ],
+}
+
 
 MODEL_TITLE_AND_ID_PAIRS = [
     ("apparel", APPAREL_MODEL_ID),
