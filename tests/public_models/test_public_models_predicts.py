@@ -71,7 +71,7 @@ DETECTION_MODEL_TITLE_AND_IDS = []
 # Add models in object_detection_models dict to model_id_pairs list
 # older image tests use different model-ids not from the platform
 for _, values in OBJECT_DETECTION_MODELS.items():
-    MODEL_TITLE_AND_ID_PAIRS.append(tuple(values))
+    DETECTION_MODEL_TITLE_AND_IDS.append(tuple(values))
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
@@ -223,6 +223,32 @@ def test_image_predict_on_public_models(channel):
             ],
         )
         response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        raise_on_failure(
+            response,
+            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+@both_channels
+def test_image_detection_predict_on_public_models(channel):
+    """Test object detection models using clarifai platform user
+    and app id access credentials.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                )
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
