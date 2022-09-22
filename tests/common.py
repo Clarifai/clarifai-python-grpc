@@ -22,14 +22,14 @@ TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
 
 TRANSLATION_TEST_DATA = {
-    "ROMANCE": "No me apetece nada estudiar esta noche.",
-    "EN": "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study.",
-    "SPANISH": "No me apetece nada estudiar esta noche.",
+    "ROMANCE": "No me apetece nada estudiar esta noche",
+    "EN": "I dont feel like studying tonight but I must study",
+    "SPANISH": "No me apetece nada estudiar esta noche",
     "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
     "CHINESE": "我今晚不想學習",
     "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
-    "WELSH": "Dydw i ddim yn teimlo fel astudio heno.",
-    "FRENCH": "Je n'ai pas envie d'étudier ce soir.",
+    "WELSH": "Dydw i ddim yn teimlo fel astudio heno",
+    "FRENCH": "Je n'ai pas envie d'étudier ce soir",
     "RUSSIAN": "Я не хочу учиться сегодня вечером",
     "TURKISH": "bu gece ders çalışmak istemiyorum",
     "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
@@ -191,22 +191,6 @@ FACEBOOK_TRANSLATION_MODELS = {
         "translation-english-to-chinese-text",
         "translation-english-to-chinese-text",
     ],
-    "ARABIC_EN_FB_MODEL": [
-        "translation-arabic-to-english-text",
-        "translation-arabic-to-english-text",
-    ],
-    "EN_ARABIC_FB_MODEL": [
-        "translation-english-to-arabic-text",
-        "translation-english-to-arabic-text",
-    ],
-    "WELSH_EN_FB_MODEL": [
-        "translation-welsh-to-english-text",
-        "translation-welsh-to-english-text",
-    ],
-    "EN_WELSH_FB_MODEL": [
-        "translation-english-to-welsh-text",
-        "translation-english-to-welsh-text",
-    ],
     "RUSSIAN_EN_MODEL": [
         "translation-russian-to-english-text",
         "translation-russian-to-english-text",
@@ -238,6 +222,22 @@ FACEBOOK_TRANSLATION_MODELS = {
     "EN_INDONESIAN_MODEL": [
         "translation-english-to-indonesian-text",
         "translation-english-to-indonesian-text",
+    ],
+    "ARABIC_EN_FB_MODEL": [
+        "translation-arabic-to-english-text",
+        "translation-arabic-to-english-text",
+    ],
+    "EN_ARABIC_FB_MODEL": [
+        "translation-english-to-arabic-text",
+        "translation-english-to-arabic-text",
+    ],
+    "WELSH_EN_FB_MODEL": [
+        "translation-welsh-to-english-text",
+        "translation-welsh-to-english-text",
+    ],
+    "EN_WELSH_FB_MODEL": [
+        "translation-english-to-welsh-text",
+        "translation-english-to-welsh-text",
     ],
     "PORTUGESE_EN_MODEL": [
         "translation-portuguese-to-english-text",
