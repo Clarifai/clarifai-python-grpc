@@ -37,21 +37,6 @@ TRANSLATION_TEST_DATA = {
     "CZECH": "Dnes večer se mi nechce učit",
     "JAPANESE": "今夜は勉強したくない",
     "DANISH": "Jeg har ikke lyst til at studere i aften",
-    "CATALAN": "No tinc ganes d'estudiar aquesta nit",
-    "BULGARIAN": "Тази вечер не ми се учи",
-    "AFRIKAANS": "Ek is nie lus om vanaand te studeer nie",
-    "CROATIAN": "Večeras mi se ne uči, ali moram učiti",
-    "FINNISH": "En halua opiskella tänä iltana, mutta minun täytyy opiskella",
-    "SWEDISH": "Jag känner inte för att plugga ikväll, men jag måste plugga",
-    "NORWEGIAN": "Jeg har ikke lyst til å studere i kveld, men jeg må studere",
-    "HINDI": "मेरा आज रात पढ़ने का मन नहीं है, लेकिन मुझे पढ़ना चाहिए",
-    "UKRAINIAN": "Мені не хочеться сьогодні вчитися, але я мушу вчитися",
-    "VIETNAMESE": "Tôi không muốn học tối nay, nhưng tôi phải học",
-    "POLISH": "Nie chce mi się dzisiaj studiować, ale muszę się uczyć",
-    "ITALIAN": "Non ho voglia di studiare stasera, ma devo studiare",
-    "KOREAN": "오늘 밤은 공부하기 싫지만 공부는 해야겠어",
-    "IRISH": "Ní dóigh liom gur mhaith liom staidéar a dhéanamh anocht, ach caithfidh mé staidéar a dhéanamh",
-    "DUTCH": "Ik heb geen zin om te studeren vanavond, maar ik moet studeren",
 }
 
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
@@ -91,34 +76,10 @@ OBJECT_DETECTION_MODELS = {
         "yolov6",
         "meituan",
     ],
-    "YOLOV6_TINY": [
-        "general-detector-yolov6tiny-coco",
-        "yolov6tiny-coco",
-        "yolov6",
-        "meituan",
-    ],
     "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
     "YOLOV7_E6": [
         "general-image-detector-yolov7-e6-coco",
         "yolov7-e6",
-        "yolov7",
-        "wongkinyiu",
-    ],
-    "YOLOV7_W6": [
-        "general-image-detector-yolov7-w6-coco",
-        "yolov7-w6",
-        "yolov7",
-        "wongkinyiu",
-    ],
-    "YOLOV7_D6": [
-        "general-image-detector-yolov7-d6-coco",
-        "yolov7-d6",
-        "yolov7",
-        "wongkinyiu",
-    ],
-    "YOLOV7_E6E": [
-        "general-image-detector-yolov7-e6e-coco",
-        "yolov7-e6e",
         "yolov7",
         "wongkinyiu",
     ],
@@ -203,18 +164,6 @@ HELSINKINLP_TRANSLATION_MODELS = {
         "text-translation-danish-english",
         "Helsinki-NLP/opus-mt-da-en",
     ],
-    "CATALAN_EN_MODEL": [
-        "text-translation-catalan-english",
-        "Helsinki-NLP/opus-mt-ca-en",
-    ],
-    "BULGARIAN_EN_MODEL": [
-        "text-translation-bulgarian-english",
-        "Helsinki-NLP/opus-mt-bg-en",
-    ],
-    "AFRIKAANS_EN_MODEL": [
-        "text-translation-afrikaans-english",
-        "Helsinki-NLP/opus-mt-af-en",
-    ],
 }
 
 FACEBOOK_TRANSLATION_MODELS = {
@@ -260,7 +209,7 @@ FACEBOOK_TRANSLATION_MODELS = {
     ],
     "RUSSIAN_EN_MODEL": [
         "translation-russian-to-english-text",
-        "translations-russian-to-english-text",
+        "translation-russian-to-english-text",
     ],
     "EN_RUSSIAN_MODEL": [
         "translation-english-to-russian-text",
@@ -297,102 +246,6 @@ FACEBOOK_TRANSLATION_MODELS = {
     "EN_PORTUGESE_MODEL": [
         "translation-english-to-portuguese-text",
         "translation-english-to-portuguese-text",
-    ],
-    "CROATIAN_EN_MODEL": [
-        "translation-croatian-to-english-text",
-        "translation-croatian-to-english-text",
-    ],
-    "EN_CROATIAN_MODEL": [
-        "translation-english-to-croatian-text",
-        "translation-english-to-croatian-text",
-    ],
-    "FINNISH_EN_MODEL": [
-        "translation-finnish-to-english-text",
-        "translation-finnish-to-english-text",
-    ],
-    "EN_FINNISH_MODEL": [
-        "translation-english-to-finnish-text",
-        "translation-english-to-finnish-text",
-    ],
-    "SWEDISH_EN_MODEL": [
-        "translation-swedish-to-english-text",
-        "translation-swedish-to-english-text",
-    ],
-    "EN_SWEDISH_MODEL": [
-        "translation-english-to-swedish-text",
-        "translation-english-to-swedish-text",
-    ],
-    "NORWEGIAN_EN_MODEL": [
-        "translation-norwegian-to-english-text",
-        "translation-norwegian-to-english-text",
-    ],
-    "EN_NORWEGIAN_MODEL": [
-        "translation-english-to-norwegian-text",
-        "translation-english-to-norwegian-text",
-    ],
-    "HINDI_EN_MODEL": [
-        "translation-hindi-to-english-text",
-        "translation-hindi-to-english-text",
-    ],
-    "EN_HINDI_MODEL": [
-        "translation-english-to-hindi-text",
-        "translation-english-to-hindi-text",
-    ],
-    "UKRAINIAN_EN_MODEL": [
-        "translation-ukrainian-to-english-text",
-        "translation-ukrainian-to-english-text",
-    ],
-    "EN_UKRAINIAN_MODEL": [
-        "translation-english-to-ukrainian-text",
-        "translation-english-to-ukrainian-text",
-    ],
-    "VIETNAMESE_EN_MODEL": [
-        "translation-vietnamese-to-english-text",
-        "translation-vietnamese-to-english-text",
-    ],
-    "EN_VIETNAMESE_MODEL": [
-        "translation-english-to-vietnamese-text",
-        "translation-english-to-vietnamese-text",
-    ],
-    "POLISH_EN_MODEL": [
-        "translation-polish-to-english-text",
-        "translation-polish-to-english-text",
-    ],
-    "EN_POLISH_MODEL": [
-        "translation-english-to-polish-text",
-        "translation-english-to-polish-text",
-    ],
-    "ITALIAN_EN_MODEL": [
-        "translation-italian-to-english-text",
-        "translation-italian-to-english-text",
-    ],
-    "EN_ITALIAN_MODEL": [
-        "translation-english-to-italian-text",
-        "translation-english-to-italian-text",
-    ],
-    "KOREAN_EN_MODEL": [
-        "translation-korean-to-english-text",
-        "translation-korean-to-english-text",
-    ],
-    "EN_KOREAN_MODEL": [
-        "translation-english-to-korean-text",
-        "translation-english-to-korean-text",
-    ],
-    "IRISH_EN_MODEL": [
-        "translation-irish-to-english-text",
-        "translation-irish-to-english-text",
-    ],
-    "EN_IRISH_MODEL": [
-        "translation-english-to-irish-text",
-        "translation-english-to-irish-text",
-    ],
-    "DUTCH_EN_MODEL": [
-        "translation-dutch-flemish-to-english-text",
-        "translation-dutch-flemish-to-english-text",
-    ],
-    "EN_DUTCH_MODEL": [
-        "translation-english-to-dutch-flemish-text",
-        "translation-english-to-dutch-flemish-text",
     ],
 }
 

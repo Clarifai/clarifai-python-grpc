@@ -66,7 +66,10 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
 ]
 
+DETECTION_MODEL_TITLE_AND_IDS = []
+
 # Add models in object_detection_models dict to model_id_pairs list
+# older image tests use different model-ids not from the platform
 for _, values in OBJECT_DETECTION_MODELS.items():
     MODEL_TITLE_AND_ID_PAIRS.append(tuple(values))
 
