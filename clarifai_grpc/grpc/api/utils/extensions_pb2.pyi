@@ -6,7 +6,6 @@ import builtins
 import google.protobuf.descriptor
 import google.protobuf.descriptor_pb2
 import google.protobuf.internal.extension_dict
-import typing
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -18,9 +17,7 @@ cl_show_if_empty: google.protobuf.internal.extension_dict._ExtensionFieldDescrip
 This means in json responses empty lists will appear instead of not being returned (which is
 the default convention for proto3). For int's we will show 0, for floats 0.0, etc.
 """
-
-cl_moretags: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, typing.Text]
-
+cl_moretags: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.str]
 cl_default_float: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.float]
 """For float fields where this is set, this value will be used by the server when parsing the
 request and the field is not present in the request. If the field is present in the request,
