@@ -21,12 +21,10 @@ cl_private_field: google.protobuf.internal.extension_dict._ExtensionFieldDescrip
 """indicates if this field should be private. If true, then internal use only. If False,
 then publicly avaliable to world.
 """
-
 cl_private_rpc: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, builtins.bool]
 """indicates if this rpc should be private. If true, then internal use only. If False,
 then publicly available to world.
 """
-
 cl_depending_scopes: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, google.protobuf.internal.containers.RepeatedScalarFieldContainer[proto.clarifai.auth.scope.scope_pb2.S.ValueType]]
 """For each grpc method we define a list of required low-level auth scopes that are needed
 for the key that is issuing the request. These are checked at authorization time for the
@@ -46,10 +44,8 @@ example, the PostAnnotations call is often used to add concepts as well. If thos
 new, then the Concepts_Add scope will be needed. But since you don't always annotate with
 concepts, it is not a hard requirements that Concepts_Add is used.
 """
-
 cl_auth_type: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MethodOptions, proto.clarifai.auth.types.types_pb2.AuthType.ValueType]
 """This is the authorizer type for the endpoint our of multiple backend authorizers."""
-
 cl_private_message: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.MessageOptions, builtins.bool]
 """indicates if this message should be private. If true, then internal use only. If False,
 then publicly avaliable to world.
