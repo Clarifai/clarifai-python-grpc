@@ -3,11 +3,16 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.message
-import typing
-import typing_extensions
+import sys
+
+if sys.version_info >= (3, 8):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
@@ -18,22 +23,24 @@ class MatrixUint64(google.protobuf.message.Message):
     The matrix does store the number of columns, but it does not store the number of rows.
     The number of rows can automatically be calculated as length(data)/n_cols.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     N_COLS_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     n_cols: builtins.int
     """Number of columns"""
-
     @property
     def data(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Matrix data stored as an array.
         In order to access matrix element at row i & column j, use data[i*n_cols+j].
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
         n_cols: builtins.int = ...,
-        data: typing.Optional[typing.Iterable[builtins.int]] = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data",b"data","n_cols",b"n_cols"]) -> None: ...
+        data: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "n_cols", b"n_cols"]) -> None: ...
+
 global___MatrixUint64 = MatrixUint64

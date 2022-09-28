@@ -3,6 +3,7 @@
 isort:skip_file
 """
 import builtins
+import collections.abc
 import google.protobuf.descriptor
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
@@ -11,15 +12,21 @@ import google.protobuf.struct_pb2
 import proto.clarifai.api.resources_pb2
 import proto.clarifai.api.status.status_code_pb2
 import proto.clarifai.api.status.status_pb2
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _OrganizationInvitationStatus:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
-class _OrganizationInvitationStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrganizationInvitationStatus.ValueType], builtins.type):
+
+class _OrganizationInvitationStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrganizationInvitationStatus.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     NOT_SET: _OrganizationInvitationStatus.ValueType  # 0
     PENDING: _OrganizationInvitationStatus.ValueType  # 1
@@ -27,8 +34,8 @@ class _OrganizationInvitationStatusEnumTypeWrapper(google.protobuf.internal.enum
     CANCELLED: _OrganizationInvitationStatus.ValueType  # 3
     DECLINED: _OrganizationInvitationStatus.ValueType  # 4
     EXPIRED: _OrganizationInvitationStatus.ValueType  # 5
-class OrganizationInvitationStatus(_OrganizationInvitationStatus, metaclass=_OrganizationInvitationStatusEnumTypeWrapper):
-    pass
+
+class OrganizationInvitationStatus(_OrganizationInvitationStatus, metaclass=_OrganizationInvitationStatusEnumTypeWrapper): ...
 
 NOT_SET: OrganizationInvitationStatus.ValueType  # 0
 PENDING: OrganizationInvitationStatus.ValueType  # 1
@@ -38,49 +45,56 @@ DECLINED: OrganizationInvitationStatus.ValueType  # 4
 EXPIRED: OrganizationInvitationStatus.ValueType  # 5
 global___OrganizationInvitationStatus = OrganizationInvitationStatus
 
-
 class Pagination(google.protobuf.message.Message):
     """Split the results into pages."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks. Defaults to 1."""
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults to 128."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page"]) -> None: ...
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page"]) -> None: ...
+
 global___Pagination = Pagination
 
 class GetAnnotationRequest(google.protobuf.message.Message):
     """GetAnnotationRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    annotation_id: typing.Text
-    input_id: typing.Text
-    def __init__(self,
+    annotation_id: builtins.str
+    input_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotation_id: typing.Text = ...,
-        input_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_id",b"annotation_id","input_id",b"input_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotation_id: builtins.str = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_id", b"annotation_id", "input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetAnnotationRequest = GetAnnotationRequest
 
 class ListAnnotationsRequest(google.protobuf.message.Message):
     """ListAnnotationsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     INPUT_IDS_FIELD_NUMBER: builtins.int
@@ -95,20 +109,18 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List annotations for these IDs"""
-        pass
     @property
-    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List annotations for these Input IDs
         Note that 'ids' are optional but if the are provided the number and order in
         'ids' and 'input_ids' should match
         If you do not specify 'ids' all the annotations for 'input_ids' are returned
         If a you do not specify both 'input_ids' and 'ids' all the annotations in the app are returned
         """
-        pass
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Only return the annotations that has one of these user IDs, effectively operating as an
         OR among them to filter down the results.
         If model_version_ids are also provided these user_ids are OR'd with them as well since
@@ -116,9 +128,8 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
         provided user or model version annotations in the results of ListAnnotations request.
         If no user_ids are provided then annotations from all users are returned.
         """
-        pass
     @property
-    def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Only return the annotations that has one of these model version IDs, effectively operating as an
         OR among them to filter down the results.
         If user_ids are also provided these model_versions_ids are OR'd with them as well since
@@ -126,73 +137,74 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
         provided user or model version annotations in the results of ListAnnotations request.
         If no model_version_ids are provided then annotations from all model versions are returned.
         """
-        pass
     @property
     def statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.status.status_pb2.Status]:
         """Set status to filter by a list of statuses
         If not statuses are provided then annotations with any status will be returned.
         """
-        pass
     list_all_annotations: builtins.bool
     """Set this flag to list both trusted and not trusted annotations
     by default it's listing only trusted annotations
     """
-
     return_model_output: builtins.bool
     """Set this flag to return the model output for model annotations in the response."""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    task_id: typing.Text
+    task_id: builtins.str
     """Flag to filter annotations by task_id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        input_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        model_version_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        statuses: typing.Optional[typing.Iterable[proto.clarifai.api.status.status_pb2.Status]] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+        input_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        statuses: collections.abc.Iterable[proto.clarifai.api.status.status_pb2.Status] | None = ...,
         list_all_annotations: builtins.bool = ...,
         return_model_output: builtins.bool = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        task_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","input_ids",b"input_ids","list_all_annotations",b"list_all_annotations","model_version_ids",b"model_version_ids","page",b"page","per_page",b"per_page","return_model_output",b"return_model_output","statuses",b"statuses","task_id",b"task_id","user_app_id",b"user_app_id","user_ids",b"user_ids"]) -> None: ...
+        task_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "input_ids", b"input_ids", "list_all_annotations", b"list_all_annotations", "model_version_ids", b"model_version_ids", "page", b"page", "per_page", b"per_page", "return_model_output", b"return_model_output", "statuses", b"statuses", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
+
 global___ListAnnotationsRequest = ListAnnotationsRequest
 
 class PostAnnotationsRequest(google.protobuf.message.Message):
     """PostAnnotationsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def annotations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Annotation]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Annotation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotations",b"annotations","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Annotation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotations", b"annotations", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAnnotationsRequest = PostAnnotationsRequest
 
 class PatchAnnotationsRequest(google.protobuf.message.Message):
     """PatchAnnotationsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATIONS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -200,24 +212,27 @@ class PatchAnnotationsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def annotations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Annotation]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Annotation]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","annotations",b"annotations","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Annotation] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "annotations", b"annotations", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAnnotationsRequest = PatchAnnotationsRequest
 
 class PatchAnnotationsStatusRequest(google.protobuf.message.Message):
     """PatchAnnotationsStatusRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     STATUS_CODE_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
@@ -227,80 +242,89 @@ class PatchAnnotationsStatusRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """Annotation Status code"""
-
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    task_id: typing.Text
-    action: typing.Text
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    task_id: builtins.str
+    action: builtins.str
     """'overwrite' is supported"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
-        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        task_id: typing.Text = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","status_code",b"status_code","task_id",b"task_id","user_app_id",b"user_app_id","user_ids",b"user_ids"]) -> None: ...
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        task_id: builtins.str = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "status_code", b"status_code", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
+
 global___PatchAnnotationsStatusRequest = PatchAnnotationsStatusRequest
 
 class PatchAnnotationsStatusResponse(google.protobuf.message.Message):
     """PatchAnnotationsStatusResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     UPDATED_COUNT_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     updated_count: builtins.int
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
         updated_count: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","updated_count",b"updated_count","user_ids",b"user_ids"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "updated_count", b"updated_count", "user_ids", b"user_ids"]) -> None: ...
+
 global___PatchAnnotationsStatusResponse = PatchAnnotationsStatusResponse
 
 class DeleteAnnotationRequest(google.protobuf.message.Message):
     """DeleteAnnotationRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    input_id: typing.Text
-    annotation_id: typing.Text
-    def __init__(self,
+    input_id: builtins.str
+    annotation_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        input_id: typing.Text = ...,
-        annotation_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_id",b"annotation_id","input_id",b"input_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+        annotation_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_id", b"annotation_id", "input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteAnnotationRequest = DeleteAnnotationRequest
 
 class DeleteAnnotationsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     INPUT_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Delete annotations with IDs"""
-        pass
     @property
-    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Delete annotations for these Input IDs
         Note that 'ids' are optional but if the are provided the number and order in
         'ids' and 'input_ids' should match
@@ -308,76 +332,90 @@ class DeleteAnnotationsRequest(google.protobuf.message.Message):
         However you need to specify at least one value for 'input_ids'
         i.e. this API does not support deleting all annotations
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        input_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","input_ids",b"input_ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+        input_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "input_ids", b"input_ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteAnnotationsRequest = DeleteAnnotationsRequest
 
 class SingleAnnotationResponse(google.protobuf.message.Message):
     """SingleAnnotationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ANNOTATION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def annotation(self) -> proto.clarifai.api.resources_pb2.Annotation: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        annotation: typing.Optional[proto.clarifai.api.resources_pb2.Annotation] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotation",b"annotation","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation",b"annotation","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotation: proto.clarifai.api.resources_pb2.Annotation | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "status", b"status"]) -> None: ...
+
 global___SingleAnnotationResponse = SingleAnnotationResponse
 
 class MultiAnnotationResponse(google.protobuf.message.Message):
     """MultiAnnotationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ANNOTATIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def annotations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Annotation]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        annotations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Annotation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotations",b"annotations","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Annotation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotations", b"annotations", "status", b"status"]) -> None: ...
+
 global___MultiAnnotationResponse = MultiAnnotationResponse
 
 class GetAppRequest(google.protobuf.message.Message):
     """GetAppRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetAppRequest = GetAppRequest
 
 class ListAppsRequest(google.protobuf.message.Message):
     """ListAppsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -395,99 +433,101 @@ class ListAppsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     sort_ascending: builtins.bool
     """Sorting opitons:
     Whether to sort in ascending order. If false, will order in descending order.
     """
-
     sort_by_name: builtins.bool
     """Whether to order by the name"""
-
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time.
     If neither sort option is set to true, will sort by modified_at.
     """
-
-    query: typing.Text
+    query: builtins.str
     """Filtering options:
     Query various text fields that can contain the words in the query string
     """
-
-    name: typing.Text
+    name: builtins.str
     """Filter by the name of the app. This supports wilcard queries like "gen*" to match "general" as an example.
     Deprecated in favor of query
     """
-
     featured_only: builtins.bool
     """If true, we only return apps that are handpicked by clarifai staff"""
-
     starred_only: builtins.bool
     """If true, we only return apps that are starred by the requesting user"""
-
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
-        query: typing.Text = ...,
-        name: typing.Text = ...,
+        query: builtins.str = ...,
+        name: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by",b"sort_by","sort_by_modified_at",b"sort_by_modified_at","sort_by_name",b"sort_by_name","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","featured_only",b"featured_only","name",b"name","page",b"page","per_page",b"per_page","query",b"query","sort_ascending",b"sort_ascending","sort_by",b"sort_by","sort_by_modified_at",b"sort_by_modified_at","sort_by_name",b"sort_by_name","starred_only",b"starred_only","user_app_id",b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by",b"sort_by"]) -> typing.Optional[typing_extensions.Literal["sort_by_name","sort_by_modified_at"]]: ...
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at"] | None: ...
+
 global___ListAppsRequest = ListAppsRequest
 
 class PostAppsRequest(google.protobuf.message.Message):
     """PostAppsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APPS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def apps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.App]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        apps: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.App]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["apps",b"apps","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        apps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.App] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["apps", b"apps", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAppsRequest = PostAppsRequest
 
 class DeleteAppRequest(google.protobuf.message.Message):
     """DeleteAppRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteAppRequest = DeleteAppRequest
 
 class PatchAppsRequest(google.protobuf.message.Message):
     """PatchAppsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APPS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -497,33 +537,34 @@ class PatchAppsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def apps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.App]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched App objects except App.Metadata
     For now only action 'overwrite' is supported
     """
-
     @property
     def metadata_action(self) -> proto.clarifai.api.resources_pb2.PatchAction:
         """The action to perform on the patched App.Metadata"""
-        pass
     reindex: builtins.bool
     """If set, the app will be automatically reindexed upon change of its base workflow."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        apps: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.App]] = ...,
-        action: typing.Text = ...,
-        metadata_action: typing.Optional[proto.clarifai.api.resources_pb2.PatchAction] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        apps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.App] | None = ...,
+        action: builtins.str = ...,
+        metadata_action: proto.clarifai.api.resources_pb2.PatchAction | None = ...,
         reindex: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["metadata_action",b"metadata_action","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","apps",b"apps","metadata_action",b"metadata_action","reindex",b"reindex","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["metadata_action", b"metadata_action", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "apps", b"apps", "metadata_action", b"metadata_action", "reindex", b"reindex", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAppsRequest = PatchAppsRequest
 
 class PatchAppRequest(google.protobuf.message.Message):
     """PatchAppRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -533,33 +574,34 @@ class PatchAppRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def app(self) -> proto.clarifai.api.resources_pb2.App: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched App object except App.Metadata
     For now only action 'overwrite' is supported
     """
-
     @property
     def metadata_action(self) -> proto.clarifai.api.resources_pb2.PatchAction:
         """The action to perform on the patched App.Metadata"""
-        pass
     reindex: builtins.bool
     """If set, the app will be automatically reindexed upon change of its base workflow."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        app: typing.Optional[proto.clarifai.api.resources_pb2.App] = ...,
-        action: typing.Text = ...,
-        metadata_action: typing.Optional[proto.clarifai.api.resources_pb2.PatchAction] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        app: proto.clarifai.api.resources_pb2.App | None = ...,
+        action: builtins.str = ...,
+        metadata_action: proto.clarifai.api.resources_pb2.PatchAction | None = ...,
         reindex: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app",b"app","metadata_action",b"metadata_action","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","app",b"app","metadata_action",b"metadata_action","reindex",b"reindex","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "metadata_action", b"metadata_action", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "app", b"app", "metadata_action", b"metadata_action", "reindex", b"reindex", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAppRequest = PatchAppRequest
 
 class PatchAppsIdsRequest(google.protobuf.message.Message):
     """PatchAppsIdsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -568,25 +610,27 @@ class PatchAppsIdsRequest(google.protobuf.message.Message):
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IdUpdateSource]:
         """Array containing 1 entry"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     Only 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[global___IdUpdateSource]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[global___IdUpdateSource] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAppsIdsRequest = PatchAppsIdsRequest
 
 class PostAppsSearchesRequest(google.protobuf.message.Message):
     """Search over the available applications."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_QUERY_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
@@ -595,62 +639,72 @@ class PostAppsSearchesRequest(google.protobuf.message.Message):
     @property
     def app_query(self) -> proto.clarifai.api.resources_pb2.AppQuery:
         """The body of the request."""
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination parameters here since there are no url args in this
         POST request.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        app_query: typing.Optional[proto.clarifai.api.resources_pb2.AppQuery] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app_query",b"app_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_query",b"app_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        app_query: proto.clarifai.api.resources_pb2.AppQuery | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app_query", b"app_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_query", b"app_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAppsSearchesRequest = PostAppsSearchesRequest
 
 class SingleAppResponse(google.protobuf.message.Message):
     """SingleAppResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     APP_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def app(self) -> proto.clarifai.api.resources_pb2.App: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        app: typing.Optional[proto.clarifai.api.resources_pb2.App] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app",b"app","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app",b"app","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        app: proto.clarifai.api.resources_pb2.App | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "status", b"status"]) -> None: ...
+
 global___SingleAppResponse = SingleAppResponse
 
 class MultiAppResponse(google.protobuf.message.Message):
     """MultiAppResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     APPS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def apps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.App]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        apps: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.App]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["apps",b"apps","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        apps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.App] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["apps", b"apps", "status", b"status"]) -> None: ...
+
 global___MultiAppResponse = MultiAppResponse
 
 class ListCollaboratorsRequest(google.protobuf.message.Message):
     """ListCollaboratorsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     LIST_ALL_COLLABORATORS_FIELD_NUMBER: builtins.int
     @property
@@ -659,37 +713,44 @@ class ListCollaboratorsRequest(google.protobuf.message.Message):
     """Set this flag to list both deleted and not deleted collaborators
     by default it's listing only not deleted collaborators
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         list_all_collaborators: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["list_all_collaborators",b"list_all_collaborators","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["list_all_collaborators", b"list_all_collaborators", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListCollaboratorsRequest = ListCollaboratorsRequest
 
 class PostCollaboratorsRequest(google.protobuf.message.Message):
     """PostCollaboratorsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLABORATORS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def collaborators(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collaborator]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collaborators: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collaborator]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collaborators",b"collaborators","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collaborators: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collaborator] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collaborators", b"collaborators", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostCollaboratorsRequest = PostCollaboratorsRequest
 
 class PatchCollaboratorsRequest(google.protobuf.message.Message):
     """PatchCollaboratorsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLABORATORS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -697,64 +758,75 @@ class PatchCollaboratorsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def collaborators(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collaborator]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now only action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collaborators: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collaborator]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","collaborators",b"collaborators","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collaborators: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collaborator] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "collaborators", b"collaborators", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchCollaboratorsRequest = PatchCollaboratorsRequest
 
 class DeleteCollaboratorsRequest(google.protobuf.message.Message):
     """DeleteCollaboratorsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLABORATOR_IDS_FIELD_NUMBER: builtins.int
     USER_EMAILS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def collaborator_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def collaborator_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     @property
-    def user_emails(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def user_emails(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collaborator_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        user_emails: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collaborator_ids",b"collaborator_ids","user_app_id",b"user_app_id","user_emails",b"user_emails"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collaborator_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        user_emails: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collaborator_ids", b"collaborator_ids", "user_app_id", b"user_app_id", "user_emails", b"user_emails"]) -> None: ...
+
 global___DeleteCollaboratorsRequest = DeleteCollaboratorsRequest
 
 class MultiCollaboratorsResponse(google.protobuf.message.Message):
     """MultiCollaboratorsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     COLLABORATORS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def collaborators(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collaborator]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        collaborators: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collaborator]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collaborators",b"collaborators","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        collaborators: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collaborator] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collaborators", b"collaborators", "status", b"status"]) -> None: ...
+
 global___MultiCollaboratorsResponse = MultiCollaboratorsResponse
 
 class ListCollaborationsRequest(google.protobuf.message.Message):
     """ListCollaborationsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -764,115 +836,139 @@ class ListCollaborationsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListCollaborationsRequest = ListCollaborationsRequest
 
 class MultiCollaborationsResponse(google.protobuf.message.Message):
     """MultiCollaborationsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     COLLABORATIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def collaborations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collaboration]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        collaborations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collaboration]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collaborations",b"collaborations","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        collaborations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collaboration] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collaborations", b"collaborations", "status", b"status"]) -> None: ...
+
 global___MultiCollaborationsResponse = MultiCollaborationsResponse
 
 class GetStatusCodeRequest(google.protobuf.message.Message):
     """GetStatusCodeRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_CODE_ID_FIELD_NUMBER: builtins.int
-    status_code_id: typing.Text
-    def __init__(self,
+    status_code_id: builtins.str
+    def __init__(
+        self,
         *,
-        status_code_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status_code_id",b"status_code_id"]) -> None: ...
+        status_code_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status_code_id", b"status_code_id"]) -> None: ...
+
 global___GetStatusCodeRequest = GetStatusCodeRequest
 
 class ListStatusCodesRequest(google.protobuf.message.Message):
     """ListStatusCodesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___ListStatusCodesRequest = ListStatusCodesRequest
 
 class SingleStatusCodeResponse(google.protobuf.message.Message):
     """SingleStatusCodeResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of this request."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
+
 global___SingleStatusCodeResponse = SingleStatusCodeResponse
 
 class MultiStatusCodeResponse(google.protobuf.message.Message):
     """MultiStatusCodeResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     STATUSES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.status.status_pb2.Status]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        statuses: typing.Optional[typing.Iterable[proto.clarifai.api.status.status_pb2.Status]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","statuses",b"statuses"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        statuses: collections.abc.Iterable[proto.clarifai.api.status.status_pb2.Status] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "statuses", b"statuses"]) -> None: ...
+
 global___MultiStatusCodeResponse = MultiStatusCodeResponse
 
 class GetConceptRequest(google.protobuf.message.Message):
     """GetConceptRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    concept_id: typing.Text
+    concept_id: builtins.str
     """The concept's id."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetConceptRequest = GetConceptRequest
 
 class ListConceptsRequest(google.protobuf.message.Message):
     """ListConceptsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -882,55 +978,58 @@ class ListConceptsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListConceptsRequest = ListConceptsRequest
 
 class PostConceptsSearchesRequest(google.protobuf.message.Message):
     """PostConceptsSearchesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_QUERY_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """Ids present in the url of the request."""
-        pass
     @property
     def concept_query(self) -> proto.clarifai.api.resources_pb2.ConceptQuery:
         """The body of the request."""
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination parameters here since there are no url args in this
         POST request.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_query: typing.Optional[proto.clarifai.api.resources_pb2.ConceptQuery] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["concept_query",b"concept_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_query",b"concept_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_query: proto.clarifai.api.resources_pb2.ConceptQuery | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostConceptsSearchesRequest = PostConceptsSearchesRequest
 
 class PostConceptsRequest(google.protobuf.message.Message):
     """PostConceptsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPTS_FIELD_NUMBER: builtins.int
     @property
@@ -938,19 +1037,22 @@ class PostConceptsRequest(google.protobuf.message.Message):
     @property
     def concepts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Concept]:
         """The concepts to add."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concepts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Concept]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concepts",b"concepts","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concepts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Concept] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concepts", b"concepts", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostConceptsRequest = PostConceptsRequest
 
 class PatchConceptsRequest(google.protobuf.message.Message):
     """PatchConceptsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPTS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -959,25 +1061,27 @@ class PatchConceptsRequest(google.protobuf.message.Message):
     @property
     def concepts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Concept]:
         """The concepts to patch."""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now ony action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concepts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Concept]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","concepts",b"concepts","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concepts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Concept] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "concepts", b"concepts", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchConceptsRequest = PatchConceptsRequest
 
 class GetConceptCountsRequest(google.protobuf.message.Message):
     """GetConceptCountsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -987,91 +1091,99 @@ class GetConceptCountsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetConceptCountsRequest = GetConceptCountsRequest
 
 class SingleConceptResponse(google.protobuf.message.Message):
     """SingleConceptResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPT_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def concept(self) -> proto.clarifai.api.resources_pb2.Concept:
         """The returned concept."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concept: typing.Optional[proto.clarifai.api.resources_pb2.Concept] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["concept",b"concept","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept",b"concept","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concept: proto.clarifai.api.resources_pb2.Concept | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["concept", b"concept", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept", b"concept", "status", b"status"]) -> None: ...
+
 global___SingleConceptResponse = SingleConceptResponse
 
 class MultiConceptResponse(google.protobuf.message.Message):
     """MultiConceptResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def concepts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Concept]:
         """The returned concepts."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concepts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Concept]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concepts",b"concepts","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concepts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Concept] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concepts", b"concepts", "status", b"status"]) -> None: ...
+
 global___MultiConceptResponse = MultiConceptResponse
 
 class MultiConceptCountResponse(google.protobuf.message.Message):
     """MultiConceptCountResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPT_COUNTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def concept_counts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptCount]:
         """The returned concept counts."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concept_counts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptCount]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_counts",b"concept_counts","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concept_counts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptCount] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_counts", b"concept_counts", "status", b"status"]) -> None: ...
+
 global___MultiConceptCountResponse = MultiConceptCountResponse
 
 class ListConceptRelationsRequest(google.protobuf.message.Message):
     """GET all relations such that the concept_id refers to the subject of the relation"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     PREDICATE_FIELD_NUMBER: builtins.int
@@ -1081,8 +1193,7 @@ class ListConceptRelationsRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    concept_id: typing.Text
+    concept_id: builtins.str
     """The subject concept id in your app to get all the relationships for.
     Leave as an empty string (GET /concepts/relations) to list ALL the relations in the app.
 
@@ -1099,310 +1210,323 @@ class ListConceptRelationsRequest(google.protobuf.message.Message):
     Synonyms by nature are symmetrical relationships so either side can be the concept_id (subject)
     when listing the relations.
     """
-
-    predicate: typing.Text
+    predicate: builtins.str
     """This is part of the url so we can extend to multiple link types in the future.
     Valid predicates are:
     'hypernyms'
     'hyponyms'
     """
-
-    knowledge_graph_id: typing.Text
+    knowledge_graph_id: builtins.str
     """If knowledge_graph_id is provided then just list relations from that knowledge graph.
     If not provided then list relations from all knowledge graphs including the global one for this
     app one (ie. knowledge_graph "") and any specific ones in the app.
     """
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        predicate: typing.Text = ...,
-        knowledge_graph_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        predicate: builtins.str = ...,
+        knowledge_graph_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","knowledge_graph_id",b"knowledge_graph_id","page",b"page","per_page",b"per_page","predicate",b"predicate","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "knowledge_graph_id", b"knowledge_graph_id", "page", b"page", "per_page", b"per_page", "predicate", b"predicate", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListConceptRelationsRequest = ListConceptRelationsRequest
 
 class PostConceptRelationsRequest(google.protobuf.message.Message):
     """POST new concept relations"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     CONCEPT_RELATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    concept_id: typing.Text
+    concept_id: builtins.str
     """The subject concept id you're going to add relations for."""
-
     @property
     def concept_relations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptRelation]:
         """The relationships you're going to add."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        concept_relations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptRelation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","concept_relations",b"concept_relations","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        concept_relations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptRelation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "concept_relations", b"concept_relations", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostConceptRelationsRequest = PostConceptRelationsRequest
 
 class DeleteConceptRelationsRequest(google.protobuf.message.Message):
     """DELETE concept relations"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    concept_id: typing.Text
+    concept_id: builtins.str
     """The concept to delete relationship for."""
-
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The concept relationship ids to delete."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteConceptRelationsRequest = DeleteConceptRelationsRequest
 
 class ListKnowledgeGraphsRequest(google.protobuf.message.Message):
     """GET all knowledge graphs"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListKnowledgeGraphsRequest = ListKnowledgeGraphsRequest
 
 class PostKnowledgeGraphsRequest(google.protobuf.message.Message):
     """POST new knowledge graphs"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     KNOWLEDGE_GRAPHS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
     @property
     def knowledge_graphs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.KnowledgeGraph]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        knowledge_graphs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.KnowledgeGraph]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs",b"knowledge_graphs","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        knowledge_graphs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.KnowledgeGraph] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs", b"knowledge_graphs", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostKnowledgeGraphsRequest = PostKnowledgeGraphsRequest
 
 class PostConceptMappingJobsRequest(google.protobuf.message.Message):
     """Start concept mapping jobs"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_MAPPING_JOBS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
     @property
     def concept_mapping_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptMappingJob]:
         """The concept mapping jobs that are being started"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_mapping_jobs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptMappingJob]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_mapping_jobs",b"concept_mapping_jobs","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_mapping_jobs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptMappingJob] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_mapping_jobs", b"concept_mapping_jobs", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostConceptMappingJobsRequest = PostConceptMappingJobsRequest
 
 class MultiConceptRelationResponse(google.protobuf.message.Message):
     """MultiConceptRelationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPT_RELATIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def concept_relations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptRelation]:
         """The returned concept relations."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concept_relations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptRelation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_relations",b"concept_relations","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concept_relations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptRelation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_relations", b"concept_relations", "status", b"status"]) -> None: ...
+
 global___MultiConceptRelationResponse = MultiConceptRelationResponse
 
 class MultiKnowledgeGraphResponse(google.protobuf.message.Message):
     """MultiKnowledgeGraphResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     KNOWLEDGE_GRAPHS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def knowledge_graphs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.KnowledgeGraph]:
         """The returned knowledge graphs."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        knowledge_graphs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.KnowledgeGraph]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs",b"knowledge_graphs","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        knowledge_graphs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.KnowledgeGraph] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs", b"knowledge_graphs", "status", b"status"]) -> None: ...
+
 global___MultiKnowledgeGraphResponse = MultiKnowledgeGraphResponse
 
 class MultiConceptMappingJobResponse(google.protobuf.message.Message):
     """MultiConceptMappingJobResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The ids of the concept mapping jobs underway."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "status", b"status"]) -> None: ...
+
 global___MultiConceptMappingJobResponse = MultiConceptMappingJobResponse
 
 class GetConceptLanguageRequest(google.protobuf.message.Message):
     """GET single concept language for the given concept."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    concept_id: typing.Text
-    language: typing.Text
+    concept_id: builtins.str
+    language: builtins.str
     """This is the language identifier."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        language: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","language",b"language","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        language: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "language", b"language", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetConceptLanguageRequest = GetConceptLanguageRequest
 
 class ListConceptLanguagesRequest(google.protobuf.message.Message):
     """List multiple concept languages for the given concept."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    concept_id: typing.Text
+    concept_id: builtins.str
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListConceptLanguagesRequest = ListConceptLanguagesRequest
 
 class PatchConceptLanguagesRequest(google.protobuf.message.Message):
     """PATCH multiple concept languages for the given concept."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     CONCEPT_LANGUAGES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    concept_id: typing.Text
+    concept_id: builtins.str
     @property
     def concept_languages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptLanguage]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform with the objects in the PATCH."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        concept_languages: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","concept_id",b"concept_id","concept_languages",b"concept_languages","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        concept_languages: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "concept_id", b"concept_id", "concept_languages", b"concept_languages", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchConceptLanguagesRequest = PatchConceptLanguagesRequest
 
 class PostConceptLanguagesRequest(google.protobuf.message.Message):
     """// DELETE multiple concept languages for the given concept.
-    message DeleteConceptLanguageRequest {
-      clarifai.api.UserAppIDSet user_app_id = 1;
-      string concept_id = 2;
-      // The language code to delete.
-      string language = 3;
-    }
-
-    // DELETE multiple concept languages for the given concept.
     message DeleteConceptLanguagesRequest {
       clarifai.api.UserAppIDSet user_app_id = 1;
       string concept_id = 2;
@@ -1413,104 +1537,125 @@ class PostConceptLanguagesRequest(google.protobuf.message.Message):
 
     POST multiple concept languages for the given concept.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_ID_FIELD_NUMBER: builtins.int
     CONCEPT_LANGUAGES_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    concept_id: typing.Text
+    concept_id: builtins.str
     @property
     def concept_languages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptLanguage]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        concept_id: typing.Text = ...,
-        concept_languages: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_id",b"concept_id","concept_languages",b"concept_languages","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        concept_id: builtins.str = ...,
+        concept_languages: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_id", b"concept_id", "concept_languages", b"concept_languages", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostConceptLanguagesRequest = PostConceptLanguagesRequest
 
 class SingleConceptLanguageResponse(google.protobuf.message.Message):
     """SingleConceptLanguageResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPT_LANGUAGE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def concept_language(self) -> proto.clarifai.api.resources_pb2.ConceptLanguage: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concept_language: typing.Optional[proto.clarifai.api.resources_pb2.ConceptLanguage] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["concept_language",b"concept_language","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_language",b"concept_language","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concept_language: proto.clarifai.api.resources_pb2.ConceptLanguage | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["concept_language", b"concept_language", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_language", b"concept_language", "status", b"status"]) -> None: ...
+
 global___SingleConceptLanguageResponse = SingleConceptLanguageResponse
 
 class MultiConceptLanguageResponse(google.protobuf.message.Message):
     """MultiConceptLanguageResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CONCEPT_LANGUAGES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def concept_languages(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptLanguage]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        concept_languages: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_languages",b"concept_languages","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        concept_languages: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptLanguage] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_languages", b"concept_languages", "status", b"status"]) -> None: ...
+
 global___MultiConceptLanguageResponse = MultiConceptLanguageResponse
 
 class GetInputRequest(google.protobuf.message.Message):
     """GetInputRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    input_id: typing.Text
-    def __init__(self,
+    input_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        input_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_id",b"input_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetInputRequest = GetInputRequest
 
 class GetInputSamplesRequest(google.protobuf.message.Message):
     """GetInputSamplesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    task_id: typing.Text
+    task_id: builtins.str
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """URL param. If zero ids provided, returns for all task labelers"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        task_id: typing.Text = ...,
-        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id","user_app_id",b"user_app_id","user_ids",b"user_ids"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        task_id: builtins.str = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
+
 global___GetInputSamplesRequest = GetInputSamplesRequest
 
 class ListInputsRequest(google.protobuf.message.Message):
     """ListInputsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -1522,33 +1667,34 @@ class ListInputsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Set status to filter by status"""
-        pass
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","page",b"page","per_page",b"per_page","status",b"status","user_app_id",b"user_app_id"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "page", b"page", "per_page", b"per_page", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListInputsRequest = ListInputsRequest
 
 class StreamInputsRequest(google.protobuf.message.Message):
     """StreamInputsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     LAST_ID_FIELD_NUMBER: builtins.int
@@ -1560,29 +1706,31 @@ class StreamInputsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 20.
     """
-
-    last_id: typing.Text
+    last_id: builtins.str
     order_by_id: builtins.bool
     """By default, the endpoint return inputs by the time when it is added.
     If this is set to true, we will return inputs by id.
     """
-
     descending: builtins.bool
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         per_page: builtins.int = ...,
-        last_id: typing.Text = ...,
+        last_id: builtins.str = ...,
         order_by_id: builtins.bool = ...,
         descending: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["descending",b"descending","last_id",b"last_id","order_by_id",b"order_by_id","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["descending", b"descending", "last_id", b"last_id", "order_by_id", b"order_by_id", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___StreamInputsRequest = StreamInputsRequest
 
 class PostInputsRequest(google.protobuf.message.Message):
     """PostInputsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
     @property
@@ -1595,19 +1743,22 @@ class PostInputsRequest(google.protobuf.message.Message):
         * data
         * dataset_ids
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs",b"inputs","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostInputsRequest = PostInputsRequest
 
 class PatchInputsRequest(google.protobuf.message.Message):
     """PatchInputsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -1620,146 +1771,180 @@ class PatchInputsRequest(google.protobuf.message.Message):
         For each input, the following fields are patchable:
         * data
         """
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","inputs",b"inputs","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "inputs", b"inputs", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchInputsRequest = PatchInputsRequest
 
 class DeleteInputRequest(google.protobuf.message.Message):
     """DeleteInputRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    input_id: typing.Text
-    def __init__(self,
+    input_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        input_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_id",b"input_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteInputRequest = DeleteInputRequest
 
 class DeleteInputsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteInputsRequest = DeleteInputsRequest
 
 class SingleInputResponse(google.protobuf.message.Message):
     """SingleInputResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     INPUT_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def input(self) -> proto.clarifai.api.resources_pb2.Input: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        input: typing.Optional[proto.clarifai.api.resources_pb2.Input] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["input",b"input","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input",b"input","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        input: proto.clarifai.api.resources_pb2.Input | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input", b"input", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input", b"input", "status", b"status"]) -> None: ...
+
 global___SingleInputResponse = SingleInputResponse
 
 class MultiInputResponse(google.protobuf.message.Message):
     """MultiInputResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
+    INPUTS_ADD_JOB_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]: ...
-    def __init__(self,
+    @property
+    def inputs_add_job(self) -> proto.clarifai.api.resources_pb2.InputsAddJob: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs",b"inputs","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        inputs_add_job: proto.clarifai.api.resources_pb2.InputsAddJob | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["inputs_add_job", b"inputs_add_job", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "inputs_add_job", b"inputs_add_job", "status", b"status"]) -> None: ...
+
 global___MultiInputResponse = MultiInputResponse
 
 class MultiInputAnnotationResponse(google.protobuf.message.Message):
     """MultiInputAnnotationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     HITS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def hits(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Hit]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        hits: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Hit]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["hits",b"hits","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        hits: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Hit] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["hits", b"hits", "status", b"status"]) -> None: ...
+
 global___MultiInputAnnotationResponse = MultiInputAnnotationResponse
 
 class SingleInputCountResponse(google.protobuf.message.Message):
     """SingleInputCountResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     COUNTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def counts(self) -> proto.clarifai.api.resources_pb2.InputCount: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        counts: typing.Optional[proto.clarifai.api.resources_pb2.InputCount] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["counts",b"counts","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["counts",b"counts","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        counts: proto.clarifai.api.resources_pb2.InputCount | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["counts", b"counts", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["counts", b"counts", "status", b"status"]) -> None: ...
+
 global___SingleInputCountResponse = SingleInputCountResponse
 
 class GetInputCountRequest(google.protobuf.message.Message):
     """GetInputCountRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetInputCountRequest = GetInputCountRequest
 
 class ListDatasetsRequest(google.protobuf.message.Message):
     """ListDatasetsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -1769,44 +1954,49 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListDatasetsRequest = ListDatasetsRequest
 
 class GetDatasetRequest(google.protobuf.message.Message):
     """GetDatasetRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetDatasetRequest = GetDatasetRequest
 
 class PostDatasetsRequest(google.protobuf.message.Message):
     """Request to add one or more datasets."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASETS_FIELD_NUMBER: builtins.int
     @property
@@ -1814,19 +2004,22 @@ class PostDatasetsRequest(google.protobuf.message.Message):
     @property
     def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Dataset]:
         """List of datasets that are requested to be added."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        datasets: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Dataset]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["datasets",b"datasets","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        datasets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Dataset] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["datasets", b"datasets", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostDatasetsRequest = PostDatasetsRequest
 
 class PatchDatasetsRequest(google.protobuf.message.Message):
     """Request to patch several datasets."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASETS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -1835,194 +2028,243 @@ class PatchDatasetsRequest(google.protobuf.message.Message):
     @property
     def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Dataset]:
         """List of datasets that are requested to be updated."""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     Supported values: 'overwrite' and 'merge'
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        datasets: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Dataset]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","datasets",b"datasets","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        datasets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Dataset] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "datasets", b"datasets", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchDatasetsRequest = PatchDatasetsRequest
+
+class PatchDatasetIdsRequest(google.protobuf.message.Message):
+    """PatchDatasetIdsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IdUpdateSource]:
+        """Array containing 1 entry"""
+    action: builtins.str
+    """The action to perform on the patched objects
+    Only 'overwrite' is supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[global___IdUpdateSource] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchDatasetIdsRequest = PatchDatasetIdsRequest
 
 class DeleteDatasetsRequest(google.protobuf.message.Message):
     """Request to delete several datasets by list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_ids",b"dataset_ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_ids", b"dataset_ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteDatasetsRequest = DeleteDatasetsRequest
 
 class MultiDatasetResponse(google.protobuf.message.Message):
     """MultiDatasetResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASETS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def datasets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Dataset]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        datasets: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Dataset]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["datasets",b"datasets","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        datasets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Dataset] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["datasets", b"datasets", "status", b"status"]) -> None: ...
+
 global___MultiDatasetResponse = MultiDatasetResponse
 
 class SingleDatasetResponse(google.protobuf.message.Message):
     """SingleDatasetResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset(self) -> proto.clarifai.api.resources_pb2.Dataset: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset: typing.Optional[proto.clarifai.api.resources_pb2.Dataset] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset",b"dataset","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset",b"dataset","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset: proto.clarifai.api.resources_pb2.Dataset | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "status", b"status"]) -> None: ...
+
 global___SingleDatasetResponse = SingleDatasetResponse
 
 class ListDatasetInputsRequest(google.protobuf.message.Message):
     """ListDatasetInputsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListDatasetInputsRequest = ListDatasetInputsRequest
 
 class GetDatasetInputRequest(google.protobuf.message.Message):
     """GetDatasetInputRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
-    input_id: typing.Text
+    input_id: builtins.str
     """Identify dataset input by id."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        input_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","input_id",b"input_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetDatasetInputRequest = GetDatasetInputRequest
 
 class PostDatasetInputsRequest(google.protobuf.message.Message):
     """Request to add one or more datasets."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_INPUTS_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     @property
     def dataset_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetInput]:
         """List of inputs that are requested to be added to this dataset.
         Identify each input by id field. All other inputs fields are ignored.
         """
-        pass
     @property
     def search(self) -> proto.clarifai.api.resources_pb2.Search:
         """Query to search inputs to be added to this dataset."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetInput]] = ...,
-        search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["search",b"search","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_inputs",b"dataset_inputs","search",b"search","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetInput] | None = ...,
+        search: proto.clarifai.api.resources_pb2.Search | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["search", b"search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_inputs", b"dataset_inputs", "search", b"search", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostDatasetInputsRequest = PostDatasetInputsRequest
 
 class DeleteDatasetInputsRequest(google.protobuf.message.Message):
     """Request to delete several dataset inputs by list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     INPUT_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     @property
-    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Specify which inputs to delete from dataset."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        input_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","input_ids",b"input_ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        input_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "input_ids", b"input_ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteDatasetInputsRequest = DeleteDatasetInputsRequest
 
 class MultiDatasetInputResponse(google.protobuf.message.Message):
     """MultiDatasetInputResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_INPUTS_FIELD_NUMBER: builtins.int
     DATASET_INPUTS_SEARCH_ADD_JOB_FIELD_NUMBER: builtins.int
@@ -2032,94 +2274,105 @@ class MultiDatasetInputResponse(google.protobuf.message.Message):
     def dataset_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetInput]: ...
     @property
     def dataset_inputs_search_add_job(self) -> proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset_inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetInput]] = ...,
-        dataset_inputs_search_add_job: typing.Optional[proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_inputs_search_add_job",b"dataset_inputs_search_add_job","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_inputs",b"dataset_inputs","dataset_inputs_search_add_job",b"dataset_inputs_search_add_job","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetInput] | None = ...,
+        dataset_inputs_search_add_job: proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset_inputs_search_add_job", b"dataset_inputs_search_add_job", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_inputs", b"dataset_inputs", "dataset_inputs_search_add_job", b"dataset_inputs_search_add_job", "status", b"status"]) -> None: ...
+
 global___MultiDatasetInputResponse = MultiDatasetInputResponse
 
 class SingleDatasetInputResponse(google.protobuf.message.Message):
     """SingleDatasetInputResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_INPUT_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset_input(self) -> proto.clarifai.api.resources_pb2.DatasetInput: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset_input: typing.Optional[proto.clarifai.api.resources_pb2.DatasetInput] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_input",b"dataset_input","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_input",b"dataset_input","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset_input: proto.clarifai.api.resources_pb2.DatasetInput | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset_input", b"dataset_input", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_input", b"dataset_input", "status", b"status"]) -> None: ...
+
 global___SingleDatasetInputResponse = SingleDatasetInputResponse
 
 class ListDatasetVersionsRequest(google.protobuf.message.Message):
     """ListDatasetVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListDatasetVersionsRequest = ListDatasetVersionsRequest
 
 class GetDatasetVersionRequest(google.protobuf.message.Message):
     """GetDatasetVersionRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
-    dataset_version_id: typing.Text
+    dataset_version_id: builtins.str
     """Identify dataset version by id."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_version_id",b"dataset_version_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_version_id", b"dataset_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetDatasetVersionRequest = GetDatasetVersionRequest
 
 class ListDatasetVersionMetricsGroupsRequest(google.protobuf.message.Message):
     """ListDatasetVersionMetricsGroupsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSION_ID_FIELD_NUMBER: builtins.int
@@ -2130,260 +2383,280 @@ class ListDatasetVersionMetricsGroupsRequest(google.protobuf.message.Message):
     VALUES_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
-    dataset_version_id: typing.Text
+    dataset_version_id: builtins.str
     """Identify dataset version by id."""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     @property
-    def parent_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def parent_paths(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Filter by parent path. Multiple parent paths are OR-ed. Empty list results in no filter."""
-        pass
     @property
     def types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroupType.ValueType]:
         """Filter by parent type. Multiple types are OR-ed. Empty list results in no filter."""
-        pass
     @property
     def values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.struct_pb2.Value]:
         """Filter by value. Multiple values are OR-ed. Empty list results in no filter."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_version_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_version_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        parent_paths: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        types: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroupType.ValueType]] = ...,
-        values: typing.Optional[typing.Iterable[google.protobuf.struct_pb2.Value]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_version_id",b"dataset_version_id","page",b"page","parent_paths",b"parent_paths","per_page",b"per_page","types",b"types","user_app_id",b"user_app_id","values",b"values"]) -> None: ...
+        parent_paths: collections.abc.Iterable[builtins.str] | None = ...,
+        types: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroupType.ValueType] | None = ...,
+        values: collections.abc.Iterable[google.protobuf.struct_pb2.Value] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_version_id", b"dataset_version_id", "page", b"page", "parent_paths", b"parent_paths", "per_page", b"per_page", "types", b"types", "user_app_id", b"user_app_id", "values", b"values"]) -> None: ...
+
 global___ListDatasetVersionMetricsGroupsRequest = ListDatasetVersionMetricsGroupsRequest
 
 class PostDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to add one or more dataset versions."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     @property
     def dataset_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersion]:
         """List of dataset versions that are requested to be added."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_versions",b"dataset_versions","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_versions", b"dataset_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostDatasetVersionsRequest = PostDatasetVersionsRequest
 
 class PatchDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to patch several dataset versions."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSIONS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     @property
     def dataset_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersion]:
         """List of dataset versions that are requested to be updated."""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now, only 'overwrite' action is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","dataset_id",b"dataset_id","dataset_versions",b"dataset_versions","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "dataset_id", b"dataset_id", "dataset_versions", b"dataset_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchDatasetVersionsRequest = PatchDatasetVersionsRequest
 
 class DeleteDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to delete several dataset versions by list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSION_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
     @property
-    def dataset_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def dataset_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_version_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_version_ids",b"dataset_version_ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_version_ids", b"dataset_version_ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteDatasetVersionsRequest = DeleteDatasetVersionsRequest
 
 class PutDatasetVersionExportsRequest(google.protobuf.message.Message):
     """Request to create exports of a dataset version."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
     DATASET_VERSION_ID_FIELD_NUMBER: builtins.int
     EXPORTS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    dataset_id: typing.Text
+    dataset_id: builtins.str
     """Identify dataset by id."""
-
-    dataset_version_id: typing.Text
+    dataset_version_id: builtins.str
     """Identify dataset version by id."""
-
     @property
     def exports(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersionExport]:
         """exports is the list of requested dataset version exports.
         Only setting the 'format' field of the export is supported.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        dataset_id: typing.Text = ...,
-        dataset_version_id: typing.Text = ...,
-        exports: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionExport]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id",b"dataset_id","dataset_version_id",b"dataset_version_id","exports",b"exports","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        dataset_id: builtins.str = ...,
+        dataset_version_id: builtins.str = ...,
+        exports: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionExport] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "dataset_version_id", b"dataset_version_id", "exports", b"exports", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PutDatasetVersionExportsRequest = PutDatasetVersionExportsRequest
 
 class MultiDatasetVersionResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersion]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_versions",b"dataset_versions","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_versions", b"dataset_versions", "status", b"status"]) -> None: ...
+
 global___MultiDatasetVersionResponse = MultiDatasetVersionResponse
 
 class MultiDatasetVersionExportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     EXPORTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def exports(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersionExport]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        exports: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionExport]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["exports",b"exports","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        exports: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionExport] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["exports", b"exports", "status", b"status"]) -> None: ...
+
 global___MultiDatasetVersionExportResponse = MultiDatasetVersionExportResponse
 
 class MultiDatasetVersionMetricsGroupResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_VERSION_METRICS_GROUPS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset_version_metrics_groups(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroup]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset_version_metrics_groups: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroup]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_version_metrics_groups",b"dataset_version_metrics_groups","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset_version_metrics_groups: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionMetricsGroup] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_version_metrics_groups", b"dataset_version_metrics_groups", "status", b"status"]) -> None: ...
+
 global___MultiDatasetVersionMetricsGroupResponse = MultiDatasetVersionMetricsGroupResponse
 
 class SingleDatasetVersionResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_VERSION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset_version(self) -> proto.clarifai.api.resources_pb2.DatasetVersion: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        dataset_version: typing.Optional[proto.clarifai.api.resources_pb2.DatasetVersion] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_version",b"dataset_version","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_version",b"dataset_version","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        dataset_version: proto.clarifai.api.resources_pb2.DatasetVersion | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "status", b"status"]) -> None: ...
+
 global___SingleDatasetVersionResponse = SingleDatasetVersionResponse
 
 class GetDatasetInputsSearchAddJobRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     JOB_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    job_id: typing.Text
-    def __init__(self,
+    job_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        job_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id",b"job_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        job_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["job_id", b"job_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetDatasetInputsSearchAddJobRequest = GetDatasetInputsSearchAddJobRequest
 
 class SingleDatasetInputsSearchAddJobResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     JOB_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def job(self) -> proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        job: typing.Optional[proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["job",b"job","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job",b"job","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        job: proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["job", b"job", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["job", b"job", "status", b"status"]) -> None: ...
+
 global___SingleDatasetInputsSearchAddJobResponse = SingleDatasetInputsSearchAddJobResponse
 
 class PostModelOutputsRequest(google.protobuf.message.Message):
@@ -2392,7 +2665,9 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
     //////////////////////////////////////////////////
     Model prediction.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -2400,8 +2675,8 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
     MODEL_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
+    model_id: builtins.str
+    version_id: builtins.str
     @property
     def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]: ...
     @property
@@ -2409,22 +2684,25 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
         """This allows you to specify config options for the model such as
         the language which appear's in the model's output_info.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        model: typing.Optional[proto.clarifai.api.resources_pb2.Model] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model",b"model","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs",b"inputs","model",b"model","model_id",b"model_id","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        model: proto.clarifai.api.resources_pb2.Model | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model", b"model", "model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___PostModelOutputsRequest = PostModelOutputsRequest
 
 class ListModelInputsRequest(google.protobuf.message.Message):
     """Listing the inputs that went into training this model."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -2432,50 +2710,56 @@ class ListModelInputsRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
+    model_id: builtins.str
+    version_id: builtins.str
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___ListModelInputsRequest = ListModelInputsRequest
 
 class GetKeyRequest(google.protobuf.message.Message):
     """GetKeyRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     KEY_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    key_id: typing.Text
-    def __init__(self,
+    key_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        key_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["key_id",b"key_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        key_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key_id", b"key_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetKeyRequest = GetKeyRequest
 
 class ListKeysRequest(google.protobuf.message.Message):
     """ListKeysRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -2485,25 +2769,27 @@ class ListKeysRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListKeysRequest = ListKeysRequest
 
 class ListAppKeysRequest(google.protobuf.message.Message):
     """ListAppKeysRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -2513,60 +2799,70 @@ class ListAppKeysRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListAppKeysRequest = ListAppKeysRequest
 
 class PostKeysRequest(google.protobuf.message.Message):
     """PostKeysRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Key]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        keys: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Key]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["keys",b"keys","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        keys: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Key] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostKeysRequest = PostKeysRequest
 
 class DeleteKeyRequest(google.protobuf.message.Message):
     """DeleteKeyRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     KEY_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    key_id: typing.Text
-    def __init__(self,
+    key_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        key_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["key_id",b"key_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        key_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key_id", b"key_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteKeyRequest = DeleteKeyRequest
 
 class PatchKeysRequest(google.protobuf.message.Message):
     """PatchKeysRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -2574,60 +2870,71 @@ class PatchKeysRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Key]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now only action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        keys: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Key]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","keys",b"keys","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        keys: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Key] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "keys", b"keys", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchKeysRequest = PatchKeysRequest
 
 class SingleKeyResponse(google.protobuf.message.Message):
     """SingleKeyResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     KEY_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def key(self) -> proto.clarifai.api.resources_pb2.Key: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        key: typing.Optional[proto.clarifai.api.resources_pb2.Key] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["key",b"key","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["key",b"key","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        key: proto.clarifai.api.resources_pb2.Key | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["key", b"key", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "status", b"status"]) -> None: ...
+
 global___SingleKeyResponse = SingleKeyResponse
 
 class MultiKeyResponse(google.protobuf.message.Message):
     """MultiKeyResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     KEYS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def keys(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Key]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        keys: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Key]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["keys",b"keys","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        keys: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Key] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["keys", b"keys", "status", b"status"]) -> None: ...
+
 global___MultiKeyResponse = MultiKeyResponse
 
 class GetModelRequest(google.protobuf.message.Message):
     """GetModelRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -2636,34 +2943,36 @@ class GetModelRequest(google.protobuf.message.Message):
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
+    model_id: builtins.str
+    version_id: builtins.str
     """This is included so that we can re-use this request for multiple
     rpcs with and without the version_id.
     """
-
-    language: typing.Text
+    language: builtins.str
     trained_before: builtins.bool
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        language: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        language: builtins.str = ...,
         trained_before: builtins.bool = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","language",b"language","model_id",b"model_id","trained_before",b"trained_before","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "language", b"language", "model_id", b"model_id", "trained_before", b"trained_before", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___GetModelRequest = GetModelRequest
 
 class ListModelsRequest(google.protobuf.message.Message):
     """ListModelsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -2691,289 +3000,292 @@ class ListModelsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
     """
-
     sort_by_name: builtins.bool
     """Whether to order by the name"""
-
     sort_by_num_inputs: builtins.bool
     """Whether to order by the number of training inputs"""
-
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time of the latest model version.
     If neither sort option is set to true, will sort by modified_at.
     """
-
-    query: typing.Text
+    query: builtins.str
     """Filtering options:
     Query name, description and id fields, that can contain the words in the query string. Does NOT support wildcards - full words only. Supports operators "OR" and "-" as NOT.
     """
-
-    name: typing.Text
+    name: builtins.str
     """Filter by the description and id of the model. This supports wildcard queries like "gen*" to match "general" as an example."""
-
     filter_by_user_id: builtins.bool
     """Extends the name filter to include the user_id of the application owner that the model belongs to."""
-
-    model_type_id: typing.Text
+    model_type_id: builtins.str
     """Filter models by the specific model_type_id. See ListModelTypes for the list of ModelType.Id's
     supported.
     """
-
     trained_only: builtins.bool
     """If true, we only return models that have the status MODEL_TRAINED, which includes non-trainable model types."""
-
     @property
-    def input_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def input_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The list of input fields to the model.
         For example, you can specify 'image', which will return models that make inferences on images like visual-classifier models.
         """
-        pass
     @property
-    def output_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def output_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The list of output fields to the model.
         For example, you can specify 'regions[...].data.concepts', which will return visual-detector models.
         """
-        pass
-    license: typing.Text
+    license: builtins.str
     """Filter by the license of the model version"""
-
     featured_only: builtins.bool
     """If true, we only return models that are handpicked by clarifai staff"""
-
     starred_only: builtins.bool
     """If true, we only return models that are starred by the requesting user"""
-
     @property
-    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of toolkit tags to filter by"""
-        pass
     @property
-    def use_cases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def use_cases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of use_case tags to filter by"""
-        pass
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of language tags to filter by"""
-        pass
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
-        query: typing.Text = ...,
-        name: typing.Text = ...,
+        query: builtins.str = ...,
+        name: builtins.str = ...,
         filter_by_user_id: builtins.bool = ...,
-        model_type_id: typing.Text = ...,
+        model_type_id: builtins.str = ...,
         trained_only: builtins.bool = ...,
-        input_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        output_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        license: typing.Text = ...,
+        input_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        output_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        license: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
-        toolkits: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        use_cases: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by",b"sort_by","sort_by_modified_at",b"sort_by_modified_at","sort_by_name",b"sort_by_name","sort_by_num_inputs",b"sort_by_num_inputs","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","featured_only",b"featured_only","filter_by_user_id",b"filter_by_user_id","input_fields",b"input_fields","languages",b"languages","license",b"license","model_type_id",b"model_type_id","name",b"name","output_fields",b"output_fields","page",b"page","per_page",b"per_page","query",b"query","sort_ascending",b"sort_ascending","sort_by",b"sort_by","sort_by_modified_at",b"sort_by_modified_at","sort_by_name",b"sort_by_name","sort_by_num_inputs",b"sort_by_num_inputs","starred_only",b"starred_only","toolkits",b"toolkits","trained_only",b"trained_only","use_cases",b"use_cases","user_app_id",b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by",b"sort_by"]) -> typing.Optional[typing_extensions.Literal["sort_by_name","sort_by_num_inputs","sort_by_modified_at"]]: ...
+        toolkits: collections.abc.Iterable[builtins.str] | None = ...,
+        use_cases: collections.abc.Iterable[builtins.str] | None = ...,
+        languages: collections.abc.Iterable[builtins.str] | None = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at"] | None: ...
+
 global___ListModelsRequest = ListModelsRequest
 
 class PatchModelToolkitsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     TOOLKITS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
-    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    action: typing.Text
+    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    action: builtins.str
     """overwrite supported"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        toolkits: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","model_id",b"model_id","toolkits",b"toolkits","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        toolkits: collections.abc.Iterable[builtins.str] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "model_id", b"model_id", "toolkits", b"toolkits", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelToolkitsRequest = PatchModelToolkitsRequest
 
 class PatchModelCheckConsentsRequest(google.protobuf.message.Message):
     """PatchModelCheckConsentsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     CHECK_CONSENTS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     """the model id"""
-
     @property
-    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """the consents"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """overwrite supported"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        check_consents: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","check_consents",b"check_consents","model_id",b"model_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        check_consents: collections.abc.Iterable[builtins.str] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "check_consents", b"check_consents", "model_id", b"model_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelCheckConsentsRequest = PatchModelCheckConsentsRequest
 
 class PatchModelUseCasesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     USECASES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
-    def usecases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    action: typing.Text
+    def usecases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    action: builtins.str
     """overwrite supported"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        usecases: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","model_id",b"model_id","usecases",b"usecases","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        usecases: collections.abc.Iterable[builtins.str] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "model_id", b"model_id", "usecases", b"usecases", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelUseCasesRequest = PatchModelUseCasesRequest
 
 class PatchModelLanguagesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     LANGUAGES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    action: typing.Text
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    action: builtins.str
     """Only overwrite supported"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","languages",b"languages","model_id",b"model_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        languages: collections.abc.Iterable[builtins.str] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "languages", b"languages", "model_id", b"model_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelLanguagesRequest = PatchModelLanguagesRequest
 
 class MultiModelToolkitResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     TOOLKITS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def toolkits(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        toolkits: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","toolkits",b"toolkits"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        toolkits: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "toolkits", b"toolkits"]) -> None: ...
+
 global___MultiModelToolkitResponse = MultiModelToolkitResponse
 
 class MultiModelCheckConsentResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     CHECK_CONSENTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        check_consents: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["check_consents",b"check_consents","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        check_consents: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["check_consents", b"check_consents", "status", b"status"]) -> None: ...
+
 global___MultiModelCheckConsentResponse = MultiModelCheckConsentResponse
 
 class MultiModelUseCaseResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     USECASES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def usecases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def usecases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        usecases: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","usecases",b"usecases"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        usecases: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "usecases", b"usecases"]) -> None: ...
+
 global___MultiModelUseCaseResponse = MultiModelUseCaseResponse
 
 class MultiModelLanguageResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     LANGUAGES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        languages: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["languages",b"languages","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        languages: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["languages", b"languages", "status", b"status"]) -> None: ...
+
 global___MultiModelLanguageResponse = MultiModelLanguageResponse
 
 class PostModelsRequest(google.protobuf.message.Message):
     """PostModelsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     MODELS_FIELD_NUMBER: builtins.int
@@ -2986,24 +3298,26 @@ class PostModelsRequest(google.protobuf.message.Message):
         We still support this but you should pass it as models=[model] so
         that this endpoint is consistent with the rest of our API.
         """
-        pass
     @property
     def models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Model]:
         """This allows you to create one or more model by posting it to the API."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model: typing.Optional[proto.clarifai.api.resources_pb2.Model] = ...,
-        models: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Model]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model",b"model","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model",b"model","models",b"models","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model: proto.clarifai.api.resources_pb2.Model | None = ...,
+        models: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Model] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "models", b"models", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModelsRequest = PostModelsRequest
 
 class PatchModelsRequest(google.protobuf.message.Message):
     """PatchModelsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODELS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -3011,42 +3325,46 @@ class PatchModelsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Model]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        models: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Model]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","models",b"models","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        models: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Model] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "models", b"models", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelsRequest = PatchModelsRequest
 
 class IdUpdateSource(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     ID_FIELD_NUMBER: builtins.int
     NEW_ID_FIELD_NUMBER: builtins.int
-    id: typing.Text
+    id: builtins.str
     """old id"""
-
-    new_id: typing.Text
+    new_id: builtins.str
     """new id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        id: typing.Text = ...,
-        new_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","new_id",b"new_id"]) -> None: ...
+        id: builtins.str = ...,
+        new_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "new_id", b"new_id"]) -> None: ...
+
 global___IdUpdateSource = IdUpdateSource
 
 class PatchModelIdsRequest(google.protobuf.message.Message):
-    """PatchModelIdRequest"""
+    """PatchModelIdsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -3055,177 +3373,203 @@ class PatchModelIdsRequest(google.protobuf.message.Message):
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IdUpdateSource]:
         """Array containing 1 entry"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     Only 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[global___IdUpdateSource]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[global___IdUpdateSource] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelIdsRequest = PatchModelIdsRequest
 
 class DeleteModelRequest(google.protobuf.message.Message):
     """DeleteModelRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    def __init__(self,
+    model_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteModelRequest = DeleteModelRequest
 
 class DeleteModelsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     DELETE_ALL_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     delete_all: builtins.bool
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
         delete_all: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_all",b"delete_all","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["delete_all", b"delete_all", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteModelsRequest = DeleteModelsRequest
 
 class PostModelsSearchesRequest(google.protobuf.message.Message):
     """Search over the available models."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_QUERY_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """Ids present in the url of the request."""
-        pass
     @property
     def model_query(self) -> proto.clarifai.api.resources_pb2.ModelQuery:
         """The body of the request."""
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination parameters here since there are no url args in this
         POST request.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_query: typing.Optional[proto.clarifai.api.resources_pb2.ModelQuery] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_query",b"model_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_query",b"model_query","pagination",b"pagination","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_query: proto.clarifai.api.resources_pb2.ModelQuery | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_query", b"model_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_query", b"model_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModelsSearchesRequest = PostModelsSearchesRequest
 
 class SingleModelResponse(google.protobuf.message.Message):
     """SingleModelResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def model(self) -> proto.clarifai.api.resources_pb2.Model: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model: typing.Optional[proto.clarifai.api.resources_pb2.Model] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model",b"model","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model",b"model","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model: proto.clarifai.api.resources_pb2.Model | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "status", b"status"]) -> None: ...
+
 global___SingleModelResponse = SingleModelResponse
 
 class MultiModelResponse(google.protobuf.message.Message):
     """MultiModelResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODELS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Model]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        models: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Model]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["models",b"models","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        models: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Model] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["models", b"models", "status", b"status"]) -> None: ...
+
 global___MultiModelResponse = MultiModelResponse
 
 class PatchModelVersionsRequest(google.protobuf.message.Message):
     """PatchModelVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSIONS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
     def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        model_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelVersion]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","model_id",b"model_id","model_versions",b"model_versions","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersion] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "model_id", b"model_id", "model_versions", b"model_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModelVersionsRequest = PatchModelVersionsRequest
 
 class GetModelVersionRequest(google.protobuf.message.Message):
     """request for different endpoints currently."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
-    def __init__(self,
+    model_id: builtins.str
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___GetModelVersionRequest = GetModelVersionRequest
 
 class ListModelVersionsRequest(google.protobuf.message.Message):
     """ListModelVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
@@ -3233,92 +3577,105 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     @property
-    def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """To list only the model versions that have these concept ids present in them."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        concept_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids",b"concept_ids","model_id",b"model_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+        concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModelVersionsRequest = ListModelVersionsRequest
 
 class DeleteModelVersionRequest(google.protobuf.message.Message):
     """DeleteModelVersionRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
-    def __init__(self,
+    model_id: builtins.str
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___DeleteModelVersionRequest = DeleteModelVersionRequest
 
 class SingleModelVersionResponse(google.protobuf.message.Message):
     """SingleModelVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_VERSION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def model_version(self) -> proto.clarifai.api.resources_pb2.ModelVersion: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_version: typing.Optional[proto.clarifai.api.resources_pb2.ModelVersion] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_version",b"model_version","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_version",b"model_version","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_version: proto.clarifai.api.resources_pb2.ModelVersion | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_version", b"model_version", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_version", b"model_version", "status", b"status"]) -> None: ...
+
 global___SingleModelVersionResponse = SingleModelVersionResponse
 
 class MultiModelVersionResponse(google.protobuf.message.Message):
     """MultiModelVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_versions",b"model_versions","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_versions", b"model_versions", "status", b"status"]) -> None: ...
+
 global___MultiModelVersionResponse = MultiModelVersionResponse
 
 class PostModelVersionsRequest(google.protobuf.message.Message):
     """Create (train) a new model version."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSIONS_FIELD_NUMBER: builtins.int
@@ -3331,37 +3688,31 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
     EVAL_INFO_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
     def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]:
         """This lets you post an existing model version rather than training a new one.
         For internal Clarifai use only to start.
         """
-        pass
     @property
     def search(self) -> proto.clarifai.api.resources_pb2.Search:
         """Use this to filter inputs that are used in training
         Alternatively, use train_search & test_search fields OR dataset_version field.
         """
-        pass
     @property
     def train_search(self) -> proto.clarifai.api.resources_pb2.Search:
         """train_search is used to specify what data to train on.
         Alternatively, use dataset_version field.
         """
-        pass
     @property
     def test_search(self) -> proto.clarifai.api.resources_pb2.Search:
         """test_search is used to specify what data to test on.
         Alternatively, use dataset_version field.
         """
-        pass
     evaluate_after_training: builtins.bool
     """whether to evaluate the transfer trained model after training"""
-
-    description: typing.Text
+    description: builtins.str
     """Description about this training run"""
-
     @property
     def dataset_version(self) -> proto.clarifai.api.resources_pb2.DatasetVersion:
         """Use the data from this dataset version for training.
@@ -3371,161 +3722,191 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
         When dataset_version.id is not set,
         a new dataset version will be created in the dataset using provided dataset_version fields.
         """
-        pass
     @property
     def eval_info(self) -> proto.clarifai.api.resources_pb2.EvalInfo:
         """When evaluate_after_training set to true, we will do evaluation immediately after training finishes.
         We will merge this with default_eval_info.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        model_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelVersion]] = ...,
-        search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        train_search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        test_search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersion] | None = ...,
+        search: proto.clarifai.api.resources_pb2.Search | None = ...,
+        train_search: proto.clarifai.api.resources_pb2.Search | None = ...,
+        test_search: proto.clarifai.api.resources_pb2.Search | None = ...,
         evaluate_after_training: builtins.bool = ...,
-        description: typing.Text = ...,
-        dataset_version: typing.Optional[proto.clarifai.api.resources_pb2.DatasetVersion] = ...,
-        eval_info: typing.Optional[proto.clarifai.api.resources_pb2.EvalInfo] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_version",b"dataset_version","eval_info",b"eval_info","search",b"search","test_search",b"test_search","train_search",b"train_search","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_version",b"dataset_version","description",b"description","eval_info",b"eval_info","evaluate_after_training",b"evaluate_after_training","model_id",b"model_id","model_versions",b"model_versions","search",b"search","test_search",b"test_search","train_search",b"train_search","user_app_id",b"user_app_id"]) -> None: ...
+        description: builtins.str = ...,
+        dataset_version: proto.clarifai.api.resources_pb2.DatasetVersion | None = ...,
+        eval_info: proto.clarifai.api.resources_pb2.EvalInfo | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "eval_info", b"eval_info", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "description", b"description", "eval_info", b"eval_info", "evaluate_after_training", b"evaluate_after_training", "model_id", b"model_id", "model_versions", b"model_versions", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModelVersionsRequest = PostModelVersionsRequest
 
 class PostWorkflowVersionsUnPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     PUBLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     @property
     def publications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WorkflowVersionUnPublishRequest]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        publications: typing.Optional[typing.Iterable[global___WorkflowVersionUnPublishRequest]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["publications",b"publications","user_app_id",b"user_app_id","workflow_id",b"workflow_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        publications: collections.abc.Iterable[global___WorkflowVersionUnPublishRequest] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["publications", b"publications", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___PostWorkflowVersionsUnPublishRequest = PostWorkflowVersionsUnPublishRequest
 
 class PostWorkflowVersionsPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     PUBLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     @property
     def publications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WorkflowVersionPublishRequest]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        publications: typing.Optional[typing.Iterable[global___WorkflowVersionPublishRequest]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["publications",b"publications","user_app_id",b"user_app_id","workflow_id",b"workflow_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        publications: collections.abc.Iterable[global___WorkflowVersionPublishRequest] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["publications", b"publications", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___PostWorkflowVersionsPublishRequest = PostWorkflowVersionsPublishRequest
 
 class WorkflowVersionPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VERSION_ID_FIELD_NUMBER: builtins.int
-    version_id: typing.Text
-    def __init__(self,
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["version_id",b"version_id"]) -> None: ...
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["version_id", b"version_id"]) -> None: ...
+
 global___WorkflowVersionPublishRequest = WorkflowVersionPublishRequest
 
 class WorkflowVersionUnPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VERSION_ID_FIELD_NUMBER: builtins.int
-    version_id: typing.Text
-    def __init__(self,
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["version_id",b"version_id"]) -> None: ...
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["version_id", b"version_id"]) -> None: ...
+
 global___WorkflowVersionUnPublishRequest = WorkflowVersionUnPublishRequest
 
 class ModelVersionPublishRequest(google.protobuf.message.Message):
     """ModelVersionPublishRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VERSION_ID_FIELD_NUMBER: builtins.int
-    version_id: typing.Text
-    def __init__(self,
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["version_id",b"version_id"]) -> None: ...
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["version_id", b"version_id"]) -> None: ...
+
 global___ModelVersionPublishRequest = ModelVersionPublishRequest
 
 class PostModelVersionsPublishRequest(google.protobuf.message.Message):
     """PostModelVersionsPublishRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     PUBLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
     def publications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelVersionPublishRequest]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        publications: typing.Optional[typing.Iterable[global___ModelVersionPublishRequest]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","publications",b"publications","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        publications: collections.abc.Iterable[global___ModelVersionPublishRequest] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "publications", b"publications", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModelVersionsPublishRequest = PostModelVersionsPublishRequest
 
 class ModelVersionUnpublishRequest(google.protobuf.message.Message):
     """ModelVersionUnpublishRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     VERSION_ID_FIELD_NUMBER: builtins.int
-    version_id: typing.Text
-    def __init__(self,
+    version_id: builtins.str
+    def __init__(
+        self,
         *,
-        version_id: typing.Text = ...,
-        ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["version_id",b"version_id"]) -> None: ...
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["version_id", b"version_id"]) -> None: ...
+
 global___ModelVersionUnpublishRequest = ModelVersionUnpublishRequest
 
 class PostModelVersionsUnPublishRequest(google.protobuf.message.Message):
     """PostModelVersionsUnPublishRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     PUBLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     @property
     def publications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelVersionUnpublishRequest]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        publications: typing.Optional[typing.Iterable[global___ModelVersionUnpublishRequest]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","publications",b"publications","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        publications: collections.abc.Iterable[global___ModelVersionUnpublishRequest] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "publications", b"publications", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModelVersionsUnPublishRequest = PostModelVersionsUnPublishRequest
 
 class PostModelVersionMetricsRequest(google.protobuf.message.Message):
     """Evaluate this model version."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -3534,56 +3915,59 @@ class PostModelVersionMetricsRequest(google.protobuf.message.Message):
     EVAL_INFO_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
+    model_id: builtins.str
+    version_id: builtins.str
     max_examples: builtins.int
     @property
     def test_search(self) -> proto.clarifai.api.resources_pb2.Search:
         """Use this to filter inputs that are used in evaluation"""
-        pass
     @property
     def eval_info(self) -> proto.clarifai.api.resources_pb2.EvalInfo:
         """evaluation info. Such as dataset used for evaluation."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
         max_examples: builtins.int = ...,
-        test_search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        eval_info: typing.Optional[proto.clarifai.api.resources_pb2.EvalInfo] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["eval_info",b"eval_info","test_search",b"test_search","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["eval_info",b"eval_info","max_examples",b"max_examples","model_id",b"model_id","test_search",b"test_search","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        test_search: proto.clarifai.api.resources_pb2.Search | None = ...,
+        eval_info: proto.clarifai.api.resources_pb2.EvalInfo | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "test_search", b"test_search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "max_examples", b"max_examples", "model_id", b"model_id", "test_search", b"test_search", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___PostModelVersionMetricsRequest = PostModelVersionMetricsRequest
 
 class GetModelVersionMetricsRequest(google.protobuf.message.Message):
     """Get the already computed evaluation metrics for this model
     version.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
     FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
-    version_id: typing.Text
+    model_id: builtins.str
+    version_id: builtins.str
     @property
     def fields(self) -> proto.clarifai.api.resources_pb2.FieldsValue:
         """Any of the fields you wish to return from multiclass_metrics"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        fields: typing.Optional[proto.clarifai.api.resources_pb2.FieldsValue] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["fields",b"fields","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["fields",b"fields","model_id",b"model_id","user_app_id",b"user_app_id","version_id",b"version_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        fields: proto.clarifai.api.resources_pb2.FieldsValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["fields", b"fields", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["fields", b"fields", "model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
 global___GetModelVersionMetricsRequest = GetModelVersionMetricsRequest
 
 class GetModelTypeRequest(google.protobuf.message.Message):
@@ -3596,133 +3980,149 @@ class GetModelTypeRequest(google.protobuf.message.Message):
 
     GetModelTypeRequest
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_TYPE_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """use and app combo. Not really used for this endpoint at this time so may go away in future."""
-        pass
-    model_type_id: typing.Text
+    model_type_id: builtins.str
     """The specific ModelType.Id you want to retrieve."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_type_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_type_id",b"model_type_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_type_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_type_id", b"model_type_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetModelTypeRequest = GetModelTypeRequest
 
 class ListModelTypesRequest(google.protobuf.message.Message):
     """ListModelTypesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """use and app combo. Not really used for this endpoint at this time so may go away in future."""
-        pass
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModelTypesRequest = ListModelTypesRequest
 
 class ListOpenSourceLicensesRequest(google.protobuf.message.Message):
     """ListOpenSourceLicensesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___ListOpenSourceLicensesRequest = ListOpenSourceLicensesRequest
 
 class ListOpenSourceLicensesResponse(google.protobuf.message.Message):
     """ListOpenSourceLicensesResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     LICENSES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def licenses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def licenses(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        licenses: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["licenses",b"licenses","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        licenses: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["licenses", b"licenses", "status", b"status"]) -> None: ...
+
 global___ListOpenSourceLicensesResponse = ListOpenSourceLicensesResponse
 
 class SingleModelTypeResponse(google.protobuf.message.Message):
     """SingleModelTypeResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_TYPE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of the response."""
-        pass
     @property
     def model_type(self) -> proto.clarifai.api.resources_pb2.ModelType:
         """The retrieved ModelType object. ."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_type: typing.Optional[proto.clarifai.api.resources_pb2.ModelType] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_type",b"model_type","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_type",b"model_type","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_type: proto.clarifai.api.resources_pb2.ModelType | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_type", b"model_type", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_type", b"model_type", "status", b"status"]) -> None: ...
+
 global___SingleModelTypeResponse = SingleModelTypeResponse
 
 class MultiModelTypeResponse(google.protobuf.message.Message):
     """MultiModelTypeResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_TYPES_FIELD_NUMBER: builtins.int
     MODEL_IMPORTERS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of the response."""
-        pass
     @property
     def model_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelType]:
         """List of ModelType objects."""
-        pass
     @property
     def model_importers(self) -> proto.clarifai.api.resources_pb2.ModelTypeField:
         """List of model importers"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_types: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelType]] = ...,
-        model_importers: typing.Optional[proto.clarifai.api.resources_pb2.ModelTypeField] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_importers",b"model_importers","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_importers",b"model_importers","model_types",b"model_types","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_types: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelType] | None = ...,
+        model_importers: proto.clarifai.api.resources_pb2.ModelTypeField | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_importers", b"model_importers", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_importers", b"model_importers", "model_types", b"model_types", "status", b"status"]) -> None: ...
+
 global___MultiModelTypeResponse = MultiModelTypeResponse
 
 class GetModelVersionInputExampleRequest(google.protobuf.message.Message):
     """GetModelVersionInputExampleRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
@@ -3730,30 +4130,30 @@ class GetModelVersionInputExampleRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """authorization field  (contains app/user id info)"""
-        pass
-    model_id: typing.Text
+    model_id: builtins.str
     """id of model the example belongs to"""
-
-    model_version_id: typing.Text
+    model_version_id: builtins.str
     """specific version the example belongs to"""
-
-    example_id: typing.Text
+    example_id: builtins.str
     """Id of example to fetch"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        model_version_id: typing.Text = ...,
-        example_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["example_id",b"example_id","model_id",b"model_id","model_version_id",b"model_version_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        example_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["example_id", b"example_id", "model_id", b"model_id", "model_version_id", b"model_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetModelVersionInputExampleRequest = GetModelVersionInputExampleRequest
 
 class ListModelVersionInputExamplesRequest(google.protobuf.message.Message):
     """ListModelVersionInputExamplesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
@@ -3762,230 +4162,258 @@ class ListModelVersionInputExamplesRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """authorization field  (contains app/user id info)"""
-        pass
-    model_id: typing.Text
+    model_id: builtins.str
     """id of model the example belongs to"""
-
-    model_version_id: typing.Text
+    model_version_id: builtins.str
     """specific version the example belongs to"""
-
     page: builtins.int
     """Optional, defaults to 1."""
-
     per_page: builtins.int
     """Optional, defaults to 128 references per page."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
-        model_version_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","model_version_id",b"model_version_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "model_version_id", b"model_version_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModelVersionInputExamplesRequest = ListModelVersionInputExamplesRequest
 
 class SingleModelVersionInputExampleResponse(google.protobuf.message.Message):
     """SingleModelVersionInputExampleResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_VERSION_INPUT_EXAMPLE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """status of response"""
-        pass
     @property
     def model_version_input_example(self) -> proto.clarifai.api.resources_pb2.ModelVersionInputExample:
         """model input example message"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_version_input_example: typing.Optional[proto.clarifai.api.resources_pb2.ModelVersionInputExample] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model_version_input_example",b"model_version_input_example","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_version_input_example",b"model_version_input_example","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_version_input_example: proto.clarifai.api.resources_pb2.ModelVersionInputExample | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_version_input_example", b"model_version_input_example", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_version_input_example", b"model_version_input_example", "status", b"status"]) -> None: ...
+
 global___SingleModelVersionInputExampleResponse = SingleModelVersionInputExampleResponse
 
 class MultiModelVersionInputExampleResponse(google.protobuf.message.Message):
     """MultiModelVersionInputExampleResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_VERSION_INPUT_EXAMPLES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """status of response"""
-        pass
     @property
     def model_version_input_examples(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersionInputExample]:
         """model input example messages"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_version_input_examples: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelVersionInputExample]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_version_input_examples",b"model_version_input_examples","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_version_input_examples: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersionInputExample] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_version_input_examples", b"model_version_input_examples", "status", b"status"]) -> None: ...
+
 global___MultiModelVersionInputExampleResponse = MultiModelVersionInputExampleResponse
 
 class ListModelReferencesRequest(google.protobuf.message.Message):
     """ListModelReferencesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    model_id: typing.Text
+    model_id: builtins.str
     page: builtins.int
     """Optional, defaults to 1."""
-
     per_page: builtins.int
     """Optional, defaults to 128 references per page."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        model_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id",b"model_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModelReferencesRequest = ListModelReferencesRequest
 
 class MultiModelReferenceResponse(google.protobuf.message.Message):
     """MultiModelReferenceResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_REFERENCES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def model_references(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelReference]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        model_references: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModelReference]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_references",b"model_references","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        model_references: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelReference] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_references", b"model_references", "status", b"status"]) -> None: ...
+
 global___MultiModelReferenceResponse = MultiModelReferenceResponse
 
 class MultiOutputResponse(google.protobuf.message.Message):
     """MultiOutputResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     OUTPUTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Output]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        outputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Output]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["outputs",b"outputs","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        outputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Output] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["outputs", b"outputs", "status", b"status"]) -> None: ...
+
 global___MultiOutputResponse = MultiOutputResponse
 
 class ListScopesRequest(google.protobuf.message.Message):
     """ListScopesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     KEY_TYPE_FIELD_NUMBER: builtins.int
     USER_APP_ID_FIELD_NUMBER: builtins.int
-    key_type: typing.Text
+    key_type: builtins.str
     """If "personal_access_token" include scopes and endpoints available to personal access tokens.
     If "api_key" include scopes and endpoints available to app-specific keys. (default)
     """
-
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """For all user specific information we include user_app_id to get the user_id in a consistent way"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        key_type: typing.Text = ...,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["key_type",b"key_type","user_app_id",b"user_app_id"]) -> None: ...
+        key_type: builtins.str = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["key_type", b"key_type", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListScopesRequest = ListScopesRequest
 
 class MyScopesRequest(google.protobuf.message.Message):
     """MyScopesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___MyScopesRequest = MyScopesRequest
 
 class MyScopesUserRequest(google.protobuf.message.Message):
     """MyScopesUserRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___MyScopesUserRequest = MyScopesUserRequest
 
 class MyScopesRootRequest(google.protobuf.message.Message):
     """MyScopesRootRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    def __init__(self,
-        ) -> None: ...
+
+    def __init__(
+        self,
+    ) -> None: ...
+
 global___MyScopesRootRequest = MyScopesRootRequest
 
 class MultiScopeDepsResponse(google.protobuf.message.Message):
     """MultiScopeDepsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     SCOPE_DEPS_FIELD_NUMBER: builtins.int
     ENDPOINT_DEPS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the request."""
-        pass
     @property
     def scope_deps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ScopeDeps]:
         """scopes is a list of low-level scopes and their dependencies."""
-        pass
     @property
     def endpoint_deps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.EndpointDeps]:
         """endpoint_scopes is a listof all the publicly available endponts which can be
         used as scopes as well. A call to each of those endpoint depends on a subset
         of the above "scopes"
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        scope_deps: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ScopeDeps]] = ...,
-        endpoint_deps: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.EndpointDeps]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["endpoint_deps",b"endpoint_deps","scope_deps",b"scope_deps","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        scope_deps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ScopeDeps] | None = ...,
+        endpoint_deps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.EndpointDeps] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["endpoint_deps", b"endpoint_deps", "scope_deps", b"scope_deps", "status", b"status"]) -> None: ...
+
 global___MultiScopeDepsResponse = MultiScopeDepsResponse
 
 class MultiScopeResponse(google.protobuf.message.Message):
     """MultiScopeResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     SCOPES_FIELD_NUMBER: builtins.int
     APP_FIELD_NUMBER: builtins.int
@@ -3994,35 +4422,35 @@ class MultiScopeResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the request."""
-        pass
     @property
-    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of the scopes that your key has."""
-        pass
     @property
     def app(self) -> proto.clarifai.api.resources_pb2.App:
         """The app that the key has access to."""
-        pass
     @property
-    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of endpoint permissions that your key has."""
-        pass
-    user_feature_flags: typing.Text
-    def __init__(self,
+    user_feature_flags: builtins.str
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        scopes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        app: typing.Optional[proto.clarifai.api.resources_pb2.App] = ...,
-        endpoints: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        user_feature_flags: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app",b"app","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app",b"app","endpoints",b"endpoints","scopes",b"scopes","status",b"status","user_feature_flags",b"user_feature_flags"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        scopes: collections.abc.Iterable[builtins.str] | None = ...,
+        app: proto.clarifai.api.resources_pb2.App | None = ...,
+        endpoints: collections.abc.Iterable[builtins.str] | None = ...,
+        user_feature_flags: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "endpoints", b"endpoints", "scopes", b"scopes", "status", b"status", "user_feature_flags", b"user_feature_flags"]) -> None: ...
+
 global___MultiScopeResponse = MultiScopeResponse
 
 class MultiScopeUserResponse(google.protobuf.message.Message):
     """MultiScopeUserResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     SCOPES_FIELD_NUMBER: builtins.int
     ENDPOINTS_FIELD_NUMBER: builtins.int
@@ -4030,30 +4458,31 @@ class MultiScopeUserResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the request."""
-        pass
     @property
-    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of the scopes that your key has."""
-        pass
     @property
-    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of endpoint permissions that your key has."""
-        pass
-    user_feature_flags: typing.Text
-    def __init__(self,
+    user_feature_flags: builtins.str
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        scopes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        endpoints: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        user_feature_flags: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["endpoints",b"endpoints","scopes",b"scopes","status",b"status","user_feature_flags",b"user_feature_flags"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        scopes: collections.abc.Iterable[builtins.str] | None = ...,
+        endpoints: collections.abc.Iterable[builtins.str] | None = ...,
+        user_feature_flags: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["endpoints", b"endpoints", "scopes", b"scopes", "status", b"status", "user_feature_flags", b"user_feature_flags"]) -> None: ...
+
 global___MultiScopeUserResponse = MultiScopeUserResponse
 
 class MultiScopeRootResponse(google.protobuf.message.Message):
     """MultiScopeRootResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     SCOPES_FIELD_NUMBER: builtins.int
     ENDPOINTS_FIELD_NUMBER: builtins.int
@@ -4061,47 +4490,52 @@ class MultiScopeRootResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the request."""
-        pass
     @property
-    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of the scopes that your key has."""
-        pass
     @property
-    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """This is a list of endpoint permissions that your key has."""
-        pass
-    user_feature_flags: typing.Text
-    def __init__(self,
+    user_feature_flags: builtins.str
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        scopes: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        endpoints: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        user_feature_flags: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["endpoints",b"endpoints","scopes",b"scopes","status",b"status","user_feature_flags",b"user_feature_flags"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        scopes: collections.abc.Iterable[builtins.str] | None = ...,
+        endpoints: collections.abc.Iterable[builtins.str] | None = ...,
+        user_feature_flags: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["endpoints", b"endpoints", "scopes", b"scopes", "status", b"status", "user_feature_flags", b"user_feature_flags"]) -> None: ...
+
 global___MultiScopeRootResponse = MultiScopeRootResponse
 
 class GetSearchRequest(google.protobuf.message.Message):
     """GetSearchRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
-    def __init__(self,
+    id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetSearchRequest = GetSearchRequest
 
 class ListSearchesRequest(google.protobuf.message.Message):
     """ListSearchesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -4111,25 +4545,27 @@ class ListSearchesRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListSearchesRequest = ListSearchesRequest
 
 class PostSearchesRequest(google.protobuf.message.Message):
     """PostSearchesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
@@ -4137,259 +4573,275 @@ class PostSearchesRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def query(self) -> proto.clarifai.api.resources_pb2.Query:
         """The query; this specifies how the data to be searched
         this will be replaced by "Searches"
         """
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searched to be executed or saved
         Eventually the request level fields will be deprecated in favor of this object
         """
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination information to paginate through search result Hits."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        query: typing.Optional[proto.clarifai.api.resources_pb2.Query] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["pagination",b"pagination","query",b"query","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["pagination",b"pagination","query",b"query","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        query: proto.clarifai.api.resources_pb2.Query | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "query", b"query", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "query", b"query", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostSearchesRequest = PostSearchesRequest
 
 class PatchInputsSearchesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searches to be patched"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched Search objects
     For now only action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchInputsSearchesRequest = PatchInputsSearchesRequest
 
 class PatchAnnotationsSearchesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searches to be patched"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched Search objects
     For now only action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAnnotationsSearchesRequest = PatchAnnotationsSearchesRequest
 
 class PatchSearchesRequest(google.protobuf.message.Message):
     """PatchSearchesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searches to be patched"""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched Search objects
     For now only action 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchSearchesRequest = PatchSearchesRequest
 
 class PostSearchesByIDRequest(google.protobuf.message.Message):
     """PostSearchesByIDRequest performs returns results of a saved search given its ID"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
+    id: builtins.str
     """ID for saves search to be executed"""
-
     @property
     def pagination(self) -> global___Pagination:
         """Pagination information to paginate through search result Hits."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","pagination",b"pagination","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostSearchesByIDRequest = PostSearchesByIDRequest
 
 class DeleteSearchRequest(google.protobuf.message.Message):
     """DeleteSearchRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
-    def __init__(self,
+    id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteSearchRequest = DeleteSearchRequest
 
 class PostAnnotationsSearchesRequest(google.protobuf.message.Message):
     """Execute a new annotation search and optionally save it
     annotation search over annotations using rank and filter proto
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searched to be executed or saved"""
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination information to paginate through search result Hits."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["pagination",b"pagination","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAnnotationsSearchesRequest = PostAnnotationsSearchesRequest
 
 class DeleteAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """DeleteAnnotationSearchMetricsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
-    def __init__(self,
+    id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteAnnotationSearchMetricsRequest = DeleteAnnotationSearchMetricsRequest
 
 class PostInputsSearchesRequest(google.protobuf.message.Message):
     """Execute a new input search and optionally save it"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The searched to be executed or saved"""
-        pass
     @property
     def pagination(self) -> global___Pagination:
         """Pagination information to paginate through search result Hits."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        pagination: typing.Optional[global___Pagination] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["pagination",b"pagination","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["pagination",b"pagination","searches",b"searches","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostInputsSearchesRequest = PostInputsSearchesRequest
 
 class SingleSearchResponse(google.protobuf.message.Message):
     """SingleSearchResponse returns saved search in response to GetSearchRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of whether the search was successful."""
-        pass
     @property
     def search(self) -> proto.clarifai.api.resources_pb2.Search: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        search: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["search",b"search","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["search",b"search","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        search: proto.clarifai.api.resources_pb2.Search | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["search", b"search", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["search", b"search", "status", b"status"]) -> None: ...
+
 global___SingleSearchResponse = SingleSearchResponse
 
 class MultiSearchResponse(google.protobuf.message.Message):
     """MultiSearchResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     HITS_FIELD_NUMBER: builtins.int
@@ -4398,37 +4850,36 @@ class MultiSearchResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of whether the search was successful."""
-        pass
-    id: typing.Text
+    id: builtins.str
     """A unique id which uniquely identifies a search"""
-
     @property
     def hits(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Hit]:
         """The list of search result Hits."""
-        pass
     @property
     def query(self) -> proto.clarifai.api.resources_pb2.Query:
         """The original query provided in the request."""
-        pass
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The original Searches provided in the request."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        id: typing.Text = ...,
-        hits: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Hit]] = ...,
-        query: typing.Optional[proto.clarifai.api.resources_pb2.Query] = ...,
-        searches: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Search]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["query",b"query","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["hits",b"hits","id",b"id","query",b"query","searches",b"searches","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        id: builtins.str = ...,
+        hits: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Hit] | None = ...,
+        query: proto.clarifai.api.resources_pb2.Query | None = ...,
+        searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["query", b"query", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["hits", b"hits", "id", b"id", "query", b"query", "searches", b"searches", "status", b"status"]) -> None: ...
+
 global___MultiSearchResponse = MultiSearchResponse
 
 class PostAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """PostAnnotationSearchMetricsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     GROUND_TRUTH_FIELD_NUMBER: builtins.int
@@ -4437,95 +4888,104 @@ class PostAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     EVALUATION_TYPE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
+    id: builtins.str
     """A unique customer facing id to identify this eval request"""
-
     @property
     def ground_truth(self) -> proto.clarifai.api.resources_pb2.Search:
         """The ground truth we are evaluating against"""
-        pass
     @property
     def search_to_eval(self) -> proto.clarifai.api.resources_pb2.Search:
         """The set we are evaluating"""
-        pass
     @property
     def data(self) -> proto.clarifai.api.resources_pb2.Data:
         """List of concepts to evaluate are expected to be in data.concepts
         If nil, then all app concepts are used
         """
-        pass
     evaluation_type: proto.clarifai.api.resources_pb2.EvaluationType.ValueType
     """The type of evaluation to use"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ground_truth: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        search_to_eval: typing.Optional[proto.clarifai.api.resources_pb2.Search] = ...,
-        data: typing.Optional[proto.clarifai.api.resources_pb2.Data] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+        ground_truth: proto.clarifai.api.resources_pb2.Search | None = ...,
+        search_to_eval: proto.clarifai.api.resources_pb2.Search | None = ...,
+        data: proto.clarifai.api.resources_pb2.Data | None = ...,
         evaluation_type: proto.clarifai.api.resources_pb2.EvaluationType.ValueType = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["data",b"data","ground_truth",b"ground_truth","search_to_eval",b"search_to_eval","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data",b"data","evaluation_type",b"evaluation_type","ground_truth",b"ground_truth","id",b"id","search_to_eval",b"search_to_eval","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["data", b"data", "ground_truth", b"ground_truth", "search_to_eval", b"search_to_eval", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "evaluation_type", b"evaluation_type", "ground_truth", b"ground_truth", "id", b"id", "search_to_eval", b"search_to_eval", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAnnotationSearchMetricsRequest = PostAnnotationSearchMetricsRequest
 
 class GetAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """GetAnnotationSearchMetricsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
+    id: builtins.str
     """Unique custom facing id that identifies the eval to get"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetAnnotationSearchMetricsRequest = GetAnnotationSearchMetricsRequest
 
 class ListAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """ListAnnotationSearchMetricsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListAnnotationSearchMetricsRequest = ListAnnotationSearchMetricsRequest
 
 class MultiAnnotationSearchMetricsResponse(google.protobuf.message.Message):
     """MultiAnnotationSearchMetricsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ANNOTATION_SEARCH_METRICS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of the request"""
-        pass
     @property
     def annotation_search_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AnnotationSearchMetrics]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        annotation_search_metrics: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AnnotationSearchMetrics]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_search_metrics",b"annotation_search_metrics","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotation_search_metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AnnotationSearchMetrics] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_search_metrics", b"annotation_search_metrics", "status", b"status"]) -> None: ...
+
 global___MultiAnnotationSearchMetricsResponse = MultiAnnotationSearchMetricsResponse
 
 class ListAnnotationFiltersRequest(google.protobuf.message.Message):
     """ListAnnotationFiltersRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -4535,44 +4995,49 @@ class ListAnnotationFiltersRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListAnnotationFiltersRequest = ListAnnotationFiltersRequest
 
 class GetAnnotationFilterRequest(google.protobuf.message.Message):
     """GetAnnotationFilterRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    annotation_filter_id: typing.Text
+    annotation_filter_id: builtins.str
     """Identify annotation filter by id."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotation_filter_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_id",b"annotation_filter_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotation_filter_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_id", b"annotation_filter_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetAnnotationFilterRequest = GetAnnotationFilterRequest
 
 class PostAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to add one or more annotation filters."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTERS_FIELD_NUMBER: builtins.int
     @property
@@ -4580,19 +5045,22 @@ class PostAnnotationFiltersRequest(google.protobuf.message.Message):
     @property
     def annotation_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AnnotationFilter]:
         """List of annotation filters that are requested to be added."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotation_filters: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filters",b"annotation_filters","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotation_filters: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filters", b"annotation_filters", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAnnotationFiltersRequest = PostAnnotationFiltersRequest
 
 class PatchAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to patch several annotation filters."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTERS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -4601,81 +5069,94 @@ class PatchAnnotationFiltersRequest(google.protobuf.message.Message):
     @property
     def annotation_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AnnotationFilter]:
         """List of annotation filters that are requested to be updated."""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now, only 'overwrite' action is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotation_filters: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","annotation_filters",b"annotation_filters","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotation_filters: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "annotation_filters", b"annotation_filters", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchAnnotationFiltersRequest = PatchAnnotationFiltersRequest
 
 class DeleteAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to delete several annotation filters by list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTER_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def annotation_filter_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def annotation_filter_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Specify which filters to delete."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        annotation_filter_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_ids",b"annotation_filter_ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        annotation_filter_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_ids", b"annotation_filter_ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteAnnotationFiltersRequest = DeleteAnnotationFiltersRequest
 
 class MultiAnnotationFilterResponse(google.protobuf.message.Message):
     """MultiAnnotationFilterResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTERS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def annotation_filters(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AnnotationFilter]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        annotation_filters: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filters",b"annotation_filters","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotation_filters: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AnnotationFilter] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filters", b"annotation_filters", "status", b"status"]) -> None: ...
+
 global___MultiAnnotationFilterResponse = MultiAnnotationFilterResponse
 
 class SingleAnnotationFilterResponse(google.protobuf.message.Message):
     """SingleAnnotationFilterResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     ANNOTATION_FILTER_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def annotation_filter(self) -> proto.clarifai.api.resources_pb2.AnnotationFilter: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        annotation_filter: typing.Optional[proto.clarifai.api.resources_pb2.AnnotationFilter] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotation_filter",b"annotation_filter","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter",b"annotation_filter","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotation_filter: proto.clarifai.api.resources_pb2.AnnotationFilter | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter", "status", b"status"]) -> None: ...
+
 global___SingleAnnotationFilterResponse = SingleAnnotationFilterResponse
 
 class PostValidatePasswordRequest(google.protobuf.message.Message):
     """PostValidatePasswordRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
     @property
@@ -4683,39 +5164,45 @@ class PostValidatePasswordRequest(google.protobuf.message.Message):
     @property
     def password(self) -> proto.clarifai.api.resources_pb2.Password:
         """password to be validated"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        password: typing.Optional[proto.clarifai.api.resources_pb2.Password] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["password",b"password","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["password",b"password","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        password: proto.clarifai.api.resources_pb2.Password | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["password", b"password", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["password", b"password", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostValidatePasswordRequest = PostValidatePasswordRequest
 
 class SinglePasswordValidationResponse(google.protobuf.message.Message):
     """SinglePasswordValidationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     PASSWORD_VIOLATIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Standard clarifai status code"""
-        pass
     @property
     def password_violations(self) -> proto.clarifai.api.resources_pb2.PasswordViolations: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        password_violations: typing.Optional[proto.clarifai.api.resources_pb2.PasswordViolations] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["password_violations",b"password_violations","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["password_violations",b"password_violations","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        password_violations: proto.clarifai.api.resources_pb2.PasswordViolations | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["password_violations", b"password_violations", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["password_violations", b"password_violations", "status", b"status"]) -> None: ...
+
 global___SinglePasswordValidationResponse = SinglePasswordValidationResponse
 
 class GetWorkflowRequest(google.protobuf.message.Message):
     """GetWorkflowRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     FAVOR_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
@@ -4723,37 +5210,37 @@ class GetWorkflowRequest(google.protobuf.message.Message):
     EXCLUDE_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """Workflow ID to retrieve
     If no ID is specified we return default workflow of the application
     If an ID is specified by default we first looks into Clarifai workflows for a Workflow ID
     """
-
     favor_clarifai_workflows: builtins.bool
     """Use this flag to look into clarifai published workflows first for a Workflow ID"""
-
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-        pass
     exclude_clarifai_workflows: builtins.bool
     """if true will not expand search to clarifai workflows"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
         favor_clarifai_workflows: builtins.bool = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         exclude_clarifai_workflows: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","exclude_clarifai_workflows",b"exclude_clarifai_workflows","favor_clarifai_workflows",b"favor_clarifai_workflows","user_app_id",b"user_app_id","workflow_id",b"workflow_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "exclude_clarifai_workflows", b"exclude_clarifai_workflows", "favor_clarifai_workflows", b"favor_clarifai_workflows", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___GetWorkflowRequest = GetWorkflowRequest
 
 class ListWorkflowsRequest(google.protobuf.message.Message):
     """ListWorkflowsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -4771,83 +5258,81 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
     """
-
     sort_by_id: builtins.bool
     """Whether to order by the name"""
-
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time.
     If neither sort option is set to true, will sort by modified_at.
     """
-
-    query: typing.Text
+    query: builtins.str
     """Query various text fields that can contain the words in the query string."""
-
-    id: typing.Text
+    id: builtins.str
     """Filter by the id of the workflow. This supports wilcard queries like "gen*" to match "general" as an example.
     Deprecated in favor of query
     """
-
     featured_only: builtins.bool
     """If true, we only return workflows that are handpicked by clarifai staff"""
-
     starred_only: builtins.bool
     """If true, we only return workflows that are starred by the requesting user"""
-
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
-        query: typing.Text = ...,
-        id: typing.Text = ...,
+        query: builtins.str = ...,
+        id: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by",b"sort_by","sort_by_id",b"sort_by_id","sort_by_modified_at",b"sort_by_modified_at","user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","featured_only",b"featured_only","id",b"id","page",b"page","per_page",b"per_page","query",b"query","sort_ascending",b"sort_ascending","sort_by",b"sort_by","sort_by_id",b"sort_by_id","sort_by_modified_at",b"sort_by_modified_at","starred_only",b"starred_only","user_app_id",b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by",b"sort_by"]) -> typing.Optional[typing_extensions.Literal["sort_by_id","sort_by_modified_at"]]: ...
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_id", "sort_by_modified_at"] | None: ...
+
 global___ListWorkflowsRequest = ListWorkflowsRequest
 
 class PostWorkflowsRequest(google.protobuf.message.Message):
     """PostWorkflowsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOWS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def workflows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Workflow]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflows: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Workflow]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id","workflows",b"workflows"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflows: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Workflow] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "workflows", b"workflows"]) -> None: ...
+
 global___PostWorkflowsRequest = PostWorkflowsRequest
 
 class PatchWorkflowsRequest(google.protobuf.message.Message):
     """PatchWorkflowsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOWS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -4855,98 +5340,146 @@ class PatchWorkflowsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def workflows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Workflow]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflows: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Workflow]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","user_app_id",b"user_app_id","workflows",b"workflows"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflows: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Workflow] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "user_app_id", b"user_app_id", "workflows", b"workflows"]) -> None: ...
+
 global___PatchWorkflowsRequest = PatchWorkflowsRequest
+
+class PatchWorkflowIdsRequest(google.protobuf.message.Message):
+    """PatchWorkflowIdsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___IdUpdateSource]:
+        """Array containing 1 entry"""
+    action: builtins.str
+    """The action to perform on the patched objects
+    Only 'overwrite' is supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[global___IdUpdateSource] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchWorkflowIdsRequest = PatchWorkflowIdsRequest
 
 class DeleteWorkflowRequest(google.protobuf.message.Message):
     """DeleteWorkflowRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
-    def __init__(self,
+    workflow_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id","workflow_id",b"workflow_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___DeleteWorkflowRequest = DeleteWorkflowRequest
 
 class DeleteWorkflowsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     DELETE_ALL_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     delete_all: builtins.bool
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
         delete_all: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_all",b"delete_all","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["delete_all", b"delete_all", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteWorkflowsRequest = DeleteWorkflowsRequest
 
 class SingleWorkflowResponse(google.protobuf.message.Message):
     """SingleWorkflowResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def workflow(self) -> proto.clarifai.api.resources_pb2.Workflow: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        workflow: typing.Optional[proto.clarifai.api.resources_pb2.Workflow] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","workflow",b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","workflow",b"workflow"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow: proto.clarifai.api.resources_pb2.Workflow | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workflow", b"workflow"]) -> None: ...
+
 global___SingleWorkflowResponse = SingleWorkflowResponse
 
 class MultiWorkflowResponse(google.protobuf.message.Message):
     """MultiWorkflowResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     WORKFLOWS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def workflows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Workflow]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        workflows: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Workflow]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","workflows",b"workflows"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflows: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Workflow] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workflows", b"workflows"]) -> None: ...
+
 global___MultiWorkflowResponse = MultiWorkflowResponse
 
 class PostWorkflowResultsRequest(google.protobuf.message.Message):
     """PostWorkflowResultsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -4956,17 +5489,15 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
     WORKFLOW_STATE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """Workflow ID to retrieve
     If no ID is specified we return default workflow of the application
     If an ID is specified by default we first looks into Clarifai workflows for a Workflow ID
     """
-
-    version_id: typing.Text
+    version_id: builtins.str
     """Workflow version ID to retrieve
     If no ID is specified, latest workflow version is used
     """
-
     @property
     def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]: ...
     @property
@@ -4978,34 +5509,35 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
         this OutputConfig it would probably be easier to just remove it for now to keep things simpler
         and then it's more consistent we just don't support the OutputConfig on workflows.
         """
-        pass
     favor_clarifai_workflows: builtins.bool
     """Use this flag to look into clarifai published workflows first for a Workflow ID"""
-
     @property
     def workflow_state(self) -> proto.clarifai.api.resources_pb2.WorkflowState:
         """A workflow state to be maintained across PostWorkflowResults requests/responses.
         If it is not sent in the initial request with workflow_state.id = "init" then no
         state will be saved or returned in PostWorkflowResultsResponse.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        output_config: typing.Optional[proto.clarifai.api.resources_pb2.OutputConfig] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        output_config: proto.clarifai.api.resources_pb2.OutputConfig | None = ...,
         favor_clarifai_workflows: builtins.bool = ...,
-        workflow_state: typing.Optional[proto.clarifai.api.resources_pb2.WorkflowState] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["output_config",b"output_config","user_app_id",b"user_app_id","workflow_state",b"workflow_state"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows",b"favor_clarifai_workflows","inputs",b"inputs","output_config",b"output_config","user_app_id",b"user_app_id","version_id",b"version_id","workflow_id",b"workflow_id","workflow_state",b"workflow_state"]) -> None: ...
+        workflow_state: proto.clarifai.api.resources_pb2.WorkflowState | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["output_config", b"output_config", "user_app_id", b"user_app_id", "workflow_state", b"workflow_state"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows", b"favor_clarifai_workflows", "inputs", b"inputs", "output_config", b"output_config", "user_app_id", b"user_app_id", "version_id", b"version_id", "workflow_id", b"workflow_id", "workflow_state", b"workflow_state"]) -> None: ...
+
 global___PostWorkflowResultsRequest = PostWorkflowResultsRequest
 
 class PostWorkflowResultsResponse(google.protobuf.message.Message):
     """PostWorkflowResultsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
     RESULTS_FIELD_NUMBER: builtins.int
@@ -5013,15 +5545,12 @@ class PostWorkflowResultsResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the request."""
-        pass
     @property
     def workflow(self) -> proto.clarifai.api.resources_pb2.Workflow:
         """The workflow that was used in predictions with PostWorkflowResults"""
-        pass
     @property
     def results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowResult]:
         """The resulting predictions of all models in the workflow."""
-        pass
     @property
     def workflow_state(self) -> proto.clarifai.api.resources_pb2.WorkflowState:
         """A workflow state to be maintained across PostWorkflowResults requests/responses.
@@ -5030,21 +5559,24 @@ class PostWorkflowResultsResponse(google.protobuf.message.Message):
         If no WorkflowState was initialized in a request then no WorkflowState will be returned in this
         response.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        workflow: typing.Optional[proto.clarifai.api.resources_pb2.Workflow] = ...,
-        results: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.WorkflowResult]] = ...,
-        workflow_state: typing.Optional[proto.clarifai.api.resources_pb2.WorkflowState] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","workflow",b"workflow","workflow_state",b"workflow_state"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["results",b"results","status",b"status","workflow",b"workflow","workflow_state",b"workflow_state"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow: proto.clarifai.api.resources_pb2.Workflow | None = ...,
+        results: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowResult] | None = ...,
+        workflow_state: proto.clarifai.api.resources_pb2.WorkflowState | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "workflow", b"workflow", "workflow_state", b"workflow_state"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["results", b"results", "status", b"status", "workflow", b"workflow", "workflow_state", b"workflow_state"]) -> None: ...
+
 global___PostWorkflowResultsResponse = PostWorkflowResultsResponse
 
 class PostWorkflowResultsSimilarityRequest(google.protobuf.message.Message):
     """PostWorkflowResultsSimilarityRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -5054,248 +5586,272 @@ class PostWorkflowResultsSimilarityRequest(google.protobuf.message.Message):
     FAVOR_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
-    version_id: typing.Text
+    workflow_id: builtins.str
+    version_id: builtins.str
     """Workflow version ID to retrieve
     If no ID is specified, latest workflow version is used
     """
-
-    model_version_id: typing.Text
+    model_version_id: builtins.str
     """The specific model version whose outputs we are comparing"""
-
     @property
     def probe_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]:
         """Each probe is compared against every pool input"""
-        pass
     @property
     def pool_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]:
         """Each pool input is compared against ever probe input"""
-        pass
     favor_clarifai_workflows: builtins.bool
     """Use this flag to look into clarifai published workflows first for a Workflow ID"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        version_id: typing.Text = ...,
-        model_version_id: typing.Text = ...,
-        probe_inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
-        pool_inputs: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Input]] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        probe_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        pool_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
         favor_clarifai_workflows: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows",b"favor_clarifai_workflows","model_version_id",b"model_version_id","pool_inputs",b"pool_inputs","probe_inputs",b"probe_inputs","user_app_id",b"user_app_id","version_id",b"version_id","workflow_id",b"workflow_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows", b"favor_clarifai_workflows", "model_version_id", b"model_version_id", "pool_inputs", b"pool_inputs", "probe_inputs", b"probe_inputs", "user_app_id", b"user_app_id", "version_id", b"version_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___PostWorkflowResultsSimilarityRequest = PostWorkflowResultsSimilarityRequest
 
 class PostWorkflowResultsSimilarityResponse(google.protobuf.message.Message):
     """PostWorkflowResultsSimilarityResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     RESULTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowResultsSimilarity]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        results: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.WorkflowResultsSimilarity]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["results",b"results","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        results: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowResultsSimilarity] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["results", b"results", "status", b"status"]) -> None: ...
+
 global___PostWorkflowResultsSimilarityResponse = PostWorkflowResultsSimilarityResponse
 
 class ListWorkflowVersionsRequest(google.protobuf.message.Message):
     """ListWorkflowVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """List versions for the workflow identified by this id"""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id","workflow_id",b"workflow_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
 global___ListWorkflowVersionsRequest = ListWorkflowVersionsRequest
 
 class GetWorkflowVersionRequest(google.protobuf.message.Message):
     """GetWorkflowVersionRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """The id of the workflow that has the requested version."""
-
-    workflow_version_id: typing.Text
+    workflow_version_id: builtins.str
     """Get the identified by this id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        workflow_version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id","workflow_id",b"workflow_id","workflow_version_id",b"workflow_version_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        workflow_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "workflow_id", b"workflow_id", "workflow_version_id", b"workflow_version_id"]) -> None: ...
+
 global___GetWorkflowVersionRequest = GetWorkflowVersionRequest
 
 class DeleteWorkflowVersionsRequest(google.protobuf.message.Message):
     """DeleteWorkflowVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """The id of the workflow that has the requested versions to delete."""
-
     @property
-    def workflow_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def workflow_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Delete the versions identified by these ids"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        workflow_version_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id","workflow_id",b"workflow_id","workflow_version_ids",b"workflow_version_ids"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        workflow_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "workflow_id", b"workflow_id", "workflow_version_ids", b"workflow_version_ids"]) -> None: ...
+
 global___DeleteWorkflowVersionsRequest = DeleteWorkflowVersionsRequest
 
 class PatchWorkflowVersionsRequest(google.protobuf.message.Message):
     """PatchWorkflowVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSIONS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: typing.Text
+    workflow_id: builtins.str
     """The id of the workflow that has the requested versions to patch."""
-
     @property
     def workflow_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowVersion]:
         """Patch these versions."""
-        pass
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        workflow_id: typing.Text = ...,
-        workflow_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersion]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","user_app_id",b"user_app_id","workflow_id",b"workflow_id","workflow_versions",b"workflow_versions"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        workflow_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersion] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id", "workflow_versions", b"workflow_versions"]) -> None: ...
+
 global___PatchWorkflowVersionsRequest = PatchWorkflowVersionsRequest
 
 class MultiWorkflowVersionResponse(google.protobuf.message.Message):
     """MultiWorkflowVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def workflow_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowVersion]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        workflow_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","workflow_versions",b"workflow_versions"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workflow_versions", b"workflow_versions"]) -> None: ...
+
 global___MultiWorkflowVersionResponse = MultiWorkflowVersionResponse
 
 class SingleWorkflowVersionResponse(google.protobuf.message.Message):
     """SingleWorkflowVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def workflow_version(self) -> proto.clarifai.api.resources_pb2.WorkflowVersion: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        workflow_version: typing.Optional[proto.clarifai.api.resources_pb2.WorkflowVersion] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","workflow_version",b"workflow_version"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","workflow_version",b"workflow_version"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow_version: proto.clarifai.api.resources_pb2.WorkflowVersion | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workflow_version", b"workflow_version"]) -> None: ...
+
 global___SingleWorkflowVersionResponse = SingleWorkflowVersionResponse
 
 class PostAppDuplicationsRequest(google.protobuf.message.Message):
     """Request to start a app duplication process"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_DUPLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def app_duplications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AppDuplication]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        app_duplications: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AppDuplication]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_duplications",b"app_duplications","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        app_duplications: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AppDuplication] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_duplications", b"app_duplications", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostAppDuplicationsRequest = PostAppDuplicationsRequest
 
 class GetAppDuplicationRequest(google.protobuf.message.Message):
     """Request to check app duplication status"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_DUPLICATION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    app_duplication_id: typing.Text
+    app_duplication_id: builtins.str
     """The app duplication id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        app_duplication_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_duplication_id",b"app_duplication_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        app_duplication_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_duplication_id", b"app_duplication_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetAppDuplicationRequest = GetAppDuplicationRequest
 
 class ListAppDuplicationsRequest(google.protobuf.message.Message):
     """Request to list all the app duplication that user triggered."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -5305,104 +5861,121 @@ class ListAppDuplicationsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListAppDuplicationsRequest = ListAppDuplicationsRequest
 
 class MultiAppDuplicationsResponse(google.protobuf.message.Message):
     """MultiAppDuplicationsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     APP_DUPLICATIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def app_duplications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AppDuplication]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        app_duplications: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.AppDuplication]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_duplications",b"app_duplications","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        app_duplications: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AppDuplication] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_duplications", b"app_duplications", "status", b"status"]) -> None: ...
+
 global___MultiAppDuplicationsResponse = MultiAppDuplicationsResponse
 
 class SingleAppDuplicationResponse(google.protobuf.message.Message):
     """SingleAppDuplicationResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     APP_DUPLICATION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def app_duplication(self) -> proto.clarifai.api.resources_pb2.AppDuplication: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        app_duplication: typing.Optional[proto.clarifai.api.resources_pb2.AppDuplication] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app_duplication",b"app_duplication","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_duplication",b"app_duplication","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        app_duplication: proto.clarifai.api.resources_pb2.AppDuplication | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app_duplication", b"app_duplication", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_duplication", b"app_duplication", "status", b"status"]) -> None: ...
+
 global___SingleAppDuplicationResponse = SingleAppDuplicationResponse
 
 class PostTasksRequest(google.protobuf.message.Message):
     """Request to create Tasks."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASKS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Task]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        tasks: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Task]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["tasks",b"tasks","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        tasks: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Task] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["tasks", b"tasks", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostTasksRequest = PostTasksRequest
 
 class GetTaskRequest(google.protobuf.message.Message):
     """Request to get one task."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    task_id: typing.Text
+    task_id: builtins.str
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
         Currently supported: all, worker.users, review.users.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        task_id: typing.Text = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","task_id",b"task_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        task_id: builtins.str = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetTaskRequest = GetTaskRequest
 
 class ListTasksRequest(google.protobuf.message.Message):
     """Request to list multiple tasks."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -5417,53 +5990,50 @@ class ListTasksRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
     @property
-    def worker_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def worker_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Get tasks that have ANY user from this list assigned as worker."""
-        pass
     @property
-    def review_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def review_user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Get tasks that have ANY user from this list assigned as reviewer."""
-        pass
     @property
-    def label_order_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def label_order_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Get tasks that are associated to ANY label order from this list."""
-        pass
     including_label_order_tasks: builtins.bool
     """Get label order tasks as well
     It is automatically set to true if label_order_ids is set.
     """
-
     @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
         Currently supported: all, worker.users, review.users.
         """
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        worker_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        review_user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        label_order_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        worker_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        review_user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        label_order_ids: collections.abc.Iterable[builtins.str] | None = ...,
         including_label_order_tasks: builtins.bool = ...,
-        additional_fields: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields",b"additional_fields","including_label_order_tasks",b"including_label_order_tasks","label_order_ids",b"label_order_ids","page",b"page","per_page",b"per_page","review_user_ids",b"review_user_ids","user_app_id",b"user_app_id","worker_user_ids",b"worker_user_ids"]) -> None: ...
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "including_label_order_tasks", b"including_label_order_tasks", "label_order_ids", b"label_order_ids", "page", b"page", "per_page", b"per_page", "review_user_ids", b"review_user_ids", "user_app_id", b"user_app_id", "worker_user_ids", b"worker_user_ids"]) -> None: ...
+
 global___ListTasksRequest = ListTasksRequest
 
 class PatchTasksRequest(google.protobuf.message.Message):
     """Request to patch a list of tasks."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASKS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -5471,73 +6041,86 @@ class PatchTasksRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Task]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        tasks: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Task]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","tasks",b"tasks","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        tasks: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Task] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "tasks", b"tasks", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchTasksRequest = PatchTasksRequest
 
 class DeleteTasksRequest(google.protobuf.message.Message):
     """Request to delete a list of tasks."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteTasksRequest = DeleteTasksRequest
 
 class MultiTaskResponse(google.protobuf.message.Message):
     """Response with multiple Tasks."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     TASKS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Task]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        tasks: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Task]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","tasks",b"tasks"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        tasks: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Task] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "tasks", b"tasks"]) -> None: ...
+
 global___MultiTaskResponse = MultiTaskResponse
 
 class SingleTaskResponse(google.protobuf.message.Message):
     """Response with a single Task."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     TASK_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def task(self) -> proto.clarifai.api.resources_pb2.Task: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        task: typing.Optional[proto.clarifai.api.resources_pb2.Task] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","task",b"task"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","task",b"task"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        task: proto.clarifai.api.resources_pb2.Task | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "task", b"task"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "task", b"task"]) -> None: ...
+
 global___SingleTaskResponse = SingleTaskResponse
 
 class GetTaskCountRequest(google.protobuf.message.Message):
@@ -5545,51 +6128,57 @@ class GetTaskCountRequest(google.protobuf.message.Message):
     1. Task annotation count per user, per status
     1. Task input (anchor annotations) count per user, per status
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    task_id: typing.Text
+    task_id: builtins.str
     """task_id for which count per user per status is needed"""
-
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """for given task_id, user_ids to filter on (optional)"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        task_id: typing.Text = ...,
-        user_ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["task_id",b"task_id","user_app_id",b"user_app_id","user_ids",b"user_ids"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        task_id: builtins.str = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
+
 global___GetTaskCountRequest = GetTaskCountRequest
 
 class SingleTaskCountResponse(google.protobuf.message.Message):
     """SingleTaskCountResponse represent counts of annotations or inputs(anchor annotations) for labelers in given task"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     COUNTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    app_id: typing.Text
-    task_id: typing.Text
+    app_id: builtins.str
+    task_id: builtins.str
     @property
     def counts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskStatusCountPerUser]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        app_id: typing.Text = ...,
-        task_id: typing.Text = ...,
-        counts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.TaskStatusCountPerUser]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id",b"app_id","counts",b"counts","status",b"status","task_id",b"task_id"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        app_id: builtins.str = ...,
+        task_id: builtins.str = ...,
+        counts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskStatusCountPerUser] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "counts", b"counts", "status", b"status", "task_id", b"task_id"]) -> None: ...
+
 global___SingleTaskCountResponse = SingleTaskCountResponse
 
 class PostLabelOrdersRequest(google.protobuf.message.Message):
@@ -5599,42 +6188,52 @@ class PostLabelOrdersRequest(google.protobuf.message.Message):
 
     Request to create label orders.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     LABEL_ORDERS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def label_orders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LabelOrder]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        label_orders: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.LabelOrder]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["label_orders",b"label_orders","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        label_orders: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LabelOrder] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["label_orders", b"label_orders", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostLabelOrdersRequest = PostLabelOrdersRequest
 
 class GetLabelOrderRequest(google.protobuf.message.Message):
     """Request to get one label order."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     LABEL_ORDER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    label_order_id: typing.Text
-    def __init__(self,
+    label_order_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        label_order_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["label_order_id",b"label_order_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        label_order_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["label_order_id", b"label_order_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetLabelOrderRequest = GetLabelOrderRequest
 
 class ListLabelOrdersRequest(google.protobuf.message.Message):
     """Request to list multiple label orders."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -5644,25 +6243,27 @@ class ListLabelOrdersRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListLabelOrdersRequest = ListLabelOrdersRequest
 
 class PatchLabelOrdersRequest(google.protobuf.message.Message):
     """Request to patch a list of label orders."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     LABEL_ORDERS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -5670,96 +6271,115 @@ class PatchLabelOrdersRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def label_orders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LabelOrder]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        label_orders: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.LabelOrder]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","label_orders",b"label_orders","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        label_orders: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LabelOrder] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "label_orders", b"label_orders", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchLabelOrdersRequest = PatchLabelOrdersRequest
 
 class DeleteLabelOrdersRequest(google.protobuf.message.Message):
     """Request to delete a list of label orders."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteLabelOrdersRequest = DeleteLabelOrdersRequest
 
 class MultiLabelOrderResponse(google.protobuf.message.Message):
     """Response with multiple label order."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     LABEL_ORDERS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def label_orders(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LabelOrder]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        label_orders: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.LabelOrder]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["label_orders",b"label_orders","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        label_orders: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LabelOrder] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["label_orders", b"label_orders", "status", b"status"]) -> None: ...
+
 global___MultiLabelOrderResponse = MultiLabelOrderResponse
 
 class SingleLabelOrderResponse(google.protobuf.message.Message):
     """Response with a label order."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     LABEL_ORDER_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def label_order(self) -> proto.clarifai.api.resources_pb2.LabelOrder: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        label_order: typing.Optional[proto.clarifai.api.resources_pb2.LabelOrder] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["label_order",b"label_order","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["label_order",b"label_order","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        label_order: proto.clarifai.api.resources_pb2.LabelOrder | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["label_order", b"label_order", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["label_order", b"label_order", "status", b"status"]) -> None: ...
+
 global___SingleLabelOrderResponse = SingleLabelOrderResponse
 
 class PostCollectorsRequest(google.protobuf.message.Message):
     """Request to create Collectors."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLECTORS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def collectors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collector]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collectors: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collector]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collectors",b"collectors","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collectors", b"collectors", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostCollectorsRequest = PostCollectorsRequest
 
 class PatchCollectorsRequest(google.protobuf.message.Message):
     """PatchCollectorsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLECTORS_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -5767,64 +6387,74 @@ class PatchCollectorsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def collectors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collector]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     Only 'overwrite' is supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collectors: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collector]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","collectors",b"collectors","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "collectors", b"collectors", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchCollectorsRequest = PatchCollectorsRequest
 
 class DeleteCollectorsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     DELETE_ALL_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     delete_all: builtins.bool
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
         delete_all: builtins.bool = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["delete_all",b"delete_all","ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["delete_all", b"delete_all", "ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteCollectorsRequest = DeleteCollectorsRequest
 
 class GetCollectorRequest(google.protobuf.message.Message):
     """Request to GET a single Collector."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COLLECTOR_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    collector_id: typing.Text
+    collector_id: builtins.str
     """The collecgtor id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        collector_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collector_id",b"collector_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        collector_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collector_id", b"collector_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetCollectorRequest = GetCollectorRequest
 
 class ListCollectorsRequest(google.protobuf.message.Message):
     """Request to GET all the Collectors."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -5834,175 +6464,194 @@ class ListCollectorsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListCollectorsRequest = ListCollectorsRequest
 
 class MultiCollectorResponse(google.protobuf.message.Message):
     """Response with multiple Collectors."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     COLLECTORS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def collectors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collector]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        collectors: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Collector]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collectors",b"collectors","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collectors", b"collectors", "status", b"status"]) -> None: ...
+
 global___MultiCollectorResponse = MultiCollectorResponse
 
 class SingleCollectorResponse(google.protobuf.message.Message):
     """Response with a single Collector."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     COLLECTOR_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def collector(self) -> proto.clarifai.api.resources_pb2.Collector: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        collector: typing.Optional[proto.clarifai.api.resources_pb2.Collector] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["collector",b"collector","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collector",b"collector","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        collector: proto.clarifai.api.resources_pb2.Collector | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["collector", b"collector", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collector", b"collector", "status", b"status"]) -> None: ...
+
 global___SingleCollectorResponse = SingleCollectorResponse
 
 class PostStatValuesRequest(google.protobuf.message.Message):
     """PostStatValuesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     STAT_VALUES_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user and app information for the request."""
-        pass
     @property
     def stat_values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.StatValue]:
         """The stats to post, can post more than one at a time."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        stat_values: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.StatValue]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["stat_values",b"stat_values","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        stat_values: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValue] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["stat_values", b"stat_values", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostStatValuesRequest = PostStatValuesRequest
 
 class MultiStatValueResponse(google.protobuf.message.Message):
     """MultiStatValueResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     STAT_VALUES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def stat_values(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.StatValue]:
         """The returned stats values."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        stat_values: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.StatValue]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["stat_values",b"stat_values","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        stat_values: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValue] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["stat_values", b"stat_values", "status", b"status"]) -> None: ...
+
 global___MultiStatValueResponse = MultiStatValueResponse
 
 class PostStatValuesAggregateRequest(google.protobuf.message.Message):
     """PostStatValuesAggregateRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     STAT_VALUE_AGGREGATE_QUERIES_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """Ids present in the url of the request."""
-        pass
     @property
     def stat_value_aggregate_queries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.StatValueAggregateQuery]:
         """Query to retrieve aggregate values."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        stat_value_aggregate_queries: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.StatValueAggregateQuery]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["stat_value_aggregate_queries",b"stat_value_aggregate_queries","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        stat_value_aggregate_queries: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValueAggregateQuery] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["stat_value_aggregate_queries", b"stat_value_aggregate_queries", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostStatValuesAggregateRequest = PostStatValuesAggregateRequest
 
 class MultiStatValueAggregateResponse(google.protobuf.message.Message):
     """MultiStatValueAggregateResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     STAT_VALUE_AGGREGATE_RESULTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The response status."""
-        pass
     @property
     def stat_value_aggregate_results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.StatValueAggregateResult]:
         """The aggregate results for each query passedin."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        stat_value_aggregate_results: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.StatValueAggregateResult]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["stat_value_aggregate_results",b"stat_value_aggregate_results","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        stat_value_aggregate_results: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValueAggregateResult] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["stat_value_aggregate_results", b"stat_value_aggregate_results", "status", b"status"]) -> None: ...
+
 global___MultiStatValueAggregateResponse = MultiStatValueAggregateResponse
 
 class PostTrendingMetricsViewRequest(google.protobuf.message.Message):
     """PostTrendingMetricsViewRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     VIEW_TYPE_FIELD_NUMBER: builtins.int
     OBJECT_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    view_type: typing.Text
+    view_type: builtins.str
     """For now view types 'apps', 'workflows', and 'models' are supported."""
-
-    object_id: typing.Text
+    object_id: builtins.str
     """ID of the views object."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        view_type: typing.Text = ...,
-        object_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["object_id",b"object_id","user_app_id",b"user_app_id","view_type",b"view_type"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        view_type: builtins.str = ...,
+        object_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["object_id", b"object_id", "user_app_id", b"user_app_id", "view_type", b"view_type"]) -> None: ...
+
 global___PostTrendingMetricsViewRequest = PostTrendingMetricsViewRequest
 
 class ListTrendingMetricsViewsRequest(google.protobuf.message.Message):
     """ListTrendingMetricsViewsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     VIEW_TYPE_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
@@ -6010,69 +6659,77 @@ class ListTrendingMetricsViewsRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id information."""
-        pass
-    view_type: typing.Text
+    view_type: builtins.str
     """For now view types 'apps', 'workflows', and 'models' are supported."""
-
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        view_type: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        view_type: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id","view_type",b"view_type"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "view_type", b"view_type"]) -> None: ...
+
 global___ListTrendingMetricsViewsRequest = ListTrendingMetricsViewsRequest
 
 class MultiTrendingMetricsViewResponse(google.protobuf.message.Message):
     """MultiTrendingMetricsViewResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     METRICS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TrendingMetric]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        metrics: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.TrendingMetric]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metrics",b"metrics","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TrendingMetric] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["metrics", b"metrics", "status", b"status"]) -> None: ...
+
 global___MultiTrendingMetricsViewResponse = MultiTrendingMetricsViewResponse
 
 class GetModuleRequest(google.protobuf.message.Message):
     """GetModuleRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    module_id: typing.Text
-    def __init__(self,
+    module_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        module_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetModuleRequest = GetModuleRequest
 
 class ListModulesRequest(google.protobuf.message.Message):
     """ListModulesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -6082,25 +6739,27 @@ class ListModulesRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModulesRequest = ListModulesRequest
 
 class PostModulesRequest(google.protobuf.message.Message):
     """PostModulesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
     @property
@@ -6108,19 +6767,22 @@ class PostModulesRequest(google.protobuf.message.Message):
     @property
     def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]:
         """This allows you to create one or more module by posting it to the API."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["modules",b"modules","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        modules: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Module] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["modules", b"modules", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModulesRequest = PostModulesRequest
 
 class PatchModulesRequest(google.protobuf.message.Message):
     """PatchModulesRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
@@ -6128,228 +6790,267 @@ class PatchModulesRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]: ...
-    action: typing.Text
+    action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
-        action: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action",b"action","modules",b"modules","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        modules: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Module] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "modules", b"modules", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PatchModulesRequest = PatchModulesRequest
 
 class DeleteModulesRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteModulesRequest = DeleteModulesRequest
 
 class SingleModuleResponse(google.protobuf.message.Message):
     """SingleModuleResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODULE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def module(self) -> proto.clarifai.api.resources_pb2.Module: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        module: typing.Optional[proto.clarifai.api.resources_pb2.Module] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["module",b"module","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module",b"module","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        module: proto.clarifai.api.resources_pb2.Module | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["module", b"module", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module", b"module", "status", b"status"]) -> None: ...
+
 global___SingleModuleResponse = SingleModuleResponse
 
 class MultiModuleResponse(google.protobuf.message.Message):
     """MultiModuleResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        modules: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Module]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["modules",b"modules","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        modules: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Module] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["modules", b"modules", "status", b"status"]) -> None: ...
+
 global___MultiModuleResponse = MultiModuleResponse
 
 class GetModuleVersionRequest(google.protobuf.message.Message):
     """request for different endpoints currently."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
     MODULE_VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    module_id: typing.Text
-    module_version_id: typing.Text
-    def __init__(self,
+    module_id: builtins.str
+    module_version_id: builtins.str
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        module_id: typing.Text = ...,
-        module_version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","module_version_id",b"module_version_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+        module_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "module_version_id", b"module_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetModuleVersionRequest = GetModuleVersionRequest
 
 class ListModuleVersionsRequest(google.protobuf.message.Message):
     """ListModuleVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    module_id: typing.Text
+    module_id: builtins.str
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        module_id: typing.Text = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListModuleVersionsRequest = ListModuleVersionsRequest
 
 class PostModuleVersionsRequest(google.protobuf.message.Message):
     """PostModuleVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
     MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    module_id: typing.Text
+    module_id: builtins.str
     @property
     def module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModuleVersion]:
         """This allows you to create one or more module by posting it to the API."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        module_id: typing.Text = ...,
-        module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_id",b"module_id","module_versions",b"module_versions","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+        module_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "module_versions", b"module_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostModuleVersionsRequest = PostModuleVersionsRequest
 
 class DeleteModuleVersionsRequest(google.protobuf.message.Message):
     """Request to delete several module versions by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    module_id: typing.Text
+    module_id: builtins.str
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        module_id: typing.Text = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","module_id",b"module_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "module_id", b"module_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteModuleVersionsRequest = DeleteModuleVersionsRequest
 
 class SingleModuleVersionResponse(google.protobuf.message.Message):
     """SingleModuleVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODULE_VERSION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def module_version(self) -> proto.clarifai.api.resources_pb2.ModuleVersion: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        module_version: typing.Optional[proto.clarifai.api.resources_pb2.ModuleVersion] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["module_version",b"module_version","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_version",b"module_version","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        module_version: proto.clarifai.api.resources_pb2.ModuleVersion | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["module_version", b"module_version", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_version", b"module_version", "status", b"status"]) -> None: ...
+
 global___SingleModuleVersionResponse = SingleModuleVersionResponse
 
 class MultiModuleVersionResponse(google.protobuf.message.Message):
     """MultiModuleVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModuleVersion]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_versions",b"module_versions","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        module_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_versions", b"module_versions", "status", b"status"]) -> None: ...
+
 global___MultiModuleVersionResponse = MultiModuleVersionResponse
 
 class GetInstalledModuleVersionRequest(google.protobuf.message.Message):
     """GetInstalledModuleVersionRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INSTALLED_MODULE_VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    installed_module_version_id: typing.Text
+    installed_module_version_id: builtins.str
     """the ID to get of the install module version."""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        installed_module_version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version_id",b"installed_module_version_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        installed_module_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version_id", b"installed_module_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetInstalledModuleVersionRequest = GetInstalledModuleVersionRequest
 
 class ListInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """ListInstalledModuleVersionsRequest"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -6359,25 +7060,27 @@ class ListInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListInstalledModuleVersionsRequest = ListInstalledModuleVersionsRequest
 
 class PostInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """PostInstalledModuleVersionsRequest to install a module version into the app in the URL"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     @property
@@ -6385,99 +7088,117 @@ class PostInstalledModuleVersionsRequest(google.protobuf.message.Message):
     @property
     def installed_module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InstalledModuleVersion]:
         """This allows you to create one or more module by posting it to the API."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        installed_module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions",b"installed_module_versions","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        installed_module_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions", b"installed_module_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostInstalledModuleVersionsRequest = PostInstalledModuleVersionsRequest
 
 class PostInstalledModuleVersionsKeyRequest(google.protobuf.message.Message):
     """PostInstalledModuleVersionsKeyRequest to associate a key of the caller's to the installed module
     version.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INSTALLED_MODULE_VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    installed_module_version_id: typing.Text
+    installed_module_version_id: builtins.str
     """the ID to get of the install module version.
     Note(zeiler): we don't provide a key to create since it's always deterministic.
     we'll create a PAT, owned by the caller with the scopes that the module requests.
     in the future if we want we can pass in a Key key = 3; field so that the caller
     can adjust the scopes, but for now that doesn't seem necessary.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        installed_module_version_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version_id",b"installed_module_version_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        installed_module_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version_id", b"installed_module_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostInstalledModuleVersionsKeyRequest = PostInstalledModuleVersionsKeyRequest
 
 class DeleteInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """Request to delete several installed module versions by the list of ids."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteInstalledModuleVersionsRequest = DeleteInstalledModuleVersionsRequest
 
 class SingleInstalledModuleVersionResponse(google.protobuf.message.Message):
     """SingleInstalledModuleVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     INSTALLED_MODULE_VERSION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def installed_module_version(self) -> proto.clarifai.api.resources_pb2.InstalledModuleVersion: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        installed_module_version: typing.Optional[proto.clarifai.api.resources_pb2.InstalledModuleVersion] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["installed_module_version",b"installed_module_version","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version",b"installed_module_version","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        installed_module_version: proto.clarifai.api.resources_pb2.InstalledModuleVersion | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["installed_module_version", b"installed_module_version", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_version", b"installed_module_version", "status", b"status"]) -> None: ...
+
 global___SingleInstalledModuleVersionResponse = SingleInstalledModuleVersionResponse
 
 class MultiInstalledModuleVersionResponse(google.protobuf.message.Message):
     """MultiInstalledModuleVersionResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def installed_module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InstalledModuleVersion]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        installed_module_versions: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions",b"installed_module_versions","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        installed_module_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InstalledModuleVersion] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["installed_module_versions", b"installed_module_versions", "status", b"status"]) -> None: ...
+
 global___MultiInstalledModuleVersionResponse = MultiInstalledModuleVersionResponse
 
 class PostBulkOperationsRequest(google.protobuf.message.Message):
     """Request to perform bulk operations on a list of inputs based on input source."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     BULK_OPERATIONS_FIELD_NUMBER: builtins.int
     @property
@@ -6485,19 +7206,22 @@ class PostBulkOperationsRequest(google.protobuf.message.Message):
     @property
     def bulk_operations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.BulkOperation]:
         """List of bulk operation(s) to be performed e.g bulk update metadata or tags or labels etc."""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        bulk_operations: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.BulkOperation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bulk_operations",b"bulk_operations","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        bulk_operations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.BulkOperation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operations", b"bulk_operations", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PostBulkOperationsRequest = PostBulkOperationsRequest
 
 class ListBulkOperationsRequest(google.protobuf.message.Message):
     """Request to list all the bulk operations."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -6507,157 +7231,141 @@ class ListBulkOperationsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListBulkOperationsRequest = ListBulkOperationsRequest
 
 class GetBulkOperationRequest(google.protobuf.message.Message):
     """Request to get the details of a bulk operation by ID."""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    id: typing.Text
+    id: builtins.str
     """The bulk operation id"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id",b"id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetBulkOperationRequest = GetBulkOperationRequest
 
 class CancelBulkOperationRequest(google.protobuf.message.Message):
     """Cancel a list of bulk operation ids"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of bulk operation ids to be cancelled"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___CancelBulkOperationRequest = CancelBulkOperationRequest
 
 class DeleteBulkOperationRequest(google.protobuf.message.Message):
     """Request to delete the terminated bulk operations by ID
     Only operations in terminated state can be deleted.
     """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]:
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of bulk operation ids to be deleted"""
-        pass
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___DeleteBulkOperationRequest = DeleteBulkOperationRequest
 
 class SingleBulkOperationsResponse(google.protobuf.message.Message):
     """SingleBulkOperationsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     BULK_OPERATION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def bulk_operation(self) -> proto.clarifai.api.resources_pb2.BulkOperation: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        bulk_operation: typing.Optional[proto.clarifai.api.resources_pb2.BulkOperation] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        bulk_operation: proto.clarifai.api.resources_pb2.BulkOperation | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "status", b"status"]) -> None: ...
+
 global___SingleBulkOperationsResponse = SingleBulkOperationsResponse
 
 class MultiBulkOperationsResponse(google.protobuf.message.Message):
     """MultiBulkOperationsResponse"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     BULK_OPERATION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def bulk_operation(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.BulkOperation]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        bulk_operation: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.BulkOperation]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation",b"bulk_operation","status",b"status"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        bulk_operation: collections.abc.Iterable[proto.clarifai.api.resources_pb2.BulkOperation] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "status", b"status"]) -> None: ...
+
 global___MultiBulkOperationsResponse = MultiBulkOperationsResponse
 
-class PostUploadsRequest(google.protobuf.message.Message):
-    """Start a multipart upload"""
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    UPLOADS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Upload]: ...
-    def __init__(self,
-        *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        uploads: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Upload]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["uploads",b"uploads","user_app_id",b"user_app_id"]) -> None: ...
-global___PostUploadsRequest = PostUploadsRequest
+class ListInputsAddJobsRequest(google.protobuf.message.Message):
+    """List all the input ingestion jobs"""
 
-class DeleteUploadsRequest(google.protobuf.message.Message):
-    """Stops or deletes multipart upload"""
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[typing.Text]: ...
-    def __init__(self,
-        *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        ids: typing.Optional[typing.Iterable[typing.Text]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids",b"ids","user_app_id",b"user_app_id"]) -> None: ...
-global___DeleteUploadsRequest = DeleteUploadsRequest
 
-class ListUploadsRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
@@ -6667,91 +7375,239 @@ class ListUploadsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
     """
-
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page",b"page","per_page",b"per_page","user_app_id",b"user_app_id"]) -> None: ...
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListInputsAddJobsRequest = ListInputsAddJobsRequest
+
+class GetInputsAddJobRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    id: builtins.str
+    """id of add inputs job"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetInputsAddJobRequest = GetInputsAddJobRequest
+
+class MultiInputsAddJobResponse(google.protobuf.message.Message):
+    """MultiInputsAddJobResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    INPUTS_ADD_JOBS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def inputs_add_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InputsAddJob]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        inputs_add_jobs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InputsAddJob] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_add_jobs", b"inputs_add_jobs", "status", b"status"]) -> None: ...
+
+global___MultiInputsAddJobResponse = MultiInputsAddJobResponse
+
+class SingleInputsAddJobResponse(google.protobuf.message.Message):
+    """SingleInputsAddJobResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    INPUTS_ADD_JOB_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def inputs_add_job(self) -> proto.clarifai.api.resources_pb2.InputsAddJob: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        inputs_add_job: proto.clarifai.api.resources_pb2.InputsAddJob | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["inputs_add_job", b"inputs_add_job", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_add_job", b"inputs_add_job", "status", b"status"]) -> None: ...
+
+global___SingleInputsAddJobResponse = SingleInputsAddJobResponse
+
+class PostUploadsRequest(google.protobuf.message.Message):
+    """Start a multipart upload"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    UPLOADS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Upload]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        uploads: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Upload] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["uploads", b"uploads", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostUploadsRequest = PostUploadsRequest
+
+class DeleteUploadsRequest(google.protobuf.message.Message):
+    """Stops or deletes multipart upload"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___DeleteUploadsRequest = DeleteUploadsRequest
+
+class ListUploadsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___ListUploadsRequest = ListUploadsRequest
 
 class GetUploadRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     UPLOAD_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    upload_id: typing.Text
+    upload_id: builtins.str
     """Upload ID"""
-
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        upload_id: typing.Text = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["upload_id",b"upload_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        upload_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["upload_id", b"upload_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___GetUploadRequest = GetUploadRequest
 
 class SingleUploadResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     UPLOAD_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def upload(self) -> proto.clarifai.api.resources_pb2.Upload: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        upload: typing.Optional[proto.clarifai.api.resources_pb2.Upload] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status","upload",b"upload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","upload",b"upload"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        upload: proto.clarifai.api.resources_pb2.Upload | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "upload", b"upload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "upload", b"upload"]) -> None: ...
+
 global___SingleUploadResponse = SingleUploadResponse
 
 class MultiUploadResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     STATUS_FIELD_NUMBER: builtins.int
     UPLOADS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Upload]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        status: typing.Optional[proto.clarifai.api.status.status_pb2.Status] = ...,
-        uploads: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.Upload]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status",b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status",b"status","uploads",b"uploads"]) -> None: ...
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        uploads: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Upload] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "uploads", b"uploads"]) -> None: ...
+
 global___MultiUploadResponse = MultiUploadResponse
 
 class PutUploadContentPartsRequest(google.protobuf.message.Message):
     """Upload part of multipart upload"""
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     UPLOAD_ID_FIELD_NUMBER: builtins.int
     CONTENT_PARTS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    upload_id: typing.Text
+    upload_id: builtins.str
     @property
     def content_parts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.UploadContentPart]: ...
-    def __init__(self,
+    def __init__(
+        self,
         *,
-        user_app_id: typing.Optional[proto.clarifai.api.resources_pb2.UserAppIDSet] = ...,
-        upload_id: typing.Text = ...,
-        content_parts: typing.Optional[typing.Iterable[proto.clarifai.api.resources_pb2.UploadContentPart]] = ...,
-        ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id",b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["content_parts",b"content_parts","upload_id",b"upload_id","user_app_id",b"user_app_id"]) -> None: ...
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        upload_id: builtins.str = ...,
+        content_parts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.UploadContentPart] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["content_parts", b"content_parts", "upload_id", b"upload_id", "user_app_id", b"user_app_id"]) -> None: ...
+
 global___PutUploadContentPartsRequest = PutUploadContentPartsRequest
