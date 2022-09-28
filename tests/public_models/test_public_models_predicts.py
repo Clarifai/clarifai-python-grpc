@@ -1,4 +1,5 @@
 import os
+import pytest
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 
@@ -122,6 +123,8 @@ OBJECT_DETECTION_MODELS = {
         "facebook",
     ],
 }
+SHORT_OBJECT_DETECTION_MODEL_KEYS = ["YOLOV6_S", "YOLOV7", "DETIC_CLIP_R50"]
+OBJECT_DETECTION_MODELS_SHORT = {k: OBJECT_DETECTION_MODELS[k] for k in SHORT_OBJECT_DETECTION_MODEL_KEYS}
 
 ## LANGUAGE TRANSLATION
 
@@ -279,7 +282,7 @@ DETECTION_MODEL_TITLE_AND_IDS = []
 
 # Add models in object_detection_models dict to model_id_pairs list
 # older image tests use different model-ids not from the platform
-for _, values in OBJECT_DETECTION_MODELS.items():
+for _, values in OBJECT_DETECTION_MODELS_SHORT.items():
     DETECTION_MODEL_TITLE_AND_IDS.append(tuple(values))
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
@@ -390,6 +393,8 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
+
+@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels
 def test_text_fb_translation_predict_on_public_models(channel):
     """Test language translation models.
@@ -414,6 +419,7 @@ def test_text_fb_translation_predict_on_public_models(channel):
         )
 
 
+@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels
 def test_text_helsinki_translation_predict_on_public_models(channel):
     """Test language translation models.
