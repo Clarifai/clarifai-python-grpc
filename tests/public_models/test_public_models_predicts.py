@@ -60,7 +60,7 @@ TRANSLATION_TEST_DATA = {
 }
 
 # general visual detection models (yolo, detic)
-# Data Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>, <app_id>, <user_id>]}
+# Data Structure: {MODEL_NAME: [title, model, app, user]}
 OBJECT_DETECTION_MODELS = {
     "YOLOV6_S": [
         "general-detector-yolov6s-coco",
@@ -275,6 +275,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
 ]
 
+# title, model, app, user
 DETECTION_MODEL_TITLE_AND_IDS = []
 
 # Add models in object_detection_models dict to model_id_pairs list
