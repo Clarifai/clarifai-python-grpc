@@ -5,29 +5,32 @@ isort:skip_file
 import builtins
 import google.protobuf.descriptor
 import google.protobuf.internal.enum_type_wrapper
+import sys
 import typing
-import typing_extensions
+
+if sys.version_info >= (3, 10):
+    import typing as typing_extensions
+else:
+    import typing_extensions
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
 class _StatusCode:
-    ValueType = typing.NewType('ValueType', builtins.int)
+    ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
-class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatusCode.ValueType], builtins.type):
+
+class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatusCode.ValueType], builtins.type):  # noqa: F821
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ZERO: _StatusCode.ValueType  # 0
     """to be revised and greatly expanded"""
-
     SUCCESS: _StatusCode.ValueType  # 10000
     """Generic"""
-
     MIXED_STATUS: _StatusCode.ValueType  # 10010
     FAILURE: _StatusCode.ValueType  # 10020
     TRY_AGAIN: _StatusCode.ValueType  # 10030
     NOT_IMPLEMENTED: _StatusCode.ValueType  # 10040
     MOVED: _StatusCode.ValueType  # 10050
     """Resource moved. Respond with Http status 307 and add new Location header to response"""
-
     CONN_ACCOUNT_ISSUES: _StatusCode.ValueType  # 11000
     """SUCCESS_WARNING_API_DEPRECATED = 10001;
     SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
@@ -35,101 +38,70 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     Clarifai Connection Codes: 11xxx
     expired cc, still in trial, feature not supported in your tier
     """
-
     CONN_TOKEN_INVALID: _StatusCode.ValueType  # 11001
     """invalid auth token used. Deprecated: we should return CONN_KEY_INVALID instead now in all cases."""
-
     CONN_CREDENTIALS_INVALID: _StatusCode.ValueType  # 11002
     """invalid auth credentials"""
-
     CONN_EXCEED_HOURLY_LIMIT: _StatusCode.ValueType  # 11003
     """throttle hourly limit exceeded"""
-
     CONN_EXCEED_MONTHLY_LIMIT: _StatusCode.ValueType  # 11004
     """throttle monthly limit exceeded"""
-
     CONN_THROTTLED: _StatusCode.ValueType  # 11005
     """throttler and billing stuff"""
-
     CONN_EXCEEDS_LIMITS: _StatusCode.ValueType  # 11006
     """throttler and billing stuff"""
-
     CONN_INSUFFICIENT_SCOPES: _StatusCode.ValueType  # 11007
     """api key has insufficient permissions"""
-
     CONN_KEY_INVALID: _StatusCode.ValueType  # 11008
     """api key is invalid"""
-
     CONN_KEY_NOT_FOUND: _StatusCode.ValueType  # 11009
     """api key not found"""
-
     CONN_BAD_REQUEST_FORMAT: _StatusCode.ValueType  # 11100
     """multipart form parsing, broken json, etc"""
-
     CONN_DOES_NOT_EXIST: _StatusCode.ValueType  # 11101
     """when path is bad"""
-
     CONN_INVALID_REQUEST: _StatusCode.ValueType  # 11102
     """something wrong with a header"""
-
     CONN_METHOD_NOT_ALLOWED: _StatusCode.ValueType  # 11103
     """when a request method is not allowed"""
-
     CONN_NO_GDPR_CONSENT: _StatusCode.ValueType  # 11104
     """lack GDPR consent"""
-
     CONN_AUTH_METHOD_DISABLED: _StatusCode.ValueType  # 11200
     """authentication method is disabled"""
-
     MODEL_TRAINED: _StatusCode.ValueType  # 21100
     """Model/Custom Training related 20xxx
     Custom model has been already trained.
     """
-
     MODEL_TRAINING: _StatusCode.ValueType  # 21101
     """Custom model is currently training."""
-
     MODEL_UNTRAINED: _StatusCode.ValueType  # 21102
     """Custom model has not yet been trained."""
-
     MODEL_QUEUED_FOR_TRAINING: _StatusCode.ValueType  # 21103
     """Custom model is currently in queue for training, waiting on assets to process first."""
-
     MODEL_UPLOADING: _StatusCode.ValueType  # 21104
     MODEL_UPLOADING_FAILED: _StatusCode.ValueType  # 21105
     MODEL_TRAINING_FAILED: _StatusCode.ValueType  # 21106
     """generic err msg for any type of model training err."""
-
     MODEL_TRAINING_NO_DATA: _StatusCode.ValueType  # 21110
     """Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_NO_POSITIVES: _StatusCode.ValueType  # 21111
     """Custom model training had no positive examples. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS: _StatusCode.ValueType  # 21112
     """Custom model training was ONE_VS_N but with a single class. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_TIMED_OUT: _StatusCode.ValueType  # 21113
     """Training took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_WAITING_ERROR: _StatusCode.ValueType  # 21114
     """Training got error waiting on asset pipeline to finish. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_UNKNOWN_ERROR: _StatusCode.ValueType  # 21115
     """Training threw an unknown exception."""
-
     MODEL_TRAINING_MSG_REDELIVER: _StatusCode.ValueType  # 21116
     """Training message was redelivered. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_INSUFFICIENT_DATA: _StatusCode.ValueType  # 21117
     """Training got error due to insufficient labelled data. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_INVALID_PARAMS: _StatusCode.ValueType  # 21118
     """FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED: _StatusCode.ValueType  # 21119
     """Training is stopped because too much data was dropped. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
     MODEL_MODIFY_SUCCESS: _StatusCode.ValueType  # 21150
     MODEL_MODIFY_PENDING: _StatusCode.ValueType  # 21151
     MODEL_MODIFY_FAILED: _StatusCode.ValueType  # 21152
@@ -138,91 +110,69 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     MODEL_INVALID_ARGUMENT: _StatusCode.ValueType  # 21202
     MODEL_INVALID_REQUEST: _StatusCode.ValueType  # 21203
     MODEL_EVALUATED: _StatusCode.ValueType  # 21300
-    """Model Evaluation status codes
-
-    """
-
+    """Model Evaluation status codes"""
     MODEL_EVALUATING: _StatusCode.ValueType  # 21301
     MODEL_NOT_EVALUATED: _StatusCode.ValueType  # 21302
     MODEL_QUEUED_FOR_EVALUATION: _StatusCode.ValueType  # 21303
     MODEL_EVALUATION_TIMED_OUT: _StatusCode.ValueType  # 21310
     """Evaluation took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
     MODEL_EVALUATION_WAITING_ERROR: _StatusCode.ValueType  # 21311
     """Evaluation got error waiting on asset pipeline to finish.FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
     MODEL_EVALUATION_UNKNOWN_ERROR: _StatusCode.ValueType  # 21312
     """EVALUATION THREW AN UNKNOWN EXCEPTION."""
-
     MODEL_PREDICTION_FAILED: _StatusCode.ValueType  # 21313
     MODEL_EVALUATION_MSG_REDELIVER: _StatusCode.ValueType  # 21314
     """Eval message was redelivered. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
     MODEL_EVALUATION_NEED_LABELS: _StatusCode.ValueType  # 21315
     """Don't have enough concepts labelled to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
     MODEL_EVALUATION_NEED_INPUTS: _StatusCode.ValueType  # 21316
     """Don't have enough inputs per concept to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
     MODEL_EVALUATION_FAILED: _StatusCode.ValueType  # 21317
     """Generic err code for eval failure."""
-
     MODEL_DEPLOYMENT_FAILED: _StatusCode.ValueType  # 21350
     """Status codes through 21319 (inclusive) reserved for model eval *errors* (per logic in clients)
 
     Used when inference coordinator failed to deploy spire and throws an error
     """
-
     MODEL_DEPLOYING: _StatusCode.ValueType  # 21351
     """Used when calling the inference coordinator to deploy a spire"""
-
     MODEL_QUEUED_FOR_DEPLOYMENT: _StatusCode.ValueType  # 21352
     """Used when training is completed"""
-
     MODEL_NOT_DEPLOYED: _StatusCode.ValueType  # 21353
     """Used when model spire deployment is manually taken down or due to inactivity"""
-
     MODEL_REFERENCE_INVALID_ARGUMENT: _StatusCode.ValueType  # 21400
     """Used when a model reference field is not set properly"""
-
     MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: _StatusCode.ValueType  # 21420
     """Used when a model example input field is not set properly"""
-
     WORKFLOW_NO_MATCHING_INPUT: _StatusCode.ValueType  # 22001
     """Workflow related 22xxx
 
     specified model input not in workflow
     """
-
     WORKFLOW_REQUIRE_TRAINED_MODEL: _StatusCode.ValueType  # 22002
     """specified model must be trained"""
-
     WORKFLOW_DUPLICATE: _StatusCode.ValueType  # 22100
     WORKFLOW_UNSUPPORTED_FORMAT: _StatusCode.ValueType  # 22101
     WORKFLOW_DOES_NOT_EXIST: _StatusCode.ValueType  # 22102
     WORKFLOW_PERMISSION_DENIED: _StatusCode.ValueType  # 22103
     WORKFLOW_INVALID_ARGUMENT: _StatusCode.ValueType  # 22104
     """error in the request somewhere"""
-
     WORKFLOW_INVALID_RECIPE: _StatusCode.ValueType  # 22105
     WORKFLOW_INVALID_TEMPLATE: _StatusCode.ValueType  # 22106
     WORKFLOW_INVALID_GRAPH: _StatusCode.ValueType  # 22107
     WORKFLOW_INTERNAL_FAILURE: _StatusCode.ValueType  # 22108
     WORKFLOW_INVALID_REQUEST: _StatusCode.ValueType  # 22999
     """error in the request somewhere"""
-
     WORKFLOW_MODIFY_SUCCESS: _StatusCode.ValueType  # 22150
     WORKFLOW_MODIFY_PENDING: _StatusCode.ValueType  # 22151
     WORKFLOW_MODIFY_FAILED: _StatusCode.ValueType  # 22152
     WORKFLOW_REINDEX_FAILED: _StatusCode.ValueType  # 22153
     CONCEPT_MODIFY_SUCCESS: _StatusCode.ValueType  # 23150
     """Concept related 23xxx"""
-
     CONCEPT_MODIFY_PENDING: _StatusCode.ValueType  # 23151
     CONCEPT_MODIFY_FAILED: _StatusCode.ValueType  # 23152
     ANNOTATION_SUCCESS: _StatusCode.ValueType  # 24150
     """Annotation related 24xxx"""
-
     ANNOTATION_PENDING: _StatusCode.ValueType  # 24151
     ANNOTATION_FAILED: _StatusCode.ValueType  # 24152
     ANNOTATION_UNKNOWN_STATUS: _StatusCode.ValueType  # 24154
@@ -236,19 +186,16 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     ANNOTATION_MODIFY_FAILED: _StatusCode.ValueType  # 24252
     METADATA_INVALID_PATCH_ARGUMENTS: _StatusCode.ValueType  # 24900
     """Metadata related 249xx"""
-
     METADATA_PARSING_ISSUE: _StatusCode.ValueType  # 24901
     METADATA_MANIPULATION_ISSUE: _StatusCode.ValueType  # 24902
     TRAINER_JOB_STATE_NONE: _StatusCode.ValueType  # 25000
     """Training service related 25xxx"""
-
     TRAINER_JOB_STATE_QUEUED: _StatusCode.ValueType  # 25001
     TRAINER_JOB_STATE_RUNNING: _StatusCode.ValueType  # 25002
     TRAINER_JOB_STATE_COMPLETE: _StatusCode.ValueType  # 25003
     TRAINER_JOB_STATE_ERROR: _StatusCode.ValueType  # 25004
     DATA_DUMP_SUCCESS: _StatusCode.ValueType  # 25150
     """Data Dump related 251xx"""
-
     DATA_DUMP_PENDING: _StatusCode.ValueType  # 25151
     DATA_DUMP_FAILED: _StatusCode.ValueType  # 25152
     DATA_DUMP_IN_PROGRESS: _StatusCode.ValueType  # 25153
@@ -261,20 +208,17 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     DATA_DUMP_EXPORT_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25174
     APP_DUPLICATION_SUCCESS: _StatusCode.ValueType  # 25200
     """Duplicate related 252xx"""
-
     APP_DUPLICATION_FAILED: _StatusCode.ValueType  # 25201
     APP_DUPLICATION_PENDING: _StatusCode.ValueType  # 25202
     APP_DUPLICATION_IN_PROGRESS: _StatusCode.ValueType  # 25203
     APP_DUPLICATION_INVALID_REQUEST: _StatusCode.ValueType  # 25204
     MODULE_DOES_NOT_EXIST: _StatusCode.ValueType  # 25300
     """Module related codes 253xx"""
-
     MODULE_PERMISSION_DENIED: _StatusCode.ValueType  # 25301
     MODULE_INVALID_ARGUMENT: _StatusCode.ValueType  # 25302
     MODULE_INVALID_REQUEST: _StatusCode.ValueType  # 25303
     BULK_OPERATION_SUCCESS: _StatusCode.ValueType  # 25400
     """Bulk Operation related codes 254xx"""
-
     BULK_OPERATION_FAILED: _StatusCode.ValueType  # 25401
     BULK_OPERATION_PENDING: _StatusCode.ValueType  # 25402
     BULK_OPERATION_IN_PROGRESS: _StatusCode.ValueType  # 25403
@@ -284,16 +228,12 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     BULK_OPERATION_DELETED: _StatusCode.ValueType  # 25407
     INPUTS_ADD_JOBS_FAILED: _StatusCode.ValueType  # 25501
     """INPUTS ADD JOBS related codes 255xx"""
-
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
-
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
     """when things are async, this is the default status."""
-
     INPUT_DOWNLOAD_FAILED: _StatusCode.ValueType  # 30002
     """any type of error downloading and processing"""
-
     INPUT_DOWNLOAD_IN_PROGRESS: _StatusCode.ValueType  # 30003
     INPUT_STATUS_UPDATE_FAILED: _StatusCode.ValueType  # 30004
     INPUT_DELETE_FAILED: _StatusCode.ValueType  # 30005
@@ -319,7 +259,6 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INPUT_REINDEX_IN_PROGRESS: _StatusCode.ValueType  # 30503
     INPUT_VIDEO_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 31000
     """Input:Video related 31xxx -- Deprecated"""
-
     INPUT_VIDEO_DOWNLOAD_PENDING: _StatusCode.ValueType  # 31001
     INPUT_VIDEO_DOWNLOAD_FAILED: _StatusCode.ValueType  # 31002
     INPUT_VIDEO_DUPLICATE: _StatusCode.ValueType  # 31100
@@ -340,13 +279,11 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INPUT_INVALID_REQUEST: _StatusCode.ValueType  # 39999
     PREDICT_INVALID_REQUEST: _StatusCode.ValueType  # 40001
     """API formatting issues 4000x"""
-
     SEARCH_INVALID_REQUEST: _StatusCode.ValueType  # 40002
     CONCEPTS_INVALID_REQUEST: _StatusCode.ValueType  # 40003
     STATS_INVALID_REQUEST: _StatusCode.ValueType  # 40004
     DATABASE_DUPLICATE_KEY: _StatusCode.ValueType  # 40010
     """Other related 400xx"""
-
     DATABASE_STATEMENT_TIMEOUT: _StatusCode.ValueType  # 40011
     DATABASE_INVALID_ROWS_AFFECTED: _StatusCode.ValueType  # 40012
     DATABASE_DEADLOCK_DETECTED: _StatusCode.ValueType  # 40013
@@ -365,10 +302,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     CLUSTER_INTERNAL_FAILURE: _StatusCode.ValueType  # 43040
     EXTERNAL_CONNECTION_ERROR: _StatusCode.ValueType  # 40034
     """could not connect to external services"""
-
     QUEUE_CONN_ERROR: _StatusCode.ValueType  # 41000
     """Queue related errors 41xxx"""
-
     QUEUE_CLOSE_REQUEST_TIMEOUT: _StatusCode.ValueType  # 41002
     QUEUE_CONN_CLOSED: _StatusCode.ValueType  # 41003
     QUEUE_PUBLISH_ACK_TIMEOUT: _StatusCode.ValueType  # 41004
@@ -381,19 +316,16 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     QUEUE_ACK_FAILURE: _StatusCode.ValueType  # 41011
     SQS_OVERLIMIT: _StatusCode.ValueType  # 41100
     """SQS related errors 411xx"""
-
     SQS_INVALID_RECEIPT_HANDLE: _StatusCode.ValueType  # 41101
     SQS_UNKNOWN: _StatusCode.ValueType  # 41102
     SEARCH_INTERNAL_FAILURE: _StatusCode.ValueType  # 43001
     """Search related errors 43xxxx"""
-
     SEARCH_PROJECTION_FAILURE: _StatusCode.ValueType  # 43002
     SEARCH_PREDICTION_FAILURE: _StatusCode.ValueType  # 43003
     SEARCH_BY_NOT_FULLY_INDEXED_INPUT: _StatusCode.ValueType  # 43004
     SAVED_SEARCH_MODIFY_FAILED: _StatusCode.ValueType  # 43005
     EVALUATION_QUEUED: _StatusCode.ValueType  # 43100
     """Workflow evaluation err code"""
-
     EVALUATION_IN_PROGRESS: _StatusCode.ValueType  # 43101
     EVALUATION_SUCCESS: _StatusCode.ValueType  # 43102
     EVALUATION_FAILED_TO_RETRIEVE_DATA: _StatusCode.ValueType  # 43103
@@ -405,28 +337,23 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     EVALUATION_MIXED: _StatusCode.ValueType  # 43109
     STRIPE_EVENT_ERROR: _StatusCode.ValueType  # 44001
     """Stripe 44xxx"""
-
     CACHE_MISS: _StatusCode.ValueType  # 45001
     """Redis/Cache 45xxx"""
-
     REDIS_SCRIPT_EXITED_WITH_FAILURE: _StatusCode.ValueType  # 45002
     REDIS_STREAM_ERR: _StatusCode.ValueType  # 45003
     REDIS_NO_CONSUMERS: _StatusCode.ValueType  # 45004
     REDIS_STREAM_BACKOFF: _StatusCode.ValueType  # 45005
     SIGNUP_EVENT_ERROR: _StatusCode.ValueType  # 46001
     """Sift Science 46xxx"""
-
     SIGNUP_FLAGGED: _StatusCode.ValueType  # 46002
     FILETYPE_UNSUPPORTED: _StatusCode.ValueType  # 46003
     APP_COUNT_INVALID_MESSAGE: _StatusCode.ValueType  # 47001
     """Application counts related errors 470xx"""
-
     APP_COUNT_UPDATE_INCREMENT_FAILED: _StatusCode.ValueType  # 47002
     APP_COUNT_REBUILD_FAILED: _StatusCode.ValueType  # 47003
     APP_COUNT_INTERNAL_FAILURE: _StatusCode.ValueType  # 47004
     MP_DOWNLOAD_ERROR: _StatusCode.ValueType  # 47101
     """Media processor related errors 471xx -- DEPRECATED"""
-
     MP_RESOLVE_DNS_ERROR: _StatusCode.ValueType  # 47102
     MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR: _StatusCode.ValueType  # 47103
     MP_IMAGE_DECODE_ERROR: _StatusCode.ValueType  # 47104
@@ -434,107 +361,82 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     MP_IMAGE_PROCESSING_ERROR: _StatusCode.ValueType  # 47106
     DATATIER_CONN_ERROR: _StatusCode.ValueType  # 47201
     """DataTier related error 472xx"""
-
     USER_CONSENT_FACE: _StatusCode.ValueType  # 50001
     """User legal consent stauts related 50xxx"""
-
     WORKER_MISSING: _StatusCode.ValueType  # 51000
     """Workers 51xxx"""
-
     WORKER_ACTIVE: _StatusCode.ValueType  # 51001
     WORKER_INACTIVE: _StatusCode.ValueType  # 51002
     COLLECTOR_MISSING: _StatusCode.ValueType  # 52000
     """Collectors 52xxx"""
-
     COLLECTOR_ACTIVE: _StatusCode.ValueType  # 52001
     COLLECTOR_INACTIVE: _StatusCode.ValueType  # 52002
     COLLECTOR_POST_INPUT_FAILED: _StatusCode.ValueType  # 52003
     SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST: _StatusCode.ValueType  # 53001
     """SSO 53xxx"""
-
     TASK_IN_PROGRESS: _StatusCode.ValueType  # 54001
     """Tasks 54xxx
     The task was created.
     """
-
     TASK_DONE: _StatusCode.ValueType  # 54002
     """The task is completed."""
-
     TASK_WONT_DO: _StatusCode.ValueType  # 54003
     """The task is marked as abandoned."""
-
     TASK_ADD_ANNOTATIONS_FAILURE: _StatusCode.ValueType  # 54005
     """An error occurred during add-task-annotations pipeline."""
-
     TASK_CONFLICT: _StatusCode.ValueType  # 54100
     """The task operation is in conflict with the current state of the server."""
-
     TASK_NOT_IMPLEMENTED: _StatusCode.ValueType  # 54101
     """Certain task-related scenarios are not implemented."""
-
     TASK_MISSING: _StatusCode.ValueType  # 54102
     """Task was not found."""
-
     LABEL_ORDER_PENDING: _StatusCode.ValueType  # 55001
     """Label Order Related Status Code 55xxx"""
-
     LABEL_ORDER_IN_PROGRESS: _StatusCode.ValueType  # 55002
     LABEL_ORDER_SUCCESS: _StatusCode.ValueType  # 55003
     LABEL_ORDER_CANCELED: _StatusCode.ValueType  # 55004
     LICENSE_ACTIVE: _StatusCode.ValueType  # 60000
     """License Related Status Code 600xx"""
-
     LICENSE_DOES_NOT_EXIST: _StatusCode.ValueType  # 60001
     LICENSE_NEED_UPDATE: _StatusCode.ValueType  # 60002
     LICENSE_EXPIRED: _StatusCode.ValueType  # 60003
     LICENSE_REVOKED: _StatusCode.ValueType  # 60004
     LICENSE_DELETED: _StatusCode.ValueType  # 60005
     """hidden state not reflected to users"""
-
     LICENSE_VOLUME_EXCEEDED: _StatusCode.ValueType  # 60006
     PASSWORD_VALIDATION_SUCCESS: _StatusCode.ValueType  # 61000
     """Password Related Status Code"""
-
     PASSWORD_VALIDATION_FAILED: _StatusCode.ValueType  # 61001
     PASSWORDPOLICY_INVALID_ARGUMENT: _StatusCode.ValueType  # 61002
     FEATUREFLAG_CONFIG_NOT_FOUND: _StatusCode.ValueType  # 62000
     """Feature flags status code"""
-
     FEATUREFLAG_INVALID_ARGUMENT: _StatusCode.ValueType  # 62001
     FEATUREFLAG_BLOCKED: _StatusCode.ValueType  # 62002
     MAINTENANCE_SUCCESS: _StatusCode.ValueType  # 63000
     """Maintenance status code"""
-
     MAINTENANCE_FAILED: _StatusCode.ValueType  # 63001
     DATASET_VERSION_PENDING: _StatusCode.ValueType  # 64005
     """Datasets 64xxx
     The dataset version is pending to be processed.
     """
-
     DATASET_VERSION_IN_PROGRESS: _StatusCode.ValueType  # 64010
     """The dataset version is currently being processed."""
-
     DATASET_VERSION_READY: _StatusCode.ValueType  # 64015
     """The dataset version is ready to be used."""
-
     DATASET_VERSION_FAILURE: _StatusCode.ValueType  # 64020
     """An error occurred during the dataset version processing."""
-
     DATASET_VERSION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64025
     """An unexpected error occurred during the dataset version processing."""
-
     DATASET_VERSION_CONFLICT: _StatusCode.ValueType  # 64030
     """An alteration to dataset version would create a conflict"""
-
     DATASET_INPUT_SUCCESS: _StatusCode.ValueType  # 64100
     """The dataset input was successfully added."""
-
     DATASET_INPUT_DUPLICATE: _StatusCode.ValueType  # 64101
-    """The dataset input is a duplicate."""
-
+    """The dataset input is a duplicate.
+    Deprecated: Unused.
+    """
     JOB_QUEUED: _StatusCode.ValueType  # 64000
     """Generic Job status codes"""
-
     JOB_RUNNING: _StatusCode.ValueType  # 64001
     JOB_COMPLETED: _StatusCode.ValueType  # 64002
     JOB_FAILED: _StatusCode.ValueType  # 64003
@@ -542,18 +444,18 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """auth issues
     TODO: Knowledge graph related 80xxx
     """
-
     LIST_OBJECTS_FAILED: _StatusCode.ValueType  # 66000
     ARCHIVE_EXTRACT_FAILED: _StatusCode.ValueType  # 67000
     UPLOAD_IN_PROGRESS: _StatusCode.ValueType  # 68000
     """Multipart uploading status codes"""
-
     UPLOAD_DONE: _StatusCode.ValueType  # 68001
     UPLOAD_FAILED: _StatusCode.ValueType  # 68002
     UPLOAD_UNEXPECTED_ERROR: _StatusCode.ValueType  # 68003
+    UPLOAD_EXPIRED: _StatusCode.ValueType  # 68004
+    BILLING_INVALID_INFO: _StatusCode.ValueType  # 69000
+    """Billing related issues: 69xxx"""
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
-
     INTERNAL_FETCHING_ISSUE: _StatusCode.ValueType  # 98005
     INTERNAL_DATABASE_ISSUE: _StatusCode.ValueType  # 98006
     INTERNAL_UNEXPECTED_TIMEOUT: _StatusCode.ValueType  # 98009
@@ -567,7 +469,6 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INTERNAL_AZURE_UNCATEGORIZED: _StatusCode.ValueType  # 98017
     CONN_UNCATEGORIZED: _StatusCode.ValueType  # 99001
     """Uncategorized: 99xxx: move off as soon as known"""
-
     MODEL_UNCATEGORIZED: _StatusCode.ValueType  # 99002
     INPUT_UNCATEGORIZED: _StatusCode.ValueType  # 99003
     ANNOTATION_UNCATEGORIZED: _StatusCode.ValueType  # 99004
@@ -575,26 +476,21 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INTERNAL_UNCATEGORIZED: _StatusCode.ValueType  # 99009
     BAD_REQUEST: _StatusCode.ValueType  # 90400
     """Deprecated: migrate off to one of the internal issues"""
-
     SERVER_ERROR: _StatusCode.ValueType  # 90500
     """Deprecated: migrate off to one of the internal issues"""
 
-class StatusCode(_StatusCode, metaclass=_StatusCodeEnumTypeWrapper):
-    pass
+class StatusCode(_StatusCode, metaclass=_StatusCodeEnumTypeWrapper): ...
 
 ZERO: StatusCode.ValueType  # 0
 """to be revised and greatly expanded"""
-
 SUCCESS: StatusCode.ValueType  # 10000
 """Generic"""
-
 MIXED_STATUS: StatusCode.ValueType  # 10010
 FAILURE: StatusCode.ValueType  # 10020
 TRY_AGAIN: StatusCode.ValueType  # 10030
 NOT_IMPLEMENTED: StatusCode.ValueType  # 10040
 MOVED: StatusCode.ValueType  # 10050
 """Resource moved. Respond with Http status 307 and add new Location header to response"""
-
 CONN_ACCOUNT_ISSUES: StatusCode.ValueType  # 11000
 """SUCCESS_WARNING_API_DEPRECATED = 10001;
 SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
@@ -602,101 +498,70 @@ SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
 Clarifai Connection Codes: 11xxx
 expired cc, still in trial, feature not supported in your tier
 """
-
 CONN_TOKEN_INVALID: StatusCode.ValueType  # 11001
 """invalid auth token used. Deprecated: we should return CONN_KEY_INVALID instead now in all cases."""
-
 CONN_CREDENTIALS_INVALID: StatusCode.ValueType  # 11002
 """invalid auth credentials"""
-
 CONN_EXCEED_HOURLY_LIMIT: StatusCode.ValueType  # 11003
 """throttle hourly limit exceeded"""
-
 CONN_EXCEED_MONTHLY_LIMIT: StatusCode.ValueType  # 11004
 """throttle monthly limit exceeded"""
-
 CONN_THROTTLED: StatusCode.ValueType  # 11005
 """throttler and billing stuff"""
-
 CONN_EXCEEDS_LIMITS: StatusCode.ValueType  # 11006
 """throttler and billing stuff"""
-
 CONN_INSUFFICIENT_SCOPES: StatusCode.ValueType  # 11007
 """api key has insufficient permissions"""
-
 CONN_KEY_INVALID: StatusCode.ValueType  # 11008
 """api key is invalid"""
-
 CONN_KEY_NOT_FOUND: StatusCode.ValueType  # 11009
 """api key not found"""
-
 CONN_BAD_REQUEST_FORMAT: StatusCode.ValueType  # 11100
 """multipart form parsing, broken json, etc"""
-
 CONN_DOES_NOT_EXIST: StatusCode.ValueType  # 11101
 """when path is bad"""
-
 CONN_INVALID_REQUEST: StatusCode.ValueType  # 11102
 """something wrong with a header"""
-
 CONN_METHOD_NOT_ALLOWED: StatusCode.ValueType  # 11103
 """when a request method is not allowed"""
-
 CONN_NO_GDPR_CONSENT: StatusCode.ValueType  # 11104
 """lack GDPR consent"""
-
 CONN_AUTH_METHOD_DISABLED: StatusCode.ValueType  # 11200
 """authentication method is disabled"""
-
 MODEL_TRAINED: StatusCode.ValueType  # 21100
 """Model/Custom Training related 20xxx
 Custom model has been already trained.
 """
-
 MODEL_TRAINING: StatusCode.ValueType  # 21101
 """Custom model is currently training."""
-
 MODEL_UNTRAINED: StatusCode.ValueType  # 21102
 """Custom model has not yet been trained."""
-
 MODEL_QUEUED_FOR_TRAINING: StatusCode.ValueType  # 21103
 """Custom model is currently in queue for training, waiting on assets to process first."""
-
 MODEL_UPLOADING: StatusCode.ValueType  # 21104
 MODEL_UPLOADING_FAILED: StatusCode.ValueType  # 21105
 MODEL_TRAINING_FAILED: StatusCode.ValueType  # 21106
 """generic err msg for any type of model training err."""
-
 MODEL_TRAINING_NO_DATA: StatusCode.ValueType  # 21110
 """Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_NO_POSITIVES: StatusCode.ValueType  # 21111
 """Custom model training had no positive examples. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_ONE_VS_N_SINGLE_CLASS: StatusCode.ValueType  # 21112
 """Custom model training was ONE_VS_N but with a single class. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_TIMED_OUT: StatusCode.ValueType  # 21113
 """Training took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_WAITING_ERROR: StatusCode.ValueType  # 21114
 """Training got error waiting on asset pipeline to finish. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_UNKNOWN_ERROR: StatusCode.ValueType  # 21115
 """Training threw an unknown exception."""
-
 MODEL_TRAINING_MSG_REDELIVER: StatusCode.ValueType  # 21116
 """Training message was redelivered. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_INSUFFICIENT_DATA: StatusCode.ValueType  # 21117
 """Training got error due to insufficient labelled data. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_INVALID_PARAMS: StatusCode.ValueType  # 21118
 """FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_TRAINING_INVALID_DATA_TOLERANCE_EXCEEDED: StatusCode.ValueType  # 21119
 """Training is stopped because too much data was dropped. FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
-
 MODEL_MODIFY_SUCCESS: StatusCode.ValueType  # 21150
 MODEL_MODIFY_PENDING: StatusCode.ValueType  # 21151
 MODEL_MODIFY_FAILED: StatusCode.ValueType  # 21152
@@ -705,91 +570,69 @@ MODEL_PERMISSION_DENIED: StatusCode.ValueType  # 21201
 MODEL_INVALID_ARGUMENT: StatusCode.ValueType  # 21202
 MODEL_INVALID_REQUEST: StatusCode.ValueType  # 21203
 MODEL_EVALUATED: StatusCode.ValueType  # 21300
-"""Model Evaluation status codes
-
-"""
-
+"""Model Evaluation status codes"""
 MODEL_EVALUATING: StatusCode.ValueType  # 21301
 MODEL_NOT_EVALUATED: StatusCode.ValueType  # 21302
 MODEL_QUEUED_FOR_EVALUATION: StatusCode.ValueType  # 21303
 MODEL_EVALUATION_TIMED_OUT: StatusCode.ValueType  # 21310
 """Evaluation took longer than hard coded timeouts. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
 MODEL_EVALUATION_WAITING_ERROR: StatusCode.ValueType  # 21311
 """Evaluation got error waiting on asset pipeline to finish.FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
 MODEL_EVALUATION_UNKNOWN_ERROR: StatusCode.ValueType  # 21312
 """EVALUATION THREW AN UNKNOWN EXCEPTION."""
-
 MODEL_PREDICTION_FAILED: StatusCode.ValueType  # 21313
 MODEL_EVALUATION_MSG_REDELIVER: StatusCode.ValueType  # 21314
 """Eval message was redelivered. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
 MODEL_EVALUATION_NEED_LABELS: StatusCode.ValueType  # 21315
 """Don't have enough concepts labelled to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
 MODEL_EVALUATION_NEED_INPUTS: StatusCode.ValueType  # 21316
 """Don't have enough inputs per concept to perform evaluation. FIXME(yang): deprecate this. Use the 21317 + errStatusMsg"""
-
 MODEL_EVALUATION_FAILED: StatusCode.ValueType  # 21317
 """Generic err code for eval failure."""
-
 MODEL_DEPLOYMENT_FAILED: StatusCode.ValueType  # 21350
 """Status codes through 21319 (inclusive) reserved for model eval *errors* (per logic in clients)
 
 Used when inference coordinator failed to deploy spire and throws an error
 """
-
 MODEL_DEPLOYING: StatusCode.ValueType  # 21351
 """Used when calling the inference coordinator to deploy a spire"""
-
 MODEL_QUEUED_FOR_DEPLOYMENT: StatusCode.ValueType  # 21352
 """Used when training is completed"""
-
 MODEL_NOT_DEPLOYED: StatusCode.ValueType  # 21353
 """Used when model spire deployment is manually taken down or due to inactivity"""
-
 MODEL_REFERENCE_INVALID_ARGUMENT: StatusCode.ValueType  # 21400
 """Used when a model reference field is not set properly"""
-
 MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: StatusCode.ValueType  # 21420
 """Used when a model example input field is not set properly"""
-
 WORKFLOW_NO_MATCHING_INPUT: StatusCode.ValueType  # 22001
 """Workflow related 22xxx
 
 specified model input not in workflow
 """
-
 WORKFLOW_REQUIRE_TRAINED_MODEL: StatusCode.ValueType  # 22002
 """specified model must be trained"""
-
 WORKFLOW_DUPLICATE: StatusCode.ValueType  # 22100
 WORKFLOW_UNSUPPORTED_FORMAT: StatusCode.ValueType  # 22101
 WORKFLOW_DOES_NOT_EXIST: StatusCode.ValueType  # 22102
 WORKFLOW_PERMISSION_DENIED: StatusCode.ValueType  # 22103
 WORKFLOW_INVALID_ARGUMENT: StatusCode.ValueType  # 22104
 """error in the request somewhere"""
-
 WORKFLOW_INVALID_RECIPE: StatusCode.ValueType  # 22105
 WORKFLOW_INVALID_TEMPLATE: StatusCode.ValueType  # 22106
 WORKFLOW_INVALID_GRAPH: StatusCode.ValueType  # 22107
 WORKFLOW_INTERNAL_FAILURE: StatusCode.ValueType  # 22108
 WORKFLOW_INVALID_REQUEST: StatusCode.ValueType  # 22999
 """error in the request somewhere"""
-
 WORKFLOW_MODIFY_SUCCESS: StatusCode.ValueType  # 22150
 WORKFLOW_MODIFY_PENDING: StatusCode.ValueType  # 22151
 WORKFLOW_MODIFY_FAILED: StatusCode.ValueType  # 22152
 WORKFLOW_REINDEX_FAILED: StatusCode.ValueType  # 22153
 CONCEPT_MODIFY_SUCCESS: StatusCode.ValueType  # 23150
 """Concept related 23xxx"""
-
 CONCEPT_MODIFY_PENDING: StatusCode.ValueType  # 23151
 CONCEPT_MODIFY_FAILED: StatusCode.ValueType  # 23152
 ANNOTATION_SUCCESS: StatusCode.ValueType  # 24150
 """Annotation related 24xxx"""
-
 ANNOTATION_PENDING: StatusCode.ValueType  # 24151
 ANNOTATION_FAILED: StatusCode.ValueType  # 24152
 ANNOTATION_UNKNOWN_STATUS: StatusCode.ValueType  # 24154
@@ -803,19 +646,16 @@ ANNOTATION_MODIFY_PENDING: StatusCode.ValueType  # 24251
 ANNOTATION_MODIFY_FAILED: StatusCode.ValueType  # 24252
 METADATA_INVALID_PATCH_ARGUMENTS: StatusCode.ValueType  # 24900
 """Metadata related 249xx"""
-
 METADATA_PARSING_ISSUE: StatusCode.ValueType  # 24901
 METADATA_MANIPULATION_ISSUE: StatusCode.ValueType  # 24902
 TRAINER_JOB_STATE_NONE: StatusCode.ValueType  # 25000
 """Training service related 25xxx"""
-
 TRAINER_JOB_STATE_QUEUED: StatusCode.ValueType  # 25001
 TRAINER_JOB_STATE_RUNNING: StatusCode.ValueType  # 25002
 TRAINER_JOB_STATE_COMPLETE: StatusCode.ValueType  # 25003
 TRAINER_JOB_STATE_ERROR: StatusCode.ValueType  # 25004
 DATA_DUMP_SUCCESS: StatusCode.ValueType  # 25150
 """Data Dump related 251xx"""
-
 DATA_DUMP_PENDING: StatusCode.ValueType  # 25151
 DATA_DUMP_FAILED: StatusCode.ValueType  # 25152
 DATA_DUMP_IN_PROGRESS: StatusCode.ValueType  # 25153
@@ -828,20 +668,17 @@ DATA_DUMP_EXPORT_IN_PROGRESS: StatusCode.ValueType  # 25173
 DATA_DUMP_EXPORT_UNEXPECTED_ERROR: StatusCode.ValueType  # 25174
 APP_DUPLICATION_SUCCESS: StatusCode.ValueType  # 25200
 """Duplicate related 252xx"""
-
 APP_DUPLICATION_FAILED: StatusCode.ValueType  # 25201
 APP_DUPLICATION_PENDING: StatusCode.ValueType  # 25202
 APP_DUPLICATION_IN_PROGRESS: StatusCode.ValueType  # 25203
 APP_DUPLICATION_INVALID_REQUEST: StatusCode.ValueType  # 25204
 MODULE_DOES_NOT_EXIST: StatusCode.ValueType  # 25300
 """Module related codes 253xx"""
-
 MODULE_PERMISSION_DENIED: StatusCode.ValueType  # 25301
 MODULE_INVALID_ARGUMENT: StatusCode.ValueType  # 25302
 MODULE_INVALID_REQUEST: StatusCode.ValueType  # 25303
 BULK_OPERATION_SUCCESS: StatusCode.ValueType  # 25400
 """Bulk Operation related codes 254xx"""
-
 BULK_OPERATION_FAILED: StatusCode.ValueType  # 25401
 BULK_OPERATION_PENDING: StatusCode.ValueType  # 25402
 BULK_OPERATION_IN_PROGRESS: StatusCode.ValueType  # 25403
@@ -851,16 +688,12 @@ BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
 BULK_OPERATION_DELETED: StatusCode.ValueType  # 25407
 INPUTS_ADD_JOBS_FAILED: StatusCode.ValueType  # 25501
 """INPUTS ADD JOBS related codes 255xx"""
-
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
-
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
 """when things are async, this is the default status."""
-
 INPUT_DOWNLOAD_FAILED: StatusCode.ValueType  # 30002
 """any type of error downloading and processing"""
-
 INPUT_DOWNLOAD_IN_PROGRESS: StatusCode.ValueType  # 30003
 INPUT_STATUS_UPDATE_FAILED: StatusCode.ValueType  # 30004
 INPUT_DELETE_FAILED: StatusCode.ValueType  # 30005
@@ -886,7 +719,6 @@ INPUT_REINDEX_FAILED: StatusCode.ValueType  # 30502
 INPUT_REINDEX_IN_PROGRESS: StatusCode.ValueType  # 30503
 INPUT_VIDEO_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 31000
 """Input:Video related 31xxx -- Deprecated"""
-
 INPUT_VIDEO_DOWNLOAD_PENDING: StatusCode.ValueType  # 31001
 INPUT_VIDEO_DOWNLOAD_FAILED: StatusCode.ValueType  # 31002
 INPUT_VIDEO_DUPLICATE: StatusCode.ValueType  # 31100
@@ -907,13 +739,11 @@ INPUT_WRITES_DISABLED_FOR_MAINTENANCE: StatusCode.ValueType  # 39998
 INPUT_INVALID_REQUEST: StatusCode.ValueType  # 39999
 PREDICT_INVALID_REQUEST: StatusCode.ValueType  # 40001
 """API formatting issues 4000x"""
-
 SEARCH_INVALID_REQUEST: StatusCode.ValueType  # 40002
 CONCEPTS_INVALID_REQUEST: StatusCode.ValueType  # 40003
 STATS_INVALID_REQUEST: StatusCode.ValueType  # 40004
 DATABASE_DUPLICATE_KEY: StatusCode.ValueType  # 40010
 """Other related 400xx"""
-
 DATABASE_STATEMENT_TIMEOUT: StatusCode.ValueType  # 40011
 DATABASE_INVALID_ROWS_AFFECTED: StatusCode.ValueType  # 40012
 DATABASE_DEADLOCK_DETECTED: StatusCode.ValueType  # 40013
@@ -932,10 +762,8 @@ REQUEST_CANCELED_BY_USER: StatusCode.ValueType  # 40037
 CLUSTER_INTERNAL_FAILURE: StatusCode.ValueType  # 43040
 EXTERNAL_CONNECTION_ERROR: StatusCode.ValueType  # 40034
 """could not connect to external services"""
-
 QUEUE_CONN_ERROR: StatusCode.ValueType  # 41000
 """Queue related errors 41xxx"""
-
 QUEUE_CLOSE_REQUEST_TIMEOUT: StatusCode.ValueType  # 41002
 QUEUE_CONN_CLOSED: StatusCode.ValueType  # 41003
 QUEUE_PUBLISH_ACK_TIMEOUT: StatusCode.ValueType  # 41004
@@ -948,19 +776,16 @@ QUEUE_MAX_MSG_REDELIVERY_EXCEEDED: StatusCode.ValueType  # 41010
 QUEUE_ACK_FAILURE: StatusCode.ValueType  # 41011
 SQS_OVERLIMIT: StatusCode.ValueType  # 41100
 """SQS related errors 411xx"""
-
 SQS_INVALID_RECEIPT_HANDLE: StatusCode.ValueType  # 41101
 SQS_UNKNOWN: StatusCode.ValueType  # 41102
 SEARCH_INTERNAL_FAILURE: StatusCode.ValueType  # 43001
 """Search related errors 43xxxx"""
-
 SEARCH_PROJECTION_FAILURE: StatusCode.ValueType  # 43002
 SEARCH_PREDICTION_FAILURE: StatusCode.ValueType  # 43003
 SEARCH_BY_NOT_FULLY_INDEXED_INPUT: StatusCode.ValueType  # 43004
 SAVED_SEARCH_MODIFY_FAILED: StatusCode.ValueType  # 43005
 EVALUATION_QUEUED: StatusCode.ValueType  # 43100
 """Workflow evaluation err code"""
-
 EVALUATION_IN_PROGRESS: StatusCode.ValueType  # 43101
 EVALUATION_SUCCESS: StatusCode.ValueType  # 43102
 EVALUATION_FAILED_TO_RETRIEVE_DATA: StatusCode.ValueType  # 43103
@@ -972,28 +797,23 @@ EVALUATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 43108
 EVALUATION_MIXED: StatusCode.ValueType  # 43109
 STRIPE_EVENT_ERROR: StatusCode.ValueType  # 44001
 """Stripe 44xxx"""
-
 CACHE_MISS: StatusCode.ValueType  # 45001
 """Redis/Cache 45xxx"""
-
 REDIS_SCRIPT_EXITED_WITH_FAILURE: StatusCode.ValueType  # 45002
 REDIS_STREAM_ERR: StatusCode.ValueType  # 45003
 REDIS_NO_CONSUMERS: StatusCode.ValueType  # 45004
 REDIS_STREAM_BACKOFF: StatusCode.ValueType  # 45005
 SIGNUP_EVENT_ERROR: StatusCode.ValueType  # 46001
 """Sift Science 46xxx"""
-
 SIGNUP_FLAGGED: StatusCode.ValueType  # 46002
 FILETYPE_UNSUPPORTED: StatusCode.ValueType  # 46003
 APP_COUNT_INVALID_MESSAGE: StatusCode.ValueType  # 47001
 """Application counts related errors 470xx"""
-
 APP_COUNT_UPDATE_INCREMENT_FAILED: StatusCode.ValueType  # 47002
 APP_COUNT_REBUILD_FAILED: StatusCode.ValueType  # 47003
 APP_COUNT_INTERNAL_FAILURE: StatusCode.ValueType  # 47004
 MP_DOWNLOAD_ERROR: StatusCode.ValueType  # 47101
 """Media processor related errors 471xx -- DEPRECATED"""
-
 MP_RESOLVE_DNS_ERROR: StatusCode.ValueType  # 47102
 MP_DOWNLOAD_MAX_SIZE_EXCEEDED_ERROR: StatusCode.ValueType  # 47103
 MP_IMAGE_DECODE_ERROR: StatusCode.ValueType  # 47104
@@ -1001,107 +821,82 @@ MP_INVALID_ARGUMENT: StatusCode.ValueType  # 47105
 MP_IMAGE_PROCESSING_ERROR: StatusCode.ValueType  # 47106
 DATATIER_CONN_ERROR: StatusCode.ValueType  # 47201
 """DataTier related error 472xx"""
-
 USER_CONSENT_FACE: StatusCode.ValueType  # 50001
 """User legal consent stauts related 50xxx"""
-
 WORKER_MISSING: StatusCode.ValueType  # 51000
 """Workers 51xxx"""
-
 WORKER_ACTIVE: StatusCode.ValueType  # 51001
 WORKER_INACTIVE: StatusCode.ValueType  # 51002
 COLLECTOR_MISSING: StatusCode.ValueType  # 52000
 """Collectors 52xxx"""
-
 COLLECTOR_ACTIVE: StatusCode.ValueType  # 52001
 COLLECTOR_INACTIVE: StatusCode.ValueType  # 52002
 COLLECTOR_POST_INPUT_FAILED: StatusCode.ValueType  # 52003
 SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST: StatusCode.ValueType  # 53001
 """SSO 53xxx"""
-
 TASK_IN_PROGRESS: StatusCode.ValueType  # 54001
 """Tasks 54xxx
 The task was created.
 """
-
 TASK_DONE: StatusCode.ValueType  # 54002
 """The task is completed."""
-
 TASK_WONT_DO: StatusCode.ValueType  # 54003
 """The task is marked as abandoned."""
-
 TASK_ADD_ANNOTATIONS_FAILURE: StatusCode.ValueType  # 54005
 """An error occurred during add-task-annotations pipeline."""
-
 TASK_CONFLICT: StatusCode.ValueType  # 54100
 """The task operation is in conflict with the current state of the server."""
-
 TASK_NOT_IMPLEMENTED: StatusCode.ValueType  # 54101
 """Certain task-related scenarios are not implemented."""
-
 TASK_MISSING: StatusCode.ValueType  # 54102
 """Task was not found."""
-
 LABEL_ORDER_PENDING: StatusCode.ValueType  # 55001
 """Label Order Related Status Code 55xxx"""
-
 LABEL_ORDER_IN_PROGRESS: StatusCode.ValueType  # 55002
 LABEL_ORDER_SUCCESS: StatusCode.ValueType  # 55003
 LABEL_ORDER_CANCELED: StatusCode.ValueType  # 55004
 LICENSE_ACTIVE: StatusCode.ValueType  # 60000
 """License Related Status Code 600xx"""
-
 LICENSE_DOES_NOT_EXIST: StatusCode.ValueType  # 60001
 LICENSE_NEED_UPDATE: StatusCode.ValueType  # 60002
 LICENSE_EXPIRED: StatusCode.ValueType  # 60003
 LICENSE_REVOKED: StatusCode.ValueType  # 60004
 LICENSE_DELETED: StatusCode.ValueType  # 60005
 """hidden state not reflected to users"""
-
 LICENSE_VOLUME_EXCEEDED: StatusCode.ValueType  # 60006
 PASSWORD_VALIDATION_SUCCESS: StatusCode.ValueType  # 61000
 """Password Related Status Code"""
-
 PASSWORD_VALIDATION_FAILED: StatusCode.ValueType  # 61001
 PASSWORDPOLICY_INVALID_ARGUMENT: StatusCode.ValueType  # 61002
 FEATUREFLAG_CONFIG_NOT_FOUND: StatusCode.ValueType  # 62000
 """Feature flags status code"""
-
 FEATUREFLAG_INVALID_ARGUMENT: StatusCode.ValueType  # 62001
 FEATUREFLAG_BLOCKED: StatusCode.ValueType  # 62002
 MAINTENANCE_SUCCESS: StatusCode.ValueType  # 63000
 """Maintenance status code"""
-
 MAINTENANCE_FAILED: StatusCode.ValueType  # 63001
 DATASET_VERSION_PENDING: StatusCode.ValueType  # 64005
 """Datasets 64xxx
 The dataset version is pending to be processed.
 """
-
 DATASET_VERSION_IN_PROGRESS: StatusCode.ValueType  # 64010
 """The dataset version is currently being processed."""
-
 DATASET_VERSION_READY: StatusCode.ValueType  # 64015
 """The dataset version is ready to be used."""
-
 DATASET_VERSION_FAILURE: StatusCode.ValueType  # 64020
 """An error occurred during the dataset version processing."""
-
 DATASET_VERSION_UNEXPECTED_ERROR: StatusCode.ValueType  # 64025
 """An unexpected error occurred during the dataset version processing."""
-
 DATASET_VERSION_CONFLICT: StatusCode.ValueType  # 64030
 """An alteration to dataset version would create a conflict"""
-
 DATASET_INPUT_SUCCESS: StatusCode.ValueType  # 64100
 """The dataset input was successfully added."""
-
 DATASET_INPUT_DUPLICATE: StatusCode.ValueType  # 64101
-"""The dataset input is a duplicate."""
-
+"""The dataset input is a duplicate.
+Deprecated: Unused.
+"""
 JOB_QUEUED: StatusCode.ValueType  # 64000
 """Generic Job status codes"""
-
 JOB_RUNNING: StatusCode.ValueType  # 64001
 JOB_COMPLETED: StatusCode.ValueType  # 64002
 JOB_FAILED: StatusCode.ValueType  # 64003
@@ -1109,18 +904,18 @@ AUTH_MISSING_IDP_ASSOC: StatusCode.ValueType  # 65000
 """auth issues
 TODO: Knowledge graph related 80xxx
 """
-
 LIST_OBJECTS_FAILED: StatusCode.ValueType  # 66000
 ARCHIVE_EXTRACT_FAILED: StatusCode.ValueType  # 67000
 UPLOAD_IN_PROGRESS: StatusCode.ValueType  # 68000
 """Multipart uploading status codes"""
-
 UPLOAD_DONE: StatusCode.ValueType  # 68001
 UPLOAD_FAILED: StatusCode.ValueType  # 68002
 UPLOAD_UNEXPECTED_ERROR: StatusCode.ValueType  # 68003
+UPLOAD_EXPIRED: StatusCode.ValueType  # 68004
+BILLING_INVALID_INFO: StatusCode.ValueType  # 69000
+"""Billing related issues: 69xxx"""
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
-
 INTERNAL_FETCHING_ISSUE: StatusCode.ValueType  # 98005
 INTERNAL_DATABASE_ISSUE: StatusCode.ValueType  # 98006
 INTERNAL_UNEXPECTED_TIMEOUT: StatusCode.ValueType  # 98009
@@ -1134,7 +929,6 @@ INTERNAL_AWS_UNCATEGORIZED: StatusCode.ValueType  # 98016
 INTERNAL_AZURE_UNCATEGORIZED: StatusCode.ValueType  # 98017
 CONN_UNCATEGORIZED: StatusCode.ValueType  # 99001
 """Uncategorized: 99xxx: move off as soon as known"""
-
 MODEL_UNCATEGORIZED: StatusCode.ValueType  # 99002
 INPUT_UNCATEGORIZED: StatusCode.ValueType  # 99003
 ANNOTATION_UNCATEGORIZED: StatusCode.ValueType  # 99004
@@ -1142,9 +936,6 @@ BILLING_UNCATEGORIZED: StatusCode.ValueType  # 99005
 INTERNAL_UNCATEGORIZED: StatusCode.ValueType  # 99009
 BAD_REQUEST: StatusCode.ValueType  # 90400
 """Deprecated: migrate off to one of the internal issues"""
-
 SERVER_ERROR: StatusCode.ValueType  # 90500
 """Deprecated: migrate off to one of the internal issues"""
-
 global___StatusCode = StatusCode
-

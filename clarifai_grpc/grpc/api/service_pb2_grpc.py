@@ -239,6 +239,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse),
                 )
+        self.PatchDatasetIds = channel.unary_unary(
+                '/clarifai.api.V2/PatchDatasetIds',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse),
+                )
         self.DeleteDatasets = channel.unary_unary(
                 '/clarifai.api.V2/DeleteDatasets',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetsRequest.SerializeToString,
@@ -472,6 +477,11 @@ class V2Stub(object):
         self.PatchWorkflows = channel.unary_unary(
                 '/clarifai.api.V2/PatchWorkflows',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse),
+                )
+        self.PatchWorkflowIds = channel.unary_unary(
+                '/clarifai.api.V2/PatchWorkflowIds',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowIdsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse),
                 )
         self.DeleteWorkflow = channel.unary_unary(
@@ -939,6 +949,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
                 )
+        self.ListInputsAddJobs = channel.unary_unary(
+                '/clarifai.api.V2/ListInputsAddJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsAddJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse),
+                )
+        self.GetInputsAddJob = channel.unary_unary(
+                '/clarifai.api.V2/GetInputsAddJob',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse),
+                )
         self.PostUploads = channel.unary_unary(
                 '/clarifai.api.V2/PostUploads',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUploadsRequest.SerializeToString,
@@ -1288,6 +1308,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchDatasetIds(self, request, context):
+        """Patch one or more dataset ids.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DeleteDatasets(self, request, context):
         """Delete one or more datasets in a single request.
         """
@@ -1450,7 +1477,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PatchModelIds(self, request, context):
-        """Patch one or more models.
+        """Patch one or more models ids.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1632,6 +1659,13 @@ class V2Servicer(object):
 
     def PatchWorkflows(self, request, context):
         """Patch one or more workflows.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchWorkflowIds(self, request, context):
+        """Patch one or more workflows ids.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2311,6 +2345,20 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListInputsAddJobs(self, request, context):
+        """List all the inputs add jobs
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetInputsAddJob(self, request, context):
+        """Get the input add job details by ID
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostUploads(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2549,6 +2597,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.SerializeToString,
             ),
+            'PatchDatasetIds': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchDatasetIds,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.SerializeToString,
+            ),
             'DeleteDatasets': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteDatasets,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetsRequest.FromString,
@@ -2782,6 +2835,11 @@ def add_V2Servicer_to_server(servicer, server):
             'PatchWorkflows': grpc.unary_unary_rpc_method_handler(
                     servicer.PatchWorkflows,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
+            ),
+            'PatchWorkflowIds': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchWorkflowIds,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowIdsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
             ),
             'DeleteWorkflow': grpc.unary_unary_rpc_method_handler(
@@ -3248,6 +3306,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.GetDatasetInputsSearchAddJob,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
+            ),
+            'ListInputsAddJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListInputsAddJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsAddJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.SerializeToString,
+            ),
+            'GetInputsAddJob': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetInputsAddJob,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.SerializeToString,
             ),
             'PostUploads': grpc.unary_unary_rpc_method_handler(
                     servicer.PostUploads,
@@ -3995,6 +4063,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchDatasets',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchDatasetIds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchDatasetIds',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -4794,6 +4879,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflows',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchWorkflowIds(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowIds',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowIdsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -6376,6 +6478,40 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListInputsAddJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListInputsAddJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsAddJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetInputsAddJob(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInputsAddJob',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
