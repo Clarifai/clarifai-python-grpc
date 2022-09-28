@@ -392,7 +392,6 @@ def test_text_predict_on_public_models(channel):
         )
 
 
-@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels
 def test_text_fb_translation_predict_on_public_models(channel):
     """Test language translation models.
@@ -400,7 +399,10 @@ def test_text_fb_translation_predict_on_public_models(channel):
     all en-language translations use the same english text.
     """
     stub = service_pb2_grpc.V2Stub(channel)
-    for title, model_id, text, app_id, user_id in TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
+    # Note: Only one test for now. The rest of the tests will be added in time
+    for title, model_id, text, app_id, user_id in TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE[
+        :1
+    ]:
         request = service_pb2.PostModelOutputsRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
@@ -417,7 +419,6 @@ def test_text_fb_translation_predict_on_public_models(channel):
         )
 
 
-@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels
 def test_text_helsinki_translation_predict_on_public_models(channel):
     """Test language translation models.
@@ -425,13 +426,14 @@ def test_text_helsinki_translation_predict_on_public_models(channel):
     all en-language translations use the same english text.
     """
     stub = service_pb2_grpc.V2Stub(channel)
+    # Note: Only one test for now. The rest of the tests will be added in time
     for (
         title,
         model_id,
         text,
         app_id,
         user_id,
-    ) in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
+    ) in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE[:1]:
         request = service_pb2.PostModelOutputsRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
