@@ -74,12 +74,7 @@ OBJECT_DETECTION_MODELS = {
         "yolov6",
         "meituan",
     ],
-    "YOLOV7": [
-        "general-detector-yolov7-coco",
-        "yolov7",
-        "yolov7",
-        "wongkinyiu"
-    ],
+    "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
     "YOLOV7_E6": [
         "general-image-detector-yolov7-e6-coco",
         "yolov7-e6",
@@ -124,7 +119,9 @@ OBJECT_DETECTION_MODELS = {
     ],
 }
 SHORT_OBJECT_DETECTION_MODEL_KEYS = ["YOLOV6_S", "YOLOV7", "DETIC_CLIP_R50"]
-OBJECT_DETECTION_MODELS_SHORT = {k: OBJECT_DETECTION_MODELS[k] for k in SHORT_OBJECT_DETECTION_MODEL_KEYS}
+OBJECT_DETECTION_MODELS_SHORT = {
+    k: OBJECT_DETECTION_MODELS[k] for k in SHORT_OBJECT_DETECTION_MODEL_KEYS
+}
 
 ## LANGUAGE TRANSLATION
 
@@ -159,8 +156,8 @@ HELSINKINLP_TRANSLATION_MODELS = {
     ],
     "CZECH_EN_MODEL": [
         "Helsinki-NLP/opus-mt-cs-en",
-        "text-translation-czech-english", 
-        ],
+        "text-translation-czech-english",
+    ],
     "JAPANESE_EN_MODEL": [
         "Helsinki-NLP/opus-mt-jap-en",
         "text-translation-japanese-english",
@@ -427,7 +424,13 @@ def test_text_helsinki_translation_predict_on_public_models(channel):
     all en-language translations use the same english text.
     """
     stub = service_pb2_grpc.V2Stub(channel)
-    for title, model_id, text, app_id, user_id in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
+    for (
+        title,
+        model_id,
+        text,
+        app_id,
+        user_id,
+    ) in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
         request = service_pb2.PostModelOutputsRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
