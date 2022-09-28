@@ -73,7 +73,12 @@ OBJECT_DETECTION_MODELS = {
         "yolov6",
         "meituan",
     ],
-    "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
+    "YOLOV7": [
+        "general-detector-yolov7-coco",
+        "yolov7",
+        "yolov7",
+        "wongkinyiu"
+    ],
     "YOLOV7_E6": [
         "general-image-detector-yolov7-e6-coco",
         "yolov7-e6",
@@ -126,34 +131,40 @@ OBJECT_DETECTION_MODELS = {
 
 HELSINKINLP_TRANSLATION_MODELS = {
     "ROMANCE_EN_MODEL": [
-        "text-translation-romance-lang-english",
         "Text Translation: Romance to English",
+        "text-translation-romance-lang-english",
     ],
     "EN_SPANISH_MODEL": [
-        "text-translation-english-spanish",
         "Helsinki-NLP/opus-mt-en-es",
+        "text-translation-english-spanish",
     ],
     "GERMAN_EN_MODEL": [
-        "text-translation-german-english",
         "Helsinki-NLP/opus-mt-de-en",
+        "text-translation-german-english",
     ],
     "CHINESE_EN_MODEL": [
-        "text-translation-chinese-english",
         "Helsinki-NLP/opus-mt-zh-en",
+        "text-translation-chinese-english",
     ],
     "ARABIC_EN_MODEL": [
-        "text-translation-arabic-english",
         "Helsinki-NLP/opus-mt-ar-en",
+        "text-translation-arabic-english",
     ],
-    "WELSH_EN_MODEL": ["text-translation-welsh-english", "Helsinki-NLP/opus-mt-cy-en"],
-    "CZECH_EN_MODEL": ["text-translation-czech-english", "Helsinki-NLP/opus-mt-cs-en"],
+    "WELSH_EN_MODEL": [
+        "Helsinki-NLP/opus-mt-cy-en",
+        "text-translation-welsh-english",
+    ],
+    "CZECH_EN_MODEL": [
+        "Helsinki-NLP/opus-mt-cs-en",
+        "text-translation-czech-english", 
+        ],
     "JAPANESE_EN_MODEL": [
-        "text-translation-japanese-english",
         "Helsinki-NLP/opus-mt-jap-en",
+        "text-translation-japanese-english",
     ],
     "DANISH_EN_MODEL": [
-        "text-translation-danish-english",
         "Helsinki-NLP/opus-mt-da-en",
+        "text-translation-danish-english",
     ],
 }
 
@@ -289,11 +300,14 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
     ),
 ]
 
-TEXT_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE = []
+# title, model_id, text, app, user
+TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE = []
+TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE = []
 
 # Map corresponding test data to each model in translation_models dict
 # append app_id and user_id vars to model data and then add the data to
 # the text_translation_model_title_id_data list of tuples
+
 for key, values in FACEBOOK_TRANSLATION_MODELS.items():
     language = key.split("_")[0]
     values.append(TRANSLATION_TEST_DATA[language])
@@ -302,7 +316,8 @@ for key, values in FACEBOOK_TRANSLATION_MODELS.items():
         "facebook",
     ]
     values += app_credentials
-    TEXT_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
+    TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
+
 
 for key, values in HELSINKINLP_TRANSLATION_MODELS.items():
     language = key.split("_")[0]
@@ -312,7 +327,7 @@ for key, values in HELSINKINLP_TRANSLATION_MODELS.items():
         "helsinkinlp",
     ]
     values += app_credentials
-    TEXT_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
+    TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
     ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook"),
@@ -375,22 +390,38 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
-
 @both_channels
-def test_text_translation_predict_on_public_models(channel):
+def test_text_fb_translation_predict_on_public_models(channel):
     """Test language translation models.
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
     """
     stub = service_pb2_grpc.V2Stub(channel)
+    for title, model_id, text, app_id, user_id in TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+        raise_on_failure(
+            response,
+            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+        )
 
-    for (
-        title,
-        model_id,
-        text,
-        app_id,
-        user_id,
-    ) in TEXT_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
+
+@both_channels
+def test_text_helsinki_translation_predict_on_public_models(channel):
+    """Test language translation models.
+    Each language-english translation has its own text input while
+    all en-language translations use the same english text.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+    for title, model_id, text, app_id, user_id in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
         request = service_pb2.PostModelOutputsRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
             model_id=model_id,
