@@ -42,8 +42,8 @@ jobs:
       run: ./lint.sh check
     - name: Prepare the API keys & run pytest
       env:
-        CLARIFAI_USER_EMAIL: "eng+test@clarifai.com"
-        CLARIFAI_USER_PASSWORD: "basketball123"
+        CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
+        CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
       shell: bash
       run: |
         export PYTHONPATH=.
