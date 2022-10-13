@@ -13,7 +13,7 @@ jobs:
   build:
 
     runs-on: ${{ matrix.os }}
-    timeout-minutes: 30
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
@@ -42,15 +42,18 @@ jobs:
       run: ./lint.sh check
     - name: Prepare the API keys & run pytest
       env:
-        CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
-        CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
+        CLARIFAI_USER_EMAIL: "eng+test@clarifai.com"
+        CLARIFAI_USER_PASSWORD: "basketball123"
       shell: bash
       run: |
         export PYTHONPATH=.
+        export CLARIFAI_DEPLOY="Dev"
+        export CLARIFAI_GRPC_BASE="api-staging.clarifai.com"
+        export CLARIFAI_API_BASE="https://api-staging.clarifai.com"
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
         pip install pytest
-        pytest tests/ -n auto
+        pytest tests/public_models -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
