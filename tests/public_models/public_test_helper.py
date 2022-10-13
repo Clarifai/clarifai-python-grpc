@@ -327,11 +327,5 @@ for key, values in HELSINKINLP_TRANSLATION_MODELS.items():
     TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
-    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook"),
-    (
-        "general-asr-nemo_jasper",
-        GENERAL_ASR_NEMO_JASPER_MODEL_ID,
-        "asr",
-        "nvidia",
-    ),
+    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook")
 ]
