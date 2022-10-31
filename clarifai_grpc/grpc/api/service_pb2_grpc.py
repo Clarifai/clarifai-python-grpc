@@ -64,6 +64,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
                 )
+        self.ListModelConcepts = channel.unary_unary(
+                '/clarifai.api.V2/ListModelConcepts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelConceptsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
+                )
         self.PostConceptsSearches = channel.unary_unary(
                 '/clarifai.api.V2/PostConceptsSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsSearchesRequest.SerializeToString,
@@ -1046,6 +1051,13 @@ class V2Servicer(object):
 
     def ListConcepts(self, request, context):
         """List all the concepts.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListModelConcepts(self, request, context):
+        """List models concepts.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2422,6 +2434,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
             ),
+            'ListModelConcepts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListModelConcepts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelConceptsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
+            ),
             'PostConceptsSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PostConceptsSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptsSearchesRequest.FromString,
@@ -3468,6 +3485,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListConcepts',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListModelConcepts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListModelConcepts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListModelConceptsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

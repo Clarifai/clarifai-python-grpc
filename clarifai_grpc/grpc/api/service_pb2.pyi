@@ -994,6 +994,44 @@ class ListConceptsRequest(google.protobuf.message.Message):
 
 global___ListConceptsRequest = ListConceptsRequest
 
+class ListModelConceptsRequest(google.protobuf.message.Message):
+    """ListModelConceptsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    VERSION_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    """Model id"""
+    version_id: builtins.str
+    """Model version Id. Optional, if not provided latest model version is used."""
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
+global___ListModelConceptsRequest = ListModelConceptsRequest
+
 class PostConceptsSearchesRequest(google.protobuf.message.Message):
     """PostConceptsSearchesRequest"""
 
@@ -1733,6 +1771,7 @@ class PostInputsRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
+    INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
@@ -1743,14 +1782,21 @@ class PostInputsRequest(google.protobuf.message.Message):
         * data
         * dataset_ids
         """
+    inputs_add_job_id: builtins.str
+    """Collect statistics about created inputs in job with given ID.
+    * If job ID is empty, then job is not created.
+    * If job ID is non-empty and doesn't already exist, then a new job will be created with given ID.
+    * If job ID does already exist, then new inputs statistics are merged with previous inputs statistics.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
+        inputs_add_job_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "inputs_add_job_id", b"inputs_add_job_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostInputsRequest = PostInputsRequest
 
@@ -5252,6 +5298,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    SEARCH_TERM_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -5285,6 +5332,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
+    search_term: builtins.str
+    """(optional) search_term. Full text and prefix matching on description, id, owner id. Searchable fields may be added"""
     def __init__(
         self,
         *,
@@ -5299,9 +5348,10 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        search_term: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "search_term", b"search_term", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_id", "sort_by_modified_at"] | None: ...
 
 global___ListWorkflowsRequest = ListWorkflowsRequest
