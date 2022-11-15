@@ -22,6 +22,7 @@ GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID = "86039c857a206810679f7f72b82fff54"
 IMAGE_SUBJECT_SEGMENTATION_MODEL_ID = "6a3dc529acf3f720a629cdc8c6ad41a9"
 EASYOCR_ENGLISH_MODEL_ID = "f1b1005c8feaa8d3f34d35f224092915"
 PADDLEOCR_ENG_CHINESE_MODEL_ID = "dc09ac965f64826410fbd8fea603abe6"
+MULTIMODAL_CLIP_EMBED_MODEL_ID = '6bfff3d825ad4fc790713b0fb593fc68'
 
 # TODO: Why is this not being used? Is there a reason why this does not have a test?
 DEMOGRAPHICS_MODEL_ID = "c0c0ac362b03416da06ab3fa36fb58e3"
@@ -273,6 +274,10 @@ MODEL_TITLE_AND_ID_PAIRS = [
 
 # title, model, app, user
 DETECTION_MODEL_TITLE_AND_IDS = []
+
+MULTIMODAL_MODEL_TITLE_AND_IDS = [
+    ("multimodal clip embed", MULTIMODAL_CLIP_EMBED_MODEL_ID),
+]
 
 # Add models in object_detection_models dict to model_id_pairs list
 # older image tests use different model-ids not from the platform

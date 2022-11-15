@@ -15,6 +15,7 @@ from tests.public_models.public_test_helper import (
     DETECTION_MODEL_TITLE_AND_IDS,
     ENGLISH_AUDIO_URL,
     MODEL_TITLE_AND_ID_PAIRS,
+    MULTIMODAL_MODEL_TITLE_AND_IDS,
     TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_MODEL_TITLE_IDS_TUPLE,
@@ -195,3 +196,30 @@ def test_video_predict_on_public_models(channel):
         response,
         custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
     )
+
+@both_channels
+def test_multimodal_predict_on_public_models(channel):
+    """Test multimodal models.
+    Currently supporting only text and image inputs.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id in MULTIMODAL_MODEL_TITLE_AND_IDS:
+        request = service_pb2.PostModelOutputsRequest(
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                ),
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
+                    )
+                )
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        raise_on_failure(
+            response,
+            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+        )
