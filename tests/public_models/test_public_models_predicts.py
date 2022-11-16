@@ -197,6 +197,7 @@ def test_video_predict_on_public_models(channel):
         custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
     )
 
+
 @both_channels
 def test_multimodal_predict_on_public_models(channel):
     """Test multimodal models.
@@ -215,7 +216,7 @@ def test_multimodal_predict_on_public_models(channel):
                     data=resources_pb2.Data(
                         text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
                     )
-                )
+                ),
             ],
         )
         response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
