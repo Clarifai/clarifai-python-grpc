@@ -22,7 +22,7 @@ from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"proto/clarifai/api/resources.proto\x12\x0c\x63larifai.api\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a%proto/clarifai/api/utils/matrix.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xe5\x03\n\nAnnotation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x30\n\x0f\x61nnotation_info\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\x0f \x01(\t\x12\x18\n\x10model_version_id\x18\x10 \x01(\t\x12\"\n\x16\x65mbed_model_version_id\x18\x0e \x01(\tB\x02\x18\x01\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x07trusted\x18\n \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0binput_level\x18\x11 \x01(\x08\x12/\n\x0e\x63onsensus_info\x18\x12 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07task_id\x18\x13 \x01(\tJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\xc6\x03\n\x03\x41pp\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x10\x64\x65\x66\x61ult_language\x18\x03 \x01(\t\x12\x1b\n\x13\x64\x65\x66\x61ult_workflow_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1c\n\x14legal_consent_status\x18\x07 \x01(\r\x12)\n\x08metadata\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x11\n\tsample_ms\x18\x0f \x01(\r\x12,\n\nvisibility\x18\x10 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x14\n\x0c\x64\x61ta_tier_id\x18\x12 \x01(\t\x12\x12\n\nis_starred\x18\x13 \x01(\x08\x12\x12\n\nstar_count\x18\x14 \x01(\x05\x12\r\n\x05notes\x18\x15 \x01(\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\x18\n\x08\x41ppQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x90\x02\n\x0c\x43ollaborator\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12 \n\x04user\x18\x03 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x04 \x03(\t\x12\x11\n\tendpoints\x18\x05 \x03(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ndeleted_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\rCollaboration\x12\x1e\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x11.clarifai.api.App\x12%\n\tapp_owner\x18\x02 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x97\x01\n\x05\x41udio\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\naudio_info\x18\x06 \x01(\x0b\x32\x17.clarifai.api.AudioInfo\"b\n\tAudioInfo\x12\x14\n\x0c\x61udio_format\x18\x01 \x01(\t\x12\x13\n\x0bsample_rate\x18\x02 \x01(\x05\x12\x18\n\x10\x64uration_seconds\x18\x03 \x01(\x02\x12\x10\n\x08\x62it_rate\x18\x04 \x01(\x05\"w\n\x05Track\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12)\n\ttime_info\x18\x04 \x01(\x0b\x32\x16.clarifai.api.TimeInfo\x12\x0f\n\x07quality\x18\x05 \x01(\x02J\x04\x08\x03\x10\x04\"h\n\x07\x43luster\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\x12\r\n\x05score\x18\x03 \x01(\x02\x12\x1f\n\x04hits\x18\x04 \x03(\x0b\x32\x11.clarifai.api.Hit\x12\x12\n\nprojection\x18\x05 \x03(\x02\"M\n\x05\x43olor\x12\x0f\n\x07raw_hex\x18\x01 \x01(\t\x12\x1e\n\x03w3c\x18\x02 \x01(\x0b\x32\x11.clarifai.api.W3C\x12\x13\n\x05value\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\" \n\x03W3C\x12\x0b\n\x03hex\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"/\n\x0cUserAppIDSet\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\"J\n\x0bPatchAction\x12\n\n\x02op\x18\x01 \x01(\t\x12!\n\x19merge_conflict_resolution\x18\x02 \x01(\t\x12\x0c\n\x04path\x18\x03 \x01(\t\"\xa9\x02\n\x07\x43oncept\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1a\n\x05value\x18\x03 \x01(\x02\x42\x0b\xd5\xb5\x18\x00\x00\x80?\x80\xb5\x18\x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08language\x18\x05 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\t\x12\x12\n\ndefinition\x18\x07 \x01(\t\x12\x10\n\x08vocab_id\x18\x08 \x01(\t\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\n \x01(\t\x12\x31\n\rkeypoint_info\x18\x0b \x01(\x0b\x32\x1a.clarifai.api.KeypointInfo\"T\n\x0cKeypointInfo\x12\x16\n\x0ekeypoint_names\x18\x01 \x03(\t\x12,\n\x08skeleton\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.KeypointEdge\"&\n\x0cKeypointEdge\x12\n\n\x02k1\x18\x01 \x01(\r\x12\n\n\x02k2\x18\x02 \x01(\r\"\xa4\x01\n\x0c\x43onceptCount\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12:\n\x12\x63oncept_type_count\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12>\n\x14\x64\x65tail_concept_count\x18\x04 \x01(\x0b\x32 .clarifai.api.DetailConceptCount\"B\n\x10\x43onceptTypeCount\x12\x16\n\x08positive\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08negative\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"\xdf\x01\n\x12\x44\x65tailConceptCount\x12\x31\n\tprocessed\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nto_process\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12.\n\x06\x65rrors\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nprocessing\x18\x04 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\"C\n\x0c\x43onceptQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x03 \x01(\t\"\xd9\x01\n\x0f\x43onceptRelation\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\x0fsubject_concept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\x12-\n\x0eobject_concept\x18\x03 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x11\n\tpredicate\x18\x04 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x05 \x01(\t\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"y\n\x0eKnowledgeGraph\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x17\n\x0f\x65xamples_app_id\x18\x04 \x01(\t\x12\x1f\n\x17sampled_examples_app_id\x18\x05 \x01(\t\"D\n\x11\x43onceptMappingJob\x12\x1a\n\x12knowledge_graph_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"?\n\x0f\x43onceptLanguage\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\ndefinition\x18\x03 \x01(\t\"\xfa\x04\n\x04\x44\x61ta\x12\"\n\x05image\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Image\x12\"\n\x05video\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Video\x12\'\n\x08\x63oncepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x03geo\x18\x06 \x01(\x0b\x32\x11.clarifai.api.Geo\x12#\n\x06\x63olors\x18\x07 \x03(\x0b\x32\x13.clarifai.api.Color\x12\'\n\x08\x63lusters\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Cluster\x12+\n\nembeddings\x18\t \x03(\x0b\x32\x17.clarifai.api.Embedding\x12%\n\x07regions\x18\x0b \x03(\x0b\x32\x14.clarifai.api.Region\x12#\n\x06\x66rames\x18\x0c \x03(\x0b\x32\x13.clarifai.api.Frame\x12 \n\x04text\x18\r \x01(\x0b\x32\x12.clarifai.api.Text\x12\"\n\x05\x61udio\x18\x0e \x01(\x0b\x32\x13.clarifai.api.Audio\x12#\n\x06tracks\x18\x0f \x03(\x0b\x32\x13.clarifai.api.Track\x12\x30\n\rtime_segments\x18\x10 \x03(\x0b\x32\x19.clarifai.api.TimeSegment\x12\x1f\n\x04hits\x18\x11 \x03(\x0b\x32\x11.clarifai.api.Hit\x12%\n\x08heatmaps\x18\x12 \x03(\x0b\x32\x13.clarifai.api.ImageJ\x04\x08\x04\x10\x05J\x04\x08\n\x10\x0b\"\x86\x01\n\x06Region\x12\n\n\x02id\x18\x01 \x01(\t\x12-\n\x0bregion_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.RegionInfo\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\r\n\x05value\x18\x04 \x01(\x02\x12\x10\n\x08track_id\x18\x05 \x01(\t\"\xae\x02\n\nRegionInfo\x12/\n\x0c\x62ounding_box\x18\x01 \x01(\x0b\x32\x19.clarifai.api.BoundingBox\x12 \n\x04mask\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Mask\x12&\n\x07polygon\x18\x05 \x01(\x0b\x32\x15.clarifai.api.Polygon\x12\"\n\x05point\x18\x06 \x01(\x0b\x32\x13.clarifai.api.Point\x12 \n\x04span\x18\x07 \x01(\x0b\x32\x12.clarifai.api.Span\x12\"\n\x05token\x18\x08 \x01(\x0b\x32\x13.clarifai.api.Token\x12/\n\x12keypoint_locations\x18\t \x03(\x0b\x32\x13.clarifai.api.PointJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04\"o\n\x0b\x42oundingBox\x12\x15\n\x07top_row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08left_col\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nbottom_row\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tright_col\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"4\n\tFrameInfo\x12\x13\n\x05index\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x12\n\x04time\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"b\n\x05\x46rame\x12+\n\nframe_info\x18\x01 \x01(\x0b\x32\x17.clarifai.api.FrameInfo\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\n\n\x02id\x18\x03 \x01(\t\"0\n\x04Mask\x12\"\n\x05image\x18\x02 \x01(\x0b\x32\x13.clarifai.api.ImageJ\x04\x08\x01\x10\x02\".\n\x07Polygon\x12#\n\x06points\x18\x01 \x03(\x0b\x32\x13.clarifai.api.Point\"\xb6\x01\n\x05Point\x12\x11\n\x03row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03\x63ol\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\t\n\x01z\x18\x03 \x01(\x02\x12\x32\n\nvisibility\x18\x04 \x01(\x0e\x32\x1e.clarifai.api.Point.Visibility\"H\n\nVisibility\x12\x0b\n\x07NOT_SET\x10\x00\x12\x0b\n\x07VISIBLE\x10\x01\x12\x0f\n\x0bNOT_VISIBLE\x10\x02\x12\x0f\n\x0bNOT_PRESENT\x10\x03\"J\n\x04Span\x12\x18\n\nchar_start\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08\x63har_end\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x10\n\x08raw_text\x18\x03 \x01(\t\"K\n\x05Token\x12\x18\n\nchar_start\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08\x63har_end\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x10\n\x08raw_text\x18\x03 \x01(\t\"7\n\tEmbedding\x12\x12\n\x06vector\x18\x01 \x03(\x02\x42\x02\x10\x01\x12\x16\n\x0enum_dimensions\x18\x02 \x01(\r\";\n\x08GeoPoint\x12\x17\n\tlongitude\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08latitude\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\"-\n\x08GeoLimit\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x13\n\x05value\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\":\n\rGeoBoxedPoint\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\"\x89\x01\n\x03Geo\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\x12)\n\tgeo_limit\x18\x02 \x01(\x0b\x32\x16.clarifai.api.GeoLimit\x12,\n\x07geo_box\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.GeoBoxedPoint\"\x9d\x01\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\nimage_info\x18\x06 \x01(\x0b\x32\x17.clarifai.api.ImageInfoJ\x04\x08\x03\x10\x04\"N\n\tImageInfo\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x0e\n\x06\x66ormat\x18\x03 \x01(\t\x12\x12\n\ncolor_mode\x18\x04 \x01(\t\"O\n\tHostedURL\x12\x0e\n\x06prefix\x18\x01 \x01(\t\x12\x0e\n\x06suffix\x18\x02 \x01(\t\x12\r\n\x05sizes\x18\x03 \x03(\t\x12\x13\n\x0b\x63rossorigin\x18\x04 \x01(\t\"\xde\x01\n\x05Input\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x13\n\x0b\x64\x61taset_ids\x18\x07 \x03(\tJ\x04\x08\x03\x10\x04\"\xda\x01\n\nInputCount\x12\x17\n\tprocessed\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_process\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x14\n\x06\x65rrors\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nprocessing\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\treindexed\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_reindex\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1c\n\x0ereindex_errors\x18\x07 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nreindexing\x18\x08 \x01(\rB\x04\x80\xb5\x18\x01\"\x92\x03\n\x07\x44\x61taset\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x07 \x01(\t\x12)\n\x08metadata\x18\x08 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x41\n\x19\x64\x65\x66\x61ult_annotation_filter\x18\x0c \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\x12\r\n\x05notes\x18\x0b \x01(\t\x12-\n\x07version\x18\r \x01(\x0b\x32\x1c.clarifai.api.DatasetVersionJ\x04\x08\x06\x10\x07J\x04\x08\n\x10\x0b\"\xd8\x01\n\x10\x41nnotationFilter\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12*\n\x0csaved_search\x18\x08 \x01(\x0b\x32\x14.clarifai.api.SearchJ\x04\x08\x06\x10\x07J\x04\x08\x07\x10\x08\"b\n\x0c\x44\x61tasetInput\x12.\n\ncreated_at\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\"\xe9\x05\n\x0e\x44\x61tasetVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x12\n\ndataset_id\x18\x06 \x01(\t\x12H\n\x18\x61nnotation_filter_config\x18\x0f \x01(\x0b\x32$.clarifai.api.AnnotationFilterConfigH\x00\x12@\n\x14model_predict_config\x18\x12 \x01(\x0b\x32 .clarifai.api.ModelPredictConfigH\x00\x12+\n\x06status\x18\x08 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\x12:\n\x07metrics\x18\x10 \x03(\x0b\x32).clarifai.api.DatasetVersion.MetricsEntry\x12;\n\x0b\x65xport_info\x18\x11 \x01(\x0b\x32&.clarifai.api.DatasetVersionExportInfo\x12)\n\x08metadata\x18\x0c \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\r \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x1f\n\x17\x65mbed_model_version_ids\x18\x0e \x03(\t\x1aS\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.clarifai.api.DatasetVersionMetrics:\x02\x38\x01\x42\r\n\x0b\x64\x61ta_configJ\x04\x08\x07\x10\x08J\x04\x08\t\x10\nJ\x04\x08\x0b\x10\x0c\"S\n\x16\x41nnotationFilterConfig\x12\x39\n\x11\x61nnotation_filter\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"8\n\x12ModelPredictConfig\x12\"\n\x05model\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Model\"\xc3\x08\n\x15\x44\x61tasetVersionMetrics\x12\x32\n\x0cinputs_count\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12<\n\x16unlabeled_inputs_count\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12@\n\x1ainputs_with_metadata_count\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12;\n\x15inputs_with_geo_count\x18\t \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x33\n\rregions_count\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12-\n\x16region_location_matrix\x18\x15 \x01(\x0b\x32\r.MatrixUint64\x12:\n\x14\x62ounding_boxes_count\x18\x16 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x34\n\x0epolygons_count\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x32\n\x0cpoints_count\x18\x18 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x31\n\x0bmasks_count\x18\x19 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x39\n\x13region_inputs_count\x18< \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x39\n\x13region_frames_count\x18= \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x32\n\x0c\x66rames_count\x18\x1e \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x38\n\x12\x66rame_inputs_count\x18\x46 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x36\n\x10\x65mbeddings_count\x18( \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12?\n\x19positive_input_tags_count\x18\x32 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12@\n\x1apositive_region_tags_count\x18\x33 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12?\n\x19positive_frame_tags_count\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.UInt64ValueJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x07\x10\x08\"\xca\x01\n\x1a\x44\x61tasetVersionMetricsGroup\x12\x13\n\x0bparent_path\x18\x01 \x01(\t\x12:\n\x04type\x18\x02 \x01(\x0e\x32,.clarifai.api.DatasetVersionMetricsGroupType\x12%\n\x05value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x34\n\x07metrics\x18\x04 \x01(\x0b\x32#.clarifai.api.DatasetVersionMetrics\"\xd0\x01\n\x18\x44\x61tasetVersionExportInfo\x12\x42\n\x16\x63larifai_data_protobuf\x18\x01 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\x12>\n\x12\x63larifai_data_json\x18\x03 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\x12\x30\n\x04\x63oco\x18\x02 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\"\x98\x01\n\x14\x44\x61tasetVersionExport\x12\x38\n\x06\x66ormat\x18\x01 \x01(\x0e\x32(.clarifai.api.DatasetVersionExportFormat\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04size\x18\x04 \x01(\x04\"n\n\x19WorkflowResultsSimilarity\x12(\n\x0bprobe_input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12\'\n\x0cpool_results\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Hit\"\xf4\x01\n\x03Key\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x07 \x03(\t\x12\x1f\n\x04\x61pps\x18\x04 \x03(\x0b\x32\x11.clarifai.api.App\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1a\n\x12\x61uthorized_idp_ids\x18\t \x03(\t\"\xc8\x07\n\x05Model\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x04name\x18\x02 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x06\x61pp_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01\x12-\n\x0boutput_info\x18\x05 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\x12\x31\n\rmodel_version\x18\x06 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x18\n\x0c\x64isplay_name\x18\x07 \x01(\tB\x02\x18\x01\x12\x0f\n\x07user_id\x18\t \x01(\t\x12+\n\ninput_info\x18\x0c \x01(\x0b\x32\x17.clarifai.api.InputInfo\x12+\n\ntrain_info\x18\r \x01(\x0b\x32\x17.clarifai.api.TrainInfo\x12\x31\n\x11\x64\x65\x66\x61ult_eval_info\x18\x1e \x01(\x0b\x32\x16.clarifai.api.EvalInfo\x12\x15\n\rmodel_type_id\x18\x0e \x01(\t\x12\x0c\n\x04task\x18\x1a \x01(\t\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x13\n\x0b\x64\x65scription\x18\x10 \x01(\t\x12)\n\x08metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.Struct\x12(\n\x07presets\x18\x1b \x01(\x0b\x32\x17.google.protobuf.Struct\x12\r\n\x05notes\x18\x12 \x01(\t\x12\x16\n\x08toolkits\x18\x14 \x03(\tB\x04\x80\xb5\x18\x01\x12\x17\n\tuse_cases\x18\x15 \x03(\tB\x04\x80\xb5\x18\x01\x12\x17\n\tlanguages\x18\x19 \x03(\tB\x04\x80\xb5\x18\x01\x12\x33\n\x0elanguages_full\x18\x1f \x03(\x0b\x32\x15.clarifai.api.FullTagB\x04\x80\xb5\x18\x01\x12\x1c\n\x0e\x63heck_consents\x18  \x03(\tB\x04\x80\xb5\x18\x01\x12\x12\n\nis_starred\x18\x16 \x01(\x08\x12\x12\n\nstar_count\x18\x17 \x01(\x05\x12-\n\x0bimport_info\x18\x18 \x01(\x0b\x32\x18.clarifai.api.ImportInfo\x12\x38\n\x14workflow_recommended\x18\x1d \x01(\x0b\x32\x1a.google.protobuf.BoolValueJ\x04\x08\x08\x10\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x1c\x10\x1d\"t\n\x0eModelReference\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x97\x01\n\x18ModelVersionInputExample\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\"\xd4\x01\n\nOutputInfo\x12 \n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\routput_config\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12\x0f\n\x07message\x18\x03 \x01(\t\x12+\n\nfields_map\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x07 \x01(\x0b\x32\x17.google.protobuf.StructJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06\"a\n\tInputInfo\x12+\n\nfields_map\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"4\n\tTrainInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"3\n\x08\x45valInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"5\n\nImportInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x83\x04\n\x0cOutputConfig\x12)\n\x1b\x63oncepts_mutually_exclusive\x18\x01 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12 \n\x12\x63losed_environment\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x1d\n\x11\x65xisting_model_id\x18\x03 \x01(\tB\x02\x18\x01\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x1c\n\x10hyper_parameters\x18\x05 \x01(\tB\x02\x18\x01\x12\x1a\n\x0cmax_concepts\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\tmin_value\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12.\n\x0fselect_concepts\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x18\n\x10training_timeout\x18\t \x01(\r\x12\x11\n\tsample_ms\x18\n \x01(\r\x12-\n\x0chyper_params\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x16\x65mbed_model_version_id\x18\x0e \x01(\t\x12)\n!fail_on_missing_positive_examples\x18\x0f \x01(\x08\x12\x33\n\x0emodel_metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\rJ\x04\x08\x10\x10\x11J\x04\x08\x12\x10\x13\"\xa8\x03\n\tModelType\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x14\n\x0cinput_fields\x18\x05 \x03(\t\x12\x15\n\routput_fields\x18\x06 \x03(\t\x12\x11\n\ttrainable\x18\x08 \x01(\x08\x12\x11\n\tcreatable\x18\t \x01(\x08\x12\x15\n\rinternal_only\x18\n \x01(\x08\x12\x37\n\x11model_type_fields\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\"\n\x1arequires_sequential_frames\x18\x0c \x01(\x08\x12\x11\n\tevaluable\x18\r \x01(\x08\x12;\n\x15\x65xpected_input_layers\x18\x10 \x03(\x0b\x32\x1c.clarifai.api.ModelLayerInfo\x12<\n\x16\x65xpected_output_layers\x18\x11 \x03(\x0b\x32\x1c.clarifai.api.ModelLayerInfoJ\x04\x08\x07\x10\x08J\x04\x08\x04\x10\x05J\x04\x08\x0e\x10\x0fJ\x04\x08\x0f\x10\x10\"\x89\x01\n\x0eModelLayerInfo\x12\x17\n\x0f\x64\x61ta_field_name\x18\x01 \x01(\t\x12(\n\x06shapes\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LayerShape\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x1f\n\x17requires_label_filename\x18\x04 \x01(\x08\"l\n\nLayerShape\x12\x0c\n\x04\x64ims\x18\x01 \x03(\x05\x12\x10\n\x08max_dims\x18\x02 \x03(\x05\x12)\n\tdata_type\x18\x03 \x01(\x0e\x32\x16.clarifai.api.DataType\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\xd2\x05\n\x0eModelTypeField\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x43\n\nfield_type\x18\x02 \x01(\x0e\x32/.clarifai.api.ModelTypeField.ModelTypeFieldType\x12-\n\rdefault_value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bplaceholder\x18\x05 \x01(\t\x12\x42\n\x17model_type_enum_options\x18\x06 \x03(\x0b\x32!.clarifai.api.ModelTypeEnumOption\x12\x15\n\rinternal_only\x18\x07 \x01(\x08\x12\x10\n\x08required\x18\x08 \x01(\x08\x12?\n\x15model_type_range_info\x18\t \x01(\x0b\x32 .clarifai.api.ModelTypeRangeInfo\"\xe5\x02\n\x12ModelTypeFieldType\x12!\n\x1dINVALID_MODEL_TYPE_FIELD_TYPE\x10\x00\x12\x0b\n\x07\x42OOLEAN\x10\x01\x12\n\n\x06STRING\x10\x02\x12\n\n\x06NUMBER\x10\x03\x12\x15\n\x11\x41RRAY_OF_CONCEPTS\x10\x04\x12$\n ARRAY_OF_CONCEPTS_WITH_THRESHOLD\x10\x05\x12\t\n\x05RANGE\x10\x07\x12\x08\n\x04\x45NUM\x10\x08\x12\x11\n\rCOLLABORATORS\x10\t\x12\x08\n\x04JSON\x10\n\x12\x14\n\x10\x41RRAY_OF_NUMBERS\x10\x0b\x12\x19\n\x15WORKFLOW_EMBED_MODELS\x10\x0c\x12\x14\n\x10\x41RRAY_OF_STRINGS\x10\r\x12\x12\n\x0eRECURSIVE_ENUM\x10\x0e\x12\x0f\n\x0bPYTHON_CODE\x10\x0f\x12\x0e\n\nDATASET_ID\x10\x10\x12\x16\n\x12\x44\x41TASET_VERSION_ID\x10\x11\"\x04\x08\x06\x10\x06\"<\n\x12ModelTypeRangeInfo\x12\x0b\n\x03min\x18\x01 \x01(\x02\x12\x0b\n\x03max\x18\x02 \x01(\x02\x12\x0c\n\x04step\x18\x03 \x01(\x02\"\xbf\x01\n\x13ModelTypeEnumOption\x12\n\n\x02id\x18\x01 \x01(\t\x12\x37\n\x07\x61liases\x18\x05 \x03(\x0b\x32&.clarifai.api.ModelTypeEnumOptionAlias\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x11model_type_fields\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\x15\n\rinternal_only\x18\x04 \x01(\x08\"C\n\x18ModelTypeEnumOptionAlias\x12\x0e\n\x06id_int\x18\x01 \x01(\x03\x12\x17\n\x0fwildcard_string\x18\x02 \x01(\t\"7\n\nModelQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rmodel_type_id\x18\x03 \x01(\tJ\x04\x08\x02\x10\x03\"\xe2\x04\n\x0cModelVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x04 \x01(\r\x12*\n\x07metrics\x18\x05 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12\x19\n\x11total_input_count\x18\x06 \x01(\r\x12\x44\n\x17pretrained_model_config\x18\x07 \x01(\x0b\x32#.clarifai.api.PretrainedModelConfig\x12\x30\n\x0c\x63ompleted_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x64\x65scription\x18\x0b \x01(\t\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\r \x01(\t\x12\x0f\n\x07user_id\x18\x0e \x01(\t\x12/\n\x0bmodified_at\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x10 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07license\x18\x11 \x01(\t\x12\x35\n\x0f\x64\x61taset_version\x18\x12 \x01(\x0b\x32\x1c.clarifai.api.DatasetVersionJ\x04\x08\t\x10\n\"\xa1\x01\n\x15PretrainedModelConfig\x12\x31\n\x10input_fields_map\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x32\n\x11output_fields_map\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x15\n\rmodel_zip_url\x18\x06 \x01(\tJ\x04\x08\x02\x10\x03J\x04\x08\x05\x10\x06\">\n\nTrainStats\x12\x30\n\nloss_curve\x18\x01 \x03(\x0b\x32\x1c.clarifai.api.LossCurveEntry\"B\n\x0eLossCurveEntry\x12\r\n\x05\x65poch\x18\x01 \x01(\r\x12\x13\n\x0bglobal_step\x18\x02 \x01(\r\x12\x0c\n\x04\x63ost\x18\x03 \x01(\x02\"1\n\nLabelCount\x12\x14\n\x0c\x63oncept_name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"L\n\x11LabelDistribution\x12\x37\n\x15positive_label_counts\x18\x01 \x03(\x0b\x32\x18.clarifai.api.LabelCount\"B\n\x17\x43ooccurrenceMatrixEntry\x12\x0b\n\x03row\x18\x01 \x01(\t\x12\x0b\n\x03\x63ol\x18\x02 \x01(\t\x12\r\n\x05\x63ount\x18\x03 \x01(\r\"`\n\x12\x43ooccurrenceMatrix\x12\x35\n\x06matrix\x18\x01 \x03(\x0b\x32%.clarifai.api.CooccurrenceMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"N\n\x14\x43onfusionMatrixEntry\x12\x11\n\tpredicted\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tual\x18\x02 \x01(\t\x12\x13\n\x05value\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"Z\n\x0f\x43onfusionMatrix\x12\x32\n\x06matrix\x18\x01 \x03(\x0b\x32\".clarifai.api.ConfusionMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"t\n\x03ROC\x12\x11\n\x03\x66pr\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03tpr\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x15\n\rfpr_per_image\x18\x04 \x03(\x02\x12\x16\n\x0e\x66pr_per_object\x18\x05 \x03(\x02\"_\n\x14PrecisionRecallCurve\x12\x14\n\x06recall\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tprecision\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\"\xea\x02\n\rBinaryMetrics\x12\x15\n\x07num_pos\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_neg\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_tot\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x10\n\x02\x66\x31\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12&\n\x07\x63oncept\x18\x06 \x01(\x0b\x32\x15.clarifai.api.Concept\x12$\n\troc_curve\x18\x07 \x01(\x0b\x32\x11.clarifai.api.ROC\x12\x42\n\x16precision_recall_curve\x18\x08 \x01(\x0b\x32\".clarifai.api.PrecisionRecallCurve\x12\x15\n\ravg_precision\x18\t \x01(\x02\x12\x11\n\tarea_name\x18\n \x01(\t\x12\x10\n\x08\x61rea_min\x18\x0b \x01(\x01\x12\x10\n\x08\x61rea_max\x18\x0c \x01(\x01\x12\x0b\n\x03iou\x18\r \x01(\x02\"\x91\x01\n\x0eTrackerMetrics\x12\x10\n\x08mot_mota\x18\x01 \x01(\x02\x12\x18\n\x10mot_num_switches\x18\x02 \x01(\x05\x12\x12\n\nmorse_frag\x18\x03 \x01(\x02\x12\x15\n\ravg_precision\x18\x04 \x01(\x02\x12\x0c\n\x04\x61iid\x18\x05 \x01(\t\x12\x1a\n\x12unique_switch_rate\x18\x06 \x01(\x02\"\xee\x01\n\x10\x45valTestSetEntry\x12\x0e\n\x02id\x18\x01 \x01(\tB\x02\x18\x01\x12\x0f\n\x03url\x18\x02 \x01(\tB\x02\x18\x01\x12\"\n\x05input\x18\x06 \x01(\x0b\x32\x13.clarifai.api.Input\x12\x31\n\x12predicted_concepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x34\n\x15ground_truth_concepts\x18\x04 \x03(\x0b\x32\x15.clarifai.api.Concept\x12,\n\nannotation\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\xcd\x01\n\x0eLOPQEvalResult\x12\t\n\x01k\x18\x01 \x01(\x05\x12#\n\x15recall_vs_brute_force\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1akendall_tau_vs_brute_force\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1amost_frequent_code_percent\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tlopq_ndcg\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10\x62rute_force_ndcg\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\"\x8c\x03\n\x0eMetricsSummary\x12\x19\n\rtop1_accuracy\x18\x01 \x01(\x02\x42\x02\x18\x01\x12\x19\n\rtop5_accuracy\x18\x02 \x01(\x02\x42\x02\x18\x01\x12\x1f\n\x11macro_avg_roc_auc\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1f\n\x11macro_std_roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_avg_f1_score\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_std_f1_score\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x13macro_avg_precision\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10macro_avg_recall\x18\x08 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x19mean_avg_precision_iou_50\x18\n \x01(\x02\x12$\n\x1cmean_avg_precision_iou_range\x18\x0b \x01(\x02\x12\x32\n\x0clopq_metrics\x18\t \x03(\x0b\x32\x1c.clarifai.api.LOPQEvalResult\"\xda\x04\n\x0b\x45valMetrics\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\n \x01(\t\x12-\n\x07summary\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.MetricsSummary\x12\x37\n\x10\x63onfusion_matrix\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.ConfusionMatrix\x12=\n\x13\x63ooccurrence_matrix\x18\x04 \x01(\x0b\x32 .clarifai.api.CooccurrenceMatrix\x12\x35\n\x0clabel_counts\x18\x05 \x01(\x0b\x32\x1f.clarifai.api.LabelDistribution\x12\x33\n\x0e\x62inary_metrics\x18\x06 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x30\n\x08test_set\x18\x07 \x03(\x0b\x32\x1e.clarifai.api.EvalTestSetEntry\x12\x34\n\x0fmetrics_by_area\x18\x08 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x10metrics_by_class\x18\t \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x0ftracker_metrics\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.TrackerMetrics\x12)\n\teval_info\x18\x0c \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xb7\x01\n\x0b\x46ieldsValue\x12\x18\n\x10\x63onfusion_matrix\x18\x01 \x01(\x08\x12\x1b\n\x13\x63ooccurrence_matrix\x18\x02 \x01(\x08\x12\x14\n\x0clabel_counts\x18\x03 \x01(\x08\x12\x16\n\x0e\x62inary_metrics\x18\x04 \x01(\x08\x12\x10\n\x08test_set\x18\x05 \x01(\x08\x12\x17\n\x0fmetrics_by_area\x18\x06 \x01(\x08\x12\x18\n\x10metrics_by_class\x18\x07 \x01(\x08\"\xdb\x01\n\x06Output\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12 \n\x04\x64\x61ta\x18\x06 \x01(\x0b\x32\x12.clarifai.api.Data\"4\n\tScopeDeps\x12\r\n\x05scope\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\":\n\x0c\x45ndpointDeps\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\"\x8d\x01\n\x03Hit\x12\x13\n\x05score\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\x12,\n\nannotation\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\"\x8d\x01\n\x03\x41nd\x12\"\n\x05input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12$\n\x06output\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Output\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x84\x01\n\x05Query\x12\x1f\n\x04\x61nds\x18\x01 \x03(\x0b\x32\x11.clarifai.api.And\x12\x10\n\x08language\x18\x02 \x01(\t\x12%\n\x07\x66ilters\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Filter\x12!\n\x05ranks\x18\x04 \x03(\x0b\x32\x12.clarifai.api.Rank\"\xde\x02\n\x06Search\x12\"\n\x05query\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Query\x12\n\n\x02id\x18\x02 \x01(\t\x12\x16\n\x0e\x61pplication_id\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x05\x61s_of\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08git_hash\x18\x06 \x01(\t\x12.\n\ncreated_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\talgorithm\x18\t \x01(\t\x12\x0c\n\x04save\x18\n \x01(\x08\x12\x11\n\tmin_value\x18\x0b \x01(\x02\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xa4\x01\n\x06\x46ilter\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12\x38\n\x17last_updated_time_range\x18\x06 \x01(\x0b\x32\x17.clarifai.api.TimeRange\"i\n\tTimeRange\x12.\n\nstart_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"D\n\x04Rank\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x02\n\x17\x41nnotationSearchMetrics\x12*\n\x0cground_truth\x18\x01 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Search\x12*\n\x07metrics\x18\x03 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x05 \x01(\r\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"\x91\x01\n\x04Text\x12\x0b\n\x03raw\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x1b\n\x13\x61llow_duplicate_url\x18\x03 \x01(\x08\x12\'\n\x06hosted\x18\x04 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12)\n\ttext_info\x18\x05 \x01(\x0b\x32\x16.clarifai.api.TextInfo\"0\n\x08TextInfo\x12\x12\n\nchar_count\x18\x01 \x01(\x05\x12\x10\n\x08\x65ncoding\x18\x02 \x01(\t\"\xfc\x05\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\rprimary_email\x18\x02 \x01(\tB\x02\x18\x01\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x11\n\tjob_title\x18\x13 \x01(\t\x12\x10\n\x08job_role\x18\x14 \x01(\t\x12\x15\n\tbill_type\x18\x07 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x11\x64\x61te_gdpr_consent\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_tos_consent\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12>\n\x16\x64\x61te_marketing_consent\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_pii_consent\x18\x17 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12-\n\x08metadata\x18\x0b \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01\x12\x37\n\x0f\x65mail_addresses\x18\x0c \x03(\x0b\x32\x1a.clarifai.api.EmailAddressB\x02\x18\x01\x12#\n\x17two_factor_auth_enabled\x18\x0f \x01(\x08\x42\x02\x18\x01\x12\x17\n\x0bteams_count\x18\x10 \x01(\rB\x02\x18\x01\x12\x12\n\nis_starred\x18\x15 \x01(\x08\x12\x12\n\nstar_count\x18\x16 \x01(\x05\x12,\n\nvisibility\x18\x11 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12-\n\x0buser_detail\x18\x12 \x01(\x0b\x32\x18.clarifai.api.UserDetailJ\x04\x08\r\x10\x0eJ\x04\x08\x0e\x10\x0f\"\xd1\x03\n\nUserDetail\x12\x15\n\rprimary_email\x18\x01 \x01(\t\x12\x11\n\tbill_type\x18\x02 \x01(\t\x12\x35\n\x11\x64\x61te_gdpr_consent\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_tos_consent\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\x16\x64\x61te_marketing_consent\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_pii_consent\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x33\n\x0f\x65mail_addresses\x18\x07 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\x12\x1f\n\x17two_factor_auth_enabled\x18\t \x01(\x08\x12\x13\n\x0bteams_count\x18\n \x01(\r\x12\x0f\n\x07\x63ountry\x18\x0b \x01(\t\x12\r\n\x05state\x18\x0c \x01(\tJ\x04\x08\x08\x10\t\"R\n\x0c\x45mailAddress\x12\x13\n\x05\x65mail\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07primary\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08verified\x18\x03 \x01(\x08\x42\x04\x80\xb5\x18\x01\"\x1d\n\x08Password\x12\x11\n\tplaintext\x18\x01 \x01(\t\"\x86\x03\n\x12PasswordViolations\x12\x16\n\x0eminimum_length\x18\x01 \x01(\x08\x12\x16\n\x0emaximum_length\x18\x02 \x01(\x08\x12\x19\n\x11upper_case_needed\x18\x03 \x01(\x08\x12\x19\n\x11lower_case_needed\x18\x04 \x01(\x08\x12\x16\n\x0enumeric_needed\x18\x05 \x01(\x08\x12\x1f\n\x17non_alphanumeric_needed\x18\x06 \x01(\x08\x12\x16\n\x0epassword_reuse\x18\x07 \x01(\x08\x12\x15\n\rexclude_names\x18\x08 \x01(\x08\x12\x15\n\rexclude_email\x18\t \x01(\x08\x12\x1c\n\x14no_confusing_letters\x18\n \x01(\x08\x12\x1b\n\x13no_simple_passwords\x18\x0b \x01(\x08\x12\x18\n\x10no_common_vocabs\x18\x0c \x01(\x08\x12\x1b\n\x13no_overlap_with_old\x18\r \x01(\x08\x12\x19\n\x11password_lifespan\x18\x0e \x01(\x08\"\xae\x01\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\'\n\x06hosted\x18\x06 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\nvideo_info\x18\x07 \x01(\x0b\x32\x17.clarifai.api.VideoInfo\"\x8e\x01\n\tVideoInfo\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x0b\n\x03\x66ps\x18\x03 \x01(\x02\x12\x14\n\x0cvideo_format\x18\x04 \x01(\t\x12\x10\n\x08\x62it_rate\x18\x05 \x01(\x05\x12\x13\n\x0b\x66rame_count\x18\x06 \x01(\x05\x12\x18\n\x10\x64uration_seconds\x18\x07 \x01(\x02\"\xcf\x03\n\x08Workflow\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x05nodes\x18\x04 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\x07 \x01(\t\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\x07version\x18\t \x01(\x0b\x32\x1d.clarifai.api.WorkflowVersion\x12\x12\n\nis_starred\x18\n \x01(\x08\x12\x12\n\nstar_count\x18\x0b \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\r\n\x05notes\x18\r \x01(\t\x12\x17\n\tuse_cases\x18\x0e \x03(\tB\x04\x80\xb5\x18\x01\x12\x1c\n\x0e\x63heck_consents\x18\x0f \x03(\tB\x04\x80\xb5\x18\x01\"\xde\x02\n\x0fWorkflowVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\nvisibility\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x05nodes\x18\x06 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0e\n\x06\x61pp_id\x18\x08 \x01(\t\x12\x0f\n\x07user_id\x18\t \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\x12\x0f\n\x07license\x18\x0b \x01(\t\"\x85\x01\n\x0cWorkflowNode\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\x12,\n\x0bnode_inputs\x18\x03 \x03(\x0b\x32\x17.clarifai.api.NodeInput\x12\x17\n\x0fsuppress_output\x18\x04 \x01(\x08\"\x1c\n\tNodeInput\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\x81\x02\n\x0eWorkflowResult\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12%\n\x07outputs\x18\x06 \x03(\x0b\x32\x14.clarifai.api.Output\x12\x17\n\x0fsuppress_output\x18\x07 \x01(\x08\"\x1b\n\rWorkflowState\x12\n\n\x02id\x18\x01 \x01(\t\"\xd8\x02\n\x0e\x41ppDuplication\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\nnew_app_id\x18\x02 \x01(\t\x12\x14\n\x0cnew_app_name\x18\x03 \x01(\t\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x06\x66ilter\x18\x07 \x01(\x0b\x32#.clarifai.api.AppDuplicationFilters\x12\x17\n\x0f\x65xisting_app_id\x18\x08 \x01(\t\x12/\n\x08progress\x18\t \x03(\x0b\x32\x1d.clarifai.api.AppCopyProgress\"/\n\x0f\x41ppCopyProgress\x12\r\n\x05\x66ield\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05\"\x8a\x01\n\x15\x41ppDuplicationFilters\x12\x13\n\x0b\x63opy_inputs\x18\x01 \x01(\x08\x12\x15\n\rcopy_concepts\x18\x02 \x01(\x08\x12\x18\n\x10\x63opy_annotations\x18\x03 \x01(\x08\x12\x13\n\x0b\x63opy_models\x18\x04 \x01(\x08\x12\x16\n\x0e\x63opy_workflows\x18\x05 \x01(\x08\"\xfa\x02\n\nLabelOrder\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0c\x61uto_release\x18\x04 \x01(\x08\x12\x17\n\x0f\x61llow_empty_tag\x18\x05 \x01(\x08\x12\x38\n\x14\x64\x65sired_fulfill_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x15\x65stimate_fulfill_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12 \n\x04task\x18\x08 \x01(\x0b\x32\x12.clarifai.api.Task\x12.\n\ncreated_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xe5\x05\n\x04Task\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x04type\x18\x04 \x01(\x0e\x32\x1b.clarifai.api.Task.TaskType\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12(\n\x06worker\x18\x06 \x01(\x0b\x32\x18.clarifai.api.TaskWorker\x12\x13\n\x0b\x63oncept_ids\x18\x07 \x03(\t\x12\x33\n\x0cinput_source\x18\x08 \x01(\x0b\x32\x1d.clarifai.api.TaskInputSource\x12\x11\n\tsample_ms\x18\t \x01(\r\x12\x33\n\x0c\x61i_assistant\x18\n \x01(\x0b\x32\x1d.clarifai.api.TaskAIAssistant\x12(\n\x06review\x18\x0b \x01(\x0b\x32\x18.clarifai.api.TaskReview\x12+\n\x06status\x18\x0c \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0c\n\x04name\x18\r \x01(\t\x12:\n\x10\x61i_assist_params\x18\x0e \x01(\x0b\x32 .clarifai.api.AiAssistParameters\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\x10 \x01(\t\x12\x0f\n\x07user_id\x18\x11 \x01(\t\x12\x16\n\x0elabel_order_id\x18\x12 \x01(\t\"l\n\x08TaskType\x12\x10\n\x0cTYPE_NOT_SET\x10\x00\x12\x1b\n\x17\x43ONCEPTS_CLASSIFICATION\x10\x01\x12\x1a\n\x16\x42OUNDING_BOX_DETECTION\x10\x02\x12\x15\n\x11POLYGON_DETECTION\x10\x03\"`\n\x12\x41iAssistParameters\x12\x15\n\rmin_threshold\x18\x01 \x01(\x02\x12\x15\n\rmax_threshold\x18\x02 \x01(\x02\x12\x1c\n\x14\x63oncept_relation_ids\x18\x03 \x03(\t\"\xbf\x02\n\nTaskWorker\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskWorker.TaskWorkerStrategy\x12\x14\n\x08user_ids\x18\x02 \x03(\tB\x02\x18\x01\x12!\n\x05users\x18\x04 \x03(\x0b\x32\x12.clarifai.api.User\x12T\n\x19partitioned_strategy_info\x18\x03 \x01(\x0b\x32/.clarifai.api.TaskWorkerPartitionedStrategyInfoH\x00\"R\n\x12TaskWorkerStrategy\x12\x1b\n\x17WORKER_STRATEGY_NOT_SET\x10\x00\x12\x0f\n\x0bPARTITIONED\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\x04\x08\x01\x10\x01\x42\x0f\n\rstrategy_info\"\xa9\x02\n!TaskWorkerPartitionedStrategyInfo\x12[\n\x04type\x18\x01 \x01(\x0e\x32M.clarifai.api.TaskWorkerPartitionedStrategyInfo.TaskWorkerPartitionedStrategy\x12\x19\n\x11workers_per_input\x18\x02 \x01(\x05\x12(\n\x07weights\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"b\n\x1dTaskWorkerPartitionedStrategy\x12\'\n#PARTITIONED_WORKER_STRATEGY_NOT_SET\x10\x00\x12\n\n\x06\x45VENLY\x10\x01\x12\x0c\n\x08WEIGHTED\x10\x02\"\xc3\x01\n\x0fTaskInputSource\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.clarifai.api.TaskInputSource.TaskInputSourceType\x12\n\n\x02id\x18\x02 \x01(\t\"c\n\x13TaskInputSourceType\x12\x1d\n\x19INPUT_SOURCE_TYPE_NOT_SET\x10\x00\x12\x0e\n\nALL_INPUTS\x10\x01\x12\x10\n\x0cSAVED_SEARCH\x10\x02\x12\x0b\n\x07\x44\x41TASET\x10\x03\"\x90\x03\n\nTaskReview\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskReview.TaskReviewStrategy\x12\x14\n\x08user_ids\x18\x02 \x03(\tB\x02\x18\x01\x12!\n\x05users\x18\x05 \x03(\x0b\x32\x12.clarifai.api.User\x12J\n\x14manual_strategy_info\x18\x03 \x01(\x0b\x32*.clarifai.api.TaskReviewManualStrategyInfoH\x00\x12P\n\x17\x63onsensus_strategy_info\x18\x04 \x01(\x0b\x32-.clarifai.api.TaskReviewConsensusStrategyInfoH\x00\"[\n\x12TaskReviewStrategy\x12 \n\x1cTASK_REVIEW_STRATEGY_NOT_SET\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06MANUAL\x10\x02\x12\r\n\tCONSENSUS\x10\x03\x42\x0f\n\rstrategy_info\"9\n\x1cTaskReviewManualStrategyInfo\x12\x19\n\x11sample_percentage\x18\x01 \x01(\x02\"C\n\x1fTaskReviewConsensusStrategyInfo\x12\x1a\n\x12\x61pproval_threshold\x18\x02 \x01(\rJ\x04\x08\x01\x10\x02\"&\n\x0fTaskAIAssistant\x12\x13\n\x0bworkflow_id\x18\x01 \x01(\t\"\xbc\x01\n\x16TaskStatusCountPerUser\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x15\n\x07pending\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1d\n\x0f\x61waiting_review\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07success\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1b\n\rreview_denied\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\'\n\x19\x61waiting_consensus_review\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\"\x81\x02\n\tCollector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1d\n\x15pre_queue_workflow_id\x18\x04 \x01(\t\x12\x1e\n\x16post_queue_workflow_id\x18\x05 \x01(\t\x12\x37\n\x10\x63ollector_source\x18\x06 \x01(\x0b\x32\x1d.clarifai.api.CollectorSource\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"t\n\x0f\x43ollectorSource\x12\x61\n\'api_post_model_outputs_collector_source\x18\x02 \x01(\x0b\x32\x30.clarifai.api.APIPostModelOutputsCollectorSource\"\x99\x01\n\"APIPostModelOutputsCollectorSource\x12\x15\n\rmodel_user_id\x18\x01 \x01(\t\x12\x14\n\x0cmodel_app_id\x18\x02 \x01(\t\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x18\n\x10model_version_id\x18\x04 \x01(\t\x12\x1a\n\x12post_inputs_key_id\x18\x05 \x01(\t\"R\n\tStatValue\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05value\x18\x02 \x01(\x02\x12\x0c\n\x04tags\x18\x03 \x03(\t\"\xa6\x01\n\x18StatValueAggregateResult\x12?\n\x15stat_value_aggregates\x18\x01 \x03(\x0b\x32 .clarifai.api.StatValueAggregate\x12I\n\x1astat_value_aggregate_query\x18\x02 \x01(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"t\n\x12StatValueAggregate\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\x0f\x61ggregate_value\x18\x02 \x01(\x02\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\x12\x0c\n\x04tags\x18\x04 \x03(\t\"\x91\x02\n\x17StatValueAggregateQuery\x12\x0c\n\x04tags\x18\x01 \x03(\t\x12\x12\n\ntag_groups\x18\x02 \x03(\t\x12;\n\x13stat_value_agg_type\x18\x03 \x01(\x0e\x32\x1e.clarifai.api.StatValueAggType\x12\x39\n\x12stat_time_agg_type\x18\x04 \x01(\x0e\x32\x1d.clarifai.api.StatTimeAggType\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xef\x01\n\x19\x44\x61tasetInputsSearchAddJob\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x12\n\ndataset_id\x18\x05 \x01(\t\x12$\n\x06search\x18\x06 \x01(\x0b\x32\x14.clarifai.api.Search\"\x87\x01\n\nVisibility\x12\x33\n\x08gettable\x18\x01 \x01(\x0e\x32!.clarifai.api.Visibility.Gettable\"D\n\x08Gettable\x12\x16\n\x12UNKNOWN_VISIBILITY\x10\x00\x12\x0b\n\x07PRIVATE\x10\n\x12\x07\n\x03ORG\x10\x1e\x12\n\n\x06PUBLIC\x10\x32\"X\n\x0eTrendingMetric\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x11\n\tobject_id\x18\x03 \x01(\t\x12\x12\n\nview_count\x18\x04 \x01(\x04\"#\n\x07\x46ullTag\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"f\n\x0bTimeSegment\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12)\n\ttime_info\x18\x03 \x01(\x0b\x32\x16.clarifai.api.TimeInfo\"D\n\x08TimeInfo\x12\x12\n\nnum_frames\x18\x01 \x01(\r\x12\x12\n\nbegin_time\x18\x02 \x01(\r\x12\x10\n\x08\x65nd_time\x18\x03 \x01(\r\"\x8a\x02\n\x06Module\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\nvisibility\x18\x07 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x08metadata\x18\x08 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\t \x01(\t\x12\x0e\n\x06\x61pp_id\x18\n \x01(\tJ\x04\x08\x02\x10\x03\"\xbe\x04\n\rModuleVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\r\n\x05notes\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0egit_commit_url\x18\n \x01(\t\x12\x39\n\nmodule_nav\x18\x0b \x01(\x0b\x32%.clarifai.api.ModuleVersion.ModuleNav\x12\x10\n\x08\x61pproved\x18\x0c \x01(\x08\x12,\n\nvisibility\x18\r \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x08metadata\x18\x0e \x01(\x0b\x32\x17.google.protobuf.Struct\x1a\x45\n\x0cModuleSubNav\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\tquery_key\x18\x02 \x01(\t\x12\x13\n\x0bquery_value\x18\x03 \x01(\t\x1a]\n\tModuleNav\x12\r\n\x05title\x18\x01 \x01(\t\x12\x41\n\x0fmodule_sub_navs\x18\x02 \x03(\x0b\x32(.clarifai.api.ModuleVersion.ModuleSubNavJ\x04\x08\x05\x10\x06\"\xad\x02\n\x16InstalledModuleVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x33\n\x0emodule_version\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.ModuleVersion\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\ndeploy_url\x18\x07 \x01(\t\x12,\n\nvisibility\x18\x08 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06key_id\x18\t \x01(\t\"\x8d\x03\n\rBulkOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\tinput_ids\x18\x02 \x01(\x0b\x32\x16.clarifai.api.InputIDsH\x00\x12&\n\x06search\x18\n \x01(\x0b\x32\x14.clarifai.api.SearchH\x00\x12*\n\toperation\x18\x03 \x01(\x0b\x32\x17.clarifai.api.Operation\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08progress\x18\x06 \x01(\x0b\x32\x16.clarifai.api.Progress\x12\x12\n\ncreated_by\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x0e\n\x0cinput_source\"\x1d\n\x08InputIDs\x12\x11\n\tinput_ids\x18\x01 \x03(\t\"8\n\x08Progress\x12\x11\n\tprocessed\x18\x01 \x01(\r\x12\x19\n\x11last_processed_id\x18\x02 \x01(\t\"\xd4\x02\n\tOperation\x12\x31\n\x0c\x61\x64\x64_concepts\x18\x01 \x01(\x0b\x32\x19.clarifai.api.AddConceptsH\x00\x12\x37\n\x0f\x64\x65lete_concepts\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.DeleteConceptsH\x00\x12\x31\n\x0c\x61\x64\x64_metadata\x18\x03 \x01(\x0b\x32\x19.clarifai.api.AddMetadataH\x00\x12\x37\n\x0f\x64\x65lete_metadata\x18\x04 \x01(\x0b\x32\x1c.clarifai.api.DeleteMetadataH\x00\x12\x33\n\roverwrite_geo\x18\x05 \x01(\x0b\x32\x1a.clarifai.api.OverwriteGeoH\x00\x12-\n\ndelete_geo\x18\x06 \x01(\x0b\x32\x17.clarifai.api.DeleteGeoH\x00\x42\x0b\n\toperation\"6\n\x0b\x41\x64\x64\x43oncepts\x12\'\n\x08\x63oncepts\x18\x01 \x03(\x0b\x32\x15.clarifai.api.Concept\"9\n\x0e\x44\x65leteConcepts\x12\'\n\x08\x63oncepts\x18\x01 \x03(\x0b\x32\x15.clarifai.api.Concept\"8\n\x0b\x41\x64\x64Metadata\x12)\n\x08metadata\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\";\n\x0e\x44\x65leteMetadata\x12)\n\x08metadata\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\".\n\x0cOverwriteGeo\x12\x1e\n\x03geo\x18\x01 \x01(\x0b\x32\x11.clarifai.api.Geo\"\x0b\n\tDeleteGeo\"\x80\x02\n\x0cInputsAddJob\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\x11\x63loud_storage_url\x18\x02 \x01(\t\x12\x15\n\rcall_back_url\x18\x03 \x01(\t\x12\x0f\n\x07\x61pp_pat\x18\x04 \x01(\t\x12\x34\n\x08progress\x18\x07 \x01(\x0b\x32\".clarifai.api.InputsAddJobProgress\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampJ\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07\"u\n\x14InputsAddJobProgress\x12\x15\n\rpending_count\x18\x01 \x01(\x04\x12\x19\n\x11in_progress_count\x18\x02 \x01(\x04\x12\x15\n\rsuccess_count\x18\x03 \x01(\x04\x12\x14\n\x0c\x66\x61iled_count\x18\x04 \x01(\x04\"\x95\x02\n\x06Upload\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0c\x63ontent_name\x18\x08 \x01(\t\x12\x16\n\x0e\x63ontent_length\x18\x06 \x01(\x04\x12\x13\n\x0b\x63ontent_url\x18\x07 \x01(\t\"K\n\x11UploadContentPart\x12\x13\n\x0brange_start\x18\x01 \x01(\x04\x12\x13\n\x0bpart_number\x18\x02 \x01(\x03\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c*\xf9\x01\n\x1e\x44\x61tasetVersionMetricsGroupType\x12.\n*DATASET_VERSION_METRICS_GROUP_TYPE_NOT_SET\x10\x00\x12\x0e\n\nINPUT_TYPE\x10\x02\x12\x0e\n\nCONCEPT_ID\x10\n\x12\x12\n\x0e\x43ONCEPTS_COUNT\x10\x0b\x12\x18\n\x14\x42OUNDING_BOXES_COUNT\x10\x14\x12\x12\n\x0ePOLYGONS_COUNT\x10\x15\x12\x10\n\x0cPOINTS_COUNT\x10\x16\x12\x0f\n\x0bMASKS_COUNT\x10\x17\x12\x10\n\x0cPIXELS_COUNT\x10\x1e\x12\x10\n\x0c\x41SPECT_RATIO\x10\x1f*\x85\x01\n\x1a\x44\x61tasetVersionExportFormat\x12)\n%DATASET_VERSION_EXPORT_FORMAT_NOT_SET\x10\x00\x12\x1a\n\x16\x43LARIFAI_DATA_PROTOBUF\x10\x01\x12\x16\n\x12\x43LARIFAI_DATA_JSON\x10\x03\x12\x08\n\x04\x43OCO\x10\x02*H\n\x10\x45xpirationAction\x12\x1d\n\x19\x45XPIRATION_ACTION_NOT_SET\x10\x00\x12\t\n\x05\x44\x45LAY\x10\x01\x12\n\n\x06\x45XPIRY\x10\x02*M\n\x0cLicenseScope\x12\x19\n\x15LICENSE_SCOPE_NOT_SET\x10\x00\x12\x0b\n\x07PREDICT\x10\x01\x12\t\n\x05TRAIN\x10\x02\x12\n\n\x06SEARCH\x10\x03*P\n\x08\x44\x61taType\x12\r\n\tUNDEFINED\x10\x00\x12\n\n\x06STRING\x10\x01\x12\t\n\x05UINT8\x10\x02\x12\t\n\x05INT32\x10\x03\x12\t\n\x05INT64\x10\x04\x12\x08\n\x04\x46P32\x10\x05*\x8f\x01\n\x0fValueComparator\x12\x1d\n\x19\x43ONCEPT_THRESHOLD_NOT_SET\x10\x00\x12\x10\n\x0cGREATER_THAN\x10\x01\x12\x19\n\x15GREATER_THAN_OR_EQUAL\x10\x02\x12\r\n\tLESS_THAN\x10\x03\x12\x16\n\x12LESS_THAN_OR_EQUAL\x10\x04\x12\t\n\x05\x45QUAL\x10\x05*3\n\x0e\x45valuationType\x12\x12\n\x0e\x43lassification\x10\x00\x12\r\n\tDetection\x10\x01*f\n\x0c\x41PIEventType\x12\x1a\n\x16\x41PI_EVENT_TYPE_NOT_SET\x10\x00\x12\x13\n\x0fON_PREM_PREDICT\x10\x01\x12\x11\n\rON_PREM_TRAIN\x10\x02\x12\x12\n\x0eON_PREM_SEARCH\x10\x03*<\n\x11UsageIntervalType\x12\t\n\x05undef\x10\x00\x12\x07\n\x03\x64\x61y\x10\x01\x12\t\n\x05month\x10\x02\x12\x08\n\x04year\x10\x03*\x1d\n\x08RoleType\x12\x08\n\x04TEAM\x10\x00\x12\x07\n\x03ORG\x10\x01*$\n\x10StatValueAggType\x12\x07\n\x03SUM\x10\x00\x12\x07\n\x03\x41VG\x10\x01*`\n\x0fStatTimeAggType\x12\x0f\n\x0bNO_TIME_AGG\x10\x00\x12\x08\n\x04YEAR\x10\x01\x12\t\n\x05MONTH\x10\x02\x12\x08\n\x04WEEK\x10\x03\x12\x07\n\x03\x44\x41Y\x10\x04\x12\x08\n\x04HOUR\x10\x05\x12\n\n\x06MINUTE\x10\x06*b\n\x13ValidationErrorType\x12!\n\x1dVALIDATION_ERROR_TYPE_NOT_SET\x10\x00\x12\x0e\n\nRESTRICTED\x10\x01\x12\x0c\n\x08\x44\x41TABASE\x10\x02\x12\n\n\x06\x46ORMAT\x10\x03\x42Y\n\x15\x63om.clarifai.grpc.apiP\x01Z7github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api\xa2\x02\x04\x43\x41IPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\"proto/clarifai/api/resources.proto\x12\x0c\x63larifai.api\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a%proto/clarifai/api/utils/matrix.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xe5\x03\n\nAnnotation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x30\n\x0f\x61nnotation_info\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\x0f \x01(\t\x12\x18\n\x10model_version_id\x18\x10 \x01(\t\x12\"\n\x16\x65mbed_model_version_id\x18\x0e \x01(\tB\x02\x18\x01\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x07trusted\x18\n \x01(\x08\x42\x02\x18\x01\x12\x13\n\x0binput_level\x18\x11 \x01(\x08\x12/\n\x0e\x63onsensus_info\x18\x12 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07task_id\x18\x13 \x01(\tJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\xc6\x03\n\x03\x41pp\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x18\n\x10\x64\x65\x66\x61ult_language\x18\x03 \x01(\t\x12\x1b\n\x13\x64\x65\x66\x61ult_workflow_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x11 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1c\n\x14legal_consent_status\x18\x07 \x01(\r\x12)\n\x08metadata\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x13\n\x0b\x64\x65scription\x18\x0e \x01(\t\x12\x11\n\tsample_ms\x18\x0f \x01(\r\x12,\n\nvisibility\x18\x10 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x14\n\x0c\x64\x61ta_tier_id\x18\x12 \x01(\t\x12\x12\n\nis_starred\x18\x13 \x01(\x08\x12\x12\n\nstar_count\x18\x14 \x01(\x05\x12\r\n\x05notes\x18\x15 \x01(\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\r\"\x18\n\x08\x41ppQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\"\x90\x02\n\x0c\x43ollaborator\x12\n\n\x02id\x18\x01 \x01(\t\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12 \n\x04user\x18\x03 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x04 \x03(\t\x12\x11\n\tendpoints\x18\x05 \x03(\t\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\ndeleted_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xa9\x01\n\rCollaboration\x12\x1e\n\x03\x61pp\x18\x01 \x01(\x0b\x32\x11.clarifai.api.App\x12%\n\tapp_owner\x18\x02 \x01(\x0b\x32\x12.clarifai.api.User\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x97\x01\n\x05\x41udio\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\naudio_info\x18\x06 \x01(\x0b\x32\x17.clarifai.api.AudioInfo\"b\n\tAudioInfo\x12\x14\n\x0c\x61udio_format\x18\x01 \x01(\t\x12\x13\n\x0bsample_rate\x18\x02 \x01(\x05\x12\x18\n\x10\x64uration_seconds\x18\x03 \x01(\x02\x12\x10\n\x08\x62it_rate\x18\x04 \x01(\x05\"w\n\x05Track\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12)\n\ttime_info\x18\x04 \x01(\x0b\x32\x16.clarifai.api.TimeInfo\x12\x0f\n\x07quality\x18\x05 \x01(\x02J\x04\x08\x03\x10\x04\"~\n\x0c\x42illingCycle\x12.\n\nstart_date\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08\x63ycle_id\x18\x03 \x01(\x05\"\x91\x01\n\nUsageCycle\x12.\n\nstart_date\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08\x63ycle_id\x18\x03 \x01(\t\x12\x13\n\x0b\x63ycle_epoch\x18\x04 \x01(\x05\"v\n\x0bInvoiceItem\x12\x0f\n\x07op_type\x18\x01 \x01(\t\x12\x11\n\tbill_type\x18\x02 \x01(\t\x12\x14\n\x0cprice_per_op\x18\x03 \x01(\x01\x12\r\n\x05\x63ount\x18\x04 \x01(\x01\x12\x0f\n\x07\x64ollars\x18\x05 \x01(\x01\x12\r\n\x05notes\x18\x06 \x01(\t\"h\n\x07\x43luster\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\x12\r\n\x05score\x18\x03 \x01(\x02\x12\x1f\n\x04hits\x18\x04 \x03(\x0b\x32\x11.clarifai.api.Hit\x12\x12\n\nprojection\x18\x05 \x03(\x02\"M\n\x05\x43olor\x12\x0f\n\x07raw_hex\x18\x01 \x01(\t\x12\x1e\n\x03w3c\x18\x02 \x01(\x0b\x32\x11.clarifai.api.W3C\x12\x13\n\x05value\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\" \n\x03W3C\x12\x0b\n\x03hex\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\"/\n\x0cUserAppIDSet\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\"J\n\x0bPatchAction\x12\n\n\x02op\x18\x01 \x01(\t\x12!\n\x19merge_conflict_resolution\x18\x02 \x01(\t\x12\x0c\n\x04path\x18\x03 \x01(\t\"\xa9\x02\n\x07\x43oncept\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x1a\n\x05value\x18\x03 \x01(\x02\x42\x0b\xd5\xb5\x18\x00\x00\x80?\x80\xb5\x18\x01\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08language\x18\x05 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x06 \x01(\t\x12\x12\n\ndefinition\x18\x07 \x01(\t\x12\x10\n\x08vocab_id\x18\x08 \x01(\t\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\n \x01(\t\x12\x31\n\rkeypoint_info\x18\x0b \x01(\x0b\x32\x1a.clarifai.api.KeypointInfo\"T\n\x0cKeypointInfo\x12\x16\n\x0ekeypoint_names\x18\x01 \x03(\t\x12,\n\x08skeleton\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.KeypointEdge\"&\n\x0cKeypointEdge\x12\n\n\x02k1\x18\x01 \x01(\r\x12\n\n\x02k2\x18\x02 \x01(\r\"\xa4\x01\n\x0c\x43onceptCount\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12:\n\x12\x63oncept_type_count\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12>\n\x14\x64\x65tail_concept_count\x18\x04 \x01(\x0b\x32 .clarifai.api.DetailConceptCount\"B\n\x10\x43onceptTypeCount\x12\x16\n\x08positive\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08negative\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"\xdf\x01\n\x12\x44\x65tailConceptCount\x12\x31\n\tprocessed\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nto_process\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12.\n\x06\x65rrors\x18\x03 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\x12\x32\n\nprocessing\x18\x04 \x01(\x0b\x32\x1e.clarifai.api.ConceptTypeCount\"C\n\x0c\x43onceptQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x10\n\x08language\x18\x02 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x03 \x01(\t\"\xd9\x01\n\x0f\x43onceptRelation\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\x0fsubject_concept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\x12-\n\x0eobject_concept\x18\x03 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x11\n\tpredicate\x18\x04 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x05 \x01(\t\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"y\n\x0eKnowledgeGraph\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x17\n\x0f\x65xamples_app_id\x18\x04 \x01(\t\x12\x1f\n\x17sampled_examples_app_id\x18\x05 \x01(\t\"\xb6\x01\n\x0e\x43onceptMapping\x12&\n\x07\x63oncept\x18\x01 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x30\n\x11suggested_concept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\x12\x1a\n\x12\x63ustomer_confirmed\x18\x03 \x01(\x08\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"D\n\x11\x43onceptMappingJob\x12\x1a\n\x12knowledge_graph_id\x18\x01 \x01(\t\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"?\n\x0f\x43onceptLanguage\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x12\n\ndefinition\x18\x03 \x01(\t\"\x83\x01\n\x10\x43onceptReference\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06source\x18\x02 \x01(\t\x12\x11\n\tsource_id\x18\x03 \x01(\t\x12\x12\n\nsource_url\x18\x04 \x01(\t\x12,\n\nvisibility\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xfa\x04\n\x04\x44\x61ta\x12\"\n\x05image\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Image\x12\"\n\x05video\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Video\x12\'\n\x08\x63oncepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x03geo\x18\x06 \x01(\x0b\x32\x11.clarifai.api.Geo\x12#\n\x06\x63olors\x18\x07 \x03(\x0b\x32\x13.clarifai.api.Color\x12\'\n\x08\x63lusters\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Cluster\x12+\n\nembeddings\x18\t \x03(\x0b\x32\x17.clarifai.api.Embedding\x12%\n\x07regions\x18\x0b \x03(\x0b\x32\x14.clarifai.api.Region\x12#\n\x06\x66rames\x18\x0c \x03(\x0b\x32\x13.clarifai.api.Frame\x12 \n\x04text\x18\r \x01(\x0b\x32\x12.clarifai.api.Text\x12\"\n\x05\x61udio\x18\x0e \x01(\x0b\x32\x13.clarifai.api.Audio\x12#\n\x06tracks\x18\x0f \x03(\x0b\x32\x13.clarifai.api.Track\x12\x30\n\rtime_segments\x18\x10 \x03(\x0b\x32\x19.clarifai.api.TimeSegment\x12\x1f\n\x04hits\x18\x11 \x03(\x0b\x32\x11.clarifai.api.Hit\x12%\n\x08heatmaps\x18\x12 \x03(\x0b\x32\x13.clarifai.api.ImageJ\x04\x08\x04\x10\x05J\x04\x08\n\x10\x0b\"-\n\tDataBatch\x12 \n\x04\x64\x61ta\x18\x01 \x03(\x0b\x32\x12.clarifai.api.Data\"\x86\x01\n\x06Region\x12\n\n\x02id\x18\x01 \x01(\t\x12-\n\x0bregion_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.RegionInfo\x12 \n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Data\x12\r\n\x05value\x18\x04 \x01(\x02\x12\x10\n\x08track_id\x18\x05 \x01(\t\"\xae\x02\n\nRegionInfo\x12/\n\x0c\x62ounding_box\x18\x01 \x01(\x0b\x32\x19.clarifai.api.BoundingBox\x12 \n\x04mask\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Mask\x12&\n\x07polygon\x18\x05 \x01(\x0b\x32\x15.clarifai.api.Polygon\x12\"\n\x05point\x18\x06 \x01(\x0b\x32\x13.clarifai.api.Point\x12 \n\x04span\x18\x07 \x01(\x0b\x32\x12.clarifai.api.Span\x12\"\n\x05token\x18\x08 \x01(\x0b\x32\x13.clarifai.api.Token\x12/\n\x12keypoint_locations\x18\t \x03(\x0b\x32\x13.clarifai.api.PointJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04\"o\n\x0b\x42oundingBox\x12\x15\n\x07top_row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08left_col\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nbottom_row\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tright_col\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"4\n\tFrameInfo\x12\x13\n\x05index\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x12\n\x04time\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\"b\n\x05\x46rame\x12+\n\nframe_info\x18\x01 \x01(\x0b\x32\x17.clarifai.api.FrameInfo\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12\n\n\x02id\x18\x03 \x01(\t\"0\n\x04Mask\x12\"\n\x05image\x18\x02 \x01(\x0b\x32\x13.clarifai.api.ImageJ\x04\x08\x01\x10\x02\".\n\x07Polygon\x12#\n\x06points\x18\x01 \x03(\x0b\x32\x13.clarifai.api.Point\"\xb6\x01\n\x05Point\x12\x11\n\x03row\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03\x63ol\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\t\n\x01z\x18\x03 \x01(\x02\x12\x32\n\nvisibility\x18\x04 \x01(\x0e\x32\x1e.clarifai.api.Point.Visibility\"H\n\nVisibility\x12\x0b\n\x07NOT_SET\x10\x00\x12\x0b\n\x07VISIBLE\x10\x01\x12\x0f\n\x0bNOT_VISIBLE\x10\x02\x12\x0f\n\x0bNOT_PRESENT\x10\x03\"J\n\x04Span\x12\x18\n\nchar_start\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08\x63har_end\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x10\n\x08raw_text\x18\x03 \x01(\t\"K\n\x05Token\x12\x18\n\nchar_start\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x16\n\x08\x63har_end\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x10\n\x08raw_text\x18\x03 \x01(\t\"7\n\tEmbedding\x12\x12\n\x06vector\x18\x01 \x03(\x02\x42\x02\x10\x01\x12\x16\n\x0enum_dimensions\x18\x02 \x01(\r\";\n\x08GeoPoint\x12\x17\n\tlongitude\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08latitude\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\"-\n\x08GeoLimit\x12\x0c\n\x04type\x18\x01 \x01(\t\x12\x13\n\x05value\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\":\n\rGeoBoxedPoint\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\"\x89\x01\n\x03Geo\x12)\n\tgeo_point\x18\x01 \x01(\x0b\x32\x16.clarifai.api.GeoPoint\x12)\n\tgeo_limit\x18\x02 \x01(\x0b\x32\x16.clarifai.api.GeoLimit\x12,\n\x07geo_box\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.GeoBoxedPoint\"\x9d\x01\n\x05Image\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\'\n\x06hosted\x18\x05 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\nimage_info\x18\x06 \x01(\x0b\x32\x17.clarifai.api.ImageInfoJ\x04\x08\x03\x10\x04\"N\n\tImageInfo\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x0e\n\x06\x66ormat\x18\x03 \x01(\t\x12\x12\n\ncolor_mode\x18\x04 \x01(\t\"O\n\tHostedURL\x12\x0e\n\x06prefix\x18\x01 \x01(\t\x12\x0e\n\x06suffix\x18\x02 \x01(\t\x12\r\n\x05sizes\x18\x03 \x03(\t\x12\x13\n\x0b\x63rossorigin\x18\x04 \x01(\t\"\xde\x01\n\x05Input\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x13\n\x0b\x64\x61taset_ids\x18\x07 \x03(\tJ\x04\x08\x03\x10\x04\"\xda\x01\n\nInputCount\x12\x17\n\tprocessed\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_process\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x14\n\x06\x65rrors\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nprocessing\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\treindexed\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nto_reindex\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1c\n\x0ereindex_errors\x18\x07 \x01(\rB\x04\x80\xb5\x18\x01\x12\x18\n\nreindexing\x18\x08 \x01(\rB\x04\x80\xb5\x18\x01\"\x92\x03\n\x07\x44\x61taset\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x07 \x01(\t\x12)\n\x08metadata\x18\x08 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x41\n\x19\x64\x65\x66\x61ult_annotation_filter\x18\x0c \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\x12\r\n\x05notes\x18\x0b \x01(\t\x12-\n\x07version\x18\r \x01(\x0b\x32\x1c.clarifai.api.DatasetVersionJ\x04\x08\x06\x10\x07J\x04\x08\n\x10\x0b\"\xd8\x01\n\x10\x41nnotationFilter\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\x12*\n\x0csaved_search\x18\x08 \x01(\x0b\x32\x14.clarifai.api.SearchJ\x04\x08\x06\x10\x07J\x04\x08\x07\x10\x08\"b\n\x0c\x44\x61tasetInput\x12.\n\ncreated_at\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\"\xe9\x05\n\x0e\x44\x61tasetVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12\x0f\n\x07user_id\x18\x05 \x01(\t\x12\x12\n\ndataset_id\x18\x06 \x01(\t\x12H\n\x18\x61nnotation_filter_config\x18\x0f \x01(\x0b\x32$.clarifai.api.AnnotationFilterConfigH\x00\x12@\n\x14model_predict_config\x18\x12 \x01(\x0b\x32 .clarifai.api.ModelPredictConfigH\x00\x12+\n\x06status\x18\x08 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\x12:\n\x07metrics\x18\x10 \x03(\x0b\x32).clarifai.api.DatasetVersion.MetricsEntry\x12;\n\x0b\x65xport_info\x18\x11 \x01(\x0b\x32&.clarifai.api.DatasetVersionExportInfo\x12)\n\x08metadata\x18\x0c \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\r \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x1f\n\x17\x65mbed_model_version_ids\x18\x0e \x03(\t\x1aS\n\x0cMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x32\n\x05value\x18\x02 \x01(\x0b\x32#.clarifai.api.DatasetVersionMetrics:\x02\x38\x01\x42\r\n\x0b\x64\x61ta_configJ\x04\x08\x07\x10\x08J\x04\x08\t\x10\nJ\x04\x08\x0b\x10\x0c\"S\n\x16\x41nnotationFilterConfig\x12\x39\n\x11\x61nnotation_filter\x18\x01 \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"8\n\x12ModelPredictConfig\x12\"\n\x05model\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Model\"\xc3\x08\n\x15\x44\x61tasetVersionMetrics\x12\x32\n\x0cinputs_count\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12<\n\x16unlabeled_inputs_count\x18\x06 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12@\n\x1ainputs_with_metadata_count\x18\x08 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12;\n\x15inputs_with_geo_count\x18\t \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x33\n\rregions_count\x18\x14 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12-\n\x16region_location_matrix\x18\x15 \x01(\x0b\x32\r.MatrixUint64\x12:\n\x14\x62ounding_boxes_count\x18\x16 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x34\n\x0epolygons_count\x18\x17 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x32\n\x0cpoints_count\x18\x18 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x31\n\x0bmasks_count\x18\x19 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x39\n\x13region_inputs_count\x18< \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x39\n\x13region_frames_count\x18= \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x32\n\x0c\x66rames_count\x18\x1e \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x38\n\x12\x66rame_inputs_count\x18\x46 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12\x36\n\x10\x65mbeddings_count\x18( \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12?\n\x19positive_input_tags_count\x18\x32 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12@\n\x1apositive_region_tags_count\x18\x33 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\x12?\n\x19positive_frame_tags_count\x18\x34 \x01(\x0b\x32\x1c.google.protobuf.UInt64ValueJ\x04\x08\x02\x10\x03J\x04\x08\x03\x10\x04J\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06J\x04\x08\x07\x10\x08\"\xca\x01\n\x1a\x44\x61tasetVersionMetricsGroup\x12\x13\n\x0bparent_path\x18\x01 \x01(\t\x12:\n\x04type\x18\x02 \x01(\x0e\x32,.clarifai.api.DatasetVersionMetricsGroupType\x12%\n\x05value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x34\n\x07metrics\x18\x04 \x01(\x0b\x32#.clarifai.api.DatasetVersionMetrics\"\xd0\x01\n\x18\x44\x61tasetVersionExportInfo\x12\x42\n\x16\x63larifai_data_protobuf\x18\x01 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\x12>\n\x12\x63larifai_data_json\x18\x03 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\x12\x30\n\x04\x63oco\x18\x02 \x01(\x0b\x32\".clarifai.api.DatasetVersionExport\"\x98\x01\n\x14\x44\x61tasetVersionExport\x12\x38\n\x06\x66ormat\x18\x01 \x01(\x0e\x32(.clarifai.api.DatasetVersionExportFormat\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04size\x18\x04 \x01(\x04\"n\n\x19WorkflowResultsSimilarity\x12(\n\x0bprobe_input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12\'\n\x0cpool_results\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Hit\"\xf4\x01\n\x03Key\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04type\x18\x08 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0e\n\x06scopes\x18\x03 \x03(\t\x12\x11\n\tendpoints\x18\x07 \x03(\t\x12\x1f\n\x04\x61pps\x18\x04 \x03(\x0b\x32\x11.clarifai.api.App\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1a\n\x12\x61uthorized_idp_ids\x18\t \x03(\t\"\xb2\x01\n\x0cLicenseLimit\x12\"\n\x05model\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Model\x12.\n\nexpires_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12!\n\x13max_operation_count\x18\x03 \x01(\x03\x42\x04\x80\xb5\x18\x01\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"\xaa\x02\n\x07License\x12\n\n\x02id\x18\x01 \x01(\t\x12/\n\x05scope\x18\x02 \x01(\x0e\x32\x1a.clarifai.api.LicenseScopeB\x04\x80\xb5\x18\x01\x12.\n\nexpires_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12?\n\x11\x65xpiration_action\x18\x04 \x01(\x0e\x32\x1e.clarifai.api.ExpirationActionB\x04\x80\xb5\x18\x01\x12*\n\x06limits\x18\x05 \x03(\x0b\x32\x1a.clarifai.api.LicenseLimit\x12+\n\x06status\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x18\n\nis_offline\x18\x07 \x01(\x08\x42\x04\x80\xb5\x18\x01\"\xd8\x07\n\x05Model\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x04name\x18\x02 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x13 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x14\n\x06\x61pp_id\x18\x04 \x01(\tB\x04\x80\xb5\x18\x01\x12\x31\n\x0boutput_info\x18\x05 \x01(\x0b\x32\x18.clarifai.api.OutputInfoB\x02\x18\x01\x12\x31\n\rmodel_version\x18\x06 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x18\n\x0c\x64isplay_name\x18\x07 \x01(\tB\x02\x18\x01\x12\x0f\n\x07user_id\x18\t \x01(\t\x12/\n\ninput_info\x18\x0c \x01(\x0b\x32\x17.clarifai.api.InputInfoB\x02\x18\x01\x12/\n\ntrain_info\x18\r \x01(\x0b\x32\x17.clarifai.api.TrainInfoB\x02\x18\x01\x12\x31\n\x11\x64\x65\x66\x61ult_eval_info\x18\x1e \x01(\x0b\x32\x16.clarifai.api.EvalInfo\x12\x15\n\rmodel_type_id\x18\x0e \x01(\t\x12\x0c\n\x04task\x18\x1a \x01(\t\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x13\n\x0b\x64\x65scription\x18\x10 \x01(\t\x12)\n\x08metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.Struct\x12(\n\x07presets\x18\x1b \x01(\x0b\x32\x17.google.protobuf.Struct\x12\r\n\x05notes\x18\x12 \x01(\t\x12\x16\n\x08toolkits\x18\x14 \x03(\tB\x04\x80\xb5\x18\x01\x12\x17\n\tuse_cases\x18\x15 \x03(\tB\x04\x80\xb5\x18\x01\x12\x17\n\tlanguages\x18\x19 \x03(\tB\x04\x80\xb5\x18\x01\x12\x33\n\x0elanguages_full\x18\x1f \x03(\x0b\x32\x15.clarifai.api.FullTagB\x04\x80\xb5\x18\x01\x12\x1c\n\x0e\x63heck_consents\x18  \x03(\tB\x04\x80\xb5\x18\x01\x12\x12\n\nis_starred\x18\x16 \x01(\x08\x12\x12\n\nstar_count\x18\x17 \x01(\x05\x12\x31\n\x0bimport_info\x18\x18 \x01(\x0b\x32\x18.clarifai.api.ImportInfoB\x02\x18\x01\x12\x38\n\x14workflow_recommended\x18\x1d \x01(\x0b\x32\x1a.google.protobuf.BoolValueJ\x04\x08\x08\x10\tJ\x04\x08\n\x10\x0bJ\x04\x08\x0b\x10\x0cJ\x04\x08\x1c\x10\x1d\"t\n\x0eModelReference\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0b\n\x03url\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x97\x01\n\x18ModelVersionInputExample\x12\n\n\x02id\x18\x01 \x01(\t\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\"\xd4\x01\n\nOutputInfo\x12 \n\x04\x64\x61ta\x18\x01 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x31\n\routput_config\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12\x0f\n\x07message\x18\x03 \x01(\t\x12+\n\nfields_map\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x07 \x01(\x0b\x32\x17.google.protobuf.StructJ\x04\x08\x04\x10\x05J\x04\x08\x05\x10\x06\"a\n\tInputInfo\x12+\n\nfields_map\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x02 \x01(\x0b\x32\x17.google.protobuf.Struct\"4\n\tTrainInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"3\n\x08\x45valInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"5\n\nImportInfo\x12\'\n\x06params\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\"\x83\x04\n\x0cOutputConfig\x12)\n\x1b\x63oncepts_mutually_exclusive\x18\x01 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12 \n\x12\x63losed_environment\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x1d\n\x11\x65xisting_model_id\x18\x03 \x01(\tB\x02\x18\x01\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x1c\n\x10hyper_parameters\x18\x05 \x01(\tB\x02\x18\x01\x12\x1a\n\x0cmax_concepts\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\x12\x17\n\tmin_value\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12.\n\x0fselect_concepts\x18\x08 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x18\n\x10training_timeout\x18\t \x01(\r\x12\x11\n\tsample_ms\x18\n \x01(\r\x12-\n\x0chyper_params\x18\r \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x1e\n\x16\x65mbed_model_version_id\x18\x0e \x01(\t\x12)\n!fail_on_missing_positive_examples\x18\x0f \x01(\x08\x12\x33\n\x0emodel_metadata\x18\x11 \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01J\x04\x08\x0b\x10\x0cJ\x04\x08\x0c\x10\rJ\x04\x08\x10\x10\x11J\x04\x08\x12\x10\x13\"\xa8\x03\n\tModelType\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05title\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x14\n\x0cinput_fields\x18\x05 \x03(\t\x12\x15\n\routput_fields\x18\x06 \x03(\t\x12\x11\n\ttrainable\x18\x08 \x01(\x08\x12\x11\n\tcreatable\x18\t \x01(\x08\x12\x15\n\rinternal_only\x18\n \x01(\x08\x12\x37\n\x11model_type_fields\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\"\n\x1arequires_sequential_frames\x18\x0c \x01(\x08\x12\x11\n\tevaluable\x18\r \x01(\x08\x12;\n\x15\x65xpected_input_layers\x18\x10 \x03(\x0b\x32\x1c.clarifai.api.ModelLayerInfo\x12<\n\x16\x65xpected_output_layers\x18\x11 \x03(\x0b\x32\x1c.clarifai.api.ModelLayerInfoJ\x04\x08\x07\x10\x08J\x04\x08\x04\x10\x05J\x04\x08\x0e\x10\x0fJ\x04\x08\x0f\x10\x10\"\x89\x01\n\x0eModelLayerInfo\x12\x17\n\x0f\x64\x61ta_field_name\x18\x01 \x01(\t\x12(\n\x06shapes\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LayerShape\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x1f\n\x17requires_label_filename\x18\x04 \x01(\x08\"l\n\nLayerShape\x12\x0c\n\x04\x64ims\x18\x01 \x03(\x05\x12\x10\n\x08max_dims\x18\x02 \x03(\x05\x12)\n\tdata_type\x18\x03 \x01(\x0e\x32\x16.clarifai.api.DataType\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\"\xd2\x05\n\x0eModelTypeField\x12\x0c\n\x04path\x18\x01 \x01(\t\x12\x43\n\nfield_type\x18\x02 \x01(\x0e\x32/.clarifai.api.ModelTypeField.ModelTypeFieldType\x12-\n\rdefault_value\x18\x03 \x01(\x0b\x32\x16.google.protobuf.Value\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x13\n\x0bplaceholder\x18\x05 \x01(\t\x12\x42\n\x17model_type_enum_options\x18\x06 \x03(\x0b\x32!.clarifai.api.ModelTypeEnumOption\x12\x15\n\rinternal_only\x18\x07 \x01(\x08\x12\x10\n\x08required\x18\x08 \x01(\x08\x12?\n\x15model_type_range_info\x18\t \x01(\x0b\x32 .clarifai.api.ModelTypeRangeInfo\"\xe5\x02\n\x12ModelTypeFieldType\x12!\n\x1dINVALID_MODEL_TYPE_FIELD_TYPE\x10\x00\x12\x0b\n\x07\x42OOLEAN\x10\x01\x12\n\n\x06STRING\x10\x02\x12\n\n\x06NUMBER\x10\x03\x12\x15\n\x11\x41RRAY_OF_CONCEPTS\x10\x04\x12$\n ARRAY_OF_CONCEPTS_WITH_THRESHOLD\x10\x05\x12\t\n\x05RANGE\x10\x07\x12\x08\n\x04\x45NUM\x10\x08\x12\x11\n\rCOLLABORATORS\x10\t\x12\x08\n\x04JSON\x10\n\x12\x14\n\x10\x41RRAY_OF_NUMBERS\x10\x0b\x12\x19\n\x15WORKFLOW_EMBED_MODELS\x10\x0c\x12\x14\n\x10\x41RRAY_OF_STRINGS\x10\r\x12\x12\n\x0eRECURSIVE_ENUM\x10\x0e\x12\x0f\n\x0bPYTHON_CODE\x10\x0f\x12\x0e\n\nDATASET_ID\x10\x10\x12\x16\n\x12\x44\x41TASET_VERSION_ID\x10\x11\"\x04\x08\x06\x10\x06\"<\n\x12ModelTypeRangeInfo\x12\x0b\n\x03min\x18\x01 \x01(\x02\x12\x0b\n\x03max\x18\x02 \x01(\x02\x12\x0c\n\x04step\x18\x03 \x01(\x02\"\xbf\x01\n\x13ModelTypeEnumOption\x12\n\n\x02id\x18\x01 \x01(\t\x12\x37\n\x07\x61liases\x18\x05 \x03(\x0b\x32&.clarifai.api.ModelTypeEnumOptionAlias\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x37\n\x11model_type_fields\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.ModelTypeField\x12\x15\n\rinternal_only\x18\x04 \x01(\x08\"C\n\x18ModelTypeEnumOptionAlias\x12\x0e\n\x06id_int\x18\x01 \x01(\x03\x12\x17\n\x0fwildcard_string\x18\x02 \x01(\t\"7\n\nModelQuery\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x15\n\rmodel_type_id\x18\x03 \x01(\tJ\x04\x08\x02\x10\x03\"\xcf\x06\n\x0cModelVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x04 \x01(\r\x12*\n\x07metrics\x18\x05 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12\x19\n\x11total_input_count\x18\x06 \x01(\r\x12\x44\n\x17pretrained_model_config\x18\x07 \x01(\x0b\x32#.clarifai.api.PretrainedModelConfig\x12\x33\n\x0btrain_stats\x18\x08 \x01(\x0b\x32\x18.clarifai.api.TrainStatsB\x04\x80\x9c\'\x01\x12\x30\n\x0c\x63ompleted_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x13\n\x0b\x64\x65scription\x18\x0b \x01(\t\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\r \x01(\t\x12\x0f\n\x07user_id\x18\x0e \x01(\t\x12/\n\x0bmodified_at\x18\x0f \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x10 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07license\x18\x11 \x01(\t\x12\x35\n\x0f\x64\x61taset_version\x18\x12 \x01(\x0b\x32\x1c.clarifai.api.DatasetVersion\x12-\n\x0boutput_info\x18\x13 \x01(\x0b\x32\x18.clarifai.api.OutputInfo\x12+\n\ninput_info\x18\x14 \x01(\x0b\x32\x17.clarifai.api.InputInfo\x12+\n\ntrain_info\x18\x15 \x01(\x0b\x32\x17.clarifai.api.TrainInfo\x12-\n\x0bimport_info\x18\x16 \x01(\x0b\x32\x18.clarifai.api.ImportInfoJ\x04\x08\t\x10\n\"\xcc\x01\n\x15PretrainedModelConfig\x12\x10\n\x02id\x18\x01 \x01(\tB\x04\x80\x9c\'\x01\x12\x31\n\x10input_fields_map\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x32\n\x11output_fields_map\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x15\n\rmodel_zip_url\x18\x06 \x01(\t\x12\x17\n\toverwrite\x18\x07 \x01(\x08\x42\x04\x80\x9c\'\x01J\x04\x08\x02\x10\x03J\x04\x08\x05\x10\x06\">\n\nTrainStats\x12\x30\n\nloss_curve\x18\x01 \x03(\x0b\x32\x1c.clarifai.api.LossCurveEntry\"B\n\x0eLossCurveEntry\x12\r\n\x05\x65poch\x18\x01 \x01(\r\x12\x13\n\x0bglobal_step\x18\x02 \x01(\r\x12\x0c\n\x04\x63ost\x18\x03 \x01(\x02\"1\n\nLabelCount\x12\x14\n\x0c\x63oncept_name\x18\x01 \x01(\t\x12\r\n\x05\x63ount\x18\x02 \x01(\r\"L\n\x11LabelDistribution\x12\x37\n\x15positive_label_counts\x18\x01 \x03(\x0b\x32\x18.clarifai.api.LabelCount\"B\n\x17\x43ooccurrenceMatrixEntry\x12\x0b\n\x03row\x18\x01 \x01(\t\x12\x0b\n\x03\x63ol\x18\x02 \x01(\t\x12\r\n\x05\x63ount\x18\x03 \x01(\r\"`\n\x12\x43ooccurrenceMatrix\x12\x35\n\x06matrix\x18\x01 \x03(\x0b\x32%.clarifai.api.CooccurrenceMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"N\n\x14\x43onfusionMatrixEntry\x12\x11\n\tpredicted\x18\x01 \x01(\t\x12\x0e\n\x06\x61\x63tual\x18\x02 \x01(\t\x12\x13\n\x05value\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\"Z\n\x0f\x43onfusionMatrix\x12\x32\n\x06matrix\x18\x01 \x03(\x0b\x32\".clarifai.api.ConfusionMatrixEntry\x12\x13\n\x0b\x63oncept_ids\x18\x02 \x03(\t\"t\n\x03ROC\x12\x11\n\x03\x66pr\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x11\n\x03tpr\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x15\n\rfpr_per_image\x18\x04 \x03(\x02\x12\x16\n\x0e\x66pr_per_object\x18\x05 \x03(\x02\"_\n\x14PrecisionRecallCurve\x12\x14\n\x06recall\x18\x01 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tprecision\x18\x02 \x03(\x02\x42\x04\x80\xb5\x18\x01\x12\x18\n\nthresholds\x18\x03 \x03(\x02\x42\x04\x80\xb5\x18\x01\"\xea\x02\n\rBinaryMetrics\x12\x15\n\x07num_pos\x18\x01 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_neg\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07num_tot\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x10\n\x02\x66\x31\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12&\n\x07\x63oncept\x18\x06 \x01(\x0b\x32\x15.clarifai.api.Concept\x12$\n\troc_curve\x18\x07 \x01(\x0b\x32\x11.clarifai.api.ROC\x12\x42\n\x16precision_recall_curve\x18\x08 \x01(\x0b\x32\".clarifai.api.PrecisionRecallCurve\x12\x15\n\ravg_precision\x18\t \x01(\x02\x12\x11\n\tarea_name\x18\n \x01(\t\x12\x10\n\x08\x61rea_min\x18\x0b \x01(\x01\x12\x10\n\x08\x61rea_max\x18\x0c \x01(\x01\x12\x0b\n\x03iou\x18\r \x01(\x02\"\x91\x01\n\x0eTrackerMetrics\x12\x10\n\x08mot_mota\x18\x01 \x01(\x02\x12\x18\n\x10mot_num_switches\x18\x02 \x01(\x05\x12\x12\n\nmorse_frag\x18\x03 \x01(\x02\x12\x15\n\ravg_precision\x18\x04 \x01(\x02\x12\x0c\n\x04\x61iid\x18\x05 \x01(\t\x12\x1a\n\x12unique_switch_rate\x18\x06 \x01(\x02\"\xee\x01\n\x10\x45valTestSetEntry\x12\x0e\n\x02id\x18\x01 \x01(\tB\x02\x18\x01\x12\x0f\n\x03url\x18\x02 \x01(\tB\x02\x18\x01\x12\"\n\x05input\x18\x06 \x01(\x0b\x32\x13.clarifai.api.Input\x12\x31\n\x12predicted_concepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x34\n\x15ground_truth_concepts\x18\x04 \x03(\x0b\x32\x15.clarifai.api.Concept\x12,\n\nannotation\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\xcd\x01\n\x0eLOPQEvalResult\x12\t\n\x01k\x18\x01 \x01(\x05\x12#\n\x15recall_vs_brute_force\x18\x02 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1akendall_tau_vs_brute_force\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12(\n\x1amost_frequent_code_percent\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x17\n\tlopq_ndcg\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10\x62rute_force_ndcg\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\"\x8c\x03\n\x0eMetricsSummary\x12\x19\n\rtop1_accuracy\x18\x01 \x01(\x02\x42\x02\x18\x01\x12\x19\n\rtop5_accuracy\x18\x02 \x01(\x02\x42\x02\x18\x01\x12\x1f\n\x11macro_avg_roc_auc\x18\x03 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1f\n\x11macro_std_roc_auc\x18\x04 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_avg_f1_score\x18\x05 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12 \n\x12macro_std_f1_score\x18\x06 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x13macro_avg_precision\x18\x07 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\x1e\n\x10macro_avg_recall\x18\x08 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12!\n\x19mean_avg_precision_iou_50\x18\n \x01(\x02\x12$\n\x1cmean_avg_precision_iou_range\x18\x0b \x01(\x02\x12\x32\n\x0clopq_metrics\x18\t \x03(\x0b\x32\x1c.clarifai.api.LOPQEvalResult\"\xda\x04\n\x0b\x45valMetrics\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\n \x01(\t\x12-\n\x07summary\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.MetricsSummary\x12\x37\n\x10\x63onfusion_matrix\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.ConfusionMatrix\x12=\n\x13\x63ooccurrence_matrix\x18\x04 \x01(\x0b\x32 .clarifai.api.CooccurrenceMatrix\x12\x35\n\x0clabel_counts\x18\x05 \x01(\x0b\x32\x1f.clarifai.api.LabelDistribution\x12\x33\n\x0e\x62inary_metrics\x18\x06 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x30\n\x08test_set\x18\x07 \x03(\x0b\x32\x1e.clarifai.api.EvalTestSetEntry\x12\x34\n\x0fmetrics_by_area\x18\x08 \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x10metrics_by_class\x18\t \x03(\x0b\x32\x1b.clarifai.api.BinaryMetrics\x12\x35\n\x0ftracker_metrics\x18\x0b \x03(\x0b\x32\x1c.clarifai.api.TrackerMetrics\x12)\n\teval_info\x18\x0c \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xb7\x01\n\x0b\x46ieldsValue\x12\x18\n\x10\x63onfusion_matrix\x18\x01 \x01(\x08\x12\x1b\n\x13\x63ooccurrence_matrix\x18\x02 \x01(\x08\x12\x14\n\x0clabel_counts\x18\x03 \x01(\x08\x12\x16\n\x0e\x62inary_metrics\x18\x04 \x01(\x08\x12\x10\n\x08test_set\x18\x05 \x01(\x08\x12\x17\n\x0fmetrics_by_area\x18\x06 \x01(\x08\x12\x18\n\x10metrics_by_class\x18\x07 \x01(\x08\"\xdb\x01\n\x06Output\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12 \n\x04\x64\x61ta\x18\x06 \x01(\x0b\x32\x12.clarifai.api.Data\"4\n\tScopeDeps\x12\r\n\x05scope\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\":\n\x0c\x45ndpointDeps\x12\x10\n\x08\x65ndpoint\x18\x01 \x01(\t\x12\x18\n\x10\x64\x65pending_scopes\x18\x02 \x03(\t\"\x8d\x01\n\x03Hit\x12\x13\n\x05score\x18\x01 \x01(\x02\x42\x04\x80\xb5\x18\x01\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\x12,\n\nannotation\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x05 \x01(\t\"\x8d\x01\n\x03\x41nd\x12\"\n\x05input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12$\n\x06output\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Output\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"q\n\x0e\x41ttributeMixIn\x12\x12\n\nversion_id\x18\x01 \x01(\t\x12\x1a\n\x12mix_in_coefficient\x18\x02 \x01(\x02\x12/\n\x10\x63oncept_override\x18\x03 \x01(\x0b\x32\x15.clarifai.api.Concept\"l\n\x0e\x41ttributeQuery\x12\"\n\x05input\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Input\x12\x36\n\x10\x61ttribute_mix_in\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.AttributeMixIn\"\x88\x01\n\x05Query\x12#\n\x04\x61nds\x18\x01 \x03(\x0b\x32\x11.clarifai.api.AndB\x02\x18\x01\x12\x10\n\x08language\x18\x02 \x01(\t\x12%\n\x07\x66ilters\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Filter\x12!\n\x05ranks\x18\x04 \x03(\x0b\x32\x12.clarifai.api.Rank\"\xde\x02\n\x06Search\x12\"\n\x05query\x18\x01 \x01(\x0b\x32\x13.clarifai.api.Query\x12\n\n\x02id\x18\x02 \x01(\t\x12\x16\n\x0e\x61pplication_id\x18\x03 \x01(\t\x12\x0c\n\x04name\x18\x04 \x01(\t\x12)\n\x05\x61s_of\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x10\n\x08git_hash\x18\x06 \x01(\t\x12.\n\ncreated_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\talgorithm\x18\t \x01(\t\x12\x0c\n\x04save\x18\n \x01(\x08\x12\x11\n\tmin_value\x18\x0b \x01(\x02\x12,\n\nvisibility\x18\x0c \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xa4\x01\n\x06\x46ilter\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12\x38\n\x17last_updated_time_range\x18\x06 \x01(\x0b\x32\x17.clarifai.api.TimeRange\"i\n\tTimeRange\x12.\n\nstart_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"D\n\x04Rank\x12\x0e\n\x06negate\x18\x03 \x01(\x08\x12,\n\nannotation\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Annotation\"\x8d\x02\n\x17\x41nnotationSearchMetrics\x12*\n\x0cground_truth\x18\x01 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Search\x12*\n\x07metrics\x18\x03 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\x12 \n\x04\x64\x61ta\x18\x04 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x1c\n\x14\x61\x63tive_concept_count\x18\x05 \x01(\r\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\" \n\x04Plan\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"\xd2\x02\n\nCreditCard\x12\x0e\n\x06number\x18\x01 \x01(\t\x12\x13\n\x0b\x66our_digits\x18\x02 \x01(\t\x12\x11\n\texp_month\x18\x03 \x01(\t\x12\x10\n\x08\x65xp_year\x18\x04 \x01(\t\x12\x0b\n\x03\x63vc\x18\x05 \x01(\t\x12\x0c\n\x04name\x18\x06 \x01(\t\x12\x16\n\x0e\x61\x64\x64ress_line_1\x18\x07 \x01(\t\x12\x16\n\x0e\x61\x64\x64ress_line_2\x18\x08 \x01(\t\x12\x13\n\x0b\x61\x64\x64ress_zip\x18\t \x01(\t\x12\x17\n\x0f\x61\x64\x64ress_country\x18\n \x01(\t\x12\x14\n\x0c\x61\x64\x64ress_city\x18\x0b \x01(\t\x12\x15\n\raddress_state\x18\x0c \x01(\t\x12\n\n\x02id\x18\r \x01(\t\x12\r\n\x05\x62rand\x18\x0e \x01(\t\x12\x0f\n\x07\x66unding\x18\x0f \x01(\t\x12\x15\n\x07\x64\x65\x66\x61ult\x18\x10 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x11\n\tcvc_check\x18\x11 \x01(\t\"\xe9\x01\n\x0fShippingAddress\x12\x1f\n\x17shipping_address_line_1\x18\x01 \x01(\t\x12\x1f\n\x17shipping_address_line_2\x18\x02 \x01(\t\x12\x1c\n\x14shipping_address_zip\x18\x03 \x01(\t\x12 \n\x18shipping_address_country\x18\x04 \x01(\t\x12\x1d\n\x15shipping_address_city\x18\x05 \x01(\t\x12\x1e\n\x16shipping_address_state\x18\x06 \x01(\t\x12\x15\n\rshipping_name\x18\x07 \x01(\t\"\x91\x01\n\x04Text\x12\x0b\n\x03raw\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x1b\n\x13\x61llow_duplicate_url\x18\x03 \x01(\x08\x12\'\n\x06hosted\x18\x04 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12)\n\ttext_info\x18\x05 \x01(\x0b\x32\x16.clarifai.api.TextInfo\"0\n\x08TextInfo\x12\x12\n\nchar_count\x18\x01 \x01(\x05\x12\x10\n\x08\x65ncoding\x18\x02 \x01(\t\"\xa8\x01\n\rOpCountByDate\x12(\n\x04\x64\x61te\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0f\n\x07section\x18\x02 \x01(\t\x12\x16\n\x0e\x63\x61ller_user_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12\x10\n\x08model_id\x18\x05 \x01(\t\x12\x13\n\x0b\x63\x61tegory_id\x18\x06 \x01(\t\x12\r\n\x05value\x18\x07 \x01(\x05\"\xf6\x01\n\rDimensionList\x12=\n\tdimension\x18\x01 \x03(\x0b\x32*.clarifai.api.DimensionList.DimensionEntry\x12\x16\n\x0eint_value_list\x18\x02 \x03(\x03\x12.\n\nstart_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x1a\x30\n\x0e\x44imensionEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"0\n\rUsageInterval\x12\x10\n\x08interval\x18\x01 \x01(\t\x12\r\n\x05range\x18\x02 \x01(\x05\"5\n\rRealtimeCount\x12\x0f\n\x07op_type\x18\x01 \x01(\t\x12\x13\n\x05\x63ount\x18\x02 \x01(\x03\x42\x04\x80\xb5\x18\x01\"q\n\x0c\x45ventSummary\x12.\n\nevent_type\x18\x01 \x01(\x0e\x32\x1a.clarifai.api.APIEventType\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\"\xa5\x01\n\x10\x45ventsCollection\x12.\n\nstart_time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x0f\x65vent_summaries\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.EventSummary\"\xfc\x05\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\rprimary_email\x18\x02 \x01(\tB\x02\x18\x01\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x11\n\tjob_title\x18\x13 \x01(\t\x12\x10\n\x08job_role\x18\x14 \x01(\t\x12\x15\n\tbill_type\x18\x07 \x01(\tB\x02\x18\x01\x12.\n\ncreated_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x11\x64\x61te_gdpr_consent\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_tos_consent\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12>\n\x16\x64\x61te_marketing_consent\x18\n \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12\x38\n\x10\x64\x61te_pii_consent\x18\x17 \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x02\x18\x01\x12-\n\x08metadata\x18\x0b \x01(\x0b\x32\x17.google.protobuf.StructB\x02\x18\x01\x12\x37\n\x0f\x65mail_addresses\x18\x0c \x03(\x0b\x32\x1a.clarifai.api.EmailAddressB\x02\x18\x01\x12#\n\x17two_factor_auth_enabled\x18\x0f \x01(\x08\x42\x02\x18\x01\x12\x17\n\x0bteams_count\x18\x10 \x01(\rB\x02\x18\x01\x12\x12\n\nis_starred\x18\x15 \x01(\x08\x12\x12\n\nstar_count\x18\x16 \x01(\x05\x12,\n\nvisibility\x18\x11 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12-\n\x0buser_detail\x18\x12 \x01(\x0b\x32\x18.clarifai.api.UserDetailJ\x04\x08\r\x10\x0eJ\x04\x08\x0e\x10\x0f\"\xd1\x03\n\nUserDetail\x12\x15\n\rprimary_email\x18\x01 \x01(\t\x12\x11\n\tbill_type\x18\x02 \x01(\t\x12\x35\n\x11\x64\x61te_gdpr_consent\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_tos_consent\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12:\n\x16\x64\x61te_marketing_consent\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10\x64\x61te_pii_consent\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x08metadata\x18\x06 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x33\n\x0f\x65mail_addresses\x18\x07 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\x12\x1f\n\x17two_factor_auth_enabled\x18\t \x01(\x08\x12\x13\n\x0bteams_count\x18\n \x01(\r\x12\x0f\n\x07\x63ountry\x18\x0b \x01(\t\x12\r\n\x05state\x18\x0c \x01(\tJ\x04\x08\x08\x10\t\"R\n\x0c\x45mailAddress\x12\x13\n\x05\x65mail\x18\x01 \x01(\tB\x04\x80\xb5\x18\x01\x12\x15\n\x07primary\x18\x02 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x16\n\x08verified\x18\x03 \x01(\x08\x42\x04\x80\xb5\x18\x01\"6\n\x0cUserPassword\x12\x14\n\x0cold_password\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\"\xd1\x01\n\x08UserInfo\x12\x14\n\x0c\x63ompany_name\x18\x01 \x01(\t\x12\x12\n\nfirst_name\x18\x02 \x01(\t\x12\x11\n\tlast_name\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x11\n\tjob_title\x18\x07 \x01(\t\x12\x10\n\x08job_role\x18\x08 \x01(\t\x12\x0f\n\x07\x63ountry\x18\t \x01(\t\x12\r\n\x05state\x18\n \x01(\tJ\x04\x08\x05\x10\x06\"\x1d\n\x08Password\x12\x11\n\tplaintext\x18\x01 \x01(\t\"a\n\nUserAccess\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x1b\n\x13v2_portal_requested\x18\x02 \x01(\x08\x12\x19\n\x11v2_portal_granted\x18\x03 \x01(\x08\x12\n\n\x02id\x18\x04 \x01(\t\"\xc4\x03\n\x0ePasswordPolicy\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12\x17\n\x0forganization_id\x18\x03 \x01(\t\x12\x16\n\x0eminimum_length\x18\x04 \x01(\r\x12\x16\n\x0emaximum_length\x18\x05 \x01(\r\x12\x19\n\x11upper_case_needed\x18\x06 \x01(\x08\x12\x19\n\x11lower_case_needed\x18\x07 \x01(\x08\x12\x16\n\x0enumeric_needed\x18\x08 \x01(\x08\x12\x1f\n\x17non_alphanumeric_needed\x18\t \x01(\x08\x12\x1f\n\x17password_life_span_days\x18\n \x01(\r\x12\x1c\n\x14password_reuse_epoch\x18\x0b \x01(\r\x12\x15\n\rexclude_names\x18\x0c \x01(\x08\x12\x15\n\rexclude_email\x18\r \x01(\x08\x12\x1c\n\x14no_confusing_letters\x18\x0e \x01(\x08\x12\x1b\n\x13no_simple_passwords\x18\x0f \x01(\x08\x12\x18\n\x10no_common_vocabs\x18\x10 \x01(\x08\x12\x1b\n\x13no_overlap_with_old\x18\x11 \x01(\x08\"\x86\x03\n\x12PasswordViolations\x12\x16\n\x0eminimum_length\x18\x01 \x01(\x08\x12\x16\n\x0emaximum_length\x18\x02 \x01(\x08\x12\x19\n\x11upper_case_needed\x18\x03 \x01(\x08\x12\x19\n\x11lower_case_needed\x18\x04 \x01(\x08\x12\x16\n\x0enumeric_needed\x18\x05 \x01(\x08\x12\x1f\n\x17non_alphanumeric_needed\x18\x06 \x01(\x08\x12\x16\n\x0epassword_reuse\x18\x07 \x01(\x08\x12\x15\n\rexclude_names\x18\x08 \x01(\x08\x12\x15\n\rexclude_email\x18\t \x01(\x08\x12\x1c\n\x14no_confusing_letters\x18\n \x01(\x08\x12\x1b\n\x13no_simple_passwords\x18\x0b \x01(\x08\x12\x18\n\x10no_common_vocabs\x18\x0c \x01(\x08\x12\x1b\n\x13no_overlap_with_old\x18\r \x01(\x08\x12\x19\n\x11password_lifespan\x18\x0e \x01(\x08\"\xae\x01\n\x05Video\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x0e\n\x06\x62\x61se64\x18\x02 \x01(\x0c\x12\x1b\n\x13\x61llow_duplicate_url\x18\x04 \x01(\x08\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\'\n\x06hosted\x18\x06 \x01(\x0b\x32\x17.clarifai.api.HostedURL\x12+\n\nvideo_info\x18\x07 \x01(\x0b\x32\x17.clarifai.api.VideoInfo\"\x8e\x01\n\tVideoInfo\x12\r\n\x05width\x18\x01 \x01(\x05\x12\x0e\n\x06height\x18\x02 \x01(\x05\x12\x0b\n\x03\x66ps\x18\x03 \x01(\x02\x12\x14\n\x0cvideo_format\x18\x04 \x01(\t\x12\x10\n\x08\x62it_rate\x18\x05 \x01(\x05\x12\x13\n\x0b\x66rame_count\x18\x06 \x01(\x05\x12\x18\n\x10\x64uration_seconds\x18\x07 \x01(\x02\"\xa4\x01\n\x05Vocab\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\"\xcf\x03\n\x08Workflow\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x05nodes\x18\x04 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x05 \x01(\x0b\x32\x17.google.protobuf.Struct\x12,\n\nvisibility\x18\x06 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0f\n\x07user_id\x18\x07 \x01(\t\x12/\n\x0bmodified_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\x07version\x18\t \x01(\x0b\x32\x1d.clarifai.api.WorkflowVersion\x12\x12\n\nis_starred\x18\n \x01(\x08\x12\x12\n\nstar_count\x18\x0b \x01(\x05\x12\x13\n\x0b\x64\x65scription\x18\x0c \x01(\t\x12\r\n\x05notes\x18\r \x01(\t\x12\x17\n\tuse_cases\x18\x0e \x03(\tB\x04\x80\xb5\x18\x01\x12\x1c\n\x0e\x63heck_consents\x18\x0f \x03(\tB\x04\x80\xb5\x18\x01\"\xde\x02\n\x0fWorkflowVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\nvisibility\x18\x05 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x05nodes\x18\x06 \x03(\x0b\x32\x1a.clarifai.api.WorkflowNode\x12)\n\x08metadata\x18\x07 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0e\n\x06\x61pp_id\x18\x08 \x01(\t\x12\x0f\n\x07user_id\x18\t \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\n \x01(\t\x12\x0f\n\x07license\x18\x0b \x01(\t\"\x85\x01\n\x0cWorkflowNode\x12\n\n\x02id\x18\x01 \x01(\t\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\x12,\n\x0bnode_inputs\x18\x03 \x03(\x0b\x32\x17.clarifai.api.NodeInput\x12\x17\n\x0fsuppress_output\x18\x04 \x01(\x08\"\x1c\n\tNodeInput\x12\x0f\n\x07node_id\x18\x01 \x01(\t\"\x81\x02\n\x0eWorkflowResult\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\x06status\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\"\n\x05model\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Model\x12\"\n\x05input\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Input\x12%\n\x07outputs\x18\x06 \x03(\x0b\x32\x14.clarifai.api.Output\x12\x17\n\x0fsuppress_output\x18\x07 \x01(\x08\"\xd1\x03\n\x0fWorkflowMetrics\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04\x64\x61ta\x18\x06 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x44\n\x0cnode_metrics\x18\x07 \x03(\x0b\x32..clarifai.api.WorkflowMetrics.NodeMetricsEntry\x12*\n\x0cground_truth\x18\x08 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\nvisibility\x18\t \x01(\x0b\x32\x18.clarifai.api.Visibility\x1aM\n\x10NodeMetricsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12(\n\x05value\x18\x02 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics:\x02\x38\x01\"\x1b\n\rWorkflowState\x12\n\n\x02id\x18\x01 \x01(\t\"\xd8\x02\n\x0e\x41ppDuplication\x12\n\n\x02id\x18\x01 \x01(\t\x12\x12\n\nnew_app_id\x18\x02 \x01(\t\x12\x14\n\x0cnew_app_name\x18\x03 \x01(\t\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x33\n\x06\x66ilter\x18\x07 \x01(\x0b\x32#.clarifai.api.AppDuplicationFilters\x12\x17\n\x0f\x65xisting_app_id\x18\x08 \x01(\t\x12/\n\x08progress\x18\t \x03(\x0b\x32\x1d.clarifai.api.AppCopyProgress\"/\n\x0f\x41ppCopyProgress\x12\r\n\x05\x66ield\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\x05\"\x8a\x01\n\x15\x41ppDuplicationFilters\x12\x13\n\x0b\x63opy_inputs\x18\x01 \x01(\x08\x12\x15\n\rcopy_concepts\x18\x02 \x01(\x08\x12\x18\n\x10\x63opy_annotations\x18\x03 \x01(\x08\x12\x13\n\x0b\x63opy_models\x18\x04 \x01(\x08\x12\x16\n\x0e\x63opy_workflows\x18\x05 \x01(\x08\"\xfa\x02\n\nLabelOrder\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12+\n\x06status\x18\x03 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0c\x61uto_release\x18\x04 \x01(\x08\x12\x17\n\x0f\x61llow_empty_tag\x18\x05 \x01(\x08\x12\x38\n\x14\x64\x65sired_fulfill_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x39\n\x15\x65stimate_fulfill_time\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12 \n\x04task\x18\x08 \x01(\x0b\x32\x12.clarifai.api.Task\x12.\n\ncreated_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\n \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xe5\x05\n\x04Task\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12)\n\x04type\x18\x04 \x01(\x0e\x32\x1b.clarifai.api.Task.TaskType\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12(\n\x06worker\x18\x06 \x01(\x0b\x32\x18.clarifai.api.TaskWorker\x12\x13\n\x0b\x63oncept_ids\x18\x07 \x03(\t\x12\x33\n\x0cinput_source\x18\x08 \x01(\x0b\x32\x1d.clarifai.api.TaskInputSource\x12\x11\n\tsample_ms\x18\t \x01(\r\x12\x33\n\x0c\x61i_assistant\x18\n \x01(\x0b\x32\x1d.clarifai.api.TaskAIAssistant\x12(\n\x06review\x18\x0b \x01(\x0b\x32\x18.clarifai.api.TaskReview\x12+\n\x06status\x18\x0c \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0c\n\x04name\x18\r \x01(\t\x12:\n\x10\x61i_assist_params\x18\x0e \x01(\x0b\x32 .clarifai.api.AiAssistParameters\x12,\n\nvisibility\x18\x0f \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06\x61pp_id\x18\x10 \x01(\t\x12\x0f\n\x07user_id\x18\x11 \x01(\t\x12\x16\n\x0elabel_order_id\x18\x12 \x01(\t\"l\n\x08TaskType\x12\x10\n\x0cTYPE_NOT_SET\x10\x00\x12\x1b\n\x17\x43ONCEPTS_CLASSIFICATION\x10\x01\x12\x1a\n\x16\x42OUNDING_BOX_DETECTION\x10\x02\x12\x15\n\x11POLYGON_DETECTION\x10\x03\"`\n\x12\x41iAssistParameters\x12\x15\n\rmin_threshold\x18\x01 \x01(\x02\x12\x15\n\rmax_threshold\x18\x02 \x01(\x02\x12\x1c\n\x14\x63oncept_relation_ids\x18\x03 \x03(\t\"\xbf\x02\n\nTaskWorker\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskWorker.TaskWorkerStrategy\x12\x14\n\x08user_ids\x18\x02 \x03(\tB\x02\x18\x01\x12!\n\x05users\x18\x04 \x03(\x0b\x32\x12.clarifai.api.User\x12T\n\x19partitioned_strategy_info\x18\x03 \x01(\x0b\x32/.clarifai.api.TaskWorkerPartitionedStrategyInfoH\x00\"R\n\x12TaskWorkerStrategy\x12\x1b\n\x17WORKER_STRATEGY_NOT_SET\x10\x00\x12\x0f\n\x0bPARTITIONED\x10\x02\x12\x08\n\x04\x46ULL\x10\x03\"\x04\x08\x01\x10\x01\x42\x0f\n\rstrategy_info\"\xa9\x02\n!TaskWorkerPartitionedStrategyInfo\x12[\n\x04type\x18\x01 \x01(\x0e\x32M.clarifai.api.TaskWorkerPartitionedStrategyInfo.TaskWorkerPartitionedStrategy\x12\x19\n\x11workers_per_input\x18\x02 \x01(\x05\x12(\n\x07weights\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\"b\n\x1dTaskWorkerPartitionedStrategy\x12\'\n#PARTITIONED_WORKER_STRATEGY_NOT_SET\x10\x00\x12\n\n\x06\x45VENLY\x10\x01\x12\x0c\n\x08WEIGHTED\x10\x02\"\xc3\x01\n\x0fTaskInputSource\x12?\n\x04type\x18\x01 \x01(\x0e\x32\x31.clarifai.api.TaskInputSource.TaskInputSourceType\x12\n\n\x02id\x18\x02 \x01(\t\"c\n\x13TaskInputSourceType\x12\x1d\n\x19INPUT_SOURCE_TYPE_NOT_SET\x10\x00\x12\x0e\n\nALL_INPUTS\x10\x01\x12\x10\n\x0cSAVED_SEARCH\x10\x02\x12\x0b\n\x07\x44\x41TASET\x10\x03\"\x90\x03\n\nTaskReview\x12=\n\x08strategy\x18\x01 \x01(\x0e\x32+.clarifai.api.TaskReview.TaskReviewStrategy\x12\x14\n\x08user_ids\x18\x02 \x03(\tB\x02\x18\x01\x12!\n\x05users\x18\x05 \x03(\x0b\x32\x12.clarifai.api.User\x12J\n\x14manual_strategy_info\x18\x03 \x01(\x0b\x32*.clarifai.api.TaskReviewManualStrategyInfoH\x00\x12P\n\x17\x63onsensus_strategy_info\x18\x04 \x01(\x0b\x32-.clarifai.api.TaskReviewConsensusStrategyInfoH\x00\"[\n\x12TaskReviewStrategy\x12 \n\x1cTASK_REVIEW_STRATEGY_NOT_SET\x10\x00\x12\x08\n\x04NONE\x10\x01\x12\n\n\x06MANUAL\x10\x02\x12\r\n\tCONSENSUS\x10\x03\x42\x0f\n\rstrategy_info\"9\n\x1cTaskReviewManualStrategyInfo\x12\x19\n\x11sample_percentage\x18\x01 \x01(\x02\"C\n\x1fTaskReviewConsensusStrategyInfo\x12\x1a\n\x12\x61pproval_threshold\x18\x02 \x01(\rJ\x04\x08\x01\x10\x02\"&\n\x0fTaskAIAssistant\x12\x13\n\x0bworkflow_id\x18\x01 \x01(\t\"\xbc\x01\n\x16TaskStatusCountPerUser\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x15\n\x07pending\x18\x02 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1d\n\x0f\x61waiting_review\x18\x03 \x01(\rB\x04\x80\xb5\x18\x01\x12\x15\n\x07success\x18\x04 \x01(\rB\x04\x80\xb5\x18\x01\x12\x1b\n\rreview_denied\x18\x05 \x01(\rB\x04\x80\xb5\x18\x01\x12\'\n\x19\x61waiting_consensus_review\x18\x06 \x01(\rB\x04\x80\xb5\x18\x01\"\xdf\x01\n\x04Role\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x05 \x01(\t\x12\x0e\n\x06scopes\x18\x06 \x03(\t\x12\x11\n\tendpoints\x18\x07 \x03(\t\x12$\n\x04type\x18\x08 \x01(\x0e\x32\x16.clarifai.api.RoleType\"\xa0\x01\n\x0cOrganization\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04name\x18\x04 \x01(\t\x12\x15\n\rbilling_email\x18\x05 \x01(\t\"\x88\x01\n\x12OrganizationMember\x12 \n\x04user\x18\x01 \x01(\x0b\x32\x12.clarifai.api.User\x12 \n\x04role\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Role\x12.\n\nnot_before\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\xd1\x02\n\x10IdentityProvider\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0f\n\x07\x65nabled\x18\x03 \x01(\x08\x12\x19\n\x11saml_metadata_url\x18\x04 \x01(\t\x12\x18\n\x10\x62\x61\x63kground_color\x18\x05 \x01(\t\x12\x0c\n\x04icon\x18\x06 \x01(\t\x12\x12\n\ntext_color\x18\x07 \x01(\t\x12\x0c\n\x04type\x18\x08 \x01(\t\x12\x16\n\x0eoauth_provider\x18\t \x01(\t\x12\x17\n\x0foauth_client_id\x18\n \x01(\t\x12\x1b\n\x13oauth_client_secret\x18\x0b \x01(\t\x12.\n\ncreated_at\x18\x0c \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\r \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x81\x01\n\x04Team\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04name\x18\x04 \x01(\t\"\x83\x01\n\x08TeamUser\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x0f\n\x07user_id\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\nfirst_name\x18\x04 \x01(\t\x12\x11\n\tlast_name\x18\x05 \x01(\t\"\xf1\x02\n\x16OrganizationInvitation\x12\n\n\x02id\x18\x01 \x01(\t\x12\x15\n\rinvitee_email\x18\x02 \x01(\t\x12 \n\x04role\x18\x03 \x01(\x0b\x32\x12.clarifai.api.Role\x12\x30\n\x0corganization\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.Organization\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x30\n\x0c\x63\x61ncelled_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0b\x64\x65\x63lined_at\x18\x07 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0b\x61\x63\x63\x65pted_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1c\n\x14primary_email_exists\x18\t \x01(\x08\"\x81\x02\n\tCollector\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12.\n\ncreated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1d\n\x15pre_queue_workflow_id\x18\x04 \x01(\t\x12\x1e\n\x16post_queue_workflow_id\x18\x05 \x01(\t\x12\x37\n\x10\x63ollector_source\x18\x06 \x01(\x0b\x32\x1d.clarifai.api.CollectorSource\x12+\n\x06status\x18\x07 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"t\n\x0f\x43ollectorSource\x12\x61\n\'api_post_model_outputs_collector_source\x18\x02 \x01(\x0b\x32\x30.clarifai.api.APIPostModelOutputsCollectorSource\"\xb7\x01\n\"APIPostModelOutputsCollectorSource\x12\x15\n\rmodel_user_id\x18\x01 \x01(\t\x12\x14\n\x0cmodel_app_id\x18\x02 \x01(\t\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x18\n\x10model_version_id\x18\x04 \x01(\t\x12\x1a\n\x12post_inputs_key_id\x18\x05 \x01(\t\x12\x1c\n\x0e\x63\x61ller_user_id\x18\x06 \x01(\tB\x04\x80\x9c\'\x01\"R\n\tStatValue\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\r\n\x05value\x18\x02 \x01(\x02\x12\x0c\n\x04tags\x18\x03 \x03(\t\"\xa6\x01\n\x18StatValueAggregateResult\x12?\n\x15stat_value_aggregates\x18\x01 \x03(\x0b\x32 .clarifai.api.StatValueAggregate\x12I\n\x1astat_value_aggregate_query\x18\x02 \x01(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"t\n\x12StatValueAggregate\x12(\n\x04time\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\x0f\x61ggregate_value\x18\x02 \x01(\x02\x12\r\n\x05\x63ount\x18\x03 \x01(\x04\x12\x0c\n\x04tags\x18\x04 \x03(\t\"\x91\x02\n\x17StatValueAggregateQuery\x12\x0c\n\x04tags\x18\x01 \x03(\t\x12\x12\n\ntag_groups\x18\x02 \x03(\t\x12;\n\x13stat_value_agg_type\x18\x03 \x01(\x0e\x32\x1e.clarifai.api.StatValueAggType\x12\x39\n\x12stat_time_agg_type\x18\x04 \x01(\x0e\x32\x1d.clarifai.api.StatTimeAggType\x12.\n\nstart_time\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_time\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x96\x02\n\nAuthMethod\x12\n\n\x02id\x18\x01 \x01(\t\x12\x35\n\x04type\x18\x02 \x01(\x0e\x32\'.clarifai.api.AuthMethod.AuthMethodType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x15\n\x07\x65nabled\x18\x04 \x01(\x08\x42\x04\x80\xb5\x18\x01\x12\x11\n\tauth_link\x18\x05 \x01(\t\x12\x18\n\x10\x62\x61\x63kground_color\x18\x06 \x01(\t\x12\x0c\n\x04icon\x18\x07 \x01(\t\x12\x12\n\ntext_color\x18\x08 \x01(\t\"Q\n\x0e\x41uthMethodType\x12\x1c\n\x18\x41UTH_METHOD_TYPE_NOT_SET\x10\x00\x12\x0c\n\x08PASSWORD\x10\x01\x12\x08\n\x04SAML\x10\x02\x12\t\n\x05OAUTH\x10\x03\"\xc0\x01\n\x13TwoFactorAuthMethod\x12\n\n\x02id\x18\x01 \x01(\t\x12>\n\x04type\x18\x02 \x01(\x0e\x32\x30.clarifai.api.TwoFactorAuthMethod.AuthMethodType\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x15\n\x07\x65nabled\x18\x04 \x01(\x08\x42\x04\x80\xb5\x18\x01\"8\n\x0e\x41uthMethodType\x12\x1c\n\x18\x41UTH_METHOD_TYPE_NOT_SET\x10\x00\x12\x08\n\x04TOTP\x10\x01\".\n\x0fSDKBillingCycle\x12\x0c\n\x04year\x18\x01 \x01(\r\x12\r\n\x05month\x18\x02 \x01(\r\"*\n\nDeviceInfo\x12\r\n\x05\x62rand\x18\x01 \x01(\t\x12\r\n\x05model\x18\x02 \x01(\t\"\xdb\x06\n\x0fSDKEventSummary\x12\r\n\x05\x63ount\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x44\n\nevent_type\x18\x03 \x01(\x0e\x32\x30.clarifai.api.SDKEventSummary.AnalyticsEventType\x12O\n\x14network_connectivity\x18\x04 \x01(\x0e\x32\x31.clarifai.api.SDKEventSummary.NetworkConnectivity\x12?\n\x0crunning_mode\x18\x05 \x01(\x0e\x32).clarifai.api.SDKEventSummary.RunningMode\x12\x10\n\x08model_id\x18\x06 \x01(\t\x12\x18\n\x10model_version_id\x18\x07 \x01(\t\">\n\x0bRunningMode\x12\x18\n\x14UNKNOWN_RUNNING_MODE\x10\x00\x12\t\n\x05LOCAL\x10\x01\x12\n\n\x06REMOTE\x10\x02\"M\n\x13NetworkConnectivity\x12\x13\n\x0fNO_CONNECTIVITY\x10\x00\x12\x08\n\x04WIFI\x10\x01\x12\x0c\n\x08\x43\x45LLULAR\x10\x02\x12\t\n\x05WIRED\x10\x03\"\x97\x03\n\x12\x41nalyticsEventType\x12\x16\n\x12UNKNOWN_EVENT_TYPE\x10\x00\x12\x0e\n\nSAVE_MODEL\x10\x01\x12\t\n\x05TRAIN\x10\x02\x12\x0b\n\x07PREDICT\x10\x03\x12\x10\n\x0cSAVE_CONCEPT\x10\x04\x12\x12\n\x0e\x44\x45LETE_CONCEPT\x10\x05\x12\x0e\n\nSAVE_INPUT\x10\x06\x12\x0e\n\nLOAD_INPUT\x10\x07\x12\x15\n\x11VISUAL_SIMILARITY\x10\x08\x12\x10\n\x0cLOAD_CONCEPT\x10\t\x12\x10\n\x0c\x44\x45LETE_INPUT\x10\n\x12\x10\n\x0c\x44\x45LETE_MODEL\x10\x0b\x12\x0e\n\nLOAD_MODEL\x10\x0c\x12\x0b\n\x07WARNING\x10\r\x12\t\n\x05\x45RROR\x10\x0e\x12\n\n\x06LAUNCH\x10\x0f\x12\x0e\n\nFOREGROUND\x10\x10\x12\x0e\n\nBACKGROUND\x10\x11\x12\x0f\n\x0bTERMINATION\x10\x12\x12\x1a\n\x16\x41UTHENTICATION_GRANTED\x10\x13\x12\x19\n\x15\x41UTHENTICATION_DENIED\x10\x14\x12\x12\n\x0eMODEL_DOWNLOAD\x10\x15\"\xb5\x01\n\x13SDKEventsCollection\x12\x34\n\x10time_range_begin\x18\x01 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x32\n\x0etime_range_end\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\revent_summary\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.SDKEventSummary\"E\n\x0bHostAppInfo\x12\x14\n\x0c\x62uild_number\x18\x01 \x01(\t\x12\x0f\n\x07\x61pi_key\x18\x02 \x01(\t\x12\x0f\n\x07version\x18\x03 \x01(\t\"0\n\x0fOperatingSystem\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0f\n\x07version\x18\x02 \x01(\t\"%\n\x03SDK\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\r\n\x05\x62uild\x18\x02 \x01(\t\"\xb6\x02\n\x05State\x12\x14\n\x0c\x63ountry_code\x18\x01 \x01(\t\x12\x14\n\x0claunch_count\x18\x02 \x01(\r\x12\x15\n\rlanguage_code\x18\x03 \x01(\t\x12\x13\n\x0btoken_count\x18\x04 \x01(\x04\x12\x18\n\x10time_zone_offset\x18\x05 \x01(\x05\x12\x1e\n\x16time_zone_abbreviation\x18\x06 \x01(\t\x12\x43\n\x13running_environment\x18\x07 \x01(\x0e\x32&.clarifai.api.State.RunningEnvironment\"V\n\x12RunningEnvironment\x12\x1f\n\x1bUNKNOWN_RUNNING_ENVIRONMENT\x10\x00\x12\x0f\n\x0b\x44\x45VELOPMENT\x10\x01\x12\x0e\n\nPRODUCTION\x10\x02\"\xc7\x01\n\x1b\x46indDuplicateAnnotationsJob\x12\n\n\x02id\x18\x01 \x01(\t\x12J\n\x19pca_projection_comparator\x18\x02 \x01(\x0b\x32%.clarifai.api.PCAProjectionComparatorH\x00\x12\x0b\n\x03url\x18\x03 \x01(\t\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.StatusB\x16\n\x14\x63omparison_attribute\"\xef\x01\n\x19\x44\x61tasetInputsSearchAddJob\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x12\n\ndataset_id\x18\x05 \x01(\t\x12$\n\x06search\x18\x06 \x01(\x0b\x32\x14.clarifai.api.Search\"O\n\x17PCAProjectionComparator\x12\x1a\n\x12\x64istance_threshold\x18\x01 \x01(\x02\x12\x18\n\x10model_version_id\x18\x02 \x01(\t\"K\n\x1b\x44uplicateAnnotationsResults\x12\x16\n\x0e\x64uplicate_cfid\x18\x01 \x03(\t\x12\x14\n\x0cunique_count\x18\x02 \x01(\x05\"\x87\x01\n\nVisibility\x12\x33\n\x08gettable\x18\x01 \x01(\x0e\x32!.clarifai.api.Visibility.Gettable\"D\n\x08Gettable\x12\x16\n\x12UNKNOWN_VISIBILITY\x10\x00\x12\x0b\n\x07PRIVATE\x10\n\x12\x07\n\x03ORG\x10\x1e\x12\n\n\x06PUBLIC\x10\x32\"X\n\x0eTrendingMetric\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x11\n\tobject_id\x18\x03 \x01(\t\x12\x12\n\nview_count\x18\x04 \x01(\x04\"e\n\x0fValidationError\x12/\n\x04type\x18\x01 \x01(\x0e\x32!.clarifai.api.ValidationErrorType\x12\x0c\n\x04text\x18\x02 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\"U\n\nValidation\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x13\n\x0bobject_type\x18\x02 \x01(\t\x12\x11\n\tobject_id\x18\x03 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\"\x88\x01\n\x10ValidationResult\x12,\n\nvalidation\x18\x01 \x01(\x0b\x32\x18.clarifai.api.Validation\x12-\n\x06\x65rrors\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.ValidationError\x12\x17\n\x0frecommended_ids\x18\x03 \x03(\t\"n\n\x0bTagCategory\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04tags\x18\x02 \x03(\t\x12(\n\tfull_tags\x18\x04 \x03(\x0b\x32\x15.clarifai.api.FullTag\x12\x19\n\x11supports_multiple\x18\x03 \x01(\x08\"#\n\x07\x46ullTag\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\t\"f\n\x0bTimeSegment\x12\n\n\x02id\x18\x01 \x01(\t\x12 \n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Data\x12)\n\ttime_info\x18\x03 \x01(\x0b\x32\x16.clarifai.api.TimeInfo\"D\n\x08TimeInfo\x12\x12\n\nnum_frames\x18\x01 \x01(\r\x12\x12\n\nbegin_time\x18\x02 \x01(\r\x12\x10\n\x08\x65nd_time\x18\x03 \x01(\r\"\x1d\n\tModelStar\x12\x10\n\x08model_id\x18\x01 \x01(\t\"\x1b\n\x08UserStar\x12\x0f\n\x07user_id\x18\x01 \x01(\t\"\x19\n\x07\x41ppStar\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\"#\n\x0cWorkflowStar\x12\x13\n\x0bworkflow_id\x18\x01 \x01(\t\"\xaf\x01\n\x0fWebNotification\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07summary\x18\x03 \x01(\t\x12\r\n\x05title\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x07read_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"3\n\x14PatchWebNotification\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07is_read\x18\x02 \x01(\x08\"\xbf\x02\n\x06Module\x12\n\n\x02id\x18\x01 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x03 \x01(\t\x12.\n\ncreated_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\nvisibility\x18\x07 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x08metadata\x18\x08 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\x0f\n\x07user_id\x18\t \x01(\t\x12\x0e\n\x06\x61pp_id\x18\n \x01(\t\x12\x33\n\x0emodule_version\x18\x0b \x01(\x0b\x32\x1b.clarifai.api.ModuleVersionJ\x04\x08\x02\x10\x03\"\xbe\x04\n\rModuleVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x06 \x01(\t\x12\r\n\x05notes\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x16\n\x0egit_commit_url\x18\n \x01(\t\x12\x39\n\nmodule_nav\x18\x0b \x01(\x0b\x32%.clarifai.api.ModuleVersion.ModuleNav\x12\x10\n\x08\x61pproved\x18\x0c \x01(\x08\x12,\n\nvisibility\x18\r \x01(\x0b\x32\x18.clarifai.api.Visibility\x12)\n\x08metadata\x18\x0e \x01(\x0b\x32\x17.google.protobuf.Struct\x1a\x45\n\x0cModuleSubNav\x12\r\n\x05title\x18\x01 \x01(\t\x12\x11\n\tquery_key\x18\x02 \x01(\t\x12\x13\n\x0bquery_value\x18\x03 \x01(\t\x1a]\n\tModuleNav\x12\r\n\x05title\x18\x01 \x01(\t\x12\x41\n\x0fmodule_sub_navs\x18\x02 \x03(\x0b\x32(.clarifai.api.ModuleVersion.ModuleSubNavJ\x04\x08\x05\x10\x06\"\xad\x02\n\x16InstalledModuleVersion\x12\n\n\x02id\x18\x01 \x01(\t\x12\x33\n\x0emodule_version\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.ModuleVersion\x12\x0e\n\x06\x61pp_id\x18\x03 \x01(\t\x12\x0f\n\x07user_id\x18\x04 \x01(\t\x12.\n\ncreated_at\x18\x05 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x06 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\ndeploy_url\x18\x07 \x01(\t\x12,\n\nvisibility\x18\x08 \x01(\x0b\x32\x18.clarifai.api.Visibility\x12\x0e\n\x06key_id\x18\t \x01(\t\"\x8d\x03\n\rBulkOperation\x12\n\n\x02id\x18\x01 \x01(\t\x12+\n\tinput_ids\x18\x02 \x01(\x0b\x32\x16.clarifai.api.InputIDsH\x00\x12&\n\x06search\x18\n \x01(\x0b\x32\x14.clarifai.api.SearchH\x00\x12*\n\toperation\x18\x03 \x01(\x0b\x32\x17.clarifai.api.Operation\x12\x0e\n\x06\x61pp_id\x18\x04 \x01(\t\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08progress\x18\x06 \x01(\x0b\x32\x16.clarifai.api.Progress\x12\x12\n\ncreated_by\x18\x07 \x01(\t\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x34\n\x10last_modified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampB\x0e\n\x0cinput_source\"\x1d\n\x08InputIDs\x12\x11\n\tinput_ids\x18\x01 \x03(\t\"8\n\x08Progress\x12\x11\n\tprocessed\x18\x01 \x01(\r\x12\x19\n\x11last_processed_id\x18\x02 \x01(\t\"\xd4\x02\n\tOperation\x12\x31\n\x0c\x61\x64\x64_concepts\x18\x01 \x01(\x0b\x32\x19.clarifai.api.AddConceptsH\x00\x12\x37\n\x0f\x64\x65lete_concepts\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.DeleteConceptsH\x00\x12\x31\n\x0c\x61\x64\x64_metadata\x18\x03 \x01(\x0b\x32\x19.clarifai.api.AddMetadataH\x00\x12\x37\n\x0f\x64\x65lete_metadata\x18\x04 \x01(\x0b\x32\x1c.clarifai.api.DeleteMetadataH\x00\x12\x33\n\roverwrite_geo\x18\x05 \x01(\x0b\x32\x1a.clarifai.api.OverwriteGeoH\x00\x12-\n\ndelete_geo\x18\x06 \x01(\x0b\x32\x17.clarifai.api.DeleteGeoH\x00\x42\x0b\n\toperation\"6\n\x0b\x41\x64\x64\x43oncepts\x12\'\n\x08\x63oncepts\x18\x01 \x03(\x0b\x32\x15.clarifai.api.Concept\"9\n\x0e\x44\x65leteConcepts\x12\'\n\x08\x63oncepts\x18\x01 \x03(\x0b\x32\x15.clarifai.api.Concept\"8\n\x0b\x41\x64\x64Metadata\x12)\n\x08metadata\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\";\n\x0e\x44\x65leteMetadata\x12)\n\x08metadata\x18\x01 \x01(\x0b\x32\x17.google.protobuf.Struct\".\n\x0cOverwriteGeo\x12\x1e\n\x03geo\x18\x01 \x01(\x0b\x32\x11.clarifai.api.Geo\"\x0b\n\tDeleteGeo\"\x1e\n\rWaitlistEmail\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"\x80\x02\n\x0cInputsAddJob\x12\n\n\x02id\x18\x01 \x01(\t\x12\x19\n\x11\x63loud_storage_url\x18\x02 \x01(\t\x12\x15\n\rcall_back_url\x18\x03 \x01(\t\x12\x0f\n\x07\x61pp_pat\x18\x04 \x01(\t\x12\x34\n\x08progress\x18\x07 \x01(\x0b\x32\".clarifai.api.InputsAddJobProgress\x12.\n\ncreated_at\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\t \x01(\x0b\x32\x1a.google.protobuf.TimestampJ\x04\x08\x05\x10\x06J\x04\x08\x06\x10\x07\"u\n\x14InputsAddJobProgress\x12\x15\n\rpending_count\x18\x01 \x01(\x04\x12\x19\n\x11in_progress_count\x18\x02 \x01(\x04\x12\x15\n\rsuccess_count\x18\x03 \x01(\x04\x12\x14\n\x0c\x66\x61iled_count\x18\x04 \x01(\x04\"\x95\x02\n\x06Upload\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12.\n\nexpires_at\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0c\x63ontent_name\x18\x08 \x01(\t\x12\x16\n\x0e\x63ontent_length\x18\x06 \x01(\x04\x12\x13\n\x0b\x63ontent_url\x18\x07 \x01(\t\"K\n\x11UploadContentPart\x12\x13\n\x0brange_start\x18\x01 \x01(\x04\x12\x13\n\x0bpart_number\x18\x02 \x01(\x03\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\"l\n\x19\x43ustomCodeOperatorRequest\x12#\n\x06inputs\x18\x01 \x03(\x0b\x32\x13.clarifai.api.Input\x12*\n\x08metadata\x18\xea\x07 \x01(\x0b\x32\x17.google.protobuf.Struct*\xf9\x01\n\x1e\x44\x61tasetVersionMetricsGroupType\x12.\n*DATASET_VERSION_METRICS_GROUP_TYPE_NOT_SET\x10\x00\x12\x0e\n\nINPUT_TYPE\x10\x02\x12\x0e\n\nCONCEPT_ID\x10\n\x12\x12\n\x0e\x43ONCEPTS_COUNT\x10\x0b\x12\x18\n\x14\x42OUNDING_BOXES_COUNT\x10\x14\x12\x12\n\x0ePOLYGONS_COUNT\x10\x15\x12\x10\n\x0cPOINTS_COUNT\x10\x16\x12\x0f\n\x0bMASKS_COUNT\x10\x17\x12\x10\n\x0cPIXELS_COUNT\x10\x1e\x12\x10\n\x0c\x41SPECT_RATIO\x10\x1f*\x85\x01\n\x1a\x44\x61tasetVersionExportFormat\x12)\n%DATASET_VERSION_EXPORT_FORMAT_NOT_SET\x10\x00\x12\x1a\n\x16\x43LARIFAI_DATA_PROTOBUF\x10\x01\x12\x16\n\x12\x43LARIFAI_DATA_JSON\x10\x03\x12\x08\n\x04\x43OCO\x10\x02*H\n\x10\x45xpirationAction\x12\x1d\n\x19\x45XPIRATION_ACTION_NOT_SET\x10\x00\x12\t\n\x05\x44\x45LAY\x10\x01\x12\n\n\x06\x45XPIRY\x10\x02*M\n\x0cLicenseScope\x12\x19\n\x15LICENSE_SCOPE_NOT_SET\x10\x00\x12\x0b\n\x07PREDICT\x10\x01\x12\t\n\x05TRAIN\x10\x02\x12\n\n\x06SEARCH\x10\x03*P\n\x08\x44\x61taType\x12\r\n\tUNDEFINED\x10\x00\x12\n\n\x06STRING\x10\x01\x12\t\n\x05UINT8\x10\x02\x12\t\n\x05INT32\x10\x03\x12\t\n\x05INT64\x10\x04\x12\x08\n\x04\x46P32\x10\x05*\x8f\x01\n\x0fValueComparator\x12\x1d\n\x19\x43ONCEPT_THRESHOLD_NOT_SET\x10\x00\x12\x10\n\x0cGREATER_THAN\x10\x01\x12\x19\n\x15GREATER_THAN_OR_EQUAL\x10\x02\x12\r\n\tLESS_THAN\x10\x03\x12\x16\n\x12LESS_THAN_OR_EQUAL\x10\x04\x12\t\n\x05\x45QUAL\x10\x05*3\n\x0e\x45valuationType\x12\x12\n\x0e\x43lassification\x10\x00\x12\r\n\tDetection\x10\x01*f\n\x0c\x41PIEventType\x12\x1a\n\x16\x41PI_EVENT_TYPE_NOT_SET\x10\x00\x12\x13\n\x0fON_PREM_PREDICT\x10\x01\x12\x11\n\rON_PREM_TRAIN\x10\x02\x12\x12\n\x0eON_PREM_SEARCH\x10\x03*<\n\x11UsageIntervalType\x12\t\n\x05undef\x10\x00\x12\x07\n\x03\x64\x61y\x10\x01\x12\t\n\x05month\x10\x02\x12\x08\n\x04year\x10\x03*\x1d\n\x08RoleType\x12\x08\n\x04TEAM\x10\x00\x12\x07\n\x03ORG\x10\x01*$\n\x10StatValueAggType\x12\x07\n\x03SUM\x10\x00\x12\x07\n\x03\x41VG\x10\x01*`\n\x0fStatTimeAggType\x12\x0f\n\x0bNO_TIME_AGG\x10\x00\x12\x08\n\x04YEAR\x10\x01\x12\t\n\x05MONTH\x10\x02\x12\x08\n\x04WEEK\x10\x03\x12\x07\n\x03\x44\x41Y\x10\x04\x12\x08\n\x04HOUR\x10\x05\x12\n\n\x06MINUTE\x10\x06*b\n\x13ValidationErrorType\x12!\n\x1dVALIDATION_ERROR_TYPE_NOT_SET\x10\x00\x12\x0e\n\nRESTRICTED\x10\x01\x12\x0c\n\x08\x44\x41TABASE\x10\x02\x12\n\n\x06\x46ORMAT\x10\x03\x42.\n\x15\x63om.clarifai.grpc.apiP\x01Z\x0c\x63larifai/api\xa2\x02\x04\x43\x41IPb\x06proto3')
 
 _DATASETVERSIONMETRICSGROUPTYPE = DESCRIPTOR.enum_types_by_name['DatasetVersionMetricsGroupType']
 DatasetVersionMetricsGroupType = enum_type_wrapper.EnumTypeWrapper(_DATASETVERSIONMETRICSGROUPTYPE)
@@ -118,6 +118,9 @@ _COLLABORATION = DESCRIPTOR.message_types_by_name['Collaboration']
 _AUDIO = DESCRIPTOR.message_types_by_name['Audio']
 _AUDIOINFO = DESCRIPTOR.message_types_by_name['AudioInfo']
 _TRACK = DESCRIPTOR.message_types_by_name['Track']
+_BILLINGCYCLE = DESCRIPTOR.message_types_by_name['BillingCycle']
+_USAGECYCLE = DESCRIPTOR.message_types_by_name['UsageCycle']
+_INVOICEITEM = DESCRIPTOR.message_types_by_name['InvoiceItem']
 _CLUSTER = DESCRIPTOR.message_types_by_name['Cluster']
 _COLOR = DESCRIPTOR.message_types_by_name['Color']
 _W3C = DESCRIPTOR.message_types_by_name['W3C']
@@ -132,9 +135,12 @@ _DETAILCONCEPTCOUNT = DESCRIPTOR.message_types_by_name['DetailConceptCount']
 _CONCEPTQUERY = DESCRIPTOR.message_types_by_name['ConceptQuery']
 _CONCEPTRELATION = DESCRIPTOR.message_types_by_name['ConceptRelation']
 _KNOWLEDGEGRAPH = DESCRIPTOR.message_types_by_name['KnowledgeGraph']
+_CONCEPTMAPPING = DESCRIPTOR.message_types_by_name['ConceptMapping']
 _CONCEPTMAPPINGJOB = DESCRIPTOR.message_types_by_name['ConceptMappingJob']
 _CONCEPTLANGUAGE = DESCRIPTOR.message_types_by_name['ConceptLanguage']
+_CONCEPTREFERENCE = DESCRIPTOR.message_types_by_name['ConceptReference']
 _DATA = DESCRIPTOR.message_types_by_name['Data']
+_DATABATCH = DESCRIPTOR.message_types_by_name['DataBatch']
 _REGION = DESCRIPTOR.message_types_by_name['Region']
 _REGIONINFO = DESCRIPTOR.message_types_by_name['RegionInfo']
 _BOUNDINGBOX = DESCRIPTOR.message_types_by_name['BoundingBox']
@@ -168,6 +174,8 @@ _DATASETVERSIONEXPORTINFO = DESCRIPTOR.message_types_by_name['DatasetVersionExpo
 _DATASETVERSIONEXPORT = DESCRIPTOR.message_types_by_name['DatasetVersionExport']
 _WORKFLOWRESULTSSIMILARITY = DESCRIPTOR.message_types_by_name['WorkflowResultsSimilarity']
 _KEY = DESCRIPTOR.message_types_by_name['Key']
+_LICENSELIMIT = DESCRIPTOR.message_types_by_name['LicenseLimit']
+_LICENSE = DESCRIPTOR.message_types_by_name['License']
 _MODEL = DESCRIPTOR.message_types_by_name['Model']
 _MODELREFERENCE = DESCRIPTOR.message_types_by_name['ModelReference']
 _MODELVERSIONINPUTEXAMPLE = DESCRIPTOR.message_types_by_name['ModelVersionInputExample']
@@ -209,26 +217,45 @@ _SCOPEDEPS = DESCRIPTOR.message_types_by_name['ScopeDeps']
 _ENDPOINTDEPS = DESCRIPTOR.message_types_by_name['EndpointDeps']
 _HIT = DESCRIPTOR.message_types_by_name['Hit']
 _AND = DESCRIPTOR.message_types_by_name['And']
+_ATTRIBUTEMIXIN = DESCRIPTOR.message_types_by_name['AttributeMixIn']
+_ATTRIBUTEQUERY = DESCRIPTOR.message_types_by_name['AttributeQuery']
 _QUERY = DESCRIPTOR.message_types_by_name['Query']
 _SEARCH = DESCRIPTOR.message_types_by_name['Search']
 _FILTER = DESCRIPTOR.message_types_by_name['Filter']
 _TIMERANGE = DESCRIPTOR.message_types_by_name['TimeRange']
 _RANK = DESCRIPTOR.message_types_by_name['Rank']
 _ANNOTATIONSEARCHMETRICS = DESCRIPTOR.message_types_by_name['AnnotationSearchMetrics']
+_PLAN = DESCRIPTOR.message_types_by_name['Plan']
+_CREDITCARD = DESCRIPTOR.message_types_by_name['CreditCard']
+_SHIPPINGADDRESS = DESCRIPTOR.message_types_by_name['ShippingAddress']
 _TEXT = DESCRIPTOR.message_types_by_name['Text']
 _TEXTINFO = DESCRIPTOR.message_types_by_name['TextInfo']
+_OPCOUNTBYDATE = DESCRIPTOR.message_types_by_name['OpCountByDate']
+_DIMENSIONLIST = DESCRIPTOR.message_types_by_name['DimensionList']
+_DIMENSIONLIST_DIMENSIONENTRY = _DIMENSIONLIST.nested_types_by_name['DimensionEntry']
+_USAGEINTERVAL = DESCRIPTOR.message_types_by_name['UsageInterval']
+_REALTIMECOUNT = DESCRIPTOR.message_types_by_name['RealtimeCount']
+_EVENTSUMMARY = DESCRIPTOR.message_types_by_name['EventSummary']
+_EVENTSCOLLECTION = DESCRIPTOR.message_types_by_name['EventsCollection']
 _USER = DESCRIPTOR.message_types_by_name['User']
 _USERDETAIL = DESCRIPTOR.message_types_by_name['UserDetail']
 _EMAILADDRESS = DESCRIPTOR.message_types_by_name['EmailAddress']
+_USERPASSWORD = DESCRIPTOR.message_types_by_name['UserPassword']
+_USERINFO = DESCRIPTOR.message_types_by_name['UserInfo']
 _PASSWORD = DESCRIPTOR.message_types_by_name['Password']
+_USERACCESS = DESCRIPTOR.message_types_by_name['UserAccess']
+_PASSWORDPOLICY = DESCRIPTOR.message_types_by_name['PasswordPolicy']
 _PASSWORDVIOLATIONS = DESCRIPTOR.message_types_by_name['PasswordViolations']
 _VIDEO = DESCRIPTOR.message_types_by_name['Video']
 _VIDEOINFO = DESCRIPTOR.message_types_by_name['VideoInfo']
+_VOCAB = DESCRIPTOR.message_types_by_name['Vocab']
 _WORKFLOW = DESCRIPTOR.message_types_by_name['Workflow']
 _WORKFLOWVERSION = DESCRIPTOR.message_types_by_name['WorkflowVersion']
 _WORKFLOWNODE = DESCRIPTOR.message_types_by_name['WorkflowNode']
 _NODEINPUT = DESCRIPTOR.message_types_by_name['NodeInput']
 _WORKFLOWRESULT = DESCRIPTOR.message_types_by_name['WorkflowResult']
+_WORKFLOWMETRICS = DESCRIPTOR.message_types_by_name['WorkflowMetrics']
+_WORKFLOWMETRICS_NODEMETRICSENTRY = _WORKFLOWMETRICS.nested_types_by_name['NodeMetricsEntry']
 _WORKFLOWSTATE = DESCRIPTOR.message_types_by_name['WorkflowState']
 _APPDUPLICATION = DESCRIPTOR.message_types_by_name['AppDuplication']
 _APPCOPYPROGRESS = DESCRIPTOR.message_types_by_name['AppCopyProgress']
@@ -244,6 +271,13 @@ _TASKREVIEWMANUALSTRATEGYINFO = DESCRIPTOR.message_types_by_name['TaskReviewManu
 _TASKREVIEWCONSENSUSSTRATEGYINFO = DESCRIPTOR.message_types_by_name['TaskReviewConsensusStrategyInfo']
 _TASKAIASSISTANT = DESCRIPTOR.message_types_by_name['TaskAIAssistant']
 _TASKSTATUSCOUNTPERUSER = DESCRIPTOR.message_types_by_name['TaskStatusCountPerUser']
+_ROLE = DESCRIPTOR.message_types_by_name['Role']
+_ORGANIZATION = DESCRIPTOR.message_types_by_name['Organization']
+_ORGANIZATIONMEMBER = DESCRIPTOR.message_types_by_name['OrganizationMember']
+_IDENTITYPROVIDER = DESCRIPTOR.message_types_by_name['IdentityProvider']
+_TEAM = DESCRIPTOR.message_types_by_name['Team']
+_TEAMUSER = DESCRIPTOR.message_types_by_name['TeamUser']
+_ORGANIZATIONINVITATION = DESCRIPTOR.message_types_by_name['OrganizationInvitation']
 _COLLECTOR = DESCRIPTOR.message_types_by_name['Collector']
 _COLLECTORSOURCE = DESCRIPTOR.message_types_by_name['CollectorSource']
 _APIPOSTMODELOUTPUTSCOLLECTORSOURCE = DESCRIPTOR.message_types_by_name['APIPostModelOutputsCollectorSource']
@@ -251,12 +285,35 @@ _STATVALUE = DESCRIPTOR.message_types_by_name['StatValue']
 _STATVALUEAGGREGATERESULT = DESCRIPTOR.message_types_by_name['StatValueAggregateResult']
 _STATVALUEAGGREGATE = DESCRIPTOR.message_types_by_name['StatValueAggregate']
 _STATVALUEAGGREGATEQUERY = DESCRIPTOR.message_types_by_name['StatValueAggregateQuery']
+_AUTHMETHOD = DESCRIPTOR.message_types_by_name['AuthMethod']
+_TWOFACTORAUTHMETHOD = DESCRIPTOR.message_types_by_name['TwoFactorAuthMethod']
+_SDKBILLINGCYCLE = DESCRIPTOR.message_types_by_name['SDKBillingCycle']
+_DEVICEINFO = DESCRIPTOR.message_types_by_name['DeviceInfo']
+_SDKEVENTSUMMARY = DESCRIPTOR.message_types_by_name['SDKEventSummary']
+_SDKEVENTSCOLLECTION = DESCRIPTOR.message_types_by_name['SDKEventsCollection']
+_HOSTAPPINFO = DESCRIPTOR.message_types_by_name['HostAppInfo']
+_OPERATINGSYSTEM = DESCRIPTOR.message_types_by_name['OperatingSystem']
+_SDK = DESCRIPTOR.message_types_by_name['SDK']
+_STATE = DESCRIPTOR.message_types_by_name['State']
+_FINDDUPLICATEANNOTATIONSJOB = DESCRIPTOR.message_types_by_name['FindDuplicateAnnotationsJob']
 _DATASETINPUTSSEARCHADDJOB = DESCRIPTOR.message_types_by_name['DatasetInputsSearchAddJob']
+_PCAPROJECTIONCOMPARATOR = DESCRIPTOR.message_types_by_name['PCAProjectionComparator']
+_DUPLICATEANNOTATIONSRESULTS = DESCRIPTOR.message_types_by_name['DuplicateAnnotationsResults']
 _VISIBILITY = DESCRIPTOR.message_types_by_name['Visibility']
 _TRENDINGMETRIC = DESCRIPTOR.message_types_by_name['TrendingMetric']
+_VALIDATIONERROR = DESCRIPTOR.message_types_by_name['ValidationError']
+_VALIDATION = DESCRIPTOR.message_types_by_name['Validation']
+_VALIDATIONRESULT = DESCRIPTOR.message_types_by_name['ValidationResult']
+_TAGCATEGORY = DESCRIPTOR.message_types_by_name['TagCategory']
 _FULLTAG = DESCRIPTOR.message_types_by_name['FullTag']
 _TIMESEGMENT = DESCRIPTOR.message_types_by_name['TimeSegment']
 _TIMEINFO = DESCRIPTOR.message_types_by_name['TimeInfo']
+_MODELSTAR = DESCRIPTOR.message_types_by_name['ModelStar']
+_USERSTAR = DESCRIPTOR.message_types_by_name['UserStar']
+_APPSTAR = DESCRIPTOR.message_types_by_name['AppStar']
+_WORKFLOWSTAR = DESCRIPTOR.message_types_by_name['WorkflowStar']
+_WEBNOTIFICATION = DESCRIPTOR.message_types_by_name['WebNotification']
+_PATCHWEBNOTIFICATION = DESCRIPTOR.message_types_by_name['PatchWebNotification']
 _MODULE = DESCRIPTOR.message_types_by_name['Module']
 _MODULEVERSION = DESCRIPTOR.message_types_by_name['ModuleVersion']
 _MODULEVERSION_MODULESUBNAV = _MODULEVERSION.nested_types_by_name['ModuleSubNav']
@@ -272,10 +329,12 @@ _ADDMETADATA = DESCRIPTOR.message_types_by_name['AddMetadata']
 _DELETEMETADATA = DESCRIPTOR.message_types_by_name['DeleteMetadata']
 _OVERWRITEGEO = DESCRIPTOR.message_types_by_name['OverwriteGeo']
 _DELETEGEO = DESCRIPTOR.message_types_by_name['DeleteGeo']
+_WAITLISTEMAIL = DESCRIPTOR.message_types_by_name['WaitlistEmail']
 _INPUTSADDJOB = DESCRIPTOR.message_types_by_name['InputsAddJob']
 _INPUTSADDJOBPROGRESS = DESCRIPTOR.message_types_by_name['InputsAddJobProgress']
 _UPLOAD = DESCRIPTOR.message_types_by_name['Upload']
 _UPLOADCONTENTPART = DESCRIPTOR.message_types_by_name['UploadContentPart']
+_CUSTOMCODEOPERATORREQUEST = DESCRIPTOR.message_types_by_name['CustomCodeOperatorRequest']
 _POINT_VISIBILITY = _POINT.enum_types_by_name['Visibility']
 _MODELTYPEFIELD_MODELTYPEFIELDTYPE = _MODELTYPEFIELD.enum_types_by_name['ModelTypeFieldType']
 _TASK_TASKTYPE = _TASK.enum_types_by_name['TaskType']
@@ -283,6 +342,12 @@ _TASKWORKER_TASKWORKERSTRATEGY = _TASKWORKER.enum_types_by_name['TaskWorkerStrat
 _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY = _TASKWORKERPARTITIONEDSTRATEGYINFO.enum_types_by_name['TaskWorkerPartitionedStrategy']
 _TASKINPUTSOURCE_TASKINPUTSOURCETYPE = _TASKINPUTSOURCE.enum_types_by_name['TaskInputSourceType']
 _TASKREVIEW_TASKREVIEWSTRATEGY = _TASKREVIEW.enum_types_by_name['TaskReviewStrategy']
+_AUTHMETHOD_AUTHMETHODTYPE = _AUTHMETHOD.enum_types_by_name['AuthMethodType']
+_TWOFACTORAUTHMETHOD_AUTHMETHODTYPE = _TWOFACTORAUTHMETHOD.enum_types_by_name['AuthMethodType']
+_SDKEVENTSUMMARY_RUNNINGMODE = _SDKEVENTSUMMARY.enum_types_by_name['RunningMode']
+_SDKEVENTSUMMARY_NETWORKCONNECTIVITY = _SDKEVENTSUMMARY.enum_types_by_name['NetworkConnectivity']
+_SDKEVENTSUMMARY_ANALYTICSEVENTTYPE = _SDKEVENTSUMMARY.enum_types_by_name['AnalyticsEventType']
+_STATE_RUNNINGENVIRONMENT = _STATE.enum_types_by_name['RunningEnvironment']
 _VISIBILITY_GETTABLE = _VISIBILITY.enum_types_by_name['Gettable']
 Annotation = _reflection.GeneratedProtocolMessageType('Annotation', (_message.Message,), {
   'DESCRIPTOR' : _ANNOTATION,
@@ -339,6 +404,27 @@ Track = _reflection.GeneratedProtocolMessageType('Track', (_message.Message,), {
   # @@protoc_insertion_point(class_scope:clarifai.api.Track)
   })
 _sym_db.RegisterMessage(Track)
+
+BillingCycle = _reflection.GeneratedProtocolMessageType('BillingCycle', (_message.Message,), {
+  'DESCRIPTOR' : _BILLINGCYCLE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.BillingCycle)
+  })
+_sym_db.RegisterMessage(BillingCycle)
+
+UsageCycle = _reflection.GeneratedProtocolMessageType('UsageCycle', (_message.Message,), {
+  'DESCRIPTOR' : _USAGECYCLE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UsageCycle)
+  })
+_sym_db.RegisterMessage(UsageCycle)
+
+InvoiceItem = _reflection.GeneratedProtocolMessageType('InvoiceItem', (_message.Message,), {
+  'DESCRIPTOR' : _INVOICEITEM,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.InvoiceItem)
+  })
+_sym_db.RegisterMessage(InvoiceItem)
 
 Cluster = _reflection.GeneratedProtocolMessageType('Cluster', (_message.Message,), {
   'DESCRIPTOR' : _CLUSTER,
@@ -438,6 +524,13 @@ KnowledgeGraph = _reflection.GeneratedProtocolMessageType('KnowledgeGraph', (_me
   })
 _sym_db.RegisterMessage(KnowledgeGraph)
 
+ConceptMapping = _reflection.GeneratedProtocolMessageType('ConceptMapping', (_message.Message,), {
+  'DESCRIPTOR' : _CONCEPTMAPPING,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ConceptMapping)
+  })
+_sym_db.RegisterMessage(ConceptMapping)
+
 ConceptMappingJob = _reflection.GeneratedProtocolMessageType('ConceptMappingJob', (_message.Message,), {
   'DESCRIPTOR' : _CONCEPTMAPPINGJOB,
   '__module__' : 'proto.clarifai.api.resources_pb2'
@@ -452,12 +545,26 @@ ConceptLanguage = _reflection.GeneratedProtocolMessageType('ConceptLanguage', (_
   })
 _sym_db.RegisterMessage(ConceptLanguage)
 
+ConceptReference = _reflection.GeneratedProtocolMessageType('ConceptReference', (_message.Message,), {
+  'DESCRIPTOR' : _CONCEPTREFERENCE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ConceptReference)
+  })
+_sym_db.RegisterMessage(ConceptReference)
+
 Data = _reflection.GeneratedProtocolMessageType('Data', (_message.Message,), {
   'DESCRIPTOR' : _DATA,
   '__module__' : 'proto.clarifai.api.resources_pb2'
   # @@protoc_insertion_point(class_scope:clarifai.api.Data)
   })
 _sym_db.RegisterMessage(Data)
+
+DataBatch = _reflection.GeneratedProtocolMessageType('DataBatch', (_message.Message,), {
+  'DESCRIPTOR' : _DATABATCH,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DataBatch)
+  })
+_sym_db.RegisterMessage(DataBatch)
 
 Region = _reflection.GeneratedProtocolMessageType('Region', (_message.Message,), {
   'DESCRIPTOR' : _REGION,
@@ -690,6 +797,20 @@ Key = _reflection.GeneratedProtocolMessageType('Key', (_message.Message,), {
   # @@protoc_insertion_point(class_scope:clarifai.api.Key)
   })
 _sym_db.RegisterMessage(Key)
+
+LicenseLimit = _reflection.GeneratedProtocolMessageType('LicenseLimit', (_message.Message,), {
+  'DESCRIPTOR' : _LICENSELIMIT,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.LicenseLimit)
+  })
+_sym_db.RegisterMessage(LicenseLimit)
+
+License = _reflection.GeneratedProtocolMessageType('License', (_message.Message,), {
+  'DESCRIPTOR' : _LICENSE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.License)
+  })
+_sym_db.RegisterMessage(License)
 
 Model = _reflection.GeneratedProtocolMessageType('Model', (_message.Message,), {
   'DESCRIPTOR' : _MODEL,
@@ -978,6 +1099,20 @@ And = _reflection.GeneratedProtocolMessageType('And', (_message.Message,), {
   })
 _sym_db.RegisterMessage(And)
 
+AttributeMixIn = _reflection.GeneratedProtocolMessageType('AttributeMixIn', (_message.Message,), {
+  'DESCRIPTOR' : _ATTRIBUTEMIXIN,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.AttributeMixIn)
+  })
+_sym_db.RegisterMessage(AttributeMixIn)
+
+AttributeQuery = _reflection.GeneratedProtocolMessageType('AttributeQuery', (_message.Message,), {
+  'DESCRIPTOR' : _ATTRIBUTEQUERY,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.AttributeQuery)
+  })
+_sym_db.RegisterMessage(AttributeQuery)
+
 Query = _reflection.GeneratedProtocolMessageType('Query', (_message.Message,), {
   'DESCRIPTOR' : _QUERY,
   '__module__' : 'proto.clarifai.api.resources_pb2'
@@ -1020,6 +1155,27 @@ AnnotationSearchMetrics = _reflection.GeneratedProtocolMessageType('AnnotationSe
   })
 _sym_db.RegisterMessage(AnnotationSearchMetrics)
 
+Plan = _reflection.GeneratedProtocolMessageType('Plan', (_message.Message,), {
+  'DESCRIPTOR' : _PLAN,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Plan)
+  })
+_sym_db.RegisterMessage(Plan)
+
+CreditCard = _reflection.GeneratedProtocolMessageType('CreditCard', (_message.Message,), {
+  'DESCRIPTOR' : _CREDITCARD,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.CreditCard)
+  })
+_sym_db.RegisterMessage(CreditCard)
+
+ShippingAddress = _reflection.GeneratedProtocolMessageType('ShippingAddress', (_message.Message,), {
+  'DESCRIPTOR' : _SHIPPINGADDRESS,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ShippingAddress)
+  })
+_sym_db.RegisterMessage(ShippingAddress)
+
 Text = _reflection.GeneratedProtocolMessageType('Text', (_message.Message,), {
   'DESCRIPTOR' : _TEXT,
   '__module__' : 'proto.clarifai.api.resources_pb2'
@@ -1033,6 +1189,56 @@ TextInfo = _reflection.GeneratedProtocolMessageType('TextInfo', (_message.Messag
   # @@protoc_insertion_point(class_scope:clarifai.api.TextInfo)
   })
 _sym_db.RegisterMessage(TextInfo)
+
+OpCountByDate = _reflection.GeneratedProtocolMessageType('OpCountByDate', (_message.Message,), {
+  'DESCRIPTOR' : _OPCOUNTBYDATE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.OpCountByDate)
+  })
+_sym_db.RegisterMessage(OpCountByDate)
+
+DimensionList = _reflection.GeneratedProtocolMessageType('DimensionList', (_message.Message,), {
+
+  'DimensionEntry' : _reflection.GeneratedProtocolMessageType('DimensionEntry', (_message.Message,), {
+    'DESCRIPTOR' : _DIMENSIONLIST_DIMENSIONENTRY,
+    '__module__' : 'proto.clarifai.api.resources_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.DimensionList.DimensionEntry)
+    })
+  ,
+  'DESCRIPTOR' : _DIMENSIONLIST,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DimensionList)
+  })
+_sym_db.RegisterMessage(DimensionList)
+_sym_db.RegisterMessage(DimensionList.DimensionEntry)
+
+UsageInterval = _reflection.GeneratedProtocolMessageType('UsageInterval', (_message.Message,), {
+  'DESCRIPTOR' : _USAGEINTERVAL,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UsageInterval)
+  })
+_sym_db.RegisterMessage(UsageInterval)
+
+RealtimeCount = _reflection.GeneratedProtocolMessageType('RealtimeCount', (_message.Message,), {
+  'DESCRIPTOR' : _REALTIMECOUNT,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.RealtimeCount)
+  })
+_sym_db.RegisterMessage(RealtimeCount)
+
+EventSummary = _reflection.GeneratedProtocolMessageType('EventSummary', (_message.Message,), {
+  'DESCRIPTOR' : _EVENTSUMMARY,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.EventSummary)
+  })
+_sym_db.RegisterMessage(EventSummary)
+
+EventsCollection = _reflection.GeneratedProtocolMessageType('EventsCollection', (_message.Message,), {
+  'DESCRIPTOR' : _EVENTSCOLLECTION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.EventsCollection)
+  })
+_sym_db.RegisterMessage(EventsCollection)
 
 User = _reflection.GeneratedProtocolMessageType('User', (_message.Message,), {
   'DESCRIPTOR' : _USER,
@@ -1055,12 +1261,40 @@ EmailAddress = _reflection.GeneratedProtocolMessageType('EmailAddress', (_messag
   })
 _sym_db.RegisterMessage(EmailAddress)
 
+UserPassword = _reflection.GeneratedProtocolMessageType('UserPassword', (_message.Message,), {
+  'DESCRIPTOR' : _USERPASSWORD,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UserPassword)
+  })
+_sym_db.RegisterMessage(UserPassword)
+
+UserInfo = _reflection.GeneratedProtocolMessageType('UserInfo', (_message.Message,), {
+  'DESCRIPTOR' : _USERINFO,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UserInfo)
+  })
+_sym_db.RegisterMessage(UserInfo)
+
 Password = _reflection.GeneratedProtocolMessageType('Password', (_message.Message,), {
   'DESCRIPTOR' : _PASSWORD,
   '__module__' : 'proto.clarifai.api.resources_pb2'
   # @@protoc_insertion_point(class_scope:clarifai.api.Password)
   })
 _sym_db.RegisterMessage(Password)
+
+UserAccess = _reflection.GeneratedProtocolMessageType('UserAccess', (_message.Message,), {
+  'DESCRIPTOR' : _USERACCESS,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UserAccess)
+  })
+_sym_db.RegisterMessage(UserAccess)
+
+PasswordPolicy = _reflection.GeneratedProtocolMessageType('PasswordPolicy', (_message.Message,), {
+  'DESCRIPTOR' : _PASSWORDPOLICY,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PasswordPolicy)
+  })
+_sym_db.RegisterMessage(PasswordPolicy)
 
 PasswordViolations = _reflection.GeneratedProtocolMessageType('PasswordViolations', (_message.Message,), {
   'DESCRIPTOR' : _PASSWORDVIOLATIONS,
@@ -1082,6 +1316,13 @@ VideoInfo = _reflection.GeneratedProtocolMessageType('VideoInfo', (_message.Mess
   # @@protoc_insertion_point(class_scope:clarifai.api.VideoInfo)
   })
 _sym_db.RegisterMessage(VideoInfo)
+
+Vocab = _reflection.GeneratedProtocolMessageType('Vocab', (_message.Message,), {
+  'DESCRIPTOR' : _VOCAB,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Vocab)
+  })
+_sym_db.RegisterMessage(Vocab)
 
 Workflow = _reflection.GeneratedProtocolMessageType('Workflow', (_message.Message,), {
   'DESCRIPTOR' : _WORKFLOW,
@@ -1117,6 +1358,21 @@ WorkflowResult = _reflection.GeneratedProtocolMessageType('WorkflowResult', (_me
   # @@protoc_insertion_point(class_scope:clarifai.api.WorkflowResult)
   })
 _sym_db.RegisterMessage(WorkflowResult)
+
+WorkflowMetrics = _reflection.GeneratedProtocolMessageType('WorkflowMetrics', (_message.Message,), {
+
+  'NodeMetricsEntry' : _reflection.GeneratedProtocolMessageType('NodeMetricsEntry', (_message.Message,), {
+    'DESCRIPTOR' : _WORKFLOWMETRICS_NODEMETRICSENTRY,
+    '__module__' : 'proto.clarifai.api.resources_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.WorkflowMetrics.NodeMetricsEntry)
+    })
+  ,
+  'DESCRIPTOR' : _WORKFLOWMETRICS,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.WorkflowMetrics)
+  })
+_sym_db.RegisterMessage(WorkflowMetrics)
+_sym_db.RegisterMessage(WorkflowMetrics.NodeMetricsEntry)
 
 WorkflowState = _reflection.GeneratedProtocolMessageType('WorkflowState', (_message.Message,), {
   'DESCRIPTOR' : _WORKFLOWSTATE,
@@ -1223,6 +1479,55 @@ TaskStatusCountPerUser = _reflection.GeneratedProtocolMessageType('TaskStatusCou
   })
 _sym_db.RegisterMessage(TaskStatusCountPerUser)
 
+Role = _reflection.GeneratedProtocolMessageType('Role', (_message.Message,), {
+  'DESCRIPTOR' : _ROLE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Role)
+  })
+_sym_db.RegisterMessage(Role)
+
+Organization = _reflection.GeneratedProtocolMessageType('Organization', (_message.Message,), {
+  'DESCRIPTOR' : _ORGANIZATION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Organization)
+  })
+_sym_db.RegisterMessage(Organization)
+
+OrganizationMember = _reflection.GeneratedProtocolMessageType('OrganizationMember', (_message.Message,), {
+  'DESCRIPTOR' : _ORGANIZATIONMEMBER,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.OrganizationMember)
+  })
+_sym_db.RegisterMessage(OrganizationMember)
+
+IdentityProvider = _reflection.GeneratedProtocolMessageType('IdentityProvider', (_message.Message,), {
+  'DESCRIPTOR' : _IDENTITYPROVIDER,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.IdentityProvider)
+  })
+_sym_db.RegisterMessage(IdentityProvider)
+
+Team = _reflection.GeneratedProtocolMessageType('Team', (_message.Message,), {
+  'DESCRIPTOR' : _TEAM,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Team)
+  })
+_sym_db.RegisterMessage(Team)
+
+TeamUser = _reflection.GeneratedProtocolMessageType('TeamUser', (_message.Message,), {
+  'DESCRIPTOR' : _TEAMUSER,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.TeamUser)
+  })
+_sym_db.RegisterMessage(TeamUser)
+
+OrganizationInvitation = _reflection.GeneratedProtocolMessageType('OrganizationInvitation', (_message.Message,), {
+  'DESCRIPTOR' : _ORGANIZATIONINVITATION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.OrganizationInvitation)
+  })
+_sym_db.RegisterMessage(OrganizationInvitation)
+
 Collector = _reflection.GeneratedProtocolMessageType('Collector', (_message.Message,), {
   'DESCRIPTOR' : _COLLECTOR,
   '__module__' : 'proto.clarifai.api.resources_pb2'
@@ -1272,12 +1577,103 @@ StatValueAggregateQuery = _reflection.GeneratedProtocolMessageType('StatValueAgg
   })
 _sym_db.RegisterMessage(StatValueAggregateQuery)
 
+AuthMethod = _reflection.GeneratedProtocolMessageType('AuthMethod', (_message.Message,), {
+  'DESCRIPTOR' : _AUTHMETHOD,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.AuthMethod)
+  })
+_sym_db.RegisterMessage(AuthMethod)
+
+TwoFactorAuthMethod = _reflection.GeneratedProtocolMessageType('TwoFactorAuthMethod', (_message.Message,), {
+  'DESCRIPTOR' : _TWOFACTORAUTHMETHOD,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.TwoFactorAuthMethod)
+  })
+_sym_db.RegisterMessage(TwoFactorAuthMethod)
+
+SDKBillingCycle = _reflection.GeneratedProtocolMessageType('SDKBillingCycle', (_message.Message,), {
+  'DESCRIPTOR' : _SDKBILLINGCYCLE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SDKBillingCycle)
+  })
+_sym_db.RegisterMessage(SDKBillingCycle)
+
+DeviceInfo = _reflection.GeneratedProtocolMessageType('DeviceInfo', (_message.Message,), {
+  'DESCRIPTOR' : _DEVICEINFO,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeviceInfo)
+  })
+_sym_db.RegisterMessage(DeviceInfo)
+
+SDKEventSummary = _reflection.GeneratedProtocolMessageType('SDKEventSummary', (_message.Message,), {
+  'DESCRIPTOR' : _SDKEVENTSUMMARY,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SDKEventSummary)
+  })
+_sym_db.RegisterMessage(SDKEventSummary)
+
+SDKEventsCollection = _reflection.GeneratedProtocolMessageType('SDKEventsCollection', (_message.Message,), {
+  'DESCRIPTOR' : _SDKEVENTSCOLLECTION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SDKEventsCollection)
+  })
+_sym_db.RegisterMessage(SDKEventsCollection)
+
+HostAppInfo = _reflection.GeneratedProtocolMessageType('HostAppInfo', (_message.Message,), {
+  'DESCRIPTOR' : _HOSTAPPINFO,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.HostAppInfo)
+  })
+_sym_db.RegisterMessage(HostAppInfo)
+
+OperatingSystem = _reflection.GeneratedProtocolMessageType('OperatingSystem', (_message.Message,), {
+  'DESCRIPTOR' : _OPERATINGSYSTEM,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.OperatingSystem)
+  })
+_sym_db.RegisterMessage(OperatingSystem)
+
+SDK = _reflection.GeneratedProtocolMessageType('SDK', (_message.Message,), {
+  'DESCRIPTOR' : _SDK,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SDK)
+  })
+_sym_db.RegisterMessage(SDK)
+
+State = _reflection.GeneratedProtocolMessageType('State', (_message.Message,), {
+  'DESCRIPTOR' : _STATE,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.State)
+  })
+_sym_db.RegisterMessage(State)
+
+FindDuplicateAnnotationsJob = _reflection.GeneratedProtocolMessageType('FindDuplicateAnnotationsJob', (_message.Message,), {
+  'DESCRIPTOR' : _FINDDUPLICATEANNOTATIONSJOB,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.FindDuplicateAnnotationsJob)
+  })
+_sym_db.RegisterMessage(FindDuplicateAnnotationsJob)
+
 DatasetInputsSearchAddJob = _reflection.GeneratedProtocolMessageType('DatasetInputsSearchAddJob', (_message.Message,), {
   'DESCRIPTOR' : _DATASETINPUTSSEARCHADDJOB,
   '__module__' : 'proto.clarifai.api.resources_pb2'
   # @@protoc_insertion_point(class_scope:clarifai.api.DatasetInputsSearchAddJob)
   })
 _sym_db.RegisterMessage(DatasetInputsSearchAddJob)
+
+PCAProjectionComparator = _reflection.GeneratedProtocolMessageType('PCAProjectionComparator', (_message.Message,), {
+  'DESCRIPTOR' : _PCAPROJECTIONCOMPARATOR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PCAProjectionComparator)
+  })
+_sym_db.RegisterMessage(PCAProjectionComparator)
+
+DuplicateAnnotationsResults = _reflection.GeneratedProtocolMessageType('DuplicateAnnotationsResults', (_message.Message,), {
+  'DESCRIPTOR' : _DUPLICATEANNOTATIONSRESULTS,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DuplicateAnnotationsResults)
+  })
+_sym_db.RegisterMessage(DuplicateAnnotationsResults)
 
 Visibility = _reflection.GeneratedProtocolMessageType('Visibility', (_message.Message,), {
   'DESCRIPTOR' : _VISIBILITY,
@@ -1292,6 +1688,34 @@ TrendingMetric = _reflection.GeneratedProtocolMessageType('TrendingMetric', (_me
   # @@protoc_insertion_point(class_scope:clarifai.api.TrendingMetric)
   })
 _sym_db.RegisterMessage(TrendingMetric)
+
+ValidationError = _reflection.GeneratedProtocolMessageType('ValidationError', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATIONERROR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ValidationError)
+  })
+_sym_db.RegisterMessage(ValidationError)
+
+Validation = _reflection.GeneratedProtocolMessageType('Validation', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Validation)
+  })
+_sym_db.RegisterMessage(Validation)
+
+ValidationResult = _reflection.GeneratedProtocolMessageType('ValidationResult', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATIONRESULT,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ValidationResult)
+  })
+_sym_db.RegisterMessage(ValidationResult)
+
+TagCategory = _reflection.GeneratedProtocolMessageType('TagCategory', (_message.Message,), {
+  'DESCRIPTOR' : _TAGCATEGORY,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.TagCategory)
+  })
+_sym_db.RegisterMessage(TagCategory)
 
 FullTag = _reflection.GeneratedProtocolMessageType('FullTag', (_message.Message,), {
   'DESCRIPTOR' : _FULLTAG,
@@ -1313,6 +1737,48 @@ TimeInfo = _reflection.GeneratedProtocolMessageType('TimeInfo', (_message.Messag
   # @@protoc_insertion_point(class_scope:clarifai.api.TimeInfo)
   })
 _sym_db.RegisterMessage(TimeInfo)
+
+ModelStar = _reflection.GeneratedProtocolMessageType('ModelStar', (_message.Message,), {
+  'DESCRIPTOR' : _MODELSTAR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ModelStar)
+  })
+_sym_db.RegisterMessage(ModelStar)
+
+UserStar = _reflection.GeneratedProtocolMessageType('UserStar', (_message.Message,), {
+  'DESCRIPTOR' : _USERSTAR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UserStar)
+  })
+_sym_db.RegisterMessage(UserStar)
+
+AppStar = _reflection.GeneratedProtocolMessageType('AppStar', (_message.Message,), {
+  'DESCRIPTOR' : _APPSTAR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.AppStar)
+  })
+_sym_db.RegisterMessage(AppStar)
+
+WorkflowStar = _reflection.GeneratedProtocolMessageType('WorkflowStar', (_message.Message,), {
+  'DESCRIPTOR' : _WORKFLOWSTAR,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.WorkflowStar)
+  })
+_sym_db.RegisterMessage(WorkflowStar)
+
+WebNotification = _reflection.GeneratedProtocolMessageType('WebNotification', (_message.Message,), {
+  'DESCRIPTOR' : _WEBNOTIFICATION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.WebNotification)
+  })
+_sym_db.RegisterMessage(WebNotification)
+
+PatchWebNotification = _reflection.GeneratedProtocolMessageType('PatchWebNotification', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHWEBNOTIFICATION,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchWebNotification)
+  })
+_sym_db.RegisterMessage(PatchWebNotification)
 
 Module = _reflection.GeneratedProtocolMessageType('Module', (_message.Message,), {
   'DESCRIPTOR' : _MODULE,
@@ -1421,6 +1887,13 @@ DeleteGeo = _reflection.GeneratedProtocolMessageType('DeleteGeo', (_message.Mess
   })
 _sym_db.RegisterMessage(DeleteGeo)
 
+WaitlistEmail = _reflection.GeneratedProtocolMessageType('WaitlistEmail', (_message.Message,), {
+  'DESCRIPTOR' : _WAITLISTEMAIL,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.WaitlistEmail)
+  })
+_sym_db.RegisterMessage(WaitlistEmail)
+
 InputsAddJob = _reflection.GeneratedProtocolMessageType('InputsAddJob', (_message.Message,), {
   'DESCRIPTOR' : _INPUTSADDJOB,
   '__module__' : 'proto.clarifai.api.resources_pb2'
@@ -1449,10 +1922,17 @@ UploadContentPart = _reflection.GeneratedProtocolMessageType('UploadContentPart'
   })
 _sym_db.RegisterMessage(UploadContentPart)
 
+CustomCodeOperatorRequest = _reflection.GeneratedProtocolMessageType('CustomCodeOperatorRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CUSTOMCODEOPERATORREQUEST,
+  '__module__' : 'proto.clarifai.api.resources_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.CustomCodeOperatorRequest)
+  })
+_sym_db.RegisterMessage(CustomCodeOperatorRequest)
+
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\025com.clarifai.grpc.apiP\001Z7github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api\242\002\004CAIP'
+  DESCRIPTOR._serialized_options = b'\n\025com.clarifai.grpc.apiP\001Z\014clarifai/api\242\002\004CAIP'
   _ANNOTATION.fields_by_name['embed_model_version_id']._options = None
   _ANNOTATION.fields_by_name['embed_model_version_id']._serialized_options = b'\030\001'
   _ANNOTATION.fields_by_name['trusted']._options = None
@@ -1515,12 +1995,26 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _INPUTCOUNT.fields_by_name['reindexing']._serialized_options = b'\200\265\030\001'
   _DATASETVERSION_METRICSENTRY._options = None
   _DATASETVERSION_METRICSENTRY._serialized_options = b'8\001'
+  _LICENSELIMIT.fields_by_name['max_operation_count']._options = None
+  _LICENSELIMIT.fields_by_name['max_operation_count']._serialized_options = b'\200\265\030\001'
+  _LICENSE.fields_by_name['scope']._options = None
+  _LICENSE.fields_by_name['scope']._serialized_options = b'\200\265\030\001'
+  _LICENSE.fields_by_name['expiration_action']._options = None
+  _LICENSE.fields_by_name['expiration_action']._serialized_options = b'\200\265\030\001'
+  _LICENSE.fields_by_name['is_offline']._options = None
+  _LICENSE.fields_by_name['is_offline']._serialized_options = b'\200\265\030\001'
   _MODEL.fields_by_name['name']._options = None
   _MODEL.fields_by_name['name']._serialized_options = b'\030\001'
   _MODEL.fields_by_name['app_id']._options = None
   _MODEL.fields_by_name['app_id']._serialized_options = b'\200\265\030\001'
+  _MODEL.fields_by_name['output_info']._options = None
+  _MODEL.fields_by_name['output_info']._serialized_options = b'\030\001'
   _MODEL.fields_by_name['display_name']._options = None
   _MODEL.fields_by_name['display_name']._serialized_options = b'\030\001'
+  _MODEL.fields_by_name['input_info']._options = None
+  _MODEL.fields_by_name['input_info']._serialized_options = b'\030\001'
+  _MODEL.fields_by_name['train_info']._options = None
+  _MODEL.fields_by_name['train_info']._serialized_options = b'\030\001'
   _MODEL.fields_by_name['toolkits']._options = None
   _MODEL.fields_by_name['toolkits']._serialized_options = b'\200\265\030\001'
   _MODEL.fields_by_name['use_cases']._options = None
@@ -1531,6 +2025,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _MODEL.fields_by_name['languages_full']._serialized_options = b'\200\265\030\001'
   _MODEL.fields_by_name['check_consents']._options = None
   _MODEL.fields_by_name['check_consents']._serialized_options = b'\200\265\030\001'
+  _MODEL.fields_by_name['import_info']._options = None
+  _MODEL.fields_by_name['import_info']._serialized_options = b'\030\001'
   _OUTPUTCONFIG.fields_by_name['concepts_mutually_exclusive']._options = None
   _OUTPUTCONFIG.fields_by_name['concepts_mutually_exclusive']._serialized_options = b'\200\265\030\001'
   _OUTPUTCONFIG.fields_by_name['closed_environment']._options = None
@@ -1545,6 +2041,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _OUTPUTCONFIG.fields_by_name['min_value']._serialized_options = b'\200\265\030\001'
   _OUTPUTCONFIG.fields_by_name['model_metadata']._options = None
   _OUTPUTCONFIG.fields_by_name['model_metadata']._serialized_options = b'\030\001'
+  _MODELVERSION.fields_by_name['train_stats']._options = None
+  _MODELVERSION.fields_by_name['train_stats']._serialized_options = b'\200\234\'\001'
+  _PRETRAINEDMODELCONFIG.fields_by_name['id']._options = None
+  _PRETRAINEDMODELCONFIG.fields_by_name['id']._serialized_options = b'\200\234\'\001'
+  _PRETRAINEDMODELCONFIG.fields_by_name['overwrite']._options = None
+  _PRETRAINEDMODELCONFIG.fields_by_name['overwrite']._serialized_options = b'\200\234\'\001'
   _CONFUSIONMATRIXENTRY.fields_by_name['value']._options = None
   _CONFUSIONMATRIXENTRY.fields_by_name['value']._serialized_options = b'\200\265\030\001'
   _ROC.fields_by_name['fpr']._options = None
@@ -1601,6 +2103,14 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _METRICSSUMMARY.fields_by_name['macro_avg_recall']._serialized_options = b'\200\265\030\001'
   _HIT.fields_by_name['score']._options = None
   _HIT.fields_by_name['score']._serialized_options = b'\200\265\030\001'
+  _QUERY.fields_by_name['ands']._options = None
+  _QUERY.fields_by_name['ands']._serialized_options = b'\030\001'
+  _CREDITCARD.fields_by_name['default']._options = None
+  _CREDITCARD.fields_by_name['default']._serialized_options = b'\200\265\030\001'
+  _DIMENSIONLIST_DIMENSIONENTRY._options = None
+  _DIMENSIONLIST_DIMENSIONENTRY._serialized_options = b'8\001'
+  _REALTIMECOUNT.fields_by_name['count']._options = None
+  _REALTIMECOUNT.fields_by_name['count']._serialized_options = b'\200\265\030\001'
   _USER.fields_by_name['primary_email']._options = None
   _USER.fields_by_name['primary_email']._serialized_options = b'\030\001'
   _USER.fields_by_name['bill_type']._options = None
@@ -1631,6 +2141,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _WORKFLOW.fields_by_name['use_cases']._serialized_options = b'\200\265\030\001'
   _WORKFLOW.fields_by_name['check_consents']._options = None
   _WORKFLOW.fields_by_name['check_consents']._serialized_options = b'\200\265\030\001'
+  _WORKFLOWMETRICS_NODEMETRICSENTRY._options = None
+  _WORKFLOWMETRICS_NODEMETRICSENTRY._serialized_options = b'8\001'
   _TASKWORKER.fields_by_name['user_ids']._options = None
   _TASKWORKER.fields_by_name['user_ids']._serialized_options = b'\030\001'
   _TASKREVIEW.fields_by_name['user_ids']._options = None
@@ -1645,32 +2157,38 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _TASKSTATUSCOUNTPERUSER.fields_by_name['review_denied']._serialized_options = b'\200\265\030\001'
   _TASKSTATUSCOUNTPERUSER.fields_by_name['awaiting_consensus_review']._options = None
   _TASKSTATUSCOUNTPERUSER.fields_by_name['awaiting_consensus_review']._serialized_options = b'\200\265\030\001'
-  _DATASETVERSIONMETRICSGROUPTYPE._serialized_start=31681
-  _DATASETVERSIONMETRICSGROUPTYPE._serialized_end=31930
-  _DATASETVERSIONEXPORTFORMAT._serialized_start=31933
-  _DATASETVERSIONEXPORTFORMAT._serialized_end=32066
-  _EXPIRATIONACTION._serialized_start=32068
-  _EXPIRATIONACTION._serialized_end=32140
-  _LICENSESCOPE._serialized_start=32142
-  _LICENSESCOPE._serialized_end=32219
-  _DATATYPE._serialized_start=32221
-  _DATATYPE._serialized_end=32301
-  _VALUECOMPARATOR._serialized_start=32304
-  _VALUECOMPARATOR._serialized_end=32447
-  _EVALUATIONTYPE._serialized_start=32449
-  _EVALUATIONTYPE._serialized_end=32500
-  _APIEVENTTYPE._serialized_start=32502
-  _APIEVENTTYPE._serialized_end=32604
-  _USAGEINTERVALTYPE._serialized_start=32606
-  _USAGEINTERVALTYPE._serialized_end=32666
-  _ROLETYPE._serialized_start=32668
-  _ROLETYPE._serialized_end=32697
-  _STATVALUEAGGTYPE._serialized_start=32699
-  _STATVALUEAGGTYPE._serialized_end=32735
-  _STATTIMEAGGTYPE._serialized_start=32737
-  _STATTIMEAGGTYPE._serialized_end=32833
-  _VALIDATIONERRORTYPE._serialized_start=32835
-  _VALIDATIONERRORTYPE._serialized_end=32933
+  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE.fields_by_name['caller_user_id']._options = None
+  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE.fields_by_name['caller_user_id']._serialized_options = b'\200\234\'\001'
+  _AUTHMETHOD.fields_by_name['enabled']._options = None
+  _AUTHMETHOD.fields_by_name['enabled']._serialized_options = b'\200\265\030\001'
+  _TWOFACTORAUTHMETHOD.fields_by_name['enabled']._options = None
+  _TWOFACTORAUTHMETHOD.fields_by_name['enabled']._serialized_options = b'\200\265\030\001'
+  _DATASETVERSIONMETRICSGROUPTYPE._serialized_start=41300
+  _DATASETVERSIONMETRICSGROUPTYPE._serialized_end=41549
+  _DATASETVERSIONEXPORTFORMAT._serialized_start=41552
+  _DATASETVERSIONEXPORTFORMAT._serialized_end=41685
+  _EXPIRATIONACTION._serialized_start=41687
+  _EXPIRATIONACTION._serialized_end=41759
+  _LICENSESCOPE._serialized_start=41761
+  _LICENSESCOPE._serialized_end=41838
+  _DATATYPE._serialized_start=41840
+  _DATATYPE._serialized_end=41920
+  _VALUECOMPARATOR._serialized_start=41923
+  _VALUECOMPARATOR._serialized_end=42066
+  _EVALUATIONTYPE._serialized_start=42068
+  _EVALUATIONTYPE._serialized_end=42119
+  _APIEVENTTYPE._serialized_start=42121
+  _APIEVENTTYPE._serialized_end=42223
+  _USAGEINTERVALTYPE._serialized_start=42225
+  _USAGEINTERVALTYPE._serialized_end=42285
+  _ROLETYPE._serialized_start=42287
+  _ROLETYPE._serialized_end=42316
+  _STATVALUEAGGTYPE._serialized_start=42318
+  _STATVALUEAGGTYPE._serialized_end=42354
+  _STATTIMEAGGTYPE._serialized_start=42356
+  _STATTIMEAGGTYPE._serialized_end=42452
+  _VALIDATIONERRORTYPE._serialized_start=42454
+  _VALIDATIONERRORTYPE._serialized_end=42552
   _ANNOTATION._serialized_start=312
   _ANNOTATION._serialized_end=797
   _APP._serialized_start=800
@@ -1687,336 +2205,466 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _AUDIOINFO._serialized_end=1981
   _TRACK._serialized_start=1983
   _TRACK._serialized_end=2102
-  _CLUSTER._serialized_start=2104
-  _CLUSTER._serialized_end=2208
-  _COLOR._serialized_start=2210
-  _COLOR._serialized_end=2287
-  _W3C._serialized_start=2289
-  _W3C._serialized_end=2321
-  _USERAPPIDSET._serialized_start=2323
-  _USERAPPIDSET._serialized_end=2370
-  _PATCHACTION._serialized_start=2372
-  _PATCHACTION._serialized_end=2446
-  _CONCEPT._serialized_start=2449
-  _CONCEPT._serialized_end=2746
-  _KEYPOINTINFO._serialized_start=2748
-  _KEYPOINTINFO._serialized_end=2832
-  _KEYPOINTEDGE._serialized_start=2834
-  _KEYPOINTEDGE._serialized_end=2872
-  _CONCEPTCOUNT._serialized_start=2875
-  _CONCEPTCOUNT._serialized_end=3039
-  _CONCEPTTYPECOUNT._serialized_start=3041
-  _CONCEPTTYPECOUNT._serialized_end=3107
-  _DETAILCONCEPTCOUNT._serialized_start=3110
-  _DETAILCONCEPTCOUNT._serialized_end=3333
-  _CONCEPTQUERY._serialized_start=3335
-  _CONCEPTQUERY._serialized_end=3402
-  _CONCEPTRELATION._serialized_start=3405
-  _CONCEPTRELATION._serialized_end=3622
-  _KNOWLEDGEGRAPH._serialized_start=3624
-  _KNOWLEDGEGRAPH._serialized_end=3745
-  _CONCEPTMAPPINGJOB._serialized_start=3747
-  _CONCEPTMAPPINGJOB._serialized_end=3815
-  _CONCEPTLANGUAGE._serialized_start=3817
-  _CONCEPTLANGUAGE._serialized_end=3880
-  _DATA._serialized_start=3883
-  _DATA._serialized_end=4517
-  _REGION._serialized_start=4520
-  _REGION._serialized_end=4654
-  _REGIONINFO._serialized_start=4657
-  _REGIONINFO._serialized_end=4959
-  _BOUNDINGBOX._serialized_start=4961
-  _BOUNDINGBOX._serialized_end=5072
-  _FRAMEINFO._serialized_start=5074
-  _FRAMEINFO._serialized_end=5126
-  _FRAME._serialized_start=5128
-  _FRAME._serialized_end=5226
-  _MASK._serialized_start=5228
-  _MASK._serialized_end=5276
-  _POLYGON._serialized_start=5278
-  _POLYGON._serialized_end=5324
-  _POINT._serialized_start=5327
-  _POINT._serialized_end=5509
-  _POINT_VISIBILITY._serialized_start=5437
-  _POINT_VISIBILITY._serialized_end=5509
-  _SPAN._serialized_start=5511
-  _SPAN._serialized_end=5585
-  _TOKEN._serialized_start=5587
-  _TOKEN._serialized_end=5662
-  _EMBEDDING._serialized_start=5664
-  _EMBEDDING._serialized_end=5719
-  _GEOPOINT._serialized_start=5721
-  _GEOPOINT._serialized_end=5780
-  _GEOLIMIT._serialized_start=5782
-  _GEOLIMIT._serialized_end=5827
-  _GEOBOXEDPOINT._serialized_start=5829
-  _GEOBOXEDPOINT._serialized_end=5887
-  _GEO._serialized_start=5890
-  _GEO._serialized_end=6027
-  _IMAGE._serialized_start=6030
-  _IMAGE._serialized_end=6187
-  _IMAGEINFO._serialized_start=6189
-  _IMAGEINFO._serialized_end=6267
-  _HOSTEDURL._serialized_start=6269
-  _HOSTEDURL._serialized_end=6348
-  _INPUT._serialized_start=6351
-  _INPUT._serialized_end=6573
-  _INPUTCOUNT._serialized_start=6576
-  _INPUTCOUNT._serialized_end=6794
-  _DATASET._serialized_start=6797
-  _DATASET._serialized_end=7199
-  _ANNOTATIONFILTER._serialized_start=7202
-  _ANNOTATIONFILTER._serialized_end=7418
-  _DATASETINPUT._serialized_start=7420
-  _DATASETINPUT._serialized_end=7518
-  _DATASETVERSION._serialized_start=7521
-  _DATASETVERSION._serialized_end=8266
-  _DATASETVERSION_METRICSENTRY._serialized_start=8150
-  _DATASETVERSION_METRICSENTRY._serialized_end=8233
-  _ANNOTATIONFILTERCONFIG._serialized_start=8268
-  _ANNOTATIONFILTERCONFIG._serialized_end=8351
-  _MODELPREDICTCONFIG._serialized_start=8353
-  _MODELPREDICTCONFIG._serialized_end=8409
-  _DATASETVERSIONMETRICS._serialized_start=8412
-  _DATASETVERSIONMETRICS._serialized_end=9503
-  _DATASETVERSIONMETRICSGROUP._serialized_start=9506
-  _DATASETVERSIONMETRICSGROUP._serialized_end=9708
-  _DATASETVERSIONEXPORTINFO._serialized_start=9711
-  _DATASETVERSIONEXPORTINFO._serialized_end=9919
-  _DATASETVERSIONEXPORT._serialized_start=9922
-  _DATASETVERSIONEXPORT._serialized_end=10074
-  _WORKFLOWRESULTSSIMILARITY._serialized_start=10076
-  _WORKFLOWRESULTSSIMILARITY._serialized_end=10186
-  _KEY._serialized_start=10189
-  _KEY._serialized_end=10433
-  _MODEL._serialized_start=10436
-  _MODEL._serialized_end=11404
-  _MODELREFERENCE._serialized_start=11406
-  _MODELREFERENCE._serialized_end=11522
-  _MODELVERSIONINPUTEXAMPLE._serialized_start=11525
-  _MODELVERSIONINPUTEXAMPLE._serialized_end=11676
-  _OUTPUTINFO._serialized_start=11679
-  _OUTPUTINFO._serialized_end=11891
-  _INPUTINFO._serialized_start=11893
-  _INPUTINFO._serialized_end=11990
-  _TRAININFO._serialized_start=11992
-  _TRAININFO._serialized_end=12044
-  _EVALINFO._serialized_start=12046
-  _EVALINFO._serialized_end=12097
-  _IMPORTINFO._serialized_start=12099
-  _IMPORTINFO._serialized_end=12152
-  _OUTPUTCONFIG._serialized_start=12155
-  _OUTPUTCONFIG._serialized_end=12670
-  _MODELTYPE._serialized_start=12673
-  _MODELTYPE._serialized_end=13097
-  _MODELLAYERINFO._serialized_start=13100
-  _MODELLAYERINFO._serialized_end=13237
-  _LAYERSHAPE._serialized_start=13239
-  _LAYERSHAPE._serialized_end=13347
-  _MODELTYPEFIELD._serialized_start=13350
-  _MODELTYPEFIELD._serialized_end=14072
-  _MODELTYPEFIELD_MODELTYPEFIELDTYPE._serialized_start=13715
-  _MODELTYPEFIELD_MODELTYPEFIELDTYPE._serialized_end=14072
-  _MODELTYPERANGEINFO._serialized_start=14074
-  _MODELTYPERANGEINFO._serialized_end=14134
-  _MODELTYPEENUMOPTION._serialized_start=14137
-  _MODELTYPEENUMOPTION._serialized_end=14328
-  _MODELTYPEENUMOPTIONALIAS._serialized_start=14330
-  _MODELTYPEENUMOPTIONALIAS._serialized_end=14397
-  _MODELQUERY._serialized_start=14399
-  _MODELQUERY._serialized_end=14454
-  _MODELVERSION._serialized_start=14457
-  _MODELVERSION._serialized_end=15067
-  _PRETRAINEDMODELCONFIG._serialized_start=15070
-  _PRETRAINEDMODELCONFIG._serialized_end=15231
-  _TRAINSTATS._serialized_start=15233
-  _TRAINSTATS._serialized_end=15295
-  _LOSSCURVEENTRY._serialized_start=15297
-  _LOSSCURVEENTRY._serialized_end=15363
-  _LABELCOUNT._serialized_start=15365
-  _LABELCOUNT._serialized_end=15414
-  _LABELDISTRIBUTION._serialized_start=15416
-  _LABELDISTRIBUTION._serialized_end=15492
-  _COOCCURRENCEMATRIXENTRY._serialized_start=15494
-  _COOCCURRENCEMATRIXENTRY._serialized_end=15560
-  _COOCCURRENCEMATRIX._serialized_start=15562
-  _COOCCURRENCEMATRIX._serialized_end=15658
-  _CONFUSIONMATRIXENTRY._serialized_start=15660
-  _CONFUSIONMATRIXENTRY._serialized_end=15738
-  _CONFUSIONMATRIX._serialized_start=15740
-  _CONFUSIONMATRIX._serialized_end=15830
-  _ROC._serialized_start=15832
-  _ROC._serialized_end=15948
-  _PRECISIONRECALLCURVE._serialized_start=15950
-  _PRECISIONRECALLCURVE._serialized_end=16045
-  _BINARYMETRICS._serialized_start=16048
-  _BINARYMETRICS._serialized_end=16410
-  _TRACKERMETRICS._serialized_start=16413
-  _TRACKERMETRICS._serialized_end=16558
-  _EVALTESTSETENTRY._serialized_start=16561
-  _EVALTESTSETENTRY._serialized_end=16799
-  _LOPQEVALRESULT._serialized_start=16802
-  _LOPQEVALRESULT._serialized_end=17007
-  _METRICSSUMMARY._serialized_start=17010
-  _METRICSSUMMARY._serialized_end=17406
-  _EVALMETRICS._serialized_start=17409
-  _EVALMETRICS._serialized_end=18011
-  _FIELDSVALUE._serialized_start=18014
-  _FIELDSVALUE._serialized_end=18197
-  _OUTPUT._serialized_start=18200
-  _OUTPUT._serialized_end=18419
-  _SCOPEDEPS._serialized_start=18421
-  _SCOPEDEPS._serialized_end=18473
-  _ENDPOINTDEPS._serialized_start=18475
-  _ENDPOINTDEPS._serialized_end=18533
-  _HIT._serialized_start=18536
-  _HIT._serialized_end=18677
-  _AND._serialized_start=18680
-  _AND._serialized_end=18821
-  _QUERY._serialized_start=18824
-  _QUERY._serialized_end=18956
-  _SEARCH._serialized_start=18959
-  _SEARCH._serialized_end=19309
-  _FILTER._serialized_start=19312
-  _FILTER._serialized_end=19476
-  _TIMERANGE._serialized_start=19478
-  _TIMERANGE._serialized_end=19583
-  _RANK._serialized_start=19585
-  _RANK._serialized_end=19653
-  _ANNOTATIONSEARCHMETRICS._serialized_start=19656
-  _ANNOTATIONSEARCHMETRICS._serialized_end=19925
-  _TEXT._serialized_start=19928
-  _TEXT._serialized_end=20073
-  _TEXTINFO._serialized_start=20075
-  _TEXTINFO._serialized_end=20123
-  _USER._serialized_start=20126
-  _USER._serialized_end=20890
-  _USERDETAIL._serialized_start=20893
-  _USERDETAIL._serialized_end=21358
-  _EMAILADDRESS._serialized_start=21360
-  _EMAILADDRESS._serialized_end=21442
-  _PASSWORD._serialized_start=21444
-  _PASSWORD._serialized_end=21473
-  _PASSWORDVIOLATIONS._serialized_start=21476
-  _PASSWORDVIOLATIONS._serialized_end=21866
-  _VIDEO._serialized_start=21869
-  _VIDEO._serialized_end=22043
-  _VIDEOINFO._serialized_start=22046
-  _VIDEOINFO._serialized_end=22188
-  _WORKFLOW._serialized_start=22191
-  _WORKFLOW._serialized_end=22654
-  _WORKFLOWVERSION._serialized_start=22657
-  _WORKFLOWVERSION._serialized_end=23007
-  _WORKFLOWNODE._serialized_start=23010
-  _WORKFLOWNODE._serialized_end=23143
-  _NODEINPUT._serialized_start=23145
-  _NODEINPUT._serialized_end=23173
-  _WORKFLOWRESULT._serialized_start=23176
-  _WORKFLOWRESULT._serialized_end=23433
-  _WORKFLOWSTATE._serialized_start=23435
-  _WORKFLOWSTATE._serialized_end=23462
-  _APPDUPLICATION._serialized_start=23465
-  _APPDUPLICATION._serialized_end=23809
-  _APPCOPYPROGRESS._serialized_start=23811
-  _APPCOPYPROGRESS._serialized_end=23858
-  _APPDUPLICATIONFILTERS._serialized_start=23861
-  _APPDUPLICATIONFILTERS._serialized_end=23999
-  _LABELORDER._serialized_start=24002
-  _LABELORDER._serialized_end=24380
-  _TASK._serialized_start=24383
-  _TASK._serialized_end=25124
-  _TASK_TASKTYPE._serialized_start=25016
-  _TASK_TASKTYPE._serialized_end=25124
-  _AIASSISTPARAMETERS._serialized_start=25126
-  _AIASSISTPARAMETERS._serialized_end=25222
-  _TASKWORKER._serialized_start=25225
-  _TASKWORKER._serialized_end=25544
-  _TASKWORKER_TASKWORKERSTRATEGY._serialized_start=25445
-  _TASKWORKER_TASKWORKERSTRATEGY._serialized_end=25527
-  _TASKWORKERPARTITIONEDSTRATEGYINFO._serialized_start=25547
-  _TASKWORKERPARTITIONEDSTRATEGYINFO._serialized_end=25844
-  _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY._serialized_start=25746
-  _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY._serialized_end=25844
-  _TASKINPUTSOURCE._serialized_start=25847
-  _TASKINPUTSOURCE._serialized_end=26042
-  _TASKINPUTSOURCE_TASKINPUTSOURCETYPE._serialized_start=25943
-  _TASKINPUTSOURCE_TASKINPUTSOURCETYPE._serialized_end=26042
-  _TASKREVIEW._serialized_start=26045
-  _TASKREVIEW._serialized_end=26445
-  _TASKREVIEW_TASKREVIEWSTRATEGY._serialized_start=26337
-  _TASKREVIEW_TASKREVIEWSTRATEGY._serialized_end=26428
-  _TASKREVIEWMANUALSTRATEGYINFO._serialized_start=26447
-  _TASKREVIEWMANUALSTRATEGYINFO._serialized_end=26504
-  _TASKREVIEWCONSENSUSSTRATEGYINFO._serialized_start=26506
-  _TASKREVIEWCONSENSUSSTRATEGYINFO._serialized_end=26573
-  _TASKAIASSISTANT._serialized_start=26575
-  _TASKAIASSISTANT._serialized_end=26613
-  _TASKSTATUSCOUNTPERUSER._serialized_start=26616
-  _TASKSTATUSCOUNTPERUSER._serialized_end=26804
-  _COLLECTOR._serialized_start=26807
-  _COLLECTOR._serialized_end=27064
-  _COLLECTORSOURCE._serialized_start=27066
-  _COLLECTORSOURCE._serialized_end=27182
-  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE._serialized_start=27185
-  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE._serialized_end=27338
-  _STATVALUE._serialized_start=27340
-  _STATVALUE._serialized_end=27422
-  _STATVALUEAGGREGATERESULT._serialized_start=27425
-  _STATVALUEAGGREGATERESULT._serialized_end=27591
-  _STATVALUEAGGREGATE._serialized_start=27593
-  _STATVALUEAGGREGATE._serialized_end=27709
-  _STATVALUEAGGREGATEQUERY._serialized_start=27712
-  _STATVALUEAGGREGATEQUERY._serialized_end=27985
-  _DATASETINPUTSSEARCHADDJOB._serialized_start=27988
-  _DATASETINPUTSSEARCHADDJOB._serialized_end=28227
-  _VISIBILITY._serialized_start=28230
-  _VISIBILITY._serialized_end=28365
-  _VISIBILITY_GETTABLE._serialized_start=28297
-  _VISIBILITY_GETTABLE._serialized_end=28365
-  _TRENDINGMETRIC._serialized_start=28367
-  _TRENDINGMETRIC._serialized_end=28455
-  _FULLTAG._serialized_start=28457
-  _FULLTAG._serialized_end=28492
-  _TIMESEGMENT._serialized_start=28494
-  _TIMESEGMENT._serialized_end=28596
-  _TIMEINFO._serialized_start=28598
-  _TIMEINFO._serialized_end=28666
-  _MODULE._serialized_start=28669
-  _MODULE._serialized_end=28935
-  _MODULEVERSION._serialized_start=28938
-  _MODULEVERSION._serialized_end=29512
-  _MODULEVERSION_MODULESUBNAV._serialized_start=29342
-  _MODULEVERSION_MODULESUBNAV._serialized_end=29411
-  _MODULEVERSION_MODULENAV._serialized_start=29413
-  _MODULEVERSION_MODULENAV._serialized_end=29506
-  _INSTALLEDMODULEVERSION._serialized_start=29515
-  _INSTALLEDMODULEVERSION._serialized_end=29816
-  _BULKOPERATION._serialized_start=29819
-  _BULKOPERATION._serialized_end=30216
-  _INPUTIDS._serialized_start=30218
-  _INPUTIDS._serialized_end=30247
-  _PROGRESS._serialized_start=30249
-  _PROGRESS._serialized_end=30305
-  _OPERATION._serialized_start=30308
-  _OPERATION._serialized_end=30648
-  _ADDCONCEPTS._serialized_start=30650
-  _ADDCONCEPTS._serialized_end=30704
-  _DELETECONCEPTS._serialized_start=30706
-  _DELETECONCEPTS._serialized_end=30763
-  _ADDMETADATA._serialized_start=30765
-  _ADDMETADATA._serialized_end=30821
-  _DELETEMETADATA._serialized_start=30823
-  _DELETEMETADATA._serialized_end=30882
-  _OVERWRITEGEO._serialized_start=30884
-  _OVERWRITEGEO._serialized_end=30930
-  _DELETEGEO._serialized_start=30932
-  _DELETEGEO._serialized_end=30943
-  _INPUTSADDJOB._serialized_start=30946
-  _INPUTSADDJOB._serialized_end=31202
-  _INPUTSADDJOBPROGRESS._serialized_start=31204
-  _INPUTSADDJOBPROGRESS._serialized_end=31321
-  _UPLOAD._serialized_start=31324
-  _UPLOAD._serialized_end=31601
-  _UPLOADCONTENTPART._serialized_start=31603
-  _UPLOADCONTENTPART._serialized_end=31678
+  _BILLINGCYCLE._serialized_start=2104
+  _BILLINGCYCLE._serialized_end=2230
+  _USAGECYCLE._serialized_start=2233
+  _USAGECYCLE._serialized_end=2378
+  _INVOICEITEM._serialized_start=2380
+  _INVOICEITEM._serialized_end=2498
+  _CLUSTER._serialized_start=2500
+  _CLUSTER._serialized_end=2604
+  _COLOR._serialized_start=2606
+  _COLOR._serialized_end=2683
+  _W3C._serialized_start=2685
+  _W3C._serialized_end=2717
+  _USERAPPIDSET._serialized_start=2719
+  _USERAPPIDSET._serialized_end=2766
+  _PATCHACTION._serialized_start=2768
+  _PATCHACTION._serialized_end=2842
+  _CONCEPT._serialized_start=2845
+  _CONCEPT._serialized_end=3142
+  _KEYPOINTINFO._serialized_start=3144
+  _KEYPOINTINFO._serialized_end=3228
+  _KEYPOINTEDGE._serialized_start=3230
+  _KEYPOINTEDGE._serialized_end=3268
+  _CONCEPTCOUNT._serialized_start=3271
+  _CONCEPTCOUNT._serialized_end=3435
+  _CONCEPTTYPECOUNT._serialized_start=3437
+  _CONCEPTTYPECOUNT._serialized_end=3503
+  _DETAILCONCEPTCOUNT._serialized_start=3506
+  _DETAILCONCEPTCOUNT._serialized_end=3729
+  _CONCEPTQUERY._serialized_start=3731
+  _CONCEPTQUERY._serialized_end=3798
+  _CONCEPTRELATION._serialized_start=3801
+  _CONCEPTRELATION._serialized_end=4018
+  _KNOWLEDGEGRAPH._serialized_start=4020
+  _KNOWLEDGEGRAPH._serialized_end=4141
+  _CONCEPTMAPPING._serialized_start=4144
+  _CONCEPTMAPPING._serialized_end=4326
+  _CONCEPTMAPPINGJOB._serialized_start=4328
+  _CONCEPTMAPPINGJOB._serialized_end=4396
+  _CONCEPTLANGUAGE._serialized_start=4398
+  _CONCEPTLANGUAGE._serialized_end=4461
+  _CONCEPTREFERENCE._serialized_start=4464
+  _CONCEPTREFERENCE._serialized_end=4595
+  _DATA._serialized_start=4598
+  _DATA._serialized_end=5232
+  _DATABATCH._serialized_start=5234
+  _DATABATCH._serialized_end=5279
+  _REGION._serialized_start=5282
+  _REGION._serialized_end=5416
+  _REGIONINFO._serialized_start=5419
+  _REGIONINFO._serialized_end=5721
+  _BOUNDINGBOX._serialized_start=5723
+  _BOUNDINGBOX._serialized_end=5834
+  _FRAMEINFO._serialized_start=5836
+  _FRAMEINFO._serialized_end=5888
+  _FRAME._serialized_start=5890
+  _FRAME._serialized_end=5988
+  _MASK._serialized_start=5990
+  _MASK._serialized_end=6038
+  _POLYGON._serialized_start=6040
+  _POLYGON._serialized_end=6086
+  _POINT._serialized_start=6089
+  _POINT._serialized_end=6271
+  _POINT_VISIBILITY._serialized_start=6199
+  _POINT_VISIBILITY._serialized_end=6271
+  _SPAN._serialized_start=6273
+  _SPAN._serialized_end=6347
+  _TOKEN._serialized_start=6349
+  _TOKEN._serialized_end=6424
+  _EMBEDDING._serialized_start=6426
+  _EMBEDDING._serialized_end=6481
+  _GEOPOINT._serialized_start=6483
+  _GEOPOINT._serialized_end=6542
+  _GEOLIMIT._serialized_start=6544
+  _GEOLIMIT._serialized_end=6589
+  _GEOBOXEDPOINT._serialized_start=6591
+  _GEOBOXEDPOINT._serialized_end=6649
+  _GEO._serialized_start=6652
+  _GEO._serialized_end=6789
+  _IMAGE._serialized_start=6792
+  _IMAGE._serialized_end=6949
+  _IMAGEINFO._serialized_start=6951
+  _IMAGEINFO._serialized_end=7029
+  _HOSTEDURL._serialized_start=7031
+  _HOSTEDURL._serialized_end=7110
+  _INPUT._serialized_start=7113
+  _INPUT._serialized_end=7335
+  _INPUTCOUNT._serialized_start=7338
+  _INPUTCOUNT._serialized_end=7556
+  _DATASET._serialized_start=7559
+  _DATASET._serialized_end=7961
+  _ANNOTATIONFILTER._serialized_start=7964
+  _ANNOTATIONFILTER._serialized_end=8180
+  _DATASETINPUT._serialized_start=8182
+  _DATASETINPUT._serialized_end=8280
+  _DATASETVERSION._serialized_start=8283
+  _DATASETVERSION._serialized_end=9028
+  _DATASETVERSION_METRICSENTRY._serialized_start=8912
+  _DATASETVERSION_METRICSENTRY._serialized_end=8995
+  _ANNOTATIONFILTERCONFIG._serialized_start=9030
+  _ANNOTATIONFILTERCONFIG._serialized_end=9113
+  _MODELPREDICTCONFIG._serialized_start=9115
+  _MODELPREDICTCONFIG._serialized_end=9171
+  _DATASETVERSIONMETRICS._serialized_start=9174
+  _DATASETVERSIONMETRICS._serialized_end=10265
+  _DATASETVERSIONMETRICSGROUP._serialized_start=10268
+  _DATASETVERSIONMETRICSGROUP._serialized_end=10470
+  _DATASETVERSIONEXPORTINFO._serialized_start=10473
+  _DATASETVERSIONEXPORTINFO._serialized_end=10681
+  _DATASETVERSIONEXPORT._serialized_start=10684
+  _DATASETVERSIONEXPORT._serialized_end=10836
+  _WORKFLOWRESULTSSIMILARITY._serialized_start=10838
+  _WORKFLOWRESULTSSIMILARITY._serialized_end=10948
+  _KEY._serialized_start=10951
+  _KEY._serialized_end=11195
+  _LICENSELIMIT._serialized_start=11198
+  _LICENSELIMIT._serialized_end=11376
+  _LICENSE._serialized_start=11379
+  _LICENSE._serialized_end=11677
+  _MODEL._serialized_start=11680
+  _MODEL._serialized_end=12664
+  _MODELREFERENCE._serialized_start=12666
+  _MODELREFERENCE._serialized_end=12782
+  _MODELVERSIONINPUTEXAMPLE._serialized_start=12785
+  _MODELVERSIONINPUTEXAMPLE._serialized_end=12936
+  _OUTPUTINFO._serialized_start=12939
+  _OUTPUTINFO._serialized_end=13151
+  _INPUTINFO._serialized_start=13153
+  _INPUTINFO._serialized_end=13250
+  _TRAININFO._serialized_start=13252
+  _TRAININFO._serialized_end=13304
+  _EVALINFO._serialized_start=13306
+  _EVALINFO._serialized_end=13357
+  _IMPORTINFO._serialized_start=13359
+  _IMPORTINFO._serialized_end=13412
+  _OUTPUTCONFIG._serialized_start=13415
+  _OUTPUTCONFIG._serialized_end=13930
+  _MODELTYPE._serialized_start=13933
+  _MODELTYPE._serialized_end=14357
+  _MODELLAYERINFO._serialized_start=14360
+  _MODELLAYERINFO._serialized_end=14497
+  _LAYERSHAPE._serialized_start=14499
+  _LAYERSHAPE._serialized_end=14607
+  _MODELTYPEFIELD._serialized_start=14610
+  _MODELTYPEFIELD._serialized_end=15332
+  _MODELTYPEFIELD_MODELTYPEFIELDTYPE._serialized_start=14975
+  _MODELTYPEFIELD_MODELTYPEFIELDTYPE._serialized_end=15332
+  _MODELTYPERANGEINFO._serialized_start=15334
+  _MODELTYPERANGEINFO._serialized_end=15394
+  _MODELTYPEENUMOPTION._serialized_start=15397
+  _MODELTYPEENUMOPTION._serialized_end=15588
+  _MODELTYPEENUMOPTIONALIAS._serialized_start=15590
+  _MODELTYPEENUMOPTIONALIAS._serialized_end=15657
+  _MODELQUERY._serialized_start=15659
+  _MODELQUERY._serialized_end=15714
+  _MODELVERSION._serialized_start=15717
+  _MODELVERSION._serialized_end=16564
+  _PRETRAINEDMODELCONFIG._serialized_start=16567
+  _PRETRAINEDMODELCONFIG._serialized_end=16771
+  _TRAINSTATS._serialized_start=16773
+  _TRAINSTATS._serialized_end=16835
+  _LOSSCURVEENTRY._serialized_start=16837
+  _LOSSCURVEENTRY._serialized_end=16903
+  _LABELCOUNT._serialized_start=16905
+  _LABELCOUNT._serialized_end=16954
+  _LABELDISTRIBUTION._serialized_start=16956
+  _LABELDISTRIBUTION._serialized_end=17032
+  _COOCCURRENCEMATRIXENTRY._serialized_start=17034
+  _COOCCURRENCEMATRIXENTRY._serialized_end=17100
+  _COOCCURRENCEMATRIX._serialized_start=17102
+  _COOCCURRENCEMATRIX._serialized_end=17198
+  _CONFUSIONMATRIXENTRY._serialized_start=17200
+  _CONFUSIONMATRIXENTRY._serialized_end=17278
+  _CONFUSIONMATRIX._serialized_start=17280
+  _CONFUSIONMATRIX._serialized_end=17370
+  _ROC._serialized_start=17372
+  _ROC._serialized_end=17488
+  _PRECISIONRECALLCURVE._serialized_start=17490
+  _PRECISIONRECALLCURVE._serialized_end=17585
+  _BINARYMETRICS._serialized_start=17588
+  _BINARYMETRICS._serialized_end=17950
+  _TRACKERMETRICS._serialized_start=17953
+  _TRACKERMETRICS._serialized_end=18098
+  _EVALTESTSETENTRY._serialized_start=18101
+  _EVALTESTSETENTRY._serialized_end=18339
+  _LOPQEVALRESULT._serialized_start=18342
+  _LOPQEVALRESULT._serialized_end=18547
+  _METRICSSUMMARY._serialized_start=18550
+  _METRICSSUMMARY._serialized_end=18946
+  _EVALMETRICS._serialized_start=18949
+  _EVALMETRICS._serialized_end=19551
+  _FIELDSVALUE._serialized_start=19554
+  _FIELDSVALUE._serialized_end=19737
+  _OUTPUT._serialized_start=19740
+  _OUTPUT._serialized_end=19959
+  _SCOPEDEPS._serialized_start=19961
+  _SCOPEDEPS._serialized_end=20013
+  _ENDPOINTDEPS._serialized_start=20015
+  _ENDPOINTDEPS._serialized_end=20073
+  _HIT._serialized_start=20076
+  _HIT._serialized_end=20217
+  _AND._serialized_start=20220
+  _AND._serialized_end=20361
+  _ATTRIBUTEMIXIN._serialized_start=20363
+  _ATTRIBUTEMIXIN._serialized_end=20476
+  _ATTRIBUTEQUERY._serialized_start=20478
+  _ATTRIBUTEQUERY._serialized_end=20586
+  _QUERY._serialized_start=20589
+  _QUERY._serialized_end=20725
+  _SEARCH._serialized_start=20728
+  _SEARCH._serialized_end=21078
+  _FILTER._serialized_start=21081
+  _FILTER._serialized_end=21245
+  _TIMERANGE._serialized_start=21247
+  _TIMERANGE._serialized_end=21352
+  _RANK._serialized_start=21354
+  _RANK._serialized_end=21422
+  _ANNOTATIONSEARCHMETRICS._serialized_start=21425
+  _ANNOTATIONSEARCHMETRICS._serialized_end=21694
+  _PLAN._serialized_start=21696
+  _PLAN._serialized_end=21728
+  _CREDITCARD._serialized_start=21731
+  _CREDITCARD._serialized_end=22069
+  _SHIPPINGADDRESS._serialized_start=22072
+  _SHIPPINGADDRESS._serialized_end=22305
+  _TEXT._serialized_start=22308
+  _TEXT._serialized_end=22453
+  _TEXTINFO._serialized_start=22455
+  _TEXTINFO._serialized_end=22503
+  _OPCOUNTBYDATE._serialized_start=22506
+  _OPCOUNTBYDATE._serialized_end=22674
+  _DIMENSIONLIST._serialized_start=22677
+  _DIMENSIONLIST._serialized_end=22923
+  _DIMENSIONLIST_DIMENSIONENTRY._serialized_start=22875
+  _DIMENSIONLIST_DIMENSIONENTRY._serialized_end=22923
+  _USAGEINTERVAL._serialized_start=22925
+  _USAGEINTERVAL._serialized_end=22973
+  _REALTIMECOUNT._serialized_start=22975
+  _REALTIMECOUNT._serialized_end=23028
+  _EVENTSUMMARY._serialized_start=23030
+  _EVENTSUMMARY._serialized_end=23143
+  _EVENTSCOLLECTION._serialized_start=23146
+  _EVENTSCOLLECTION._serialized_end=23311
+  _USER._serialized_start=23314
+  _USER._serialized_end=24078
+  _USERDETAIL._serialized_start=24081
+  _USERDETAIL._serialized_end=24546
+  _EMAILADDRESS._serialized_start=24548
+  _EMAILADDRESS._serialized_end=24630
+  _USERPASSWORD._serialized_start=24632
+  _USERPASSWORD._serialized_end=24686
+  _USERINFO._serialized_start=24689
+  _USERINFO._serialized_end=24898
+  _PASSWORD._serialized_start=24900
+  _PASSWORD._serialized_end=24929
+  _USERACCESS._serialized_start=24931
+  _USERACCESS._serialized_end=25028
+  _PASSWORDPOLICY._serialized_start=25031
+  _PASSWORDPOLICY._serialized_end=25483
+  _PASSWORDVIOLATIONS._serialized_start=25486
+  _PASSWORDVIOLATIONS._serialized_end=25876
+  _VIDEO._serialized_start=25879
+  _VIDEO._serialized_end=26053
+  _VIDEOINFO._serialized_start=26056
+  _VIDEOINFO._serialized_end=26198
+  _VOCAB._serialized_start=26201
+  _VOCAB._serialized_end=26365
+  _WORKFLOW._serialized_start=26368
+  _WORKFLOW._serialized_end=26831
+  _WORKFLOWVERSION._serialized_start=26834
+  _WORKFLOWVERSION._serialized_end=27184
+  _WORKFLOWNODE._serialized_start=27187
+  _WORKFLOWNODE._serialized_end=27320
+  _NODEINPUT._serialized_start=27322
+  _NODEINPUT._serialized_end=27350
+  _WORKFLOWRESULT._serialized_start=27353
+  _WORKFLOWRESULT._serialized_end=27610
+  _WORKFLOWMETRICS._serialized_start=27613
+  _WORKFLOWMETRICS._serialized_end=28078
+  _WORKFLOWMETRICS_NODEMETRICSENTRY._serialized_start=28001
+  _WORKFLOWMETRICS_NODEMETRICSENTRY._serialized_end=28078
+  _WORKFLOWSTATE._serialized_start=28080
+  _WORKFLOWSTATE._serialized_end=28107
+  _APPDUPLICATION._serialized_start=28110
+  _APPDUPLICATION._serialized_end=28454
+  _APPCOPYPROGRESS._serialized_start=28456
+  _APPCOPYPROGRESS._serialized_end=28503
+  _APPDUPLICATIONFILTERS._serialized_start=28506
+  _APPDUPLICATIONFILTERS._serialized_end=28644
+  _LABELORDER._serialized_start=28647
+  _LABELORDER._serialized_end=29025
+  _TASK._serialized_start=29028
+  _TASK._serialized_end=29769
+  _TASK_TASKTYPE._serialized_start=29661
+  _TASK_TASKTYPE._serialized_end=29769
+  _AIASSISTPARAMETERS._serialized_start=29771
+  _AIASSISTPARAMETERS._serialized_end=29867
+  _TASKWORKER._serialized_start=29870
+  _TASKWORKER._serialized_end=30189
+  _TASKWORKER_TASKWORKERSTRATEGY._serialized_start=30090
+  _TASKWORKER_TASKWORKERSTRATEGY._serialized_end=30172
+  _TASKWORKERPARTITIONEDSTRATEGYINFO._serialized_start=30192
+  _TASKWORKERPARTITIONEDSTRATEGYINFO._serialized_end=30489
+  _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY._serialized_start=30391
+  _TASKWORKERPARTITIONEDSTRATEGYINFO_TASKWORKERPARTITIONEDSTRATEGY._serialized_end=30489
+  _TASKINPUTSOURCE._serialized_start=30492
+  _TASKINPUTSOURCE._serialized_end=30687
+  _TASKINPUTSOURCE_TASKINPUTSOURCETYPE._serialized_start=30588
+  _TASKINPUTSOURCE_TASKINPUTSOURCETYPE._serialized_end=30687
+  _TASKREVIEW._serialized_start=30690
+  _TASKREVIEW._serialized_end=31090
+  _TASKREVIEW_TASKREVIEWSTRATEGY._serialized_start=30982
+  _TASKREVIEW_TASKREVIEWSTRATEGY._serialized_end=31073
+  _TASKREVIEWMANUALSTRATEGYINFO._serialized_start=31092
+  _TASKREVIEWMANUALSTRATEGYINFO._serialized_end=31149
+  _TASKREVIEWCONSENSUSSTRATEGYINFO._serialized_start=31151
+  _TASKREVIEWCONSENSUSSTRATEGYINFO._serialized_end=31218
+  _TASKAIASSISTANT._serialized_start=31220
+  _TASKAIASSISTANT._serialized_end=31258
+  _TASKSTATUSCOUNTPERUSER._serialized_start=31261
+  _TASKSTATUSCOUNTPERUSER._serialized_end=31449
+  _ROLE._serialized_start=31452
+  _ROLE._serialized_end=31675
+  _ORGANIZATION._serialized_start=31678
+  _ORGANIZATION._serialized_end=31838
+  _ORGANIZATIONMEMBER._serialized_start=31841
+  _ORGANIZATIONMEMBER._serialized_end=31977
+  _IDENTITYPROVIDER._serialized_start=31980
+  _IDENTITYPROVIDER._serialized_end=32317
+  _TEAM._serialized_start=32320
+  _TEAM._serialized_end=32449
+  _TEAMUSER._serialized_start=32452
+  _TEAMUSER._serialized_end=32583
+  _ORGANIZATIONINVITATION._serialized_start=32586
+  _ORGANIZATIONINVITATION._serialized_end=32955
+  _COLLECTOR._serialized_start=32958
+  _COLLECTOR._serialized_end=33215
+  _COLLECTORSOURCE._serialized_start=33217
+  _COLLECTORSOURCE._serialized_end=33333
+  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE._serialized_start=33336
+  _APIPOSTMODELOUTPUTSCOLLECTORSOURCE._serialized_end=33519
+  _STATVALUE._serialized_start=33521
+  _STATVALUE._serialized_end=33603
+  _STATVALUEAGGREGATERESULT._serialized_start=33606
+  _STATVALUEAGGREGATERESULT._serialized_end=33772
+  _STATVALUEAGGREGATE._serialized_start=33774
+  _STATVALUEAGGREGATE._serialized_end=33890
+  _STATVALUEAGGREGATEQUERY._serialized_start=33893
+  _STATVALUEAGGREGATEQUERY._serialized_end=34166
+  _AUTHMETHOD._serialized_start=34169
+  _AUTHMETHOD._serialized_end=34447
+  _AUTHMETHOD_AUTHMETHODTYPE._serialized_start=34366
+  _AUTHMETHOD_AUTHMETHODTYPE._serialized_end=34447
+  _TWOFACTORAUTHMETHOD._serialized_start=34450
+  _TWOFACTORAUTHMETHOD._serialized_end=34642
+  _TWOFACTORAUTHMETHOD_AUTHMETHODTYPE._serialized_start=34586
+  _TWOFACTORAUTHMETHOD_AUTHMETHODTYPE._serialized_end=34642
+  _SDKBILLINGCYCLE._serialized_start=34644
+  _SDKBILLINGCYCLE._serialized_end=34690
+  _DEVICEINFO._serialized_start=34692
+  _DEVICEINFO._serialized_end=34734
+  _SDKEVENTSUMMARY._serialized_start=34737
+  _SDKEVENTSUMMARY._serialized_end=35596
+  _SDKEVENTSUMMARY_RUNNINGMODE._serialized_start=35045
+  _SDKEVENTSUMMARY_RUNNINGMODE._serialized_end=35107
+  _SDKEVENTSUMMARY_NETWORKCONNECTIVITY._serialized_start=35109
+  _SDKEVENTSUMMARY_NETWORKCONNECTIVITY._serialized_end=35186
+  _SDKEVENTSUMMARY_ANALYTICSEVENTTYPE._serialized_start=35189
+  _SDKEVENTSUMMARY_ANALYTICSEVENTTYPE._serialized_end=35596
+  _SDKEVENTSCOLLECTION._serialized_start=35599
+  _SDKEVENTSCOLLECTION._serialized_end=35780
+  _HOSTAPPINFO._serialized_start=35782
+  _HOSTAPPINFO._serialized_end=35851
+  _OPERATINGSYSTEM._serialized_start=35853
+  _OPERATINGSYSTEM._serialized_end=35901
+  _SDK._serialized_start=35903
+  _SDK._serialized_end=35940
+  _STATE._serialized_start=35943
+  _STATE._serialized_end=36253
+  _STATE_RUNNINGENVIRONMENT._serialized_start=36167
+  _STATE_RUNNINGENVIRONMENT._serialized_end=36253
+  _FINDDUPLICATEANNOTATIONSJOB._serialized_start=36256
+  _FINDDUPLICATEANNOTATIONSJOB._serialized_end=36455
+  _DATASETINPUTSSEARCHADDJOB._serialized_start=36458
+  _DATASETINPUTSSEARCHADDJOB._serialized_end=36697
+  _PCAPROJECTIONCOMPARATOR._serialized_start=36699
+  _PCAPROJECTIONCOMPARATOR._serialized_end=36778
+  _DUPLICATEANNOTATIONSRESULTS._serialized_start=36780
+  _DUPLICATEANNOTATIONSRESULTS._serialized_end=36855
+  _VISIBILITY._serialized_start=36858
+  _VISIBILITY._serialized_end=36993
+  _VISIBILITY_GETTABLE._serialized_start=36925
+  _VISIBILITY_GETTABLE._serialized_end=36993
+  _TRENDINGMETRIC._serialized_start=36995
+  _TRENDINGMETRIC._serialized_end=37083
+  _VALIDATIONERROR._serialized_start=37085
+  _VALIDATIONERROR._serialized_end=37186
+  _VALIDATION._serialized_start=37188
+  _VALIDATION._serialized_end=37273
+  _VALIDATIONRESULT._serialized_start=37276
+  _VALIDATIONRESULT._serialized_end=37412
+  _TAGCATEGORY._serialized_start=37414
+  _TAGCATEGORY._serialized_end=37524
+  _FULLTAG._serialized_start=37526
+  _FULLTAG._serialized_end=37561
+  _TIMESEGMENT._serialized_start=37563
+  _TIMESEGMENT._serialized_end=37665
+  _TIMEINFO._serialized_start=37667
+  _TIMEINFO._serialized_end=37735
+  _MODELSTAR._serialized_start=37737
+  _MODELSTAR._serialized_end=37766
+  _USERSTAR._serialized_start=37768
+  _USERSTAR._serialized_end=37795
+  _APPSTAR._serialized_start=37797
+  _APPSTAR._serialized_end=37822
+  _WORKFLOWSTAR._serialized_start=37824
+  _WORKFLOWSTAR._serialized_end=37859
+  _WEBNOTIFICATION._serialized_start=37862
+  _WEBNOTIFICATION._serialized_end=38037
+  _PATCHWEBNOTIFICATION._serialized_start=38039
+  _PATCHWEBNOTIFICATION._serialized_end=38090
+  _MODULE._serialized_start=38093
+  _MODULE._serialized_end=38412
+  _MODULEVERSION._serialized_start=38415
+  _MODULEVERSION._serialized_end=38989
+  _MODULEVERSION_MODULESUBNAV._serialized_start=38819
+  _MODULEVERSION_MODULESUBNAV._serialized_end=38888
+  _MODULEVERSION_MODULENAV._serialized_start=38890
+  _MODULEVERSION_MODULENAV._serialized_end=38983
+  _INSTALLEDMODULEVERSION._serialized_start=38992
+  _INSTALLEDMODULEVERSION._serialized_end=39293
+  _BULKOPERATION._serialized_start=39296
+  _BULKOPERATION._serialized_end=39693
+  _INPUTIDS._serialized_start=39695
+  _INPUTIDS._serialized_end=39724
+  _PROGRESS._serialized_start=39726
+  _PROGRESS._serialized_end=39782
+  _OPERATION._serialized_start=39785
+  _OPERATION._serialized_end=40125
+  _ADDCONCEPTS._serialized_start=40127
+  _ADDCONCEPTS._serialized_end=40181
+  _DELETECONCEPTS._serialized_start=40183
+  _DELETECONCEPTS._serialized_end=40240
+  _ADDMETADATA._serialized_start=40242
+  _ADDMETADATA._serialized_end=40298
+  _DELETEMETADATA._serialized_start=40300
+  _DELETEMETADATA._serialized_end=40359
+  _OVERWRITEGEO._serialized_start=40361
+  _OVERWRITEGEO._serialized_end=40407
+  _DELETEGEO._serialized_start=40409
+  _DELETEGEO._serialized_end=40420
+  _WAITLISTEMAIL._serialized_start=40422
+  _WAITLISTEMAIL._serialized_end=40452
+  _INPUTSADDJOB._serialized_start=40455
+  _INPUTSADDJOB._serialized_end=40711
+  _INPUTSADDJOBPROGRESS._serialized_start=40713
+  _INPUTSADDJOBPROGRESS._serialized_end=40830
+  _UPLOAD._serialized_start=40833
+  _UPLOAD._serialized_end=41110
+  _UPLOADCONTENTPART._serialized_start=41112
+  _UPLOADCONTENTPART._serialized_end=41187
+  _CUSTOMCODEOPERATORREQUEST._serialized_start=41189
+  _CUSTOMCODEOPERATORREQUEST._serialized_end=41297
 # @@protoc_insertion_point(module_scope)

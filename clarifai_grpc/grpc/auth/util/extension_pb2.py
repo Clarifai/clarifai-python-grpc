@@ -17,7 +17,7 @@ from clarifai_grpc.grpc.auth.types import types_pb2 as proto_dot_clarifai_dot_au
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(proto/clarifai/auth/util/extension.proto\x12\x12\x63larifai.auth.util\x1a%proto/clarifai/auth/scope/scope.proto\x1a%proto/clarifai/auth/types/types.proto\x1a google/protobuf/descriptor.proto:9\n\x10\x63l_private_field\x12\x1d.google.protobuf.FieldOptions\x18\xc0\xf3\x04 \x01(\x08:8\n\x0e\x63l_private_rpc\x12\x1e.google.protobuf.MethodOptions\x18\xc1\xf3\x04 \x01(\x08:U\n\x13\x63l_depending_scopes\x12\x1e.google.protobuf.MethodOptions\x18\xc2\xf3\x04 \x03(\x0e\x32\x16.clarifai.auth.scope.S:U\n\x0c\x63l_auth_type\x12\x1e.google.protobuf.MethodOptions\x18\xc3\xf3\x04 \x01(\x0e\x32\x1d.clarifai.auth.types.AuthType:=\n\x12\x63l_private_message\x12\x1f.google.protobuf.MessageOptions\x18\xc4\xf3\x04 \x01(\x08\x42\x65\n\x1b\x63om.clarifai.grpc.auth.utilP\x01Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/util\xa2\x02\x04\x43\x41IPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n(proto/clarifai/auth/util/extension.proto\x12\x12\x63larifai.auth.util\x1a%proto/clarifai/auth/scope/scope.proto\x1a%proto/clarifai/auth/types/types.proto\x1a google/protobuf/descriptor.proto:9\n\x10\x63l_private_field\x12\x1d.google.protobuf.FieldOptions\x18\xc0\xf3\x04 \x01(\x08:8\n\x0e\x63l_private_rpc\x12\x1e.google.protobuf.MethodOptions\x18\xc1\xf3\x04 \x01(\x08:U\n\x13\x63l_depending_scopes\x12\x1e.google.protobuf.MethodOptions\x18\xc2\xf3\x04 \x03(\x0e\x32\x16.clarifai.auth.scope.S:U\n\x0c\x63l_auth_type\x12\x1e.google.protobuf.MethodOptions\x18\xc3\xf3\x04 \x01(\x0e\x32\x1d.clarifai.auth.types.AuthType:=\n\x12\x63l_private_message\x12\x1f.google.protobuf.MessageOptions\x18\xc4\xf3\x04 \x01(\x08\x42:\n\x1b\x63om.clarifai.grpc.auth.utilP\x01Z\x12\x63larifai/auth/util\xa2\x02\x04\x43\x41IPb\x06proto3')
 
 
 CL_PRIVATE_FIELD_FIELD_NUMBER = 80320
@@ -39,5 +39,5 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   google_dot_protobuf_dot_descriptor__pb2.MessageOptions.RegisterExtension(cl_private_message)
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\033com.clarifai.grpc.auth.utilP\001Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/util\242\002\004CAIP'
+  DESCRIPTOR._serialized_options = b'\n\033com.clarifai.grpc.auth.utilP\001Z\022clarifai/auth/util\242\002\004CAIP'
 # @@protoc_insertion_point(module_scope)

@@ -34,6 +34,7 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     All: _S.ValueType  # 1
     Predict: _S.ValueType  # 2
     """Make an rpc to our prediction services."""
+    Predict_Feedback: _S.ValueType  # 29
     Inputs_Add: _S.ValueType  # 4
     """Write to the inputs table in the DB."""
     Inputs_Get: _S.ValueType  # 5
@@ -154,6 +155,18 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """Read from the password_policies DB table"""
     PasswordPolicies_Delete: _S.ValueType  # 59
     """To delete password_policies we need read/write"""
+    PasswordHistory_Add: _S.ValueType  # 60
+    """Write to password_history table"""
+    PasswordHistory_Get: _S.ValueType  # 61
+    """Read from password_history table"""
+    PasswordHistory_Delete: _S.ValueType  # 62
+    """To delete password history we need read/write"""
+    Notifications_Get: _S.ValueType  # 64
+    """Read from notifications table"""
+    Notifications_Add: _S.ValueType  # 65
+    """Write to notifications table"""
+    Notifications_Delete: _S.ValueType  # 66
+    """To delete notifications we need read/write"""
     LabelOrders_Get: _S.ValueType  # 67
     """Read from label orders table"""
     LabelOrders_Add: _S.ValueType  # 68
@@ -162,6 +175,46 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """To delete label orders we need read/write"""
     UserFeatureConfigs_Get: _S.ValueType  # 71
     """Read from user_feature_configs table"""
+    UserFeatureConfigs_Add: _S.ValueType  # 72
+    """Write to configs table"""
+    UserFeatureConfigs_Delete: _S.ValueType  # 73
+    """To delete configs we need read/write"""
+    Teams_Get: _S.ValueType  # 74
+    """Read from teams table"""
+    Teams_Add: _S.ValueType  # 75
+    """Write to teams table"""
+    Teams_Delete: _S.ValueType  # 76
+    """To delete teams we need read/write"""
+    TeamUsers_Get: _S.ValueType  # 77
+    """Read from team_users table"""
+    TeamUsers_Add: _S.ValueType  # 78
+    """Write to team_users table"""
+    TeamUsers_Delete: _S.ValueType  # 79
+    """To delete team_users we need read/write"""
+    TeamApps_Get: _S.ValueType  # 83
+    TeamApps_Add: _S.ValueType  # 84
+    TeamApps_Delete: _S.ValueType  # 85
+    Roles_Get: _S.ValueType  # 80
+    """Read from roles table"""
+    Organizations_Get: _S.ValueType  # 86
+    """Read from organizations table"""
+    Organizations_Add: _S.ValueType  # 87
+    """Write to organizations table"""
+    Organizations_Delete: _S.ValueType  # 88
+    """To delete organizations we need read/write"""
+    IdentityProviders_Get: _S.ValueType  # 89
+    """Read from identity_providers table"""
+    IdentityProviders_Add: _S.ValueType  # 90
+    """Write to identity_providers table"""
+    IdentityProviders_Delete: _S.ValueType  # 91
+    """To delete identity_providers we need read/write"""
+    Org_ListAllApps: _S.ValueType  # 92
+    OrganizationMembers_Delete: _S.ValueType  # 93
+    OrganizationMembers_Add: _S.ValueType  # 94
+    OrganizationMembers_List: _S.ValueType  # 99
+    UserOrganizations_Get: _S.ValueType  # 95
+    OrganizationInvitations_Add: _S.ValueType  # 100
+    OrganizationInvitations_Get: _S.ValueType  # 101
     FindDuplicateAnnotationsJobs_Add: _S.ValueType  # 102
     """CRUD on FindDuplicateAnnotationsJobs table"""
     FindDuplicateAnnotationsJobs_Get: _S.ValueType  # 103
@@ -183,6 +236,7 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """To delete we need read/write."""
     Search: _S.ValueType  # 3
     """Make an rpc to our search services."""
+    Search_Feedback: _S.ValueType  # 28
     SavedSearch_Get: _S.ValueType  # 114
     """To get a saved search."""
     SavedSearch_Add: _S.ValueType  # 115
@@ -245,6 +299,7 @@ to indicate any "real" value.
 All: S.ValueType  # 1
 Predict: S.ValueType  # 2
 """Make an rpc to our prediction services."""
+Predict_Feedback: S.ValueType  # 29
 Inputs_Add: S.ValueType  # 4
 """Write to the inputs table in the DB."""
 Inputs_Get: S.ValueType  # 5
@@ -365,6 +420,18 @@ PasswordPolicies_Get: S.ValueType  # 58
 """Read from the password_policies DB table"""
 PasswordPolicies_Delete: S.ValueType  # 59
 """To delete password_policies we need read/write"""
+PasswordHistory_Add: S.ValueType  # 60
+"""Write to password_history table"""
+PasswordHistory_Get: S.ValueType  # 61
+"""Read from password_history table"""
+PasswordHistory_Delete: S.ValueType  # 62
+"""To delete password history we need read/write"""
+Notifications_Get: S.ValueType  # 64
+"""Read from notifications table"""
+Notifications_Add: S.ValueType  # 65
+"""Write to notifications table"""
+Notifications_Delete: S.ValueType  # 66
+"""To delete notifications we need read/write"""
 LabelOrders_Get: S.ValueType  # 67
 """Read from label orders table"""
 LabelOrders_Add: S.ValueType  # 68
@@ -373,6 +440,46 @@ LabelOrders_Delete: S.ValueType  # 69
 """To delete label orders we need read/write"""
 UserFeatureConfigs_Get: S.ValueType  # 71
 """Read from user_feature_configs table"""
+UserFeatureConfigs_Add: S.ValueType  # 72
+"""Write to configs table"""
+UserFeatureConfigs_Delete: S.ValueType  # 73
+"""To delete configs we need read/write"""
+Teams_Get: S.ValueType  # 74
+"""Read from teams table"""
+Teams_Add: S.ValueType  # 75
+"""Write to teams table"""
+Teams_Delete: S.ValueType  # 76
+"""To delete teams we need read/write"""
+TeamUsers_Get: S.ValueType  # 77
+"""Read from team_users table"""
+TeamUsers_Add: S.ValueType  # 78
+"""Write to team_users table"""
+TeamUsers_Delete: S.ValueType  # 79
+"""To delete team_users we need read/write"""
+TeamApps_Get: S.ValueType  # 83
+TeamApps_Add: S.ValueType  # 84
+TeamApps_Delete: S.ValueType  # 85
+Roles_Get: S.ValueType  # 80
+"""Read from roles table"""
+Organizations_Get: S.ValueType  # 86
+"""Read from organizations table"""
+Organizations_Add: S.ValueType  # 87
+"""Write to organizations table"""
+Organizations_Delete: S.ValueType  # 88
+"""To delete organizations we need read/write"""
+IdentityProviders_Get: S.ValueType  # 89
+"""Read from identity_providers table"""
+IdentityProviders_Add: S.ValueType  # 90
+"""Write to identity_providers table"""
+IdentityProviders_Delete: S.ValueType  # 91
+"""To delete identity_providers we need read/write"""
+Org_ListAllApps: S.ValueType  # 92
+OrganizationMembers_Delete: S.ValueType  # 93
+OrganizationMembers_Add: S.ValueType  # 94
+OrganizationMembers_List: S.ValueType  # 99
+UserOrganizations_Get: S.ValueType  # 95
+OrganizationInvitations_Add: S.ValueType  # 100
+OrganizationInvitations_Get: S.ValueType  # 101
 FindDuplicateAnnotationsJobs_Add: S.ValueType  # 102
 """CRUD on FindDuplicateAnnotationsJobs table"""
 FindDuplicateAnnotationsJobs_Get: S.ValueType  # 103
@@ -394,6 +501,7 @@ InstalledModuleVersions_Delete: S.ValueType  # 113
 """To delete we need read/write."""
 Search: S.ValueType  # 3
 """Make an rpc to our search services."""
+Search_Feedback: S.ValueType  # 28
 SavedSearch_Get: S.ValueType  # 114
 """To get a saved search."""
 SavedSearch_Add: S.ValueType  # 115

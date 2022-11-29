@@ -7,24 +7,7 @@ from clarifai_grpc.grpc.api.status import status_pb2 as proto_dot_clarifai_dot_a
 
 
 class V2Stub(object):
-    """
-    Note: this is based on the google api format defined here. Please
-    read this before contributing to this file and other *.proto files
-    for the API.
-    https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
-
-    For the cl_depending_scopes in this file, see the docstring that explains the two types of
-    scope dependencies in clarifai/auth/scope/scope.proto
-
-    For new endpoints you should typically only add the fully qualified url that includes the user_id
-    and app_id.
-
-    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
-    for resources not contained in an app or need access from things across apps. See more about the
-    auth types here:
-    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
-
-
+    """V2
     """
 
     def __init__(self, channel):
@@ -34,6 +17,11 @@ class V2Stub(object):
         Args:
             channel: A grpc.Channel.
         """
+        self.Echo = channel.unary_unary(
+                '/clarifai.api.V2/Echo',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage),
+                )
         self.ListConceptRelations = channel.unary_unary(
                 '/clarifai.api.V2/ListConceptRelations',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.SerializeToString,
@@ -84,6 +72,56 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
                 )
+        self.GetVocab = channel.unary_unary(
+                '/clarifai.api.V2/GetVocab',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetVocabRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleVocabResponse),
+                )
+        self.ListVocabs = channel.unary_unary(
+                '/clarifai.api.V2/ListVocabs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse),
+                )
+        self.PostVocabs = channel.unary_unary(
+                '/clarifai.api.V2/PostVocabs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse),
+                )
+        self.PatchVocabs = channel.unary_unary(
+                '/clarifai.api.V2/PatchVocabs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchVocabsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse),
+                )
+        self.DeleteVocab = channel.unary_unary(
+                '/clarifai.api.V2/DeleteVocab',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.DeleteVocabs = channel.unary_unary(
+                '/clarifai.api.V2/DeleteVocabs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListVocabConcepts = channel.unary_unary(
+                '/clarifai.api.V2/ListVocabConcepts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabConceptsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
+                )
+        self.PostVocabConcepts = channel.unary_unary(
+                '/clarifai.api.V2/PostVocabConcepts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabConceptsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse),
+                )
+        self.DeleteVocabConcept = channel.unary_unary(
+                '/clarifai.api.V2/DeleteVocabConcept',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.DeleteVocabConcepts = channel.unary_unary(
+                '/clarifai.api.V2/DeleteVocabConcepts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.GetConceptLanguage = channel.unary_unary(
                 '/clarifai.api.V2/GetConceptLanguage',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptLanguageRequest.SerializeToString,
@@ -104,6 +142,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse),
                 )
+        self.ListConceptReferences = channel.unary_unary(
+                '/clarifai.api.V2/ListConceptReferences',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptReferencesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptReferenceResponse),
+                )
         self.ListKnowledgeGraphs = channel.unary_unary(
                 '/clarifai.api.V2/ListKnowledgeGraphs',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.SerializeToString,
@@ -118,6 +161,16 @@ class V2Stub(object):
                 '/clarifai.api.V2/PostConceptMappingJobs',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse),
+                )
+        self.ListConceptMappings = channel.unary_unary(
+                '/clarifai.api.V2/ListConceptMappings',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptMappingsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse),
+                )
+        self.PostConceptMappings = channel.unary_unary(
+                '/clarifai.api.V2/PostConceptMappings',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse),
                 )
         self.GetAnnotation = channel.unary_unary(
                 '/clarifai.api.V2/GetAnnotation',
@@ -192,6 +245,21 @@ class V2Stub(object):
         self.PostInputs = channel.unary_unary(
                 '/clarifai.api.V2/PostInputs',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+                )
+        self.PostInputsFile = channel.unary_unary(
+                '/clarifai.api.V2/PostInputsFile',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsFileRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+                )
+        self.PostInputsNiFi = channel.unary_unary(
+                '/clarifai.api.V2/PostInputsNiFi',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsNiFiRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+                )
+        self.PostInputsDocument = channel.unary_unary(
+                '/clarifai.api.V2/PostInputsDocument',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsDocumentRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
                 )
         self.PatchInputs = channel.unary_unary(
@@ -454,6 +522,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelReferencesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse),
                 )
+        self.PostModelReferences = channel.unary_unary(
+                '/clarifai.api.V2/PostModelReferences',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelReferencesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse),
+                )
+        self.DeleteModelReferences = channel.unary_unary(
+                '/clarifai.api.V2/DeleteModelReferences',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelReferencesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.GetModelVersionInputExample = channel.unary_unary(
                 '/clarifai.api.V2/GetModelVersionInputExample',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionInputExampleRequest.SerializeToString,
@@ -464,6 +542,56 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionInputExamplesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse),
                 )
+        self.PostModelVersionInputExamples = channel.unary_unary(
+                '/clarifai.api.V2/PostModelVersionInputExamples',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionInputExamplesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse),
+                )
+        self.DeleteModelVersionInputExamples = channel.unary_unary(
+                '/clarifai.api.V2/DeleteModelVersionInputExamples',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionInputExamplesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostModelStars = channel.unary_unary(
+                '/clarifai.api.V2/PostModelStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelStarResponse),
+                )
+        self.DeleteModelStars = channel.unary_unary(
+                '/clarifai.api.V2/DeleteModelStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsResponse),
+                )
+        self.PostUserStars = channel.unary_unary(
+                '/clarifai.api.V2/PostUserStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserStarResponse),
+                )
+        self.DeleteUserStars = channel.unary_unary(
+                '/clarifai.api.V2/DeleteUserStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsResponse),
+                )
+        self.PostWorkflowStars = channel.unary_unary(
+                '/clarifai.api.V2/PostWorkflowStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowStarResponse),
+                )
+        self.DeleteWorkflowStars = channel.unary_unary(
+                '/clarifai.api.V2/DeleteWorkflowStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsResponse),
+                )
+        self.PostAppStars = channel.unary_unary(
+                '/clarifai.api.V2/PostAppStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppStarResponse),
+                )
+        self.DeleteAppStars = channel.unary_unary(
+                '/clarifai.api.V2/DeleteAppStars',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsResponse),
+                )
         self.GetWorkflow = channel.unary_unary(
                 '/clarifai.api.V2/GetWorkflow',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest.SerializeToString,
@@ -472,6 +600,11 @@ class V2Stub(object):
         self.ListWorkflows = channel.unary_unary(
                 '/clarifai.api.V2/ListWorkflows',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse),
+                )
+        self.ListPublicWorkflows = channel.unary_unary(
+                '/clarifai.api.V2/ListPublicWorkflows',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPublicWorkflowsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse),
                 )
         self.PostWorkflows = channel.unary_unary(
@@ -528,6 +661,31 @@ class V2Stub(object):
                 '/clarifai.api.V2/PatchWorkflowVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse),
+                )
+        self.PostWorkflowMetrics = channel.unary_unary(
+                '/clarifai.api.V2/PostWorkflowMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse),
+                )
+        self.GetWorkflowMetrics = channel.unary_unary(
+                '/clarifai.api.V2/GetWorkflowMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowMetricsResponse),
+                )
+        self.GetWorkflowNodeMetrics = channel.unary_unary(
+                '/clarifai.api.V2/GetWorkflowNodeMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowNodeMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowNodeMetricsResponse),
+                )
+        self.ListWorkflowMetrics = channel.unary_unary(
+                '/clarifai.api.V2/ListWorkflowMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse),
+                )
+        self.DeleteWorkflowMetrics = channel.unary_unary(
+                '/clarifai.api.V2/DeleteWorkflowMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.GetKey = channel.unary_unary(
                 '/clarifai.api.V2/GetKey',
@@ -614,15 +772,290 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse),
                 )
+        self.PatchAppOwner = channel.unary_unary(
+                '/clarifai.api.V2/PatchAppOwner',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppOwnerRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.PostAppsSearches = channel.unary_unary(
                 '/clarifai.api.V2/PostAppsSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
                 )
+        self.GetUser = channel.unary_unary(
+                '/clarifai.api.V2/GetUser',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse),
+                )
+        self.ListUsers = channel.unary_unary(
+                '/clarifai.api.V2/ListUsers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserResponse),
+                )
+        self.PostUserConsent = channel.unary_unary(
+                '/clarifai.api.V2/PostUserConsent',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserConsentRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse),
+                )
+        self.PatchUser = channel.unary_unary(
+                '/clarifai.api.V2/PatchUser',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchUserRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse),
+                )
+        self.PostUserAccess = channel.unary_unary(
+                '/clarifai.api.V2/PostUserAccess',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserAccessRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserAccessResponse),
+                )
+        self.GetUserAccess = channel.unary_unary(
+                '/clarifai.api.V2/GetUserAccess',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserAccessRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserAccessResponse),
+                )
+        self.PostEmails = channel.unary_unary(
+                '/clarifai.api.V2/PostEmails',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostEmailsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse),
+                )
+        self.ListEmails = channel.unary_unary(
+                '/clarifai.api.V2/ListEmails',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListEmailsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse),
+                )
+        self.PostResendVerifyEmail = channel.unary_unary(
+                '/clarifai.api.V2/PostResendVerifyEmail',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostResendVerifyRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleResendVerifyResponse),
+                )
+        self.DeleteEmail = channel.unary_unary(
+                '/clarifai.api.V2/DeleteEmail',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteEmailRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostPrimaryEmail = channel.unary_unary(
+                '/clarifai.api.V2/PostPrimaryEmail',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPrimaryEmailRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleEmailResponse),
+                )
         self.PostValidatePassword = channel.unary_unary(
                 '/clarifai.api.V2/PostValidatePassword',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SinglePasswordValidationResponse),
+                )
+        self.ListGlobalPasswordPolicies = channel.unary_unary(
+                '/clarifai.api.V2/ListGlobalPasswordPolicies',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListGlobalPasswordPoliciesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse),
+                )
+        self.ListPasswordPolicies = channel.unary_unary(
+                '/clarifai.api.V2/ListPasswordPolicies',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPasswordPoliciesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse),
+                )
+        self.PostPasswordPolicies = channel.unary_unary(
+                '/clarifai.api.V2/PostPasswordPolicies',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPasswordPoliciesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse),
+                )
+        self.PatchPasswordPolicies = channel.unary_unary(
+                '/clarifai.api.V2/PatchPasswordPolicies',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchPasswordPoliciesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse),
+                )
+        self.DeletePasswordPolicies = channel.unary_unary(
+                '/clarifai.api.V2/DeletePasswordPolicies',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePasswordPoliciesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.GetUserFeatureConfig = channel.unary_unary(
+                '/clarifai.api.V2/GetUserFeatureConfig',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.UserFeatureConfigRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserFeatureConfigResponse),
+                )
+        self.PostOrganizations = channel.unary_unary(
+                '/clarifai.api.V2/PostOrganizations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse),
+                )
+        self.ListUsersOrganizations = channel.unary_unary(
+                '/clarifai.api.V2/ListUsersOrganizations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersOrganizationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiUsersOrganizationsResponse),
+                )
+        self.ListOrganizations = channel.unary_unary(
+                '/clarifai.api.V2/ListOrganizations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse),
+                )
+        self.GetOrganization = channel.unary_unary(
+                '/clarifai.api.V2/GetOrganization',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse),
+                )
+        self.PatchOrganization = channel.unary_unary(
+                '/clarifai.api.V2/PatchOrganization',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse),
+                )
+        self.DeleteOrganization = channel.unary_unary(
+                '/clarifai.api.V2/DeleteOrganization',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListOrganizationMembers = channel.unary_unary(
+                '/clarifai.api.V2/ListOrganizationMembers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationMembersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse),
+                )
+        self.ListOrganizationAppMembers = channel.unary_unary(
+                '/clarifai.api.V2/ListOrganizationAppMembers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationAppMembersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse),
+                )
+        self.PostOrganizationMember = channel.unary_unary(
+                '/clarifai.api.V2/PostOrganizationMember',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationMemberRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PatchOrganizationMember = channel.unary_unary(
+                '/clarifai.api.V2/PatchOrganizationMember',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationMembersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.DeleteOrganizationMember = channel.unary_unary(
+                '/clarifai.api.V2/DeleteOrganizationMember',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationMemberRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostOrganizationInvitations = channel.unary_unary(
+                '/clarifai.api.V2/PostOrganizationInvitations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationInvitationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse),
+                )
+        self.PatchOrganizationInvitations = channel.unary_unary(
+                '/clarifai.api.V2/PatchOrganizationInvitations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationInvitationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse),
+                )
+        self.ListOrganizationInvitations = channel.unary_unary(
+                '/clarifai.api.V2/ListOrganizationInvitations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationInvitationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse),
+                )
+        self.GetOrganizationInvitation = channel.unary_unary(
+                '/clarifai.api.V2/GetOrganizationInvitation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse),
+                )
+        self.PostDeclineOrganizationInvitation = channel.unary_unary(
+                '/clarifai.api.V2/PostDeclineOrganizationInvitation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostDeclineOrganizationInvitationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostAcceptOrganizationInvitation = channel.unary_unary(
+                '/clarifai.api.V2/PostAcceptOrganizationInvitation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAcceptOrganizationInvitationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.GetOrganizationInvitationPublic = channel.unary_unary(
+                '/clarifai.api.V2/GetOrganizationInvitationPublic',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationPublicRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse),
+                )
+        self.DeleteRequestingUserFromOrganization = channel.unary_unary(
+                '/clarifai.api.V2/DeleteRequestingUserFromOrganization',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRequestingUserFromOrganizationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostIdentityProviders = channel.unary_unary(
+                '/clarifai.api.V2/PostIdentityProviders',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdentityProvidersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse),
+                )
+        self.ListIdentityProviders = channel.unary_unary(
+                '/clarifai.api.V2/ListIdentityProviders',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListIdentityProvidersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse),
+                )
+        self.GetIdentityProvider = channel.unary_unary(
+                '/clarifai.api.V2/GetIdentityProvider',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetIdentityProviderRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleIdentityProviderResponse),
+                )
+        self.PatchIdentityProviders = channel.unary_unary(
+                '/clarifai.api.V2/PatchIdentityProviders',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchIdentityProvidersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse),
+                )
+        self.DeleteIdentityProviders = channel.unary_unary(
+                '/clarifai.api.V2/DeleteIdentityProviders',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteIdentityProvidersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostTeams = channel.unary_unary(
+                '/clarifai.api.V2/PostTeams',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse),
+                )
+        self.ListTeams = channel.unary_unary(
+                '/clarifai.api.V2/ListTeams',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse),
+                )
+        self.GetTeam = channel.unary_unary(
+                '/clarifai.api.V2/GetTeam',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTeamRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleTeamResponse),
+                )
+        self.PatchTeams = channel.unary_unary(
+                '/clarifai.api.V2/PatchTeams',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchTeamsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse),
+                )
+        self.DeleteTeams = channel.unary_unary(
+                '/clarifai.api.V2/DeleteTeams',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostTeamUsers = channel.unary_unary(
+                '/clarifai.api.V2/PostTeamUsers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamUsersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse),
+                )
+        self.ListTeamUsers = channel.unary_unary(
+                '/clarifai.api.V2/ListTeamUsers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamUsersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse),
+                )
+        self.DeleteTeamUsers = channel.unary_unary(
+                '/clarifai.api.V2/DeleteTeamUsers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamUsersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostTeamApps = channel.unary_unary(
+                '/clarifai.api.V2/PostTeamApps',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamAppsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListTeamApps = channel.unary_unary(
+                '/clarifai.api.V2/ListTeamApps',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamAppsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamAppsResponse),
+                )
+        self.DeleteTeamApps = channel.unary_unary(
+                '/clarifai.api.V2/DeleteTeamApps',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamAppsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListRoles = channel.unary_unary(
+                '/clarifai.api.V2/ListRoles',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRolesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRoleResponse),
+                )
+        self.GetRole = channel.unary_unary(
+                '/clarifai.api.V2/GetRole',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRoleRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleRoleResponse),
                 )
         self.GetSearch = channel.unary_unary(
                 '/clarifai.api.V2/GetSearch',
@@ -674,6 +1107,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSearchRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.PostAttributeSearch = channel.unary_unary(
+                '/clarifai.api.V2/PostAttributeSearch',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAttributeSearchRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
+                )
         self.ListAnnotationFilters = channel.unary_unary(
                 '/clarifai.api.V2/ListAnnotationFilters',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationFiltersRequest.SerializeToString,
@@ -699,6 +1137,156 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationFiltersRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.ListClusters = channel.unary_unary(
+                '/clarifai.api.V2/ListClusters',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListClustersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse),
+                )
+        self.ListAnnotationsForCluster = channel.unary_unary(
+                '/clarifai.api.V2/ListAnnotationsForCluster',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsForClusterRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
+                )
+        self.PostClustersSearches = channel.unary_unary(
+                '/clarifai.api.V2/PostClustersSearches',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostClustersSearchesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse),
+                )
+        self.PostVerifyEmail = channel.unary_unary(
+                '/clarifai.api.V2/PostVerifyEmail',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVerifyEmailRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleVerifyEmailResponse),
+                )
+        self.PostRequestResetPassword = channel.unary_unary(
+                '/clarifai.api.V2/PostRequestResetPassword',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.RequestResetPasswordRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostCompleteResetPassword = channel.unary_unary(
+                '/clarifai.api.V2/PostCompleteResetPassword',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.CompleteResetPasswordRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostLogin = channel.unary_unary(
+                '/clarifai.api.V2/PostLogin',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLoginRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse),
+                )
+        self.PostSignup = channel.unary_unary(
+                '/clarifai.api.V2/PostSignup',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSignupRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse),
+                )
+        self.PostLogout = channel.unary_unary(
+                '/clarifai.api.V2/PostLogout',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLogoutRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLogoutResponse),
+                )
+        self.ListAuthMethods = channel.unary_unary(
+                '/clarifai.api.V2/ListAuthMethods',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse),
+                )
+        self.ListOrgAuthMethods = channel.unary_unary(
+                '/clarifai.api.V2/ListOrgAuthMethods',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse),
+                )
+        self.PostIdLoginFinalizer = channel.unary_unary(
+                '/clarifai.api.V2/PostIdLoginFinalizer',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerResponse),
+                )
+        self.PostLinkIdpUser = channel.unary_unary(
+                '/clarifai.api.V2/PostLinkIdpUser',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserResponse),
+                )
+        self.GetLoginInfo = channel.unary_unary(
+                '/clarifai.api.V2/GetLoginInfo',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoResponse),
+                )
+        self.ListAuth2FAMethods = channel.unary_unary(
+                '/clarifai.api.V2/ListAuth2FAMethods',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsResponse),
+                )
+        self.PostAuth2FATotpRegisterEnable = channel.unary_unary(
+                '/clarifai.api.V2/PostAuth2FATotpRegisterEnable',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableResponse),
+                )
+        self.PostAuth2FATotpRegisterVerify = channel.unary_unary(
+                '/clarifai.api.V2/PostAuth2FATotpRegisterVerify',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyResponse),
+                )
+        self.PostAuth2FATotpDisable = channel.unary_unary(
+                '/clarifai.api.V2/PostAuth2FATotpDisable',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableResponse),
+                )
+        self.PostAuth2FATotpLogin = channel.unary_unary(
+                '/clarifai.api.V2/PostAuth2FATotpLogin',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpLoginRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse),
+                )
+        self.PostAuth2FATotpRecover = channel.unary_unary(
+                '/clarifai.api.V2/PostAuth2FATotpRecover',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverResponse),
+                )
+        self.GetAuth2FATotpRecoverConfirm = channel.unary_unary(
+                '/clarifai.api.V2/GetAuth2FATotpRecoverConfirm',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmResponse),
+                )
+        self.GetSubscription = channel.unary_unary(
+                '/clarifai.api.V2/GetSubscription',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSubscriptionRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse),
+                )
+        self.PostSubscription = channel.unary_unary(
+                '/clarifai.api.V2/PostSubscription',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSubscriptionRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse),
+                )
+        self.ListCreditCards = channel.unary_unary(
+                '/clarifai.api.V2/ListCreditCards',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCreditCardsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse),
+                )
+        self.PostCreditCard = channel.unary_unary(
+                '/clarifai.api.V2/PostCreditCard',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCreditCardRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleCreditCardResponse),
+                )
+        self.DeleteCreditCard = channel.unary_unary(
+                '/clarifai.api.V2/DeleteCreditCard',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCreditCardRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PatchCreditCards = channel.unary_unary(
+                '/clarifai.api.V2/PatchCreditCards',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCreditCardsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse),
+                )
+        self.GetShippingAddress = channel.unary_unary(
+                '/clarifai.api.V2/GetShippingAddress',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetShippingAddressRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse),
+                )
+        self.PutShippingAddress = channel.unary_unary(
+                '/clarifai.api.V2/PutShippingAddress',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutShippingAddressRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse),
+                )
+        self.ListPlans = channel.unary_unary(
+                '/clarifai.api.V2/ListPlans',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPlansRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPlanResponse),
+                )
         self.ListStatusCodes = channel.unary_unary(
                 '/clarifai.api.V2/ListStatusCodes',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListStatusCodesRequest.SerializeToString,
@@ -708,6 +1296,51 @@ class V2Stub(object):
                 '/clarifai.api.V2/GetStatusCode',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse),
+                )
+        self.GetHealthz = channel.unary_unary(
+                '/clarifai.api.V2/GetHealthz',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzResponse),
+                )
+        self.ListUserBillingCycles = channel.unary_unary(
+                '/clarifai.api.V2/ListUserBillingCycles',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesResponse),
+                )
+        self.ListUserCycles = channel.unary_unary(
+                '/clarifai.api.V2/ListUserCycles',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesResponse),
+                )
+        self.GetBillingUsage = channel.unary_unary(
+                '/clarifai.api.V2/GetBillingUsage',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageResponse),
+                )
+        self.PostHistoricalUsage = channel.unary_unary(
+                '/clarifai.api.V2/PostHistoricalUsage',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageResponse),
+                )
+        self.GetHistoricalUsage = channel.unary_unary(
+                '/clarifai.api.V2/GetHistoricalUsage',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageResponse),
+                )
+        self.ListUsageIntervals = channel.unary_unary(
+                '/clarifai.api.V2/ListUsageIntervals',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsResponse),
+                )
+        self.GetRealtimeUsage = channel.unary_unary(
+                '/clarifai.api.V2/GetRealtimeUsage',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageResponse),
+                )
+        self.PostUsage = channel.unary_unary(
+                '/clarifai.api.V2/PostUsage',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageResponse),
                 )
         self.ListCollaborators = channel.unary_unary(
                 '/clarifai.api.V2/ListCollaborators',
@@ -733,6 +1366,26 @@ class V2Stub(object):
                 '/clarifai.api.V2/ListCollaborations',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaborationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaborationsResponse),
+                )
+        self.FetchLicense = channel.unary_unary(
+                '/clarifai.api.V2/FetchLicense',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseResponse),
+                )
+        self.ListLicenses = channel.unary_unary(
+                '/clarifai.api.V2/ListLicenses',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLicensesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultipleLicensesResponse),
+                )
+        self.GetLicense = channel.unary_unary(
+                '/clarifai.api.V2/GetLicense',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLicenseRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleLicenseResponse),
+                )
+        self.ValidateLicense = channel.unary_unary(
+                '/clarifai.api.V2/ValidateLicense',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseResponse),
                 )
         self.PostAppDuplications = channel.unary_unary(
                 '/clarifai.api.V2/PostAppDuplications',
@@ -782,6 +1435,11 @@ class V2Stub(object):
         self.DeleteTasks = channel.unary_unary(
                 '/clarifai.api.V2/DeleteTasks',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PatchAnnotationCountsRollup = channel.unary_unary(
+                '/clarifai.api.V2/PatchAnnotationCountsRollup',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationCountsRollupRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.PostLabelOrders = channel.unary_unary(
@@ -844,6 +1502,36 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse),
                 )
+        self.PostAnalytics = channel.unary_unary(
+                '/clarifai.api.V2/PostAnalytics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsResponse),
+                )
+        self.PostSDKBilling = channel.unary_unary(
+                '/clarifai.api.V2/PostSDKBilling',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingResponse),
+                )
+        self.PostFindDuplicateAnnotationsJobs = channel.unary_unary(
+                '/clarifai.api.V2/PostFindDuplicateAnnotationsJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostFindDuplicateAnnotationsJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse),
+                )
+        self.GetFindDuplicateAnnotationsJob = channel.unary_unary(
+                '/clarifai.api.V2/GetFindDuplicateAnnotationsJob',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetFindDuplicateAnnotationsJobRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleFindDuplicateAnnotationsJobResponse),
+                )
+        self.ListFindDuplicateAnnotationsJobs = channel.unary_unary(
+                '/clarifai.api.V2/ListFindDuplicateAnnotationsJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListFindDuplicateAnnotationsJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse),
+                )
+        self.DeleteFindDuplicateAnnotationsJobs = channel.unary_unary(
+                '/clarifai.api.V2/DeleteFindDuplicateAnnotationsJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteFindDuplicateAnnotationsJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.PostTrendingMetricsView = channel.unary_unary(
                 '/clarifai.api.V2/PostTrendingMetricsView',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.SerializeToString,
@@ -853,6 +1541,36 @@ class V2Stub(object):
                 '/clarifai.api.V2/ListTrendingMetricsViews',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
+                )
+        self.PostIdValidation = channel.unary_unary(
+                '/clarifai.api.V2/PostIdValidation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdValidationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdValidationResponse),
+                )
+        self.ListTagCategories = channel.unary_unary(
+                '/clarifai.api.V2/ListTagCategories',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTagCategoriesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTagCategoryResponse),
+                )
+        self.ListWebNotifications = channel.unary_unary(
+                '/clarifai.api.V2/ListWebNotifications',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWebNotificationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse),
+                )
+        self.GetWebNotification = channel.unary_unary(
+                '/clarifai.api.V2/GetWebNotification',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWebNotificationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleWebNotificationResponse),
+                )
+        self.PatchWebNotifications = channel.unary_unary(
+                '/clarifai.api.V2/PatchWebNotifications',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWebNotificationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse),
+                )
+        self.DeleteWebNotifications = channel.unary_unary(
+                '/clarifai.api.V2/DeleteWebNotifications',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWebNotificationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.GetModule = channel.unary_unary(
                 '/clarifai.api.V2/GetModule',
@@ -954,6 +1672,31 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
                 )
+        self.ListNextTaskAssignments = channel.unary_unary(
+                '/clarifai.api.V2/ListNextTaskAssignments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+                )
+        self.PutTaskAssignments = channel.unary_unary(
+                '/clarifai.api.V2/PutTaskAssignments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.PostWaitlistEmails = channel.unary_unary(
+                '/clarifai.api.V2/PostWaitlistEmails',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWaitlistEmailsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWaitlistEmailResponse),
+                )
+        self.GetSampledPredictMetrics = channel.unary_unary(
+                '/clarifai.api.V2/GetSampledPredictMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSampledPredictMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSampledPredictMetricsResponse),
+                )
+        self.PostInputsAddJobs = channel.unary_unary(
+                '/clarifai.api.V2/PostInputsAddJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsAddJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse),
+                )
         self.ListInputsAddJobs = channel.unary_unary(
                 '/clarifai.api.V2/ListInputsAddJobs',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsAddJobsRequest.SerializeToString,
@@ -962,6 +1705,11 @@ class V2Stub(object):
         self.GetInputsAddJob = channel.unary_unary(
                 '/clarifai.api.V2/GetInputsAddJob',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse),
+                )
+        self.CancelInputsAddJob = channel.unary_unary(
+                '/clarifai.api.V2/CancelInputsAddJob',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse),
                 )
         self.PostUploads = channel.unary_unary(
@@ -992,25 +1740,15 @@ class V2Stub(object):
 
 
 class V2Servicer(object):
+    """V2
     """
-    Note: this is based on the google api format defined here. Please
-    read this before contributing to this file and other *.proto files
-    for the API.
-    https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
 
-    For the cl_depending_scopes in this file, see the docstring that explains the two types of
-    scope dependencies in clarifai/auth/scope/scope.proto
-
-    For new endpoints you should typically only add the fully qualified url that includes the user_id
-    and app_id.
-
-    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
-    for resources not contained in an app or need access from things across apps. See more about the
-    auth types here:
-    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
-
-
-    """
+    def Echo(self, request, context):
+        """Common echo example.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
     def ListConceptRelations(self, request, context):
         """List concept relations between concepts in the platform.
@@ -1086,6 +1824,76 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetVocab(self, request, context):
+        """Get a specific vocab from an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListVocabs(self, request, context):
+        """List all the vocabs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostVocabs(self, request, context):
+        """Add a vocab to an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchVocabs(self, request, context):
+        """Patch one or more vocabs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteVocab(self, request, context):
+        """Delete a single vocab.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteVocabs(self, request, context):
+        """Delete multiple vocabs in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListVocabConcepts(self, request, context):
+        """List all the vocabs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostVocabConcepts(self, request, context):
+        """Add a vocab to an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteVocabConcept(self, request, context):
+        """Delete a single concept from a vocab.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteVocabConcepts(self, request, context):
+        """Delete multiple concepts from a vocab in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetConceptLanguage(self, request, context):
         """Get a specific concept from an app.
         """
@@ -1115,6 +1923,37 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListConceptReferences(self, request, context):
+        """TODO(zeiler): we don't have a way to delete the languages currently. This should be rare
+        anyways as users should just patch translations to the right naming.
+        // Delete a single concept translation.
+        rpc DeleteConceptLanguage(DeleteConceptLanguageRequest) returns (clarifai.api.status.BaseResponse) {
+        option (google.api.http) = {
+        delete: "/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages/{language}"
+        additional_bindings {
+        delete: "/v2/concepts/{concept_id}/languages/{language}"
+        }
+        };
+        }
+
+        // Delete multiple concept translations in one request.
+        rpc DeleteConceptLanguages(DeleteConceptLanguagesRequest) returns (clarifai.api.status.BaseResponse) {
+        option (google.api.http) = {
+        delete: "/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages"
+        body: "*"
+        additional_bindings {
+        delete: "/v2/concepts/{concept_id}/languages"
+        body: "*"
+        }
+        };
+        }
+
+        List the concept in all the outside sources where we found these concepts.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListKnowledgeGraphs(self, request, context):
         """List all domain graphs.
         """
@@ -1131,6 +1970,20 @@ class V2Servicer(object):
 
     def PostConceptMappingJobs(self, request, context):
         """Start concept mapping jobs.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListConceptMappings(self, request, context):
+        """List all concept mappings for a given concept id.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostConceptMappings(self, request, context):
+        """Post concept mappings.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1238,6 +2091,28 @@ class V2Servicer(object):
         """Add an input (or set of inputs) to an app.
         This call is synchronous if the PostInputsRequest contains exactly one image input. Otherwise,
         it is asynchronous.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInputsFile(self, request, context):
+        """Add an input (or set of inputs) to an app via a file.
+        This is asynchronous.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInputsNiFi(self, request, context):
+        """Add an input or set of inputs to an app designed for NiFi integration.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInputsDocument(self, request, context):
+        """Add an input or set of inputs to an app designed for Document integration.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1628,6 +2503,20 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostModelReferences(self, request, context):
+        """Add new reference(s) to a particular model
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteModelReferences(self, request, context):
+        """Delete model references tied to a model id by reference id.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetModelVersionInputExample(self, request, context):
         """GetModelVersionInputExample
         """
@@ -1642,10 +2531,78 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostModelVersionInputExamples(self, request, context):
+        """PostModelVersionInputExamples
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteModelVersionInputExamples(self, request, context):
+        """DeleteModelVersionInputExamples
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostModelStars(self, request, context):
+        """Star a model
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteModelStars(self, request, context):
+        """Un-star a model
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostUserStars(self, request, context):
+        """Star a user
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteUserStars(self, request, context):
+        """Un-star a user
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostWorkflowStars(self, request, context):
+        """Star a workflow
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteWorkflowStars(self, request, context):
+        """Un-star a workflow
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAppStars(self, request, context):
+        """Star an app
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteAppStars(self, request, context):
+        """Un-star an app
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetWorkflow(self, request, context):
         """//////////////////////////////////////
-
-        //////////////////////////////////////
         Workflows
         //////////////////////////////////////
 
@@ -1657,6 +2614,13 @@ class V2Servicer(object):
 
     def ListWorkflows(self, request, context):
         """List all the workflows.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPublicWorkflows(self, request, context):
+        """List all public workflows.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1734,6 +2698,41 @@ class V2Servicer(object):
 
     def PatchWorkflowVersions(self, request, context):
         """Patch workflow versions.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostWorkflowMetrics(self, request, context):
+        """Evaluate all the nodes in the workflow.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetWorkflowMetrics(self, request, context):
+        """Get workflow evaluation data.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetWorkflowNodeMetrics(self, request, context):
+        """GetWorkflowNodeMetrics
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListWorkflowMetrics(self, request, context):
+        """ListWorkflowMetrics
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteWorkflowMetrics(self, request, context):
+        """Delete one or more workflow metrics.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1864,6 +2863,14 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchAppOwner(self, request, context):
+        """Patch app owner.
+        The new app owner can only be an org, and the original owner must be a member of that org.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostAppsSearches(self, request, context):
         """Search over the applications to find one or more you're looking for.
         """
@@ -1871,8 +2878,391 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUser(self, request, context):
+        """Get current user information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUsers(self, request, context):
+        """List users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostUserConsent(self, request, context):
+        """Update gdpr fields of current user.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchUser(self, request, context):
+        """Patch information of current user or another user in the same organisation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostUserAccess(self, request, context):
+        """Post user access request
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserAccess(self, request, context):
+        """Get user access request
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostEmails(self, request, context):
+        """//////////////////////////////////////
+
+        //////////////////////////////////////
+        Email
+        //////////////////////////////////////
+        Add Email
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListEmails(self, request, context):
+        """List emails
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostResendVerifyEmail(self, request, context):
+        """For sending another verification email.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteEmail(self, request, context):
+        """Deleting an email.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostPrimaryEmail(self, request, context):
+        """Create primate email.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostValidatePassword(self, request, context):
         """Validate new password in real-time for a user
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListGlobalPasswordPolicies(self, request, context):
+        """Get global policy
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPasswordPolicies(self, request, context):
+        """Get a specific set of password policies attached to a user.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostPasswordPolicies(self, request, context):
+        """Create a specific set of password policies attached to a user or an organization.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchPasswordPolicies(self, request, context):
+        """Update a specific set of password policies attached to a user or an organization.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeletePasswordPolicies(self, request, context):
+        """DeletePasswordPolicies
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetUserFeatureConfig(self, request, context):
+        """Get user feature config
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostOrganizations(self, request, context):
+        """Add organizations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUsersOrganizations(self, request, context):
+        """List the provided user's organizations with their roles
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListOrganizations(self, request, context):
+        """List multiple organizations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetOrganization(self, request, context):
+        """Get single organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchOrganization(self, request, context):
+        """Patch an organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteOrganization(self, request, context):
+        """Delete an organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListOrganizationMembers(self, request, context):
+        """List organization members
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListOrganizationAppMembers(self, request, context):
+        """ListOrganizationAppMembers
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostOrganizationMember(self, request, context):
+        """Add new member to organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchOrganizationMember(self, request, context):
+        """PatchOrganizationMember
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteOrganizationMember(self, request, context):
+        """Remove a member from organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostOrganizationInvitations(self, request, context):
+        """Organization invites
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchOrganizationInvitations(self, request, context):
+        """PatchOrganizationInvitations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListOrganizationInvitations(self, request, context):
+        """ListOrganizationInvitations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetOrganizationInvitation(self, request, context):
+        """GetOrganizationInvitation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostDeclineOrganizationInvitation(self, request, context):
+        """PostDeclineOrganizationInvitation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAcceptOrganizationInvitation(self, request, context):
+        """PostAcceptOrganizationInvitation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetOrganizationInvitationPublic(self, request, context):
+        """GetOrganizationInvitationPublic
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteRequestingUserFromOrganization(self, request, context):
+        """Leave an organization
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostIdentityProviders(self, request, context):
+        """Add IdentityProviders
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListIdentityProviders(self, request, context):
+        """List multiple IdentityProviders
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetIdentityProvider(self, request, context):
+        """Get single IdentityProvider
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchIdentityProviders(self, request, context):
+        """Patch multiple IdentityProviders
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteIdentityProviders(self, request, context):
+        """Delete multiple IdentityProviders
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostTeams(self, request, context):
+        """Add teams
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTeams(self, request, context):
+        """List multiple teams
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetTeam(self, request, context):
+        """Get single team
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchTeams(self, request, context):
+        """Patch multiple teams
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteTeams(self, request, context):
+        """Delete multiple teams
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostTeamUsers(self, request, context):
+        """Add users to a team
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTeamUsers(self, request, context):
+        """List team users
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteTeamUsers(self, request, context):
+        """Delete users from a team
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostTeamApps(self, request, context):
+        """Add applications to team
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTeamApps(self, request, context):
+        """List team applications
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteTeamApps(self, request, context):
+        """Remove applications from team
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListRoles(self, request, context):
+        """List multiple roles
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetRole(self, request, context):
+        """Get single role
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1901,6 +3291,8 @@ class V2Servicer(object):
 
     def PostSearches(self, request, context):
         """Execute a new search and optionally save it.
+
+        Deprecated: Use PostInputsSearches or PostAnnotationsSearches instead.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1948,6 +3340,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostAttributeSearch(self, request, context):
+        """Execute an attribute search.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListAnnotationFilters(self, request, context):
         """List all the annotation filters.
         """
@@ -1983,6 +3382,219 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListClusters(self, request, context):
+        """Get a list of clusters in an app
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAnnotationsForCluster(self, request, context):
+        """List all the annotations for a given cluster.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostClustersSearches(self, request, context):
+        """List all the annotations for a given cluser.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostVerifyEmail(self, request, context):
+        """Verify email
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostRequestResetPassword(self, request, context):
+        """Request for password reset email
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostCompleteResetPassword(self, request, context):
+        """Complete reset password
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostLogin(self, request, context):
+        """Login with user/pass
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostSignup(self, request, context):
+        """Signup with account.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostLogout(self, request, context):
+        """Logout use
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAuthMethods(self, request, context):
+        """List available authentication methods, e.g.
+        * standard auth method - login using user & password
+        * SAML auth methods - SSO using SAML Identity Providers like Okta, Github, Google GSuite, LinkedIn, etc.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListOrgAuthMethods(self, request, context):
+        """ListOrgAuthMethods
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostIdLoginFinalizer(self, request, context):
+        """ListOrgAuthMethods
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostLinkIdpUser(self, request, context):
+        """PostLinkIdpUser
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetLoginInfo(self, request, context):
+        """GetLoginInfo
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAuth2FAMethods(self, request, context):
+        """List available 2FA methods in current environment, e.g.
+        * TOTP auth method - login layer using time synced  codes
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAuth2FATotpRegisterEnable(self, request, context):
+        """Enable Clarifai TOTP 2FA
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAuth2FATotpRegisterVerify(self, request, context):
+        """Verify Clarifai TOTP 2FA activation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAuth2FATotpDisable(self, request, context):
+        """Disable Clarifai TOTP 2FA
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAuth2FATotpLogin(self, request, context):
+        """Login with Clarifai TOTP 2FA activation
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAuth2FATotpRecover(self, request, context):
+        """Recover users Clarifai TOTP 2FA activation through sending an email confirmation.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetAuth2FATotpRecoverConfirm(self, request, context):
+        """Confirm the recovery of users Clarifai TOTP 2FA. Will be called by user from email link (via portal).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSubscription(self, request, context):
+        """List the subscriptions.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostSubscription(self, request, context):
+        """Add a new subscription.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListCreditCards(self, request, context):
+        """List all credit cards.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostCreditCard(self, request, context):
+        """Add a new credit card.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteCreditCard(self, request, context):
+        """Delete a credit card.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchCreditCards(self, request, context):
+        """Update a credit card.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetShippingAddress(self, request, context):
+        """Get the shipping address.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutShippingAddress(self, request, context):
+        """Update shipping address.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPlans(self, request, context):
+        """ListPlans
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListStatusCodes(self, request, context):
         """List all status codes.
         """
@@ -1992,6 +3604,69 @@ class V2Servicer(object):
 
     def GetStatusCode(self, request, context):
         """Get more details for a status code.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetHealthz(self, request, context):
+        """Health check endpoint
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUserBillingCycles(self, request, context):
+        """List all billing  cycles - old billing
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUserCycles(self, request, context):
+        """List user usage.cycles.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetBillingUsage(self, request, context):
+        """Gets the billing cycle start and end date as well as invoice items.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostHistoricalUsage(self, request, context):
+        """Add historical usage. - Billing 1
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetHistoricalUsage(self, request, context):
+        """Get historical usage. - Billing 2
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListUsageIntervals(self, request, context):
+        """Get a list of valid usage intervals
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetRealtimeUsage(self, request, context):
+        """Get realtime usage.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostUsage(self, request, context):
+        """Post usage to platform. Only called by on prem now.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2027,6 +3702,34 @@ class V2Servicer(object):
 
     def ListCollaborations(self, request, context):
         """Collaboration includes the app user are invitied to work on
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def FetchLicense(self, request, context):
+        """Get the license with crypto security.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListLicenses(self, request, context):
+        """List all licenses.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetLicense(self, request, context):
+        """Get a license
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ValidateLicense(self, request, context):
+        """Check that a license is still valid.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2098,6 +3801,13 @@ class V2Servicer(object):
 
     def DeleteTasks(self, request, context):
         """Delete multiple tasks in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchAnnotationCountsRollup(self, request, context):
+        """Rollup annotation count for task.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2198,6 +3908,48 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostAnalytics(self, request, context):
+        """Add a new analytics entry into our database
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostSDKBilling(self, request, context):
+        """Add a new sdk_billing entry into our database
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostFindDuplicateAnnotationsJobs(self, request, context):
+        """Find annotations duplicates based on an specified attribute of different annotations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetFindDuplicateAnnotationsJob(self, request, context):
+        """Get annotations find duplicates jobs results by id
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListFindDuplicateAnnotationsJobs(self, request, context):
+        """List all the annotations find duplicates jobs results
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteFindDuplicateAnnotationsJobs(self, request, context):
+        """DeleteFindDuplicateAnnotationsJobs
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostTrendingMetricsView(self, request, context):
         """Increase the view metric for a detail view
         """
@@ -2207,6 +3959,48 @@ class V2Servicer(object):
 
     def ListTrendingMetricsViews(self, request, context):
         """List the view metrics for a detail view
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostIdValidation(self, request, context):
+        """Validates the ids (app and user supported), returns validation errors and recommendations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListTagCategories(self, request, context):
+        """List all the available tags for specified object_type grouped by category
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListWebNotifications(self, request, context):
+        """List users web notifications
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetWebNotification(self, request, context):
+        """Get a web notification
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchWebNotifications(self, request, context):
+        """Update users web notifications
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteWebNotifications(self, request, context):
+        """Delete users web notifications
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2357,6 +4151,42 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListNextTaskAssignments(self, request, context):
+        """List next non-labeled and unassigned inputs from task's dataset
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutTaskAssignments(self, request, context):
+        """PutTaskAssignments evaluates all the annotations by labeler (authenticated user) for given task (task_id) and input (input_id).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostWaitlistEmails(self, request, context):
+        """PostWaitlistEmails adds new e-mail addresses to a feature waiting list.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSampledPredictMetrics(self, request, context):
+        """GetSampledPredictResults get sampled prediction metrics by model id
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInputsAddJobs(self, request, context):
+        """Create a job to add inputs from a cloud storage to an app on the clarifai platform
+        This is an Asynchronous process. Use ListInputsAddJobs or GetInputsJob to check the status.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListInputsAddJobs(self, request, context):
         """List all the inputs add jobs
         """
@@ -2366,6 +4196,13 @@ class V2Servicer(object):
 
     def GetInputsAddJob(self, request, context):
         """Get the input add job details by ID
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CancelInputsAddJob(self, request, context):
+        """cancel the input add job by ID
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2404,6 +4241,11 @@ class V2Servicer(object):
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'Echo': grpc.unary_unary_rpc_method_handler(
+                    servicer.Echo,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage.SerializeToString,
+            ),
             'ListConceptRelations': grpc.unary_unary_rpc_method_handler(
                     servicer.ListConceptRelations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptRelationsRequest.FromString,
@@ -2454,6 +4296,56 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
             ),
+            'GetVocab': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetVocab,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetVocabRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleVocabResponse.SerializeToString,
+            ),
+            'ListVocabs': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListVocabs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.SerializeToString,
+            ),
+            'PostVocabs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostVocabs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.SerializeToString,
+            ),
+            'PatchVocabs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchVocabs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchVocabsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.SerializeToString,
+            ),
+            'DeleteVocab': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteVocab,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'DeleteVocabs': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteVocabs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListVocabConcepts': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListVocabConcepts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabConceptsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
+            ),
+            'PostVocabConcepts': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostVocabConcepts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabConceptsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.SerializeToString,
+            ),
+            'DeleteVocabConcept': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteVocabConcept,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'DeleteVocabConcepts': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteVocabConcepts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'GetConceptLanguage': grpc.unary_unary_rpc_method_handler(
                     servicer.GetConceptLanguage,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetConceptLanguageRequest.FromString,
@@ -2474,6 +4366,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchConceptLanguagesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptLanguageResponse.SerializeToString,
             ),
+            'ListConceptReferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListConceptReferences,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptReferencesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptReferenceResponse.SerializeToString,
+            ),
             'ListKnowledgeGraphs': grpc.unary_unary_rpc_method_handler(
                     servicer.ListKnowledgeGraphs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListKnowledgeGraphsRequest.FromString,
@@ -2488,6 +4385,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostConceptMappingJobs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.SerializeToString,
+            ),
+            'ListConceptMappings': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListConceptMappings,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptMappingsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse.SerializeToString,
+            ),
+            'PostConceptMappings': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostConceptMappings,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse.SerializeToString,
             ),
             'GetAnnotation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAnnotation,
@@ -2562,6 +4469,21 @@ def add_V2Servicer_to_server(servicer, server):
             'PostInputs': grpc.unary_unary_rpc_method_handler(
                     servicer.PostInputs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+            ),
+            'PostInputsFile': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInputsFile,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsFileRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+            ),
+            'PostInputsNiFi': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInputsNiFi,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsNiFiRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+            ),
+            'PostInputsDocument': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInputsDocument,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsDocumentRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
             ),
             'PatchInputs': grpc.unary_unary_rpc_method_handler(
@@ -2824,6 +4746,16 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelReferencesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse.SerializeToString,
             ),
+            'PostModelReferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelReferences,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelReferencesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse.SerializeToString,
+            ),
+            'DeleteModelReferences': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteModelReferences,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelReferencesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'GetModelVersionInputExample': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModelVersionInputExample,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionInputExampleRequest.FromString,
@@ -2834,6 +4766,56 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionInputExamplesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse.SerializeToString,
             ),
+            'PostModelVersionInputExamples': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelVersionInputExamples,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionInputExamplesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse.SerializeToString,
+            ),
+            'DeleteModelVersionInputExamples': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteModelVersionInputExamples,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionInputExamplesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostModelStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelStarResponse.SerializeToString,
+            ),
+            'DeleteModelStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteModelStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsResponse.SerializeToString,
+            ),
+            'PostUserStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostUserStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserStarResponse.SerializeToString,
+            ),
+            'DeleteUserStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteUserStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsResponse.SerializeToString,
+            ),
+            'PostWorkflowStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostWorkflowStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowStarResponse.SerializeToString,
+            ),
+            'DeleteWorkflowStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteWorkflowStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsResponse.SerializeToString,
+            ),
+            'PostAppStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAppStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppStarResponse.SerializeToString,
+            ),
+            'DeleteAppStars': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteAppStars,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsResponse.SerializeToString,
+            ),
             'GetWorkflow': grpc.unary_unary_rpc_method_handler(
                     servicer.GetWorkflow,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowRequest.FromString,
@@ -2842,6 +4824,11 @@ def add_V2Servicer_to_server(servicer, server):
             'ListWorkflows': grpc.unary_unary_rpc_method_handler(
                     servicer.ListWorkflows,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
+            ),
+            'ListPublicWorkflows': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPublicWorkflows,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPublicWorkflowsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.SerializeToString,
             ),
             'PostWorkflows': grpc.unary_unary_rpc_method_handler(
@@ -2898,6 +4885,31 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PatchWorkflowVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse.SerializeToString,
+            ),
+            'PostWorkflowMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostWorkflowMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse.SerializeToString,
+            ),
+            'GetWorkflowMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorkflowMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowMetricsResponse.SerializeToString,
+            ),
+            'GetWorkflowNodeMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorkflowNodeMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowNodeMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowNodeMetricsResponse.SerializeToString,
+            ),
+            'ListWorkflowMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWorkflowMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse.SerializeToString,
+            ),
+            'DeleteWorkflowMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteWorkflowMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'GetKey': grpc.unary_unary_rpc_method_handler(
                     servicer.GetKey,
@@ -2984,15 +4996,290 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAppResponse.SerializeToString,
             ),
+            'PatchAppOwner': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchAppOwner,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppOwnerRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'PostAppsSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAppsSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
             ),
+            'GetUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUser,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.SerializeToString,
+            ),
+            'ListUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUsers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserResponse.SerializeToString,
+            ),
+            'PostUserConsent': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostUserConsent,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserConsentRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.SerializeToString,
+            ),
+            'PatchUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchUser,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchUserRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.SerializeToString,
+            ),
+            'PostUserAccess': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostUserAccess,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUserAccessRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserAccessResponse.SerializeToString,
+            ),
+            'GetUserAccess': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserAccess,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserAccessRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserAccessResponse.SerializeToString,
+            ),
+            'PostEmails': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostEmails,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostEmailsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse.SerializeToString,
+            ),
+            'ListEmails': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListEmails,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListEmailsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse.SerializeToString,
+            ),
+            'PostResendVerifyEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostResendVerifyEmail,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostResendVerifyRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleResendVerifyResponse.SerializeToString,
+            ),
+            'DeleteEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteEmail,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteEmailRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostPrimaryEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostPrimaryEmail,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPrimaryEmailRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleEmailResponse.SerializeToString,
+            ),
             'PostValidatePassword': grpc.unary_unary_rpc_method_handler(
                     servicer.PostValidatePassword,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SinglePasswordValidationResponse.SerializeToString,
+            ),
+            'ListGlobalPasswordPolicies': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListGlobalPasswordPolicies,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListGlobalPasswordPoliciesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.SerializeToString,
+            ),
+            'ListPasswordPolicies': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPasswordPolicies,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPasswordPoliciesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.SerializeToString,
+            ),
+            'PostPasswordPolicies': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostPasswordPolicies,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPasswordPoliciesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.SerializeToString,
+            ),
+            'PatchPasswordPolicies': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchPasswordPolicies,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchPasswordPoliciesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.SerializeToString,
+            ),
+            'DeletePasswordPolicies': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeletePasswordPolicies,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePasswordPoliciesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'GetUserFeatureConfig': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUserFeatureConfig,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.UserFeatureConfigRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserFeatureConfigResponse.SerializeToString,
+            ),
+            'PostOrganizations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostOrganizations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse.SerializeToString,
+            ),
+            'ListUsersOrganizations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUsersOrganizations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersOrganizationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiUsersOrganizationsResponse.SerializeToString,
+            ),
+            'ListOrganizations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListOrganizations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse.SerializeToString,
+            ),
+            'GetOrganization': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOrganization,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse.SerializeToString,
+            ),
+            'PatchOrganization': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchOrganization,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse.SerializeToString,
+            ),
+            'DeleteOrganization': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteOrganization,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListOrganizationMembers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListOrganizationMembers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationMembersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse.SerializeToString,
+            ),
+            'ListOrganizationAppMembers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListOrganizationAppMembers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationAppMembersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse.SerializeToString,
+            ),
+            'PostOrganizationMember': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostOrganizationMember,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationMemberRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PatchOrganizationMember': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchOrganizationMember,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationMembersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'DeleteOrganizationMember': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteOrganizationMember,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationMemberRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostOrganizationInvitations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostOrganizationInvitations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationInvitationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.SerializeToString,
+            ),
+            'PatchOrganizationInvitations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchOrganizationInvitations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationInvitationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.SerializeToString,
+            ),
+            'ListOrganizationInvitations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListOrganizationInvitations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationInvitationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.SerializeToString,
+            ),
+            'GetOrganizationInvitation': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOrganizationInvitation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse.SerializeToString,
+            ),
+            'PostDeclineOrganizationInvitation': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostDeclineOrganizationInvitation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostDeclineOrganizationInvitationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostAcceptOrganizationInvitation': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAcceptOrganizationInvitation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAcceptOrganizationInvitationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'GetOrganizationInvitationPublic': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetOrganizationInvitationPublic,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationPublicRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse.SerializeToString,
+            ),
+            'DeleteRequestingUserFromOrganization': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteRequestingUserFromOrganization,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRequestingUserFromOrganizationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostIdentityProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostIdentityProviders,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdentityProvidersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.SerializeToString,
+            ),
+            'ListIdentityProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListIdentityProviders,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListIdentityProvidersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.SerializeToString,
+            ),
+            'GetIdentityProvider': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetIdentityProvider,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetIdentityProviderRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleIdentityProviderResponse.SerializeToString,
+            ),
+            'PatchIdentityProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchIdentityProviders,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchIdentityProvidersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.SerializeToString,
+            ),
+            'DeleteIdentityProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteIdentityProviders,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteIdentityProvidersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostTeams': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostTeams,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.SerializeToString,
+            ),
+            'ListTeams': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTeams,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.SerializeToString,
+            ),
+            'GetTeam': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetTeam,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetTeamRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleTeamResponse.SerializeToString,
+            ),
+            'PatchTeams': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchTeams,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchTeamsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.SerializeToString,
+            ),
+            'DeleteTeams': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteTeams,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostTeamUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostTeamUsers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamUsersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse.SerializeToString,
+            ),
+            'ListTeamUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTeamUsers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamUsersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse.SerializeToString,
+            ),
+            'DeleteTeamUsers': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteTeamUsers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamUsersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostTeamApps': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostTeamApps,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamAppsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListTeamApps': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTeamApps,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamAppsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamAppsResponse.SerializeToString,
+            ),
+            'DeleteTeamApps': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteTeamApps,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamAppsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListRoles': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListRoles,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRolesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRoleResponse.SerializeToString,
+            ),
+            'GetRole': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetRole,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRoleRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleRoleResponse.SerializeToString,
             ),
             'GetSearch': grpc.unary_unary_rpc_method_handler(
                     servicer.GetSearch,
@@ -3044,6 +5331,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSearchRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'PostAttributeSearch': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAttributeSearch,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAttributeSearchRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
+            ),
             'ListAnnotationFilters': grpc.unary_unary_rpc_method_handler(
                     servicer.ListAnnotationFilters,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationFiltersRequest.FromString,
@@ -3069,6 +5361,156 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationFiltersRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'ListClusters': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListClusters,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListClustersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse.SerializeToString,
+            ),
+            'ListAnnotationsForCluster': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAnnotationsForCluster,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsForClusterRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
+            ),
+            'PostClustersSearches': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostClustersSearches,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostClustersSearchesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse.SerializeToString,
+            ),
+            'PostVerifyEmail': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostVerifyEmail,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostVerifyEmailRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleVerifyEmailResponse.SerializeToString,
+            ),
+            'PostRequestResetPassword': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostRequestResetPassword,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.RequestResetPasswordRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostCompleteResetPassword': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostCompleteResetPassword,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.CompleteResetPasswordRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostLogin': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostLogin,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLoginRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.SerializeToString,
+            ),
+            'PostSignup': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostSignup,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSignupRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.SerializeToString,
+            ),
+            'PostLogout': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostLogout,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLogoutRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLogoutResponse.SerializeToString,
+            ),
+            'ListAuthMethods': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAuthMethods,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse.SerializeToString,
+            ),
+            'ListOrgAuthMethods': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListOrgAuthMethods,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse.SerializeToString,
+            ),
+            'PostIdLoginFinalizer': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostIdLoginFinalizer,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerResponse.SerializeToString,
+            ),
+            'PostLinkIdpUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostLinkIdpUser,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserResponse.SerializeToString,
+            ),
+            'GetLoginInfo': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetLoginInfo,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoResponse.SerializeToString,
+            ),
+            'ListAuth2FAMethods': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAuth2FAMethods,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsResponse.SerializeToString,
+            ),
+            'PostAuth2FATotpRegisterEnable': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAuth2FATotpRegisterEnable,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableResponse.SerializeToString,
+            ),
+            'PostAuth2FATotpRegisterVerify': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAuth2FATotpRegisterVerify,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyResponse.SerializeToString,
+            ),
+            'PostAuth2FATotpDisable': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAuth2FATotpDisable,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableResponse.SerializeToString,
+            ),
+            'PostAuth2FATotpLogin': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAuth2FATotpLogin,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpLoginRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.SerializeToString,
+            ),
+            'PostAuth2FATotpRecover': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAuth2FATotpRecover,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverResponse.SerializeToString,
+            ),
+            'GetAuth2FATotpRecoverConfirm': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetAuth2FATotpRecoverConfirm,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmResponse.SerializeToString,
+            ),
+            'GetSubscription': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSubscription,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSubscriptionRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse.SerializeToString,
+            ),
+            'PostSubscription': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostSubscription,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSubscriptionRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse.SerializeToString,
+            ),
+            'ListCreditCards': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCreditCards,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCreditCardsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse.SerializeToString,
+            ),
+            'PostCreditCard': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostCreditCard,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCreditCardRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleCreditCardResponse.SerializeToString,
+            ),
+            'DeleteCreditCard': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteCreditCard,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCreditCardRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PatchCreditCards': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchCreditCards,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCreditCardsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse.SerializeToString,
+            ),
+            'GetShippingAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetShippingAddress,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetShippingAddressRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse.SerializeToString,
+            ),
+            'PutShippingAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutShippingAddress,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutShippingAddressRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse.SerializeToString,
+            ),
+            'ListPlans': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPlans,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPlansRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPlanResponse.SerializeToString,
+            ),
             'ListStatusCodes': grpc.unary_unary_rpc_method_handler(
                     servicer.ListStatusCodes,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListStatusCodesRequest.FromString,
@@ -3078,6 +5520,51 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.GetStatusCode,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.SerializeToString,
+            ),
+            'GetHealthz': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetHealthz,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzResponse.SerializeToString,
+            ),
+            'ListUserBillingCycles': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUserBillingCycles,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesResponse.SerializeToString,
+            ),
+            'ListUserCycles': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUserCycles,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesResponse.SerializeToString,
+            ),
+            'GetBillingUsage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetBillingUsage,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageResponse.SerializeToString,
+            ),
+            'PostHistoricalUsage': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostHistoricalUsage,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageResponse.SerializeToString,
+            ),
+            'GetHistoricalUsage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetHistoricalUsage,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageResponse.SerializeToString,
+            ),
+            'ListUsageIntervals': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListUsageIntervals,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsResponse.SerializeToString,
+            ),
+            'GetRealtimeUsage': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetRealtimeUsage,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageResponse.SerializeToString,
+            ),
+            'PostUsage': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostUsage,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageResponse.SerializeToString,
             ),
             'ListCollaborators': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCollaborators,
@@ -3103,6 +5590,26 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListCollaborations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaborationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaborationsResponse.SerializeToString,
+            ),
+            'FetchLicense': grpc.unary_unary_rpc_method_handler(
+                    servicer.FetchLicense,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseResponse.SerializeToString,
+            ),
+            'ListLicenses': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListLicenses,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLicensesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultipleLicensesResponse.SerializeToString,
+            ),
+            'GetLicense': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetLicense,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetLicenseRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleLicenseResponse.SerializeToString,
+            ),
+            'ValidateLicense': grpc.unary_unary_rpc_method_handler(
+                    servicer.ValidateLicense,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseResponse.SerializeToString,
             ),
             'PostAppDuplications': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAppDuplications,
@@ -3152,6 +5659,11 @@ def add_V2Servicer_to_server(servicer, server):
             'DeleteTasks': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteTasks,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PatchAnnotationCountsRollup': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchAnnotationCountsRollup,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationCountsRollupRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'PostLabelOrders': grpc.unary_unary_rpc_method_handler(
@@ -3214,6 +5726,36 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.SerializeToString,
             ),
+            'PostAnalytics': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAnalytics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsResponse.SerializeToString,
+            ),
+            'PostSDKBilling': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostSDKBilling,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingResponse.SerializeToString,
+            ),
+            'PostFindDuplicateAnnotationsJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostFindDuplicateAnnotationsJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostFindDuplicateAnnotationsJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse.SerializeToString,
+            ),
+            'GetFindDuplicateAnnotationsJob': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetFindDuplicateAnnotationsJob,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetFindDuplicateAnnotationsJobRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleFindDuplicateAnnotationsJobResponse.SerializeToString,
+            ),
+            'ListFindDuplicateAnnotationsJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListFindDuplicateAnnotationsJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListFindDuplicateAnnotationsJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse.SerializeToString,
+            ),
+            'DeleteFindDuplicateAnnotationsJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteFindDuplicateAnnotationsJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteFindDuplicateAnnotationsJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'PostTrendingMetricsView': grpc.unary_unary_rpc_method_handler(
                     servicer.PostTrendingMetricsView,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.FromString,
@@ -3223,6 +5765,36 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListTrendingMetricsViews,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
+            ),
+            'PostIdValidation': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostIdValidation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostIdValidationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdValidationResponse.SerializeToString,
+            ),
+            'ListTagCategories': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListTagCategories,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTagCategoriesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTagCategoryResponse.SerializeToString,
+            ),
+            'ListWebNotifications': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWebNotifications,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWebNotificationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse.SerializeToString,
+            ),
+            'GetWebNotification': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWebNotification,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWebNotificationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWebNotificationResponse.SerializeToString,
+            ),
+            'PatchWebNotifications': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchWebNotifications,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWebNotificationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse.SerializeToString,
+            ),
+            'DeleteWebNotifications': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteWebNotifications,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWebNotificationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'GetModule': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModule,
@@ -3324,6 +5896,31 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
             ),
+            'ListNextTaskAssignments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListNextTaskAssignments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+            ),
+            'PutTaskAssignments': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutTaskAssignments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostWaitlistEmails': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostWaitlistEmails,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWaitlistEmailsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWaitlistEmailResponse.SerializeToString,
+            ),
+            'GetSampledPredictMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSampledPredictMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSampledPredictMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSampledPredictMetricsResponse.SerializeToString,
+            ),
+            'PostInputsAddJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInputsAddJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsAddJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.SerializeToString,
+            ),
             'ListInputsAddJobs': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInputsAddJobs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsAddJobsRequest.FromString,
@@ -3332,6 +5929,11 @@ def add_V2Servicer_to_server(servicer, server):
             'GetInputsAddJob': grpc.unary_unary_rpc_method_handler(
                     servicer.GetInputsAddJob,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.SerializeToString,
+            ),
+            'CancelInputsAddJob': grpc.unary_unary_rpc_method_handler(
+                    servicer.CancelInputsAddJob,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.SerializeToString,
             ),
             'PostUploads': grpc.unary_unary_rpc_method_handler(
@@ -3367,25 +5969,25 @@ def add_V2Servicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class V2(object):
+    """V2
     """
-    Note: this is based on the google api format defined here. Please
-    read this before contributing to this file and other *.proto files
-    for the API.
-    https://cloud.google.com/service-management/reference/rpc/google.api#google.api.HttpRule
 
-    For the cl_depending_scopes in this file, see the docstring that explains the two types of
-    scope dependencies in clarifai/auth/scope/scope.proto
-
-    For new endpoints you should typically only add the fully qualified url that includes the user_id
-    and app_id.
-
-    You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
-    for resources not contained in an app or need access from things across apps. See more about the
-    auth types here:
-    https://clarifai.atlassian.net/wiki/spaces/TT/pages/1821409336/API+Authorizers+and+Resource+Access
-
-
-    """
+    @staticmethod
+    def Echo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/Echo',
+            proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.TestMessage.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ListConceptRelations(request,
@@ -3558,6 +6160,176 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetVocab(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetVocab',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetVocabRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleVocabResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListVocabs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListVocabs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostVocabs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostVocabs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchVocabs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchVocabs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchVocabsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiVocabResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteVocab(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteVocab',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteVocabs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteVocabs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListVocabConcepts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListVocabConcepts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListVocabConceptsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostVocabConcepts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostVocabConcepts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostVocabConceptsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteVocabConcept(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteVocabConcept',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteVocabConcepts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteVocabConcepts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteVocabConceptsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def GetConceptLanguage(request,
             target,
             options=(),
@@ -3626,6 +6398,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ListConceptReferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListConceptReferences',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptReferencesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptReferenceResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListKnowledgeGraphs(request,
             target,
             options=(),
@@ -3673,6 +6462,40 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostConceptMappingJobs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListConceptMappings(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListConceptMappings',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListConceptMappingsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostConceptMappings(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostConceptMappings',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -3927,6 +6750,57 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInputsFile(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsFile',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsFileRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInputsNiFi(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsNiFi',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsNiFiRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInputsDocument(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsDocument',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsDocumentRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -4816,6 +7690,40 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostModelReferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelReferences',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelReferencesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelReferenceResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteModelReferences(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteModelReferences',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelReferencesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def GetModelVersionInputExample(request,
             target,
             options=(),
@@ -4850,6 +7758,176 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostModelVersionInputExamples(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelVersionInputExamples',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionInputExamplesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelVersionInputExampleResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteModelVersionInputExamples(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteModelVersionInputExamples',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelVersionInputExamplesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostModelStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelStarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteModelStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteModelStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelStarsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostUserStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostUserStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUserStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserStarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteUserStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteUserStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteUserStarsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostWorkflowStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowStarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteWorkflowStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteWorkflowStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowStarsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAppStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAppStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAppStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppStarResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteAppStars(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteAppStars',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAppStarsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def GetWorkflow(request,
             target,
             options=(),
@@ -4879,6 +7957,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflows',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPublicWorkflows(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPublicWorkflows',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPublicWorkflowsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -5067,6 +8162,91 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostWorkflowMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWorkflowMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetWorkflowMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWorkflowNodeMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetWorkflowNodeMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowNodeMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowNodeMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListWorkflowMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflowMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteWorkflowMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteWorkflowMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWorkflowMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5360,6 +8540,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PatchAppOwner(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchAppOwner',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppOwnerRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostAppsSearches(request,
             target,
             options=(),
@@ -5377,6 +8574,193 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetUser',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUsers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostUserConsent(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostUserConsent',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUserConsentRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchUser',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchUserRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostUserAccess(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostUserAccess',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUserAccessRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUserAccessResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUserAccess(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetUserAccess',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetUserAccessRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserAccessResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostEmails(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostEmails',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostEmailsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListEmails(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListEmails',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListEmailsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultipleEmailResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostResendVerifyEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostResendVerifyEmail',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostResendVerifyRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleResendVerifyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteEmail',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteEmailRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostPrimaryEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostPrimaryEmail',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPrimaryEmailRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleEmailResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostValidatePassword(request,
             target,
             options=(),
@@ -5390,6 +8774,737 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostValidatePassword',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SinglePasswordValidationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListGlobalPasswordPolicies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListGlobalPasswordPolicies',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListGlobalPasswordPoliciesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPasswordPolicies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPasswordPolicies',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPasswordPoliciesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostPasswordPolicies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostPasswordPolicies',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPasswordPoliciesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchPasswordPolicies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchPasswordPolicies',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchPasswordPoliciesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiplePasswordPoliciesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeletePasswordPolicies(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeletePasswordPolicies',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeletePasswordPoliciesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetUserFeatureConfig(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetUserFeatureConfig',
+            proto_dot_clarifai_dot_api_dot_service__pb2.UserFeatureConfigRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserFeatureConfigResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostOrganizations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostOrganizations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUsersOrganizations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUsersOrganizations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUsersOrganizationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiUsersOrganizationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListOrganizations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListOrganizations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetOrganization(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetOrganization',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchOrganization(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchOrganization',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteOrganization(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteOrganization',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListOrganizationMembers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListOrganizationMembers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationMembersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListOrganizationAppMembers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListOrganizationAppMembers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationAppMembersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationMemberResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostOrganizationMember(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostOrganizationMember',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationMemberRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchOrganizationMember(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchOrganizationMember',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationMembersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteOrganizationMember(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteOrganizationMember',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteOrganizationMemberRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostOrganizationInvitations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostOrganizationInvitations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostOrganizationInvitationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchOrganizationInvitations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchOrganizationInvitations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchOrganizationInvitationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListOrganizationInvitations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListOrganizationInvitations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListOrganizationInvitationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOrganizationInvitationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetOrganizationInvitation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetOrganizationInvitation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostDeclineOrganizationInvitation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostDeclineOrganizationInvitation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostDeclineOrganizationInvitationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAcceptOrganizationInvitation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAcceptOrganizationInvitation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAcceptOrganizationInvitationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetOrganizationInvitationPublic(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetOrganizationInvitationPublic',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetOrganizationInvitationPublicRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleOrganizationInvitationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteRequestingUserFromOrganization(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteRequestingUserFromOrganization',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRequestingUserFromOrganizationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostIdentityProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostIdentityProviders',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostIdentityProvidersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListIdentityProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListIdentityProviders',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListIdentityProvidersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetIdentityProvider(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetIdentityProvider',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetIdentityProviderRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleIdentityProviderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchIdentityProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchIdentityProviders',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchIdentityProvidersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdentityProviderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteIdentityProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteIdentityProviders',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteIdentityProvidersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostTeams(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostTeams',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTeams(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTeams',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetTeam(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetTeam',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetTeamRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleTeamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchTeams(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchTeams',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchTeamsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteTeams(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteTeams',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostTeamUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostTeamUsers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamUsersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTeamUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTeamUsers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamUsersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteTeamUsers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteTeamUsers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamUsersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostTeamApps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostTeamApps',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostTeamAppsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTeamApps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTeamApps',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListTeamAppsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTeamAppsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteTeamApps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteTeamApps',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTeamAppsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListRoles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListRoles',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListRolesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRoleResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetRole(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetRole',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetRoleRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleRoleResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5564,6 +9679,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostAttributeSearch(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAttributeSearch',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAttributeSearchRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListAnnotationFilters(request,
             target,
             options=(),
@@ -5649,6 +9781,516 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ListClusters(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListClusters',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListClustersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListAnnotationsForCluster(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAnnotationsForCluster',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsForClusterRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostClustersSearches(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostClustersSearches',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostClustersSearchesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiClusterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostVerifyEmail(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostVerifyEmail',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostVerifyEmailRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleVerifyEmailResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostRequestResetPassword(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRequestResetPassword',
+            proto_dot_clarifai_dot_api_dot_service__pb2.RequestResetPasswordRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostCompleteResetPassword(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostCompleteResetPassword',
+            proto_dot_clarifai_dot_api_dot_service__pb2.CompleteResetPasswordRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostLogin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostLogin',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostLoginRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostSignup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostSignup',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostSignupRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostLogout(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostLogout',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostLogoutRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleLogoutResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListAuthMethods(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAuthMethods',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListOrgAuthMethods(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListOrgAuthMethods',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAuthMethodsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostIdLoginFinalizer(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostIdLoginFinalizer',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostIdLoginFinalizerResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostLinkIdpUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostLinkIdpUser',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostLinkIdpUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetLoginInfo(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetLoginInfo',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetLoginInfoResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListAuth2FAMethods(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAuth2FAMethods',
+            proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.List2FAMethodsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAuth2FATotpRegisterEnable(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuth2FATotpRegisterEnable',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterEnableResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAuth2FATotpRegisterVerify(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuth2FATotpRegisterVerify',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRegisterVerifyResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAuth2FATotpDisable(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuth2FATotpDisable',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpDisableResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAuth2FATotpLogin(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuth2FATotpLogin',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpLoginRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleLoginResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAuth2FATotpRecover(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuth2FATotpRecover',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAuth2FATotpRecoverResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetAuth2FATotpRecoverConfirm(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetAuth2FATotpRecoverConfirm',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetAuth2FATotpRecoverConfirmResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSubscription(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetSubscription',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetSubscriptionRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostSubscription(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostSubscription',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostSubscriptionRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleSubscriptionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListCreditCards(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListCreditCards',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListCreditCardsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostCreditCard(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostCreditCard',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostCreditCardRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleCreditCardResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteCreditCard(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteCreditCard',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCreditCardRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchCreditCards(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchCreditCards',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchCreditCardsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultipleCreditCardResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetShippingAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetShippingAddress',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetShippingAddressRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutShippingAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutShippingAddress',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutShippingAddressRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleShippingAddressResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPlans(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPlans',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPlansRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPlanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListStatusCodes(request,
             target,
             options=(),
@@ -5679,6 +10321,159 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetStatusCode',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetHealthz(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetHealthz',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetHealthzResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUserBillingCycles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUserBillingCycles',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUserBillingCyclesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUserCycles(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUserCycles',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUserCyclesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetBillingUsage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetBillingUsage',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetBillingUsageResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostHistoricalUsage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostHistoricalUsage',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostHistoricalUsageResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetHistoricalUsage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetHistoricalUsage',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetHistoricalUsageResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListUsageIntervals(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListUsageIntervals',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListUsageIntervalsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetRealtimeUsage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetRealtimeUsage',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetRealtimeUsageResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostUsage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostUsage',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostUsageResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5764,6 +10559,74 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListCollaborations',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaborationsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollaborationsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def FetchLicense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/FetchLicense',
+            proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.FetchLicenseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListLicenses(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListLicenses',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListLicensesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultipleLicensesResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetLicense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetLicense',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetLicenseRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleLicenseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ValidateLicense(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ValidateLicense',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.ValidateLicenseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5933,6 +10796,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteTasks',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteTasksRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchAnnotationCountsRollup(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchAnnotationCountsRollup',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationCountsRollupRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -6142,6 +11022,108 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostAnalytics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAnalytics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAnalyticsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostSDKBilling(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostSDKBilling',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostSDKBillingResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostFindDuplicateAnnotationsJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostFindDuplicateAnnotationsJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostFindDuplicateAnnotationsJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetFindDuplicateAnnotationsJob(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetFindDuplicateAnnotationsJob',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetFindDuplicateAnnotationsJobRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleFindDuplicateAnnotationsJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListFindDuplicateAnnotationsJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListFindDuplicateAnnotationsJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListFindDuplicateAnnotationsJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiFindDuplicateAnnotationsJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteFindDuplicateAnnotationsJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteFindDuplicateAnnotationsJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteFindDuplicateAnnotationsJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostTrendingMetricsView(request,
             target,
             options=(),
@@ -6172,6 +11154,108 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTrendingMetricsViews',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostIdValidation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostIdValidation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostIdValidationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiIdValidationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListTagCategories(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTagCategories',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListTagCategoriesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTagCategoryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListWebNotifications(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWebNotifications',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListWebNotificationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWebNotification(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetWebNotification',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetWebNotificationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleWebNotificationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchWebNotifications(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWebNotifications',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchWebNotificationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWebNotificationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteWebNotifications(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteWebNotifications',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteWebNotificationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -6516,6 +11600,91 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ListNextTaskAssignments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListNextTaskAssignments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutTaskAssignments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutTaskAssignments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostWaitlistEmails(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWaitlistEmails',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostWaitlistEmailsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWaitlistEmailResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSampledPredictMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetSampledPredictMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetSampledPredictMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSampledPredictMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInputsAddJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsAddJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsAddJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListInputsAddJobs(request,
             target,
             options=(),
@@ -6545,6 +11714,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInputsAddJob',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CancelInputsAddJob(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/CancelInputsAddJob',
+            proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

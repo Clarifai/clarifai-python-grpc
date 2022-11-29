@@ -18,6 +18,7 @@ from clarifai_grpc.grpc.api.status import status_pb2 as proto_dot_clarifai_dot_a
 from clarifai_grpc.grpc.api.utils import extensions_pb2 as proto_dot_clarifai_dot_api_dot_utils_dot_extensions__pb2
 from clarifai_grpc.grpc.auth.scope import scope_pb2 as proto_dot_clarifai_dot_auth_dot_scope_dot_scope__pb2
 from clarifai_grpc.grpc.auth.util import extension_pb2 as proto_dot_clarifai_dot_auth_dot_util_dot_extension__pb2
+from clarifai_grpc.grpc.commands import commands_pb2 as proto_dot_clarifai_dot_commands_dot_commands__pb2
 from clarifai_grpc.grpc.api.status import status_code_pb2 as proto_dot_clarifai_dot_api_dot_status_dot_status__code__pb2
 from google.api import annotations_pb2 as google_dot_api_dot_annotations__pb2
 from google.protobuf import duration_pb2 as google_dot_protobuf_dot_duration__pb2
@@ -25,7 +26,7 @@ from google.protobuf import struct_pb2 as google_dot_protobuf_dot_struct__pb2
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n proto/clarifai/api/service.proto\x12\x0c\x63larifai.api\x1a\"proto/clarifai/api/resources.proto\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a%proto/clarifai/auth/scope/scope.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a+proto/clarifai/api/status/status_code.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\",\n\nPagination\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\"p\n\x14GetAnnotationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x15\n\rannotation_id\x18\x02 \x01(\t\x12\x10\n\x08input_id\x18\x03 \x01(\t\"\xb7\x02\n\x16ListAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\x12\x10\n\x08user_ids\x18\t \x03(\t\x12\x19\n\x11model_version_ids\x18\n \x03(\t\x12-\n\x08statuses\x18\x05 \x03(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14list_all_annotations\x18\x06 \x01(\x08\x12\x1b\n\x13return_model_output\x18\x0c \x01(\x08\x12\x0c\n\x04page\x18\x07 \x01(\r\x12\x10\n\x08per_page\x18\x08 \x01(\r\x12\x0f\n\x07task_id\x18\x0b \x01(\tJ\x04\x08\x04\x10\x05\"x\n\x16PostAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.Annotation\"\x89\x01\n\x17PatchAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.Annotation\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\xb9\x01\n\x1dPatchAnnotationsStatusRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x34\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1f.clarifai.api.status.StatusCode\x12\x10\n\x08user_ids\x18\x03 \x03(\t\x12\x0f\n\x07task_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x05 \x01(\t\"v\n\x1ePatchAnnotationsStatusResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12\x15\n\rupdated_count\x18\x03 \x01(\r\"s\n\x17\x44\x65leteAnnotationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12\x15\n\rannotation_id\x18\x03 \x01(\t\"k\n\x18\x44\x65leteAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\"u\n\x18SingleAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12,\n\nannotation\x18\x02 \x01(\x0b\x32\x18.clarifai.api.Annotation\"{\n\x17MultiAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.AnnotationB\x04\x80\xb5\x18\x01\"[\n\rGetAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x02 \x03(\t\"\xa5\x02\n\x0fListAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\x05 \x01(\x08\x12\x16\n\x0csort_by_name\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\x07 \x01(\x08H\x00\x12\r\n\x05query\x18\x08 \x01(\t\x12\x10\n\x04name\x18\x04 \x01(\tB\x02\x18\x01\x12\x15\n\rfeatured_only\x18\t \x01(\x08\x12\x14\n\x0cstarred_only\x18\x0b \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\n \x03(\tB\t\n\x07sort_by\"c\n\x0fPostAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.App\"C\n\x10\x44\x65leteAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xb9\x01\n\x10PatchAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.App\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12\x32\n\x0fmetadata_action\x18\x04 \x01(\x0b\x32\x19.clarifai.api.PatchAction\x12\x0f\n\x07reindex\x18\x05 \x01(\x08\"\xb7\x01\n\x0fPatchAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12\x32\n\x0fmetadata_action\x18\x04 \x01(\x0b\x32\x19.clarifai.api.PatchAction\x12\x0f\n\x07reindex\x18\x05 \x01(\x08\"\x81\x01\n\x13PatchAppsIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\xa3\x01\n\x17PostAppsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tapp_query\x18\x02 \x01(\x0b\x32\x16.clarifai.api.AppQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"`\n\x11SingleAppResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\"f\n\x10MultiAppResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.AppB\x04\x80\xb5\x18\x01\"k\n\x18ListCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1e\n\x16list_all_collaborators\x18\x02 \x01(\x08\"~\n\x18PostCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Collaborator\"\x8f\x01\n\x19PatchCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Collaborator\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"|\n\x1a\x44\x65leteCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x18\n\x10\x63ollaborator_ids\x18\x02 \x03(\t\x12\x13\n\x0buser_emails\x18\x03 \x03(\t\"\x82\x01\n\x1aMultiCollaboratorsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.CollaboratorB\x04\x80\xb5\x18\x01\"l\n\x19ListCollaborationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x85\x01\n\x1bMultiCollaborationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x0e\x63ollaborations\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.CollaborationB\x04\x80\xb5\x18\x01\".\n\x14GetStatusCodeRequest\x12\x16\n\x0estatus_code_id\x18\x01 \x01(\t\"\x18\n\x16ListStatusCodesRequest\"G\n\x18SingleStatusCodeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"u\n\x17MultiStatusCodeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08statuses\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.status.Status\"X\n\x11GetConceptRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\"f\n\x13ListConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x91\x01\n\x18ListModelConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"\xaf\x01\n\x1bPostConceptsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rconcept_query\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.ConceptQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"o\n\x13PostConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Concept\"\x80\x01\n\x14PatchConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"j\n\x17GetConceptCountsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"l\n\x15SingleConceptResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x07\x63oncept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\"r\n\x14MultiConceptResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.ConceptB\x04\x80\xb5\x18\x01\"\x82\x01\n\x19MultiConceptCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0e\x63oncept_counts\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.ConceptCountB\x04\x80\xb5\x18\x01\"\xb1\x01\n\x1bListConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x11\n\tpredicate\x18\x03 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x04 \x01(\t\x12\x0c\n\x04page\x18\x05 \x01(\r\x12\x10\n\x08per_page\x18\x06 \x01(\r\"\x9c\x01\n\x1bPostConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_relations\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptRelation\"q\n\x1d\x44\x65leteConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"M\n\x1aListKnowledgeGraphsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x85\x01\n\x1aPostKnowledgeGraphsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x36\n\x10knowledge_graphs\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.KnowledgeGraph\"\x8f\x01\n\x1dPostConceptMappingJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12=\n\x14\x63oncept_mapping_jobs\x18\x02 \x03(\x0b\x32\x1f.clarifai.api.ConceptMappingJob\"\x8b\x01\n\x1cMultiConceptRelationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11\x63oncept_relations\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.ConceptRelationB\x04\x80\xb5\x18\x01\"\x88\x01\n\x1bMultiKnowledgeGraphResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12<\n\x10knowledge_graphs\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.KnowledgeGraphB\x04\x80\xb5\x18\x01\"Z\n\x1eMultiConceptMappingJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03ids\x18\x02 \x03(\t\"r\n\x19GetConceptLanguageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\t\"\x82\x01\n\x1bListConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\xad\x01\n\x1cPatchConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_languages\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguage\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x9c\x01\n\x1bPostConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_languages\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguage\"\x85\x01\n\x1dSingleConceptLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10\x63oncept_language\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.ConceptLanguage\"\x8b\x01\n\x1cMultiConceptLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11\x63oncept_languages\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguageB\x04\x80\xb5\x18\x01\"T\n\x0fGetInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\"l\n\x16GetInputSamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x10\n\x08user_ids\x18\x03 \x03(\t\"\x9e\x01\n\x11ListInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03ids\x18\x04 \x03(\t\"\x92\x01\n\x13StreamInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12\x0f\n\x07last_id\x18\x03 \x01(\t\x12\x13\n\x0border_by_id\x18\x05 \x01(\x08\x12\x12\n\ndescending\x18\x04 \x01(\x08\"\x84\x01\n\x11PostInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x19\n\x11inputs_add_job_id\x18\x03 \x01(\t\"z\n\x12PatchInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"W\n\x12\x44\x65leteInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\"Y\n\x13\x44\x65leteInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\tJ\x04\x08\x03\x10\x04\"f\n\x13SingleInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\"\xa0\x01\n\x12MultiInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.InputB\x04\x80\xb5\x18\x01\x12\x32\n\x0einputs_add_job\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.InputsAddJob\"r\n\x1cMultiInputAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04hits\x18\x03 \x03(\x0b\x32\x11.clarifai.api.HitB\x04\x80\xb5\x18\x01\"q\n\x18SingleInputCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x06\x63ounts\x18\x02 \x01(\x0b\x32\x18.clarifai.api.InputCount\"G\n\x14GetInputCountRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"f\n\x13ListDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"X\n\x11GetDatasetRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\"o\n\x13PostDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Dataset\"\x80\x01\n\x14PatchDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Dataset\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x84\x01\n\x16PatchDatasetIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"]\n\x15\x44\x65leteDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0b\x64\x61taset_ids\x18\x02 \x03(\t\"r\n\x14MultiDatasetResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.DatasetB\x04\x80\xb5\x18\x01\"l\n\x15SingleDatasetResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x07\x64\x61taset\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Dataset\"\x7f\n\x18ListDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"o\n\x16GetDatasetInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x10\n\x08input_id\x18\x03 \x01(\t\"\xb9\x01\n\x18PostDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x32\n\x0e\x64\x61taset_inputs\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.DatasetInput\x12$\n\x06search\x18\x04 \x01(\x0b\x32\x14.clarifai.api.Search\"t\n\x1a\x44\x65leteDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\"\xd2\x01\n\x19MultiDatasetInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0e\x64\x61taset_inputs\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.DatasetInputB\x04\x80\xb5\x18\x01\x12N\n\x1d\x64\x61taset_inputs_search_add_job\x18\x03 \x01(\x0b\x32\'.clarifai.api.DatasetInputsSearchAddJob\"|\n\x1aSingleDatasetInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\rdataset_input\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.DatasetInput\"\x81\x01\n\x1aListDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"{\n\x18GetDatasetVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\"\xa4\x02\n&ListDatasetVersionMetricsGroupsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\x12\x14\n\x0cparent_paths\x18\x06 \x03(\t\x12;\n\x05types\x18\x07 \x03(\x0e\x32,.clarifai.api.DatasetVersionMetricsGroupType\x12&\n\x06values\x18\x08 \x03(\x0b\x32\x16.google.protobuf.Value\"\x99\x01\n\x1aPostDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x36\n\x10\x64\x61taset_versions\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersion\"\xaa\x01\n\x1bPatchDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x36\n\x10\x64\x61taset_versions\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x80\x01\n\x1c\x44\x65leteDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1b\n\x13\x64\x61taset_version_ids\x18\x03 \x03(\t\"\xb7\x01\n\x1fPutDatasetVersionExportsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\x12\x33\n\x07\x65xports\x18\x04 \x03(\x0b\x32\".clarifai.api.DatasetVersionExport\"\x88\x01\n\x1bMultiDatasetVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12<\n\x10\x64\x61taset_versions\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersionB\x04\x80\xb5\x18\x01\"\x8b\x01\n!MultiDatasetVersionExportResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x07\x65xports\x18\x02 \x03(\x0b\x32\".clarifai.api.DatasetVersionExportB\x04\x80\xb5\x18\x01\"\xae\x01\n\'MultiDatasetVersionMetricsGroupResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12V\n\x1e\x64\x61taset_version_metrics_groups\x18\x02 \x03(\x0b\x32(.clarifai.api.DatasetVersionMetricsGroupB\x04\x80\xb5\x18\x01\"\x82\x01\n\x1cSingleDatasetVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0f\x64\x61taset_version\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.DatasetVersion\"f\n#GetDatasetInputsSearchAddJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06job_id\x18\x02 \x01(\t\"\x8c\x01\n\'SingleDatasetInputsSearchAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x03job\x18\x02 \x01(\x0b\x32\'.clarifai.api.DatasetInputsSearchAddJob\"\xb9\x01\n\x17PostModelOutputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12#\n\x06inputs\x18\x04 \x03(\x0b\x32\x13.clarifai.api.Input\x12\"\n\x05model\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Model\"\x8f\x01\n\x16ListModelInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"P\n\rGetKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06key_id\x18\x02 \x01(\t\"b\n\x0fListKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"e\n\x12ListAppKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"c\n\x0fPostKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Key\"S\n\x10\x44\x65leteKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06key_id\x18\x02 \x01(\t\"t\n\x10PatchKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Key\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"`\n\x11SingleKeyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1e\n\x03key\x18\x02 \x01(\x0b\x32\x11.clarifai.api.Key\"f\n\x10MultiKeyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.KeyB\x04\x80\xb5\x18\x01\"\xad\x01\n\x0fGetModelRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x16\n\x0etrained_before\x18\x05 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x13 \x03(\t\"\x85\x04\n\x11ListModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\n \x01(\x08\x12\x16\n\x0csort_by_name\x18\x0b \x01(\x08H\x00\x12\x1c\n\x12sort_by_num_inputs\x18\x0c \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\r \x01(\x08H\x00\x12\r\n\x05query\x18\x0e \x01(\t\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x19\n\x11\x66ilter_by_user_id\x18\x16 \x01(\x08\x12\x15\n\rmodel_type_id\x18\x06 \x01(\t\x12\x14\n\x0ctrained_only\x18\x07 \x01(\x08\x12\x14\n\x0cinput_fields\x18\x08 \x03(\t\x12\x15\n\routput_fields\x18\t \x03(\t\x12\x0f\n\x07license\x18\x0f \x01(\t\x12\x15\n\rfeatured_only\x18\x10 \x01(\x08\x12\x14\n\x0cstarred_only\x18\x14 \x01(\x08\x12\x10\n\x08toolkits\x18\x11 \x03(\t\x12\x11\n\tuse_cases\x18\x12 \x03(\t\x12\x11\n\tlanguages\x18\x15 \x03(\t\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x13 \x03(\tB\t\n\x07sort_byJ\x04\x08\x04\x10\x05\"\x80\x01\n\x19PatchModelToolkitsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x10\n\x08toolkits\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x8b\x01\n\x1ePatchModelCheckConsentsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x16\n\x0e\x63heck_consents\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x80\x01\n\x19PatchModelUseCasesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x10\n\x08usecases\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x82\x01\n\x1aPatchModelLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x11\n\tlanguages\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"Z\n\x19MultiModelToolkitResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08toolkits\x18\x02 \x03(\t\"e\n\x1eMultiModelCheckConsentResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x16\n\x0e\x63heck_consents\x18\x02 \x03(\t\"Z\n\x19MultiModelUseCaseResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08usecases\x18\x02 \x03(\t\"\\\n\x1aMultiModelLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x11\n\tlanguages\x18\x02 \x03(\t\"\x91\x01\n\x11PostModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.ModelB\x02\x18\x01\x12#\n\x06models\x18\x03 \x03(\x0b\x32\x13.clarifai.api.Model\"z\n\x12PatchModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06models\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Model\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\",\n\x0eIdUpdateSource\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06new_id\x18\x02 \x01(\t\"\x82\x01\n\x14PatchModelIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"W\n\x12\x44\x65leteModelRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\"g\n\x13\x44\x65leteModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"\xa9\x01\n\x19PostModelsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0bmodel_query\x18\x02 \x01(\x0b\x32\x18.clarifai.api.ModelQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"f\n\x13SingleModelResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\"l\n\x12MultiModelResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x06models\x18\x02 \x03(\x0b\x32\x13.clarifai.api.ModelB\x04\x80\xb5\x18\x01\"\xa2\x01\n\x19PatchModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x32\n\x0emodel_versions\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"o\n\x16GetModelVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\"\x92\x01\n\x18ListModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\x12\x13\n\x0b\x63oncept_ids\x18\x05 \x03(\t\"r\n\x19\x44\x65leteModelVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x12\n\nversion_id\x18\x04 \x01(\t\"|\n\x1aSingleModelVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\rmodel_version\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\"\x82\x01\n\x19MultiModelVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0emodel_versions\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.ModelVersionB\x04\x80\xb5\x18\x01\"\xaa\x03\n\x18PostModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x32\n\x0emodel_versions\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.ModelVersion\x12(\n\x06search\x18\x04 \x01(\x0b\x32\x14.clarifai.api.SearchB\x02\x18\x01\x12*\n\x0ctrain_search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\x12)\n\x0btest_search\x18\x06 \x01(\x0b\x32\x14.clarifai.api.Search\x12\x1f\n\x17\x65valuate_after_training\x18\x07 \x01(\x08\x12\x13\n\x0b\x64\x65scription\x18\x08 \x01(\t\x12\x35\n\x0f\x64\x61taset_version\x18\t \x01(\x0b\x32\x1c.clarifai.api.DatasetVersion\x12)\n\teval_info\x18\n \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xb1\x01\n$PostWorkflowVersionsUnPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x43\n\x0cpublications\x18\x03 \x03(\x0b\x32-.clarifai.api.WorkflowVersionUnPublishRequest\"\xad\x01\n\"PostWorkflowVersionsPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x41\n\x0cpublications\x18\x03 \x03(\x0b\x32+.clarifai.api.WorkflowVersionPublishRequest\"3\n\x1dWorkflowVersionPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"5\n\x1fWorkflowVersionUnPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"0\n\x1aModelVersionPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"\xa4\x01\n\x1fPostModelVersionsPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12>\n\x0cpublications\x18\x03 \x03(\x0b\x32(.clarifai.api.ModelVersionPublishRequest\"2\n\x1cModelVersionUnpublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"\xa8\x01\n!PostModelVersionsUnPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12@\n\x0cpublications\x18\x03 \x03(\x0b\x32*.clarifai.api.ModelVersionUnpublishRequest\"\xe3\x01\n\x1ePostModelVersionMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x14\n\x0cmax_examples\x18\x04 \x01(\r\x12)\n\x0btest_search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\x12)\n\teval_info\x18\n \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xa1\x01\n\x1dGetModelVersionMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12)\n\x06\x66ields\x18\x04 \x01(\x0b\x32\x19.clarifai.api.FieldsValue\"]\n\x13GetModelTypeRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x15\n\rmodel_type_id\x18\x02 \x01(\t\"h\n\x15ListModelTypesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x1f\n\x1dListOpenSourceLicensesRequest\"_\n\x1eListOpenSourceLicensesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08licenses\x18\x02 \x03(\t\"y\n\x17SingleModelTypeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\nmodel_type\x18\x02 \x01(\x0b\x32\x17.clarifai.api.ModelTypeB\x04\x80\xb5\x18\x01\"\xb0\x01\n\x16MultiModelTypeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0bmodel_types\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ModelTypeB\x04\x80\xb5\x18\x01\x12\x35\n\x0fmodel_importers\x18\x03 \x01(\x0b\x32\x1c.clarifai.api.ModelTypeField\"\x95\x01\n\"GetModelVersionInputExampleRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12\x12\n\nexample_id\x18\x04 \x01(\t\"\xa3\x01\n$ListModelVersionInputExamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"\xa2\x01\n&SingleModelVersionInputExampleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12K\n\x1bmodel_version_input_example\x18\x02 \x01(\x0b\x32&.clarifai.api.ModelVersionInputExample\"\xa2\x01\n%MultiModelVersionInputExampleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12L\n\x1cmodel_version_input_examples\x18\x02 \x03(\x0b\x32&.clarifai.api.ModelVersionInputExample\"\x7f\n\x1aListModelReferencesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x82\x01\n\x1bMultiModelReferenceResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x36\n\x10model_references\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.ModelReference\"o\n\x13MultiOutputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\x07outputs\x18\x02 \x03(\x0b\x32\x14.clarifai.api.OutputB\x04\x80\xb5\x18\x01\"V\n\x11ListScopesRequest\x12\x10\n\x08key_type\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"B\n\x0fMyScopesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"F\n\x13MyScopesUserRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x15\n\x13MyScopesRootRequest\"\xa5\x01\n\x16MultiScopeDepsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\nscope_deps\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ScopeDeps\x12\x31\n\rendpoint_deps\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.EndpointDeps\"\xa0\x01\n\x12MultiScopeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x1e\n\x03\x61pp\x18\x03 \x01(\x0b\x32\x11.clarifai.api.App\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"\x84\x01\n\x16MultiScopeUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"\x84\x01\n\x16MultiScopeRootResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"O\n\x10GetSearchRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"f\n\x13ListSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\xc4\x01\n\x13PostSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x05query\x18\x02 \x01(\x0b\x32\x13.clarifai.api.QueryB\x02\x18\x01\x12&\n\x08searches\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Pagination\"\x85\x01\n\x1aPatchInputsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x8a\x01\n\x1fPatchAnnotationsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x7f\n\x14PatchSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x84\x01\n\x17PostSearchesByIDRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"R\n\x13\x44\x65leteSearchRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\xa7\x01\n\x1ePostAnnotationsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"c\n$DeleteAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\xa2\x01\n\x19PostInputsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"i\n\x14SingleSearchResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\"\xc1\x01\n\x13MultiSearchResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\x02 \x01(\t\x12%\n\x04hits\x18\x03 \x03(\x0b\x32\x11.clarifai.api.HitB\x04\x80\xb5\x18\x01\x12\"\n\x05query\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Query\x12&\n\x08searches\x18\x05 \x03(\x0b\x32\x14.clarifai.api.Search\"\x94\x02\n\"PostAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\x12*\n\x0cground_truth\x18\x03 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x04 \x01(\x0b\x32\x14.clarifai.api.Search\x12 \n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x35\n\x0f\x65valuation_type\x18\x06 \x01(\x0e\x32\x1c.clarifai.api.EvaluationType\"`\n!GetAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"U\n\"ListAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x9d\x01\n$MultiAnnotationSearchMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12H\n\x19\x61nnotation_search_metrics\x18\x02 \x03(\x0b\x32%.clarifai.api.AnnotationSearchMetrics\"o\n\x1cListAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"k\n\x1aGetAnnotationFilterRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1c\n\x14\x61nnotation_filter_id\x18\x02 \x01(\t\"\x8b\x01\n\x1cPostAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12:\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"\x9c\x01\n\x1dPatchAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12:\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilter\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"p\n\x1e\x44\x65leteAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1d\n\x15\x61nnotation_filter_ids\x18\x02 \x03(\t\"\x8e\x01\n\x1dMultiAnnotationFilterResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12@\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilterB\x04\x80\xb5\x18\x01\"\x88\x01\n\x1eSingleAnnotationFilterResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x11\x61nnotation_filter\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"x\n\x1bPostValidatePasswordRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12(\n\x08password\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Password\"\x8e\x01\n SinglePasswordValidationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12=\n\x13password_violations\x18\x02 \x01(\x0b\x32 .clarifai.api.PasswordViolations\"\xbb\x01\n\x12GetWorkflowRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x03 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x04 \x03(\t\x12\"\n\x1a\x65xclude_clarifai_workflows\x18\x05 \x01(\x08\"\xbb\x02\n\x14ListWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\x05 \x01(\x08\x12\x14\n\nsort_by_id\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\x07 \x01(\x08H\x00\x12\r\n\x05query\x18\x08 \x01(\t\x12\x0e\n\x02id\x18\x04 \x01(\tB\x02\x18\x01\x12\x15\n\rfeatured_only\x18\t \x01(\x08\x12\x14\n\x0cstarred_only\x18\x0b \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\n \x03(\t\x12\x13\n\x0bsearch_term\x18\x0c \x01(\tB\t\n\x07sort_by\"r\n\x14PostWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.Workflow\"\x83\x01\n\x15PatchWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.Workflow\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x85\x01\n\x17PatchWorkflowIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"]\n\x15\x44\x65leteWorkflowRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\"j\n\x16\x44\x65leteWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"o\n\x16SingleWorkflowResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08workflow\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Workflow\"u\n\x15MultiWorkflowResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12/\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.WorkflowB\x04\x80\xb5\x18\x01\"\xa5\x02\n\x1aPostWorkflowResultsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x07 \x01(\t\x12#\n\x06inputs\x18\x03 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x31\n\routput_config\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x05 \x01(\x08\x12\x33\n\x0eworkflow_state\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.WorkflowState\"\xd8\x01\n\x1bPostWorkflowResultsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08workflow\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Workflow\x12-\n\x07results\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.WorkflowResult\x12\x33\n\x0eworkflow_state\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.WorkflowState\"\x91\x02\n$PostWorkflowResultsSimilarityRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x07 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12)\n\x0cprobe_inputs\x18\x04 \x03(\x0b\x32\x13.clarifai.api.Input\x12(\n\x0bpool_inputs\x18\x05 \x03(\x0b\x32\x13.clarifai.api.Input\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x06 \x01(\x08\"\x8e\x01\n%PostWorkflowResultsSimilarityResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x07results\x18\x02 \x03(\x0b\x32\'.clarifai.api.WorkflowResultsSimilarity\"\x83\x01\n\x1bListWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"~\n\x19GetWorkflowVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x1b\n\x13workflow_version_id\x18\x03 \x01(\t\"\x83\x01\n\x1d\x44\x65leteWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x1c\n\x14workflow_version_ids\x18\x03 \x03(\t\"\xae\x01\n\x1cPatchWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x38\n\x11workflow_versions\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.WorkflowVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x8b\x01\n\x1cMultiWorkflowVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11workflow_versions\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.WorkflowVersionB\x04\x80\xb5\x18\x01\"\x85\x01\n\x1dSingleWorkflowVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10workflow_version\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.WorkflowVersion\"\x85\x01\n\x1aPostAppDuplicationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x36\n\x10\x61pp_duplications\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.AppDuplication\"g\n\x18GetAppDuplicationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1a\n\x12\x61pp_duplication_id\x18\x02 \x01(\t\"m\n\x1aListAppDuplicationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x83\x01\n\x1cMultiAppDuplicationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x36\n\x10\x61pp_duplications\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.AppDuplication\"\x82\x01\n\x1cSingleAppDuplicationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0f\x61pp_duplication\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.AppDuplication\"f\n\x10PostTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12!\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.Task\"m\n\x0eGetTaskRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x03 \x03(\t\"\xee\x01\n\x10ListTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x17\n\x0fworker_user_ids\x18\x04 \x03(\t\x12\x17\n\x0freview_user_ids\x18\x05 \x03(\t\x12\x17\n\x0flabel_order_ids\x18\x08 \x03(\t\x12#\n\x1bincluding_label_order_tasks\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x07 \x03(\t\"w\n\x11PatchTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12!\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.Task\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"R\n\x12\x44\x65leteTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"i\n\x11MultiTaskResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.TaskB\x04\x80\xb5\x18\x01\"c\n\x12SingleTaskResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04task\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Task\"i\n\x13GetTaskCountRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x10\n\x08user_ids\x18\x03 \x03(\t\"\x9d\x01\n\x17SingleTaskCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x0f\n\x07task_id\x18\x03 \x01(\t\x12\x34\n\x06\x63ounts\x18\x04 \x03(\x0b\x32$.clarifai.api.TaskStatusCountPerUser\"y\n\x16PostLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12.\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrder\"_\n\x14GetLabelOrderRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x16\n\x0elabel_order_id\x18\x02 \x01(\t\"i\n\x16ListLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x8a\x01\n\x17PatchLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12.\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrder\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"X\n\x18\x44\x65leteLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"|\n\x17MultiLabelOrderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrderB\x04\x80\xb5\x18\x01\"v\n\x18SingleLabelOrderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x0blabel_order\x18\x02 \x01(\x0b\x32\x18.clarifai.api.LabelOrder\"u\n\x15PostCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\"\x86\x01\n\x16PatchCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"k\n\x17\x44\x65leteCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"\\\n\x13GetCollectorRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x14\n\x0c\x63ollector_id\x18\x02 \x01(\t\"h\n\x15ListCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"r\n\x16MultiCollectorResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\"r\n\x17SingleCollectorResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12*\n\tcollector\x18\x02 \x01(\x0b\x32\x17.clarifai.api.Collector\"v\n\x15PostStatValuesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12,\n\x0bstat_values\x18\x02 \x03(\x0b\x32\x17.clarifai.api.StatValue\"y\n\x16MultiStatValueResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0bstat_values\x18\x02 \x03(\x0b\x32\x17.clarifai.api.StatValueB\x04\x80\xb5\x18\x01\"\x9e\x01\n\x1ePostStatValuesAggregateRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12K\n\x1cstat_value_aggregate_queries\x18\x02 \x03(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"\x9c\x01\n\x1fMultiStatValueAggregateResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12L\n\x1cstat_value_aggregate_results\x18\x02 \x03(\x0b\x32&.clarifai.api.StatValueAggregateResult\"w\n\x1ePostTrendingMetricsViewRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tview_type\x18\x02 \x01(\t\x12\x11\n\tobject_id\x18\x03 \x01(\t\"\x85\x01\n\x1fListTrendingMetricsViewsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tview_type\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"~\n MultiTrendingMetricsViewResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x07metrics\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.TrendingMetric\"V\n\x10GetModuleRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\"e\n\x12ListModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"l\n\x12PostModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07modules\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Module\"}\n\x13PatchModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07modules\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Module\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"T\n\x14\x44\x65leteModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"i\n\x14SingleModuleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06module\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Module\"o\n\x13MultiModuleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\x07modules\x18\x02 \x03(\x0b\x32\x14.clarifai.api.ModuleB\x04\x80\xb5\x18\x01\"x\n\x17GetModuleVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x19\n\x11module_version_id\x18\x03 \x01(\t\"\x7f\n\x19ListModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x95\x01\n\x19PostModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x34\n\x0fmodule_versions\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.ModuleVersion\"n\n\x1b\x44\x65leteModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"\x7f\n\x1bSingleModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0emodule_version\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.ModuleVersion\"\x85\x01\n\x1aMultiModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12:\n\x0fmodule_versions\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.ModuleVersionB\x04\x80\xb5\x18\x01\"x\n GetInstalledModuleVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x1binstalled_module_version_id\x18\x02 \x01(\t\"u\n\"ListInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x9e\x01\n\"PostInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12G\n\x19installed_module_versions\x18\x02 \x03(\x0b\x32$.clarifai.api.InstalledModuleVersion\"}\n%PostInstalledModuleVersionsKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x1binstalled_module_version_id\x18\x02 \x01(\t\"d\n$DeleteInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x9b\x01\n$SingleInstalledModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x46\n\x18installed_module_version\x18\x02 \x01(\x0b\x32$.clarifai.api.InstalledModuleVersion\"\xa1\x01\n#MultiInstalledModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12M\n\x19installed_module_versions\x18\x02 \x03(\x0b\x32$.clarifai.api.InstalledModuleVersionB\x04\x80\xb5\x18\x01\"\x82\x01\n\x19PostBulkOperationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x34\n\x0f\x62ulk_operations\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.BulkOperation\"l\n\x19ListBulkOperationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"V\n\x17GetBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"Z\n\x1a\x43\x61ncelBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"Z\n\x1a\x44\x65leteBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x80\x01\n\x1cSingleBulkOperationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0e\x62ulk_operation\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.BulkOperation\"\x7f\n\x1bMultiBulkOperationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0e\x62ulk_operation\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.BulkOperation\"k\n\x18ListInputsAddJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"U\n\x16GetInputsAddJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\x83\x01\n\x19MultiInputsAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x0finputs_add_jobs\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.InputsAddJobB\x04\x80\xb5\x18\x01\"}\n\x1aSingleInputsAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0einputs_add_job\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.InputsAddJob\"l\n\x12PostUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07uploads\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Upload\"T\n\x14\x44\x65leteUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"e\n\x12ListUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"V\n\x10GetUploadRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tupload_id\x18\x02 \x01(\t\"i\n\x14SingleUploadResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06upload\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Upload\"i\n\x13MultiUploadResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x07uploads\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Upload\"\x9a\x01\n\x1cPutUploadContentPartsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tupload_id\x18\x02 \x01(\t\x12\x36\n\rcontent_parts\x18\x03 \x03(\x0b\x32\x1f.clarifai.api.UploadContentPart*p\n\x1cOrganizationInvitationStatus\x12\x0b\n\x07NOT_SET\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x02\x12\r\n\tCANCELLED\x10\x03\x12\x0c\n\x08\x44\x45\x43LINED\x10\x04\x12\x0b\n\x07\x45XPIRED\x10\x05\x32\xbe\xdb\x02\n\x02V2\x12\xaa\x02\n\x14ListConceptRelations\x12).clarifai.api.ListConceptRelationsRequest\x1a*.clarifai.api.MultiConceptRelationResponse\"\xba\x01\x82\xd3\xe4\x93\x02\xab\x01\x12Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relationsZN\x12L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/relations\x98\x9c\'\x05\x90\x9c\'\x0b\x12\xdf\x01\n\x14PostConceptRelations\x12).clarifai.api.PostConceptRelationsRequest\x1a*.clarifai.api.MultiConceptRelationResponse\"p\x82\xd3\xe4\x93\x02^\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relations:\x01*\x98\x9c\'\x05\x90\x9c\'\n\x90\x9c\'\x0b\x12\xde\x01\n\x16\x44\x65leteConceptRelations\x12+.clarifai.api.DeleteConceptRelationsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relations:\x01*\x98\x9c\'\x05\x90\x9c\'\r\x90\x9c\'\n\x90\x9c\'\x0b\x12\xdc\x01\n\x10GetConceptCounts\x12%.clarifai.api.GetConceptCountsRequest\x1a\'.clarifai.api.MultiConceptCountResponse\"x\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/statusZ\x15\x12\x13/v2/concepts/status\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xd0\x01\n\nGetConcept\x12\x1f.clarifai.api.GetConceptRequest\x1a#.clarifai.api.SingleConceptResponse\"|\x82\xd3\xe4\x93\x02n\x12O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}Z\x1b\x12\x19/v2/concepts/{concept_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xb9\x01\n\x0cListConcepts\x12!.clarifai.api.ListConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"b\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/conceptsZ\x0e\x12\x0c/v2/concepts\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xb9\x02\n\x11ListModelConcepts\x12&.clarifai.api.ListModelConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"\xd7\x01\x82\xd3\xe4\x93\x02\xc4\x01\x12T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/conceptsZl\x12j/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/concepts\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xea\x01\n\x14PostConceptsSearches\x12).clarifai.api.PostConceptsSearchesRequest\x1a\".clarifai.api.MultiConceptResponse\"\x82\x01\x82\xd3\xe4\x93\x02l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/searches:\x01*Z\x1a\"\x15/v2/concepts/searches:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xc3\x01\n\x0cPostConcepts\x12!.clarifai.api.PostConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"l\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\x01*Z\x11\"\x0c/v2/concepts:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xc5\x01\n\rPatchConcepts\x12\".clarifai.api.PatchConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"l\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\x01*Z\x11\x32\x0c/v2/concepts:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x94\x02\n\x12GetConceptLanguage\x12\'.clarifai.api.GetConceptLanguageRequest\x1a+.clarifai.api.SingleConceptLanguageResponse\"\xa7\x01\x82\xd3\xe4\x93\x02\x98\x01\x12\x64/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages/{language}Z0\x12./v2/concepts/{concept_id}/languages/{language}\x98\x9c\'\x02\x90\x9c\'\x0b\x12\x81\x02\n\x14ListConceptLanguages\x12).clarifai.api.ListConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x91\x01\x82\xd3\xe4\x93\x02\x82\x01\x12Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languagesZ%\x12#/v2/concepts/{concept_id}/languages\x98\x9c\'\x02\x90\x9c\'\x0b\x12\x8b\x02\n\x14PostConceptLanguages\x12).clarifai.api.PostConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x9b\x01\x82\xd3\xe4\x93\x02\x88\x01\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\x01*Z(\"#/v2/concepts/{concept_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x8d\x02\n\x15PatchConceptLanguages\x12*.clarifai.api.PatchConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x9b\x01\x82\xd3\xe4\x93\x02\x88\x01\x32Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\x01*Z(2#/v2/concepts/{concept_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xf1\x01\n\x13ListKnowledgeGraphs\x12(.clarifai.api.ListKnowledgeGraphsRequest\x1a).clarifai.api.MultiKnowledgeGraphResponse\"\x84\x01\x82\xd3\xe4\x93\x02v\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphsZ\x1f\x12\x1d/v2/concepts/knowledge_graphs\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xfb\x01\n\x13PostKnowledgeGraphs\x12(.clarifai.api.PostKnowledgeGraphsRequest\x1a).clarifai.api.MultiKnowledgeGraphResponse\"\x8e\x01\x82\xd3\xe4\x93\x02|\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphs:\x01*Z\"\"\x1d/v2/concepts/knowledge_graphs:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xfe\x01\n\x16PostConceptMappingJobs\x12+.clarifai.api.PostConceptMappingJobsRequest\x1a,.clarifai.api.MultiConceptMappingJobResponse\"\x88\x01\x82\xd3\xe4\x93\x02v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappings/jobs:\x01*Z\x1f\"\x1a/v2/concepts/mappings/jobs:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x93\x02\n\rGetAnnotation\x12\".clarifai.api.GetAnnotationRequest\x1a&.clarifai.api.SingleAnnotationResponse\"\xb5\x01\x82\xd3\xe4\x93\x02\x9e\x01\x12g/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}/annotations/{annotation_id}Z3\x12\x31/v2/inputs/{input_id}/annotations/{annotation_id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xd0\x01\n\x0fListAnnotations\x12$.clarifai.api.ListAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"p\x82\xd3\xe4\x93\x02Z\x12\x45/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotationsZ\x11\x12\x0f/v2/annotations\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xe3\x01\n\x0fPostAnnotations\x12$.clarifai.api.PostAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"\x82\x01\x82\xd3\xe4\x93\x02`\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14\"\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xe5\x01\n\x10PatchAnnotations\x12%.clarifai.api.PatchAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"\x82\x01\x82\xd3\xe4\x93\x02`2E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14\x32\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf3\x01\n\x16PatchAnnotationsStatus\x12+.clarifai.api.PatchAnnotationsStatusRequest\x1a,.clarifai.api.PatchAnnotationsStatusResponse\"~\x82\xd3\xe4\x93\x02`2[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/task/{task_id}/annotations/status:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\x9c\x02\n\x10\x44\x65leteAnnotation\x12%.clarifai.api.DeleteAnnotationRequest\x1a!.clarifai.api.status.BaseResponse\"\xbd\x01\x82\xd3\xe4\x93\x02\x9e\x01*g/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}/annotations/{annotation_id}Z3*1/v2/inputs/{input_id}/annotations/{annotation_id}\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xd0\x02\n\x11\x44\x65leteAnnotations\x12&.clarifai.api.DeleteAnnotationsRequest\x1a!.clarifai.api.status.BaseResponse\"\xef\x01\x82\xd3\xe4\x93\x02\xd0\x01*L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/annotations:\x01*Z\x1b*\x16/v2/inputs/annotations:\x01*ZJ*E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14*\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf3\x01\n\x18PatchAnnotationsSearches\x12-.clarifai.api.PatchAnnotationsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x84\x01\x82\xd3\xe4\x93\x02r2N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches:\x01*Z\x1d\x32\x18/v2/annotations/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\x81\x02\n\x17PostAnnotationsSearches\x12,.clarifai.api.PostAnnotationsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x94\x01\x82\xd3\xe4\x93\x02r\"N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches:\x01*Z\x1d\"\x18/v2/annotations/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\xd1\x01\n\rGetInputCount\x12\".clarifai.api.GetInputCountRequest\x1a&.clarifai.api.SingleInputCountResponse\"t\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/statusZ\x13\x12\x11/v2/inputs/status\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xc9\x01\n\x0cStreamInputs\x12!.clarifai.api.StreamInputsRequest\x1a .clarifai.api.MultiInputResponse\"t\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/streamZ\x13\x12\x11/v2/inputs/stream\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xfd\x01\n\x0fGetInputSamples\x12$.clarifai.api.GetInputSamplesRequest\x1a*.clarifai.api.MultiInputAnnotationResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x80\x01\x12X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/inputs/samplesZ$\x12\"/v2/tasks/{task_id}/inputs/samples\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xca\x01\n\x08GetInput\x12\x1d.clarifai.api.GetInputRequest\x1a!.clarifai.api.SingleInputResponse\"|\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}Z\x17\x12\x15/v2/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xb7\x01\n\nListInputs\x12\x1f.clarifai.api.ListInputsRequest\x1a .clarifai.api.MultiInputResponse\"f\x82\xd3\xe4\x93\x02P\x12@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputsZ\x0c\x12\n/v2/inputs\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xd2\x01\n\nPostInputs\x12\x1f.clarifai.api.PostInputsRequest\x1a .clarifai.api.MultiInputResponse\"\x80\x01\x82\xd3\xe4\x93\x02V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f\"\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x02\x90\x9c\'\x13\x12\xcb\x01\n\x0bPatchInputs\x12 .clarifai.api.PatchInputsRequest\x1a .clarifai.api.MultiInputResponse\"x\x82\xd3\xe4\x93\x02V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f\x32\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x12\xe5\x01\n\x0b\x44\x65leteInput\x12 .clarifai.api.DeleteInputRequest\x1a!.clarifai.api.status.BaseResponse\"\x90\x01\x82\xd3\xe4\x93\x02\x66*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}Z\x17*\x15/v2/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x04\x90\x9c\'\x08\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xd7\x01\n\x0c\x44\x65leteInputs\x12!.clarifai.api.DeleteInputsRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f*\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x04\x90\x9c\'\x08\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xde\x01\n\x13PatchInputsSearches\x12(.clarifai.api.PatchInputsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"z\x82\xd3\xe4\x93\x02h2I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/searches:\x01*Z\x18\x32\x13/v2/inputs/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\xed\x01\n\x12PostInputsSearches\x12\'.clarifai.api.PostInputsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x8a\x01\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/searches:\x01*Z\x18\"\x13/v2/inputs/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\x9c\x03\n\x10PostModelOutputs\x12%.clarifai.api.PostModelOutputsRequest\x1a!.clarifai.api.MultiOutputResponse\"\xbd\x02\x82\xd3\xe4\x93\x02\xa6\x02\"i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/outputs:\x01*Z8\"3/v2/models/{model_id}/versions/{version_id}/outputs:\x01*ZX\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/outputs:\x01*Z\"\"\x1d/v2/models/{model_id}/outputs:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x02\x12\xbd\x01\n\x0cListDatasets\x12!.clarifai.api.ListDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"f\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasetsZ\x0e\x12\x0c/v2/datasets\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xd5\x01\n\nGetDataset\x12\x1f.clarifai.api.GetDatasetRequest\x1a#.clarifai.api.SingleDatasetResponse\"\x80\x01\x82\xd3\xe4\x93\x02n\x12O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}Z\x1b\x12\x19/v2/datasets/{dataset_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xc7\x01\n\x0cPostDatasets\x12!.clarifai.api.PostDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"p\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11\"\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'r\x12\xc9\x01\n\rPatchDatasets\x12\".clarifai.api.PatchDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"p\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11\x32\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'r\x12\xba\x01\n\x0fPatchDatasetIds\x12$.clarifai.api.PatchDatasetIdsRequest\x1a\".clarifai.api.MultiDatasetResponse\"]\x82\xd3\xe4\x93\x02K2F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/ids:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\xca\x01\n\x0e\x44\x65leteDatasets\x12#.clarifai.api.DeleteDatasetsRequest\x1a!.clarifai.api.status.BaseResponse\"p\x82\xd3\xe4\x93\x02Z*B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11*\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x12\xfd\x01\n\x11ListDatasetInputs\x12&.clarifai.api.ListDatasetInputsRequest\x1a\'.clarifai.api.MultiDatasetInputResponse\"\x96\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputsZ\"\x12 /v2/datasets/{dataset_id}/inputs\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x91\x02\n\x0fGetDatasetInput\x12$.clarifai.api.GetDatasetInputRequest\x1a(.clarifai.api.SingleDatasetInputResponse\"\xad\x01\x82\xd3\xe4\x93\x02\x92\x01\x12\x61/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs/{input_id}Z-\x12+/v2/datasets/{dataset_id}/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x88\x02\n\x11PostDatasetInputs\x12&.clarifai.api.PostDatasetInputsRequest\x1a\'.clarifai.api.MultiDatasetInputResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x82\x01\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs:\x01*Z%\" /v2/datasets/{dataset_id}/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x82\x02\n\x13\x44\x65leteDatasetInputs\x12(.clarifai.api.DeleteDatasetInputsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x82\x01*V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs:\x01*Z%* /v2/datasets/{dataset_id}/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x90\x9c\'\x05\x12\x80\x02\n\x13ListDatasetVersions\x12(.clarifai.api.ListDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\x93\x01\x82\xd3\xe4\x93\x02\x80\x01\x12X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versionsZ$\x12\"/v2/datasets/{dataset_id}/versions\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xa7\x02\n\x11GetDatasetVersion\x12&.clarifai.api.GetDatasetVersionRequest\x1a*.clarifai.api.SingleDatasetVersionResponse\"\xbd\x01\x82\xd3\xe4\x93\x02\xaa\x01\x12m/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}Z9\x12\x37/v2/datasets/{dataset_id}/versions/{dataset_version_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xe6\x02\n\x1fListDatasetVersionMetricsGroups\x12\x34.clarifai.api.ListDatasetVersionMetricsGroupsRequest\x1a\x35.clarifai.api.MultiDatasetVersionMetricsGroupResponse\"\xd5\x01\x82\xd3\xe4\x93\x02\xba\x01\x12u/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}/metricsZA\x12?/v2/datasets/{dataset_id}/versions/{dataset_version_id}/metrics\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\x8e\x02\n\x13PostDatasetVersions\x12(.clarifai.api.PostDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x86\x01\"X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'\"\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x88\x02\n\x14PatchDatasetVersions\x12).clarifai.api.PatchDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x86\x01\x32X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'2\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\x86\x02\n\x15\x44\x65leteDatasetVersions\x12*.clarifai.api.DeleteDatasetVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x86\x01*X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'*\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x12\xd0\x02\n\x18PutDatasetVersionExports\x12-.clarifai.api.PutDatasetVersionExportsRequest\x1a/.clarifai.api.MultiDatasetVersionExportResponse\"\xd3\x01\x82\xd3\xe4\x93\x02\xc0\x01\x1au/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}/exports:\x01*ZD\x1a?/v2/datasets/{dataset_id}/versions/{dataset_version_id}/exports:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\xe5\x01\n\x0cGetModelType\x12!.clarifai.api.GetModelTypeRequest\x1a%.clarifai.api.SingleModelTypeResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/types/{model_type_id}Z\"\x12 /v2/models/types/{model_type_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x12\x99\x01\n\x16ListOpenSourceLicenses\x12+.clarifai.api.ListOpenSourceLicensesRequest\x1a,.clarifai.api.ListOpenSourceLicensesResponse\"$\x82\xd3\xe4\x93\x02\x1a\x12\x18/v2/open_source_licenses\x98\x9c\'\x01\x12\xc7\x01\n\x0eListModelTypes\x12#.clarifai.api.ListModelTypesRequest\x1a$.clarifai.api.MultiModelTypeResponse\"j\x82\xd3\xe4\x93\x02\\\x12\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/typesZ\x12\x12\x10/v2/models/types\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xc6\x01\n\x08GetModel\x12\x1d.clarifai.api.GetModelRequest\x1a!.clarifai.api.SingleModelResponse\"x\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}Z\x17\x12\x15/v2/models/{model_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\x96\x03\n\x12GetModelOutputInfo\x12\x1d.clarifai.api.GetModelRequest\x1a!.clarifai.api.SingleModelResponse\"\xbd\x02\x82\xd3\xe4\x93\x02\xaa\x02\x12W/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/output_infoZ#\x12!/v2/models/{model_id}/output_infoZo\x12m/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/output_infoZ9\x12\x37/v2/models/{model_id}/versions/{version_id}/output_info\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xde\x01\n\nListModels\x12\x1f.clarifai.api.ListModelsRequest\x1a .clarifai.api.MultiModelResponse\"\x8c\x01\x82\xd3\xe4\x93\x02z\x12@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modelsZ(\x12&/v2/users/{user_app_id.user_id}/modelsZ\x0c\x12\n/v2/models\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xdb\x01\n\x12PostModelsSearches\x12\'.clarifai.api.PostModelsSearchesRequest\x1a .clarifai.api.MultiModelResponse\"z\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/searches:\x01*Z\x18\"\x13/v2/models/searches:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xc6\x01\n\nPostModels\x12\x1f.clarifai.api.PostModelsRequest\x1a!.clarifai.api.SingleModelResponse\"t\x82\xd3\xe4\x93\x02V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f\"\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x12\xc3\x01\n\x0bPatchModels\x12 .clarifai.api.PatchModelsRequest\x1a .clarifai.api.MultiModelResponse\"p\x82\xd3\xe4\x93\x02V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f\x32\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x12\xb2\x01\n\rPatchModelIds\x12\".clarifai.api.PatchModelIdsRequest\x1a .clarifai.api.MultiModelResponse\"[\x82\xd3\xe4\x93\x02I2D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/ids:\x01*\x98\x9c\'\x02\x90\x9c\'\x0e\x90\x9c\'\x0f\x12\xd9\x01\n\x0b\x44\x65leteModel\x12 .clarifai.api.DeleteModelRequest\x1a!.clarifai.api.status.BaseResponse\"\x84\x01\x82\xd3\xe4\x93\x02\x66*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}Z\x17*\x15/v2/models/{model_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xca\x01\n\x0c\x44\x65leteModels\x12!.clarifai.api.DeleteModelsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f*\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x91\x02\n\x17PatchModelCheckConsents\x12,.clarifai.api.PatchModelCheckConsentsRequest\x1a,.clarifai.api.MultiModelCheckConsentResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x8a\x01\x32Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/check_consents:\x01*Z)2$/v2/models/{model_id}/check_consents:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xf5\x01\n\x12PatchModelToolkits\x12\'.clarifai.api.PatchModelToolkitsRequest\x1a\'.clarifai.api.MultiModelToolkitResponse\"\x8c\x01\x82\xd3\xe4\x93\x02~2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/toolkits:\x01*Z#2\x1e/v2/models/{model_id}/toolkits:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xf5\x01\n\x12PatchModelUseCases\x12\'.clarifai.api.PatchModelUseCasesRequest\x1a\'.clarifai.api.MultiModelUseCaseResponse\"\x8c\x01\x82\xd3\xe4\x93\x02~2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/usecases:\x01*Z#2\x1e/v2/models/{model_id}/usecases:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xfb\x01\n\x13PatchModelLanguages\x12(.clarifai.api.PatchModelLanguagesRequest\x1a(.clarifai.api.MultiModelLanguageResponse\"\x8f\x01\x82\xd3\xe4\x93\x02\x80\x01\x32U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/languages:\x01*Z$2\x1f/v2/models/{model_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\x8d\x03\n\x0fListModelInputs\x12$.clarifai.api.ListModelInputsRequest\x1a .clarifai.api.MultiInputResponse\"\xb1\x02\x82\xd3\xe4\x93\x02\x96\x02\x12R/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/inputsZ\x1e\x12\x1c/v2/models/{model_id}/inputsZj\x12h/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/inputsZ4\x12\x32/v2/models/{model_id}/versions/{version_id}/inputs\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x12\x89\x02\n\x0fGetModelVersion\x12$.clarifai.api.GetModelVersionRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x92\x01\x12\x61/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}Z-\x12+/v2/models/{model_id}/versions/{version_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xf1\x01\n\x11ListModelVersions\x12&.clarifai.api.ListModelVersionsRequest\x1a\'.clarifai.api.MultiModelVersionResponse\"\x8a\x01\x82\xd3\xe4\x93\x02x\x12T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versionsZ \x12\x1e/v2/models/{model_id}/versions\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xb8\x02\n\x1dPostWorkflowVersionsUnPublish\x12\x32.clarifai.api.PostWorkflowVersionsUnPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xbf\x01\x82\xd3\xe4\x93\x02\x8c\x01\"[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/unpublish:\x01*Z*\"%/v2/workflows/{workflow_id}/unpublish:\x01*\x98\x9c\'\x02\x90\x9c\'x\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xb0\x02\n\x1bPostWorkflowVersionsPublish\x12\x30.clarifai.api.PostWorkflowVersionsPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xbb\x01\x82\xd3\xe4\x93\x02\x88\x01\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/publish:\x01*Z(\"#/v2/workflows/{workflow_id}/publish:\x01*\x98\x9c\'\x02\x90\x9c\'w\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\x9d\x02\n\x18PostModelVersionsPublish\x12-.clarifai.api.PostModelVersionsPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xae\x01\x82\xd3\xe4\x93\x02|\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/publish:\x01*Z\"\"\x1d/v2/models/{model_id}/publish:\x01*\x98\x9c\'\x02\x90\x9c\'u\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xa6\x02\n\x1aPostModelVersionsUnPublish\x12/.clarifai.api.PostModelVersionsUnPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xb3\x01\x82\xd3\xe4\x93\x02\x80\x01\"U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/unpublish:\x01*Z$\"\x1f/v2/models/{model_id}/unpublish:\x01*\x98\x9c\'\x02\x90\x9c\'v\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\x8d\x02\n\x11PostModelVersions\x12&.clarifai.api.PostModelVersionsRequest\x1a!.clarifai.api.SingleModelResponse\"\xac\x01\x82\xd3\xe4\x93\x02~\"T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions:\x01*Z#\"\x1e/v2/models/{model_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xdb\x01\n\x12PatchModelVersions\x12\'.clarifai.api.PatchModelVersionsRequest\x1a\'.clarifai.api.MultiModelVersionResponse\"s\x82\xd3\xe4\x93\x02Y2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x0e\x90\x9c\'\x1a\x12\x94\x02\n\x12\x44\x65leteModelVersion\x12\'.clarifai.api.DeleteModelVersionRequest\x1a!.clarifai.api.status.BaseResponse\"\xb1\x01\x82\xd3\xe4\x93\x02\x92\x01*a/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}Z-*+/v2/models/{model_id}/versions/{version_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xb3\x02\n\x16GetModelVersionMetrics\x12+.clarifai.api.GetModelVersionMetricsRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xc1\x01\x82\xd3\xe4\x93\x02\xa2\x01\x12i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/metricsZ5\x12\x33/v2/models/{model_id}/versions/{version_id}/metrics\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x05\x90\x9c\'5\x12\xcf\x02\n\x17PostModelVersionMetrics\x12,.clarifai.api.PostModelVersionMetricsRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xdb\x01\x82\xd3\xe4\x93\x02\xa8\x01\"i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/metrics:\x01*Z8\"3/v2/models/{model_id}/versions/{version_id}/metrics:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xf7\x01\n\x13ListModelReferences\x12(.clarifai.api.ListModelReferencesRequest\x1a).clarifai.api.MultiModelReferenceResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/referencesZ\"\x12 /v2/models/{model_id}/references\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xee\x02\n\x1bGetModelVersionInputExample\x12\x30.clarifai.api.GetModelVersionInputExampleRequest\x1a\x34.clarifai.api.SingleModelVersionInputExampleResponse\"\xe6\x01\x82\xd3\xe4\x93\x02\xd7\x01\x12\x83\x01/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}ZO\x12M/v2/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xd6\x02\n\x1dListModelVersionInputExamples\x12\x32.clarifai.api.ListModelVersionInputExamplesRequest\x1a\x33.clarifai.api.MultiModelVersionInputExampleResponse\"\xcb\x01\x82\xd3\xe4\x93\x02\xbc\x01\x12v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examplesZB\x12@/v2/models/{model_id}/versions/{model_version_id}/input_examples\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xdc\x01\n\x0bGetWorkflow\x12 .clarifai.api.GetWorkflowRequest\x1a$.clarifai.api.SingleWorkflowResponse\"\x84\x01\x82\xd3\xe4\x93\x02r\x12Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}Z\x1d\x12\x1b/v2/workflows/{workflow_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xf1\x01\n\rListWorkflows\x12\".clarifai.api.ListWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"\x96\x01\x82\xd3\xe4\x93\x02\x83\x01\x12\x43/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflowsZ+\x12)/v2/users/{user_app_id.user_id}/workflowsZ\x0f\x12\r/v2/workflows\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xcc\x01\n\rPostWorkflows\x12\".clarifai.api.PostWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"r\x82\xd3\xe4\x93\x02\\\"C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12\"\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x12\x90\x9c\'\x13\x12\xce\x01\n\x0ePatchWorkflows\x12#.clarifai.api.PatchWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"r\x82\xd3\xe4\x93\x02\\2C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12\x32\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x12\x90\x9c\'\x13\x12\xbe\x01\n\x10PatchWorkflowIds\x12%.clarifai.api.PatchWorkflowIdsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"^\x82\xd3\xe4\x93\x02L2G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/ids:\x01*\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x13\x12\xe3\x01\n\x0e\x44\x65leteWorkflow\x12#.clarifai.api.DeleteWorkflowRequest\x1a!.clarifai.api.status.BaseResponse\"\x88\x01\x82\xd3\xe4\x93\x02r*Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}Z\x1d*\x1b/v2/workflows/{workflow_id}\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x15\x90\x9c\'\x13\x12\xce\x01\n\x0f\x44\x65leteWorkflows\x12$.clarifai.api.DeleteWorkflowsRequest\x1a!.clarifai.api.status.BaseResponse\"r\x82\xd3\xe4\x93\x02\\*C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12*\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x15\x90\x9c\'\x13\x12\x86\x03\n\x13PostWorkflowResults\x12(.clarifai.api.PostWorkflowResultsRequest\x1a).clarifai.api.PostWorkflowResultsResponse\"\x99\x02\x82\xd3\xe4\x93\x02\xfe\x01\"o/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{version_id}/results:\x01*Z^\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/results:\x01*Z(\"#/v2/workflows/{workflow_id}/results:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0b\x90\x9c\'\x02\x90\x9c\'\x13\x12\xc5\x03\n\x1dPostWorkflowResultsSimilarity\x12\x32.clarifai.api.PostWorkflowResultsSimilarityRequest\x1a\x33.clarifai.api.PostWorkflowResultsSimilarityResponse\"\xba\x02\x82\xd3\xe4\x93\x02\x9f\x02\"z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{version_id}/results/similarity:\x01*Zi\"d/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/results/similarity:\x01*Z3\"./v2/workflows/{workflow_id}/results/similarity:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0b\x90\x9c\'\x02\x90\x9c\'\x13\x12\x87\x02\n\x14ListWorkflowVersions\x12).clarifai.api.ListWorkflowVersionsRequest\x1a*.clarifai.api.MultiWorkflowVersionResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x84\x01\x12Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versionsZ&\x12$/v2/workflows/{workflow_id}/versions\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xb0\x02\n\x12GetWorkflowVersion\x12\'.clarifai.api.GetWorkflowVersionRequest\x1a+.clarifai.api.SingleWorkflowVersionResponse\"\xc3\x01\x82\xd3\xe4\x93\x02\xb0\x01\x12p/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{workflow_version_id}Z<\x12:/v2/workflows/{workflow_id}/versions/{workflow_version_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x8c\x02\n\x16\x44\x65leteWorkflowVersions\x12+.clarifai.api.DeleteWorkflowVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x8a\x01*Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\x01*Z)*$/v2/workflows/{workflow_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'\x12\x90\x9c\'\x15\x12\x93\x02\n\x15PatchWorkflowVersions\x12*.clarifai.api.PatchWorkflowVersionsRequest\x1a*.clarifai.api.MultiWorkflowVersionResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x8a\x01\x32Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\x01*Z)2$/v2/workflows/{workflow_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x90\x9c\'\x12\x12\x85\x01\n\x06GetKey\x12\x1b.clarifai.api.GetKeyRequest\x1a\x1f.clarifai.api.SingleKeyResponse\"=\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/keys/{key_id}\x98\x9c\'\x05\x90\x9c\'0\x12\x7f\n\x08ListKeys\x12\x1d.clarifai.api.ListKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"4\x82\xd3\xe4\x93\x02&\x12$/v2/users/{user_app_id.user_id}/keys\x98\x9c\'\x05\x90\x9c\'0\x12\x9f\x01\n\x0bListAppKeys\x12 .clarifai.api.ListAppKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"N\x82\xd3\xe4\x93\x02@\x12>/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/keys\x98\x9c\'\x05\x90\x9c\'0\x12\x95\x01\n\tDeleteKey\x12\x1e.clarifai.api.DeleteKeyRequest\x1a!.clarifai.api.status.BaseResponse\"E\x82\xd3\xe4\x93\x02/*-/v2/users/{user_app_id.user_id}/keys/{key_id}\x98\x9c\'\x05\x90\x9c\'/\x90\x9c\'1\x90\x9c\'0\x12\x8a\x01\n\x08PostKeys\x12\x1d.clarifai.api.PostKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"?\x82\xd3\xe4\x93\x02)\"$/v2/users/{user_app_id.user_id}/keys:\x01*\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'/\x90\x9c\'0\x12\x88\x01\n\tPatchKeys\x12\x1e.clarifai.api.PatchKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\";\x82\xd3\xe4\x93\x02)2$/v2/users/{user_app_id.user_id}/keys:\x01*\x98\x9c\'\x05\x90\x9c\'/\x90\x9c\'0\x12\xbc\x01\n\x08MyScopes\x12\x1d.clarifai.api.MyScopesRequest\x1a .clarifai.api.MultiScopeResponse\"o\x82\xd3\xe4\x93\x02\x65\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/myscopesZ\x0e\x12\x0c/v2/myscopesZ\x0f\x12\r/v2/my_scopes\x98\x9c\'\x02\x12\x8d\x01\n\x0cMyScopesUser\x12!.clarifai.api.MyScopesUserRequest\x1a$.clarifai.api.MultiScopeUserResponse\"4\x82\xd3\xe4\x93\x02*\x12(/v2/users/{user_app_id.user_id}/myscopes\x98\x9c\'\x05\x12u\n\x0cMyScopesRoot\x12!.clarifai.api.MyScopesRootRequest\x1a$.clarifai.api.MultiScopeRootResponse\"\x1c\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/myscopesroot\x98\x9c\'\x05\x12\x87\x01\n\nListScopes\x12\x1f.clarifai.api.ListScopesRequest\x1a$.clarifai.api.MultiScopeDepsResponse\"2\x82\xd3\xe4\x93\x02(\x12&/v2/users/{user_app_id.user_id}/scopes\x98\x9c\'\x03\x12\x95\x01\n\x06GetApp\x12\x1b.clarifai.api.GetAppRequest\x1a\x1f.clarifai.api.SingleAppResponse\"M\x82\xd3\xe4\x93\x02;\x12\x39/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12\x8f\x01\n\x08ListApps\x12\x1d.clarifai.api.ListAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"D\x82\xd3\xe4\x93\x02\x32\x12$/v2/users/{user_app_id.user_id}/appsZ\n\x12\x08/v2/apps\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12\xa5\x01\n\tDeleteApp\x12\x1e.clarifai.api.DeleteAppRequest\x1a!.clarifai.api.status.BaseResponse\"U\x82\xd3\xe4\x93\x02;*9/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'.\x90\x9c\'-\x90\x9c\'\x13\x12\x92\x01\n\x08PostApps\x12\x1d.clarifai.api.PostAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"G\x82\xd3\xe4\x93\x02)\"$/v2/users/{user_app_id.user_id}/apps:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x90\x9c\'\x0f\x90\x9c\'\x13\x90\x9c\'\x12\x12\x88\x01\n\tPatchApps\x12\x1e.clarifai.api.PatchAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\";\x82\xd3\xe4\x93\x02)2$/v2/users/{user_app_id.user_id}/apps:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\x92\x01\n\x0cPatchAppsIds\x12!.clarifai.api.PatchAppsIdsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"?\x82\xd3\xe4\x93\x02-2(/v2/users/{user_app_id.user_id}/apps/ids:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\x9c\x01\n\x08PatchApp\x12\x1d.clarifai.api.PatchAppRequest\x1a\x1f.clarifai.api.SingleAppResponse\"P\x82\xd3\xe4\x93\x02>29/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\x9f\x01\n\x10PostAppsSearches\x12%.clarifai.api.PostAppsSearchesRequest\x1a\x1e.clarifai.api.MultiAppResponse\"D\x82\xd3\xe4\x93\x02\x32\"-/v2/users/{user_app_id.user_id}/apps/searches:\x01*\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12\xcf\x01\n\x14PostValidatePassword\x12).clarifai.api.PostValidatePasswordRequest\x1a..clarifai.api.SinglePasswordValidationResponse\"\\\x82\xd3\xe4\x93\x02R\"1/v2/users/{user_app_id.user_id}/validate_password:\x01*Z\x1a\"\x15/v2/validate_password:\x01*\x98\x9c\'\x03\x12\xbd\x01\n\tGetSearch\x12\x1e.clarifai.api.GetSearchRequest\x1a\".clarifai.api.SingleSearchResponse\"l\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\x13\x12\x11/v2/searches/{id}\x98\x9c\'\x02\x90\x9c\'r\x12\xb8\x01\n\x0cListSearches\x12!.clarifai.api.ListSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"b\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searchesZ\x0e\x12\x0c/v2/searches\x98\x9c\'\x02\x90\x9c\'r\x12\xc4\x01\n\rPatchSearches\x12\".clarifai.api.PatchSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"l\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\x01*Z\x11\x32\x0c/v2/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\xd2\x01\n\x0cPostSearches\x12!.clarifai.api.PostSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"|\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\x01*Z\x11\"\x0c/v2/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\xd4\x01\n\x10PostSearchesByID\x12%.clarifai.api.PostSearchesByIDRequest\x1a!.clarifai.api.MultiSearchResponse\"v\x82\xd3\xe4\x93\x02\x64\"G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}:\x01*Z\x16\"\x11/v2/searches/{id}:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'\x03\x12\xaf\x02\n\x1bPostAnnotationSearchMetrics\x12\x30.clarifai.api.PostAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\xa9\x01\x82\xd3\xe4\x93\x02\x82\x01\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics:\x01*Z%\" /v2/annotations/searches/metrics:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x90\x9c\'6\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xa5\x02\n\x1aGetAnnotationSearchMetrics\x12/.clarifai.api.GetAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x86\x01\x12[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics/{id}Z\'\x12%/v2/annotations/searches/metrics/{id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x12\x9c\x02\n\x1bListAnnotationSearchMetrics\x12\x30.clarifai.api.ListAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\x96\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metricsZ\"\x12 /v2/annotations/searches/metrics\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x12\x96\x02\n\x1d\x44\x65leteAnnotationSearchMetrics\x12\x32.clarifai.api.DeleteAnnotationSearchMetricsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x86\x01*[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics/{id}Z\'*%/v2/annotations/searches/metrics/{id}\x98\x9c\'\x02\x90\x9c\'5\x90\x9c\'6\x90\x9c\'?\x12\xca\x01\n\x0c\x44\x65leteSearch\x12!.clarifai.api.DeleteSearchRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\x13*\x11/v2/searches/{id}\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x90\x9c\'t\x12\xe8\x01\n\x15ListAnnotationFilters\x12*.clarifai.api.ListAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"v\x82\xd3\xe4\x93\x02h\x12L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filtersZ\x18\x12\x16/v2/annotation_filters\x98\x9c\'\x02\x90\x9c\'r\x12\x95\x02\n\x13GetAnnotationFilter\x12(.clarifai.api.GetAnnotationFilterRequest\x1a,.clarifai.api.SingleAnnotationFilterResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x96\x01\x12\x63/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters/{annotation_filter_id}Z/\x12-/v2/annotation_filters/{annotation_filter_id}\x98\x9c\'\x02\x90\x9c\'r\x12\xf3\x01\n\x15PostAnnotationFilters\x12*.clarifai.api.PostAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"\x80\x01\x82\xd3\xe4\x93\x02n\"L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b\"\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12\xf5\x01\n\x16PatchAnnotationFilters\x12+.clarifai.api.PatchAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"\x80\x01\x82\xd3\xe4\x93\x02n2L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b\x32\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12\xed\x01\n\x17\x44\x65leteAnnotationFilters\x12,.clarifai.api.DeleteAnnotationFiltersRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02n*L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b*\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12|\n\x0fListStatusCodes\x12$.clarifai.api.ListStatusCodesRequest\x1a%.clarifai.api.MultiStatusCodeResponse\"\x1c\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/status_codes\x98\x9c\'\x01\x12\x8a\x01\n\rGetStatusCode\x12\".clarifai.api.GetStatusCodeRequest\x1a&.clarifai.api.SingleStatusCodeResponse\"-\x82\xd3\xe4\x93\x02#\x12!/v2/status_codes/{status_code_id}\x98\x9c\'\x01\x12\xbe\x01\n\x11ListCollaborators\x12&.clarifai.api.ListCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"W\x82\xd3\xe4\x93\x02I\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators\x98\x9c\'\x02\x90\x9c\'2\x12\xc5\x01\n\x11PostCollaborators\x12&.clarifai.api.PostCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"^\x82\xd3\xe4\x93\x02L\"G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x12\xcb\x01\n\x12PatchCollaborators\x12\'.clarifai.api.PatchCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"b\x82\xd3\xe4\x93\x02L2G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x90\x9c\'4\x12\xce\x01\n\x13\x44\x65leteCollaborators\x12(.clarifai.api.DeleteCollaboratorsRequest\x1a!.clarifai.api.status.BaseResponse\"j\x82\xd3\xe4\x93\x02L*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x90\x9c\'4\x90\x9c\'7\x90\x9c\'8\x12\xa4\x01\n\x12ListCollaborations\x12\'.clarifai.api.ListCollaborationsRequest\x1a).clarifai.api.MultiCollaborationsResponse\":\x82\xd3\xe4\x93\x02\x30\x12./v2/users/{user_app_id.user_id}/collaborations\x98\x9c\'\x03\x12\xef\x01\n\x13PostAppDuplications\x12(.clarifai.api.PostAppDuplicationsRequest\x1a*.clarifai.api.MultiAppDuplicationsResponse\"\x81\x01\x82\xd3\xe4\x93\x02K\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/duplications:\x01*\x98\x9c\'\x02\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\n\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x12\x90\x9c\'\x13\x12\xa5\x01\n\x13ListAppDuplications\x12(.clarifai.api.ListAppDuplicationsRequest\x1a*.clarifai.api.MultiAppDuplicationsResponse\"8\x82\xd3\xe4\x93\x02.\x12,/v2/users/{user_app_id.user_id}/duplications\x98\x9c\'\x03\x12\xb6\x01\n\x11GetAppDuplication\x12&.clarifai.api.GetAppDuplicationRequest\x1a*.clarifai.api.SingleAppDuplicationResponse\"M\x82\xd3\xe4\x93\x02\x43\x12\x41/v2/users/{user_app_id.user_id}/duplications/{app_duplication_id}\x98\x9c\'\x03\x12\xd5\x01\n\tPostTasks\x12\x1e.clarifai.api.PostTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"\x86\x01\x82\xd3\xe4\x93\x02T\"?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e\"\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'\x03\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x90\x9c\'%\x90\x9c\'&\x12\xfa\x01\n\x16GetTaskAnnotationCount\x12!.clarifai.api.GetTaskCountRequest\x1a%.clarifai.api.SingleTaskCountResponse\"\x95\x01\x82\xd3\xe4\x93\x02\x86\x01\x12[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/annotations/countZ\'\x12%/v2/tasks/{task_id}/annotations/count\x98\x9c\'\x02\x90\x9c\'8\x12\xea\x01\n\x11GetTaskInputCount\x12!.clarifai.api.GetTaskCountRequest\x1a%.clarifai.api.SingleTaskCountResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/inputs/countZ\"\x12 /v2/tasks/{task_id}/inputs/count\x98\x9c\'\x02\x90\x9c\'8\x12\xcc\x01\n\x07GetTask\x12\x1c.clarifai.api.GetTaskRequest\x1a .clarifai.api.SingleTaskResponse\"\x80\x01\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}Z\x15\x12\x13/v2/tasks/{task_id}\x98\x9c\'\x02\x90\x9c\'8\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xba\x01\n\tListTasks\x12\x1e.clarifai.api.ListTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"l\x82\xd3\xe4\x93\x02N\x12?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasksZ\x0b\x12\t/v2/tasks\x98\x9c\'\x02\x90\x9c\'8\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xd3\x01\n\nPatchTasks\x12\x1f.clarifai.api.PatchTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"\x82\x01\x82\xd3\xe4\x93\x02T2?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e\x32\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x90\x9c\'%\x90\x9c\'&\x12\xbe\x01\n\x0b\x44\x65leteTasks\x12 .clarifai.api.DeleteTasksRequest\x1a!.clarifai.api.status.BaseResponse\"j\x82\xd3\xe4\x93\x02T*?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e*\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'F\x12\xf1\x01\n\x0fPostLabelOrders\x12$.clarifai.api.PostLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"\x90\x01\x82\xd3\xe4\x93\x02\x62\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15\"\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'D\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf2\x01\n\rGetLabelOrder\x12\".clarifai.api.GetLabelOrderRequest\x1a&.clarifai.api.SingleLabelOrderResponse\"\x94\x01\x82\xd3\xe4\x93\x02~\x12W/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders/{label_order_id}Z#\x12!/v2/label_orders/{label_order_id}\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'\x0b\x90\x9c\'8\x12\xd2\x01\n\x0fListLabelOrders\x12$.clarifai.api.ListLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"r\x82\xd3\xe4\x93\x02\\\x12\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_ordersZ\x12\x12\x10/v2/label_orders\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'\x0b\x90\x9c\'8\x12\xe7\x01\n\x10PatchLabelOrders\x12%.clarifai.api.PatchLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"\x84\x01\x82\xd3\xe4\x93\x02\x62\x32\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15\x32\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'D\x90\x9c\'\x0b\x90\x9c\'7\x90\x9c\'8\x90\x9c\'F\x12\xe1\x01\n\x11\x44\x65leteLabelOrders\x12&.clarifai.api.DeleteLabelOrdersRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02\x62*F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15*\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'E\x90\x9c\'C\x90\x9c\'D\x90\x9c\'7\x90\x9c\'8\x12\xee\x01\n\x0ePostCollectors\x12#.clarifai.api.PostCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"\x90\x01\x82\xd3\xe4\x93\x02^\"D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13\"\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\'\x04\x90\x9c\'%\x90\x9c\'&\x90\x9c\')\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x02\x90\x9c\'\x13\x12\xdf\x01\n\x0cGetCollector\x12!.clarifai.api.GetCollectorRequest\x1a%.clarifai.api.SingleCollectorResponse\"\x84\x01\x82\xd3\xe4\x93\x02v\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors/{collector_id}Z\x1f\x12\x1d/v2/collectors/{collector_id}\x98\x9c\'\x02\x90\x9c\'*\x12\xc3\x01\n\x0eListCollectors\x12#.clarifai.api.ListCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"f\x82\xd3\xe4\x93\x02X\x12\x44/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectorsZ\x10\x12\x0e/v2/collectors\x98\x9c\'\x02\x90\x9c\'*\x12\xcf\x01\n\x0fPatchCollectors\x12$.clarifai.api.PatchCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"p\x82\xd3\xe4\x93\x02^2D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13\x32\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\')\x90\x9c\'*\x12\xd2\x01\n\x10\x44\x65leteCollectors\x12%.clarifai.api.DeleteCollectorsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13*\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\')\x90\x9c\'+\x90\x9c\'*\x12\xc9\x01\n\x0ePostStatValues\x12#.clarifai.api.PostStatValuesRequest\x1a$.clarifai.api.MultiStatValueResponse\"l\x82\xd3\xe4\x93\x02\x62\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values:\x01*Z\x15\"\x10/v2/stats/values:\x01*\x98\x9c\'\x02\x12\xf9\x01\n\x17PostStatValuesAggregate\x12,.clarifai.api.PostStatValuesAggregateRequest\x1a-.clarifai.api.MultiStatValueAggregateResponse\"\x80\x01\x82\xd3\xe4\x93\x02v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values/aggregate:\x01*Z\x1f\"\x1a/v2/stats/values/aggregate:\x01*\x98\x9c\'\x02\x12\xe3\x01\n\x17PostTrendingMetricsView\x12,.clarifai.api.PostTrendingMetricsViewRequest\x1a!.clarifai.api.status.BaseResponse\"w\x82\xd3\xe4\x93\x02m\"h/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}/{object_id}:\x01*\x98\x9c\'\x02\x12\x8f\x02\n\x18ListTrendingMetricsViews\x12-.clarifai.api.ListTrendingMetricsViewsRequest\x1a..clarifai.api.MultiTrendingMetricsViewResponse\"\x93\x01\x82\xd3\xe4\x93\x02\x88\x01\x12\\/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}Z(\x12&/v2/trending_metrics/views/{view_type}\x98\x9c\'\x02\x12\xae\x01\n\tGetModule\x12\x1e.clarifai.api.GetModuleRequest\x1a\".clarifai.api.SingleModuleResponse\"]\x82\xd3\xe4\x93\x02O\x12M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}\x98\x9c\'\x02\x90\x9c\'m\x12\xe0\x01\n\x0bListModules\x12 .clarifai.api.ListModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"\x8b\x01\x82\xd3\xe4\x93\x02}\x12\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modulesZ)\x12\'/v2/users/{user_app_id.user_id}/modulesZ\r\x12\x0b/v2/modules\x98\x9c\'\x02\x90\x9c\'m\x12\xac\x01\n\x0bPostModules\x12 .clarifai.api.PostModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"X\x82\xd3\xe4\x93\x02\x46\"A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xae\x01\n\x0cPatchModules\x12!.clarifai.api.PatchModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"X\x82\xd3\xe4\x93\x02\x46\x32\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xb4\x01\n\rDeleteModules\x12\".clarifai.api.DeleteModulesRequest\x1a!.clarifai.api.status.BaseResponse\"\\\x82\xd3\xe4\x93\x02\x46*A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'n\x90\x9c\'m\x12\xe8\x01\n\x10GetModuleVersion\x12%.clarifai.api.GetModuleVersionRequest\x1a).clarifai.api.SingleModuleVersionResponse\"\x81\x01\x82\xd3\xe4\x93\x02s\x12q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions/{module_version_id}\x98\x9c\'\x02\x90\x9c\'m\x12\xd6\x01\n\x12ListModuleVersions\x12\'.clarifai.api.ListModuleVersionsRequest\x1a(.clarifai.api.MultiModuleVersionResponse\"m\x82\xd3\xe4\x93\x02_\x12]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions\x98\x9c\'\x02\x90\x9c\'m\x12\xdd\x01\n\x12PostModuleVersions\x12\'.clarifai.api.PostModuleVersionsRequest\x1a(.clarifai.api.MultiModuleVersionResponse\"t\x82\xd3\xe4\x93\x02\x62\"]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xde\x01\n\x14\x44\x65leteModuleVersions\x12).clarifai.api.DeleteModuleVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"x\x82\xd3\xe4\x93\x02\x62*]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'n\x90\x9c\'m\x12\x8b\x02\n\x19GetInstalledModuleVersion\x12..clarifai.api.GetInstalledModuleVersionRequest\x1a\x32.clarifai.api.SingleInstalledModuleVersionResponse\"\x89\x01\x82\xd3\xe4\x93\x02s\x12q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions/{installed_module_version_id}\x98\x9c\'\x05\x90\x9c\'p\x90\x9c\'m\x90\x9c\'0\x12\xef\x01\n\x1bListInstalledModuleVersions\x12\x30.clarifai.api.ListInstalledModuleVersionsRequest\x1a\x31.clarifai.api.MultiInstalledModuleVersionResponse\"k\x82\xd3\xe4\x93\x02U\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions\x98\x9c\'\x05\x90\x9c\'p\x90\x9c\'m\x90\x9c\'0\x12\xf6\x01\n\x1bPostInstalledModuleVersions\x12\x30.clarifai.api.PostInstalledModuleVersionsRequest\x1a\x31.clarifai.api.MultiInstalledModuleVersionResponse\"r\x82\xd3\xe4\x93\x02X\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'m\x90\x9c\'-\x12\xf6\x01\n\x1d\x44\x65leteInstalledModuleVersions\x12\x32.clarifai.api.DeleteInstalledModuleVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"~\x82\xd3\xe4\x93\x02X*S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'q\x90\x9c\'m\x90\x9c\'1\x90\x9c\'/\x90\x9c\'0\x12\x95\x02\n\x1ePostInstalledModuleVersionsKey\x12\x33.clarifai.api.PostInstalledModuleVersionsKeyRequest\x1a\x1f.clarifai.api.SingleKeyResponse\"\x9c\x01\x82\xd3\xe4\x93\x02z\"u/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions/{installed_module_version_id}/key:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'m\x90\x9c\'-\x90\x9c\'/\x90\x9c\'0\x12\xf1\x01\n\x12PostBulkOperations\x12\'.clarifai.api.PostBulkOperationsRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"\x86\x01\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18\"\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'z\x90\x9c\'y\x90\x9c\'%\x90\x9c\'&\x90\x9c\'(\x12\xda\x01\n\x12ListBulkOperations\x12\'.clarifai.api.ListBulkOperationsRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"p\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operationsZ\x15\x12\x13/v2/bulk_operations\x98\x9c\'\x02\x90\x9c\'z\x12\xe1\x01\n\x10GetBulkOperation\x12%.clarifai.api.GetBulkOperationRequest\x1a*.clarifai.api.SingleBulkOperationsResponse\"z\x82\xd3\xe4\x93\x02l\x12N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations/{id}Z\x1a\x12\x18/v2/bulk_operations/{id}\x98\x9c\'\x02\x90\x9c\'z\x12\xe7\x01\n\x14\x43\x61ncelBulkOperations\x12(.clarifai.api.CancelBulkOperationRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"z\x82\xd3\xe4\x93\x02h2I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18\x32\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'y\x90\x9c\'z\x12\xf0\x01\n\x14\x44\x65leteBulkOperations\x12(.clarifai.api.DeleteBulkOperationRequest\x1a!.clarifai.api.status.BaseResponse\"\x8a\x01\x82\xd3\xe4\x93\x02h*I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18*\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'%\x90\x9c\'(\x90\x9c\'y\x90\x9c\'z\x90\x9c\'{\x12\xae\x02\n\x1cGetDatasetInputsSearchAddJob\x12\x31.clarifai.api.GetDatasetInputsSearchAddJobRequest\x1a\x35.clarifai.api.SingleDatasetInputsSearchAddJobResponse\"\xa3\x01\x82\xd3\xe4\x93\x02\x94\x01\x12\x62/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/inputs/search_add/jobs/{job_id}Z.\x12,/v2/datasets/inputs/search_add/jobs/{job_id}\x98\x9c\'\x02\x90\x9c\'i\x12\xd6\x01\n\x11ListInputsAddJobs\x12&.clarifai.api.ListInputsAddJobsRequest\x1a\'.clarifai.api.MultiInputsAddJobResponse\"p\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/addZ\x15\x12\x13/v2/inputs/jobs/add\x98\x9c\'\x02\x90\x9c\'\x05\x12\xdd\x01\n\x0fGetInputsAddJob\x12$.clarifai.api.GetInputsAddJobRequest\x1a(.clarifai.api.SingleInputsAddJobResponse\"z\x82\xd3\xe4\x93\x02l\x12N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add/{id}Z\x1a\x12\x18/v2/inputs/jobs/add/{id}\x98\x9c\'\x02\x90\x9c\'\x05\x12\xc0\x01\n\x0bPostUploads\x12 .clarifai.api.PostUploadsRequest\x1a!.clarifai.api.MultiUploadResponse\"l\x82\xd3\xe4\x93\x02X\"A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\x01*Z\x10\"\x0b/v2/uploads:\x01*\x98\x9c\'\x02\x90\x9c\'\x81\x01\x90\x9c\'\x80\x01\x12\x88\x02\n\x15PutUploadContentParts\x12*.clarifai.api.PutUploadContentPartsRequest\x1a\".clarifai.api.SingleUploadResponse\"\x9e\x01\x82\xd3\xe4\x93\x02\x89\x01\x1a[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads/{upload_id}/content_parts:\x01*Z\'\x1a%/v2/uploads/{upload_id}/content_parts\x98\x9c\'\x02\x90\x9c\'\x81\x01\x90\x9c\'\x80\x01\x12\xca\x01\n\tGetUpload\x12\x1e.clarifai.api.GetUploadRequest\x1a\".clarifai.api.SingleUploadResponse\"y\x82\xd3\xe4\x93\x02j\x12M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads/{upload_id}Z\x19\x12\x17/v2/uploads/{upload_id}\x98\x9c\'\x02\x90\x9c\'\x80\x01\x12\xb5\x01\n\x0bListUploads\x12 .clarifai.api.ListUploadsRequest\x1a!.clarifai.api.MultiUploadResponse\"a\x82\xd3\xe4\x93\x02R\x12\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploadsZ\r\x12\x0b/v2/uploads\x98\x9c\'\x02\x90\x9c\'\x80\x01\x12\xc9\x01\n\rDeleteUploads\x12\".clarifai.api.DeleteUploadsRequest\x1a!.clarifai.api.status.BaseResponse\"q\x82\xd3\xe4\x93\x02X*A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\x01*Z\x10*\x0b/v2/uploads:\x01*\x98\x9c\'\x02\x90\x9c\'\x80\x01\x90\x9c\'\x81\x01\x90\x9c\'\x82\x01\x42Y\n\x15\x63om.clarifai.grpc.apiP\x01Z7github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api\xa2\x02\x04\x43\x41IPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n proto/clarifai/api/service.proto\x12\x0c\x63larifai.api\x1a\"proto/clarifai/api/resources.proto\x1a&proto/clarifai/api/status/status.proto\x1a)proto/clarifai/api/utils/extensions.proto\x1a%proto/clarifai/auth/scope/scope.proto\x1a(proto/clarifai/auth/util/extension.proto\x1a&proto/clarifai/commands/commands.proto\x1a+proto/clarifai/api/status/status_code.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb7\x01\n\x0bTestMessage\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\r\n\x05value\x18\x02 \x01(\t\x12\x0c\n\x04\x62yts\x18\x03 \x01(\x0c\x12\x0e\n\x06int_32\x18\x04 \x01(\r\x12\x0e\n\x06int_64\x18\x05 \x01(\x04\x12\x0c\n\x04\x66_32\x18\x06 \x01(\x02\x12\x0c\n\x04\x66_64\x18\x07 \x01(\x01\x12\"\n\x01s\x18\x08 \x01(\x0b\x32\x17.google.protobuf.Struct\",\n\nPagination\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\"p\n\x14GetAnnotationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x15\n\rannotation_id\x18\x02 \x01(\t\x12\x10\n\x08input_id\x18\x03 \x01(\t\"\xb7\x02\n\x16ListAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\x12\x10\n\x08user_ids\x18\t \x03(\t\x12\x19\n\x11model_version_ids\x18\n \x03(\t\x12-\n\x08statuses\x18\x05 \x03(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1c\n\x14list_all_annotations\x18\x06 \x01(\x08\x12\x1b\n\x13return_model_output\x18\x0c \x01(\x08\x12\x0c\n\x04page\x18\x07 \x01(\r\x12\x10\n\x08per_page\x18\x08 \x01(\r\x12\x0f\n\x07task_id\x18\x0b \x01(\tJ\x04\x08\x04\x10\x05\"x\n\x16PostAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.Annotation\"\x89\x01\n\x17PatchAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.Annotation\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\xb9\x01\n\x1dPatchAnnotationsStatusRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x34\n\x0bstatus_code\x18\x02 \x01(\x0e\x32\x1f.clarifai.api.status.StatusCode\x12\x10\n\x08user_ids\x18\x03 \x03(\t\x12\x0f\n\x07task_id\x18\x04 \x01(\t\x12\x0e\n\x06\x61\x63tion\x18\x05 \x01(\t\"v\n\x1ePatchAnnotationsStatusResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12\x15\n\rupdated_count\x18\x03 \x01(\r\"s\n\x17\x44\x65leteAnnotationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\x12\x15\n\rannotation_id\x18\x03 \x01(\t\"k\n\x18\x44\x65leteAnnotationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\"u\n\x18SingleAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12,\n\nannotation\x18\x02 \x01(\x0b\x32\x18.clarifai.api.Annotation\"{\n\x17MultiAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0b\x61nnotations\x18\x02 \x03(\x0b\x32\x18.clarifai.api.AnnotationB\x04\x80\xb5\x18\x01\"[\n\rGetAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x02 \x03(\t\"\xa5\x02\n\x0fListAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\x05 \x01(\x08\x12\x16\n\x0csort_by_name\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\x07 \x01(\x08H\x00\x12\r\n\x05query\x18\x08 \x01(\t\x12\x10\n\x04name\x18\x04 \x01(\tB\x02\x18\x01\x12\x15\n\rfeatured_only\x18\t \x01(\x08\x12\x14\n\x0cstarred_only\x18\x0b \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\n \x03(\tB\t\n\x07sort_by\"c\n\x0fPostAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.App\"C\n\x10\x44\x65leteAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xb9\x01\n\x10PatchAppsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.App\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12\x32\n\x0fmetadata_action\x18\x04 \x01(\x0b\x32\x19.clarifai.api.PatchAction\x12\x0f\n\x07reindex\x18\x05 \x01(\x08\"\xb7\x01\n\x0fPatchAppRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12\x32\n\x0fmetadata_action\x18\x04 \x01(\x0b\x32\x19.clarifai.api.PatchAction\x12\x0f\n\x07reindex\x18\x05 \x01(\x08\"]\n\x14PatchAppOwnerRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x14\n\x0cnew_owner_id\x18\x02 \x01(\t\"\x81\x01\n\x13PatchAppsIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\xa3\x01\n\x17PostAppsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tapp_query\x18\x02 \x01(\x0b\x32\x16.clarifai.api.AppQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"`\n\x11SingleAppResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1e\n\x03\x61pp\x18\x02 \x01(\x0b\x32\x11.clarifai.api.App\"f\n\x10MultiAppResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04\x61pps\x18\x02 \x03(\x0b\x32\x11.clarifai.api.AppB\x04\x80\xb5\x18\x01\"\x8b\x01\n\x18ListCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1e\n\x16list_all_collaborators\x18\x02 \x01(\x08\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"~\n\x18PostCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Collaborator\"\x8f\x01\n\x19PatchCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Collaborator\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"|\n\x1a\x44\x65leteCollaboratorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x18\n\x10\x63ollaborator_ids\x18\x02 \x03(\t\x12\x13\n\x0buser_emails\x18\x03 \x03(\t\"\x82\x01\n\x1aMultiCollaboratorsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\rcollaborators\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.CollaboratorB\x04\x80\xb5\x18\x01\"l\n\x19ListCollaborationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x85\x01\n\x1bMultiCollaborationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x0e\x63ollaborations\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.CollaborationB\x04\x80\xb5\x18\x01\"%\n\x16PostVerifyEmailRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\"H\n\x19SingleVerifyEmailResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"\x8e\x01\n\x16ListAuthMethodsRequest\x12\x15\n\rrecovery_path\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07\x64ry_run\x18\x03 \x01(\x08\x12\x15\n\rauthorize_pat\x18\x04 \x01(\tJ\x04\x08\x05\x10\x06\"[\n\x16PostLinkIdpUserRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08login_id\x18\x02 \x01(\t\"X\n\x13GetLoginInfoRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08login_id\x18\x02 \x01(\t\"\xbd\x01\n\x14GetLoginInfoResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x15\n\rsubject_email\x18\x02 \x01(\t\x12\x10\n\x08idp_name\x18\x03 \x01(\t\x12\x0e\n\x06idp_id\x18\x04 \x01(\t\x12\x1c\n\x14is_linked_to_subject\x18\x05 \x01(\x08\x12!\n\x19subject_authorized_at_idp\x18\x06 \x01(\x08\"F\n\x17PostLinkIdpUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"`\n\x1bPostIdLoginFinalizerRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08login_id\x18\x02 \x01(\t\"b\n\x1cPostIdLoginFinalizerResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x15\n\rrecovery_path\x18\x02 \x01(\t\"v\n\x17ListAuthMethodsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12.\n\x0c\x61uth_methods\x18\x02 \x03(\x0b\x32\x18.clarifai.api.AuthMethod\"H\n\x15List2FAMethodsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x89\x01\n\x16List2FAMethodsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x42\n\x17two_factor_auth_methods\x18\x02 \x03(\x0b\x32!.clarifai.api.TwoFactorAuthMethod\"W\n$PostAuth2FATotpRegisterEnableRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x84\x01\n%PostAuth2FATotpRegisterEnableResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x0f\n\x07qr_code\x18\x03 \x01(\t\x12\r\n\x05state\x18\x04 \x01(\t\"b\n\x1dPostAuth2FATotpDisableRequest\x12\x10\n\x08passcode\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"M\n\x1ePostAuth2FATotpDisableResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"x\n$PostAuth2FATotpRegisterVerifyRequest\x12\x10\n\x08passcode\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"j\n%PostAuth2FATotpRegisterVerifyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0crecovery_key\x18\x02 \x01(\t\"c\n\x1bPostAuth2FATotpLoginRequest\x12\x10\n\x08passcode\x18\x01 \x01(\t\x12\r\n\x05state\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\x12\x12\n\nlong_lived\x18\x04 \x01(\x08\"V\n\x1dPostAuth2FATotpRecoverRequest\x12\r\n\x05state\x18\x01 \x01(\t\x12\x15\n\rrecovery_code\x18\x02 \x01(\t\x12\x0f\n\x07user_id\x18\x03 \x01(\t\"M\n\x1ePostAuth2FATotpRecoverResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"4\n#GetAuth2FATotpRecoverConfirmRequest\x12\r\n\x05state\x18\x01 \x01(\t\"S\n$GetAuth2FATotpRecoverConfirmResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\",\n\x1bRequestResetPasswordRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\"A\n\x1c\x43ompleteResetPasswordRequest\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\x14\n\x0cnew_password\x18\x02 \x01(\t\"G\n\x10PostLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nlong_lived\x18\x03 \x01(\x08\"\xdf\x02\n\x11PostSignupRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x1e\n\x16\x63\x61ptcha_response_token\x18\x06 \x01(\t\x12!\n\x19\x63\x61ptcha_response_token_v3\x18\x0e \x01(\t\x12\x1e\n\x16\x61ws_registration_token\x18\x07 \x01(\t\x12\x14\n\x0cgdpr_consent\x18\x08 \x01(\x08\x12\x13\n\x0btos_consent\x18\t \x01(\x08\x12\x19\n\x11marketing_consent\x18\n \x01(\x08\x12\x11\n\tjob_title\x18\x0b \x01(\t\x12\x10\n\x08job_role\x18\x0c \x01(\t\x12\x1e\n\x03utm\x18\r \x01(\x0b\x32\x11.clarifai.api.Utm\"V\n\x03Utm\x12\x0e\n\x06source\x18\x01 \x01(\t\x12\x0e\n\x06medium\x18\x02 \x01(\t\x12\x10\n\x08\x63\x61mpaign\x18\x03 \x01(\t\x12\x0c\n\x04term\x18\x04 \x01(\t\x12\x0f\n\x07\x63ontent\x18\x05 \x01(\t\"\xe6\x03\n\x13SingleLoginResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\x12\n\nfirst_name\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x14\n\x0c\x63ompany_name\x18\x05 \x01(\t\x12\x13\n\x0b\x64\x61te_joined\x18\x06 \x01(\t\x12\x33\n\x0f\x65mail_addresses\x18\x08 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\x12\x15\n\rsession_token\x18\t \x01(\t\x12\x15\n\rtoken_expires\x18\n \x01(\t\x12\x16\n\nv2_user_id\x18\x0b \x01(\tB\x02\x18\x01\x12\x19\n\x11\x64\x61te_gdpr_consent\x18\x0c \x01(\t\x12\x18\n\x10\x64\x61te_tos_consent\x18\r \x01(\t\x12\x1e\n\x16\x64\x61te_marketing_consent\x18\x0e \x01(\t\x12\x1b\n\x13password_expired_at\x18\x0f \x01(\t\x12\x13\n\x0bis_new_user\x18\x10 \x01(\x08\x12\x1f\n\x17two_factor_auth_enabled\x18\x11 \x01(\x08\x12\r\n\x05state\x18\x12 \x01(\t\x12\x0f\n\x07user_id\x18\x13 \x01(\t\"D\n\x11PostLogoutRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"C\n\x14SingleLogoutResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"I\n\x16GetBillingUsageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xab\x01\n\x17GetBillingUsageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x30\n\rinvoice_items\x18\x02 \x03(\x0b\x32\x19.clarifai.api.InvoiceItem\x12\x31\n\rbilling_cycle\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.BillingCycle\".\n\x14GetStatusCodeRequest\x12\x16\n\x0estatus_code_id\x18\x01 \x01(\t\"\x18\n\x16ListStatusCodesRequest\"G\n\x18SingleStatusCodeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"u\n\x17MultiStatusCodeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08statuses\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.status.Status\"X\n\x11GetConceptRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\"f\n\x13ListConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x91\x01\n\x18ListModelConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"\xaf\x01\n\x1bPostConceptsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rconcept_query\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.ConceptQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"o\n\x13PostConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Concept\"\x80\x01\n\x14PatchConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Concept\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"j\n\x17GetConceptCountsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"l\n\x15SingleConceptResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x07\x63oncept\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Concept\"r\n\x14MultiConceptResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x63oncepts\x18\x02 \x03(\x0b\x32\x15.clarifai.api.ConceptB\x04\x80\xb5\x18\x01\"\x82\x01\n\x19MultiConceptCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0e\x63oncept_counts\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.ConceptCountB\x04\x80\xb5\x18\x01\"\xb1\x01\n\x1bListConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x11\n\tpredicate\x18\x03 \x01(\t\x12\x1a\n\x12knowledge_graph_id\x18\x04 \x01(\t\x12\x0c\n\x04page\x18\x05 \x01(\r\x12\x10\n\x08per_page\x18\x06 \x01(\r\"\x9c\x01\n\x1bPostConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_relations\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptRelation\"q\n\x1d\x44\x65leteConceptRelationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"M\n\x1aListKnowledgeGraphsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x85\x01\n\x1aPostKnowledgeGraphsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x36\n\x10knowledge_graphs\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.KnowledgeGraph\"m\n\x1aListConceptMappingsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\xbc\x01\n\x1aPostConceptMappingsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x36\n\x10\x63oncept_mappings\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.ConceptMapping\x12\x35\n\x0fknowledge_graph\x18\x03 \x01(\x0b\x32\x1c.clarifai.api.KnowledgeGraph\"\x8f\x01\n\x1dPostConceptMappingJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12=\n\x14\x63oncept_mapping_jobs\x18\x02 \x03(\x0b\x32\x1f.clarifai.api.ConceptMappingJob\"\x85\x01\n\x1dSingleConceptRelationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10\x63oncept_relation\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.ConceptRelation\"\x8b\x01\n\x1cMultiConceptRelationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11\x63oncept_relations\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.ConceptRelationB\x04\x80\xb5\x18\x01\"\x82\x01\n\x1cSingleKnowledgeGraphResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0fknowledge_graph\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.KnowledgeGraph\"\x88\x01\n\x1bMultiKnowledgeGraphResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12<\n\x10knowledge_graphs\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.KnowledgeGraphB\x04\x80\xb5\x18\x01\"\x82\x01\n\x1cSingleConceptMappingResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0f\x63oncept_mapping\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.ConceptMapping\"\x88\x01\n\x1bMultiConceptMappingResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12<\n\x10\x63oncept_mappings\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.ConceptMappingB\x04\x80\xb5\x18\x01\"Z\n\x1fSingleConceptMappingJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\x02 \x01(\t\"Z\n\x1eMultiConceptMappingJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03ids\x18\x02 \x03(\t\"r\n\x19GetConceptLanguageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x10\n\x08language\x18\x03 \x01(\t\"\x82\x01\n\x1bListConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\xad\x01\n\x1cPatchConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_languages\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguage\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x9c\x01\n\x1bPostConceptLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x38\n\x11\x63oncept_languages\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguage\"\x85\x01\n\x1dSingleConceptLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10\x63oncept_language\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.ConceptLanguage\"\x8b\x01\n\x1cMultiConceptLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11\x63oncept_languages\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.ConceptLanguageB\x04\x80\xb5\x18\x01\"\x83\x01\n\x1cListConceptReferencesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nconcept_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x88\x01\n\x1eSingleConceptReferenceResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x11\x63oncept_reference\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.ConceptReference\"\x8e\x01\n\x1dMultiConceptReferenceResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12@\n\x12\x63oncept_references\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.ConceptReferenceB\x04\x80\xb5\x18\x01\"\x13\n\x11GetHealthzRequest\"O\n\x12GetHealthzResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0c\n\x04time\x18\x02 \x01(\t\"T\n\x0fGetInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\"l\n\x16GetInputSamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x10\n\x08user_ids\x18\x03 \x03(\t\"\x9e\x01\n\x11ListInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12+\n\x06status\x18\x05 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0b\n\x03ids\x18\x04 \x03(\t\"\x92\x01\n\x13StreamInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12\x0f\n\x07last_id\x18\x03 \x01(\t\x12\x13\n\x0border_by_id\x18\x05 \x01(\x08\x12\x12\n\ndescending\x18\x04 \x01(\x08\"\x84\x01\n\x11PostInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x19\n\x11inputs_add_job_id\x18\x03 \x01(\t\"g\n\x15PostInputsFileRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03url\x18\x02 \x01(\t\x12\x10\n\x08\x66iletype\x18\x03 \x01(\t\"\xcc\x01\n\x15PostInputsNiFiRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12(\n\x04urls\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.ListValue\x12)\n\x08metadata\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x12\'\n\x06params\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct:\x04\xa0\x9c\'\x01\"\xc3\x01\n\x19PostInputsDocumentRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x39\n\x04\x62ody\x18\x02 \x01(\x0b\x32+.clarifai.api.PostInputsDocumentRequestBody\x12\x19\n\x11statusCallbackUrl\x18\x03 \x01(\t\x12\x19\n\x11\x65ntityCallbackUrl\x18\x04 \x01(\t:\x04\xa0\x9c\'\x01\"\xbc\x01\n\x1dPostInputsDocumentRequestBody\x12\x11\n\tbatchId_t\x18\x01 \x01(\t\x12,\n\x08\x64ocument\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.ListValue\x12)\n\x08\x63omplete\x18\x03 \x01(\x0b\x32\x17.google.protobuf.Struct\x12)\n\x08metadata\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct:\x04\xa0\x9c\'\x01\"z\n\x12PatchInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"W\n\x12\x44\x65leteInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08input_id\x18\x02 \x01(\t\"Y\n\x13\x44\x65leteInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\tJ\x04\x08\x03\x10\x04\"f\n\x13SingleInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\"\n\x05input\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Input\"\xa0\x01\n\x12MultiInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x06inputs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.InputB\x04\x80\xb5\x18\x01\x12\x32\n\x0einputs_add_job\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.InputsAddJob\"r\n\x1cMultiInputAnnotationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04hits\x18\x03 \x03(\x0b\x32\x11.clarifai.api.HitB\x04\x80\xb5\x18\x01\"q\n\x18SingleInputCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x06\x63ounts\x18\x02 \x01(\x0b\x32\x18.clarifai.api.InputCount\"G\n\x14GetInputCountRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"f\n\x13ListDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"X\n\x11GetDatasetRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\"o\n\x13PostDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Dataset\"\x80\x01\n\x14PatchDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.Dataset\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x84\x01\n\x16PatchDatasetIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"]\n\x15\x44\x65leteDatasetsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0b\x64\x61taset_ids\x18\x02 \x03(\t\"r\n\x14MultiDatasetResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x64\x61tasets\x18\x02 \x03(\x0b\x32\x15.clarifai.api.DatasetB\x04\x80\xb5\x18\x01\"l\n\x15SingleDatasetResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x07\x64\x61taset\x18\x02 \x01(\x0b\x32\x15.clarifai.api.Dataset\"\x7f\n\x18ListDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"o\n\x16GetDatasetInputRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x10\n\x08input_id\x18\x03 \x01(\t\"\xb9\x01\n\x18PostDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x32\n\x0e\x64\x61taset_inputs\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.DatasetInput\x12$\n\x06search\x18\x04 \x01(\x0b\x32\x14.clarifai.api.Search\"t\n\x1a\x44\x65leteDatasetInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x11\n\tinput_ids\x18\x03 \x03(\t\"\xd2\x01\n\x19MultiDatasetInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0e\x64\x61taset_inputs\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.DatasetInputB\x04\x80\xb5\x18\x01\x12N\n\x1d\x64\x61taset_inputs_search_add_job\x18\x03 \x01(\x0b\x32\'.clarifai.api.DatasetInputsSearchAddJob\"|\n\x1aSingleDatasetInputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\rdataset_input\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.DatasetInput\"\x81\x01\n\x1aListDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"{\n\x18GetDatasetVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\"\xa4\x02\n&ListDatasetVersionMetricsGroupsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\x12\x14\n\x0cparent_paths\x18\x06 \x03(\t\x12;\n\x05types\x18\x07 \x03(\x0e\x32,.clarifai.api.DatasetVersionMetricsGroupType\x12&\n\x06values\x18\x08 \x03(\x0b\x32\x16.google.protobuf.Value\"\x99\x01\n\x1aPostDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x36\n\x10\x64\x61taset_versions\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersion\"\xaa\x01\n\x1bPatchDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x36\n\x10\x64\x61taset_versions\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x80\x01\n\x1c\x44\x65leteDatasetVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1b\n\x13\x64\x61taset_version_ids\x18\x03 \x03(\t\"\xb7\x01\n\x1fPutDatasetVersionExportsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ndataset_id\x18\x02 \x01(\t\x12\x1a\n\x12\x64\x61taset_version_id\x18\x03 \x01(\t\x12\x33\n\x07\x65xports\x18\x04 \x03(\x0b\x32\".clarifai.api.DatasetVersionExport\"\x88\x01\n\x1bMultiDatasetVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12<\n\x10\x64\x61taset_versions\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.DatasetVersionB\x04\x80\xb5\x18\x01\"\x8b\x01\n!MultiDatasetVersionExportResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x07\x65xports\x18\x02 \x03(\x0b\x32\".clarifai.api.DatasetVersionExportB\x04\x80\xb5\x18\x01\"\xae\x01\n\'MultiDatasetVersionMetricsGroupResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12V\n\x1e\x64\x61taset_version_metrics_groups\x18\x02 \x03(\x0b\x32(.clarifai.api.DatasetVersionMetricsGroupB\x04\x80\xb5\x18\x01\"\x82\x01\n\x1cSingleDatasetVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0f\x64\x61taset_version\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.DatasetVersion\"f\n#GetDatasetInputsSearchAddJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06job_id\x18\x02 \x01(\t\"\x8c\x01\n\'SingleDatasetInputsSearchAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x03job\x18\x02 \x01(\x0b\x32\'.clarifai.api.DatasetInputsSearchAddJob\"\xb9\x01\n\x17PostModelOutputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12#\n\x06inputs\x18\x04 \x03(\x0b\x32\x13.clarifai.api.Input\x12\"\n\x05model\x18\x05 \x01(\x0b\x32\x13.clarifai.api.Model\"\x8f\x01\n\x16ListModelInputsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"P\n\rGetKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06key_id\x18\x02 \x01(\t\"b\n\x0fListKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"e\n\x12ListAppKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"c\n\x0fPostKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Key\"S\n\x10\x44\x65leteKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06key_id\x18\x02 \x01(\t\"t\n\x10PatchKeysRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1f\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.Key\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"`\n\x11SingleKeyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x1e\n\x03key\x18\x02 \x01(\x0b\x32\x11.clarifai.api.Key\"f\n\x10MultiKeyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x04keys\x18\x02 \x03(\x0b\x32\x11.clarifai.api.KeyB\x04\x80\xb5\x18\x01\"P\n\x13\x46\x65tchLicenseRequest\x12\x12\n\nlicense_id\x18\x01 \x01(\t\x12\x12\n\npublic_key\x18\x02 \x01(\t\x12\x11\n\tsignature\x18\x03 \x01(\x0c\"\xb5\x01\n\x14\x46\x65tchLicenseResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x17\n\x0f\x65ncrypted_bytes\x18\x02 \x01(\x0c\x12\x30\n\x0c\x61\x63tivated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\npublic_key\x18\x04 \x01(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\"\x99\x01\n\x16ValidateLicenseRequest\x12\x12\n\nlicense_id\x18\x01 \x01(\t\x12\x12\n\nrequest_id\x18\x02 \x01(\t\x12\x30\n\x0c\x61\x63tivated_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x12\n\npublic_key\x18\x04 \x01(\t\x12\x11\n\tsignature\x18\x05 \x01(\x0c\"\x99\x01\n\x17ValidateLicenseResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x12\n\nrequest_id\x18\x02 \x01(\t\x12*\n\x06limits\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.LicenseLimit\x12\x11\n\tsignature\x18\x04 \x01(\x0c\"F\n\x13ListLicensesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"X\n\x11GetLicenseRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\nlicense_id\x18\x02 \x01(\t\"l\n\x15SingleLicenseResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x07license\x18\x02 \x01(\x0b\x32\x15.clarifai.api.License\"v\n\x18MultipleLicensesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08licenses\x18\x02 \x03(\x0b\x32\x15.clarifai.api.LicenseB\x04\x80\xb5\x18\x01\"\xad\x01\n\x0fGetModelRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x10\n\x08language\x18\x04 \x01(\t\x12\x16\n\x0etrained_before\x18\x05 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x13 \x03(\t\"\x85\x04\n\x11ListModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\n \x01(\x08\x12\x16\n\x0csort_by_name\x18\x0b \x01(\x08H\x00\x12\x1c\n\x12sort_by_num_inputs\x18\x0c \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\r \x01(\x08H\x00\x12\r\n\x05query\x18\x0e \x01(\t\x12\x0c\n\x04name\x18\x05 \x01(\t\x12\x19\n\x11\x66ilter_by_user_id\x18\x16 \x01(\x08\x12\x15\n\rmodel_type_id\x18\x06 \x01(\t\x12\x14\n\x0ctrained_only\x18\x07 \x01(\x08\x12\x14\n\x0cinput_fields\x18\x08 \x03(\t\x12\x15\n\routput_fields\x18\t \x03(\t\x12\x0f\n\x07license\x18\x0f \x01(\t\x12\x15\n\rfeatured_only\x18\x10 \x01(\x08\x12\x14\n\x0cstarred_only\x18\x14 \x01(\x08\x12\x10\n\x08toolkits\x18\x11 \x03(\t\x12\x11\n\tuse_cases\x18\x12 \x03(\t\x12\x11\n\tlanguages\x18\x15 \x03(\t\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x13 \x03(\tB\t\n\x07sort_byJ\x04\x08\x04\x10\x05\"\x80\x01\n\x19PatchModelToolkitsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x10\n\x08toolkits\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x8b\x01\n\x1ePatchModelCheckConsentsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x16\n\x0e\x63heck_consents\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x80\x01\n\x19PatchModelUseCasesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x10\n\x08usecases\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x82\x01\n\x1aPatchModelLanguagesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x11\n\tlanguages\x18\x03 \x03(\t\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"Z\n\x19MultiModelToolkitResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08toolkits\x18\x02 \x03(\t\"e\n\x1eMultiModelCheckConsentResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x16\n\x0e\x63heck_consents\x18\x02 \x03(\t\"Z\n\x19MultiModelUseCaseResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08usecases\x18\x02 \x03(\t\"\\\n\x1aMultiModelLanguageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x11\n\tlanguages\x18\x02 \x03(\t\"\x91\x01\n\x11PostModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.ModelB\x02\x18\x01\x12#\n\x06models\x18\x03 \x03(\x0b\x32\x13.clarifai.api.Model\"z\n\x12PatchModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06models\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Model\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\",\n\x0eIdUpdateSource\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06new_id\x18\x02 \x01(\t\"\x82\x01\n\x14PatchModelIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"W\n\x12\x44\x65leteModelRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\"g\n\x13\x44\x65leteModelsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"\xa9\x01\n\x19PostModelsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12-\n\x0bmodel_query\x18\x02 \x01(\x0b\x32\x18.clarifai.api.ModelQuery\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"f\n\x13SingleModelResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\"\n\x05model\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Model\"l\n\x12MultiModelResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x06models\x18\x02 \x03(\x0b\x32\x13.clarifai.api.ModelB\x04\x80\xb5\x18\x01\"\xa2\x01\n\x19PatchModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x32\n\x0emodel_versions\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.ModelVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"o\n\x16GetModelVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\"\x92\x01\n\x18ListModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\x12\x13\n\x0b\x63oncept_ids\x18\x05 \x03(\t\"r\n\x19\x44\x65leteModelVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x03 \x01(\t\x12\x12\n\nversion_id\x18\x04 \x01(\t\"|\n\x1aSingleModelVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\rmodel_version\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.ModelVersion\"\x82\x01\n\x19MultiModelVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0emodel_versions\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.ModelVersionB\x04\x80\xb5\x18\x01\"\xaa\x03\n\x18PostModelVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x32\n\x0emodel_versions\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.ModelVersion\x12(\n\x06search\x18\x04 \x01(\x0b\x32\x14.clarifai.api.SearchB\x02\x18\x01\x12*\n\x0ctrain_search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\x12)\n\x0btest_search\x18\x06 \x01(\x0b\x32\x14.clarifai.api.Search\x12\x1f\n\x17\x65valuate_after_training\x18\x07 \x01(\x08\x12\x13\n\x0b\x64\x65scription\x18\x08 \x01(\t\x12\x35\n\x0f\x64\x61taset_version\x18\t \x01(\x0b\x32\x1c.clarifai.api.DatasetVersion\x12)\n\teval_info\x18\n \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xb1\x01\n$PostWorkflowVersionsUnPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x43\n\x0cpublications\x18\x03 \x03(\x0b\x32-.clarifai.api.WorkflowVersionUnPublishRequest\"\xad\x01\n\"PostWorkflowVersionsPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x41\n\x0cpublications\x18\x03 \x03(\x0b\x32+.clarifai.api.WorkflowVersionPublishRequest\"3\n\x1dWorkflowVersionPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"5\n\x1fWorkflowVersionUnPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"0\n\x1aModelVersionPublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"\xa4\x01\n\x1fPostModelVersionsPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12>\n\x0cpublications\x18\x03 \x03(\x0b\x32(.clarifai.api.ModelVersionPublishRequest\"2\n\x1cModelVersionUnpublishRequest\x12\x12\n\nversion_id\x18\x01 \x01(\t\"\xa8\x01\n!PostModelVersionsUnPublishRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12@\n\x0cpublications\x18\x03 \x03(\x0b\x32*.clarifai.api.ModelVersionUnpublishRequest\"\xe3\x01\n\x1ePostModelVersionMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12\x14\n\x0cmax_examples\x18\x04 \x01(\r\x12)\n\x0btest_search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\x12)\n\teval_info\x18\n \x01(\x0b\x32\x16.clarifai.api.EvalInfo\"\xa1\x01\n\x1dGetModelVersionMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x03 \x01(\t\x12)\n\x06\x66ields\x18\x04 \x01(\x0b\x32\x19.clarifai.api.FieldsValue\"]\n\x13GetModelTypeRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x15\n\rmodel_type_id\x18\x02 \x01(\t\"h\n\x15ListModelTypesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x1f\n\x1dListOpenSourceLicensesRequest\"_\n\x1eListOpenSourceLicensesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08licenses\x18\x02 \x03(\t\"y\n\x17SingleModelTypeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x31\n\nmodel_type\x18\x02 \x01(\x0b\x32\x17.clarifai.api.ModelTypeB\x04\x80\xb5\x18\x01\"\xb0\x01\n\x16MultiModelTypeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0bmodel_types\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ModelTypeB\x04\x80\xb5\x18\x01\x12\x35\n\x0fmodel_importers\x18\x03 \x01(\x0b\x32\x1c.clarifai.api.ModelTypeField\"\x95\x01\n\"GetModelVersionInputExampleRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12\x12\n\nexample_id\x18\x04 \x01(\t\"\xa3\x01\n$ListModelVersionInputExamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"\xd1\x01\n$PostModelVersionInputExamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12L\n\x1cmodel_version_input_examples\x18\x04 \x03(\x0b\x32&.clarifai.api.ModelVersionInputExample\"\x9a\x01\n&DeleteModelVersionInputExamplesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12\x13\n\x0b\x65xample_ids\x18\x04 \x03(\t\"\xa2\x01\n&SingleModelVersionInputExampleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12K\n\x1bmodel_version_input_example\x18\x02 \x01(\x0b\x32&.clarifai.api.ModelVersionInputExample\"\xa2\x01\n%MultiModelVersionInputExampleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12L\n\x1cmodel_version_input_examples\x18\x02 \x03(\x0b\x32&.clarifai.api.ModelVersionInputExample\"\x7f\n\x1aListModelReferencesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x97\x01\n\x1aPostModelReferencesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x36\n\x10model_references\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.ModelReference\"n\n\x1c\x44\x65leteModelReferencesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"\x82\x01\n\x1bMultiModelReferenceResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x36\n\x10model_references\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.ModelReference\"o\n\x13MultiOutputResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\x07outputs\x18\x02 \x03(\x0b\x32\x14.clarifai.api.OutputB\x04\x80\xb5\x18\x01\"V\n\x11ListScopesRequest\x12\x10\n\x08key_type\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"B\n\x0fMyScopesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"F\n\x13MyScopesUserRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x15\n\x13MyScopesRootRequest\"\xa5\x01\n\x16MultiScopeDepsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\nscope_deps\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ScopeDeps\x12\x31\n\rendpoint_deps\x18\x03 \x03(\x0b\x32\x1a.clarifai.api.EndpointDeps\"\xa0\x01\n\x12MultiScopeResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x1e\n\x03\x61pp\x18\x03 \x01(\x0b\x32\x11.clarifai.api.App\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"\x84\x01\n\x16MultiScopeUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"\x84\x01\n\x16MultiScopeRootResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06scopes\x18\x02 \x03(\t\x12\x11\n\tendpoints\x18\x04 \x03(\t\x12\x1a\n\x12user_feature_flags\x18\x05 \x01(\t\"O\n\x10GetSearchRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"f\n\x13ListSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\xc4\x01\n\x13PostSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x05query\x18\x02 \x01(\x0b\x32\x13.clarifai.api.QueryB\x02\x18\x01\x12&\n\x08searches\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x04 \x01(\x0b\x32\x18.clarifai.api.Pagination\"\x85\x01\n\x1aPatchInputsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x8a\x01\n\x1fPatchAnnotationsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x7f\n\x14PatchSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x84\x01\n\x17PostSearchesByIDRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"R\n\x13\x44\x65leteSearchRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\xda\x01\n\x1aPostAttributeSearchRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\x12\x13\n\x0b\x62rute_force\x18\x04 \x01(\x08\x12\x35\n\x0f\x61ttribute_query\x18\x05 \x01(\x0b\x32\x1c.clarifai.api.AttributeQuery\x12\x11\n\tmin_value\x18\x06 \x01(\x02\"\xa7\x01\n\x1ePostAnnotationsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"c\n$DeleteAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\xa2\x01\n\x19PostInputsSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"i\n\x14SingleSearchResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06search\x18\x05 \x01(\x0b\x32\x14.clarifai.api.Search\"\xc1\x01\n\x13MultiSearchResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\n\n\x02id\x18\x02 \x01(\t\x12%\n\x04hits\x18\x03 \x03(\x0b\x32\x11.clarifai.api.HitB\x04\x80\xb5\x18\x01\x12\"\n\x05query\x18\x04 \x01(\x0b\x32\x13.clarifai.api.Query\x12&\n\x08searches\x18\x05 \x03(\x0b\x32\x14.clarifai.api.Search\"\x94\x02\n\"PostAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\x12*\n\x0cground_truth\x18\x03 \x01(\x0b\x32\x14.clarifai.api.Search\x12,\n\x0esearch_to_eval\x18\x04 \x01(\x0b\x32\x14.clarifai.api.Search\x12 \n\x04\x64\x61ta\x18\x05 \x01(\x0b\x32\x12.clarifai.api.Data\x12\x35\n\x0f\x65valuation_type\x18\x06 \x01(\x0e\x32\x1c.clarifai.api.EvaluationType\"`\n!GetAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"U\n\"ListAnnotationSearchMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x9d\x01\n$MultiAnnotationSearchMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12H\n\x19\x61nnotation_search_metrics\x18\x02 \x03(\x0b\x32%.clarifai.api.AnnotationSearchMetrics\"o\n\x1cListAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"k\n\x1aGetAnnotationFilterRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1c\n\x14\x61nnotation_filter_id\x18\x02 \x01(\t\"\x8b\x01\n\x1cPostAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12:\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"\x9c\x01\n\x1dPatchAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12:\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilter\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"p\n\x1e\x44\x65leteAnnotationFiltersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1d\n\x15\x61nnotation_filter_ids\x18\x02 \x03(\t\"\x8e\x01\n\x1dMultiAnnotationFilterResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12@\n\x12\x61nnotation_filters\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.AnnotationFilterB\x04\x80\xb5\x18\x01\"\x88\x01\n\x1eSingleAnnotationFilterResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x11\x61nnotation_filter\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.AnnotationFilter\"\x94\x01\n\x13ListClustersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\x12\x1f\n\x17\x61nnotations_per_cluster\x18\x05 \x01(\r\"\x87\x01\n ListAnnotationsForClusterRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x12\n\ncluster_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\xa4\x01\n\x1bPostClustersSearchesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x08searches\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Search\x12,\n\npagination\x18\x03 \x01(\x0b\x32\x18.clarifai.api.Pagination\"\x9a\x01\n\x14MultiClusterResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x63lusters\x18\x02 \x03(\x0b\x32\x15.clarifai.api.ClusterB\x04\x80\xb5\x18\x01\x12&\n\x08searches\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Search\"I\n\x16GetSubscriptionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x81\x01\n\x17PostSubscriptionRequest\x12\x13\n\x0bsignup_code\x18\x01 \x01(\t\x12 \n\x04plan\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Plan\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x80\x01\n\x1aSingleSubscriptionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04plan\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Plan\x12\x13\n\x0bsignup_code\x18\x03 \x01(\t\"I\n\x16ListCreditCardsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"r\n\x1aMultipleCreditCardResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x18.clarifai.api.CreditCard\"\x80\x01\n\x15PostCreditCardRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06source\x18\x02 \x01(\t\x12&\n\x04\x63\x61rd\x18\x03 \x01(\x0b\x32\x18.clarifai.api.CreditCard\"o\n\x18SingleCreditCardResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12&\n\x04\x63\x61rd\x18\x02 \x01(\x0b\x32\x18.clarifai.api.CreditCard\"r\n\x17\x44\x65leteCreditCardRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12&\n\x04\x63\x61rd\x18\x02 \x01(\x0b\x32\x18.clarifai.api.CreditCard\"\x9e\x01\n\x17PatchCreditCardsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\'\n\x05\x63\x61rds\x18\x02 \x03(\x0b\x32\x18.clarifai.api.CreditCard\x12)\n\x06\x61\x63tion\x18\x03 \x01(\x0b\x32\x19.clarifai.api.PatchAction\"L\n\x19GetShippingAddressRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xb0\x01\n\x19PutShippingAddressRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x37\n\x10shipping_address\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.ShippingAddress\x12)\n\x06\x61\x63tion\x18\x03 \x01(\x0b\x32\x19.clarifai.api.PatchAction\"\x85\x01\n\x1dSingleShippingAddressResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10shipping_address\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.ShippingAddress\"C\n\x10ListPlansRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"c\n\x11MultiPlanResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12!\n\x05plans\x18\x02 \x03(\x0b\x32\x12.clarifai.api.Plan\"\xc7\x01\n\x19GetHistoricalUsageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12.\n\nstart_date\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1b\n\x13\x62roken_down_per_app\x18\x04 \x01(\x08\"{\n\x1aGetHistoricalUsageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x30\n\x05usage\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.OpCountByDateB\x04\x80\xb5\x18\x01\"M\n\x1aPostHistoricalUsageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xa9\x01\n\x1bPostHistoricalUsageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\x08interval\x18\x02 \x01(\x0b\x32\x19.google.protobuf.Duration\x12\x30\n\x05usage\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.DimensionListB\x04\x80\xb5\x18\x01\"J\n\x17GetRealtimeUsageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"|\n\x18GetRealtimeUsageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0erealtime_usage\x18\x04 \x03(\x0b\x32\x1b.clarifai.api.RealtimeCount\"\x1b\n\x19ListUsageIntervalsRequest\"\x7f\n\x1aListUsageIntervalsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x0fusage_intervals\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.UsageInterval\"o\n\x1cListUserBillingCyclesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x8f\x01\n\x15ListUserCyclesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x14\n\x0c\x63ycle_number\x18\x02 \x01(\r\x12/\n\x0b\x62\x65\x66ore_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\"\x86\x01\n\x1dListUserBillingCyclesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x0e\x62illing_cycles\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.BillingCycleB\x04\x80\xb5\x18\x01\"{\n\x16ListUserCyclesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x0cusage_cycles\x18\x02 \x03(\x0b\x32\x18.clarifai.api.UsageCycleB\x04\x80\xb5\x18\x01\"\xa6\x01\n\x10PostUsageRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12:\n\x12\x65vents_collections\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.EventsCollection\x12\x12\n\npublic_key\x18\x03 \x01(\t\x12\x11\n\tsignature\x18\x04 \x01(\x0c\"@\n\x11PostUsageResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"\\\n\x0eGetUserRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x02 \x03(\t\"\x84\x02\n\x10ListUsersRequest\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12\x16\n\x0esort_ascending\x18\x04 \x01(\x08\x12\x14\n\nsort_by_id\x18\x05 \x01(\x08H\x00\x12\x1c\n\x12sort_by_first_name\x18\x06 \x01(\x08H\x00\x12\x1b\n\x11sort_by_last_name\x18\x07 \x01(\x08H\x00\x12\x1c\n\x12sort_by_created_at\x18\x08 \x01(\x08H\x00\x12\r\n\x05query\x18\x03 \x01(\t\x12\x14\n\x0cstarred_only\x18\n \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\t \x03(\tB\t\n\x07sort_by\"j\n\x16PostUserConsentRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07\x63onsent\x18\x02 \x01(\x08\x12\x0e\n\x06\x66ields\x18\x03 \x03(\t\"c\n\x12SingleUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04user\x18\x02 \x01(\x0b\x32\x12.clarifai.api.User\"i\n\x11MultiUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05users\x18\x02 \x03(\x0b\x32\x12.clarifai.api.UserB\x04\x80\xb5\x18\x01\"\xf5\x01\n\x10PatchUserRequest\x12/\n\x0buser_app_id\x18\x07 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12$\n\x04info\x18\x02 \x01(\x0b\x32\x16.clarifai.api.UserInfo\x12(\n\x04pass\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserPassword\x12)\n\x08metadata\x18\x04 \x01(\x0b\x32\x17.google.protobuf.Struct\x12)\n\x06\x61\x63tion\x18\x05 \x01(\x0b\x32\x19.clarifai.api.PatchActionJ\x04\x08\x01\x10\x02J\x04\x08\x06\x10\x07\"r\n\x15PostUserAccessRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12(\n\x06\x61\x63\x63\x65ss\x18\x02 \x03(\x0b\x32\x18.clarifai.api.UserAccess\"G\n\x14GetUserAccessRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"p\n\x17MultiUserAccessResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x06\x61\x63\x63\x65ss\x18\x02 \x03(\x0b\x32\x18.clarifai.api.UserAccess\"q\n\x18SingleUserAccessResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x06\x61\x63\x63\x65ss\x18\x02 \x01(\x0b\x32\x18.clarifai.api.UserAccess\"T\n\x11PostEmailsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06\x65mails\x18\x02 \x03(\t\"m\n\x13SingleEmailResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x05\x65mail\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.EmailAddress\"p\n\x15MultipleEmailResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12*\n\x06\x65mails\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.EmailAddress\"D\n\x11ListEmailsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"Y\n\x17PostResendVerifyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"I\n\x1aSingleResendVerifyResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"T\n\x12\x44\x65leteEmailRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"Y\n\x17PostPrimaryEmailRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\r\n\x05\x65mail\x18\x02 \x01(\t\"x\n\x1bPostValidatePasswordRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12(\n\x08password\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Password\"\x8e\x01\n SinglePasswordValidationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12=\n\x13password_violations\x18\x02 \x01(\x0b\x32 .clarifai.api.PasswordViolations\"#\n!ListGlobalPasswordPoliciesRequest\"\x9a\x01\n\x1bListPasswordPoliciesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12\x18\n\x10organization_ids\x18\x03 \x03(\t\x12\x0c\n\x04page\x18\x04 \x01(\r\x12\x10\n\x08per_page\x18\x05 \x01(\r\"\x87\x01\n\x1bPostPasswordPoliciesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x37\n\x11password_policies\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.PasswordPolicy\"\x98\x01\n\x1cPatchPasswordPoliciesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x37\n\x11password_policies\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.PasswordPolicy\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"]\n\x1d\x44\x65letePasswordPoliciesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x88\x01\n MultiplePasswordPoliciesResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x11password_policies\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.PasswordPolicy\"K\n\x18UserFeatureConfigRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"^\n\x1fSingleUserFeatureConfigResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06\x63onfig\x18\x02 \x01(\t\"~\n\x18PostOrganizationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rorganizations\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Organization\"k\n\x18ListOrganizationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"p\n\x1dListUsersOrganizationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"^\n+DeleteRequestingUserFromOrganizationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"f\n\'PostAcceptOrganizationInvitationRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"g\n(PostDeclineOrganizationInvitationRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"I\n\x16GetOrganizationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x8e\x01\n\x18PatchOrganizationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x31\n\rorganizations\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.Organization\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"L\n\x19\x44\x65leteOrganizationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"{\n\x1aSingleOrganizationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x30\n\x0corganization\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.Organization\"\x81\x01\n\x19MultiOrganizationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\rorganizations\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.OrganizationB\x04\x80\xb5\x18\x01\"\xb2\x02\n\x1fMultiUsersOrganizationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12[\n\rorganizations\x18\x02 \x03(\x0b\x32>.clarifai.api.MultiUsersOrganizationsResponse.UserOrganizationB\x04\x80\xb5\x18\x01\x1a\x84\x01\n\x10UserOrganization\x12\x30\n\x0corganization\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.Organization\x12 \n\x04role\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Role\x12\x1c\n\x14\x66\x65\x61ture_flag_configs\x18\x03 \x01(\t\"\xa5\x01\n!ListOrganizationAppMembersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12/\n\x0frequired_scopes\x18\x02 \x03(\x0e\x32\x16.clarifai.auth.scope.S\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"q\n\x1eListOrganizationMembersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x90\x01\n\"PostOrganizationInvitationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x39\n\x0binvitations\x18\x02 \x03(\x0b\x32$.clarifai.api.OrganizationInvitation\"\xa1\x01\n#PatchOrganizationInvitationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x39\n\x0binvitations\x18\x03 \x03(\x0b\x32$.clarifai.api.OrganizationInvitation\"\xb1\x01\n\"ListOrganizationInvitationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12:\n\x06status\x18\x04 \x01(\x0e\x32*.clarifai.api.OrganizationInvitationStatus\"_\n GetOrganizationInvitationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"4\n&GetOrganizationInvitationPublicRequest\x12\n\n\x02id\x18\x01 \x01(\t\"\x8d\x01\n$SingleOrganizationInvitationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\ninvitation\x18\x02 \x01(\x0b\x32$.clarifai.api.OrganizationInvitation\"\x93\x01\n#MultiOrganizationInvitationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12?\n\x0binvitations\x18\x02 \x03(\x0b\x32$.clarifai.api.OrganizationInvitationB\x04\x80\xb5\x18\x01\"\xff\x01\n\x1fPatchOrganizationMembersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12\x63\n\x14organization_members\x18\x03 \x03(\x0b\x32\x45.clarifai.api.PatchOrganizationMembersRequest.PatchOrganizationMember\x1a\x36\n\x17PatchOrganizationMember\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0f\n\x07role_id\x18\x02 \x01(\t\"t\n\x1dPostOrganizationMemberRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmember_id\x18\x02 \x01(\t\x12\x0f\n\x07role_id\x18\x03 \x01(\t\"e\n\x1f\x44\x65leteOrganizationMemberRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmember_id\x18\x02 \x01(\t\"\x94\x01\n\x1fMultiOrganizationMemberResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x44\n\x14organization_members\x18\x02 \x03(\x0b\x32 .clarifai.api.OrganizationMemberB\x04\x80\xb5\x18\x01\"\x8b\x01\n\x1cPostIdentityProvidersRequest\x12:\n\x12identity_providers\x18\x01 \x03(\x0b\x32\x1e.clarifai.api.IdentityProvider\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"o\n\x1cListIdentityProvidersRequest\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"Y\n\x1aGetIdentityProviderRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x9c\x01\n\x1dPatchIdentityProvidersRequest\x12:\n\x12identity_providers\x18\x01 \x03(\x0b\x32\x1e.clarifai.api.IdentityProvider\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\x12/\n\x0buser_app_id\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"^\n\x1e\x44\x65leteIdentityProvidersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x88\x01\n\x1eSingleIdentityProviderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x11identity_provider\x18\x02 \x01(\x0b\x32\x1e.clarifai.api.IdentityProvider\"\x8e\x01\n\x1dMultiIdentityProviderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12@\n\x12identity_providers\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.IdentityProviderB\x04\x80\xb5\x18\x01\"\x83\x02\n\x10PostTeamsRequest\x12\x36\n\x05teams\x18\x01 \x03(\x0b\x32\'.clarifai.api.PostTeamsRequest.PostTeam\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x1a\x85\x01\n\x08PostTeam\x12\n\n\x02id\x18\x01 \x01(\t\x12.\n\ncreated_at\x18\x02 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12/\n\x0bmodified_at\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x0c\n\x04name\x18\x04 \x01(\t\"r\n\x10ListTeamsRequest\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12\r\n\x05query\x18\x03 \x01(\t\x12/\n\x0buser_app_id\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"M\n\x0eGetTeamRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"w\n\x11PatchTeamsRequest\x12!\n\x05teams\x18\x01 \x03(\x0b\x32\x12.clarifai.api.Team\x12\x0e\n\x06\x61\x63tion\x18\x02 \x01(\t\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"R\n\x12\x44\x65leteTeamsRequest\x12\x0b\n\x03ids\x18\x01 \x03(\t\x12/\n\x0buser_app_id\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"c\n\x12SingleTeamResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04team\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Team\"i\n\x11MultiTeamResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05teams\x18\x02 \x03(\x0b\x32\x12.clarifai.api.TeamB\x04\x80\xb5\x18\x01\".\n\x0b\x41ppIdentity\x12\x0f\n\x07user_id\x18\x01 \x01(\t\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\"\x86\x01\n\x13ListTeamAppsRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\r\n\x05query\x18\x04 \x01(\t\x12/\n\x0buser_app_id\x18\x05 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xc2\x01\n\x13PostTeamAppsRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12=\n\x04\x61pps\x18\x02 \x03(\x0b\x32).clarifai.api.PostTeamAppsRequest.TeamAppB\x04\x80\xb5\x18\x01\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x1a*\n\x07TeamApp\x12\x0e\n\x06\x61pp_id\x18\x01 \x01(\t\x12\x0f\n\x07role_id\x18\x02 \x01(\t\"p\n\x15\x44\x65leteTeamAppsRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x15\n\x07\x61pp_ids\x18\x02 \x03(\tB\x04\x80\xb5\x18\x01\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\xb0\x02\n\x15MultiTeamAppsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12?\n\x04\x61pps\x18\x02 \x03(\x0b\x32+.clarifai.api.MultiTeamAppsResponse.TeamAppB\x04\x80\xb5\x18\x01\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x1ax\n\x07TeamApp\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x0f\n\x07role_id\x18\x02 \x01(\t\x12&\n\x03\x61pp\x18\x03 \x01(\x0b\x32\x19.clarifai.api.AppIdentity\x12\x10\n\x08\x61pp_name\x18\x04 \x01(\t\x12\x11\n\trole_name\x18\x05 \x01(\t\"j\n\x14PostTeamUsersRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"\x87\x01\n\x14ListTeamUsersRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\r\n\x05query\x18\x04 \x01(\t\x12/\n\x0buser_app_id\x18\x05 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"l\n\x16\x44\x65leteTeamUsersRequest\x12\x0f\n\x07team_id\x18\x01 \x01(\t\x12\x10\n\x08user_ids\x18\x02 \x03(\t\x12/\n\x0buser_app_id\x18\x03 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"v\n\x15MultiTeamUserResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x30\n\nteam_users\x18\x02 \x03(\x0b\x32\x16.clarifai.api.TeamUserB\x04\x80\xb5\x18\x01\"Y\n\x10ListRolesRequest\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12%\n\x05types\x18\x03 \x03(\x0e\x32\x16.clarifai.api.RoleType\"\x1c\n\x0eGetRoleRequest\x12\n\n\x02id\x18\x01 \x01(\t\"c\n\x12SingleRoleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04role\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Role\"i\n\x11MultiRoleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05roles\x18\x02 \x03(\x0b\x32\x12.clarifai.api.RoleB\x04\x80\xb5\x18\x01\"T\n\x0fGetVocabRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\"d\n\x11ListVocabsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"i\n\x11PostVocabsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06vocabs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Vocab\"z\n\x12PatchVocabsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x06vocabs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.Vocab\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"W\n\x12\x44\x65leteVocabRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\"g\n\x13\x44\x65leteVocabsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"}\n\x18ListVocabConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x86\x01\n\x18PostVocabConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\x12\'\n\x08\x63oncepts\x18\x03 \x03(\x0b\x32\x15.clarifai.api.Concept\"r\n\x19\x44\x65leteVocabConceptRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\x12\x12\n\nconcept_id\x18\x03 \x01(\t\"\x80\x01\n\x1a\x44\x65leteVocabConceptsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08vocab_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\x12\x12\n\ndelete_all\x18\x04 \x01(\x08\"f\n\x13SingleVocabResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\"\n\x05vocab\x18\x02 \x01(\x0b\x32\x13.clarifai.api.Vocab\"l\n\x12MultiVocabResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12)\n\x06vocabs\x18\x02 \x03(\x0b\x32\x13.clarifai.api.VocabB\x04\x80\xb5\x18\x01\"\xbb\x01\n\x12GetWorkflowRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x03 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x04 \x03(\t\x12\"\n\x1a\x65xclude_clarifai_workflows\x18\x05 \x01(\x08\"\xbb\x02\n\x14ListWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x16\n\x0esort_ascending\x18\x05 \x01(\x08\x12\x14\n\nsort_by_id\x18\x06 \x01(\x08H\x00\x12\x1d\n\x13sort_by_modified_at\x18\x07 \x01(\x08H\x00\x12\r\n\x05query\x18\x08 \x01(\t\x12\x0e\n\x02id\x18\x04 \x01(\tB\x02\x18\x01\x12\x15\n\rfeatured_only\x18\t \x01(\x08\x12\x14\n\x0cstarred_only\x18\x0b \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\n \x03(\t\x12\x13\n\x0bsearch_term\x18\x0c \x01(\tB\t\n\x07sort_by\"\x80\x01\n\x1aListPublicWorkflowsRequest\x12\x0c\n\x04page\x18\x01 \x01(\r\x12\x10\n\x08per_page\x18\x02 \x01(\r\x12\x11\n\tonly_base\x18\x03 \x01(\x08\x12/\n\x0buser_app_id\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\"r\n\x14PostWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.Workflow\"\x83\x01\n\x15PatchWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.Workflow\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x85\x01\n\x17PatchWorkflowIdsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12)\n\x03ids\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.IdUpdateSource\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"]\n\x15\x44\x65leteWorkflowRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\"j\n\x16\x44\x65leteWorkflowsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"o\n\x16SingleWorkflowResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08workflow\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Workflow\"u\n\x15MultiWorkflowResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12/\n\tworkflows\x18\x02 \x03(\x0b\x32\x16.clarifai.api.WorkflowB\x04\x80\xb5\x18\x01\"\xa5\x02\n\x1aPostWorkflowResultsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x07 \x01(\t\x12#\n\x06inputs\x18\x03 \x03(\x0b\x32\x13.clarifai.api.Input\x12\x31\n\routput_config\x18\x04 \x01(\x0b\x32\x1a.clarifai.api.OutputConfig\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x05 \x01(\x08\x12\x33\n\x0eworkflow_state\x18\x06 \x01(\x0b\x32\x1b.clarifai.api.WorkflowState\"\xd8\x01\n\x1bPostWorkflowResultsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\x08workflow\x18\x02 \x01(\x0b\x32\x16.clarifai.api.Workflow\x12-\n\x07results\x18\x03 \x03(\x0b\x32\x1c.clarifai.api.WorkflowResult\x12\x33\n\x0eworkflow_state\x18\x04 \x01(\x0b\x32\x1b.clarifai.api.WorkflowState\"\x91\x02\n$PostWorkflowResultsSimilarityRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nversion_id\x18\x07 \x01(\t\x12\x18\n\x10model_version_id\x18\x03 \x01(\t\x12)\n\x0cprobe_inputs\x18\x04 \x03(\x0b\x32\x13.clarifai.api.Input\x12(\n\x0bpool_inputs\x18\x05 \x03(\x0b\x32\x13.clarifai.api.Input\x12 \n\x18\x66\x61vor_clarifai_workflows\x18\x06 \x01(\x08\"\x8e\x01\n%PostWorkflowResultsSimilarityResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x38\n\x07results\x18\x02 \x03(\x0b\x32\'.clarifai.api.WorkflowResultsSimilarity\"\x83\x01\n\x1bListWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"~\n\x19GetWorkflowVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x1b\n\x13workflow_version_id\x18\x03 \x01(\t\"\x83\x01\n\x1d\x44\x65leteWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x1c\n\x14workflow_version_ids\x18\x03 \x03(\t\"\xae\x01\n\x1cPatchWorkflowVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x38\n\x11workflow_versions\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.WorkflowVersion\x12\x0e\n\x06\x61\x63tion\x18\x04 \x01(\t\"\x8b\x01\n\x1cMultiWorkflowVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12>\n\x11workflow_versions\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.WorkflowVersionB\x04\x80\xb5\x18\x01\"\x85\x01\n\x1dSingleWorkflowVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10workflow_version\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.WorkflowVersion\"\x9b\x01\n\x1aPostWorkflowMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x37\n\x10workflow_metrics\x18\x03 \x03(\x0b\x32\x1d.clarifai.api.WorkflowMetrics\"u\n\x19GetWorkflowMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nmetrics_id\x18\x03 \x01(\t\"\x8a\x01\n\x1dGetWorkflowNodeMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x12\n\nmetrics_id\x18\x03 \x01(\t\x12\x0f\n\x07node_id\x18\x04 \x01(\t\"\x82\x01\n\x1aListWorkflowMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"q\n\x1c\x44\x65leteWorkflowMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bworkflow_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"\x85\x01\n\x1dSingleWorkflowMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x37\n\x10workflow_metrics\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.WorkflowMetrics\"\x81\x01\n!SingleWorkflowNodeMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12/\n\x0cnode_metrics\x18\x02 \x01(\x0b\x32\x19.clarifai.api.EvalMetrics\"\x8a\x01\n\x1cMultiWorkflowMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12=\n\x10workflow_metrics\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.WorkflowMetricsB\x04\x80\xb5\x18\x01\"\x85\x01\n\x1aPostAppDuplicationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x36\n\x10\x61pp_duplications\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.AppDuplication\"g\n\x18GetAppDuplicationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x1a\n\x12\x61pp_duplication_id\x18\x02 \x01(\t\"m\n\x1aListAppDuplicationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x83\x01\n\x1cMultiAppDuplicationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x36\n\x10\x61pp_duplications\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.AppDuplication\"\x82\x01\n\x1cSingleAppDuplicationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x35\n\x0f\x61pp_duplication\x18\x02 \x01(\x0b\x32\x1c.clarifai.api.AppDuplication\"f\n\x10PostTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12!\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.Task\"m\n\x0eGetTaskRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x03 \x03(\t\"\xee\x01\n\x10ListTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\x12\x17\n\x0fworker_user_ids\x18\x04 \x03(\t\x12\x17\n\x0freview_user_ids\x18\x05 \x03(\t\x12\x17\n\x0flabel_order_ids\x18\x08 \x03(\t\x12#\n\x1bincluding_label_order_tasks\x18\x06 \x01(\x08\x12\x19\n\x11\x61\x64\x64itional_fields\x18\x07 \x03(\t\"w\n\x11PatchTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12!\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.Task\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"R\n\x12\x44\x65leteTasksRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"i\n\x11MultiTaskResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\'\n\x05tasks\x18\x02 \x03(\x0b\x32\x12.clarifai.api.TaskB\x04\x80\xb5\x18\x01\"c\n\x12SingleTaskResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12 \n\x04task\x18\x02 \x01(\x0b\x32\x12.clarifai.api.Task\"i\n\x13GetTaskCountRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x10\n\x08user_ids\x18\x03 \x03(\t\"\x9d\x01\n\x17SingleTaskCountResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0e\n\x06\x61pp_id\x18\x02 \x01(\t\x12\x0f\n\x07task_id\x18\x03 \x01(\t\x12\x34\n\x06\x63ounts\x18\x04 \x03(\x0b\x32$.clarifai.api.TaskStatusCountPerUser\"f\n\"PatchAnnotationCountsRollupRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\"y\n\x16PostLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12.\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrder\"_\n\x14GetLabelOrderRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x16\n\x0elabel_order_id\x18\x02 \x01(\t\"i\n\x16ListLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x8a\x01\n\x17PatchLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12.\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrder\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"X\n\x18\x44\x65leteLabelOrdersRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"|\n\x17MultiLabelOrderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\x0clabel_orders\x18\x02 \x03(\x0b\x32\x18.clarifai.api.LabelOrderB\x04\x80\xb5\x18\x01\"v\n\x18SingleLabelOrderResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x0blabel_order\x18\x02 \x01(\x0b\x32\x18.clarifai.api.LabelOrder\"u\n\x15PostCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\"\x86\x01\n\x16PatchCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"k\n\x17\x44\x65leteCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\x12\x12\n\ndelete_all\x18\x03 \x01(\x08\"\\\n\x13GetCollectorRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x14\n\x0c\x63ollector_id\x18\x02 \x01(\t\"h\n\x15ListCollectorsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"r\n\x16MultiCollectorResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\ncollectors\x18\x02 \x03(\x0b\x32\x17.clarifai.api.Collector\"r\n\x17SingleCollectorResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12*\n\tcollector\x18\x02 \x01(\x0b\x32\x17.clarifai.api.Collector\"v\n\x15PostStatValuesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12,\n\x0bstat_values\x18\x02 \x03(\x0b\x32\x17.clarifai.api.StatValue\"y\n\x16MultiStatValueResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0bstat_values\x18\x02 \x03(\x0b\x32\x17.clarifai.api.StatValueB\x04\x80\xb5\x18\x01\"\x9e\x01\n\x1ePostStatValuesAggregateRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12K\n\x1cstat_value_aggregate_queries\x18\x02 \x03(\x0b\x32%.clarifai.api.StatValueAggregateQuery\"\x9c\x01\n\x1fMultiStatValueAggregateResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12L\n\x1cstat_value_aggregate_results\x18\x02 \x03(\x0b\x32&.clarifai.api.StatValueAggregateResult\"\x97\x03\n\x14PostAnalyticsRequest\x12\x1f\n\x17\x62\x61tch_unique_identifier\x18\x01 \x01(\t\x12-\n\x0b\x64\x65vice_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.DeviceInfo\x12<\n\x11\x65vents_collection\x18\x03 \x03(\x0b\x32!.clarifai.api.SDKEventsCollection\x12\x30\n\rhost_app_info\x18\x04 \x01(\x0b\x32\x19.clarifai.api.HostAppInfo\x12\x37\n\x10operating_system\x18\x05 \x01(\x0b\x32\x1d.clarifai.api.OperatingSystem\x12\"\n\x05state\x18\x06 \x01(\x0b\x32\x13.clarifai.api.State\x12\x13\n\x0bsystem_uuid\x18\x07 \x01(\t\x12-\n\ttimestamp\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x1e\n\x03sdk\x18\t \x01(\x0b\x32\x11.clarifai.api.SDK\"D\n\x15PostAnalyticsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\"\xd9\x02\n\x15PostSDKBillingRequest\x12\x1f\n\x17\x62\x61tch_unique_identifier\x18\x01 \x01(\t\x12-\n\x0b\x64\x65vice_info\x18\x02 \x01(\x0b\x32\x18.clarifai.api.DeviceInfo\x12,\n\x05\x63ycle\x18\x03 \x01(\x0b\x32\x1d.clarifai.api.SDKBillingCycle\x12\x30\n\rhost_app_info\x18\x04 \x01(\x0b\x32\x19.clarifai.api.HostAppInfo\x12\x37\n\x10operating_system\x18\x05 \x01(\x0b\x32\x1d.clarifai.api.OperatingSystem\x12\"\n\x05state\x18\x06 \x01(\x0b\x32\x13.clarifai.api.State\x12\x13\n\x0bsystem_uuid\x18\x07 \x01(\t\x12\x1e\n\x03sdk\x18\x08 \x01(\x0b\x32\x11.clarifai.api.SDK\"t\n\x16PostSDKBillingResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x08\x63ommands\x18\x02 \x01(\x0b\x32\x1b.clarifai.commands.Commands\"\xb1\x01\n(MultiFindDuplicateAnnotationsJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12X\n\x1f\x66ind_duplicate_annotations_jobs\x18\x02 \x03(\x0b\x32).clarifai.api.FindDuplicateAnnotationsJobB\x04\x80\xb5\x18\x01\"\xab\x01\n)SingleFindDuplicateAnnotationsJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12Q\n\x1e\x66ind_duplicate_annotations_job\x18\x02 \x01(\x0b\x32).clarifai.api.FindDuplicateAnnotationsJob\"\xae\x01\n\'PostFindDuplicateAnnotationsJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12R\n\x1f\x66ind_duplicate_annotations_jobs\x18\x02 \x03(\x0b\x32).clarifai.api.FindDuplicateAnnotationsJob\"d\n%GetFindDuplicateAnnotationsJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"z\n\'ListFindDuplicateAnnotationsJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"i\n)DeleteFindDuplicateAnnotationsJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"w\n\x1ePostTrendingMetricsViewRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tview_type\x18\x02 \x01(\t\x12\x11\n\tobject_id\x18\x03 \x01(\t\"\x85\x01\n\x1fListTrendingMetricsViewsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tview_type\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"~\n MultiTrendingMetricsViewResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\x07metrics\x18\x02 \x03(\x0b\x32\x1c.clarifai.api.TrendingMetric\"H\n\x17PostIdValidationRequest\x12-\n\x0bvalidations\x18\x01 \x03(\x0b\x32\x18.clarifai.api.Validation\"\x84\x01\n\x19MultiIdValidationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12:\n\x12validation_results\x18\x02 \x03(\x0b\x32\x1e.clarifai.api.ValidationResult\"/\n\x18ListTagCategoriesRequest\x12\x13\n\x0bobject_type\x18\x01 \x01(\t\"v\n\x18MultiTagCategoryResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12-\n\ncategories\x18\x02 \x03(\x0b\x32\x19.clarifai.api.TagCategory\"v\n\x15PostModelStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12,\n\x0bmodel_stars\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ModelStar\"s\n\x16MultiModelStarResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12,\n\x0bmodel_stars\x18\x02 \x03(\x0b\x32\x17.clarifai.api.ModelStar\"]\n\x17\x44\x65leteModelStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodel_ids\x18\x02 \x03(\t\"Z\n\x18\x44\x65leteModelStarsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x11\n\tmodel_ids\x18\x02 \x03(\t\"B\n\x14PostUserStarsRequest\x12*\n\nuser_stars\x18\x01 \x03(\x0b\x32\x16.clarifai.api.UserStar\"p\n\x15MultiUserStarResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12*\n\nuser_stars\x18\x02 \x03(\x0b\x32\x16.clarifai.api.UserStar\"*\n\x16\x44\x65leteUserStarsRequest\x12\x10\n\x08user_ids\x18\x01 \x03(\t\"X\n\x17\x44\x65leteUserStarsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x10\n\x08user_ids\x18\x02 \x03(\t\"p\n\x13PostAppStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12(\n\tapp_stars\x18\x02 \x03(\x0b\x32\x15.clarifai.api.AppStar\"m\n\x14MultiAppStarResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12(\n\tapp_stars\x18\x02 \x03(\x0b\x32\x15.clarifai.api.AppStar\"Y\n\x15\x44\x65leteAppStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07\x61pp_ids\x18\x02 \x03(\t\"V\n\x16\x44\x65leteAppStarsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x0f\n\x07\x61pp_ids\x18\x02 \x03(\t\"\x7f\n\x18PostWorkflowStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x32\n\x0eworkflow_stars\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.WorkflowStar\"|\n\x19MultiWorkflowStarResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0eworkflow_stars\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.WorkflowStar\"c\n\x1a\x44\x65leteWorkflowStarsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x14\n\x0cworkflow_ids\x18\x02 \x03(\t\"`\n\x1b\x44\x65leteWorkflowStarsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x14\n\x0cworkflow_ids\x18\x02 \x03(\t\"\x83\x01\n\x1bListWebNotificationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x13\n\x0bunread_only\x18\x02 \x01(\x08\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"e\n\x19GetWebNotificationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x17\n\x0fnotification_id\x18\x02 \x01(\t\"]\n\x1d\x44\x65leteWebNotificationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x9a\x01\n\x1cPatchWebNotificationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x39\n\rnotifications\x18\x02 \x03(\x0b\x32\".clarifai.api.PatchWebNotification\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"\x81\x01\n\x1cMultiWebNotificationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x34\n\rnotifications\x18\x02 \x03(\x0b\x32\x1d.clarifai.api.WebNotification\"\x81\x01\n\x1dSingleWebNotificationResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0cnotification\x18\x02 \x01(\x0b\x32\x1d.clarifai.api.WebNotification\"V\n\x10GetModuleRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\"e\n\x12ListModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"l\n\x12PostModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07modules\x18\x03 \x03(\x0b\x32\x14.clarifai.api.Module\"}\n\x13PatchModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07modules\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Module\x12\x0e\n\x06\x61\x63tion\x18\x03 \x01(\t\"T\n\x14\x44\x65leteModulesRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"i\n\x14SingleModuleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06module\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Module\"o\n\x13MultiModuleResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12+\n\x07modules\x18\x02 \x03(\x0b\x32\x14.clarifai.api.ModuleB\x04\x80\xb5\x18\x01\"x\n\x17GetModuleVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x19\n\x11module_version_id\x18\x03 \x01(\t\"\x7f\n\x19ListModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0c\n\x04page\x18\x03 \x01(\r\x12\x10\n\x08per_page\x18\x04 \x01(\r\"\x95\x01\n\x19PostModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x34\n\x0fmodule_versions\x18\x03 \x03(\x0b\x32\x1b.clarifai.api.ModuleVersion\"n\n\x1b\x44\x65leteModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tmodule_id\x18\x02 \x01(\t\x12\x0b\n\x03ids\x18\x03 \x03(\t\"\x7f\n\x1bSingleModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0emodule_version\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.ModuleVersion\"\x85\x01\n\x1aMultiModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12:\n\x0fmodule_versions\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.ModuleVersionB\x04\x80\xb5\x18\x01\"x\n GetInstalledModuleVersionRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x1binstalled_module_version_id\x18\x02 \x01(\t\"u\n\"ListInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"\x9e\x01\n\"PostInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12G\n\x19installed_module_versions\x18\x02 \x03(\x0b\x32$.clarifai.api.InstalledModuleVersion\"}\n%PostInstalledModuleVersionsKeyRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12#\n\x1binstalled_module_version_id\x18\x02 \x01(\t\"d\n$DeleteInstalledModuleVersionsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x9b\x01\n$SingleInstalledModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x46\n\x18installed_module_version\x18\x02 \x01(\x0b\x32$.clarifai.api.InstalledModuleVersion\"\xa1\x01\n#MultiInstalledModuleVersionResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12M\n\x19installed_module_versions\x18\x02 \x03(\x0b\x32$.clarifai.api.InstalledModuleVersionB\x04\x80\xb5\x18\x01\"b\n\x1eListNextTaskAssignmentsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\"\x82\x01\n\x19PostBulkOperationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x34\n\x0f\x62ulk_operations\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.BulkOperation\"l\n\x19ListBulkOperationsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"V\n\x17GetBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"Z\n\x1a\x43\x61ncelBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"Z\n\x1a\x44\x65leteBulkOperationRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"\x80\x01\n\x1cSingleBulkOperationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0e\x62ulk_operation\x18\x02 \x01(\x0b\x32\x1b.clarifai.api.BulkOperation\"\x7f\n\x1bMultiBulkOperationsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x33\n\x0e\x62ulk_operation\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.BulkOperation\"o\n\x19PutTaskAssignmentsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0f\n\x07task_id\x18\x02 \x01(\t\x12\x10\n\x08input_id\x18\x03 \x01(\t\"\xa5\x01\n\x19PostWaitlistEmailsRequest\x12\x0f\n\x07\x66\x65\x61ture\x18\x01 \x01(\t\x12\x34\n\x0fwaitlist_emails\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.WaitlistEmail\x12\x1e\n\x16\x63\x61ptcha_response_token\x18\x03 \x01(\t\x12!\n\x19\x63\x61ptcha_response_token_v3\x18\x04 \x01(\t\"\x85\x01\n\x1aMultiWaitlistEmailResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12:\n\x0fwaitlist_emails\x18\x02 \x03(\x0b\x32\x1b.clarifai.api.WaitlistEmailB\x04\x80\xb5\x18\x01\"\x96\x02\n\x1fGetSampledPredictMetricsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x10\n\x08model_id\x18\x02 \x01(\t\x12.\n\nstart_date\x18\x03 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12,\n\x08\x65nd_date\x18\x04 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x11\n\tmin_score\x18\x05 \x01(\x02\x12\x11\n\tmax_score\x18\x06 \x01(\x02\x12,\n\npagination\x18\x07 \x01(\x0b\x32\x18.clarifai.api.Pagination\"\x85\x01\n\"MultiSampledPredictMetricsResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x07metrics\x18\x02 \x03(\x0b\x32!.clarifai.api.SamplePredictMetric\"N\n\x13SamplePredictMetric\x12\x12\n\nconcept_id\x18\x01 \x01(\t\x12\x14\n\x0c\x63oncept_name\x18\x02 \x01(\t\x12\r\n\x05\x63ount\x18\x03 \x01(\r\"\x80\x01\n\x18PostInputsAddJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x33\n\x0finputs_add_jobs\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.InputsAddJob\"k\n\x18ListInputsAddJobsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"U\n\x16GetInputsAddJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"X\n\x19\x43\x61ncelInputsAddJobRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\n\n\x02id\x18\x02 \x01(\t\"\x83\x01\n\x19MultiInputsAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x39\n\x0finputs_add_jobs\x18\x02 \x03(\x0b\x32\x1a.clarifai.api.InputsAddJobB\x04\x80\xb5\x18\x01\"}\n\x1aSingleInputsAddJobResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12\x32\n\x0einputs_add_job\x18\x02 \x01(\x0b\x32\x1a.clarifai.api.InputsAddJob\"l\n\x12PostUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12%\n\x07uploads\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Upload\"T\n\x14\x44\x65leteUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0b\n\x03ids\x18\x02 \x03(\t\"e\n\x12ListUploadsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x0c\n\x04page\x18\x02 \x01(\r\x12\x10\n\x08per_page\x18\x03 \x01(\r\"V\n\x10GetUploadRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tupload_id\x18\x02 \x01(\t\"i\n\x14SingleUploadResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12$\n\x06upload\x18\x02 \x01(\x0b\x32\x14.clarifai.api.Upload\"i\n\x13MultiUploadResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.Status\x12%\n\x07uploads\x18\x02 \x03(\x0b\x32\x14.clarifai.api.Upload\"\x9a\x01\n\x1cPutUploadContentPartsRequest\x12/\n\x0buser_app_id\x18\x01 \x01(\x0b\x32\x1a.clarifai.api.UserAppIDSet\x12\x11\n\tupload_id\x18\x02 \x01(\t\x12\x36\n\rcontent_parts\x18\x03 \x03(\x0b\x32\x1f.clarifai.api.UploadContentPart*p\n\x1cOrganizationInvitationStatus\x12\x0b\n\x07NOT_SET\x10\x00\x12\x0b\n\x07PENDING\x10\x01\x12\x0c\n\x08\x41\x43\x43\x45PTED\x10\x02\x12\r\n\tCANCELLED\x10\x03\x12\x0c\n\x08\x44\x45\x43LINED\x10\x04\x12\x0b\n\x07\x45XPIRED\x10\x05\x32\x82\xc1\x04\n\x02V2\x12\x61\n\x04\x45\x63ho\x12\x19.clarifai.api.TestMessage\x1a\x19.clarifai.api.TestMessage\"#\x82\xd3\xe4\x93\x02\x15\"\x10/v2/example/echo:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x12\xaa\x02\n\x14ListConceptRelations\x12).clarifai.api.ListConceptRelationsRequest\x1a*.clarifai.api.MultiConceptRelationResponse\"\xba\x01\x82\xd3\xe4\x93\x02\xab\x01\x12Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relationsZN\x12L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/relations\x98\x9c\'\x05\x90\x9c\'\x0b\x12\xdf\x01\n\x14PostConceptRelations\x12).clarifai.api.PostConceptRelationsRequest\x1a*.clarifai.api.MultiConceptRelationResponse\"p\x82\xd3\xe4\x93\x02^\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relations:\x01*\x98\x9c\'\x05\x90\x9c\'\n\x90\x9c\'\x0b\x12\xde\x01\n\x16\x44\x65leteConceptRelations\x12+.clarifai.api.DeleteConceptRelationsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relations:\x01*\x98\x9c\'\x05\x90\x9c\'\r\x90\x9c\'\n\x90\x9c\'\x0b\x12\xdc\x01\n\x10GetConceptCounts\x12%.clarifai.api.GetConceptCountsRequest\x1a\'.clarifai.api.MultiConceptCountResponse\"x\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/statusZ\x15\x12\x13/v2/concepts/status\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xd0\x01\n\nGetConcept\x12\x1f.clarifai.api.GetConceptRequest\x1a#.clarifai.api.SingleConceptResponse\"|\x82\xd3\xe4\x93\x02n\x12O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}Z\x1b\x12\x19/v2/concepts/{concept_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xb9\x01\n\x0cListConcepts\x12!.clarifai.api.ListConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"b\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/conceptsZ\x0e\x12\x0c/v2/concepts\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xb9\x02\n\x11ListModelConcepts\x12&.clarifai.api.ListModelConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"\xd7\x01\x82\xd3\xe4\x93\x02\xc4\x01\x12T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/conceptsZl\x12j/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/concepts\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xea\x01\n\x14PostConceptsSearches\x12).clarifai.api.PostConceptsSearchesRequest\x1a\".clarifai.api.MultiConceptResponse\"\x82\x01\x82\xd3\xe4\x93\x02l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/searches:\x01*Z\x1a\"\x15/v2/concepts/searches:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xc3\x01\n\x0cPostConcepts\x12!.clarifai.api.PostConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"l\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\x01*Z\x11\"\x0c/v2/concepts:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xc5\x01\n\rPatchConcepts\x12\".clarifai.api.PatchConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"l\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\x01*Z\x11\x32\x0c/v2/concepts:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xc6\x01\n\x08GetVocab\x12\x1d.clarifai.api.GetVocabRequest\x1a!.clarifai.api.SingleVocabResponse\"x\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}Z\x17\x12\x15/v2/vocabs/{vocab_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xb3\x01\n\nListVocabs\x12\x1f.clarifai.api.ListVocabsRequest\x1a .clarifai.api.MultiVocabResponse\"b\x82\xd3\xe4\x93\x02P\x12@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabsZ\x0c\x12\n/v2/vocabs\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xbd\x01\n\nPostVocabs\x12\x1f.clarifai.api.PostVocabsRequest\x1a .clarifai.api.MultiVocabResponse\"l\x82\xd3\xe4\x93\x02V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\x01*Z\x0f\"\n/v2/vocabs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xbf\x01\n\x0bPatchVocabs\x12 .clarifai.api.PatchVocabsRequest\x1a .clarifai.api.MultiVocabResponse\"l\x82\xd3\xe4\x93\x02V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\x01*Z\x0f\x32\n/v2/vocabs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xd5\x01\n\x0b\x44\x65leteVocab\x12 .clarifai.api.DeleteVocabRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02\x66*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}Z\x17*\x15/v2/vocabs/{vocab_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\r\x90\x9c\'\x0b\x12\xc6\x01\n\x0c\x44\x65leteVocabs\x12!.clarifai.api.DeleteVocabsRequest\x1a!.clarifai.api.status.BaseResponse\"p\x82\xd3\xe4\x93\x02V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\x01*Z\x0f*\n/v2/vocabs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\r\x90\x9c\'\x0b\x12\xec\x01\n\x11ListVocabConcepts\x12&.clarifai.api.ListVocabConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"\x8a\x01\x82\xd3\xe4\x93\x02x\x12T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/conceptsZ \x12\x1e/v2/vocabs/{vocab_id}/concepts\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xf6\x01\n\x11PostVocabConcepts\x12&.clarifai.api.PostVocabConceptsRequest\x1a\".clarifai.api.MultiConceptResponse\"\x94\x01\x82\xd3\xe4\x93\x02~\"T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts:\x01*Z#\"\x1e/v2/vocabs/{vocab_id}/concepts:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x90\x02\n\x12\x44\x65leteVocabConcept\x12\'.clarifai.api.DeleteVocabConceptRequest\x1a!.clarifai.api.status.BaseResponse\"\xad\x01\x82\xd3\xe4\x93\x02\x92\x01*a/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts/{concept_id}Z-*+/v2/vocabs/{vocab_id}/concepts/{concept_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\r\x90\x9c\'\x0b\x12\xfd\x01\n\x13\x44\x65leteVocabConcepts\x12(.clarifai.api.DeleteVocabConceptsRequest\x1a!.clarifai.api.status.BaseResponse\"\x98\x01\x82\xd3\xe4\x93\x02~*T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts:\x01*Z#*\x1e/v2/vocabs/{vocab_id}/concepts:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\r\x90\x9c\'\x0b\x12\x94\x02\n\x12GetConceptLanguage\x12\'.clarifai.api.GetConceptLanguageRequest\x1a+.clarifai.api.SingleConceptLanguageResponse\"\xa7\x01\x82\xd3\xe4\x93\x02\x98\x01\x12\x64/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages/{language}Z0\x12./v2/concepts/{concept_id}/languages/{language}\x98\x9c\'\x02\x90\x9c\'\x0b\x12\x81\x02\n\x14ListConceptLanguages\x12).clarifai.api.ListConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x91\x01\x82\xd3\xe4\x93\x02\x82\x01\x12Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languagesZ%\x12#/v2/concepts/{concept_id}/languages\x98\x9c\'\x02\x90\x9c\'\x0b\x12\x8b\x02\n\x14PostConceptLanguages\x12).clarifai.api.PostConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x9b\x01\x82\xd3\xe4\x93\x02\x88\x01\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\x01*Z(\"#/v2/concepts/{concept_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x8d\x02\n\x15PatchConceptLanguages\x12*.clarifai.api.PatchConceptLanguagesRequest\x1a*.clarifai.api.MultiConceptLanguageResponse\"\x9b\x01\x82\xd3\xe4\x93\x02\x88\x01\x32Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\x01*Z(2#/v2/concepts/{concept_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x8a\x02\n\x15ListConceptReferences\x12*.clarifai.api.ListConceptReferencesRequest\x1a+.clarifai.api.MultiConceptReferenceResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x84\x01\x12Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/referencesZ&\x12$/v2/concepts/{concept_id}/references\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xf1\x01\n\x13ListKnowledgeGraphs\x12(.clarifai.api.ListKnowledgeGraphsRequest\x1a).clarifai.api.MultiKnowledgeGraphResponse\"\x84\x01\x82\xd3\xe4\x93\x02v\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphsZ\x1f\x12\x1d/v2/concepts/knowledge_graphs\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xfb\x01\n\x13PostKnowledgeGraphs\x12(.clarifai.api.PostKnowledgeGraphsRequest\x1a).clarifai.api.MultiKnowledgeGraphResponse\"\x8e\x01\x82\xd3\xe4\x93\x02|\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphs:\x01*Z\"\"\x1d/v2/concepts/knowledge_graphs:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xfe\x01\n\x16PostConceptMappingJobs\x12+.clarifai.api.PostConceptMappingJobsRequest\x1a,.clarifai.api.MultiConceptMappingJobResponse\"\x88\x01\x82\xd3\xe4\x93\x02v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappings/jobs:\x01*Z\x1f\"\x1a/v2/concepts/mappings/jobs:\x01*\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\xe4\x01\n\x13ListConceptMappings\x12(.clarifai.api.ListConceptMappingsRequest\x1a).clarifai.api.MultiConceptMappingResponse\"x\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappingsZ\x17\x12\x15/v2/concepts/mappings\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0b\x12\xef\x01\n\x13PostConceptMappings\x12(.clarifai.api.PostConceptMappingsRequest\x1a).clarifai.api.MultiConceptMappingResponse\"\x82\x01\x82\xd3\xe4\x93\x02l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappings:\x01*Z\x1a\"\x15/v2/concepts/mappings:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\n\x90\x9c\'\x0b\x12\x93\x02\n\rGetAnnotation\x12\".clarifai.api.GetAnnotationRequest\x1a&.clarifai.api.SingleAnnotationResponse\"\xb5\x01\x82\xd3\xe4\x93\x02\x9e\x01\x12g/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}/annotations/{annotation_id}Z3\x12\x31/v2/inputs/{input_id}/annotations/{annotation_id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xd0\x01\n\x0fListAnnotations\x12$.clarifai.api.ListAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"p\x82\xd3\xe4\x93\x02Z\x12\x45/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotationsZ\x11\x12\x0f/v2/annotations\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xe3\x01\n\x0fPostAnnotations\x12$.clarifai.api.PostAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"\x82\x01\x82\xd3\xe4\x93\x02`\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14\"\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xe5\x01\n\x10PatchAnnotations\x12%.clarifai.api.PatchAnnotationsRequest\x1a%.clarifai.api.MultiAnnotationResponse\"\x82\x01\x82\xd3\xe4\x93\x02`2E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14\x32\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf3\x01\n\x16PatchAnnotationsStatus\x12+.clarifai.api.PatchAnnotationsStatusRequest\x1a,.clarifai.api.PatchAnnotationsStatusResponse\"~\x82\xd3\xe4\x93\x02`2[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/task/{task_id}/annotations/status:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\x9c\x02\n\x10\x44\x65leteAnnotation\x12%.clarifai.api.DeleteAnnotationRequest\x1a!.clarifai.api.status.BaseResponse\"\xbd\x01\x82\xd3\xe4\x93\x02\x9e\x01*g/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}/annotations/{annotation_id}Z3*1/v2/inputs/{input_id}/annotations/{annotation_id}\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xd0\x02\n\x11\x44\x65leteAnnotations\x12&.clarifai.api.DeleteAnnotationsRequest\x1a!.clarifai.api.status.BaseResponse\"\xef\x01\x82\xd3\xe4\x93\x02\xd0\x01*L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/annotations:\x01*Z\x1b*\x16/v2/inputs/annotations:\x01*ZJ*E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations:\x01*Z\x14*\x0f/v2/annotations:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf3\x01\n\x18PatchAnnotationsSearches\x12-.clarifai.api.PatchAnnotationsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x84\x01\x82\xd3\xe4\x93\x02r2N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches:\x01*Z\x1d\x32\x18/v2/annotations/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\x81\x02\n\x17PostAnnotationsSearches\x12,.clarifai.api.PostAnnotationsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x94\x01\x82\xd3\xe4\x93\x02r\"N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches:\x01*Z\x1d\"\x18/v2/annotations/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\xd1\x01\n\rGetInputCount\x12\".clarifai.api.GetInputCountRequest\x1a&.clarifai.api.SingleInputCountResponse\"t\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/statusZ\x13\x12\x11/v2/inputs/status\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xc9\x01\n\x0cStreamInputs\x12!.clarifai.api.StreamInputsRequest\x1a .clarifai.api.MultiInputResponse\"t\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/streamZ\x13\x12\x11/v2/inputs/stream\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xfd\x01\n\x0fGetInputSamples\x12$.clarifai.api.GetInputSamplesRequest\x1a*.clarifai.api.MultiInputAnnotationResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x80\x01\x12X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/inputs/samplesZ$\x12\"/v2/tasks/{task_id}/inputs/samples\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xca\x01\n\x08GetInput\x12\x1d.clarifai.api.GetInputRequest\x1a!.clarifai.api.SingleInputResponse\"|\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}Z\x17\x12\x15/v2/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xb7\x01\n\nListInputs\x12\x1f.clarifai.api.ListInputsRequest\x1a .clarifai.api.MultiInputResponse\"f\x82\xd3\xe4\x93\x02P\x12@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputsZ\x0c\x12\n/v2/inputs\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\xd2\x01\n\nPostInputs\x12\x1f.clarifai.api.PostInputsRequest\x1a .clarifai.api.MultiInputResponse\"\x80\x01\x82\xd3\xe4\x93\x02V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f\"\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x02\x90\x9c\'\x13\x12\xcb\x01\n\x0ePostInputsFile\x12#.clarifai.api.PostInputsFileRequest\x1a .clarifai.api.MultiInputResponse\"r\x82\xd3\xe4\x93\x02`\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/file:\x01*Z\x14\"\x0f/v2/inputs/file:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x04\x12\xdc\x01\n\x0ePostInputsNiFi\x12#.clarifai.api.PostInputsNiFiRequest\x1a .clarifai.api.MultiInputResponse\"\x82\x01\x82\xd3\xe4\x93\x02p\"M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vendors/nifi/inputs:\x01*Z\x1c\"\x17/v2/vendors/nifi/inputs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x04\x12\xf2\x01\n\x12PostInputsDocument\x12\'.clarifai.api.PostInputsDocumentRequest\x1a .clarifai.api.MultiInputResponse\"\x90\x01\x82\xd3\xe4\x93\x02~\"Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vendors/document/inputs:\x04\x62odyZ#\"\x1b/v2/vendors/document/inputs:\x04\x62ody\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x04\x12\xcb\x01\n\x0bPatchInputs\x12 .clarifai.api.PatchInputsRequest\x1a .clarifai.api.MultiInputResponse\"x\x82\xd3\xe4\x93\x02V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f\x32\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x12\xe5\x01\n\x0b\x44\x65leteInput\x12 .clarifai.api.DeleteInputRequest\x1a!.clarifai.api.status.BaseResponse\"\x90\x01\x82\xd3\xe4\x93\x02\x66*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}Z\x17*\x15/v2/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x04\x90\x9c\'\x08\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xd7\x01\n\x0c\x44\x65leteInputs\x12!.clarifai.api.DeleteInputsRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\x01*Z\x0f*\n/v2/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'(\x90\x9c\'&\x90\x9c\'\x04\x90\x9c\'\x08\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xde\x01\n\x13PatchInputsSearches\x12(.clarifai.api.PatchInputsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"z\x82\xd3\xe4\x93\x02h2I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/searches:\x01*Z\x18\x32\x13/v2/inputs/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\xed\x01\n\x12PostInputsSearches\x12\'.clarifai.api.PostInputsSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x8a\x01\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/searches:\x01*Z\x18\"\x13/v2/inputs/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\x9c\x03\n\x10PostModelOutputs\x12%.clarifai.api.PostModelOutputsRequest\x1a!.clarifai.api.MultiOutputResponse\"\xbd\x02\x82\xd3\xe4\x93\x02\xa6\x02\"i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/outputs:\x01*Z8\"3/v2/models/{model_id}/versions/{version_id}/outputs:\x01*ZX\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/outputs:\x01*Z\"\"\x1d/v2/models/{model_id}/outputs:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x02\x12\xbd\x01\n\x0cListDatasets\x12!.clarifai.api.ListDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"f\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasetsZ\x0e\x12\x0c/v2/datasets\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xd5\x01\n\nGetDataset\x12\x1f.clarifai.api.GetDatasetRequest\x1a#.clarifai.api.SingleDatasetResponse\"\x80\x01\x82\xd3\xe4\x93\x02n\x12O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}Z\x1b\x12\x19/v2/datasets/{dataset_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xc7\x01\n\x0cPostDatasets\x12!.clarifai.api.PostDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"p\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11\"\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'r\x12\xc9\x01\n\rPatchDatasets\x12\".clarifai.api.PatchDatasetsRequest\x1a\".clarifai.api.MultiDatasetResponse\"p\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11\x32\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'r\x12\xba\x01\n\x0fPatchDatasetIds\x12$.clarifai.api.PatchDatasetIdsRequest\x1a\".clarifai.api.MultiDatasetResponse\"]\x82\xd3\xe4\x93\x02K2F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/ids:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\xca\x01\n\x0e\x44\x65leteDatasets\x12#.clarifai.api.DeleteDatasetsRequest\x1a!.clarifai.api.status.BaseResponse\"p\x82\xd3\xe4\x93\x02Z*B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets:\x01*Z\x11*\x0c/v2/datasets:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x12\xfd\x01\n\x11ListDatasetInputs\x12&.clarifai.api.ListDatasetInputsRequest\x1a\'.clarifai.api.MultiDatasetInputResponse\"\x96\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputsZ\"\x12 /v2/datasets/{dataset_id}/inputs\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x91\x02\n\x0fGetDatasetInput\x12$.clarifai.api.GetDatasetInputRequest\x1a(.clarifai.api.SingleDatasetInputResponse\"\xad\x01\x82\xd3\xe4\x93\x02\x92\x01\x12\x61/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs/{input_id}Z-\x12+/v2/datasets/{dataset_id}/inputs/{input_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x88\x02\n\x11PostDatasetInputs\x12&.clarifai.api.PostDatasetInputsRequest\x1a\'.clarifai.api.MultiDatasetInputResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x82\x01\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs:\x01*Z%\" /v2/datasets/{dataset_id}/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'\x05\x90\x9c\'&\x90\x9c\'\x0b\x12\x82\x02\n\x13\x44\x65leteDatasetInputs\x12(.clarifai.api.DeleteDatasetInputsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x82\x01*V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/inputs:\x01*Z%* /v2/datasets/{dataset_id}/inputs:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x90\x9c\'\x05\x12\x80\x02\n\x13ListDatasetVersions\x12(.clarifai.api.ListDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\x93\x01\x82\xd3\xe4\x93\x02\x80\x01\x12X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versionsZ$\x12\"/v2/datasets/{dataset_id}/versions\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xa7\x02\n\x11GetDatasetVersion\x12&.clarifai.api.GetDatasetVersionRequest\x1a*.clarifai.api.SingleDatasetVersionResponse\"\xbd\x01\x82\xd3\xe4\x93\x02\xaa\x01\x12m/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}Z9\x12\x37/v2/datasets/{dataset_id}/versions/{dataset_version_id}\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'r\x12\xe6\x02\n\x1fListDatasetVersionMetricsGroups\x12\x34.clarifai.api.ListDatasetVersionMetricsGroupsRequest\x1a\x35.clarifai.api.MultiDatasetVersionMetricsGroupResponse\"\xd5\x01\x82\xd3\xe4\x93\x02\xba\x01\x12u/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}/metricsZA\x12?/v2/datasets/{dataset_id}/versions/{dataset_version_id}/metrics\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x12\x8e\x02\n\x13PostDatasetVersions\x12(.clarifai.api.PostDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x86\x01\"X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'\"\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x88\x02\n\x14PatchDatasetVersions\x12).clarifai.api.PatchDatasetVersionsRequest\x1a).clarifai.api.MultiDatasetVersionResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x86\x01\x32X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'2\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\x86\x02\n\x15\x44\x65leteDatasetVersions\x12*.clarifai.api.DeleteDatasetVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x86\x01*X/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions:\x01*Z\'*\"/v2/datasets/{dataset_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x90\x9c\'k\x12\xd0\x02\n\x18PutDatasetVersionExports\x12-.clarifai.api.PutDatasetVersionExportsRequest\x1a/.clarifai.api.MultiDatasetVersionExportResponse\"\xd3\x01\x82\xd3\xe4\x93\x02\xc0\x01\x1au/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/{dataset_id}/versions/{dataset_version_id}/exports:\x01*ZD\x1a?/v2/datasets/{dataset_id}/versions/{dataset_version_id}/exports:\x01*\x98\x9c\'\x02\x90\x9c\'i\x90\x9c\'j\x12\xe5\x01\n\x0cGetModelType\x12!.clarifai.api.GetModelTypeRequest\x1a%.clarifai.api.SingleModelTypeResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/types/{model_type_id}Z\"\x12 /v2/models/types/{model_type_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x12\x99\x01\n\x16ListOpenSourceLicenses\x12+.clarifai.api.ListOpenSourceLicensesRequest\x1a,.clarifai.api.ListOpenSourceLicensesResponse\"$\x82\xd3\xe4\x93\x02\x1a\x12\x18/v2/open_source_licenses\x98\x9c\'\x01\x12\xc7\x01\n\x0eListModelTypes\x12#.clarifai.api.ListModelTypesRequest\x1a$.clarifai.api.MultiModelTypeResponse\"j\x82\xd3\xe4\x93\x02\\\x12\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/typesZ\x12\x12\x10/v2/models/types\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xc6\x01\n\x08GetModel\x12\x1d.clarifai.api.GetModelRequest\x1a!.clarifai.api.SingleModelResponse\"x\x82\xd3\xe4\x93\x02\x66\x12K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}Z\x17\x12\x15/v2/models/{model_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\x96\x03\n\x12GetModelOutputInfo\x12\x1d.clarifai.api.GetModelRequest\x1a!.clarifai.api.SingleModelResponse\"\xbd\x02\x82\xd3\xe4\x93\x02\xaa\x02\x12W/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/output_infoZ#\x12!/v2/models/{model_id}/output_infoZo\x12m/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/output_infoZ9\x12\x37/v2/models/{model_id}/versions/{version_id}/output_info\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xde\x01\n\nListModels\x12\x1f.clarifai.api.ListModelsRequest\x1a .clarifai.api.MultiModelResponse\"\x8c\x01\x82\xd3\xe4\x93\x02z\x12@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modelsZ(\x12&/v2/users/{user_app_id.user_id}/modelsZ\x0c\x12\n/v2/models\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xdb\x01\n\x12PostModelsSearches\x12\'.clarifai.api.PostModelsSearchesRequest\x1a .clarifai.api.MultiModelResponse\"z\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/searches:\x01*Z\x18\"\x13/v2/models/searches:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xc6\x01\n\nPostModels\x12\x1f.clarifai.api.PostModelsRequest\x1a!.clarifai.api.SingleModelResponse\"t\x82\xd3\xe4\x93\x02V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f\"\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x12\xc3\x01\n\x0bPatchModels\x12 .clarifai.api.PatchModelsRequest\x1a .clarifai.api.MultiModelResponse\"p\x82\xd3\xe4\x93\x02V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f\x32\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x12\xb2\x01\n\rPatchModelIds\x12\".clarifai.api.PatchModelIdsRequest\x1a .clarifai.api.MultiModelResponse\"[\x82\xd3\xe4\x93\x02I2D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/ids:\x01*\x98\x9c\'\x02\x90\x9c\'\x0e\x90\x9c\'\x0f\x12\xd9\x01\n\x0b\x44\x65leteModel\x12 .clarifai.api.DeleteModelRequest\x1a!.clarifai.api.status.BaseResponse\"\x84\x01\x82\xd3\xe4\x93\x02\x66*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}Z\x17*\x15/v2/models/{model_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xca\x01\n\x0c\x44\x65leteModels\x12!.clarifai.api.DeleteModelsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models:\x01*Z\x0f*\n/v2/models:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x91\x02\n\x17PatchModelCheckConsents\x12,.clarifai.api.PatchModelCheckConsentsRequest\x1a,.clarifai.api.MultiModelCheckConsentResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x8a\x01\x32Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/check_consents:\x01*Z)2$/v2/models/{model_id}/check_consents:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xf5\x01\n\x12PatchModelToolkits\x12\'.clarifai.api.PatchModelToolkitsRequest\x1a\'.clarifai.api.MultiModelToolkitResponse\"\x8c\x01\x82\xd3\xe4\x93\x02~2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/toolkits:\x01*Z#2\x1e/v2/models/{model_id}/toolkits:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xf5\x01\n\x12PatchModelUseCases\x12\'.clarifai.api.PatchModelUseCasesRequest\x1a\'.clarifai.api.MultiModelUseCaseResponse\"\x8c\x01\x82\xd3\xe4\x93\x02~2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/usecases:\x01*Z#2\x1e/v2/models/{model_id}/usecases:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xfb\x01\n\x13PatchModelLanguages\x12(.clarifai.api.PatchModelLanguagesRequest\x1a(.clarifai.api.MultiModelLanguageResponse\"\x8f\x01\x82\xd3\xe4\x93\x02\x80\x01\x32U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/languages:\x01*Z$2\x1f/v2/models/{model_id}/languages:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x12\x8d\x03\n\x0fListModelInputs\x12$.clarifai.api.ListModelInputsRequest\x1a .clarifai.api.MultiInputResponse\"\xb1\x02\x82\xd3\xe4\x93\x02\x96\x02\x12R/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/inputsZ\x1e\x12\x1c/v2/models/{model_id}/inputsZj\x12h/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/inputsZ4\x12\x32/v2/models/{model_id}/versions/{version_id}/inputs\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x12\x89\x02\n\x0fGetModelVersion\x12$.clarifai.api.GetModelVersionRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x92\x01\x12\x61/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}Z-\x12+/v2/models/{model_id}/versions/{version_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xf1\x01\n\x11ListModelVersions\x12&.clarifai.api.ListModelVersionsRequest\x1a\'.clarifai.api.MultiModelVersionResponse\"\x8a\x01\x82\xd3\xe4\x93\x02x\x12T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versionsZ \x12\x1e/v2/models/{model_id}/versions\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x12\xb8\x02\n\x1dPostWorkflowVersionsUnPublish\x12\x32.clarifai.api.PostWorkflowVersionsUnPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xbf\x01\x82\xd3\xe4\x93\x02\x8c\x01\"[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/unpublish:\x01*Z*\"%/v2/workflows/{workflow_id}/unpublish:\x01*\x98\x9c\'\x02\x90\x9c\'x\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xb0\x02\n\x1bPostWorkflowVersionsPublish\x12\x30.clarifai.api.PostWorkflowVersionsPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xbb\x01\x82\xd3\xe4\x93\x02\x88\x01\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/publish:\x01*Z(\"#/v2/workflows/{workflow_id}/publish:\x01*\x98\x9c\'\x02\x90\x9c\'w\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\x9d\x02\n\x18PostModelVersionsPublish\x12-.clarifai.api.PostModelVersionsPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xae\x01\x82\xd3\xe4\x93\x02|\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/publish:\x01*Z\"\"\x1d/v2/models/{model_id}/publish:\x01*\x98\x9c\'\x02\x90\x9c\'u\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xa6\x02\n\x1aPostModelVersionsUnPublish\x12/.clarifai.api.PostModelVersionsUnPublishRequest\x1a!.clarifai.api.status.BaseResponse\"\xb3\x01\x82\xd3\xe4\x93\x02\x80\x01\"U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/unpublish:\x01*Z$\"\x1f/v2/models/{model_id}/unpublish:\x01*\x98\x9c\'\x02\x90\x9c\'v\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\x8d\x02\n\x11PostModelVersions\x12&.clarifai.api.PostModelVersionsRequest\x1a!.clarifai.api.SingleModelResponse\"\xac\x01\x82\xd3\xe4\x93\x02~\"T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions:\x01*Z#\"\x1e/v2/models/{model_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xdb\x01\n\x12PatchModelVersions\x12\'.clarifai.api.PatchModelVersionsRequest\x1a\'.clarifai.api.MultiModelVersionResponse\"s\x82\xd3\xe4\x93\x02Y2T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x0e\x90\x9c\'\x1a\x12\x94\x02\n\x12\x44\x65leteModelVersion\x12\'.clarifai.api.DeleteModelVersionRequest\x1a!.clarifai.api.status.BaseResponse\"\xb1\x01\x82\xd3\xe4\x93\x02\x92\x01*a/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}Z-*+/v2/models/{model_id}/versions/{version_id}\x98\x9c\'\x02\x90\x9c\'\x0b\x90\x9c\'\x0e\x90\x9c\'\x11\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xb3\x02\n\x16GetModelVersionMetrics\x12+.clarifai.api.GetModelVersionMetricsRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xc1\x01\x82\xd3\xe4\x93\x02\xa2\x01\x12i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/metricsZ5\x12\x33/v2/models/{model_id}/versions/{version_id}/metrics\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x0f\x90\x9c\'\x05\x90\x9c\'5\x12\xcf\x02\n\x17PostModelVersionMetrics\x12,.clarifai.api.PostModelVersionMetricsRequest\x1a(.clarifai.api.SingleModelVersionResponse\"\xdb\x01\x82\xd3\xe4\x93\x02\xa8\x01\"i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/metrics:\x01*Z8\"3/v2/models/{model_id}/versions/{version_id}/metrics:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'5\x90\x9c\'6\x12\xf7\x01\n\x13ListModelReferences\x12(.clarifai.api.ListModelReferencesRequest\x1a).clarifai.api.MultiModelReferenceResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/referencesZ\"\x12 /v2/models/{model_id}/references\x98\x9c\'\x02\x90\x9c\'\x0f\x12\x86\x02\n\x13PostModelReferences\x12(.clarifai.api.PostModelReferencesRequest\x1a).clarifai.api.MultiModelReferenceResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x82\x01\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/references:\x01*Z%\" /v2/models/{model_id}/references:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0e\x12\x86\x02\n\x15\x44\x65leteModelReferences\x12*.clarifai.api.DeleteModelReferencesRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x82\x01*V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/references:\x01*Z%* /v2/models/{model_id}/references:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0e\x90\x9c\'\x11\x12\xee\x02\n\x1bGetModelVersionInputExample\x12\x30.clarifai.api.GetModelVersionInputExampleRequest\x1a\x34.clarifai.api.SingleModelVersionInputExampleResponse\"\xe6\x01\x82\xd3\xe4\x93\x02\xd7\x01\x12\x83\x01/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}ZO\x12M/v2/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xd6\x02\n\x1dListModelVersionInputExamples\x12\x32.clarifai.api.ListModelVersionInputExamplesRequest\x1a\x33.clarifai.api.MultiModelVersionInputExampleResponse\"\xcb\x01\x82\xd3\xe4\x93\x02\xbc\x01\x12v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examplesZB\x12@/v2/models/{model_id}/versions/{model_version_id}/input_examples\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xe8\x02\n\x1dPostModelVersionInputExamples\x12\x32.clarifai.api.PostModelVersionInputExamplesRequest\x1a\x33.clarifai.api.MultiModelVersionInputExampleResponse\"\xdd\x01\x82\xd3\xe4\x93\x02\xc2\x01\"v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples:\x01*ZE\"@/v2/models/{model_id}/versions/{model_version_id}/input_examples:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0e\x90\x9c\'\x13\x12\xda\x02\n\x1f\x44\x65leteModelVersionInputExamples\x12\x34.clarifai.api.DeleteModelVersionInputExamplesRequest\x1a!.clarifai.api.status.BaseResponse\"\xdd\x01\x82\xd3\xe4\x93\x02\xc2\x01*v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples:\x01*ZE*@/v2/models/{model_id}/versions/{model_version_id}/input_examples:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0e\x90\x9c\'\x11\x12\xb9\x01\n\x0ePostModelStars\x12#.clarifai.api.PostModelStarsRequest\x1a$.clarifai.api.MultiModelStarResponse\"\\\x82\xd3\xe4\x93\x02J\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/model_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x12\xbf\x01\n\x10\x44\x65leteModelStars\x12%.clarifai.api.DeleteModelStarsRequest\x1a&.clarifai.api.DeleteModelStarsResponse\"\\\x82\xd3\xe4\x93\x02J*E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/model_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x0f\x12{\n\rPostUserStars\x12\".clarifai.api.PostUserStarsRequest\x1a#.clarifai.api.MultiUserStarResponse\"!\x82\xd3\xe4\x93\x02\x13\"\x0e/v2/user_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x12\x81\x01\n\x0f\x44\x65leteUserStars\x12$.clarifai.api.DeleteUserStarsRequest\x1a%.clarifai.api.DeleteUserStarsResponse\"!\x82\xd3\xe4\x93\x02\x13*\x0e/v2/user_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x12\xc5\x01\n\x11PostWorkflowStars\x12&.clarifai.api.PostWorkflowStarsRequest\x1a\'.clarifai.api.MultiWorkflowStarResponse\"_\x82\xd3\xe4\x93\x02M\"H/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflow_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x12\xcb\x01\n\x13\x44\x65leteWorkflowStars\x12(.clarifai.api.DeleteWorkflowStarsRequest\x1a).clarifai.api.DeleteWorkflowStarsResponse\"_\x82\xd3\xe4\x93\x02M*H/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflow_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x12\x97\x01\n\x0cPostAppStars\x12!.clarifai.api.PostAppStarsRequest\x1a\".clarifai.api.MultiAppStarResponse\"@\x82\xd3\xe4\x93\x02.\")/v2/users/{user_app_id.user_id}/app_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'-\x12\x9d\x01\n\x0e\x44\x65leteAppStars\x12#.clarifai.api.DeleteAppStarsRequest\x1a$.clarifai.api.DeleteAppStarsResponse\"@\x82\xd3\xe4\x93\x02.*)/v2/users/{user_app_id.user_id}/app_stars:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'-\x12\xdc\x01\n\x0bGetWorkflow\x12 .clarifai.api.GetWorkflowRequest\x1a$.clarifai.api.SingleWorkflowResponse\"\x84\x01\x82\xd3\xe4\x93\x02r\x12Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}Z\x1d\x12\x1b/v2/workflows/{workflow_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xf1\x01\n\rListWorkflows\x12\".clarifai.api.ListWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"\x96\x01\x82\xd3\xe4\x93\x02\x83\x01\x12\x43/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflowsZ+\x12)/v2/users/{user_app_id.user_id}/workflowsZ\x0f\x12\r/v2/workflows\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xa6\x01\n\x13ListPublicWorkflows\x12(.clarifai.api.ListPublicWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"@\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/users/{user_app_id.user_id}/public_workflows\x88\x9c\'\x01\x98\x9c\'\x03\x12\xcc\x01\n\rPostWorkflows\x12\".clarifai.api.PostWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"r\x82\xd3\xe4\x93\x02\\\"C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12\"\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x12\x90\x9c\'\x13\x12\xce\x01\n\x0ePatchWorkflows\x12#.clarifai.api.PatchWorkflowsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"r\x82\xd3\xe4\x93\x02\\2C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12\x32\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x12\x90\x9c\'\x13\x12\xbe\x01\n\x10PatchWorkflowIds\x12%.clarifai.api.PatchWorkflowIdsRequest\x1a#.clarifai.api.MultiWorkflowResponse\"^\x82\xd3\xe4\x93\x02L2G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/ids:\x01*\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x13\x12\xe3\x01\n\x0e\x44\x65leteWorkflow\x12#.clarifai.api.DeleteWorkflowRequest\x1a!.clarifai.api.status.BaseResponse\"\x88\x01\x82\xd3\xe4\x93\x02r*Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}Z\x1d*\x1b/v2/workflows/{workflow_id}\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x15\x90\x9c\'\x13\x12\xce\x01\n\x0f\x44\x65leteWorkflows\x12$.clarifai.api.DeleteWorkflowsRequest\x1a!.clarifai.api.status.BaseResponse\"r\x82\xd3\xe4\x93\x02\\*C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\x01*Z\x12*\r/v2/workflows:\x01*\x98\x9c\'\x02\x90\x9c\'\x12\x90\x9c\'\x15\x90\x9c\'\x13\x12\x86\x03\n\x13PostWorkflowResults\x12(.clarifai.api.PostWorkflowResultsRequest\x1a).clarifai.api.PostWorkflowResultsResponse\"\x99\x02\x82\xd3\xe4\x93\x02\xfe\x01\"o/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{version_id}/results:\x01*Z^\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/results:\x01*Z(\"#/v2/workflows/{workflow_id}/results:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0b\x90\x9c\'\x02\x90\x9c\'\x13\x12\xc5\x03\n\x1dPostWorkflowResultsSimilarity\x12\x32.clarifai.api.PostWorkflowResultsSimilarityRequest\x1a\x33.clarifai.api.PostWorkflowResultsSimilarityResponse\"\xba\x02\x82\xd3\xe4\x93\x02\x9f\x02\"z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{version_id}/results/similarity:\x01*Zi\"d/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/results/similarity:\x01*Z3\"./v2/workflows/{workflow_id}/results/similarity:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x0b\x90\x9c\'\x02\x90\x9c\'\x13\x12\x87\x02\n\x14ListWorkflowVersions\x12).clarifai.api.ListWorkflowVersionsRequest\x1a*.clarifai.api.MultiWorkflowVersionResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x84\x01\x12Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versionsZ&\x12$/v2/workflows/{workflow_id}/versions\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xb0\x02\n\x12GetWorkflowVersion\x12\'.clarifai.api.GetWorkflowVersionRequest\x1a+.clarifai.api.SingleWorkflowVersionResponse\"\xc3\x01\x82\xd3\xe4\x93\x02\xb0\x01\x12p/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions/{workflow_version_id}Z<\x12:/v2/workflows/{workflow_id}/versions/{workflow_version_id}\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x12\x8c\x02\n\x16\x44\x65leteWorkflowVersions\x12+.clarifai.api.DeleteWorkflowVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x8a\x01*Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\x01*Z)*$/v2/workflows/{workflow_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'\x12\x90\x9c\'\x15\x12\x93\x02\n\x15PatchWorkflowVersions\x12*.clarifai.api.PatchWorkflowVersionsRequest\x1a*.clarifai.api.MultiWorkflowVersionResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x8a\x01\x32Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\x01*Z)2$/v2/workflows/{workflow_id}/versions:\x01*\x98\x9c\'\x02\x90\x9c\'\x0f\x90\x9c\'\x13\x90\x9c\'\x12\x12\xad\x02\n\x13PostWorkflowMetrics\x12(.clarifai.api.PostWorkflowMetricsRequest\x1a*.clarifai.api.MultiWorkflowMetricsResponse\"\xbf\x01\x82\xd3\xe4\x93\x02\x88\x01\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics:\x01*Z(\"#/v2/workflows/{workflow_id}/metrics:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'5\x90\x9c\'6\x90\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'`\x90\x9c\'a\x12\xa0\x02\n\x12GetWorkflowMetrics\x12\'.clarifai.api.GetWorkflowMetricsRequest\x1a+.clarifai.api.SingleWorkflowMetricsResponse\"\xb3\x01\x82\xd3\xe4\x93\x02\x9c\x01\x12\x66/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics/{metrics_id}Z2\x12\x30/v2/workflows/{workflow_id}/metrics/{metrics_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'`\x12\xcc\x02\n\x16GetWorkflowNodeMetrics\x12+.clarifai.api.GetWorkflowNodeMetricsRequest\x1a/.clarifai.api.SingleWorkflowNodeMetricsResponse\"\xd3\x01\x82\xd3\xe4\x93\x02\xbc\x01\x12v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics/{metrics_id}/nodes/{node_id}ZB\x12@/v2/workflows/{workflow_id}/metrics/{metrics_id}/nodes/{node_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'`\x12\x87\x02\n\x13ListWorkflowMetrics\x12(.clarifai.api.ListWorkflowMetricsRequest\x1a*.clarifai.api.MultiWorkflowMetricsResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x82\x01\x12Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metricsZ%\x12#/v2/workflows/{workflow_id}/metrics\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'`\x12\x90\x02\n\x15\x44\x65leteWorkflowMetrics\x12*.clarifai.api.DeleteWorkflowMetricsRequest\x1a!.clarifai.api.status.BaseResponse\"\xa7\x01\x82\xd3\xe4\x93\x02\x88\x01*Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics:\x01*Z(*#/v2/workflows/{workflow_id}/metrics:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x13\x90\x9c\'b\x90\x9c\'a\x90\x9c\'`\x12\x85\x01\n\x06GetKey\x12\x1b.clarifai.api.GetKeyRequest\x1a\x1f.clarifai.api.SingleKeyResponse\"=\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/keys/{key_id}\x98\x9c\'\x05\x90\x9c\'0\x12\x7f\n\x08ListKeys\x12\x1d.clarifai.api.ListKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"4\x82\xd3\xe4\x93\x02&\x12$/v2/users/{user_app_id.user_id}/keys\x98\x9c\'\x05\x90\x9c\'0\x12\x9f\x01\n\x0bListAppKeys\x12 .clarifai.api.ListAppKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"N\x82\xd3\xe4\x93\x02@\x12>/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/keys\x98\x9c\'\x05\x90\x9c\'0\x12\x95\x01\n\tDeleteKey\x12\x1e.clarifai.api.DeleteKeyRequest\x1a!.clarifai.api.status.BaseResponse\"E\x82\xd3\xe4\x93\x02/*-/v2/users/{user_app_id.user_id}/keys/{key_id}\x98\x9c\'\x05\x90\x9c\'/\x90\x9c\'1\x90\x9c\'0\x12\x8a\x01\n\x08PostKeys\x12\x1d.clarifai.api.PostKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\"?\x82\xd3\xe4\x93\x02)\"$/v2/users/{user_app_id.user_id}/keys:\x01*\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'/\x90\x9c\'0\x12\x88\x01\n\tPatchKeys\x12\x1e.clarifai.api.PatchKeysRequest\x1a\x1e.clarifai.api.MultiKeyResponse\";\x82\xd3\xe4\x93\x02)2$/v2/users/{user_app_id.user_id}/keys:\x01*\x98\x9c\'\x05\x90\x9c\'/\x90\x9c\'0\x12\xbc\x01\n\x08MyScopes\x12\x1d.clarifai.api.MyScopesRequest\x1a .clarifai.api.MultiScopeResponse\"o\x82\xd3\xe4\x93\x02\x65\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/myscopesZ\x0e\x12\x0c/v2/myscopesZ\x0f\x12\r/v2/my_scopes\x98\x9c\'\x02\x12\x8d\x01\n\x0cMyScopesUser\x12!.clarifai.api.MyScopesUserRequest\x1a$.clarifai.api.MultiScopeUserResponse\"4\x82\xd3\xe4\x93\x02*\x12(/v2/users/{user_app_id.user_id}/myscopes\x98\x9c\'\x05\x12u\n\x0cMyScopesRoot\x12!.clarifai.api.MyScopesRootRequest\x1a$.clarifai.api.MultiScopeRootResponse\"\x1c\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/myscopesroot\x98\x9c\'\x05\x12\x87\x01\n\nListScopes\x12\x1f.clarifai.api.ListScopesRequest\x1a$.clarifai.api.MultiScopeDepsResponse\"2\x82\xd3\xe4\x93\x02(\x12&/v2/users/{user_app_id.user_id}/scopes\x98\x9c\'\x03\x12\x95\x01\n\x06GetApp\x12\x1b.clarifai.api.GetAppRequest\x1a\x1f.clarifai.api.SingleAppResponse\"M\x82\xd3\xe4\x93\x02;\x12\x39/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12\x8f\x01\n\x08ListApps\x12\x1d.clarifai.api.ListAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"D\x82\xd3\xe4\x93\x02\x32\x12$/v2/users/{user_app_id.user_id}/appsZ\n\x12\x08/v2/apps\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12\xa5\x01\n\tDeleteApp\x12\x1e.clarifai.api.DeleteAppRequest\x1a!.clarifai.api.status.BaseResponse\"U\x82\xd3\xe4\x93\x02;*9/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'.\x90\x9c\'-\x90\x9c\'\x13\x12\x92\x01\n\x08PostApps\x12\x1d.clarifai.api.PostAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"G\x82\xd3\xe4\x93\x02)\"$/v2/users/{user_app_id.user_id}/apps:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x90\x9c\'\x0f\x90\x9c\'\x13\x90\x9c\'\x12\x12\x88\x01\n\tPatchApps\x12\x1e.clarifai.api.PatchAppsRequest\x1a\x1e.clarifai.api.MultiAppResponse\";\x82\xd3\xe4\x93\x02)2$/v2/users/{user_app_id.user_id}/apps:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\x92\x01\n\x0cPatchAppsIds\x12!.clarifai.api.PatchAppsIdsRequest\x1a\x1e.clarifai.api.MultiAppResponse\"?\x82\xd3\xe4\x93\x02-2(/v2/users/{user_app_id.user_id}/apps/ids:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\x9c\x01\n\x08PatchApp\x12\x1d.clarifai.api.PatchAppRequest\x1a\x1f.clarifai.api.SingleAppResponse\"P\x82\xd3\xe4\x93\x02>29/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x12\xb6\x01\n\rPatchAppOwner\x12\".clarifai.api.PatchAppOwnerRequest\x1a!.clarifai.api.status.BaseResponse\"^\x82\xd3\xe4\x93\x02\x44\x32?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/owner:\x01*\x98\x9c\'\x05\x90\x9c\',\x90\x9c\'-\x90\x9c\'.\x90\x9c\'V\x12\x9f\x01\n\x10PostAppsSearches\x12%.clarifai.api.PostAppsSearchesRequest\x1a\x1e.clarifai.api.MultiAppResponse\"D\x82\xd3\xe4\x93\x02\x32\"-/v2/users/{user_app_id.user_id}/apps/searches:\x01*\x98\x9c\'\x05\x90\x9c\'-\x90\x9c\'\x13\x12z\n\x07GetUser\x12\x1c.clarifai.api.GetUserRequest\x1a .clarifai.api.SingleUserResponse\"/\x82\xd3\xe4\x93\x02!\x12\x1f/v2/users/{user_app_id.user_id}\x88\x9c\'\x01\x98\x9c\'\x05\x12g\n\tListUsers\x12\x1e.clarifai.api.ListUsersRequest\x1a\x1f.clarifai.api.MultiUserResponse\"\x19\x82\xd3\xe4\x93\x02\x0b\x12\t/v2/users\x88\x9c\'\x01\x98\x9c\'\x05\x12\x95\x01\n\x0fPostUserConsent\x12$.clarifai.api.PostUserConsentRequest\x1a .clarifai.api.SingleUserResponse\":\x82\xd3\xe4\x93\x02,\"\'/v2/users/{user_app_id.user_id}/consent:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x81\x01\n\tPatchUser\x12\x1e.clarifai.api.PatchUserRequest\x1a .clarifai.api.SingleUserResponse\"2\x82\xd3\xe4\x93\x02$2\x1f/v2/users/{user_app_id.user_id}:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x97\x01\n\x0ePostUserAccess\x12#.clarifai.api.PostUserAccessRequest\x1a%.clarifai.api.MultiUserAccessResponse\"9\x82\xd3\xe4\x93\x02+\"&/v2/users/{user_app_id.user_id}/access:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x93\x01\n\rGetUserAccess\x12\".clarifai.api.GetUserAccessRequest\x1a&.clarifai.api.SingleUserAccessResponse\"6\x82\xd3\xe4\x93\x02(\x12&/v2/users/{user_app_id.user_id}/access\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9e\x01\n\nPostEmails\x12\x1f.clarifai.api.PostEmailsRequest\x1a#.clarifai.api.MultipleEmailResponse\"J\x82\xd3\xe4\x93\x02<\"&/v2/users/{user_app_id.user_id}/emails:\x01*Z\x0f\"\n/v2/emails:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x98\x01\n\nListEmails\x12\x1f.clarifai.api.ListEmailsRequest\x1a#.clarifai.api.MultipleEmailResponse\"D\x82\xd3\xe4\x93\x02\x36\x12&/v2/users/{user_app_id.user_id}/emailsZ\x0c\x12\n/v2/emails\x88\x9c\'\x01\x98\x9c\'\x03\x12\xce\x01\n\x15PostResendVerifyEmail\x12%.clarifai.api.PostResendVerifyRequest\x1a(.clarifai.api.SingleResendVerifyResponse\"d\x82\xd3\xe4\x93\x02V\"3/v2/users/{user_app_id.user_id}/resend_verification:\x01*Z\x1c\"\x17/v2/resend_verification:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x92\x01\n\x0b\x44\x65leteEmail\x12 .clarifai.api.DeleteEmailRequest\x1a!.clarifai.api.status.BaseResponse\">\x82\xd3\xe4\x93\x02\x30*./v2/users/{user_app_id.user_id}/emails/{email}\x88\x9c\'\x01\x98\x9c\'\x03\x12\xb8\x01\n\x10PostPrimaryEmail\x12%.clarifai.api.PostPrimaryEmailRequest\x1a!.clarifai.api.SingleEmailResponse\"Z\x82\xd3\xe4\x93\x02L\"./v2/users/{user_app_id.user_id}/emails/primary:\x01*Z\x17\"\x12/v2/emails/primary:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xcf\x01\n\x14PostValidatePassword\x12).clarifai.api.PostValidatePasswordRequest\x1a..clarifai.api.SinglePasswordValidationResponse\"\\\x82\xd3\xe4\x93\x02R\"1/v2/users/{user_app_id.user_id}/validate_password:\x01*Z\x1a\"\x15/v2/validate_password:\x01*\x98\x9c\'\x03\x12\xab\x01\n\x1aListGlobalPasswordPolicies\x12/.clarifai.api.ListGlobalPasswordPoliciesRequest\x1a..clarifai.api.MultiplePasswordPoliciesResponse\",\x82\xd3\xe4\x93\x02\x1e\x12\x1c/v2/password_policies/global\x88\x9c\'\x01\x98\x9c\'\x01\x12\xcd\x01\n\x14ListPasswordPolicies\x12).clarifai.api.ListPasswordPoliciesRequest\x1a..clarifai.api.MultiplePasswordPoliciesResponse\"Z\x82\xd3\xe4\x93\x02L\x12\x31/v2/users/{user_app_id.user_id}/password_policiesZ\x17\x12\x15/v2/password_policies\x88\x9c\'\x01\x98\x9c\'\x03\x12\xd3\x01\n\x14PostPasswordPolicies\x12).clarifai.api.PostPasswordPoliciesRequest\x1a..clarifai.api.MultiplePasswordPoliciesResponse\"`\x82\xd3\xe4\x93\x02R\"1/v2/users/{user_app_id.user_id}/password_policies:\x01*Z\x1a\"\x15/v2/password_policies:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xd5\x01\n\x15PatchPasswordPolicies\x12*.clarifai.api.PatchPasswordPoliciesRequest\x1a..clarifai.api.MultiplePasswordPoliciesResponse\"`\x82\xd3\xe4\x93\x02R21/v2/users/{user_app_id.user_id}/password_policies:\x01*Z\x1a\x32\x15/v2/password_policies:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xd0\x01\n\x16\x44\x65letePasswordPolicies\x12+.clarifai.api.DeletePasswordPoliciesRequest\x1a!.clarifai.api.status.BaseResponse\"f\x82\xd3\xe4\x93\x02L*1/v2/users/{user_app_id.user_id}/password_policiesZ\x17*\x15/v2/password_policies\x88\x9c\'\x01\x98\x9c\'\x03\x90\x9c\'9\x90\x9c\';\x90\x9c\':\x12\xb0\x01\n\x14GetUserFeatureConfig\x12&.clarifai.api.UserFeatureConfigRequest\x1a-.clarifai.api.SingleUserFeatureConfigResponse\"A\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/feature_flags\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'G\x12\x92\x01\n\x11PostOrganizations\x12&.clarifai.api.PostOrganizationsRequest\x1a\'.clarifai.api.MultiOrganizationResponse\",\x82\xd3\xe4\x93\x02\x16\"\x11/v2/organizations:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'W\x90\x9c\'V\x12\xb7\x01\n\x16ListUsersOrganizations\x12+.clarifai.api.ListUsersOrganizationsRequest\x1a-.clarifai.api.MultiUsersOrganizationsResponse\"A\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/organizations\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'_\x12\x8b\x01\n\x11ListOrganizations\x12&.clarifai.api.ListOrganizationsRequest\x1a\'.clarifai.api.MultiOrganizationResponse\"%\x82\xd3\xe4\x93\x02\x13\x12\x11/v2/organizations\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'V\x12\x9e\x01\n\x0fGetOrganization\x12$.clarifai.api.GetOrganizationRequest\x1a(.clarifai.api.SingleOrganizationResponse\";\x82\xd3\xe4\x93\x02)\x12\'/v2/organizations/{user_app_id.user_id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'V\x12\xa9\x01\n\x11PatchOrganization\x12&.clarifai.api.PatchOrganizationRequest\x1a(.clarifai.api.SingleOrganizationResponse\"B\x82\xd3\xe4\x93\x02,2\'/v2/organizations/{user_app_id.user_id}:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'W\x90\x9c\'V\x12\xa5\x01\n\x12\x44\x65leteOrganization\x12\'.clarifai.api.DeleteOrganizationRequest\x1a!.clarifai.api.status.BaseResponse\"C\x82\xd3\xe4\x93\x02)*\'/v2/organizations/{user_app_id.user_id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'X\x90\x9c\'W\x90\x9c\'V\x12\xbb\x01\n\x17ListOrganizationMembers\x12,.clarifai.api.ListOrganizationMembersRequest\x1a-.clarifai.api.MultiOrganizationMemberResponse\"C\x82\xd3\xe4\x93\x02\x31\x12//v2/organizations/{user_app_id.user_id}/members\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'c\x12\xdb\x01\n\x1aListOrganizationAppMembers\x12/.clarifai.api.ListOrganizationAppMembersRequest\x1a-.clarifai.api.MultiOrganizationMemberResponse\"]\x82\xd3\xe4\x93\x02K\x12I/v2/organizations/{user_app_id.user_id}/apps/{user_app_id.app_id}/members\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'c\x12\xb0\x01\n\x16PostOrganizationMember\x12+.clarifai.api.PostOrganizationMemberRequest\x1a!.clarifai.api.status.BaseResponse\"F\x82\xd3\xe4\x93\x02\x34\"//v2/organizations/{user_app_id.user_id}/members:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'^\x12\xb3\x01\n\x17PatchOrganizationMember\x12-.clarifai.api.PatchOrganizationMembersRequest\x1a!.clarifai.api.status.BaseResponse\"F\x82\xd3\xe4\x93\x02\x34\x32//v2/organizations/{user_app_id.user_id}/members:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'^\x12\xbd\x01\n\x18\x44\x65leteOrganizationMember\x12-.clarifai.api.DeleteOrganizationMemberRequest\x1a!.clarifai.api.status.BaseResponse\"O\x82\xd3\xe4\x93\x02=*;/v2/organizations/{user_app_id.user_id}/members/{member_id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\']\x12\xce\x01\n\x1bPostOrganizationInvitations\x12\x30.clarifai.api.PostOrganizationInvitationsRequest\x1a\x31.clarifai.api.MultiOrganizationInvitationResponse\"J\x82\xd3\xe4\x93\x02\x38\"3/v2/organizations/{user_app_id.user_id}/invitations:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'d\x12\xd0\x01\n\x1cPatchOrganizationInvitations\x12\x31.clarifai.api.PatchOrganizationInvitationsRequest\x1a\x31.clarifai.api.MultiOrganizationInvitationResponse\"J\x82\xd3\xe4\x93\x02\x38\x32\x33/v2/organizations/{user_app_id.user_id}/invitations:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'d\x12\xcb\x01\n\x1bListOrganizationInvitations\x12\x30.clarifai.api.ListOrganizationInvitationsRequest\x1a\x31.clarifai.api.MultiOrganizationInvitationResponse\"G\x82\xd3\xe4\x93\x02\x35\x12\x33/v2/organizations/{user_app_id.user_id}/invitations\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'e\x12\xcd\x01\n\x19GetOrganizationInvitation\x12..clarifai.api.GetOrganizationInvitationRequest\x1a\x32.clarifai.api.SingleOrganizationInvitationResponse\"L\x82\xd3\xe4\x93\x02:\x12\x38/v2/organizations/{user_app_id.user_id}/invitations/{id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'e\x12\xd4\x01\n!PostDeclineOrganizationInvitation\x12\x36.clarifai.api.PostDeclineOrganizationInvitationRequest\x1a!.clarifai.api.status.BaseResponse\"T\x82\xd3\xe4\x93\x02\x46\"D/v2/users/{user_app_id.user_id}/organization_invitation_decline/{id}\x88\x9c\'\x01\x98\x9c\'\x03\x12\xd1\x01\n PostAcceptOrganizationInvitation\x12\x35.clarifai.api.PostAcceptOrganizationInvitationRequest\x1a!.clarifai.api.status.BaseResponse\"S\x82\xd3\xe4\x93\x02\x45\"C/v2/users/{user_app_id.user_id}/organization_invitation_accept/{id}\x88\x9c\'\x01\x98\x9c\'\x03\x12\xbd\x01\n\x1fGetOrganizationInvitationPublic\x12\x34.clarifai.api.GetOrganizationInvitationPublicRequest\x1a\x32.clarifai.api.SingleOrganizationInvitationResponse\"0\x82\xd3\xe4\x93\x02\"\x12 /v2/organization_invitation/{id}\x88\x9c\'\x01\x98\x9c\'\x01\x12\xc3\x01\n$DeleteRequestingUserFromOrganization\x12\x39.clarifai.api.DeleteRequestingUserFromOrganizationRequest\x1a!.clarifai.api.status.BaseResponse\"=\x82\xd3\xe4\x93\x02/*-/v2/organizations/{user_app_id.user_id}/leave\x88\x9c\'\x01\x98\x9c\'\x05\x12\xc7\x01\n\x15PostIdentityProviders\x12*.clarifai.api.PostIdentityProvidersRequest\x1a+.clarifai.api.MultiIdentityProviderResponse\"U\x82\xd3\xe4\x93\x02?\":/v2/organizations/{user_app_id.user_id}/identity_providers:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'Z\x90\x9c\'Y\x12\xc0\x01\n\x15ListIdentityProviders\x12*.clarifai.api.ListIdentityProvidersRequest\x1a+.clarifai.api.MultiIdentityProviderResponse\"N\x82\xd3\xe4\x93\x02<\x12:/v2/organizations/{user_app_id.user_id}/identity_providers\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'Y\x12\xc2\x01\n\x13GetIdentityProvider\x12(.clarifai.api.GetIdentityProviderRequest\x1a,.clarifai.api.SingleIdentityProviderResponse\"S\x82\xd3\xe4\x93\x02\x41\x12?/v2/organizations/{user_app_id.user_id}/identity_providers/{id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'Y\x12\xc9\x01\n\x16PatchIdentityProviders\x12+.clarifai.api.PatchIdentityProvidersRequest\x1a+.clarifai.api.MultiIdentityProviderResponse\"U\x82\xd3\xe4\x93\x02?2:/v2/organizations/{user_app_id.user_id}/identity_providers:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'Z\x90\x9c\'Y\x12\xc5\x01\n\x17\x44\x65leteIdentityProviders\x12,.clarifai.api.DeleteIdentityProvidersRequest\x1a!.clarifai.api.status.BaseResponse\"Y\x82\xd3\xe4\x93\x02?*:/v2/organizations/{user_app_id.user_id}/identity_providers:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'[\x90\x9c\'Z\x90\x9c\'Y\x12\x96\x01\n\tPostTeams\x12\x1e.clarifai.api.PostTeamsRequest\x1a\x1f.clarifai.api.MultiTeamResponse\"H\x82\xd3\xe4\x93\x02\x32\"-/v2/organizations/{user_app_id.user_id}/teams:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'K\x90\x9c\'J\x12\x8f\x01\n\tListTeams\x12\x1e.clarifai.api.ListTeamsRequest\x1a\x1f.clarifai.api.MultiTeamResponse\"A\x82\xd3\xe4\x93\x02/\x12-/v2/organizations/{user_app_id.user_id}/teams\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'J\x12\x91\x01\n\x07GetTeam\x12\x1c.clarifai.api.GetTeamRequest\x1a .clarifai.api.SingleTeamResponse\"F\x82\xd3\xe4\x93\x02\x34\x12\x32/v2/organizations/{user_app_id.user_id}/teams/{id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'J\x12\x98\x01\n\nPatchTeams\x12\x1f.clarifai.api.PatchTeamsRequest\x1a\x1f.clarifai.api.MultiTeamResponse\"H\x82\xd3\xe4\x93\x02\x32\x32-/v2/organizations/{user_app_id.user_id}/teams:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'K\x90\x9c\'J\x12\xa0\x01\n\x0b\x44\x65leteTeams\x12 .clarifai.api.DeleteTeamsRequest\x1a!.clarifai.api.status.BaseResponse\"L\x82\xd3\xe4\x93\x02\x32*-/v2/organizations/{user_app_id.user_id}/teams:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'L\x90\x9c\'K\x90\x9c\'J\x12\xb6\x01\n\rPostTeamUsers\x12\".clarifai.api.PostTeamUsersRequest\x1a#.clarifai.api.MultiTeamUserResponse\"\\\x82\xd3\xe4\x93\x02\x42\"=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'N\x90\x9c\'M\x90\x9c\'J\x12\xaf\x01\n\rListTeamUsers\x12\".clarifai.api.ListTeamUsersRequest\x1a#.clarifai.api.MultiTeamUserResponse\"U\x82\xd3\xe4\x93\x02?\x12=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'M\x90\x9c\'J\x12\xbc\x01\n\x0f\x44\x65leteTeamUsers\x12$.clarifai.api.DeleteTeamUsersRequest\x1a!.clarifai.api.status.BaseResponse\"`\x82\xd3\xe4\x93\x02\x42*=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'O\x90\x9c\'N\x90\x9c\'M\x90\x9c\'J\x12\xb9\x01\n\x0cPostTeamApps\x12!.clarifai.api.PostTeamAppsRequest\x1a!.clarifai.api.status.BaseResponse\"c\x82\xd3\xe4\x93\x02\x41\"</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'S\x90\x9c\'T\x90\x9c\'J\x90\x9c\'P\x90\x9c\'-\x12\xb4\x01\n\x0cListTeamApps\x12!.clarifai.api.ListTeamAppsRequest\x1a#.clarifai.api.MultiTeamAppsResponse\"\\\x82\xd3\xe4\x93\x02>\x12</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'S\x90\x9c\'J\x90\x9c\'P\x90\x9c\'-\x12\xc1\x01\n\x0e\x44\x65leteTeamApps\x12#.clarifai.api.DeleteTeamAppsRequest\x1a!.clarifai.api.status.BaseResponse\"g\x82\xd3\xe4\x93\x02\x41*</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps:\x01*\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'U\x90\x9c\'S\x90\x9c\'T\x90\x9c\'J\x90\x9c\'P\x90\x9c\'-\x12k\n\tListRoles\x12\x1e.clarifai.api.ListRolesRequest\x1a\x1f.clarifai.api.MultiRoleResponse\"\x1d\x82\xd3\xe4\x93\x02\x0b\x12\t/v2/roles\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'P\x12m\n\x07GetRole\x12\x1c.clarifai.api.GetRoleRequest\x1a .clarifai.api.SingleRoleResponse\"\"\x82\xd3\xe4\x93\x02\x10\x12\x0e/v2/roles/{id}\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'P\x12\xbd\x01\n\tGetSearch\x12\x1e.clarifai.api.GetSearchRequest\x1a\".clarifai.api.SingleSearchResponse\"l\x82\xd3\xe4\x93\x02^\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\x13\x12\x11/v2/searches/{id}\x98\x9c\'\x02\x90\x9c\'r\x12\xb8\x01\n\x0cListSearches\x12!.clarifai.api.ListSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"b\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searchesZ\x0e\x12\x0c/v2/searches\x98\x9c\'\x02\x90\x9c\'r\x12\xc4\x01\n\rPatchSearches\x12\".clarifai.api.PatchSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"l\x82\xd3\xe4\x93\x02Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\x01*Z\x11\x32\x0c/v2/searches:\x01*\x98\x9c\'\x02\x90\x9c\'s\x90\x9c\'r\x12\xd5\x01\n\x0cPostSearches\x12!.clarifai.api.PostSearchesRequest\x1a!.clarifai.api.MultiSearchResponse\"\x7f\x88\x02\x01\x82\xd3\xe4\x93\x02Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\x01*Z\x11\"\x0c/v2/searches:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\xd4\x01\n\x10PostSearchesByID\x12%.clarifai.api.PostSearchesByIDRequest\x1a!.clarifai.api.MultiSearchResponse\"v\x82\xd3\xe4\x93\x02\x64\"G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}:\x01*Z\x16\"\x11/v2/searches/{id}:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'\x03\x12\xaf\x02\n\x1bPostAnnotationSearchMetrics\x12\x30.clarifai.api.PostAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\xa9\x01\x82\xd3\xe4\x93\x02\x82\x01\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics:\x01*Z%\" /v2/annotations/searches/metrics:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x90\x9c\'6\x90\x9c\'\x0f\x90\x9c\'\x13\x12\xa5\x02\n\x1aGetAnnotationSearchMetrics\x12/.clarifai.api.GetAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x86\x01\x12[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics/{id}Z\'\x12%/v2/annotations/searches/metrics/{id}\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x12\x9c\x02\n\x1bListAnnotationSearchMetrics\x12\x30.clarifai.api.ListAnnotationSearchMetricsRequest\x1a\x32.clarifai.api.MultiAnnotationSearchMetricsResponse\"\x96\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metricsZ\"\x12 /v2/annotations/searches/metrics\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'5\x12\x96\x02\n\x1d\x44\x65leteAnnotationSearchMetrics\x12\x32.clarifai.api.DeleteAnnotationSearchMetricsRequest\x1a!.clarifai.api.status.BaseResponse\"\x9d\x01\x82\xd3\xe4\x93\x02\x86\x01*[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics/{id}Z\'*%/v2/annotations/searches/metrics/{id}\x98\x9c\'\x02\x90\x9c\'5\x90\x9c\'6\x90\x9c\'?\x12\xca\x01\n\x0c\x44\x65leteSearch\x12!.clarifai.api.DeleteSearchRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\x13*\x11/v2/searches/{id}\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x90\x9c\'t\x12\xf9\x01\n\x13PostAttributeSearch\x12(.clarifai.api.PostAttributeSearchRequest\x1a!.clarifai.api.MultiSearchResponse\"\x94\x01\x82\xd3\xe4\x93\x02n\"L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/attribute_searches:\x01*Z\x1b\"\x16/v2/attribute_searches:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x03\x90\x9c\'\x13\x12\xe8\x01\n\x15ListAnnotationFilters\x12*.clarifai.api.ListAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"v\x82\xd3\xe4\x93\x02h\x12L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filtersZ\x18\x12\x16/v2/annotation_filters\x98\x9c\'\x02\x90\x9c\'r\x12\x95\x02\n\x13GetAnnotationFilter\x12(.clarifai.api.GetAnnotationFilterRequest\x1a,.clarifai.api.SingleAnnotationFilterResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x96\x01\x12\x63/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters/{annotation_filter_id}Z/\x12-/v2/annotation_filters/{annotation_filter_id}\x98\x9c\'\x02\x90\x9c\'r\x12\xf3\x01\n\x15PostAnnotationFilters\x12*.clarifai.api.PostAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"\x80\x01\x82\xd3\xe4\x93\x02n\"L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b\"\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12\xf5\x01\n\x16PatchAnnotationFilters\x12+.clarifai.api.PatchAnnotationFiltersRequest\x1a+.clarifai.api.MultiAnnotationFilterResponse\"\x80\x01\x82\xd3\xe4\x93\x02n2L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b\x32\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12\xed\x01\n\x17\x44\x65leteAnnotationFilters\x12,.clarifai.api.DeleteAnnotationFiltersRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02n*L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\x01*Z\x1b*\x16/v2/annotation_filters:\x01*\x98\x9c\'\x02\x90\x9c\'r\x90\x9c\'s\x12\xbd\x01\n\x0cListClusters\x12!.clarifai.api.ListClustersRequest\x1a\".clarifai.api.MultiClusterResponse\"f\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clustersZ\x0e\x12\x0c/v2/clusters\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x03\x12\x8e\x02\n\x19ListAnnotationsForCluster\x12..clarifai.api.ListAnnotationsForClusterRequest\x1a%.clarifai.api.MultiAnnotationResponse\"\x99\x01\x82\xd3\xe4\x93\x02\x86\x01\x12[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clusters/{cluster_id}/annotationsZ\'\x12%/v2/clusters/{cluster_id}/annotations\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x03\x12\xe5\x01\n\x14PostClustersSearches\x12).clarifai.api.PostClustersSearchesRequest\x1a\".clarifai.api.MultiClusterResponse\"~\x82\xd3\xe4\x93\x02l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clusters/searches:\x01*Z\x1a\"\x15/v2/clusters/searches:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x03\x12\x85\x01\n\x0fPostVerifyEmail\x12$.clarifai.api.PostVerifyEmailRequest\x1a\'.clarifai.api.SingleVerifyEmailResponse\"#\x82\xd3\xe4\x93\x02\x15\"\x10/v2/verify_email:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\x97\x01\n\x18PostRequestResetPassword\x12).clarifai.api.RequestResetPasswordRequest\x1a!.clarifai.api.status.BaseResponse\"-\x82\xd3\xe4\x93\x02\x1f\"\x1a/v2/request_password_reset:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\x9a\x01\n\x19PostCompleteResetPassword\x12*.clarifai.api.CompleteResetPasswordRequest\x1a!.clarifai.api.status.BaseResponse\".\x82\xd3\xe4\x93\x02 \"\x1b/v2/complete_password_reset:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12l\n\tPostLogin\x12\x1e.clarifai.api.PostLoginRequest\x1a!.clarifai.api.SingleLoginResponse\"\x1c\x82\xd3\xe4\x93\x02\x0e\"\t/v2/login:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12o\n\nPostSignup\x12\x1f.clarifai.api.PostSignupRequest\x1a!.clarifai.api.SingleLoginResponse\"\x1d\x82\xd3\xe4\x93\x02\x0f\"\n/v2/signup:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\x8c\x01\n\nPostLogout\x12\x1f.clarifai.api.PostLogoutRequest\x1a\".clarifai.api.SingleLogoutResponse\"9\x82\xd3\xe4\x93\x02+\"&/v2/users/{user_app_id.user_id}/logout:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x80\x01\n\x0fListAuthMethods\x12$.clarifai.api.ListAuthMethodsRequest\x1a%.clarifai.api.ListAuthMethodsResponse\" \x82\xd3\xe4\x93\x02\x12\x12\x10/v2/auth/methods\x88\x9c\'\x01\x98\x9c\'\x01\x12\xa7\x01\n\x12ListOrgAuthMethods\x12$.clarifai.api.ListAuthMethodsRequest\x1a%.clarifai.api.ListAuthMethodsResponse\"D\x82\xd3\xe4\x93\x02\x36\x12\x34/v2/organizations/{user_app_id.user_id}/auth/methods\x88\x9c\'\x01\x98\x9c\'\x03\x12\xb2\x01\n\x14PostIdLoginFinalizer\x12).clarifai.api.PostIdLoginFinalizerRequest\x1a*.clarifai.api.PostIdLoginFinalizerResponse\"C\x82\xd3\xe4\x93\x02\x35\"0/v2/users/{user_app_id.user_id}/idloginfinalizer:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9b\x01\n\x0fPostLinkIdpUser\x12$.clarifai.api.PostLinkIdpUserRequest\x1a%.clarifai.api.PostLinkIdpUserResponse\";\x82\xd3\xe4\x93\x02-\"(/v2/users/{user_app_id.user_id}/idpusers:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x97\x01\n\x0cGetLoginInfo\x12!.clarifai.api.GetLoginInfoRequest\x1a\".clarifai.api.GetLoginInfoResponse\"@\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/users/{user_app_id.user_id}/login/{login_id}\x88\x9c\'\x01\x98\x9c\'\x03\x12\xa1\x01\n\x12ListAuth2FAMethods\x12#.clarifai.api.List2FAMethodsRequest\x1a$.clarifai.api.List2FAMethodsResponse\"@\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/users/{user_app_id.user_id}/auth/2fa/methods\x88\x9c\'\x01\x98\x9c\'\x03\x12\xda\x01\n\x1dPostAuth2FATotpRegisterEnable\x12\x32.clarifai.api.PostAuth2FATotpRegisterEnableRequest\x1a\x33.clarifai.api.PostAuth2FATotpRegisterEnableResponse\"P\x82\xd3\xe4\x93\x02\x42\"=/v2/users/{user_app_id.user_id}/auth/2fa/totp/register/enable:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xda\x01\n\x1dPostAuth2FATotpRegisterVerify\x12\x32.clarifai.api.PostAuth2FATotpRegisterVerifyRequest\x1a\x33.clarifai.api.PostAuth2FATotpRegisterVerifyResponse\"P\x82\xd3\xe4\x93\x02\x42\"=/v2/users/{user_app_id.user_id}/auth/2fa/totp/register/verify:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xbd\x01\n\x16PostAuth2FATotpDisable\x12+.clarifai.api.PostAuth2FATotpDisableRequest\x1a,.clarifai.api.PostAuth2FATotpDisableResponse\"H\x82\xd3\xe4\x93\x02:\"5/v2/users/{user_app_id.user_id}/auth/2fa/totp/disable:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x90\x01\n\x14PostAuth2FATotpLogin\x12).clarifai.api.PostAuth2FATotpLoginRequest\x1a!.clarifai.api.SingleLoginResponse\"*\x82\xd3\xe4\x93\x02\x1c\"\x17/v2/auth/2fa/totp/login:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\xa1\x01\n\x16PostAuth2FATotpRecover\x12+.clarifai.api.PostAuth2FATotpRecoverRequest\x1a,.clarifai.api.PostAuth2FATotpRecoverResponse\",\x82\xd3\xe4\x93\x02\x1e\"\x19/v2/auth/2fa/totp/recover:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\xb8\x01\n\x1cGetAuth2FATotpRecoverConfirm\x12\x31.clarifai.api.GetAuth2FATotpRecoverConfirmRequest\x1a\x32.clarifai.api.GetAuth2FATotpRecoverConfirmResponse\"1\x82\xd3\xe4\x93\x02#\x12!/v2/auth/2fa/totp/recover/confirm\x88\x9c\'\x01\x98\x9c\'\x01\x12\xa0\x01\n\x0fGetSubscription\x12$.clarifai.api.GetSubscriptionRequest\x1a(.clarifai.api.SingleSubscriptionResponse\"=\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/subscriptions\x88\x9c\'\x01\x98\x9c\'\x03\x12\xa5\x01\n\x10PostSubscription\x12%.clarifai.api.PostSubscriptionRequest\x1a(.clarifai.api.SingleSubscriptionResponse\"@\x82\xd3\xe4\x93\x02\x32\"-/v2/users/{user_app_id.user_id}/subscriptions:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9f\x01\n\x0fListCreditCards\x12$.clarifai.api.ListCreditCardsRequest\x1a(.clarifai.api.MultipleCreditCardResponse\"<\x82\xd3\xe4\x93\x02.\x12,/v2/users/{user_app_id.user_id}/credit_cards\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9e\x01\n\x0ePostCreditCard\x12#.clarifai.api.PostCreditCardRequest\x1a&.clarifai.api.SingleCreditCardResponse\"?\x82\xd3\xe4\x93\x02\x31\",/v2/users/{user_app_id.user_id}/credit_cards:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9d\x01\n\x10\x44\x65leteCreditCard\x12%.clarifai.api.DeleteCreditCardRequest\x1a!.clarifai.api.status.BaseResponse\"?\x82\xd3\xe4\x93\x02\x31*,/v2/users/{user_app_id.user_id}/credit_cards:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xa4\x01\n\x10PatchCreditCards\x12%.clarifai.api.PatchCreditCardsRequest\x1a(.clarifai.api.MultipleCreditCardResponse\"?\x82\xd3\xe4\x93\x02\x31\x32,/v2/users/{user_app_id.user_id}/credit_cards:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xac\x01\n\x12GetShippingAddress\x12\'.clarifai.api.GetShippingAddressRequest\x1a+.clarifai.api.SingleShippingAddressResponse\"@\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/users/{user_app_id.user_id}/shipping_address\x88\x9c\'\x01\x98\x9c\'\x03\x12\xaf\x01\n\x12PutShippingAddress\x12\'.clarifai.api.PutShippingAddressRequest\x1a+.clarifai.api.SingleShippingAddressResponse\"C\x82\xd3\xe4\x93\x02\x35\x1a\x30/v2/users/{user_app_id.user_id}/shipping_address:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\x83\x01\n\tListPlans\x12\x1e.clarifai.api.ListPlansRequest\x1a\x1f.clarifai.api.MultiPlanResponse\"5\x82\xd3\xe4\x93\x02\'\x12%/v2/users/{user_app_id.user_id}/plans\x88\x9c\'\x01\x98\x9c\'\x03\x12|\n\x0fListStatusCodes\x12$.clarifai.api.ListStatusCodesRequest\x1a%.clarifai.api.MultiStatusCodeResponse\"\x1c\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/status_codes\x98\x9c\'\x01\x12\x8a\x01\n\rGetStatusCode\x12\".clarifai.api.GetStatusCodeRequest\x1a&.clarifai.api.SingleStatusCodeResponse\"-\x82\xd3\xe4\x93\x02#\x12!/v2/status_codes/{status_code_id}\x98\x9c\'\x01\x12l\n\nGetHealthz\x12\x1f.clarifai.api.GetHealthzRequest\x1a .clarifai.api.GetHealthzResponse\"\x1b\x82\xd3\xe4\x93\x02\r\x12\x0b/v2/healthz\x88\x9c\'\x01\x98\x9c\'\x01\x12\xb0\x01\n\x15ListUserBillingCycles\x12*.clarifai.api.ListUserBillingCyclesRequest\x1a+.clarifai.api.ListUserBillingCyclesResponse\">\x82\xd3\xe4\x93\x02\x30\x12./v2/users/{user_app_id.user_id}/billing_cycles\x88\x9c\'\x01\x98\x9c\'\x03\x12\x99\x01\n\x0eListUserCycles\x12#.clarifai.api.ListUserCyclesRequest\x1a$.clarifai.api.ListUserCyclesResponse\"<\x82\xd3\xe4\x93\x02.\x12,/v2/users/{user_app_id.user_id}/usage_cycles\x88\x9c\'\x01\x98\x9c\'\x03\x12\x9d\x01\n\x0fGetBillingUsage\x12$.clarifai.api.GetBillingUsageRequest\x1a%.clarifai.api.GetBillingUsageResponse\"=\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/billing_usage\x88\x9c\'\x01\x98\x9c\'\x03\x12\xaf\x01\n\x13PostHistoricalUsage\x12(.clarifai.api.PostHistoricalUsageRequest\x1a).clarifai.api.PostHistoricalUsageResponse\"C\x82\xd3\xe4\x93\x02\x35\"0/v2/users/{user_app_id.user_id}/historical_usage:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xad\x01\n\x12GetHistoricalUsage\x12\'.clarifai.api.GetHistoricalUsageRequest\x1a(.clarifai.api.GetHistoricalUsageResponse\"D\x82\xd3\xe4\x93\x02\x32\x12\x30/v2/users/{user_app_id.user_id}/historical_usage\x88\x9c\'\x01\x98\x9c\'\x05\x90\x9c\'|\x12\x8c\x01\n\x12ListUsageIntervals\x12\'.clarifai.api.ListUsageIntervalsRequest\x1a(.clarifai.api.ListUsageIntervalsResponse\"#\x82\xd3\xe4\x93\x02\x15\x12\x13/v2/usage_intervals\x88\x9c\'\x01\x98\x9c\'\x01\x12\xa1\x01\n\x10GetRealtimeUsage\x12%.clarifai.api.GetRealtimeUsageRequest\x1a&.clarifai.api.GetRealtimeUsageResponse\">\x82\xd3\xe4\x93\x02\x30\x12./v2/users/{user_app_id.user_id}/realtime_usage\x88\x9c\'\x01\x98\x9c\'\x03\x12\xb4\x01\n\tPostUsage\x12\x1e.clarifai.api.PostUsageRequest\x1a\x1f.clarifai.api.PostUsageResponse\"f\x82\xd3\xe4\x93\x02T\"?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/usage:\x01*Z\x0e\"\t/v2/usage:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12\xbe\x01\n\x11ListCollaborators\x12&.clarifai.api.ListCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"W\x82\xd3\xe4\x93\x02I\x12G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators\x98\x9c\'\x02\x90\x9c\'2\x12\xc5\x01\n\x11PostCollaborators\x12&.clarifai.api.PostCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"^\x82\xd3\xe4\x93\x02L\"G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x12\xcb\x01\n\x12PatchCollaborators\x12\'.clarifai.api.PatchCollaboratorsRequest\x1a(.clarifai.api.MultiCollaboratorsResponse\"b\x82\xd3\xe4\x93\x02L2G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x90\x9c\'4\x12\xce\x01\n\x13\x44\x65leteCollaborators\x12(.clarifai.api.DeleteCollaboratorsRequest\x1a!.clarifai.api.status.BaseResponse\"j\x82\xd3\xe4\x93\x02L*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\x01*\x98\x9c\'\x02\x90\x9c\'3\x90\x9c\'2\x90\x9c\'4\x90\x9c\'7\x90\x9c\'8\x12\xa4\x01\n\x12ListCollaborations\x12\'.clarifai.api.ListCollaborationsRequest\x1a).clarifai.api.MultiCollaborationsResponse\":\x82\xd3\xe4\x93\x02\x30\x12./v2/users/{user_app_id.user_id}/collaborations\x98\x9c\'\x03\x12\x87\x01\n\x0c\x46\x65tchLicense\x12!.clarifai.api.FetchLicenseRequest\x1a\".clarifai.api.FetchLicenseResponse\"0\x82\xd3\xe4\x93\x02\x1e\"\x19/v2/licenses/{license_id}:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12\xc1\x01\n\x0cListLicenses\x12!.clarifai.api.ListLicensesRequest\x1a&.clarifai.api.MultipleLicensesResponse\"f\x82\xd3\xe4\x93\x02T\x12\x42/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/licensesZ\x0e\x12\x0c/v2/licenses\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12\xd5\x01\n\nGetLicense\x12\x1f.clarifai.api.GetLicenseRequest\x1a#.clarifai.api.SingleLicenseResponse\"\x80\x01\x82\xd3\xe4\x93\x02n\x12O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/licenses/{license_id}Z\x1b\x12\x19/v2/licenses/{license_id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12\x99\x01\n\x0fValidateLicense\x12$.clarifai.api.ValidateLicenseRequest\x1a%.clarifai.api.ValidateLicenseResponse\"9\x82\xd3\xe4\x93\x02\'\"\"/v2/licenses/{license_id}/validate:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12\xef\x01\n\x13PostAppDuplications\x12(.clarifai.api.PostAppDuplicationsRequest\x1a*.clarifai.api.MultiAppDuplicationsResponse\"\x81\x01\x82\xd3\xe4\x93\x02K\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/duplications:\x01*\x98\x9c\'\x02\x90\x9c\'\x0e\x90\x9c\'\x0f\x90\x9c\'\x1a\x90\x9c\'\n\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x12\x90\x9c\'\x13\x12\xa5\x01\n\x13ListAppDuplications\x12(.clarifai.api.ListAppDuplicationsRequest\x1a*.clarifai.api.MultiAppDuplicationsResponse\"8\x82\xd3\xe4\x93\x02.\x12,/v2/users/{user_app_id.user_id}/duplications\x98\x9c\'\x05\x12\xb6\x01\n\x11GetAppDuplication\x12&.clarifai.api.GetAppDuplicationRequest\x1a*.clarifai.api.SingleAppDuplicationResponse\"M\x82\xd3\xe4\x93\x02\x43\x12\x41/v2/users/{user_app_id.user_id}/duplications/{app_duplication_id}\x98\x9c\'\x05\x12\xd5\x01\n\tPostTasks\x12\x1e.clarifai.api.PostTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"\x86\x01\x82\xd3\xe4\x93\x02T\"?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e\"\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'\x03\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x90\x9c\'%\x90\x9c\'&\x12\xfa\x01\n\x16GetTaskAnnotationCount\x12!.clarifai.api.GetTaskCountRequest\x1a%.clarifai.api.SingleTaskCountResponse\"\x95\x01\x82\xd3\xe4\x93\x02\x86\x01\x12[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/annotations/countZ\'\x12%/v2/tasks/{task_id}/annotations/count\x98\x9c\'\x02\x90\x9c\'8\x12\xea\x01\n\x11GetTaskInputCount\x12!.clarifai.api.GetTaskCountRequest\x1a%.clarifai.api.SingleTaskCountResponse\"\x8a\x01\x82\xd3\xe4\x93\x02|\x12V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/inputs/countZ\"\x12 /v2/tasks/{task_id}/inputs/count\x98\x9c\'\x02\x90\x9c\'8\x12\xcc\x01\n\x07GetTask\x12\x1c.clarifai.api.GetTaskRequest\x1a .clarifai.api.SingleTaskResponse\"\x80\x01\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}Z\x15\x12\x13/v2/tasks/{task_id}\x98\x9c\'\x02\x90\x9c\'8\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xba\x01\n\tListTasks\x12\x1e.clarifai.api.ListTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"l\x82\xd3\xe4\x93\x02N\x12?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasksZ\x0b\x12\t/v2/tasks\x98\x9c\'\x02\x90\x9c\'8\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xd3\x01\n\nPatchTasks\x12\x1f.clarifai.api.PatchTasksRequest\x1a\x1f.clarifai.api.MultiTaskResponse\"\x82\x01\x82\xd3\xe4\x93\x02T2?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e\x32\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x90\x9c\'%\x90\x9c\'&\x12\xbe\x01\n\x0b\x44\x65leteTasks\x12 .clarifai.api.DeleteTasksRequest\x1a!.clarifai.api.status.BaseResponse\"j\x82\xd3\xe4\x93\x02T*?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\x01*Z\x0e*\t/v2/tasks:\x01*\x98\x9c\'\x02\x90\x9c\'7\x90\x9c\'8\x90\x9c\'F\x12\xaa\x02\n\x1bPatchAnnotationCountsRollup\x12\x30.clarifai.api.PatchAnnotationCountsRollupRequest\x1a!.clarifai.api.status.BaseResponse\"\xb5\x01\x82\xd3\xe4\x93\x02\x9a\x01\x32\x62/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/annotations/count/rollup:\x01*Z12,/v2/tasks/{task_id}/annotations/count/rollup:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'8\x90\x9c\'%\x90\x9c\'&\x12\xf1\x01\n\x0fPostLabelOrders\x12$.clarifai.api.PostLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"\x90\x01\x82\xd3\xe4\x93\x02\x62\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15\"\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'D\x90\x9c\'7\x90\x9c\'8\x90\x9c\'\x05\x90\x9c\'r\x90\x9c\'\x0b\x90\x9c\'\x13\x90\x9c\'\x0f\x12\xf2\x01\n\rGetLabelOrder\x12\".clarifai.api.GetLabelOrderRequest\x1a&.clarifai.api.SingleLabelOrderResponse\"\x94\x01\x82\xd3\xe4\x93\x02~\x12W/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders/{label_order_id}Z#\x12!/v2/label_orders/{label_order_id}\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'\x0b\x90\x9c\'8\x12\xd2\x01\n\x0fListLabelOrders\x12$.clarifai.api.ListLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"r\x82\xd3\xe4\x93\x02\\\x12\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_ordersZ\x12\x12\x10/v2/label_orders\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'\x0b\x90\x9c\'8\x12\xe7\x01\n\x10PatchLabelOrders\x12%.clarifai.api.PatchLabelOrdersRequest\x1a%.clarifai.api.MultiLabelOrderResponse\"\x84\x01\x82\xd3\xe4\x93\x02\x62\x32\x46/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15\x32\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'C\x90\x9c\'D\x90\x9c\'\x0b\x90\x9c\'7\x90\x9c\'8\x90\x9c\'F\x12\xe1\x01\n\x11\x44\x65leteLabelOrders\x12&.clarifai.api.DeleteLabelOrdersRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02\x62*F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\x01*Z\x15*\x10/v2/label_orders:\x01*\x98\x9c\'\x02\x90\x9c\'E\x90\x9c\'C\x90\x9c\'D\x90\x9c\'7\x90\x9c\'8\x12\xee\x01\n\x0ePostCollectors\x12#.clarifai.api.PostCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"\x90\x01\x82\xd3\xe4\x93\x02^\"D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13\"\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\'\x04\x90\x9c\'%\x90\x9c\'&\x90\x9c\')\x90\x9c\'\x0b\x90\x9c\'\x04\x90\x9c\'\x05\x90\x9c\'\x0f\x90\x9c\'\x02\x90\x9c\'\x13\x12\xdf\x01\n\x0cGetCollector\x12!.clarifai.api.GetCollectorRequest\x1a%.clarifai.api.SingleCollectorResponse\"\x84\x01\x82\xd3\xe4\x93\x02v\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors/{collector_id}Z\x1f\x12\x1d/v2/collectors/{collector_id}\x98\x9c\'\x02\x90\x9c\'*\x12\xc3\x01\n\x0eListCollectors\x12#.clarifai.api.ListCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"f\x82\xd3\xe4\x93\x02X\x12\x44/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectorsZ\x10\x12\x0e/v2/collectors\x98\x9c\'\x02\x90\x9c\'*\x12\xcf\x01\n\x0fPatchCollectors\x12$.clarifai.api.PatchCollectorsRequest\x1a$.clarifai.api.MultiCollectorResponse\"p\x82\xd3\xe4\x93\x02^2D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13\x32\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\')\x90\x9c\'*\x12\xd2\x01\n\x10\x44\x65leteCollectors\x12%.clarifai.api.DeleteCollectorsRequest\x1a!.clarifai.api.status.BaseResponse\"t\x82\xd3\xe4\x93\x02^*D/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collectors:\x01*Z\x13*\x0e/v2/collectors:\x01*\x98\x9c\'\x02\x90\x9c\')\x90\x9c\'+\x90\x9c\'*\x12\xc9\x01\n\x0ePostStatValues\x12#.clarifai.api.PostStatValuesRequest\x1a$.clarifai.api.MultiStatValueResponse\"l\x82\xd3\xe4\x93\x02\x62\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values:\x01*Z\x15\"\x10/v2/stats/values:\x01*\x98\x9c\'\x02\x12\xf9\x01\n\x17PostStatValuesAggregate\x12,.clarifai.api.PostStatValuesAggregateRequest\x1a-.clarifai.api.MultiStatValueAggregateResponse\"\x80\x01\x82\xd3\xe4\x93\x02v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values/aggregate:\x01*Z\x1f\"\x1a/v2/stats/values/aggregate:\x01*\x98\x9c\'\x02\x12~\n\rPostAnalytics\x12\".clarifai.api.PostAnalyticsRequest\x1a#.clarifai.api.PostAnalyticsResponse\"$\x82\xd3\xe4\x93\x02\x12\"\r/v2/analytics:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'\x01\x12~\n\x0ePostSDKBilling\x12#.clarifai.api.PostSDKBillingRequest\x1a$.clarifai.api.PostSDKBillingResponse\"!\x82\xd3\xe4\x93\x02\x13\"\x0e/v2/sdkbilling:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\xb9\x02\n PostFindDuplicateAnnotationsJobs\x12\x35.clarifai.api.PostFindDuplicateAnnotationsJobsRequest\x1a\x36.clarifai.api.MultiFindDuplicateAnnotationsJobResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x8a\x01\"Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs:\x01*Z)\"$/v2/annotations/find_duplicates/jobs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'f\x90\x9c\'g\x12\xb2\x02\n\x1eGetFindDuplicateAnnotationsJob\x12\x33.clarifai.api.GetFindDuplicateAnnotationsJobRequest\x1a\x37.clarifai.api.SingleFindDuplicateAnnotationsJobResponse\"\xa1\x01\x82\xd3\xe4\x93\x02\x8e\x01\x12_/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs/{id}Z+\x12)/v2/annotations/find_duplicates/jobs/{id}\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'g\x12\xab\x02\n ListFindDuplicateAnnotationsJobs\x12\x35.clarifai.api.ListFindDuplicateAnnotationsJobsRequest\x1a\x36.clarifai.api.MultiFindDuplicateAnnotationsJobResponse\"\x97\x01\x82\xd3\xe4\x93\x02\x84\x01\x12Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobsZ&\x12$/v2/annotations/find_duplicates/jobs\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'g\x12\xa8\x02\n\"DeleteFindDuplicateAnnotationsJobs\x12\x37.clarifai.api.DeleteFindDuplicateAnnotationsJobsRequest\x1a!.clarifai.api.status.BaseResponse\"\xa5\x01\x82\xd3\xe4\x93\x02\x8a\x01*Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs:\x01*Z)*$/v2/annotations/find_duplicates/jobs:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'f\x90\x9c\'g\x90\x9c\'h\x12\xe3\x01\n\x17PostTrendingMetricsView\x12,.clarifai.api.PostTrendingMetricsViewRequest\x1a!.clarifai.api.status.BaseResponse\"w\x82\xd3\xe4\x93\x02m\"h/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}/{object_id}:\x01*\x98\x9c\'\x02\x12\x8f\x02\n\x18ListTrendingMetricsViews\x12-.clarifai.api.ListTrendingMetricsViewsRequest\x1a..clarifai.api.MultiTrendingMetricsViewResponse\"\x93\x01\x82\xd3\xe4\x93\x02\x88\x01\x12\\/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}Z(\x12&/v2/trending_metrics/views/{view_type}\x98\x9c\'\x02\x12\x86\x01\n\x10PostIdValidation\x12%.clarifai.api.PostIdValidationRequest\x1a\'.clarifai.api.MultiIdValidationResponse\"\"\x82\xd3\xe4\x93\x02\x14\"\x0f/v2/validate_id:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\x96\x01\n\x11ListTagCategories\x12&.clarifai.api.ListTagCategoriesRequest\x1a&.clarifai.api.MultiTagCategoryResponse\"1\x82\xd3\xe4\x93\x02#\x12!/v2/tags/{object_type}/categories\x88\x9c\'\x01\x98\x9c\'\x01\x12\xac\x01\n\x14ListWebNotifications\x12).clarifai.api.ListWebNotificationsRequest\x1a*.clarifai.api.MultiWebNotificationResponse\"=\x82\xd3\xe4\x93\x02/\x12-/v2/users/{user_app_id.user_id}/notifications\x88\x9c\'\x01\x98\x9c\'\x03\x12\xbb\x01\n\x12GetWebNotification\x12\'.clarifai.api.GetWebNotificationRequest\x1a+.clarifai.api.SingleWebNotificationResponse\"O\x82\xd3\xe4\x93\x02\x41\x12?/v2/users/{user_app_id.user_id}/notifications/{notification_id}\x88\x9c\'\x01\x98\x9c\'\x03\x12\xb1\x01\n\x15PatchWebNotifications\x12*.clarifai.api.PatchWebNotificationsRequest\x1a*.clarifai.api.MultiWebNotificationResponse\"@\x82\xd3\xe4\x93\x02\x32\x32-/v2/users/{user_app_id.user_id}/notifications:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xaa\x01\n\x16\x44\x65leteWebNotifications\x12+.clarifai.api.DeleteWebNotificationsRequest\x1a!.clarifai.api.status.BaseResponse\"@\x82\xd3\xe4\x93\x02\x32*-/v2/users/{user_app_id.user_id}/notifications:\x01*\x88\x9c\'\x01\x98\x9c\'\x03\x12\xae\x01\n\tGetModule\x12\x1e.clarifai.api.GetModuleRequest\x1a\".clarifai.api.SingleModuleResponse\"]\x82\xd3\xe4\x93\x02O\x12M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}\x98\x9c\'\x02\x90\x9c\'m\x12\xe0\x01\n\x0bListModules\x12 .clarifai.api.ListModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"\x8b\x01\x82\xd3\xe4\x93\x02}\x12\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modulesZ)\x12\'/v2/users/{user_app_id.user_id}/modulesZ\r\x12\x0b/v2/modules\x98\x9c\'\x02\x90\x9c\'m\x12\xac\x01\n\x0bPostModules\x12 .clarifai.api.PostModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"X\x82\xd3\xe4\x93\x02\x46\"A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xae\x01\n\x0cPatchModules\x12!.clarifai.api.PatchModulesRequest\x1a!.clarifai.api.MultiModuleResponse\"X\x82\xd3\xe4\x93\x02\x46\x32\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xb4\x01\n\rDeleteModules\x12\".clarifai.api.DeleteModulesRequest\x1a!.clarifai.api.status.BaseResponse\"\\\x82\xd3\xe4\x93\x02\x46*A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'n\x90\x9c\'m\x12\xe8\x01\n\x10GetModuleVersion\x12%.clarifai.api.GetModuleVersionRequest\x1a).clarifai.api.SingleModuleVersionResponse\"\x81\x01\x82\xd3\xe4\x93\x02s\x12q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions/{module_version_id}\x98\x9c\'\x02\x90\x9c\'m\x12\xd6\x01\n\x12ListModuleVersions\x12\'.clarifai.api.ListModuleVersionsRequest\x1a(.clarifai.api.MultiModuleVersionResponse\"m\x82\xd3\xe4\x93\x02_\x12]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions\x98\x9c\'\x02\x90\x9c\'m\x12\xdd\x01\n\x12PostModuleVersions\x12\'.clarifai.api.PostModuleVersionsRequest\x1a(.clarifai.api.MultiModuleVersionResponse\"t\x82\xd3\xe4\x93\x02\x62\"]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'m\x12\xde\x01\n\x14\x44\x65leteModuleVersions\x12).clarifai.api.DeleteModuleVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"x\x82\xd3\xe4\x93\x02\x62*]/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}/module_versions:\x01*\x98\x9c\'\x02\x90\x9c\'l\x90\x9c\'n\x90\x9c\'m\x12\x8b\x02\n\x19GetInstalledModuleVersion\x12..clarifai.api.GetInstalledModuleVersionRequest\x1a\x32.clarifai.api.SingleInstalledModuleVersionResponse\"\x89\x01\x82\xd3\xe4\x93\x02s\x12q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions/{installed_module_version_id}\x98\x9c\'\x05\x90\x9c\'p\x90\x9c\'m\x90\x9c\'0\x12\xef\x01\n\x1bListInstalledModuleVersions\x12\x30.clarifai.api.ListInstalledModuleVersionsRequest\x1a\x31.clarifai.api.MultiInstalledModuleVersionResponse\"k\x82\xd3\xe4\x93\x02U\x12S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions\x98\x9c\'\x05\x90\x9c\'p\x90\x9c\'m\x90\x9c\'0\x12\xf6\x01\n\x1bPostInstalledModuleVersions\x12\x30.clarifai.api.PostInstalledModuleVersionsRequest\x1a\x31.clarifai.api.MultiInstalledModuleVersionResponse\"r\x82\xd3\xe4\x93\x02X\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'m\x90\x9c\'-\x12\xf6\x01\n\x1d\x44\x65leteInstalledModuleVersions\x12\x32.clarifai.api.DeleteInstalledModuleVersionsRequest\x1a!.clarifai.api.status.BaseResponse\"~\x82\xd3\xe4\x93\x02X*S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'q\x90\x9c\'m\x90\x9c\'1\x90\x9c\'/\x90\x9c\'0\x12\x95\x02\n\x1ePostInstalledModuleVersionsKey\x12\x33.clarifai.api.PostInstalledModuleVersionsKeyRequest\x1a\x1f.clarifai.api.SingleKeyResponse\"\x9c\x01\x82\xd3\xe4\x93\x02z\"u/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/installed_module_versions/{installed_module_version_id}/key:\x01*\x98\x9c\'\x05\x90\x9c\'o\x90\x9c\'p\x90\x9c\'m\x90\x9c\'-\x90\x9c\'/\x90\x9c\'0\x12\xf1\x01\n\x12PostBulkOperations\x12\'.clarifai.api.PostBulkOperationsRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"\x86\x01\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18\"\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'z\x90\x9c\'y\x90\x9c\'%\x90\x9c\'&\x90\x9c\'(\x12\xda\x01\n\x12ListBulkOperations\x12\'.clarifai.api.ListBulkOperationsRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"p\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operationsZ\x15\x12\x13/v2/bulk_operations\x98\x9c\'\x02\x90\x9c\'z\x12\xe1\x01\n\x10GetBulkOperation\x12%.clarifai.api.GetBulkOperationRequest\x1a*.clarifai.api.SingleBulkOperationsResponse\"z\x82\xd3\xe4\x93\x02l\x12N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations/{id}Z\x1a\x12\x18/v2/bulk_operations/{id}\x98\x9c\'\x02\x90\x9c\'z\x12\xe7\x01\n\x14\x43\x61ncelBulkOperations\x12(.clarifai.api.CancelBulkOperationRequest\x1a).clarifai.api.MultiBulkOperationsResponse\"z\x82\xd3\xe4\x93\x02h2I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18\x32\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'y\x90\x9c\'z\x12\xf0\x01\n\x14\x44\x65leteBulkOperations\x12(.clarifai.api.DeleteBulkOperationRequest\x1a!.clarifai.api.status.BaseResponse\"\x8a\x01\x82\xd3\xe4\x93\x02h*I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\x01*Z\x18*\x13/v2/bulk_operations:\x01*\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'%\x90\x9c\'(\x90\x9c\'y\x90\x9c\'z\x90\x9c\'{\x12\xae\x02\n\x1cGetDatasetInputsSearchAddJob\x12\x31.clarifai.api.GetDatasetInputsSearchAddJobRequest\x1a\x35.clarifai.api.SingleDatasetInputsSearchAddJobResponse\"\xa3\x01\x82\xd3\xe4\x93\x02\x94\x01\x12\x62/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/inputs/search_add/jobs/{job_id}Z.\x12,/v2/datasets/inputs/search_add/jobs/{job_id}\x98\x9c\'\x02\x90\x9c\'i\x12\x88\x02\n\x17ListNextTaskAssignments\x12,.clarifai.api.ListNextTaskAssignmentsRequest\x1a .clarifai.api.MultiInputResponse\"\x9c\x01\x82\xd3\xe4\x93\x02z\x12U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/assignmentsZ!\x12\x1f/v2/tasks/{task_id}/assignments\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'8\x90\x9c\'i\x12\xe3\x01\n\x12PutTaskAssignments\x12\'.clarifai.api.PutTaskAssignmentsRequest\x1a!.clarifai.api.status.BaseResponse\"\x80\x01\x82\xd3\xe4\x93\x02Z\x1aU/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/assignments:\x01*\x88\x9c\'\x01\x98\x9c\'\x02\x90\x9c\'%\x90\x9c\'&\x90\x9c\'\x0b\x90\x9c\'\x05\x90\x9c\'8\x90\x9c\'i\x12\x9a\x01\n\x12PostWaitlistEmails\x12\'.clarifai.api.PostWaitlistEmailsRequest\x1a(.clarifai.api.MultiWaitlistEmailResponse\"1\x82\xd3\xe4\x93\x02#\"\x1e/v2/waitlists/{feature}/emails:\x01*\x88\x9c\'\x01\x98\x9c\'\x01\x12\xfe\x01\n\x18GetSampledPredictMetrics\x12-.clarifai.api.GetSampledPredictMetricsRequest\x1a\x30.clarifai.api.MultiSampledPredictMetricsResponse\"\x80\x01\x82\xd3\xe4\x93\x02r\x12Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/sampled_predict_metricsZ\x1d\x12\x1b/v2/sampled_predict_metrics\x88\x9c\'\x01\x98\x9c\'\x02\x12\xe4\x01\n\x11PostInputsAddJobs\x12&.clarifai.api.PostInputsAddJobsRequest\x1a\'.clarifai.api.MultiInputsAddJobResponse\"~\x82\xd3\xe4\x93\x02h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add:\x01*Z\x18\"\x13/v2/inputs/jobs/add:\x01*\x98\x9c\'\x02\x90\x9c\'\x05\x90\x9c\'\x04\x88\x9c\'\x01\x12\xd6\x01\n\x11ListInputsAddJobs\x12&.clarifai.api.ListInputsAddJobsRequest\x1a\'.clarifai.api.MultiInputsAddJobResponse\"p\x82\xd3\xe4\x93\x02\x62\x12I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/addZ\x15\x12\x13/v2/inputs/jobs/add\x98\x9c\'\x02\x90\x9c\'\x05\x12\xdd\x01\n\x0fGetInputsAddJob\x12$.clarifai.api.GetInputsAddJobRequest\x1a(.clarifai.api.SingleInputsAddJobResponse\"z\x82\xd3\xe4\x93\x02l\x12N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add/{id}Z\x1a\x12\x18/v2/inputs/jobs/add/{id}\x98\x9c\'\x02\x90\x9c\'\x05\x12\xf2\x01\n\x12\x43\x61ncelInputsAddJob\x12\'.clarifai.api.CancelInputsAddJobRequest\x1a(.clarifai.api.SingleInputsAddJobResponse\"\x88\x01\x82\xd3\xe4\x93\x02r2N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add/{id}:\x01*Z\x1d\x32\x18/v2/inputs/jobs/add/{id}:\x01*\x98\x9c\'\x02\x90\x9c\'\x04\x90\x9c\'\x05\x88\x9c\'\x01\x12\xc0\x01\n\x0bPostUploads\x12 .clarifai.api.PostUploadsRequest\x1a!.clarifai.api.MultiUploadResponse\"l\x82\xd3\xe4\x93\x02X\"A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\x01*Z\x10\"\x0b/v2/uploads:\x01*\x98\x9c\'\x02\x90\x9c\'\x81\x01\x90\x9c\'\x80\x01\x12\x88\x02\n\x15PutUploadContentParts\x12*.clarifai.api.PutUploadContentPartsRequest\x1a\".clarifai.api.SingleUploadResponse\"\x9e\x01\x82\xd3\xe4\x93\x02\x89\x01\x1a[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads/{upload_id}/content_parts:\x01*Z\'\x1a%/v2/uploads/{upload_id}/content_parts\x98\x9c\'\x02\x90\x9c\'\x81\x01\x90\x9c\'\x80\x01\x12\xca\x01\n\tGetUpload\x12\x1e.clarifai.api.GetUploadRequest\x1a\".clarifai.api.SingleUploadResponse\"y\x82\xd3\xe4\x93\x02j\x12M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads/{upload_id}Z\x19\x12\x17/v2/uploads/{upload_id}\x98\x9c\'\x02\x90\x9c\'\x80\x01\x12\xb5\x01\n\x0bListUploads\x12 .clarifai.api.ListUploadsRequest\x1a!.clarifai.api.MultiUploadResponse\"a\x82\xd3\xe4\x93\x02R\x12\x41/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploadsZ\r\x12\x0b/v2/uploads\x98\x9c\'\x02\x90\x9c\'\x80\x01\x12\xc9\x01\n\rDeleteUploads\x12\".clarifai.api.DeleteUploadsRequest\x1a!.clarifai.api.status.BaseResponse\"q\x82\xd3\xe4\x93\x02X*A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\x01*Z\x10*\x0b/v2/uploads:\x01*\x98\x9c\'\x02\x90\x9c\'\x80\x01\x90\x9c\'\x81\x01\x90\x9c\'\x82\x01\x42.\n\x15\x63om.clarifai.grpc.apiP\x01Z\x0c\x63larifai/api\xa2\x02\x04\x43\x41IPb\x06proto3')
 
 _ORGANIZATIONINVITATIONSTATUS = DESCRIPTOR.enum_types_by_name['OrganizationInvitationStatus']
 OrganizationInvitationStatus = enum_type_wrapper.EnumTypeWrapper(_ORGANIZATIONINVITATIONSTATUS)
@@ -37,6 +38,7 @@ DECLINED = 4
 EXPIRED = 5
 
 
+_TESTMESSAGE = DESCRIPTOR.message_types_by_name['TestMessage']
 _PAGINATION = DESCRIPTOR.message_types_by_name['Pagination']
 _GETANNOTATIONREQUEST = DESCRIPTOR.message_types_by_name['GetAnnotationRequest']
 _LISTANNOTATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListAnnotationsRequest']
@@ -54,6 +56,7 @@ _POSTAPPSREQUEST = DESCRIPTOR.message_types_by_name['PostAppsRequest']
 _DELETEAPPREQUEST = DESCRIPTOR.message_types_by_name['DeleteAppRequest']
 _PATCHAPPSREQUEST = DESCRIPTOR.message_types_by_name['PatchAppsRequest']
 _PATCHAPPREQUEST = DESCRIPTOR.message_types_by_name['PatchAppRequest']
+_PATCHAPPOWNERREQUEST = DESCRIPTOR.message_types_by_name['PatchAppOwnerRequest']
 _PATCHAPPSIDSREQUEST = DESCRIPTOR.message_types_by_name['PatchAppsIdsRequest']
 _POSTAPPSSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PostAppsSearchesRequest']
 _SINGLEAPPRESPONSE = DESCRIPTOR.message_types_by_name['SingleAppResponse']
@@ -65,6 +68,39 @@ _DELETECOLLABORATORSREQUEST = DESCRIPTOR.message_types_by_name['DeleteCollaborat
 _MULTICOLLABORATORSRESPONSE = DESCRIPTOR.message_types_by_name['MultiCollaboratorsResponse']
 _LISTCOLLABORATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListCollaborationsRequest']
 _MULTICOLLABORATIONSRESPONSE = DESCRIPTOR.message_types_by_name['MultiCollaborationsResponse']
+_POSTVERIFYEMAILREQUEST = DESCRIPTOR.message_types_by_name['PostVerifyEmailRequest']
+_SINGLEVERIFYEMAILRESPONSE = DESCRIPTOR.message_types_by_name['SingleVerifyEmailResponse']
+_LISTAUTHMETHODSREQUEST = DESCRIPTOR.message_types_by_name['ListAuthMethodsRequest']
+_POSTLINKIDPUSERREQUEST = DESCRIPTOR.message_types_by_name['PostLinkIdpUserRequest']
+_GETLOGININFOREQUEST = DESCRIPTOR.message_types_by_name['GetLoginInfoRequest']
+_GETLOGININFORESPONSE = DESCRIPTOR.message_types_by_name['GetLoginInfoResponse']
+_POSTLINKIDPUSERRESPONSE = DESCRIPTOR.message_types_by_name['PostLinkIdpUserResponse']
+_POSTIDLOGINFINALIZERREQUEST = DESCRIPTOR.message_types_by_name['PostIdLoginFinalizerRequest']
+_POSTIDLOGINFINALIZERRESPONSE = DESCRIPTOR.message_types_by_name['PostIdLoginFinalizerResponse']
+_LISTAUTHMETHODSRESPONSE = DESCRIPTOR.message_types_by_name['ListAuthMethodsResponse']
+_LIST2FAMETHODSREQUEST = DESCRIPTOR.message_types_by_name['List2FAMethodsRequest']
+_LIST2FAMETHODSRESPONSE = DESCRIPTOR.message_types_by_name['List2FAMethodsResponse']
+_POSTAUTH2FATOTPREGISTERENABLEREQUEST = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRegisterEnableRequest']
+_POSTAUTH2FATOTPREGISTERENABLERESPONSE = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRegisterEnableResponse']
+_POSTAUTH2FATOTPDISABLEREQUEST = DESCRIPTOR.message_types_by_name['PostAuth2FATotpDisableRequest']
+_POSTAUTH2FATOTPDISABLERESPONSE = DESCRIPTOR.message_types_by_name['PostAuth2FATotpDisableResponse']
+_POSTAUTH2FATOTPREGISTERVERIFYREQUEST = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRegisterVerifyRequest']
+_POSTAUTH2FATOTPREGISTERVERIFYRESPONSE = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRegisterVerifyResponse']
+_POSTAUTH2FATOTPLOGINREQUEST = DESCRIPTOR.message_types_by_name['PostAuth2FATotpLoginRequest']
+_POSTAUTH2FATOTPRECOVERREQUEST = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRecoverRequest']
+_POSTAUTH2FATOTPRECOVERRESPONSE = DESCRIPTOR.message_types_by_name['PostAuth2FATotpRecoverResponse']
+_GETAUTH2FATOTPRECOVERCONFIRMREQUEST = DESCRIPTOR.message_types_by_name['GetAuth2FATotpRecoverConfirmRequest']
+_GETAUTH2FATOTPRECOVERCONFIRMRESPONSE = DESCRIPTOR.message_types_by_name['GetAuth2FATotpRecoverConfirmResponse']
+_REQUESTRESETPASSWORDREQUEST = DESCRIPTOR.message_types_by_name['RequestResetPasswordRequest']
+_COMPLETERESETPASSWORDREQUEST = DESCRIPTOR.message_types_by_name['CompleteResetPasswordRequest']
+_POSTLOGINREQUEST = DESCRIPTOR.message_types_by_name['PostLoginRequest']
+_POSTSIGNUPREQUEST = DESCRIPTOR.message_types_by_name['PostSignupRequest']
+_UTM = DESCRIPTOR.message_types_by_name['Utm']
+_SINGLELOGINRESPONSE = DESCRIPTOR.message_types_by_name['SingleLoginResponse']
+_POSTLOGOUTREQUEST = DESCRIPTOR.message_types_by_name['PostLogoutRequest']
+_SINGLELOGOUTRESPONSE = DESCRIPTOR.message_types_by_name['SingleLogoutResponse']
+_GETBILLINGUSAGEREQUEST = DESCRIPTOR.message_types_by_name['GetBillingUsageRequest']
+_GETBILLINGUSAGERESPONSE = DESCRIPTOR.message_types_by_name['GetBillingUsageResponse']
 _GETSTATUSCODEREQUEST = DESCRIPTOR.message_types_by_name['GetStatusCodeRequest']
 _LISTSTATUSCODESREQUEST = DESCRIPTOR.message_types_by_name['ListStatusCodesRequest']
 _SINGLESTATUSCODERESPONSE = DESCRIPTOR.message_types_by_name['SingleStatusCodeResponse']
@@ -84,9 +120,16 @@ _POSTCONCEPTRELATIONSREQUEST = DESCRIPTOR.message_types_by_name['PostConceptRela
 _DELETECONCEPTRELATIONSREQUEST = DESCRIPTOR.message_types_by_name['DeleteConceptRelationsRequest']
 _LISTKNOWLEDGEGRAPHSREQUEST = DESCRIPTOR.message_types_by_name['ListKnowledgeGraphsRequest']
 _POSTKNOWLEDGEGRAPHSREQUEST = DESCRIPTOR.message_types_by_name['PostKnowledgeGraphsRequest']
+_LISTCONCEPTMAPPINGSREQUEST = DESCRIPTOR.message_types_by_name['ListConceptMappingsRequest']
+_POSTCONCEPTMAPPINGSREQUEST = DESCRIPTOR.message_types_by_name['PostConceptMappingsRequest']
 _POSTCONCEPTMAPPINGJOBSREQUEST = DESCRIPTOR.message_types_by_name['PostConceptMappingJobsRequest']
+_SINGLECONCEPTRELATIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleConceptRelationResponse']
 _MULTICONCEPTRELATIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiConceptRelationResponse']
+_SINGLEKNOWLEDGEGRAPHRESPONSE = DESCRIPTOR.message_types_by_name['SingleKnowledgeGraphResponse']
 _MULTIKNOWLEDGEGRAPHRESPONSE = DESCRIPTOR.message_types_by_name['MultiKnowledgeGraphResponse']
+_SINGLECONCEPTMAPPINGRESPONSE = DESCRIPTOR.message_types_by_name['SingleConceptMappingResponse']
+_MULTICONCEPTMAPPINGRESPONSE = DESCRIPTOR.message_types_by_name['MultiConceptMappingResponse']
+_SINGLECONCEPTMAPPINGJOBRESPONSE = DESCRIPTOR.message_types_by_name['SingleConceptMappingJobResponse']
 _MULTICONCEPTMAPPINGJOBRESPONSE = DESCRIPTOR.message_types_by_name['MultiConceptMappingJobResponse']
 _GETCONCEPTLANGUAGEREQUEST = DESCRIPTOR.message_types_by_name['GetConceptLanguageRequest']
 _LISTCONCEPTLANGUAGESREQUEST = DESCRIPTOR.message_types_by_name['ListConceptLanguagesRequest']
@@ -94,11 +137,20 @@ _PATCHCONCEPTLANGUAGESREQUEST = DESCRIPTOR.message_types_by_name['PatchConceptLa
 _POSTCONCEPTLANGUAGESREQUEST = DESCRIPTOR.message_types_by_name['PostConceptLanguagesRequest']
 _SINGLECONCEPTLANGUAGERESPONSE = DESCRIPTOR.message_types_by_name['SingleConceptLanguageResponse']
 _MULTICONCEPTLANGUAGERESPONSE = DESCRIPTOR.message_types_by_name['MultiConceptLanguageResponse']
+_LISTCONCEPTREFERENCESREQUEST = DESCRIPTOR.message_types_by_name['ListConceptReferencesRequest']
+_SINGLECONCEPTREFERENCERESPONSE = DESCRIPTOR.message_types_by_name['SingleConceptReferenceResponse']
+_MULTICONCEPTREFERENCERESPONSE = DESCRIPTOR.message_types_by_name['MultiConceptReferenceResponse']
+_GETHEALTHZREQUEST = DESCRIPTOR.message_types_by_name['GetHealthzRequest']
+_GETHEALTHZRESPONSE = DESCRIPTOR.message_types_by_name['GetHealthzResponse']
 _GETINPUTREQUEST = DESCRIPTOR.message_types_by_name['GetInputRequest']
 _GETINPUTSAMPLESREQUEST = DESCRIPTOR.message_types_by_name['GetInputSamplesRequest']
 _LISTINPUTSREQUEST = DESCRIPTOR.message_types_by_name['ListInputsRequest']
 _STREAMINPUTSREQUEST = DESCRIPTOR.message_types_by_name['StreamInputsRequest']
 _POSTINPUTSREQUEST = DESCRIPTOR.message_types_by_name['PostInputsRequest']
+_POSTINPUTSFILEREQUEST = DESCRIPTOR.message_types_by_name['PostInputsFileRequest']
+_POSTINPUTSNIFIREQUEST = DESCRIPTOR.message_types_by_name['PostInputsNiFiRequest']
+_POSTINPUTSDOCUMENTREQUEST = DESCRIPTOR.message_types_by_name['PostInputsDocumentRequest']
+_POSTINPUTSDOCUMENTREQUESTBODY = DESCRIPTOR.message_types_by_name['PostInputsDocumentRequestBody']
 _PATCHINPUTSREQUEST = DESCRIPTOR.message_types_by_name['PatchInputsRequest']
 _DELETEINPUTREQUEST = DESCRIPTOR.message_types_by_name['DeleteInputRequest']
 _DELETEINPUTSREQUEST = DESCRIPTOR.message_types_by_name['DeleteInputsRequest']
@@ -144,6 +196,14 @@ _DELETEKEYREQUEST = DESCRIPTOR.message_types_by_name['DeleteKeyRequest']
 _PATCHKEYSREQUEST = DESCRIPTOR.message_types_by_name['PatchKeysRequest']
 _SINGLEKEYRESPONSE = DESCRIPTOR.message_types_by_name['SingleKeyResponse']
 _MULTIKEYRESPONSE = DESCRIPTOR.message_types_by_name['MultiKeyResponse']
+_FETCHLICENSEREQUEST = DESCRIPTOR.message_types_by_name['FetchLicenseRequest']
+_FETCHLICENSERESPONSE = DESCRIPTOR.message_types_by_name['FetchLicenseResponse']
+_VALIDATELICENSEREQUEST = DESCRIPTOR.message_types_by_name['ValidateLicenseRequest']
+_VALIDATELICENSERESPONSE = DESCRIPTOR.message_types_by_name['ValidateLicenseResponse']
+_LISTLICENSESREQUEST = DESCRIPTOR.message_types_by_name['ListLicensesRequest']
+_GETLICENSEREQUEST = DESCRIPTOR.message_types_by_name['GetLicenseRequest']
+_SINGLELICENSERESPONSE = DESCRIPTOR.message_types_by_name['SingleLicenseResponse']
+_MULTIPLELICENSESRESPONSE = DESCRIPTOR.message_types_by_name['MultipleLicensesResponse']
 _GETMODELREQUEST = DESCRIPTOR.message_types_by_name['GetModelRequest']
 _LISTMODELSREQUEST = DESCRIPTOR.message_types_by_name['ListModelsRequest']
 _PATCHMODELTOOLKITSREQUEST = DESCRIPTOR.message_types_by_name['PatchModelToolkitsRequest']
@@ -188,9 +248,13 @@ _SINGLEMODELTYPERESPONSE = DESCRIPTOR.message_types_by_name['SingleModelTypeResp
 _MULTIMODELTYPERESPONSE = DESCRIPTOR.message_types_by_name['MultiModelTypeResponse']
 _GETMODELVERSIONINPUTEXAMPLEREQUEST = DESCRIPTOR.message_types_by_name['GetModelVersionInputExampleRequest']
 _LISTMODELVERSIONINPUTEXAMPLESREQUEST = DESCRIPTOR.message_types_by_name['ListModelVersionInputExamplesRequest']
+_POSTMODELVERSIONINPUTEXAMPLESREQUEST = DESCRIPTOR.message_types_by_name['PostModelVersionInputExamplesRequest']
+_DELETEMODELVERSIONINPUTEXAMPLESREQUEST = DESCRIPTOR.message_types_by_name['DeleteModelVersionInputExamplesRequest']
 _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE = DESCRIPTOR.message_types_by_name['SingleModelVersionInputExampleResponse']
 _MULTIMODELVERSIONINPUTEXAMPLERESPONSE = DESCRIPTOR.message_types_by_name['MultiModelVersionInputExampleResponse']
 _LISTMODELREFERENCESREQUEST = DESCRIPTOR.message_types_by_name['ListModelReferencesRequest']
+_POSTMODELREFERENCESREQUEST = DESCRIPTOR.message_types_by_name['PostModelReferencesRequest']
+_DELETEMODELREFERENCESREQUEST = DESCRIPTOR.message_types_by_name['DeleteModelReferencesRequest']
 _MULTIMODELREFERENCERESPONSE = DESCRIPTOR.message_types_by_name['MultiModelReferenceResponse']
 _MULTIOUTPUTRESPONSE = DESCRIPTOR.message_types_by_name['MultiOutputResponse']
 _LISTSCOPESREQUEST = DESCRIPTOR.message_types_by_name['ListScopesRequest']
@@ -209,6 +273,7 @@ _PATCHANNOTATIONSSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PatchAnnota
 _PATCHSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PatchSearchesRequest']
 _POSTSEARCHESBYIDREQUEST = DESCRIPTOR.message_types_by_name['PostSearchesByIDRequest']
 _DELETESEARCHREQUEST = DESCRIPTOR.message_types_by_name['DeleteSearchRequest']
+_POSTATTRIBUTESEARCHREQUEST = DESCRIPTOR.message_types_by_name['PostAttributeSearchRequest']
 _POSTANNOTATIONSSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PostAnnotationsSearchesRequest']
 _DELETEANNOTATIONSEARCHMETRICSREQUEST = DESCRIPTOR.message_types_by_name['DeleteAnnotationSearchMetricsRequest']
 _POSTINPUTSSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PostInputsSearchesRequest']
@@ -225,10 +290,138 @@ _PATCHANNOTATIONFILTERSREQUEST = DESCRIPTOR.message_types_by_name['PatchAnnotati
 _DELETEANNOTATIONFILTERSREQUEST = DESCRIPTOR.message_types_by_name['DeleteAnnotationFiltersRequest']
 _MULTIANNOTATIONFILTERRESPONSE = DESCRIPTOR.message_types_by_name['MultiAnnotationFilterResponse']
 _SINGLEANNOTATIONFILTERRESPONSE = DESCRIPTOR.message_types_by_name['SingleAnnotationFilterResponse']
+_LISTCLUSTERSREQUEST = DESCRIPTOR.message_types_by_name['ListClustersRequest']
+_LISTANNOTATIONSFORCLUSTERREQUEST = DESCRIPTOR.message_types_by_name['ListAnnotationsForClusterRequest']
+_POSTCLUSTERSSEARCHESREQUEST = DESCRIPTOR.message_types_by_name['PostClustersSearchesRequest']
+_MULTICLUSTERRESPONSE = DESCRIPTOR.message_types_by_name['MultiClusterResponse']
+_GETSUBSCRIPTIONREQUEST = DESCRIPTOR.message_types_by_name['GetSubscriptionRequest']
+_POSTSUBSCRIPTIONREQUEST = DESCRIPTOR.message_types_by_name['PostSubscriptionRequest']
+_SINGLESUBSCRIPTIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleSubscriptionResponse']
+_LISTCREDITCARDSREQUEST = DESCRIPTOR.message_types_by_name['ListCreditCardsRequest']
+_MULTIPLECREDITCARDRESPONSE = DESCRIPTOR.message_types_by_name['MultipleCreditCardResponse']
+_POSTCREDITCARDREQUEST = DESCRIPTOR.message_types_by_name['PostCreditCardRequest']
+_SINGLECREDITCARDRESPONSE = DESCRIPTOR.message_types_by_name['SingleCreditCardResponse']
+_DELETECREDITCARDREQUEST = DESCRIPTOR.message_types_by_name['DeleteCreditCardRequest']
+_PATCHCREDITCARDSREQUEST = DESCRIPTOR.message_types_by_name['PatchCreditCardsRequest']
+_GETSHIPPINGADDRESSREQUEST = DESCRIPTOR.message_types_by_name['GetShippingAddressRequest']
+_PUTSHIPPINGADDRESSREQUEST = DESCRIPTOR.message_types_by_name['PutShippingAddressRequest']
+_SINGLESHIPPINGADDRESSRESPONSE = DESCRIPTOR.message_types_by_name['SingleShippingAddressResponse']
+_LISTPLANSREQUEST = DESCRIPTOR.message_types_by_name['ListPlansRequest']
+_MULTIPLANRESPONSE = DESCRIPTOR.message_types_by_name['MultiPlanResponse']
+_GETHISTORICALUSAGEREQUEST = DESCRIPTOR.message_types_by_name['GetHistoricalUsageRequest']
+_GETHISTORICALUSAGERESPONSE = DESCRIPTOR.message_types_by_name['GetHistoricalUsageResponse']
+_POSTHISTORICALUSAGEREQUEST = DESCRIPTOR.message_types_by_name['PostHistoricalUsageRequest']
+_POSTHISTORICALUSAGERESPONSE = DESCRIPTOR.message_types_by_name['PostHistoricalUsageResponse']
+_GETREALTIMEUSAGEREQUEST = DESCRIPTOR.message_types_by_name['GetRealtimeUsageRequest']
+_GETREALTIMEUSAGERESPONSE = DESCRIPTOR.message_types_by_name['GetRealtimeUsageResponse']
+_LISTUSAGEINTERVALSREQUEST = DESCRIPTOR.message_types_by_name['ListUsageIntervalsRequest']
+_LISTUSAGEINTERVALSRESPONSE = DESCRIPTOR.message_types_by_name['ListUsageIntervalsResponse']
+_LISTUSERBILLINGCYCLESREQUEST = DESCRIPTOR.message_types_by_name['ListUserBillingCyclesRequest']
+_LISTUSERCYCLESREQUEST = DESCRIPTOR.message_types_by_name['ListUserCyclesRequest']
+_LISTUSERBILLINGCYCLESRESPONSE = DESCRIPTOR.message_types_by_name['ListUserBillingCyclesResponse']
+_LISTUSERCYCLESRESPONSE = DESCRIPTOR.message_types_by_name['ListUserCyclesResponse']
+_POSTUSAGEREQUEST = DESCRIPTOR.message_types_by_name['PostUsageRequest']
+_POSTUSAGERESPONSE = DESCRIPTOR.message_types_by_name['PostUsageResponse']
+_GETUSERREQUEST = DESCRIPTOR.message_types_by_name['GetUserRequest']
+_LISTUSERSREQUEST = DESCRIPTOR.message_types_by_name['ListUsersRequest']
+_POSTUSERCONSENTREQUEST = DESCRIPTOR.message_types_by_name['PostUserConsentRequest']
+_SINGLEUSERRESPONSE = DESCRIPTOR.message_types_by_name['SingleUserResponse']
+_MULTIUSERRESPONSE = DESCRIPTOR.message_types_by_name['MultiUserResponse']
+_PATCHUSERREQUEST = DESCRIPTOR.message_types_by_name['PatchUserRequest']
+_POSTUSERACCESSREQUEST = DESCRIPTOR.message_types_by_name['PostUserAccessRequest']
+_GETUSERACCESSREQUEST = DESCRIPTOR.message_types_by_name['GetUserAccessRequest']
+_MULTIUSERACCESSRESPONSE = DESCRIPTOR.message_types_by_name['MultiUserAccessResponse']
+_SINGLEUSERACCESSRESPONSE = DESCRIPTOR.message_types_by_name['SingleUserAccessResponse']
+_POSTEMAILSREQUEST = DESCRIPTOR.message_types_by_name['PostEmailsRequest']
+_SINGLEEMAILRESPONSE = DESCRIPTOR.message_types_by_name['SingleEmailResponse']
+_MULTIPLEEMAILRESPONSE = DESCRIPTOR.message_types_by_name['MultipleEmailResponse']
+_LISTEMAILSREQUEST = DESCRIPTOR.message_types_by_name['ListEmailsRequest']
+_POSTRESENDVERIFYREQUEST = DESCRIPTOR.message_types_by_name['PostResendVerifyRequest']
+_SINGLERESENDVERIFYRESPONSE = DESCRIPTOR.message_types_by_name['SingleResendVerifyResponse']
+_DELETEEMAILREQUEST = DESCRIPTOR.message_types_by_name['DeleteEmailRequest']
+_POSTPRIMARYEMAILREQUEST = DESCRIPTOR.message_types_by_name['PostPrimaryEmailRequest']
 _POSTVALIDATEPASSWORDREQUEST = DESCRIPTOR.message_types_by_name['PostValidatePasswordRequest']
 _SINGLEPASSWORDVALIDATIONRESPONSE = DESCRIPTOR.message_types_by_name['SinglePasswordValidationResponse']
+_LISTGLOBALPASSWORDPOLICIESREQUEST = DESCRIPTOR.message_types_by_name['ListGlobalPasswordPoliciesRequest']
+_LISTPASSWORDPOLICIESREQUEST = DESCRIPTOR.message_types_by_name['ListPasswordPoliciesRequest']
+_POSTPASSWORDPOLICIESREQUEST = DESCRIPTOR.message_types_by_name['PostPasswordPoliciesRequest']
+_PATCHPASSWORDPOLICIESREQUEST = DESCRIPTOR.message_types_by_name['PatchPasswordPoliciesRequest']
+_DELETEPASSWORDPOLICIESREQUEST = DESCRIPTOR.message_types_by_name['DeletePasswordPoliciesRequest']
+_MULTIPLEPASSWORDPOLICIESRESPONSE = DESCRIPTOR.message_types_by_name['MultiplePasswordPoliciesResponse']
+_USERFEATURECONFIGREQUEST = DESCRIPTOR.message_types_by_name['UserFeatureConfigRequest']
+_SINGLEUSERFEATURECONFIGRESPONSE = DESCRIPTOR.message_types_by_name['SingleUserFeatureConfigResponse']
+_POSTORGANIZATIONSREQUEST = DESCRIPTOR.message_types_by_name['PostOrganizationsRequest']
+_LISTORGANIZATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListOrganizationsRequest']
+_LISTUSERSORGANIZATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListUsersOrganizationsRequest']
+_DELETEREQUESTINGUSERFROMORGANIZATIONREQUEST = DESCRIPTOR.message_types_by_name['DeleteRequestingUserFromOrganizationRequest']
+_POSTACCEPTORGANIZATIONINVITATIONREQUEST = DESCRIPTOR.message_types_by_name['PostAcceptOrganizationInvitationRequest']
+_POSTDECLINEORGANIZATIONINVITATIONREQUEST = DESCRIPTOR.message_types_by_name['PostDeclineOrganizationInvitationRequest']
+_GETORGANIZATIONREQUEST = DESCRIPTOR.message_types_by_name['GetOrganizationRequest']
+_PATCHORGANIZATIONREQUEST = DESCRIPTOR.message_types_by_name['PatchOrganizationRequest']
+_DELETEORGANIZATIONREQUEST = DESCRIPTOR.message_types_by_name['DeleteOrganizationRequest']
+_SINGLEORGANIZATIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleOrganizationResponse']
+_MULTIORGANIZATIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiOrganizationResponse']
+_MULTIUSERSORGANIZATIONSRESPONSE = DESCRIPTOR.message_types_by_name['MultiUsersOrganizationsResponse']
+_MULTIUSERSORGANIZATIONSRESPONSE_USERORGANIZATION = _MULTIUSERSORGANIZATIONSRESPONSE.nested_types_by_name['UserOrganization']
+_LISTORGANIZATIONAPPMEMBERSREQUEST = DESCRIPTOR.message_types_by_name['ListOrganizationAppMembersRequest']
+_LISTORGANIZATIONMEMBERSREQUEST = DESCRIPTOR.message_types_by_name['ListOrganizationMembersRequest']
+_POSTORGANIZATIONINVITATIONSREQUEST = DESCRIPTOR.message_types_by_name['PostOrganizationInvitationsRequest']
+_PATCHORGANIZATIONINVITATIONSREQUEST = DESCRIPTOR.message_types_by_name['PatchOrganizationInvitationsRequest']
+_LISTORGANIZATIONINVITATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListOrganizationInvitationsRequest']
+_GETORGANIZATIONINVITATIONREQUEST = DESCRIPTOR.message_types_by_name['GetOrganizationInvitationRequest']
+_GETORGANIZATIONINVITATIONPUBLICREQUEST = DESCRIPTOR.message_types_by_name['GetOrganizationInvitationPublicRequest']
+_SINGLEORGANIZATIONINVITATIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleOrganizationInvitationResponse']
+_MULTIORGANIZATIONINVITATIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiOrganizationInvitationResponse']
+_PATCHORGANIZATIONMEMBERSREQUEST = DESCRIPTOR.message_types_by_name['PatchOrganizationMembersRequest']
+_PATCHORGANIZATIONMEMBERSREQUEST_PATCHORGANIZATIONMEMBER = _PATCHORGANIZATIONMEMBERSREQUEST.nested_types_by_name['PatchOrganizationMember']
+_POSTORGANIZATIONMEMBERREQUEST = DESCRIPTOR.message_types_by_name['PostOrganizationMemberRequest']
+_DELETEORGANIZATIONMEMBERREQUEST = DESCRIPTOR.message_types_by_name['DeleteOrganizationMemberRequest']
+_MULTIORGANIZATIONMEMBERRESPONSE = DESCRIPTOR.message_types_by_name['MultiOrganizationMemberResponse']
+_POSTIDENTITYPROVIDERSREQUEST = DESCRIPTOR.message_types_by_name['PostIdentityProvidersRequest']
+_LISTIDENTITYPROVIDERSREQUEST = DESCRIPTOR.message_types_by_name['ListIdentityProvidersRequest']
+_GETIDENTITYPROVIDERREQUEST = DESCRIPTOR.message_types_by_name['GetIdentityProviderRequest']
+_PATCHIDENTITYPROVIDERSREQUEST = DESCRIPTOR.message_types_by_name['PatchIdentityProvidersRequest']
+_DELETEIDENTITYPROVIDERSREQUEST = DESCRIPTOR.message_types_by_name['DeleteIdentityProvidersRequest']
+_SINGLEIDENTITYPROVIDERRESPONSE = DESCRIPTOR.message_types_by_name['SingleIdentityProviderResponse']
+_MULTIIDENTITYPROVIDERRESPONSE = DESCRIPTOR.message_types_by_name['MultiIdentityProviderResponse']
+_POSTTEAMSREQUEST = DESCRIPTOR.message_types_by_name['PostTeamsRequest']
+_POSTTEAMSREQUEST_POSTTEAM = _POSTTEAMSREQUEST.nested_types_by_name['PostTeam']
+_LISTTEAMSREQUEST = DESCRIPTOR.message_types_by_name['ListTeamsRequest']
+_GETTEAMREQUEST = DESCRIPTOR.message_types_by_name['GetTeamRequest']
+_PATCHTEAMSREQUEST = DESCRIPTOR.message_types_by_name['PatchTeamsRequest']
+_DELETETEAMSREQUEST = DESCRIPTOR.message_types_by_name['DeleteTeamsRequest']
+_SINGLETEAMRESPONSE = DESCRIPTOR.message_types_by_name['SingleTeamResponse']
+_MULTITEAMRESPONSE = DESCRIPTOR.message_types_by_name['MultiTeamResponse']
+_APPIDENTITY = DESCRIPTOR.message_types_by_name['AppIdentity']
+_LISTTEAMAPPSREQUEST = DESCRIPTOR.message_types_by_name['ListTeamAppsRequest']
+_POSTTEAMAPPSREQUEST = DESCRIPTOR.message_types_by_name['PostTeamAppsRequest']
+_POSTTEAMAPPSREQUEST_TEAMAPP = _POSTTEAMAPPSREQUEST.nested_types_by_name['TeamApp']
+_DELETETEAMAPPSREQUEST = DESCRIPTOR.message_types_by_name['DeleteTeamAppsRequest']
+_MULTITEAMAPPSRESPONSE = DESCRIPTOR.message_types_by_name['MultiTeamAppsResponse']
+_MULTITEAMAPPSRESPONSE_TEAMAPP = _MULTITEAMAPPSRESPONSE.nested_types_by_name['TeamApp']
+_POSTTEAMUSERSREQUEST = DESCRIPTOR.message_types_by_name['PostTeamUsersRequest']
+_LISTTEAMUSERSREQUEST = DESCRIPTOR.message_types_by_name['ListTeamUsersRequest']
+_DELETETEAMUSERSREQUEST = DESCRIPTOR.message_types_by_name['DeleteTeamUsersRequest']
+_MULTITEAMUSERRESPONSE = DESCRIPTOR.message_types_by_name['MultiTeamUserResponse']
+_LISTROLESREQUEST = DESCRIPTOR.message_types_by_name['ListRolesRequest']
+_GETROLEREQUEST = DESCRIPTOR.message_types_by_name['GetRoleRequest']
+_SINGLEROLERESPONSE = DESCRIPTOR.message_types_by_name['SingleRoleResponse']
+_MULTIROLERESPONSE = DESCRIPTOR.message_types_by_name['MultiRoleResponse']
+_GETVOCABREQUEST = DESCRIPTOR.message_types_by_name['GetVocabRequest']
+_LISTVOCABSREQUEST = DESCRIPTOR.message_types_by_name['ListVocabsRequest']
+_POSTVOCABSREQUEST = DESCRIPTOR.message_types_by_name['PostVocabsRequest']
+_PATCHVOCABSREQUEST = DESCRIPTOR.message_types_by_name['PatchVocabsRequest']
+_DELETEVOCABREQUEST = DESCRIPTOR.message_types_by_name['DeleteVocabRequest']
+_DELETEVOCABSREQUEST = DESCRIPTOR.message_types_by_name['DeleteVocabsRequest']
+_LISTVOCABCONCEPTSREQUEST = DESCRIPTOR.message_types_by_name['ListVocabConceptsRequest']
+_POSTVOCABCONCEPTSREQUEST = DESCRIPTOR.message_types_by_name['PostVocabConceptsRequest']
+_DELETEVOCABCONCEPTREQUEST = DESCRIPTOR.message_types_by_name['DeleteVocabConceptRequest']
+_DELETEVOCABCONCEPTSREQUEST = DESCRIPTOR.message_types_by_name['DeleteVocabConceptsRequest']
+_SINGLEVOCABRESPONSE = DESCRIPTOR.message_types_by_name['SingleVocabResponse']
+_MULTIVOCABRESPONSE = DESCRIPTOR.message_types_by_name['MultiVocabResponse']
 _GETWORKFLOWREQUEST = DESCRIPTOR.message_types_by_name['GetWorkflowRequest']
 _LISTWORKFLOWSREQUEST = DESCRIPTOR.message_types_by_name['ListWorkflowsRequest']
+_LISTPUBLICWORKFLOWSREQUEST = DESCRIPTOR.message_types_by_name['ListPublicWorkflowsRequest']
 _POSTWORKFLOWSREQUEST = DESCRIPTOR.message_types_by_name['PostWorkflowsRequest']
 _PATCHWORKFLOWSREQUEST = DESCRIPTOR.message_types_by_name['PatchWorkflowsRequest']
 _PATCHWORKFLOWIDSREQUEST = DESCRIPTOR.message_types_by_name['PatchWorkflowIdsRequest']
@@ -246,6 +439,14 @@ _DELETEWORKFLOWVERSIONSREQUEST = DESCRIPTOR.message_types_by_name['DeleteWorkflo
 _PATCHWORKFLOWVERSIONSREQUEST = DESCRIPTOR.message_types_by_name['PatchWorkflowVersionsRequest']
 _MULTIWORKFLOWVERSIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiWorkflowVersionResponse']
 _SINGLEWORKFLOWVERSIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleWorkflowVersionResponse']
+_POSTWORKFLOWMETRICSREQUEST = DESCRIPTOR.message_types_by_name['PostWorkflowMetricsRequest']
+_GETWORKFLOWMETRICSREQUEST = DESCRIPTOR.message_types_by_name['GetWorkflowMetricsRequest']
+_GETWORKFLOWNODEMETRICSREQUEST = DESCRIPTOR.message_types_by_name['GetWorkflowNodeMetricsRequest']
+_LISTWORKFLOWMETRICSREQUEST = DESCRIPTOR.message_types_by_name['ListWorkflowMetricsRequest']
+_DELETEWORKFLOWMETRICSREQUEST = DESCRIPTOR.message_types_by_name['DeleteWorkflowMetricsRequest']
+_SINGLEWORKFLOWMETRICSRESPONSE = DESCRIPTOR.message_types_by_name['SingleWorkflowMetricsResponse']
+_SINGLEWORKFLOWNODEMETRICSRESPONSE = DESCRIPTOR.message_types_by_name['SingleWorkflowNodeMetricsResponse']
+_MULTIWORKFLOWMETRICSRESPONSE = DESCRIPTOR.message_types_by_name['MultiWorkflowMetricsResponse']
 _POSTAPPDUPLICATIONSREQUEST = DESCRIPTOR.message_types_by_name['PostAppDuplicationsRequest']
 _GETAPPDUPLICATIONREQUEST = DESCRIPTOR.message_types_by_name['GetAppDuplicationRequest']
 _LISTAPPDUPLICATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListAppDuplicationsRequest']
@@ -260,6 +461,7 @@ _MULTITASKRESPONSE = DESCRIPTOR.message_types_by_name['MultiTaskResponse']
 _SINGLETASKRESPONSE = DESCRIPTOR.message_types_by_name['SingleTaskResponse']
 _GETTASKCOUNTREQUEST = DESCRIPTOR.message_types_by_name['GetTaskCountRequest']
 _SINGLETASKCOUNTRESPONSE = DESCRIPTOR.message_types_by_name['SingleTaskCountResponse']
+_PATCHANNOTATIONCOUNTSROLLUPREQUEST = DESCRIPTOR.message_types_by_name['PatchAnnotationCountsRollupRequest']
 _POSTLABELORDERSREQUEST = DESCRIPTOR.message_types_by_name['PostLabelOrdersRequest']
 _GETLABELORDERREQUEST = DESCRIPTOR.message_types_by_name['GetLabelOrderRequest']
 _LISTLABELORDERSREQUEST = DESCRIPTOR.message_types_by_name['ListLabelOrdersRequest']
@@ -278,9 +480,45 @@ _POSTSTATVALUESREQUEST = DESCRIPTOR.message_types_by_name['PostStatValuesRequest
 _MULTISTATVALUERESPONSE = DESCRIPTOR.message_types_by_name['MultiStatValueResponse']
 _POSTSTATVALUESAGGREGATEREQUEST = DESCRIPTOR.message_types_by_name['PostStatValuesAggregateRequest']
 _MULTISTATVALUEAGGREGATERESPONSE = DESCRIPTOR.message_types_by_name['MultiStatValueAggregateResponse']
+_POSTANALYTICSREQUEST = DESCRIPTOR.message_types_by_name['PostAnalyticsRequest']
+_POSTANALYTICSRESPONSE = DESCRIPTOR.message_types_by_name['PostAnalyticsResponse']
+_POSTSDKBILLINGREQUEST = DESCRIPTOR.message_types_by_name['PostSDKBillingRequest']
+_POSTSDKBILLINGRESPONSE = DESCRIPTOR.message_types_by_name['PostSDKBillingResponse']
+_MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE = DESCRIPTOR.message_types_by_name['MultiFindDuplicateAnnotationsJobResponse']
+_SINGLEFINDDUPLICATEANNOTATIONSJOBRESPONSE = DESCRIPTOR.message_types_by_name['SingleFindDuplicateAnnotationsJobResponse']
+_POSTFINDDUPLICATEANNOTATIONSJOBSREQUEST = DESCRIPTOR.message_types_by_name['PostFindDuplicateAnnotationsJobsRequest']
+_GETFINDDUPLICATEANNOTATIONSJOBREQUEST = DESCRIPTOR.message_types_by_name['GetFindDuplicateAnnotationsJobRequest']
+_LISTFINDDUPLICATEANNOTATIONSJOBSREQUEST = DESCRIPTOR.message_types_by_name['ListFindDuplicateAnnotationsJobsRequest']
+_DELETEFINDDUPLICATEANNOTATIONSJOBSREQUEST = DESCRIPTOR.message_types_by_name['DeleteFindDuplicateAnnotationsJobsRequest']
 _POSTTRENDINGMETRICSVIEWREQUEST = DESCRIPTOR.message_types_by_name['PostTrendingMetricsViewRequest']
 _LISTTRENDINGMETRICSVIEWSREQUEST = DESCRIPTOR.message_types_by_name['ListTrendingMetricsViewsRequest']
 _MULTITRENDINGMETRICSVIEWRESPONSE = DESCRIPTOR.message_types_by_name['MultiTrendingMetricsViewResponse']
+_POSTIDVALIDATIONREQUEST = DESCRIPTOR.message_types_by_name['PostIdValidationRequest']
+_MULTIIDVALIDATIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiIdValidationResponse']
+_LISTTAGCATEGORIESREQUEST = DESCRIPTOR.message_types_by_name['ListTagCategoriesRequest']
+_MULTITAGCATEGORYRESPONSE = DESCRIPTOR.message_types_by_name['MultiTagCategoryResponse']
+_POSTMODELSTARSREQUEST = DESCRIPTOR.message_types_by_name['PostModelStarsRequest']
+_MULTIMODELSTARRESPONSE = DESCRIPTOR.message_types_by_name['MultiModelStarResponse']
+_DELETEMODELSTARSREQUEST = DESCRIPTOR.message_types_by_name['DeleteModelStarsRequest']
+_DELETEMODELSTARSRESPONSE = DESCRIPTOR.message_types_by_name['DeleteModelStarsResponse']
+_POSTUSERSTARSREQUEST = DESCRIPTOR.message_types_by_name['PostUserStarsRequest']
+_MULTIUSERSTARRESPONSE = DESCRIPTOR.message_types_by_name['MultiUserStarResponse']
+_DELETEUSERSTARSREQUEST = DESCRIPTOR.message_types_by_name['DeleteUserStarsRequest']
+_DELETEUSERSTARSRESPONSE = DESCRIPTOR.message_types_by_name['DeleteUserStarsResponse']
+_POSTAPPSTARSREQUEST = DESCRIPTOR.message_types_by_name['PostAppStarsRequest']
+_MULTIAPPSTARRESPONSE = DESCRIPTOR.message_types_by_name['MultiAppStarResponse']
+_DELETEAPPSTARSREQUEST = DESCRIPTOR.message_types_by_name['DeleteAppStarsRequest']
+_DELETEAPPSTARSRESPONSE = DESCRIPTOR.message_types_by_name['DeleteAppStarsResponse']
+_POSTWORKFLOWSTARSREQUEST = DESCRIPTOR.message_types_by_name['PostWorkflowStarsRequest']
+_MULTIWORKFLOWSTARRESPONSE = DESCRIPTOR.message_types_by_name['MultiWorkflowStarResponse']
+_DELETEWORKFLOWSTARSREQUEST = DESCRIPTOR.message_types_by_name['DeleteWorkflowStarsRequest']
+_DELETEWORKFLOWSTARSRESPONSE = DESCRIPTOR.message_types_by_name['DeleteWorkflowStarsResponse']
+_LISTWEBNOTIFICATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListWebNotificationsRequest']
+_GETWEBNOTIFICATIONREQUEST = DESCRIPTOR.message_types_by_name['GetWebNotificationRequest']
+_DELETEWEBNOTIFICATIONSREQUEST = DESCRIPTOR.message_types_by_name['DeleteWebNotificationsRequest']
+_PATCHWEBNOTIFICATIONSREQUEST = DESCRIPTOR.message_types_by_name['PatchWebNotificationsRequest']
+_MULTIWEBNOTIFICATIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiWebNotificationResponse']
+_SINGLEWEBNOTIFICATIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleWebNotificationResponse']
 _GETMODULEREQUEST = DESCRIPTOR.message_types_by_name['GetModuleRequest']
 _LISTMODULESREQUEST = DESCRIPTOR.message_types_by_name['ListModulesRequest']
 _POSTMODULESREQUEST = DESCRIPTOR.message_types_by_name['PostModulesRequest']
@@ -301,6 +539,7 @@ _POSTINSTALLEDMODULEVERSIONSKEYREQUEST = DESCRIPTOR.message_types_by_name['PostI
 _DELETEINSTALLEDMODULEVERSIONSREQUEST = DESCRIPTOR.message_types_by_name['DeleteInstalledModuleVersionsRequest']
 _SINGLEINSTALLEDMODULEVERSIONRESPONSE = DESCRIPTOR.message_types_by_name['SingleInstalledModuleVersionResponse']
 _MULTIINSTALLEDMODULEVERSIONRESPONSE = DESCRIPTOR.message_types_by_name['MultiInstalledModuleVersionResponse']
+_LISTNEXTTASKASSIGNMENTSREQUEST = DESCRIPTOR.message_types_by_name['ListNextTaskAssignmentsRequest']
 _POSTBULKOPERATIONSREQUEST = DESCRIPTOR.message_types_by_name['PostBulkOperationsRequest']
 _LISTBULKOPERATIONSREQUEST = DESCRIPTOR.message_types_by_name['ListBulkOperationsRequest']
 _GETBULKOPERATIONREQUEST = DESCRIPTOR.message_types_by_name['GetBulkOperationRequest']
@@ -308,8 +547,16 @@ _CANCELBULKOPERATIONREQUEST = DESCRIPTOR.message_types_by_name['CancelBulkOperat
 _DELETEBULKOPERATIONREQUEST = DESCRIPTOR.message_types_by_name['DeleteBulkOperationRequest']
 _SINGLEBULKOPERATIONSRESPONSE = DESCRIPTOR.message_types_by_name['SingleBulkOperationsResponse']
 _MULTIBULKOPERATIONSRESPONSE = DESCRIPTOR.message_types_by_name['MultiBulkOperationsResponse']
+_PUTTASKASSIGNMENTSREQUEST = DESCRIPTOR.message_types_by_name['PutTaskAssignmentsRequest']
+_POSTWAITLISTEMAILSREQUEST = DESCRIPTOR.message_types_by_name['PostWaitlistEmailsRequest']
+_MULTIWAITLISTEMAILRESPONSE = DESCRIPTOR.message_types_by_name['MultiWaitlistEmailResponse']
+_GETSAMPLEDPREDICTMETRICSREQUEST = DESCRIPTOR.message_types_by_name['GetSampledPredictMetricsRequest']
+_MULTISAMPLEDPREDICTMETRICSRESPONSE = DESCRIPTOR.message_types_by_name['MultiSampledPredictMetricsResponse']
+_SAMPLEPREDICTMETRIC = DESCRIPTOR.message_types_by_name['SamplePredictMetric']
+_POSTINPUTSADDJOBSREQUEST = DESCRIPTOR.message_types_by_name['PostInputsAddJobsRequest']
 _LISTINPUTSADDJOBSREQUEST = DESCRIPTOR.message_types_by_name['ListInputsAddJobsRequest']
 _GETINPUTSADDJOBREQUEST = DESCRIPTOR.message_types_by_name['GetInputsAddJobRequest']
+_CANCELINPUTSADDJOBREQUEST = DESCRIPTOR.message_types_by_name['CancelInputsAddJobRequest']
 _MULTIINPUTSADDJOBRESPONSE = DESCRIPTOR.message_types_by_name['MultiInputsAddJobResponse']
 _SINGLEINPUTSADDJOBRESPONSE = DESCRIPTOR.message_types_by_name['SingleInputsAddJobResponse']
 _POSTUPLOADSREQUEST = DESCRIPTOR.message_types_by_name['PostUploadsRequest']
@@ -319,6 +566,13 @@ _GETUPLOADREQUEST = DESCRIPTOR.message_types_by_name['GetUploadRequest']
 _SINGLEUPLOADRESPONSE = DESCRIPTOR.message_types_by_name['SingleUploadResponse']
 _MULTIUPLOADRESPONSE = DESCRIPTOR.message_types_by_name['MultiUploadResponse']
 _PUTUPLOADCONTENTPARTSREQUEST = DESCRIPTOR.message_types_by_name['PutUploadContentPartsRequest']
+TestMessage = _reflection.GeneratedProtocolMessageType('TestMessage', (_message.Message,), {
+  'DESCRIPTOR' : _TESTMESSAGE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.TestMessage)
+  })
+_sym_db.RegisterMessage(TestMessage)
+
 Pagination = _reflection.GeneratedProtocolMessageType('Pagination', (_message.Message,), {
   'DESCRIPTOR' : _PAGINATION,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -438,6 +692,13 @@ PatchAppRequest = _reflection.GeneratedProtocolMessageType('PatchAppRequest', (_
   })
 _sym_db.RegisterMessage(PatchAppRequest)
 
+PatchAppOwnerRequest = _reflection.GeneratedProtocolMessageType('PatchAppOwnerRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHAPPOWNERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchAppOwnerRequest)
+  })
+_sym_db.RegisterMessage(PatchAppOwnerRequest)
+
 PatchAppsIdsRequest = _reflection.GeneratedProtocolMessageType('PatchAppsIdsRequest', (_message.Message,), {
   'DESCRIPTOR' : _PATCHAPPSIDSREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -514,6 +775,237 @@ MultiCollaborationsResponse = _reflection.GeneratedProtocolMessageType('MultiCol
   # @@protoc_insertion_point(class_scope:clarifai.api.MultiCollaborationsResponse)
   })
 _sym_db.RegisterMessage(MultiCollaborationsResponse)
+
+PostVerifyEmailRequest = _reflection.GeneratedProtocolMessageType('PostVerifyEmailRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTVERIFYEMAILREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostVerifyEmailRequest)
+  })
+_sym_db.RegisterMessage(PostVerifyEmailRequest)
+
+SingleVerifyEmailResponse = _reflection.GeneratedProtocolMessageType('SingleVerifyEmailResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEVERIFYEMAILRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleVerifyEmailResponse)
+  })
+_sym_db.RegisterMessage(SingleVerifyEmailResponse)
+
+ListAuthMethodsRequest = _reflection.GeneratedProtocolMessageType('ListAuthMethodsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTAUTHMETHODSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListAuthMethodsRequest)
+  })
+_sym_db.RegisterMessage(ListAuthMethodsRequest)
+
+PostLinkIdpUserRequest = _reflection.GeneratedProtocolMessageType('PostLinkIdpUserRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTLINKIDPUSERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostLinkIdpUserRequest)
+  })
+_sym_db.RegisterMessage(PostLinkIdpUserRequest)
+
+GetLoginInfoRequest = _reflection.GeneratedProtocolMessageType('GetLoginInfoRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETLOGININFOREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetLoginInfoRequest)
+  })
+_sym_db.RegisterMessage(GetLoginInfoRequest)
+
+GetLoginInfoResponse = _reflection.GeneratedProtocolMessageType('GetLoginInfoResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETLOGININFORESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetLoginInfoResponse)
+  })
+_sym_db.RegisterMessage(GetLoginInfoResponse)
+
+PostLinkIdpUserResponse = _reflection.GeneratedProtocolMessageType('PostLinkIdpUserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTLINKIDPUSERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostLinkIdpUserResponse)
+  })
+_sym_db.RegisterMessage(PostLinkIdpUserResponse)
+
+PostIdLoginFinalizerRequest = _reflection.GeneratedProtocolMessageType('PostIdLoginFinalizerRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTIDLOGINFINALIZERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostIdLoginFinalizerRequest)
+  })
+_sym_db.RegisterMessage(PostIdLoginFinalizerRequest)
+
+PostIdLoginFinalizerResponse = _reflection.GeneratedProtocolMessageType('PostIdLoginFinalizerResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTIDLOGINFINALIZERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostIdLoginFinalizerResponse)
+  })
+_sym_db.RegisterMessage(PostIdLoginFinalizerResponse)
+
+ListAuthMethodsResponse = _reflection.GeneratedProtocolMessageType('ListAuthMethodsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTAUTHMETHODSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListAuthMethodsResponse)
+  })
+_sym_db.RegisterMessage(ListAuthMethodsResponse)
+
+List2FAMethodsRequest = _reflection.GeneratedProtocolMessageType('List2FAMethodsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LIST2FAMETHODSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.List2FAMethodsRequest)
+  })
+_sym_db.RegisterMessage(List2FAMethodsRequest)
+
+List2FAMethodsResponse = _reflection.GeneratedProtocolMessageType('List2FAMethodsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LIST2FAMETHODSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.List2FAMethodsResponse)
+  })
+_sym_db.RegisterMessage(List2FAMethodsResponse)
+
+PostAuth2FATotpRegisterEnableRequest = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRegisterEnableRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPREGISTERENABLEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRegisterEnableRequest)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRegisterEnableRequest)
+
+PostAuth2FATotpRegisterEnableResponse = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRegisterEnableResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPREGISTERENABLERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRegisterEnableResponse)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRegisterEnableResponse)
+
+PostAuth2FATotpDisableRequest = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpDisableRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPDISABLEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpDisableRequest)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpDisableRequest)
+
+PostAuth2FATotpDisableResponse = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpDisableResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPDISABLERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpDisableResponse)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpDisableResponse)
+
+PostAuth2FATotpRegisterVerifyRequest = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRegisterVerifyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPREGISTERVERIFYREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRegisterVerifyRequest)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRegisterVerifyRequest)
+
+PostAuth2FATotpRegisterVerifyResponse = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRegisterVerifyResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPREGISTERVERIFYRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRegisterVerifyResponse)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRegisterVerifyResponse)
+
+PostAuth2FATotpLoginRequest = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpLoginRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPLOGINREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpLoginRequest)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpLoginRequest)
+
+PostAuth2FATotpRecoverRequest = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRecoverRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPRECOVERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRecoverRequest)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRecoverRequest)
+
+PostAuth2FATotpRecoverResponse = _reflection.GeneratedProtocolMessageType('PostAuth2FATotpRecoverResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAUTH2FATOTPRECOVERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAuth2FATotpRecoverResponse)
+  })
+_sym_db.RegisterMessage(PostAuth2FATotpRecoverResponse)
+
+GetAuth2FATotpRecoverConfirmRequest = _reflection.GeneratedProtocolMessageType('GetAuth2FATotpRecoverConfirmRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETAUTH2FATOTPRECOVERCONFIRMREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetAuth2FATotpRecoverConfirmRequest)
+  })
+_sym_db.RegisterMessage(GetAuth2FATotpRecoverConfirmRequest)
+
+GetAuth2FATotpRecoverConfirmResponse = _reflection.GeneratedProtocolMessageType('GetAuth2FATotpRecoverConfirmResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETAUTH2FATOTPRECOVERCONFIRMRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetAuth2FATotpRecoverConfirmResponse)
+  })
+_sym_db.RegisterMessage(GetAuth2FATotpRecoverConfirmResponse)
+
+RequestResetPasswordRequest = _reflection.GeneratedProtocolMessageType('RequestResetPasswordRequest', (_message.Message,), {
+  'DESCRIPTOR' : _REQUESTRESETPASSWORDREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.RequestResetPasswordRequest)
+  })
+_sym_db.RegisterMessage(RequestResetPasswordRequest)
+
+CompleteResetPasswordRequest = _reflection.GeneratedProtocolMessageType('CompleteResetPasswordRequest', (_message.Message,), {
+  'DESCRIPTOR' : _COMPLETERESETPASSWORDREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.CompleteResetPasswordRequest)
+  })
+_sym_db.RegisterMessage(CompleteResetPasswordRequest)
+
+PostLoginRequest = _reflection.GeneratedProtocolMessageType('PostLoginRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTLOGINREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostLoginRequest)
+  })
+_sym_db.RegisterMessage(PostLoginRequest)
+
+PostSignupRequest = _reflection.GeneratedProtocolMessageType('PostSignupRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTSIGNUPREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostSignupRequest)
+  })
+_sym_db.RegisterMessage(PostSignupRequest)
+
+Utm = _reflection.GeneratedProtocolMessageType('Utm', (_message.Message,), {
+  'DESCRIPTOR' : _UTM,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.Utm)
+  })
+_sym_db.RegisterMessage(Utm)
+
+SingleLoginResponse = _reflection.GeneratedProtocolMessageType('SingleLoginResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLELOGINRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleLoginResponse)
+  })
+_sym_db.RegisterMessage(SingleLoginResponse)
+
+PostLogoutRequest = _reflection.GeneratedProtocolMessageType('PostLogoutRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTLOGOUTREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostLogoutRequest)
+  })
+_sym_db.RegisterMessage(PostLogoutRequest)
+
+SingleLogoutResponse = _reflection.GeneratedProtocolMessageType('SingleLogoutResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLELOGOUTRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleLogoutResponse)
+  })
+_sym_db.RegisterMessage(SingleLogoutResponse)
+
+GetBillingUsageRequest = _reflection.GeneratedProtocolMessageType('GetBillingUsageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETBILLINGUSAGEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetBillingUsageRequest)
+  })
+_sym_db.RegisterMessage(GetBillingUsageRequest)
+
+GetBillingUsageResponse = _reflection.GeneratedProtocolMessageType('GetBillingUsageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETBILLINGUSAGERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetBillingUsageResponse)
+  })
+_sym_db.RegisterMessage(GetBillingUsageResponse)
 
 GetStatusCodeRequest = _reflection.GeneratedProtocolMessageType('GetStatusCodeRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETSTATUSCODEREQUEST,
@@ -648,12 +1140,33 @@ PostKnowledgeGraphsRequest = _reflection.GeneratedProtocolMessageType('PostKnowl
   })
 _sym_db.RegisterMessage(PostKnowledgeGraphsRequest)
 
+ListConceptMappingsRequest = _reflection.GeneratedProtocolMessageType('ListConceptMappingsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTCONCEPTMAPPINGSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListConceptMappingsRequest)
+  })
+_sym_db.RegisterMessage(ListConceptMappingsRequest)
+
+PostConceptMappingsRequest = _reflection.GeneratedProtocolMessageType('PostConceptMappingsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTCONCEPTMAPPINGSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostConceptMappingsRequest)
+  })
+_sym_db.RegisterMessage(PostConceptMappingsRequest)
+
 PostConceptMappingJobsRequest = _reflection.GeneratedProtocolMessageType('PostConceptMappingJobsRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTCONCEPTMAPPINGJOBSREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
   # @@protoc_insertion_point(class_scope:clarifai.api.PostConceptMappingJobsRequest)
   })
 _sym_db.RegisterMessage(PostConceptMappingJobsRequest)
+
+SingleConceptRelationResponse = _reflection.GeneratedProtocolMessageType('SingleConceptRelationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLECONCEPTRELATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleConceptRelationResponse)
+  })
+_sym_db.RegisterMessage(SingleConceptRelationResponse)
 
 MultiConceptRelationResponse = _reflection.GeneratedProtocolMessageType('MultiConceptRelationResponse', (_message.Message,), {
   'DESCRIPTOR' : _MULTICONCEPTRELATIONRESPONSE,
@@ -662,12 +1175,40 @@ MultiConceptRelationResponse = _reflection.GeneratedProtocolMessageType('MultiCo
   })
 _sym_db.RegisterMessage(MultiConceptRelationResponse)
 
+SingleKnowledgeGraphResponse = _reflection.GeneratedProtocolMessageType('SingleKnowledgeGraphResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEKNOWLEDGEGRAPHRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleKnowledgeGraphResponse)
+  })
+_sym_db.RegisterMessage(SingleKnowledgeGraphResponse)
+
 MultiKnowledgeGraphResponse = _reflection.GeneratedProtocolMessageType('MultiKnowledgeGraphResponse', (_message.Message,), {
   'DESCRIPTOR' : _MULTIKNOWLEDGEGRAPHRESPONSE,
   '__module__' : 'proto.clarifai.api.service_pb2'
   # @@protoc_insertion_point(class_scope:clarifai.api.MultiKnowledgeGraphResponse)
   })
 _sym_db.RegisterMessage(MultiKnowledgeGraphResponse)
+
+SingleConceptMappingResponse = _reflection.GeneratedProtocolMessageType('SingleConceptMappingResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLECONCEPTMAPPINGRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleConceptMappingResponse)
+  })
+_sym_db.RegisterMessage(SingleConceptMappingResponse)
+
+MultiConceptMappingResponse = _reflection.GeneratedProtocolMessageType('MultiConceptMappingResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTICONCEPTMAPPINGRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiConceptMappingResponse)
+  })
+_sym_db.RegisterMessage(MultiConceptMappingResponse)
+
+SingleConceptMappingJobResponse = _reflection.GeneratedProtocolMessageType('SingleConceptMappingJobResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLECONCEPTMAPPINGJOBRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleConceptMappingJobResponse)
+  })
+_sym_db.RegisterMessage(SingleConceptMappingJobResponse)
 
 MultiConceptMappingJobResponse = _reflection.GeneratedProtocolMessageType('MultiConceptMappingJobResponse', (_message.Message,), {
   'DESCRIPTOR' : _MULTICONCEPTMAPPINGJOBRESPONSE,
@@ -718,6 +1259,41 @@ MultiConceptLanguageResponse = _reflection.GeneratedProtocolMessageType('MultiCo
   })
 _sym_db.RegisterMessage(MultiConceptLanguageResponse)
 
+ListConceptReferencesRequest = _reflection.GeneratedProtocolMessageType('ListConceptReferencesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTCONCEPTREFERENCESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListConceptReferencesRequest)
+  })
+_sym_db.RegisterMessage(ListConceptReferencesRequest)
+
+SingleConceptReferenceResponse = _reflection.GeneratedProtocolMessageType('SingleConceptReferenceResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLECONCEPTREFERENCERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleConceptReferenceResponse)
+  })
+_sym_db.RegisterMessage(SingleConceptReferenceResponse)
+
+MultiConceptReferenceResponse = _reflection.GeneratedProtocolMessageType('MultiConceptReferenceResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTICONCEPTREFERENCERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiConceptReferenceResponse)
+  })
+_sym_db.RegisterMessage(MultiConceptReferenceResponse)
+
+GetHealthzRequest = _reflection.GeneratedProtocolMessageType('GetHealthzRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETHEALTHZREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetHealthzRequest)
+  })
+_sym_db.RegisterMessage(GetHealthzRequest)
+
+GetHealthzResponse = _reflection.GeneratedProtocolMessageType('GetHealthzResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETHEALTHZRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetHealthzResponse)
+  })
+_sym_db.RegisterMessage(GetHealthzResponse)
+
 GetInputRequest = _reflection.GeneratedProtocolMessageType('GetInputRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETINPUTREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -752,6 +1328,34 @@ PostInputsRequest = _reflection.GeneratedProtocolMessageType('PostInputsRequest'
   # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsRequest)
   })
 _sym_db.RegisterMessage(PostInputsRequest)
+
+PostInputsFileRequest = _reflection.GeneratedProtocolMessageType('PostInputsFileRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTINPUTSFILEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsFileRequest)
+  })
+_sym_db.RegisterMessage(PostInputsFileRequest)
+
+PostInputsNiFiRequest = _reflection.GeneratedProtocolMessageType('PostInputsNiFiRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTINPUTSNIFIREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsNiFiRequest)
+  })
+_sym_db.RegisterMessage(PostInputsNiFiRequest)
+
+PostInputsDocumentRequest = _reflection.GeneratedProtocolMessageType('PostInputsDocumentRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTINPUTSDOCUMENTREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsDocumentRequest)
+  })
+_sym_db.RegisterMessage(PostInputsDocumentRequest)
+
+PostInputsDocumentRequestBody = _reflection.GeneratedProtocolMessageType('PostInputsDocumentRequestBody', (_message.Message,), {
+  'DESCRIPTOR' : _POSTINPUTSDOCUMENTREQUESTBODY,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsDocumentRequestBody)
+  })
+_sym_db.RegisterMessage(PostInputsDocumentRequestBody)
 
 PatchInputsRequest = _reflection.GeneratedProtocolMessageType('PatchInputsRequest', (_message.Message,), {
   'DESCRIPTOR' : _PATCHINPUTSREQUEST,
@@ -1068,6 +1672,62 @@ MultiKeyResponse = _reflection.GeneratedProtocolMessageType('MultiKeyResponse', 
   })
 _sym_db.RegisterMessage(MultiKeyResponse)
 
+FetchLicenseRequest = _reflection.GeneratedProtocolMessageType('FetchLicenseRequest', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHLICENSEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.FetchLicenseRequest)
+  })
+_sym_db.RegisterMessage(FetchLicenseRequest)
+
+FetchLicenseResponse = _reflection.GeneratedProtocolMessageType('FetchLicenseResponse', (_message.Message,), {
+  'DESCRIPTOR' : _FETCHLICENSERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.FetchLicenseResponse)
+  })
+_sym_db.RegisterMessage(FetchLicenseResponse)
+
+ValidateLicenseRequest = _reflection.GeneratedProtocolMessageType('ValidateLicenseRequest', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATELICENSEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ValidateLicenseRequest)
+  })
+_sym_db.RegisterMessage(ValidateLicenseRequest)
+
+ValidateLicenseResponse = _reflection.GeneratedProtocolMessageType('ValidateLicenseResponse', (_message.Message,), {
+  'DESCRIPTOR' : _VALIDATELICENSERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ValidateLicenseResponse)
+  })
+_sym_db.RegisterMessage(ValidateLicenseResponse)
+
+ListLicensesRequest = _reflection.GeneratedProtocolMessageType('ListLicensesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTLICENSESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListLicensesRequest)
+  })
+_sym_db.RegisterMessage(ListLicensesRequest)
+
+GetLicenseRequest = _reflection.GeneratedProtocolMessageType('GetLicenseRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETLICENSEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetLicenseRequest)
+  })
+_sym_db.RegisterMessage(GetLicenseRequest)
+
+SingleLicenseResponse = _reflection.GeneratedProtocolMessageType('SingleLicenseResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLELICENSERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleLicenseResponse)
+  })
+_sym_db.RegisterMessage(SingleLicenseResponse)
+
+MultipleLicensesResponse = _reflection.GeneratedProtocolMessageType('MultipleLicensesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIPLELICENSESRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultipleLicensesResponse)
+  })
+_sym_db.RegisterMessage(MultipleLicensesResponse)
+
 GetModelRequest = _reflection.GeneratedProtocolMessageType('GetModelRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETMODELREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1376,6 +2036,20 @@ ListModelVersionInputExamplesRequest = _reflection.GeneratedProtocolMessageType(
   })
 _sym_db.RegisterMessage(ListModelVersionInputExamplesRequest)
 
+PostModelVersionInputExamplesRequest = _reflection.GeneratedProtocolMessageType('PostModelVersionInputExamplesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTMODELVERSIONINPUTEXAMPLESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostModelVersionInputExamplesRequest)
+  })
+_sym_db.RegisterMessage(PostModelVersionInputExamplesRequest)
+
+DeleteModelVersionInputExamplesRequest = _reflection.GeneratedProtocolMessageType('DeleteModelVersionInputExamplesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEMODELVERSIONINPUTEXAMPLESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteModelVersionInputExamplesRequest)
+  })
+_sym_db.RegisterMessage(DeleteModelVersionInputExamplesRequest)
+
 SingleModelVersionInputExampleResponse = _reflection.GeneratedProtocolMessageType('SingleModelVersionInputExampleResponse', (_message.Message,), {
   'DESCRIPTOR' : _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1396,6 +2070,20 @@ ListModelReferencesRequest = _reflection.GeneratedProtocolMessageType('ListModel
   # @@protoc_insertion_point(class_scope:clarifai.api.ListModelReferencesRequest)
   })
 _sym_db.RegisterMessage(ListModelReferencesRequest)
+
+PostModelReferencesRequest = _reflection.GeneratedProtocolMessageType('PostModelReferencesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTMODELREFERENCESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostModelReferencesRequest)
+  })
+_sym_db.RegisterMessage(PostModelReferencesRequest)
+
+DeleteModelReferencesRequest = _reflection.GeneratedProtocolMessageType('DeleteModelReferencesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEMODELREFERENCESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteModelReferencesRequest)
+  })
+_sym_db.RegisterMessage(DeleteModelReferencesRequest)
 
 MultiModelReferenceResponse = _reflection.GeneratedProtocolMessageType('MultiModelReferenceResponse', (_message.Message,), {
   'DESCRIPTOR' : _MULTIMODELREFERENCERESPONSE,
@@ -1523,6 +2211,13 @@ DeleteSearchRequest = _reflection.GeneratedProtocolMessageType('DeleteSearchRequ
   })
 _sym_db.RegisterMessage(DeleteSearchRequest)
 
+PostAttributeSearchRequest = _reflection.GeneratedProtocolMessageType('PostAttributeSearchRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTATTRIBUTESEARCHREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAttributeSearchRequest)
+  })
+_sym_db.RegisterMessage(PostAttributeSearchRequest)
+
 PostAnnotationsSearchesRequest = _reflection.GeneratedProtocolMessageType('PostAnnotationsSearchesRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTANNOTATIONSSEARCHESREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1635,6 +2330,356 @@ SingleAnnotationFilterResponse = _reflection.GeneratedProtocolMessageType('Singl
   })
 _sym_db.RegisterMessage(SingleAnnotationFilterResponse)
 
+ListClustersRequest = _reflection.GeneratedProtocolMessageType('ListClustersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTCLUSTERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListClustersRequest)
+  })
+_sym_db.RegisterMessage(ListClustersRequest)
+
+ListAnnotationsForClusterRequest = _reflection.GeneratedProtocolMessageType('ListAnnotationsForClusterRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTANNOTATIONSFORCLUSTERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListAnnotationsForClusterRequest)
+  })
+_sym_db.RegisterMessage(ListAnnotationsForClusterRequest)
+
+PostClustersSearchesRequest = _reflection.GeneratedProtocolMessageType('PostClustersSearchesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTCLUSTERSSEARCHESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostClustersSearchesRequest)
+  })
+_sym_db.RegisterMessage(PostClustersSearchesRequest)
+
+MultiClusterResponse = _reflection.GeneratedProtocolMessageType('MultiClusterResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTICLUSTERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiClusterResponse)
+  })
+_sym_db.RegisterMessage(MultiClusterResponse)
+
+GetSubscriptionRequest = _reflection.GeneratedProtocolMessageType('GetSubscriptionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETSUBSCRIPTIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetSubscriptionRequest)
+  })
+_sym_db.RegisterMessage(GetSubscriptionRequest)
+
+PostSubscriptionRequest = _reflection.GeneratedProtocolMessageType('PostSubscriptionRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTSUBSCRIPTIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostSubscriptionRequest)
+  })
+_sym_db.RegisterMessage(PostSubscriptionRequest)
+
+SingleSubscriptionResponse = _reflection.GeneratedProtocolMessageType('SingleSubscriptionResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLESUBSCRIPTIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleSubscriptionResponse)
+  })
+_sym_db.RegisterMessage(SingleSubscriptionResponse)
+
+ListCreditCardsRequest = _reflection.GeneratedProtocolMessageType('ListCreditCardsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTCREDITCARDSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListCreditCardsRequest)
+  })
+_sym_db.RegisterMessage(ListCreditCardsRequest)
+
+MultipleCreditCardResponse = _reflection.GeneratedProtocolMessageType('MultipleCreditCardResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIPLECREDITCARDRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultipleCreditCardResponse)
+  })
+_sym_db.RegisterMessage(MultipleCreditCardResponse)
+
+PostCreditCardRequest = _reflection.GeneratedProtocolMessageType('PostCreditCardRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTCREDITCARDREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostCreditCardRequest)
+  })
+_sym_db.RegisterMessage(PostCreditCardRequest)
+
+SingleCreditCardResponse = _reflection.GeneratedProtocolMessageType('SingleCreditCardResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLECREDITCARDRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleCreditCardResponse)
+  })
+_sym_db.RegisterMessage(SingleCreditCardResponse)
+
+DeleteCreditCardRequest = _reflection.GeneratedProtocolMessageType('DeleteCreditCardRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETECREDITCARDREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteCreditCardRequest)
+  })
+_sym_db.RegisterMessage(DeleteCreditCardRequest)
+
+PatchCreditCardsRequest = _reflection.GeneratedProtocolMessageType('PatchCreditCardsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHCREDITCARDSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchCreditCardsRequest)
+  })
+_sym_db.RegisterMessage(PatchCreditCardsRequest)
+
+GetShippingAddressRequest = _reflection.GeneratedProtocolMessageType('GetShippingAddressRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETSHIPPINGADDRESSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetShippingAddressRequest)
+  })
+_sym_db.RegisterMessage(GetShippingAddressRequest)
+
+PutShippingAddressRequest = _reflection.GeneratedProtocolMessageType('PutShippingAddressRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PUTSHIPPINGADDRESSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PutShippingAddressRequest)
+  })
+_sym_db.RegisterMessage(PutShippingAddressRequest)
+
+SingleShippingAddressResponse = _reflection.GeneratedProtocolMessageType('SingleShippingAddressResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLESHIPPINGADDRESSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleShippingAddressResponse)
+  })
+_sym_db.RegisterMessage(SingleShippingAddressResponse)
+
+ListPlansRequest = _reflection.GeneratedProtocolMessageType('ListPlansRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTPLANSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListPlansRequest)
+  })
+_sym_db.RegisterMessage(ListPlansRequest)
+
+MultiPlanResponse = _reflection.GeneratedProtocolMessageType('MultiPlanResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIPLANRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiPlanResponse)
+  })
+_sym_db.RegisterMessage(MultiPlanResponse)
+
+GetHistoricalUsageRequest = _reflection.GeneratedProtocolMessageType('GetHistoricalUsageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETHISTORICALUSAGEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetHistoricalUsageRequest)
+  })
+_sym_db.RegisterMessage(GetHistoricalUsageRequest)
+
+GetHistoricalUsageResponse = _reflection.GeneratedProtocolMessageType('GetHistoricalUsageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETHISTORICALUSAGERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetHistoricalUsageResponse)
+  })
+_sym_db.RegisterMessage(GetHistoricalUsageResponse)
+
+PostHistoricalUsageRequest = _reflection.GeneratedProtocolMessageType('PostHistoricalUsageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTHISTORICALUSAGEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostHistoricalUsageRequest)
+  })
+_sym_db.RegisterMessage(PostHistoricalUsageRequest)
+
+PostHistoricalUsageResponse = _reflection.GeneratedProtocolMessageType('PostHistoricalUsageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTHISTORICALUSAGERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostHistoricalUsageResponse)
+  })
+_sym_db.RegisterMessage(PostHistoricalUsageResponse)
+
+GetRealtimeUsageRequest = _reflection.GeneratedProtocolMessageType('GetRealtimeUsageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETREALTIMEUSAGEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetRealtimeUsageRequest)
+  })
+_sym_db.RegisterMessage(GetRealtimeUsageRequest)
+
+GetRealtimeUsageResponse = _reflection.GeneratedProtocolMessageType('GetRealtimeUsageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _GETREALTIMEUSAGERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetRealtimeUsageResponse)
+  })
+_sym_db.RegisterMessage(GetRealtimeUsageResponse)
+
+ListUsageIntervalsRequest = _reflection.GeneratedProtocolMessageType('ListUsageIntervalsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSAGEINTERVALSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUsageIntervalsRequest)
+  })
+_sym_db.RegisterMessage(ListUsageIntervalsRequest)
+
+ListUsageIntervalsResponse = _reflection.GeneratedProtocolMessageType('ListUsageIntervalsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSAGEINTERVALSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUsageIntervalsResponse)
+  })
+_sym_db.RegisterMessage(ListUsageIntervalsResponse)
+
+ListUserBillingCyclesRequest = _reflection.GeneratedProtocolMessageType('ListUserBillingCyclesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERBILLINGCYCLESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUserBillingCyclesRequest)
+  })
+_sym_db.RegisterMessage(ListUserBillingCyclesRequest)
+
+ListUserCyclesRequest = _reflection.GeneratedProtocolMessageType('ListUserCyclesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERCYCLESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUserCyclesRequest)
+  })
+_sym_db.RegisterMessage(ListUserCyclesRequest)
+
+ListUserBillingCyclesResponse = _reflection.GeneratedProtocolMessageType('ListUserBillingCyclesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERBILLINGCYCLESRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUserBillingCyclesResponse)
+  })
+_sym_db.RegisterMessage(ListUserBillingCyclesResponse)
+
+ListUserCyclesResponse = _reflection.GeneratedProtocolMessageType('ListUserCyclesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERCYCLESRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUserCyclesResponse)
+  })
+_sym_db.RegisterMessage(ListUserCyclesResponse)
+
+PostUsageRequest = _reflection.GeneratedProtocolMessageType('PostUsageRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTUSAGEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostUsageRequest)
+  })
+_sym_db.RegisterMessage(PostUsageRequest)
+
+PostUsageResponse = _reflection.GeneratedProtocolMessageType('PostUsageResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTUSAGERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostUsageResponse)
+  })
+_sym_db.RegisterMessage(PostUsageResponse)
+
+GetUserRequest = _reflection.GeneratedProtocolMessageType('GetUserRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETUSERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetUserRequest)
+  })
+_sym_db.RegisterMessage(GetUserRequest)
+
+ListUsersRequest = _reflection.GeneratedProtocolMessageType('ListUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUsersRequest)
+  })
+_sym_db.RegisterMessage(ListUsersRequest)
+
+PostUserConsentRequest = _reflection.GeneratedProtocolMessageType('PostUserConsentRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTUSERCONSENTREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostUserConsentRequest)
+  })
+_sym_db.RegisterMessage(PostUserConsentRequest)
+
+SingleUserResponse = _reflection.GeneratedProtocolMessageType('SingleUserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEUSERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleUserResponse)
+  })
+_sym_db.RegisterMessage(SingleUserResponse)
+
+MultiUserResponse = _reflection.GeneratedProtocolMessageType('MultiUserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIUSERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiUserResponse)
+  })
+_sym_db.RegisterMessage(MultiUserResponse)
+
+PatchUserRequest = _reflection.GeneratedProtocolMessageType('PatchUserRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHUSERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchUserRequest)
+  })
+_sym_db.RegisterMessage(PatchUserRequest)
+
+PostUserAccessRequest = _reflection.GeneratedProtocolMessageType('PostUserAccessRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTUSERACCESSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostUserAccessRequest)
+  })
+_sym_db.RegisterMessage(PostUserAccessRequest)
+
+GetUserAccessRequest = _reflection.GeneratedProtocolMessageType('GetUserAccessRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETUSERACCESSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetUserAccessRequest)
+  })
+_sym_db.RegisterMessage(GetUserAccessRequest)
+
+MultiUserAccessResponse = _reflection.GeneratedProtocolMessageType('MultiUserAccessResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIUSERACCESSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiUserAccessResponse)
+  })
+_sym_db.RegisterMessage(MultiUserAccessResponse)
+
+SingleUserAccessResponse = _reflection.GeneratedProtocolMessageType('SingleUserAccessResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEUSERACCESSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleUserAccessResponse)
+  })
+_sym_db.RegisterMessage(SingleUserAccessResponse)
+
+PostEmailsRequest = _reflection.GeneratedProtocolMessageType('PostEmailsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTEMAILSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostEmailsRequest)
+  })
+_sym_db.RegisterMessage(PostEmailsRequest)
+
+SingleEmailResponse = _reflection.GeneratedProtocolMessageType('SingleEmailResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEEMAILRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleEmailResponse)
+  })
+_sym_db.RegisterMessage(SingleEmailResponse)
+
+MultipleEmailResponse = _reflection.GeneratedProtocolMessageType('MultipleEmailResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIPLEEMAILRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultipleEmailResponse)
+  })
+_sym_db.RegisterMessage(MultipleEmailResponse)
+
+ListEmailsRequest = _reflection.GeneratedProtocolMessageType('ListEmailsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTEMAILSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListEmailsRequest)
+  })
+_sym_db.RegisterMessage(ListEmailsRequest)
+
+PostResendVerifyRequest = _reflection.GeneratedProtocolMessageType('PostResendVerifyRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTRESENDVERIFYREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostResendVerifyRequest)
+  })
+_sym_db.RegisterMessage(PostResendVerifyRequest)
+
+SingleResendVerifyResponse = _reflection.GeneratedProtocolMessageType('SingleResendVerifyResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLERESENDVERIFYRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleResendVerifyResponse)
+  })
+_sym_db.RegisterMessage(SingleResendVerifyResponse)
+
+DeleteEmailRequest = _reflection.GeneratedProtocolMessageType('DeleteEmailRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEEMAILREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteEmailRequest)
+  })
+_sym_db.RegisterMessage(DeleteEmailRequest)
+
+PostPrimaryEmailRequest = _reflection.GeneratedProtocolMessageType('PostPrimaryEmailRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTPRIMARYEMAILREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostPrimaryEmailRequest)
+  })
+_sym_db.RegisterMessage(PostPrimaryEmailRequest)
+
 PostValidatePasswordRequest = _reflection.GeneratedProtocolMessageType('PostValidatePasswordRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTVALIDATEPASSWORDREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1649,6 +2694,550 @@ SinglePasswordValidationResponse = _reflection.GeneratedProtocolMessageType('Sin
   })
 _sym_db.RegisterMessage(SinglePasswordValidationResponse)
 
+ListGlobalPasswordPoliciesRequest = _reflection.GeneratedProtocolMessageType('ListGlobalPasswordPoliciesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTGLOBALPASSWORDPOLICIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListGlobalPasswordPoliciesRequest)
+  })
+_sym_db.RegisterMessage(ListGlobalPasswordPoliciesRequest)
+
+ListPasswordPoliciesRequest = _reflection.GeneratedProtocolMessageType('ListPasswordPoliciesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTPASSWORDPOLICIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListPasswordPoliciesRequest)
+  })
+_sym_db.RegisterMessage(ListPasswordPoliciesRequest)
+
+PostPasswordPoliciesRequest = _reflection.GeneratedProtocolMessageType('PostPasswordPoliciesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTPASSWORDPOLICIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostPasswordPoliciesRequest)
+  })
+_sym_db.RegisterMessage(PostPasswordPoliciesRequest)
+
+PatchPasswordPoliciesRequest = _reflection.GeneratedProtocolMessageType('PatchPasswordPoliciesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHPASSWORDPOLICIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchPasswordPoliciesRequest)
+  })
+_sym_db.RegisterMessage(PatchPasswordPoliciesRequest)
+
+DeletePasswordPoliciesRequest = _reflection.GeneratedProtocolMessageType('DeletePasswordPoliciesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEPASSWORDPOLICIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeletePasswordPoliciesRequest)
+  })
+_sym_db.RegisterMessage(DeletePasswordPoliciesRequest)
+
+MultiplePasswordPoliciesResponse = _reflection.GeneratedProtocolMessageType('MultiplePasswordPoliciesResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIPLEPASSWORDPOLICIESRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiplePasswordPoliciesResponse)
+  })
+_sym_db.RegisterMessage(MultiplePasswordPoliciesResponse)
+
+UserFeatureConfigRequest = _reflection.GeneratedProtocolMessageType('UserFeatureConfigRequest', (_message.Message,), {
+  'DESCRIPTOR' : _USERFEATURECONFIGREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.UserFeatureConfigRequest)
+  })
+_sym_db.RegisterMessage(UserFeatureConfigRequest)
+
+SingleUserFeatureConfigResponse = _reflection.GeneratedProtocolMessageType('SingleUserFeatureConfigResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEUSERFEATURECONFIGRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleUserFeatureConfigResponse)
+  })
+_sym_db.RegisterMessage(SingleUserFeatureConfigResponse)
+
+PostOrganizationsRequest = _reflection.GeneratedProtocolMessageType('PostOrganizationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTORGANIZATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostOrganizationsRequest)
+  })
+_sym_db.RegisterMessage(PostOrganizationsRequest)
+
+ListOrganizationsRequest = _reflection.GeneratedProtocolMessageType('ListOrganizationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTORGANIZATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListOrganizationsRequest)
+  })
+_sym_db.RegisterMessage(ListOrganizationsRequest)
+
+ListUsersOrganizationsRequest = _reflection.GeneratedProtocolMessageType('ListUsersOrganizationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERSORGANIZATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListUsersOrganizationsRequest)
+  })
+_sym_db.RegisterMessage(ListUsersOrganizationsRequest)
+
+DeleteRequestingUserFromOrganizationRequest = _reflection.GeneratedProtocolMessageType('DeleteRequestingUserFromOrganizationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEREQUESTINGUSERFROMORGANIZATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteRequestingUserFromOrganizationRequest)
+  })
+_sym_db.RegisterMessage(DeleteRequestingUserFromOrganizationRequest)
+
+PostAcceptOrganizationInvitationRequest = _reflection.GeneratedProtocolMessageType('PostAcceptOrganizationInvitationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTACCEPTORGANIZATIONINVITATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAcceptOrganizationInvitationRequest)
+  })
+_sym_db.RegisterMessage(PostAcceptOrganizationInvitationRequest)
+
+PostDeclineOrganizationInvitationRequest = _reflection.GeneratedProtocolMessageType('PostDeclineOrganizationInvitationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTDECLINEORGANIZATIONINVITATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostDeclineOrganizationInvitationRequest)
+  })
+_sym_db.RegisterMessage(PostDeclineOrganizationInvitationRequest)
+
+GetOrganizationRequest = _reflection.GeneratedProtocolMessageType('GetOrganizationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETORGANIZATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetOrganizationRequest)
+  })
+_sym_db.RegisterMessage(GetOrganizationRequest)
+
+PatchOrganizationRequest = _reflection.GeneratedProtocolMessageType('PatchOrganizationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHORGANIZATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchOrganizationRequest)
+  })
+_sym_db.RegisterMessage(PatchOrganizationRequest)
+
+DeleteOrganizationRequest = _reflection.GeneratedProtocolMessageType('DeleteOrganizationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEORGANIZATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteOrganizationRequest)
+  })
+_sym_db.RegisterMessage(DeleteOrganizationRequest)
+
+SingleOrganizationResponse = _reflection.GeneratedProtocolMessageType('SingleOrganizationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEORGANIZATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleOrganizationResponse)
+  })
+_sym_db.RegisterMessage(SingleOrganizationResponse)
+
+MultiOrganizationResponse = _reflection.GeneratedProtocolMessageType('MultiOrganizationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIORGANIZATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiOrganizationResponse)
+  })
+_sym_db.RegisterMessage(MultiOrganizationResponse)
+
+MultiUsersOrganizationsResponse = _reflection.GeneratedProtocolMessageType('MultiUsersOrganizationsResponse', (_message.Message,), {
+
+  'UserOrganization' : _reflection.GeneratedProtocolMessageType('UserOrganization', (_message.Message,), {
+    'DESCRIPTOR' : _MULTIUSERSORGANIZATIONSRESPONSE_USERORGANIZATION,
+    '__module__' : 'proto.clarifai.api.service_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.MultiUsersOrganizationsResponse.UserOrganization)
+    })
+  ,
+  'DESCRIPTOR' : _MULTIUSERSORGANIZATIONSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiUsersOrganizationsResponse)
+  })
+_sym_db.RegisterMessage(MultiUsersOrganizationsResponse)
+_sym_db.RegisterMessage(MultiUsersOrganizationsResponse.UserOrganization)
+
+ListOrganizationAppMembersRequest = _reflection.GeneratedProtocolMessageType('ListOrganizationAppMembersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTORGANIZATIONAPPMEMBERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListOrganizationAppMembersRequest)
+  })
+_sym_db.RegisterMessage(ListOrganizationAppMembersRequest)
+
+ListOrganizationMembersRequest = _reflection.GeneratedProtocolMessageType('ListOrganizationMembersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTORGANIZATIONMEMBERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListOrganizationMembersRequest)
+  })
+_sym_db.RegisterMessage(ListOrganizationMembersRequest)
+
+PostOrganizationInvitationsRequest = _reflection.GeneratedProtocolMessageType('PostOrganizationInvitationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTORGANIZATIONINVITATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostOrganizationInvitationsRequest)
+  })
+_sym_db.RegisterMessage(PostOrganizationInvitationsRequest)
+
+PatchOrganizationInvitationsRequest = _reflection.GeneratedProtocolMessageType('PatchOrganizationInvitationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHORGANIZATIONINVITATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchOrganizationInvitationsRequest)
+  })
+_sym_db.RegisterMessage(PatchOrganizationInvitationsRequest)
+
+ListOrganizationInvitationsRequest = _reflection.GeneratedProtocolMessageType('ListOrganizationInvitationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTORGANIZATIONINVITATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListOrganizationInvitationsRequest)
+  })
+_sym_db.RegisterMessage(ListOrganizationInvitationsRequest)
+
+GetOrganizationInvitationRequest = _reflection.GeneratedProtocolMessageType('GetOrganizationInvitationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETORGANIZATIONINVITATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetOrganizationInvitationRequest)
+  })
+_sym_db.RegisterMessage(GetOrganizationInvitationRequest)
+
+GetOrganizationInvitationPublicRequest = _reflection.GeneratedProtocolMessageType('GetOrganizationInvitationPublicRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETORGANIZATIONINVITATIONPUBLICREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetOrganizationInvitationPublicRequest)
+  })
+_sym_db.RegisterMessage(GetOrganizationInvitationPublicRequest)
+
+SingleOrganizationInvitationResponse = _reflection.GeneratedProtocolMessageType('SingleOrganizationInvitationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEORGANIZATIONINVITATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleOrganizationInvitationResponse)
+  })
+_sym_db.RegisterMessage(SingleOrganizationInvitationResponse)
+
+MultiOrganizationInvitationResponse = _reflection.GeneratedProtocolMessageType('MultiOrganizationInvitationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIORGANIZATIONINVITATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiOrganizationInvitationResponse)
+  })
+_sym_db.RegisterMessage(MultiOrganizationInvitationResponse)
+
+PatchOrganizationMembersRequest = _reflection.GeneratedProtocolMessageType('PatchOrganizationMembersRequest', (_message.Message,), {
+
+  'PatchOrganizationMember' : _reflection.GeneratedProtocolMessageType('PatchOrganizationMember', (_message.Message,), {
+    'DESCRIPTOR' : _PATCHORGANIZATIONMEMBERSREQUEST_PATCHORGANIZATIONMEMBER,
+    '__module__' : 'proto.clarifai.api.service_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.PatchOrganizationMembersRequest.PatchOrganizationMember)
+    })
+  ,
+  'DESCRIPTOR' : _PATCHORGANIZATIONMEMBERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchOrganizationMembersRequest)
+  })
+_sym_db.RegisterMessage(PatchOrganizationMembersRequest)
+_sym_db.RegisterMessage(PatchOrganizationMembersRequest.PatchOrganizationMember)
+
+PostOrganizationMemberRequest = _reflection.GeneratedProtocolMessageType('PostOrganizationMemberRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTORGANIZATIONMEMBERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostOrganizationMemberRequest)
+  })
+_sym_db.RegisterMessage(PostOrganizationMemberRequest)
+
+DeleteOrganizationMemberRequest = _reflection.GeneratedProtocolMessageType('DeleteOrganizationMemberRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEORGANIZATIONMEMBERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteOrganizationMemberRequest)
+  })
+_sym_db.RegisterMessage(DeleteOrganizationMemberRequest)
+
+MultiOrganizationMemberResponse = _reflection.GeneratedProtocolMessageType('MultiOrganizationMemberResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIORGANIZATIONMEMBERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiOrganizationMemberResponse)
+  })
+_sym_db.RegisterMessage(MultiOrganizationMemberResponse)
+
+PostIdentityProvidersRequest = _reflection.GeneratedProtocolMessageType('PostIdentityProvidersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTIDENTITYPROVIDERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostIdentityProvidersRequest)
+  })
+_sym_db.RegisterMessage(PostIdentityProvidersRequest)
+
+ListIdentityProvidersRequest = _reflection.GeneratedProtocolMessageType('ListIdentityProvidersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTIDENTITYPROVIDERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListIdentityProvidersRequest)
+  })
+_sym_db.RegisterMessage(ListIdentityProvidersRequest)
+
+GetIdentityProviderRequest = _reflection.GeneratedProtocolMessageType('GetIdentityProviderRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETIDENTITYPROVIDERREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetIdentityProviderRequest)
+  })
+_sym_db.RegisterMessage(GetIdentityProviderRequest)
+
+PatchIdentityProvidersRequest = _reflection.GeneratedProtocolMessageType('PatchIdentityProvidersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHIDENTITYPROVIDERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchIdentityProvidersRequest)
+  })
+_sym_db.RegisterMessage(PatchIdentityProvidersRequest)
+
+DeleteIdentityProvidersRequest = _reflection.GeneratedProtocolMessageType('DeleteIdentityProvidersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEIDENTITYPROVIDERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteIdentityProvidersRequest)
+  })
+_sym_db.RegisterMessage(DeleteIdentityProvidersRequest)
+
+SingleIdentityProviderResponse = _reflection.GeneratedProtocolMessageType('SingleIdentityProviderResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEIDENTITYPROVIDERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleIdentityProviderResponse)
+  })
+_sym_db.RegisterMessage(SingleIdentityProviderResponse)
+
+MultiIdentityProviderResponse = _reflection.GeneratedProtocolMessageType('MultiIdentityProviderResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIIDENTITYPROVIDERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiIdentityProviderResponse)
+  })
+_sym_db.RegisterMessage(MultiIdentityProviderResponse)
+
+PostTeamsRequest = _reflection.GeneratedProtocolMessageType('PostTeamsRequest', (_message.Message,), {
+
+  'PostTeam' : _reflection.GeneratedProtocolMessageType('PostTeam', (_message.Message,), {
+    'DESCRIPTOR' : _POSTTEAMSREQUEST_POSTTEAM,
+    '__module__' : 'proto.clarifai.api.service_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.PostTeamsRequest.PostTeam)
+    })
+  ,
+  'DESCRIPTOR' : _POSTTEAMSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostTeamsRequest)
+  })
+_sym_db.RegisterMessage(PostTeamsRequest)
+_sym_db.RegisterMessage(PostTeamsRequest.PostTeam)
+
+ListTeamsRequest = _reflection.GeneratedProtocolMessageType('ListTeamsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTTEAMSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListTeamsRequest)
+  })
+_sym_db.RegisterMessage(ListTeamsRequest)
+
+GetTeamRequest = _reflection.GeneratedProtocolMessageType('GetTeamRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETTEAMREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetTeamRequest)
+  })
+_sym_db.RegisterMessage(GetTeamRequest)
+
+PatchTeamsRequest = _reflection.GeneratedProtocolMessageType('PatchTeamsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHTEAMSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchTeamsRequest)
+  })
+_sym_db.RegisterMessage(PatchTeamsRequest)
+
+DeleteTeamsRequest = _reflection.GeneratedProtocolMessageType('DeleteTeamsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETETEAMSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteTeamsRequest)
+  })
+_sym_db.RegisterMessage(DeleteTeamsRequest)
+
+SingleTeamResponse = _reflection.GeneratedProtocolMessageType('SingleTeamResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLETEAMRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleTeamResponse)
+  })
+_sym_db.RegisterMessage(SingleTeamResponse)
+
+MultiTeamResponse = _reflection.GeneratedProtocolMessageType('MultiTeamResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTITEAMRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiTeamResponse)
+  })
+_sym_db.RegisterMessage(MultiTeamResponse)
+
+AppIdentity = _reflection.GeneratedProtocolMessageType('AppIdentity', (_message.Message,), {
+  'DESCRIPTOR' : _APPIDENTITY,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.AppIdentity)
+  })
+_sym_db.RegisterMessage(AppIdentity)
+
+ListTeamAppsRequest = _reflection.GeneratedProtocolMessageType('ListTeamAppsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTTEAMAPPSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListTeamAppsRequest)
+  })
+_sym_db.RegisterMessage(ListTeamAppsRequest)
+
+PostTeamAppsRequest = _reflection.GeneratedProtocolMessageType('PostTeamAppsRequest', (_message.Message,), {
+
+  'TeamApp' : _reflection.GeneratedProtocolMessageType('TeamApp', (_message.Message,), {
+    'DESCRIPTOR' : _POSTTEAMAPPSREQUEST_TEAMAPP,
+    '__module__' : 'proto.clarifai.api.service_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.PostTeamAppsRequest.TeamApp)
+    })
+  ,
+  'DESCRIPTOR' : _POSTTEAMAPPSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostTeamAppsRequest)
+  })
+_sym_db.RegisterMessage(PostTeamAppsRequest)
+_sym_db.RegisterMessage(PostTeamAppsRequest.TeamApp)
+
+DeleteTeamAppsRequest = _reflection.GeneratedProtocolMessageType('DeleteTeamAppsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETETEAMAPPSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteTeamAppsRequest)
+  })
+_sym_db.RegisterMessage(DeleteTeamAppsRequest)
+
+MultiTeamAppsResponse = _reflection.GeneratedProtocolMessageType('MultiTeamAppsResponse', (_message.Message,), {
+
+  'TeamApp' : _reflection.GeneratedProtocolMessageType('TeamApp', (_message.Message,), {
+    'DESCRIPTOR' : _MULTITEAMAPPSRESPONSE_TEAMAPP,
+    '__module__' : 'proto.clarifai.api.service_pb2'
+    # @@protoc_insertion_point(class_scope:clarifai.api.MultiTeamAppsResponse.TeamApp)
+    })
+  ,
+  'DESCRIPTOR' : _MULTITEAMAPPSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiTeamAppsResponse)
+  })
+_sym_db.RegisterMessage(MultiTeamAppsResponse)
+_sym_db.RegisterMessage(MultiTeamAppsResponse.TeamApp)
+
+PostTeamUsersRequest = _reflection.GeneratedProtocolMessageType('PostTeamUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTTEAMUSERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostTeamUsersRequest)
+  })
+_sym_db.RegisterMessage(PostTeamUsersRequest)
+
+ListTeamUsersRequest = _reflection.GeneratedProtocolMessageType('ListTeamUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTTEAMUSERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListTeamUsersRequest)
+  })
+_sym_db.RegisterMessage(ListTeamUsersRequest)
+
+DeleteTeamUsersRequest = _reflection.GeneratedProtocolMessageType('DeleteTeamUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETETEAMUSERSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteTeamUsersRequest)
+  })
+_sym_db.RegisterMessage(DeleteTeamUsersRequest)
+
+MultiTeamUserResponse = _reflection.GeneratedProtocolMessageType('MultiTeamUserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTITEAMUSERRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiTeamUserResponse)
+  })
+_sym_db.RegisterMessage(MultiTeamUserResponse)
+
+ListRolesRequest = _reflection.GeneratedProtocolMessageType('ListRolesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTROLESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListRolesRequest)
+  })
+_sym_db.RegisterMessage(ListRolesRequest)
+
+GetRoleRequest = _reflection.GeneratedProtocolMessageType('GetRoleRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETROLEREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetRoleRequest)
+  })
+_sym_db.RegisterMessage(GetRoleRequest)
+
+SingleRoleResponse = _reflection.GeneratedProtocolMessageType('SingleRoleResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEROLERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleRoleResponse)
+  })
+_sym_db.RegisterMessage(SingleRoleResponse)
+
+MultiRoleResponse = _reflection.GeneratedProtocolMessageType('MultiRoleResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIROLERESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiRoleResponse)
+  })
+_sym_db.RegisterMessage(MultiRoleResponse)
+
+GetVocabRequest = _reflection.GeneratedProtocolMessageType('GetVocabRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETVOCABREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetVocabRequest)
+  })
+_sym_db.RegisterMessage(GetVocabRequest)
+
+ListVocabsRequest = _reflection.GeneratedProtocolMessageType('ListVocabsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTVOCABSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListVocabsRequest)
+  })
+_sym_db.RegisterMessage(ListVocabsRequest)
+
+PostVocabsRequest = _reflection.GeneratedProtocolMessageType('PostVocabsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTVOCABSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostVocabsRequest)
+  })
+_sym_db.RegisterMessage(PostVocabsRequest)
+
+PatchVocabsRequest = _reflection.GeneratedProtocolMessageType('PatchVocabsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHVOCABSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchVocabsRequest)
+  })
+_sym_db.RegisterMessage(PatchVocabsRequest)
+
+DeleteVocabRequest = _reflection.GeneratedProtocolMessageType('DeleteVocabRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEVOCABREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteVocabRequest)
+  })
+_sym_db.RegisterMessage(DeleteVocabRequest)
+
+DeleteVocabsRequest = _reflection.GeneratedProtocolMessageType('DeleteVocabsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEVOCABSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteVocabsRequest)
+  })
+_sym_db.RegisterMessage(DeleteVocabsRequest)
+
+ListVocabConceptsRequest = _reflection.GeneratedProtocolMessageType('ListVocabConceptsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTVOCABCONCEPTSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListVocabConceptsRequest)
+  })
+_sym_db.RegisterMessage(ListVocabConceptsRequest)
+
+PostVocabConceptsRequest = _reflection.GeneratedProtocolMessageType('PostVocabConceptsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTVOCABCONCEPTSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostVocabConceptsRequest)
+  })
+_sym_db.RegisterMessage(PostVocabConceptsRequest)
+
+DeleteVocabConceptRequest = _reflection.GeneratedProtocolMessageType('DeleteVocabConceptRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEVOCABCONCEPTREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteVocabConceptRequest)
+  })
+_sym_db.RegisterMessage(DeleteVocabConceptRequest)
+
+DeleteVocabConceptsRequest = _reflection.GeneratedProtocolMessageType('DeleteVocabConceptsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEVOCABCONCEPTSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteVocabConceptsRequest)
+  })
+_sym_db.RegisterMessage(DeleteVocabConceptsRequest)
+
+SingleVocabResponse = _reflection.GeneratedProtocolMessageType('SingleVocabResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEVOCABRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleVocabResponse)
+  })
+_sym_db.RegisterMessage(SingleVocabResponse)
+
+MultiVocabResponse = _reflection.GeneratedProtocolMessageType('MultiVocabResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIVOCABRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiVocabResponse)
+  })
+_sym_db.RegisterMessage(MultiVocabResponse)
+
 GetWorkflowRequest = _reflection.GeneratedProtocolMessageType('GetWorkflowRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETWORKFLOWREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1662,6 +3251,13 @@ ListWorkflowsRequest = _reflection.GeneratedProtocolMessageType('ListWorkflowsRe
   # @@protoc_insertion_point(class_scope:clarifai.api.ListWorkflowsRequest)
   })
 _sym_db.RegisterMessage(ListWorkflowsRequest)
+
+ListPublicWorkflowsRequest = _reflection.GeneratedProtocolMessageType('ListPublicWorkflowsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTPUBLICWORKFLOWSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListPublicWorkflowsRequest)
+  })
+_sym_db.RegisterMessage(ListPublicWorkflowsRequest)
 
 PostWorkflowsRequest = _reflection.GeneratedProtocolMessageType('PostWorkflowsRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTWORKFLOWSREQUEST,
@@ -1782,6 +3378,62 @@ SingleWorkflowVersionResponse = _reflection.GeneratedProtocolMessageType('Single
   })
 _sym_db.RegisterMessage(SingleWorkflowVersionResponse)
 
+PostWorkflowMetricsRequest = _reflection.GeneratedProtocolMessageType('PostWorkflowMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTWORKFLOWMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostWorkflowMetricsRequest)
+  })
+_sym_db.RegisterMessage(PostWorkflowMetricsRequest)
+
+GetWorkflowMetricsRequest = _reflection.GeneratedProtocolMessageType('GetWorkflowMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETWORKFLOWMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetWorkflowMetricsRequest)
+  })
+_sym_db.RegisterMessage(GetWorkflowMetricsRequest)
+
+GetWorkflowNodeMetricsRequest = _reflection.GeneratedProtocolMessageType('GetWorkflowNodeMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETWORKFLOWNODEMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetWorkflowNodeMetricsRequest)
+  })
+_sym_db.RegisterMessage(GetWorkflowNodeMetricsRequest)
+
+ListWorkflowMetricsRequest = _reflection.GeneratedProtocolMessageType('ListWorkflowMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTWORKFLOWMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListWorkflowMetricsRequest)
+  })
+_sym_db.RegisterMessage(ListWorkflowMetricsRequest)
+
+DeleteWorkflowMetricsRequest = _reflection.GeneratedProtocolMessageType('DeleteWorkflowMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEWORKFLOWMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteWorkflowMetricsRequest)
+  })
+_sym_db.RegisterMessage(DeleteWorkflowMetricsRequest)
+
+SingleWorkflowMetricsResponse = _reflection.GeneratedProtocolMessageType('SingleWorkflowMetricsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEWORKFLOWMETRICSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleWorkflowMetricsResponse)
+  })
+_sym_db.RegisterMessage(SingleWorkflowMetricsResponse)
+
+SingleWorkflowNodeMetricsResponse = _reflection.GeneratedProtocolMessageType('SingleWorkflowNodeMetricsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEWORKFLOWNODEMETRICSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleWorkflowNodeMetricsResponse)
+  })
+_sym_db.RegisterMessage(SingleWorkflowNodeMetricsResponse)
+
+MultiWorkflowMetricsResponse = _reflection.GeneratedProtocolMessageType('MultiWorkflowMetricsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIWORKFLOWMETRICSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiWorkflowMetricsResponse)
+  })
+_sym_db.RegisterMessage(MultiWorkflowMetricsResponse)
+
 PostAppDuplicationsRequest = _reflection.GeneratedProtocolMessageType('PostAppDuplicationsRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTAPPDUPLICATIONSREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -1879,6 +3531,13 @@ SingleTaskCountResponse = _reflection.GeneratedProtocolMessageType('SingleTaskCo
   # @@protoc_insertion_point(class_scope:clarifai.api.SingleTaskCountResponse)
   })
 _sym_db.RegisterMessage(SingleTaskCountResponse)
+
+PatchAnnotationCountsRollupRequest = _reflection.GeneratedProtocolMessageType('PatchAnnotationCountsRollupRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHANNOTATIONCOUNTSROLLUPREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchAnnotationCountsRollupRequest)
+  })
+_sym_db.RegisterMessage(PatchAnnotationCountsRollupRequest)
 
 PostLabelOrdersRequest = _reflection.GeneratedProtocolMessageType('PostLabelOrdersRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTLABELORDERSREQUEST,
@@ -2006,6 +3665,76 @@ MultiStatValueAggregateResponse = _reflection.GeneratedProtocolMessageType('Mult
   })
 _sym_db.RegisterMessage(MultiStatValueAggregateResponse)
 
+PostAnalyticsRequest = _reflection.GeneratedProtocolMessageType('PostAnalyticsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTANALYTICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAnalyticsRequest)
+  })
+_sym_db.RegisterMessage(PostAnalyticsRequest)
+
+PostAnalyticsResponse = _reflection.GeneratedProtocolMessageType('PostAnalyticsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTANALYTICSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAnalyticsResponse)
+  })
+_sym_db.RegisterMessage(PostAnalyticsResponse)
+
+PostSDKBillingRequest = _reflection.GeneratedProtocolMessageType('PostSDKBillingRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTSDKBILLINGREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostSDKBillingRequest)
+  })
+_sym_db.RegisterMessage(PostSDKBillingRequest)
+
+PostSDKBillingResponse = _reflection.GeneratedProtocolMessageType('PostSDKBillingResponse', (_message.Message,), {
+  'DESCRIPTOR' : _POSTSDKBILLINGRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostSDKBillingResponse)
+  })
+_sym_db.RegisterMessage(PostSDKBillingResponse)
+
+MultiFindDuplicateAnnotationsJobResponse = _reflection.GeneratedProtocolMessageType('MultiFindDuplicateAnnotationsJobResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiFindDuplicateAnnotationsJobResponse)
+  })
+_sym_db.RegisterMessage(MultiFindDuplicateAnnotationsJobResponse)
+
+SingleFindDuplicateAnnotationsJobResponse = _reflection.GeneratedProtocolMessageType('SingleFindDuplicateAnnotationsJobResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEFINDDUPLICATEANNOTATIONSJOBRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleFindDuplicateAnnotationsJobResponse)
+  })
+_sym_db.RegisterMessage(SingleFindDuplicateAnnotationsJobResponse)
+
+PostFindDuplicateAnnotationsJobsRequest = _reflection.GeneratedProtocolMessageType('PostFindDuplicateAnnotationsJobsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTFINDDUPLICATEANNOTATIONSJOBSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostFindDuplicateAnnotationsJobsRequest)
+  })
+_sym_db.RegisterMessage(PostFindDuplicateAnnotationsJobsRequest)
+
+GetFindDuplicateAnnotationsJobRequest = _reflection.GeneratedProtocolMessageType('GetFindDuplicateAnnotationsJobRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETFINDDUPLICATEANNOTATIONSJOBREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetFindDuplicateAnnotationsJobRequest)
+  })
+_sym_db.RegisterMessage(GetFindDuplicateAnnotationsJobRequest)
+
+ListFindDuplicateAnnotationsJobsRequest = _reflection.GeneratedProtocolMessageType('ListFindDuplicateAnnotationsJobsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTFINDDUPLICATEANNOTATIONSJOBSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListFindDuplicateAnnotationsJobsRequest)
+  })
+_sym_db.RegisterMessage(ListFindDuplicateAnnotationsJobsRequest)
+
+DeleteFindDuplicateAnnotationsJobsRequest = _reflection.GeneratedProtocolMessageType('DeleteFindDuplicateAnnotationsJobsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEFINDDUPLICATEANNOTATIONSJOBSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteFindDuplicateAnnotationsJobsRequest)
+  })
+_sym_db.RegisterMessage(DeleteFindDuplicateAnnotationsJobsRequest)
+
 PostTrendingMetricsViewRequest = _reflection.GeneratedProtocolMessageType('PostTrendingMetricsViewRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTTRENDINGMETRICSVIEWREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -2026,6 +3755,188 @@ MultiTrendingMetricsViewResponse = _reflection.GeneratedProtocolMessageType('Mul
   # @@protoc_insertion_point(class_scope:clarifai.api.MultiTrendingMetricsViewResponse)
   })
 _sym_db.RegisterMessage(MultiTrendingMetricsViewResponse)
+
+PostIdValidationRequest = _reflection.GeneratedProtocolMessageType('PostIdValidationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTIDVALIDATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostIdValidationRequest)
+  })
+_sym_db.RegisterMessage(PostIdValidationRequest)
+
+MultiIdValidationResponse = _reflection.GeneratedProtocolMessageType('MultiIdValidationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIIDVALIDATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiIdValidationResponse)
+  })
+_sym_db.RegisterMessage(MultiIdValidationResponse)
+
+ListTagCategoriesRequest = _reflection.GeneratedProtocolMessageType('ListTagCategoriesRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTTAGCATEGORIESREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListTagCategoriesRequest)
+  })
+_sym_db.RegisterMessage(ListTagCategoriesRequest)
+
+MultiTagCategoryResponse = _reflection.GeneratedProtocolMessageType('MultiTagCategoryResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTITAGCATEGORYRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiTagCategoryResponse)
+  })
+_sym_db.RegisterMessage(MultiTagCategoryResponse)
+
+PostModelStarsRequest = _reflection.GeneratedProtocolMessageType('PostModelStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTMODELSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostModelStarsRequest)
+  })
+_sym_db.RegisterMessage(PostModelStarsRequest)
+
+MultiModelStarResponse = _reflection.GeneratedProtocolMessageType('MultiModelStarResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIMODELSTARRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiModelStarResponse)
+  })
+_sym_db.RegisterMessage(MultiModelStarResponse)
+
+DeleteModelStarsRequest = _reflection.GeneratedProtocolMessageType('DeleteModelStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEMODELSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteModelStarsRequest)
+  })
+_sym_db.RegisterMessage(DeleteModelStarsRequest)
+
+DeleteModelStarsResponse = _reflection.GeneratedProtocolMessageType('DeleteModelStarsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEMODELSTARSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteModelStarsResponse)
+  })
+_sym_db.RegisterMessage(DeleteModelStarsResponse)
+
+PostUserStarsRequest = _reflection.GeneratedProtocolMessageType('PostUserStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTUSERSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostUserStarsRequest)
+  })
+_sym_db.RegisterMessage(PostUserStarsRequest)
+
+MultiUserStarResponse = _reflection.GeneratedProtocolMessageType('MultiUserStarResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIUSERSTARRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiUserStarResponse)
+  })
+_sym_db.RegisterMessage(MultiUserStarResponse)
+
+DeleteUserStarsRequest = _reflection.GeneratedProtocolMessageType('DeleteUserStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEUSERSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteUserStarsRequest)
+  })
+_sym_db.RegisterMessage(DeleteUserStarsRequest)
+
+DeleteUserStarsResponse = _reflection.GeneratedProtocolMessageType('DeleteUserStarsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEUSERSTARSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteUserStarsResponse)
+  })
+_sym_db.RegisterMessage(DeleteUserStarsResponse)
+
+PostAppStarsRequest = _reflection.GeneratedProtocolMessageType('PostAppStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTAPPSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostAppStarsRequest)
+  })
+_sym_db.RegisterMessage(PostAppStarsRequest)
+
+MultiAppStarResponse = _reflection.GeneratedProtocolMessageType('MultiAppStarResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIAPPSTARRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiAppStarResponse)
+  })
+_sym_db.RegisterMessage(MultiAppStarResponse)
+
+DeleteAppStarsRequest = _reflection.GeneratedProtocolMessageType('DeleteAppStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEAPPSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteAppStarsRequest)
+  })
+_sym_db.RegisterMessage(DeleteAppStarsRequest)
+
+DeleteAppStarsResponse = _reflection.GeneratedProtocolMessageType('DeleteAppStarsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEAPPSTARSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteAppStarsResponse)
+  })
+_sym_db.RegisterMessage(DeleteAppStarsResponse)
+
+PostWorkflowStarsRequest = _reflection.GeneratedProtocolMessageType('PostWorkflowStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTWORKFLOWSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostWorkflowStarsRequest)
+  })
+_sym_db.RegisterMessage(PostWorkflowStarsRequest)
+
+MultiWorkflowStarResponse = _reflection.GeneratedProtocolMessageType('MultiWorkflowStarResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIWORKFLOWSTARRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiWorkflowStarResponse)
+  })
+_sym_db.RegisterMessage(MultiWorkflowStarResponse)
+
+DeleteWorkflowStarsRequest = _reflection.GeneratedProtocolMessageType('DeleteWorkflowStarsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEWORKFLOWSTARSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteWorkflowStarsRequest)
+  })
+_sym_db.RegisterMessage(DeleteWorkflowStarsRequest)
+
+DeleteWorkflowStarsResponse = _reflection.GeneratedProtocolMessageType('DeleteWorkflowStarsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEWORKFLOWSTARSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteWorkflowStarsResponse)
+  })
+_sym_db.RegisterMessage(DeleteWorkflowStarsResponse)
+
+ListWebNotificationsRequest = _reflection.GeneratedProtocolMessageType('ListWebNotificationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTWEBNOTIFICATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListWebNotificationsRequest)
+  })
+_sym_db.RegisterMessage(ListWebNotificationsRequest)
+
+GetWebNotificationRequest = _reflection.GeneratedProtocolMessageType('GetWebNotificationRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETWEBNOTIFICATIONREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetWebNotificationRequest)
+  })
+_sym_db.RegisterMessage(GetWebNotificationRequest)
+
+DeleteWebNotificationsRequest = _reflection.GeneratedProtocolMessageType('DeleteWebNotificationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _DELETEWEBNOTIFICATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.DeleteWebNotificationsRequest)
+  })
+_sym_db.RegisterMessage(DeleteWebNotificationsRequest)
+
+PatchWebNotificationsRequest = _reflection.GeneratedProtocolMessageType('PatchWebNotificationsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PATCHWEBNOTIFICATIONSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PatchWebNotificationsRequest)
+  })
+_sym_db.RegisterMessage(PatchWebNotificationsRequest)
+
+MultiWebNotificationResponse = _reflection.GeneratedProtocolMessageType('MultiWebNotificationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIWEBNOTIFICATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiWebNotificationResponse)
+  })
+_sym_db.RegisterMessage(MultiWebNotificationResponse)
+
+SingleWebNotificationResponse = _reflection.GeneratedProtocolMessageType('SingleWebNotificationResponse', (_message.Message,), {
+  'DESCRIPTOR' : _SINGLEWEBNOTIFICATIONRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SingleWebNotificationResponse)
+  })
+_sym_db.RegisterMessage(SingleWebNotificationResponse)
 
 GetModuleRequest = _reflection.GeneratedProtocolMessageType('GetModuleRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETMODULEREQUEST,
@@ -2167,6 +4078,13 @@ MultiInstalledModuleVersionResponse = _reflection.GeneratedProtocolMessageType('
   })
 _sym_db.RegisterMessage(MultiInstalledModuleVersionResponse)
 
+ListNextTaskAssignmentsRequest = _reflection.GeneratedProtocolMessageType('ListNextTaskAssignmentsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTNEXTTASKASSIGNMENTSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.ListNextTaskAssignmentsRequest)
+  })
+_sym_db.RegisterMessage(ListNextTaskAssignmentsRequest)
+
 PostBulkOperationsRequest = _reflection.GeneratedProtocolMessageType('PostBulkOperationsRequest', (_message.Message,), {
   'DESCRIPTOR' : _POSTBULKOPERATIONSREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -2216,6 +4134,55 @@ MultiBulkOperationsResponse = _reflection.GeneratedProtocolMessageType('MultiBul
   })
 _sym_db.RegisterMessage(MultiBulkOperationsResponse)
 
+PutTaskAssignmentsRequest = _reflection.GeneratedProtocolMessageType('PutTaskAssignmentsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PUTTASKASSIGNMENTSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PutTaskAssignmentsRequest)
+  })
+_sym_db.RegisterMessage(PutTaskAssignmentsRequest)
+
+PostWaitlistEmailsRequest = _reflection.GeneratedProtocolMessageType('PostWaitlistEmailsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTWAITLISTEMAILSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostWaitlistEmailsRequest)
+  })
+_sym_db.RegisterMessage(PostWaitlistEmailsRequest)
+
+MultiWaitlistEmailResponse = _reflection.GeneratedProtocolMessageType('MultiWaitlistEmailResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTIWAITLISTEMAILRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiWaitlistEmailResponse)
+  })
+_sym_db.RegisterMessage(MultiWaitlistEmailResponse)
+
+GetSampledPredictMetricsRequest = _reflection.GeneratedProtocolMessageType('GetSampledPredictMetricsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _GETSAMPLEDPREDICTMETRICSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.GetSampledPredictMetricsRequest)
+  })
+_sym_db.RegisterMessage(GetSampledPredictMetricsRequest)
+
+MultiSampledPredictMetricsResponse = _reflection.GeneratedProtocolMessageType('MultiSampledPredictMetricsResponse', (_message.Message,), {
+  'DESCRIPTOR' : _MULTISAMPLEDPREDICTMETRICSRESPONSE,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.MultiSampledPredictMetricsResponse)
+  })
+_sym_db.RegisterMessage(MultiSampledPredictMetricsResponse)
+
+SamplePredictMetric = _reflection.GeneratedProtocolMessageType('SamplePredictMetric', (_message.Message,), {
+  'DESCRIPTOR' : _SAMPLEPREDICTMETRIC,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.SamplePredictMetric)
+  })
+_sym_db.RegisterMessage(SamplePredictMetric)
+
+PostInputsAddJobsRequest = _reflection.GeneratedProtocolMessageType('PostInputsAddJobsRequest', (_message.Message,), {
+  'DESCRIPTOR' : _POSTINPUTSADDJOBSREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.PostInputsAddJobsRequest)
+  })
+_sym_db.RegisterMessage(PostInputsAddJobsRequest)
+
 ListInputsAddJobsRequest = _reflection.GeneratedProtocolMessageType('ListInputsAddJobsRequest', (_message.Message,), {
   'DESCRIPTOR' : _LISTINPUTSADDJOBSREQUEST,
   '__module__' : 'proto.clarifai.api.service_pb2'
@@ -2229,6 +4196,13 @@ GetInputsAddJobRequest = _reflection.GeneratedProtocolMessageType('GetInputsAddJ
   # @@protoc_insertion_point(class_scope:clarifai.api.GetInputsAddJobRequest)
   })
 _sym_db.RegisterMessage(GetInputsAddJobRequest)
+
+CancelInputsAddJobRequest = _reflection.GeneratedProtocolMessageType('CancelInputsAddJobRequest', (_message.Message,), {
+  'DESCRIPTOR' : _CANCELINPUTSADDJOBREQUEST,
+  '__module__' : 'proto.clarifai.api.service_pb2'
+  # @@protoc_insertion_point(class_scope:clarifai.api.CancelInputsAddJobRequest)
+  })
+_sym_db.RegisterMessage(CancelInputsAddJobRequest)
 
 MultiInputsAddJobResponse = _reflection.GeneratedProtocolMessageType('MultiInputsAddJobResponse', (_message.Message,), {
   'DESCRIPTOR' : _MULTIINPUTSADDJOBRESPONSE,
@@ -2297,7 +4271,7 @@ _V2 = DESCRIPTOR.services_by_name['V2']
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\025com.clarifai.grpc.apiP\001Z7github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api\242\002\004CAIP'
+  DESCRIPTOR._serialized_options = b'\n\025com.clarifai.grpc.apiP\001Z\014clarifai/api\242\002\004CAIP'
   _MULTIANNOTATIONRESPONSE.fields_by_name['annotations']._options = None
   _MULTIANNOTATIONRESPONSE.fields_by_name['annotations']._serialized_options = b'\200\265\030\001'
   _LISTAPPSREQUEST.fields_by_name['name']._options = None
@@ -2308,6 +4282,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _MULTICOLLABORATORSRESPONSE.fields_by_name['collaborators']._serialized_options = b'\200\265\030\001'
   _MULTICOLLABORATIONSRESPONSE.fields_by_name['collaborations']._options = None
   _MULTICOLLABORATIONSRESPONSE.fields_by_name['collaborations']._serialized_options = b'\200\265\030\001'
+  _SINGLELOGINRESPONSE.fields_by_name['v2_user_id']._options = None
+  _SINGLELOGINRESPONSE.fields_by_name['v2_user_id']._serialized_options = b'\030\001'
   _MULTICONCEPTRESPONSE.fields_by_name['concepts']._options = None
   _MULTICONCEPTRESPONSE.fields_by_name['concepts']._serialized_options = b'\200\265\030\001'
   _MULTICONCEPTCOUNTRESPONSE.fields_by_name['concept_counts']._options = None
@@ -2316,8 +4292,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _MULTICONCEPTRELATIONRESPONSE.fields_by_name['concept_relations']._serialized_options = b'\200\265\030\001'
   _MULTIKNOWLEDGEGRAPHRESPONSE.fields_by_name['knowledge_graphs']._options = None
   _MULTIKNOWLEDGEGRAPHRESPONSE.fields_by_name['knowledge_graphs']._serialized_options = b'\200\265\030\001'
+  _MULTICONCEPTMAPPINGRESPONSE.fields_by_name['concept_mappings']._options = None
+  _MULTICONCEPTMAPPINGRESPONSE.fields_by_name['concept_mappings']._serialized_options = b'\200\265\030\001'
   _MULTICONCEPTLANGUAGERESPONSE.fields_by_name['concept_languages']._options = None
   _MULTICONCEPTLANGUAGERESPONSE.fields_by_name['concept_languages']._serialized_options = b'\200\265\030\001'
+  _MULTICONCEPTREFERENCERESPONSE.fields_by_name['concept_references']._options = None
+  _MULTICONCEPTREFERENCERESPONSE.fields_by_name['concept_references']._serialized_options = b'\200\265\030\001'
+  _POSTINPUTSNIFIREQUEST._options = None
+  _POSTINPUTSNIFIREQUEST._serialized_options = b'\240\234\'\001'
+  _POSTINPUTSDOCUMENTREQUEST._options = None
+  _POSTINPUTSDOCUMENTREQUEST._serialized_options = b'\240\234\'\001'
+  _POSTINPUTSDOCUMENTREQUESTBODY._options = None
+  _POSTINPUTSDOCUMENTREQUESTBODY._serialized_options = b'\240\234\'\001'
   _MULTIINPUTRESPONSE.fields_by_name['inputs']._options = None
   _MULTIINPUTRESPONSE.fields_by_name['inputs']._serialized_options = b'\200\265\030\001'
   _MULTIINPUTANNOTATIONRESPONSE.fields_by_name['hits']._options = None
@@ -2334,6 +4320,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _MULTIDATASETVERSIONMETRICSGROUPRESPONSE.fields_by_name['dataset_version_metrics_groups']._serialized_options = b'\200\265\030\001'
   _MULTIKEYRESPONSE.fields_by_name['keys']._options = None
   _MULTIKEYRESPONSE.fields_by_name['keys']._serialized_options = b'\200\265\030\001'
+  _MULTIPLELICENSESRESPONSE.fields_by_name['licenses']._options = None
+  _MULTIPLELICENSESRESPONSE.fields_by_name['licenses']._serialized_options = b'\200\265\030\001'
   _POSTMODELSREQUEST.fields_by_name['model']._options = None
   _POSTMODELSREQUEST.fields_by_name['model']._serialized_options = b'\030\001'
   _MULTIMODELRESPONSE.fields_by_name['models']._options = None
@@ -2354,26 +4342,70 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _MULTISEARCHRESPONSE.fields_by_name['hits']._serialized_options = b'\200\265\030\001'
   _MULTIANNOTATIONFILTERRESPONSE.fields_by_name['annotation_filters']._options = None
   _MULTIANNOTATIONFILTERRESPONSE.fields_by_name['annotation_filters']._serialized_options = b'\200\265\030\001'
+  _MULTICLUSTERRESPONSE.fields_by_name['clusters']._options = None
+  _MULTICLUSTERRESPONSE.fields_by_name['clusters']._serialized_options = b'\200\265\030\001'
+  _GETHISTORICALUSAGERESPONSE.fields_by_name['usage']._options = None
+  _GETHISTORICALUSAGERESPONSE.fields_by_name['usage']._serialized_options = b'\200\265\030\001'
+  _POSTHISTORICALUSAGERESPONSE.fields_by_name['usage']._options = None
+  _POSTHISTORICALUSAGERESPONSE.fields_by_name['usage']._serialized_options = b'\200\265\030\001'
+  _LISTUSERBILLINGCYCLESRESPONSE.fields_by_name['billing_cycles']._options = None
+  _LISTUSERBILLINGCYCLESRESPONSE.fields_by_name['billing_cycles']._serialized_options = b'\200\265\030\001'
+  _LISTUSERCYCLESRESPONSE.fields_by_name['usage_cycles']._options = None
+  _LISTUSERCYCLESRESPONSE.fields_by_name['usage_cycles']._serialized_options = b'\200\265\030\001'
+  _MULTIUSERRESPONSE.fields_by_name['users']._options = None
+  _MULTIUSERRESPONSE.fields_by_name['users']._serialized_options = b'\200\265\030\001'
+  _MULTIORGANIZATIONRESPONSE.fields_by_name['organizations']._options = None
+  _MULTIORGANIZATIONRESPONSE.fields_by_name['organizations']._serialized_options = b'\200\265\030\001'
+  _MULTIUSERSORGANIZATIONSRESPONSE.fields_by_name['organizations']._options = None
+  _MULTIUSERSORGANIZATIONSRESPONSE.fields_by_name['organizations']._serialized_options = b'\200\265\030\001'
+  _MULTIORGANIZATIONINVITATIONRESPONSE.fields_by_name['invitations']._options = None
+  _MULTIORGANIZATIONINVITATIONRESPONSE.fields_by_name['invitations']._serialized_options = b'\200\265\030\001'
+  _MULTIORGANIZATIONMEMBERRESPONSE.fields_by_name['organization_members']._options = None
+  _MULTIORGANIZATIONMEMBERRESPONSE.fields_by_name['organization_members']._serialized_options = b'\200\265\030\001'
+  _MULTIIDENTITYPROVIDERRESPONSE.fields_by_name['identity_providers']._options = None
+  _MULTIIDENTITYPROVIDERRESPONSE.fields_by_name['identity_providers']._serialized_options = b'\200\265\030\001'
+  _MULTITEAMRESPONSE.fields_by_name['teams']._options = None
+  _MULTITEAMRESPONSE.fields_by_name['teams']._serialized_options = b'\200\265\030\001'
+  _POSTTEAMAPPSREQUEST.fields_by_name['apps']._options = None
+  _POSTTEAMAPPSREQUEST.fields_by_name['apps']._serialized_options = b'\200\265\030\001'
+  _DELETETEAMAPPSREQUEST.fields_by_name['app_ids']._options = None
+  _DELETETEAMAPPSREQUEST.fields_by_name['app_ids']._serialized_options = b'\200\265\030\001'
+  _MULTITEAMAPPSRESPONSE.fields_by_name['apps']._options = None
+  _MULTITEAMAPPSRESPONSE.fields_by_name['apps']._serialized_options = b'\200\265\030\001'
+  _MULTITEAMUSERRESPONSE.fields_by_name['team_users']._options = None
+  _MULTITEAMUSERRESPONSE.fields_by_name['team_users']._serialized_options = b'\200\265\030\001'
+  _MULTIROLERESPONSE.fields_by_name['roles']._options = None
+  _MULTIROLERESPONSE.fields_by_name['roles']._serialized_options = b'\200\265\030\001'
+  _MULTIVOCABRESPONSE.fields_by_name['vocabs']._options = None
+  _MULTIVOCABRESPONSE.fields_by_name['vocabs']._serialized_options = b'\200\265\030\001'
   _LISTWORKFLOWSREQUEST.fields_by_name['id']._options = None
   _LISTWORKFLOWSREQUEST.fields_by_name['id']._serialized_options = b'\030\001'
   _MULTIWORKFLOWRESPONSE.fields_by_name['workflows']._options = None
   _MULTIWORKFLOWRESPONSE.fields_by_name['workflows']._serialized_options = b'\200\265\030\001'
   _MULTIWORKFLOWVERSIONRESPONSE.fields_by_name['workflow_versions']._options = None
   _MULTIWORKFLOWVERSIONRESPONSE.fields_by_name['workflow_versions']._serialized_options = b'\200\265\030\001'
+  _MULTIWORKFLOWMETRICSRESPONSE.fields_by_name['workflow_metrics']._options = None
+  _MULTIWORKFLOWMETRICSRESPONSE.fields_by_name['workflow_metrics']._serialized_options = b'\200\265\030\001'
   _MULTITASKRESPONSE.fields_by_name['tasks']._options = None
   _MULTITASKRESPONSE.fields_by_name['tasks']._serialized_options = b'\200\265\030\001'
   _MULTILABELORDERRESPONSE.fields_by_name['label_orders']._options = None
   _MULTILABELORDERRESPONSE.fields_by_name['label_orders']._serialized_options = b'\200\265\030\001'
   _MULTISTATVALUERESPONSE.fields_by_name['stat_values']._options = None
   _MULTISTATVALUERESPONSE.fields_by_name['stat_values']._serialized_options = b'\200\265\030\001'
+  _MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE.fields_by_name['find_duplicate_annotations_jobs']._options = None
+  _MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE.fields_by_name['find_duplicate_annotations_jobs']._serialized_options = b'\200\265\030\001'
   _MULTIMODULERESPONSE.fields_by_name['modules']._options = None
   _MULTIMODULERESPONSE.fields_by_name['modules']._serialized_options = b'\200\265\030\001'
   _MULTIMODULEVERSIONRESPONSE.fields_by_name['module_versions']._options = None
   _MULTIMODULEVERSIONRESPONSE.fields_by_name['module_versions']._serialized_options = b'\200\265\030\001'
   _MULTIINSTALLEDMODULEVERSIONRESPONSE.fields_by_name['installed_module_versions']._options = None
   _MULTIINSTALLEDMODULEVERSIONRESPONSE.fields_by_name['installed_module_versions']._serialized_options = b'\200\265\030\001'
+  _MULTIWAITLISTEMAILRESPONSE.fields_by_name['waitlist_emails']._options = None
+  _MULTIWAITLISTEMAILRESPONSE.fields_by_name['waitlist_emails']._serialized_options = b'\200\265\030\001'
   _MULTIINPUTSADDJOBRESPONSE.fields_by_name['inputs_add_jobs']._options = None
   _MULTIINPUTSADDJOBRESPONSE.fields_by_name['inputs_add_jobs']._serialized_options = b'\200\265\030\001'
+  _V2.methods_by_name['Echo']._options = None
+  _V2.methods_by_name['Echo']._serialized_options = b'\202\323\344\223\002\025\"\020/v2/example/echo:\001*\210\234\'\001\230\234\'\002'
   _V2.methods_by_name['ListConceptRelations']._options = None
   _V2.methods_by_name['ListConceptRelations']._serialized_options = b'\202\323\344\223\002\253\001\022Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/relationsZN\022L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/relations\230\234\'\005\220\234\'\013'
   _V2.methods_by_name['PostConceptRelations']._options = None
@@ -2394,6 +4426,26 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PostConcepts']._serialized_options = b'\202\323\344\223\002Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\001*Z\021\"\014/v2/concepts:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
   _V2.methods_by_name['PatchConcepts']._options = None
   _V2.methods_by_name['PatchConcepts']._serialized_options = b'\202\323\344\223\002Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts:\001*Z\0212\014/v2/concepts:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['GetVocab']._options = None
+  _V2.methods_by_name['GetVocab']._serialized_options = b'\202\323\344\223\002f\022K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}Z\027\022\025/v2/vocabs/{vocab_id}\210\234\'\001\230\234\'\002\220\234\'\013'
+  _V2.methods_by_name['ListVocabs']._options = None
+  _V2.methods_by_name['ListVocabs']._serialized_options = b'\202\323\344\223\002P\022@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabsZ\014\022\n/v2/vocabs\210\234\'\001\230\234\'\002\220\234\'\013'
+  _V2.methods_by_name['PostVocabs']._options = None
+  _V2.methods_by_name['PostVocabs']._serialized_options = b'\202\323\344\223\002V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\001*Z\017\"\n/v2/vocabs:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['PatchVocabs']._options = None
+  _V2.methods_by_name['PatchVocabs']._serialized_options = b'\202\323\344\223\002V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\001*Z\0172\n/v2/vocabs:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['DeleteVocab']._options = None
+  _V2.methods_by_name['DeleteVocab']._serialized_options = b'\202\323\344\223\002f*K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}Z\027*\025/v2/vocabs/{vocab_id}\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\r\220\234\'\013'
+  _V2.methods_by_name['DeleteVocabs']._options = None
+  _V2.methods_by_name['DeleteVocabs']._serialized_options = b'\202\323\344\223\002V*@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs:\001*Z\017*\n/v2/vocabs:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\r\220\234\'\013'
+  _V2.methods_by_name['ListVocabConcepts']._options = None
+  _V2.methods_by_name['ListVocabConcepts']._serialized_options = b'\202\323\344\223\002x\022T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/conceptsZ \022\036/v2/vocabs/{vocab_id}/concepts\210\234\'\001\230\234\'\002\220\234\'\013'
+  _V2.methods_by_name['PostVocabConcepts']._options = None
+  _V2.methods_by_name['PostVocabConcepts']._serialized_options = b'\202\323\344\223\002~\"T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts:\001*Z#\"\036/v2/vocabs/{vocab_id}/concepts:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['DeleteVocabConcept']._options = None
+  _V2.methods_by_name['DeleteVocabConcept']._serialized_options = b'\202\323\344\223\002\222\001*a/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts/{concept_id}Z-*+/v2/vocabs/{vocab_id}/concepts/{concept_id}\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\r\220\234\'\013'
+  _V2.methods_by_name['DeleteVocabConcepts']._options = None
+  _V2.methods_by_name['DeleteVocabConcepts']._serialized_options = b'\202\323\344\223\002~*T/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vocabs/{vocab_id}/concepts:\001*Z#*\036/v2/vocabs/{vocab_id}/concepts:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\r\220\234\'\013'
   _V2.methods_by_name['GetConceptLanguage']._options = None
   _V2.methods_by_name['GetConceptLanguage']._serialized_options = b'\202\323\344\223\002\230\001\022d/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages/{language}Z0\022./v2/concepts/{concept_id}/languages/{language}\230\234\'\002\220\234\'\013'
   _V2.methods_by_name['ListConceptLanguages']._options = None
@@ -2402,12 +4454,18 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PostConceptLanguages']._serialized_options = b'\202\323\344\223\002\210\001\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\001*Z(\"#/v2/concepts/{concept_id}/languages:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
   _V2.methods_by_name['PatchConceptLanguages']._options = None
   _V2.methods_by_name['PatchConceptLanguages']._serialized_options = b'\202\323\344\223\002\210\0012Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/languages:\001*Z(2#/v2/concepts/{concept_id}/languages:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['ListConceptReferences']._options = None
+  _V2.methods_by_name['ListConceptReferences']._serialized_options = b'\202\323\344\223\002\204\001\022Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/{concept_id}/referencesZ&\022$/v2/concepts/{concept_id}/references\210\234\'\001\230\234\'\002\220\234\'\013'
   _V2.methods_by_name['ListKnowledgeGraphs']._options = None
   _V2.methods_by_name['ListKnowledgeGraphs']._serialized_options = b'\202\323\344\223\002v\022S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphsZ\037\022\035/v2/concepts/knowledge_graphs\230\234\'\002\220\234\'\013'
   _V2.methods_by_name['PostKnowledgeGraphs']._options = None
   _V2.methods_by_name['PostKnowledgeGraphs']._serialized_options = b'\202\323\344\223\002|\"S/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/knowledge_graphs:\001*Z\"\"\035/v2/concepts/knowledge_graphs:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
   _V2.methods_by_name['PostConceptMappingJobs']._options = None
   _V2.methods_by_name['PostConceptMappingJobs']._serialized_options = b'\202\323\344\223\002v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappings/jobs:\001*Z\037\"\032/v2/concepts/mappings/jobs:\001*\230\234\'\002\220\234\'\n\220\234\'\013'
+  _V2.methods_by_name['ListConceptMappings']._options = None
+  _V2.methods_by_name['ListConceptMappings']._serialized_options = b'\202\323\344\223\002f\022K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappingsZ\027\022\025/v2/concepts/mappings\210\234\'\001\230\234\'\002\220\234\'\013'
+  _V2.methods_by_name['PostConceptMappings']._options = None
+  _V2.methods_by_name['PostConceptMappings']._serialized_options = b'\202\323\344\223\002l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/concepts/mappings:\001*Z\032\"\025/v2/concepts/mappings:\001*\210\234\'\001\230\234\'\002\220\234\'\n\220\234\'\013'
   _V2.methods_by_name['GetAnnotation']._options = None
   _V2.methods_by_name['GetAnnotation']._serialized_options = b'\202\323\344\223\002\236\001\022g/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/{input_id}/annotations/{annotation_id}Z3\0221/v2/inputs/{input_id}/annotations/{annotation_id}\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\017'
   _V2.methods_by_name['ListAnnotations']._options = None
@@ -2438,6 +4496,12 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['ListInputs']._serialized_options = b'\202\323\344\223\002P\022@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputsZ\014\022\n/v2/inputs\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005'
   _V2.methods_by_name['PostInputs']._options = None
   _V2.methods_by_name['PostInputs']._serialized_options = b'\202\323\344\223\002V\"@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\001*Z\017\"\n/v2/inputs:\001*\230\234\'\002\220\234\'%\220\234\'&\220\234\'\013\220\234\'\004\220\234\'\005\220\234\'\017\220\234\'\002\220\234\'\023'
+  _V2.methods_by_name['PostInputsFile']._options = None
+  _V2.methods_by_name['PostInputsFile']._serialized_options = b'\202\323\344\223\002`\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/file:\001*Z\024\"\017/v2/inputs/file:\001*\210\234\'\001\230\234\'\002\220\234\'\004'
+  _V2.methods_by_name['PostInputsNiFi']._options = None
+  _V2.methods_by_name['PostInputsNiFi']._serialized_options = b'\202\323\344\223\002p\"M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vendors/nifi/inputs:\001*Z\034\"\027/v2/vendors/nifi/inputs:\001*\210\234\'\001\230\234\'\002\220\234\'\004'
+  _V2.methods_by_name['PostInputsDocument']._options = None
+  _V2.methods_by_name['PostInputsDocument']._serialized_options = b'\202\323\344\223\002~\"Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/vendors/document/inputs:\004bodyZ#\"\033/v2/vendors/document/inputs:\004body\210\234\'\001\230\234\'\002\220\234\'\004'
   _V2.methods_by_name['PatchInputs']._options = None
   _V2.methods_by_name['PatchInputs']._serialized_options = b'\202\323\344\223\002V2@/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs:\001*Z\0172\n/v2/inputs:\001*\230\234\'\002\220\234\'%\220\234\'&\220\234\'\013\220\234\'\004\220\234\'\005\220\234\'\017'
   _V2.methods_by_name['DeleteInput']._options = None
@@ -2542,14 +4606,40 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PostModelVersionMetrics']._serialized_options = b'\202\323\344\223\002\250\001\"i/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/metrics:\001*Z8\"3/v2/models/{model_id}/versions/{version_id}/metrics:\001*\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'\016\220\234\'\017\220\234\'\032\220\234\'\002\220\234\'\023\220\234\'5\220\234\'6'
   _V2.methods_by_name['ListModelReferences']._options = None
   _V2.methods_by_name['ListModelReferences']._serialized_options = b'\202\323\344\223\002|\022V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/referencesZ\"\022 /v2/models/{model_id}/references\230\234\'\002\220\234\'\017'
+  _V2.methods_by_name['PostModelReferences']._options = None
+  _V2.methods_by_name['PostModelReferences']._serialized_options = b'\202\323\344\223\002\202\001\"V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/references:\001*Z%\" /v2/models/{model_id}/references:\001*\210\234\'\001\230\234\'\002\220\234\'\017\220\234\'\016'
+  _V2.methods_by_name['DeleteModelReferences']._options = None
+  _V2.methods_by_name['DeleteModelReferences']._serialized_options = b'\202\323\344\223\002\202\001*V/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/references:\001*Z%* /v2/models/{model_id}/references:\001*\210\234\'\001\230\234\'\002\220\234\'\017\220\234\'\016\220\234\'\021'
   _V2.methods_by_name['GetModelVersionInputExample']._options = None
   _V2.methods_by_name['GetModelVersionInputExample']._serialized_options = b'\202\323\344\223\002\327\001\022\203\001/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}ZO\022M/v2/models/{model_id}/versions/{model_version_id}/input_examples/{example_id}\230\234\'\002\220\234\'\017'
   _V2.methods_by_name['ListModelVersionInputExamples']._options = None
   _V2.methods_by_name['ListModelVersionInputExamples']._serialized_options = b'\202\323\344\223\002\274\001\022v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examplesZB\022@/v2/models/{model_id}/versions/{model_version_id}/input_examples\230\234\'\002\220\234\'\017'
+  _V2.methods_by_name['PostModelVersionInputExamples']._options = None
+  _V2.methods_by_name['PostModelVersionInputExamples']._serialized_options = b'\202\323\344\223\002\302\001\"v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples:\001*ZE\"@/v2/models/{model_id}/versions/{model_version_id}/input_examples:\001*\210\234\'\001\230\234\'\002\220\234\'\017\220\234\'\016\220\234\'\023'
+  _V2.methods_by_name['DeleteModelVersionInputExamples']._options = None
+  _V2.methods_by_name['DeleteModelVersionInputExamples']._serialized_options = b'\202\323\344\223\002\302\001*v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{model_version_id}/input_examples:\001*ZE*@/v2/models/{model_id}/versions/{model_version_id}/input_examples:\001*\210\234\'\001\230\234\'\002\220\234\'\017\220\234\'\016\220\234\'\021'
+  _V2.methods_by_name['PostModelStars']._options = None
+  _V2.methods_by_name['PostModelStars']._serialized_options = b'\202\323\344\223\002J\"E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/model_stars:\001*\210\234\'\001\230\234\'\002\220\234\'\017'
+  _V2.methods_by_name['DeleteModelStars']._options = None
+  _V2.methods_by_name['DeleteModelStars']._serialized_options = b'\202\323\344\223\002J*E/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/model_stars:\001*\210\234\'\001\230\234\'\002\220\234\'\017'
+  _V2.methods_by_name['PostUserStars']._options = None
+  _V2.methods_by_name['PostUserStars']._serialized_options = b'\202\323\344\223\002\023\"\016/v2/user_stars:\001*\210\234\'\001\230\234\'\005'
+  _V2.methods_by_name['DeleteUserStars']._options = None
+  _V2.methods_by_name['DeleteUserStars']._serialized_options = b'\202\323\344\223\002\023*\016/v2/user_stars:\001*\210\234\'\001\230\234\'\005'
+  _V2.methods_by_name['PostWorkflowStars']._options = None
+  _V2.methods_by_name['PostWorkflowStars']._serialized_options = b'\202\323\344\223\002M\"H/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflow_stars:\001*\210\234\'\001\230\234\'\002\220\234\'\023'
+  _V2.methods_by_name['DeleteWorkflowStars']._options = None
+  _V2.methods_by_name['DeleteWorkflowStars']._serialized_options = b'\202\323\344\223\002M*H/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflow_stars:\001*\210\234\'\001\230\234\'\002\220\234\'\023'
+  _V2.methods_by_name['PostAppStars']._options = None
+  _V2.methods_by_name['PostAppStars']._serialized_options = b'\202\323\344\223\002.\")/v2/users/{user_app_id.user_id}/app_stars:\001*\210\234\'\001\230\234\'\005\220\234\'-'
+  _V2.methods_by_name['DeleteAppStars']._options = None
+  _V2.methods_by_name['DeleteAppStars']._serialized_options = b'\202\323\344\223\002.*)/v2/users/{user_app_id.user_id}/app_stars:\001*\210\234\'\001\230\234\'\005\220\234\'-'
   _V2.methods_by_name['GetWorkflow']._options = None
   _V2.methods_by_name['GetWorkflow']._serialized_options = b'\202\323\344\223\002r\022Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}Z\035\022\033/v2/workflows/{workflow_id}\230\234\'\002\220\234\'\017\220\234\'\023'
   _V2.methods_by_name['ListWorkflows']._options = None
   _V2.methods_by_name['ListWorkflows']._serialized_options = b'\202\323\344\223\002\203\001\022C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflowsZ+\022)/v2/users/{user_app_id.user_id}/workflowsZ\017\022\r/v2/workflows\230\234\'\002\220\234\'\017\220\234\'\023'
+  _V2.methods_by_name['ListPublicWorkflows']._options = None
+  _V2.methods_by_name['ListPublicWorkflows']._serialized_options = b'\202\323\344\223\0022\0220/v2/users/{user_app_id.user_id}/public_workflows\210\234\'\001\230\234\'\003'
   _V2.methods_by_name['PostWorkflows']._options = None
   _V2.methods_by_name['PostWorkflows']._serialized_options = b'\202\323\344\223\002\\\"C/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows:\001*Z\022\"\r/v2/workflows:\001*\230\234\'\002\220\234\'\017\220\234\'\022\220\234\'\023'
   _V2.methods_by_name['PatchWorkflows']._options = None
@@ -2572,6 +4662,16 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['DeleteWorkflowVersions']._serialized_options = b'\202\323\344\223\002\212\001*Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\001*Z)*$/v2/workflows/{workflow_id}/versions:\001*\230\234\'\002\220\234\'\023\220\234\'\022\220\234\'\025'
   _V2.methods_by_name['PatchWorkflowVersions']._options = None
   _V2.methods_by_name['PatchWorkflowVersions']._serialized_options = b'\202\323\344\223\002\212\0012Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/versions:\001*Z)2$/v2/workflows/{workflow_id}/versions:\001*\230\234\'\002\220\234\'\017\220\234\'\023\220\234\'\022'
+  _V2.methods_by_name['PostWorkflowMetrics']._options = None
+  _V2.methods_by_name['PostWorkflowMetrics']._serialized_options = b'\202\323\344\223\002\210\001\"Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics:\001*Z(\"#/v2/workflows/{workflow_id}/metrics:\001*\210\234\'\001\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'\017\220\234\'5\220\234\'6\220\234\'\002\220\234\'\023\220\234\'`\220\234\'a'
+  _V2.methods_by_name['GetWorkflowMetrics']._options = None
+  _V2.methods_by_name['GetWorkflowMetrics']._serialized_options = b'\202\323\344\223\002\234\001\022f/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics/{metrics_id}Z2\0220/v2/workflows/{workflow_id}/metrics/{metrics_id}\210\234\'\001\230\234\'\002\220\234\'\023\220\234\'`'
+  _V2.methods_by_name['GetWorkflowNodeMetrics']._options = None
+  _V2.methods_by_name['GetWorkflowNodeMetrics']._serialized_options = b'\202\323\344\223\002\274\001\022v/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics/{metrics_id}/nodes/{node_id}ZB\022@/v2/workflows/{workflow_id}/metrics/{metrics_id}/nodes/{node_id}\210\234\'\001\230\234\'\002\220\234\'\023\220\234\'`'
+  _V2.methods_by_name['ListWorkflowMetrics']._options = None
+  _V2.methods_by_name['ListWorkflowMetrics']._serialized_options = b'\202\323\344\223\002\202\001\022Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metricsZ%\022#/v2/workflows/{workflow_id}/metrics\210\234\'\001\230\234\'\002\220\234\'\023\220\234\'`'
+  _V2.methods_by_name['DeleteWorkflowMetrics']._options = None
+  _V2.methods_by_name['DeleteWorkflowMetrics']._serialized_options = b'\202\323\344\223\002\210\001*Y/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/workflows/{workflow_id}/metrics:\001*Z(*#/v2/workflows/{workflow_id}/metrics:\001*\210\234\'\001\230\234\'\002\220\234\'\023\220\234\'b\220\234\'a\220\234\'`'
   _V2.methods_by_name['GetKey']._options = None
   _V2.methods_by_name['GetKey']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/keys/{key_id}\230\234\'\005\220\234\'0'
   _V2.methods_by_name['ListKeys']._options = None
@@ -2606,10 +4706,120 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PatchAppsIds']._serialized_options = b'\202\323\344\223\002-2(/v2/users/{user_app_id.user_id}/apps/ids:\001*\230\234\'\005\220\234\',\220\234\'-'
   _V2.methods_by_name['PatchApp']._options = None
   _V2.methods_by_name['PatchApp']._serialized_options = b'\202\323\344\223\002>29/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}:\001*\230\234\'\005\220\234\',\220\234\'-'
+  _V2.methods_by_name['PatchAppOwner']._options = None
+  _V2.methods_by_name['PatchAppOwner']._serialized_options = b'\202\323\344\223\002D2?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/owner:\001*\230\234\'\005\220\234\',\220\234\'-\220\234\'.\220\234\'V'
   _V2.methods_by_name['PostAppsSearches']._options = None
   _V2.methods_by_name['PostAppsSearches']._serialized_options = b'\202\323\344\223\0022\"-/v2/users/{user_app_id.user_id}/apps/searches:\001*\230\234\'\005\220\234\'-\220\234\'\023'
+  _V2.methods_by_name['GetUser']._options = None
+  _V2.methods_by_name['GetUser']._serialized_options = b'\202\323\344\223\002!\022\037/v2/users/{user_app_id.user_id}\210\234\'\001\230\234\'\005'
+  _V2.methods_by_name['ListUsers']._options = None
+  _V2.methods_by_name['ListUsers']._serialized_options = b'\202\323\344\223\002\013\022\t/v2/users\210\234\'\001\230\234\'\005'
+  _V2.methods_by_name['PostUserConsent']._options = None
+  _V2.methods_by_name['PostUserConsent']._serialized_options = b'\202\323\344\223\002,\"\'/v2/users/{user_app_id.user_id}/consent:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PatchUser']._options = None
+  _V2.methods_by_name['PatchUser']._serialized_options = b'\202\323\344\223\002$2\037/v2/users/{user_app_id.user_id}:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostUserAccess']._options = None
+  _V2.methods_by_name['PostUserAccess']._serialized_options = b'\202\323\344\223\002+\"&/v2/users/{user_app_id.user_id}/access:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetUserAccess']._options = None
+  _V2.methods_by_name['GetUserAccess']._serialized_options = b'\202\323\344\223\002(\022&/v2/users/{user_app_id.user_id}/access\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostEmails']._options = None
+  _V2.methods_by_name['PostEmails']._serialized_options = b'\202\323\344\223\002<\"&/v2/users/{user_app_id.user_id}/emails:\001*Z\017\"\n/v2/emails:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListEmails']._options = None
+  _V2.methods_by_name['ListEmails']._serialized_options = b'\202\323\344\223\0026\022&/v2/users/{user_app_id.user_id}/emailsZ\014\022\n/v2/emails\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostResendVerifyEmail']._options = None
+  _V2.methods_by_name['PostResendVerifyEmail']._serialized_options = b'\202\323\344\223\002V\"3/v2/users/{user_app_id.user_id}/resend_verification:\001*Z\034\"\027/v2/resend_verification:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['DeleteEmail']._options = None
+  _V2.methods_by_name['DeleteEmail']._serialized_options = b'\202\323\344\223\0020*./v2/users/{user_app_id.user_id}/emails/{email}\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostPrimaryEmail']._options = None
+  _V2.methods_by_name['PostPrimaryEmail']._serialized_options = b'\202\323\344\223\002L\"./v2/users/{user_app_id.user_id}/emails/primary:\001*Z\027\"\022/v2/emails/primary:\001*\210\234\'\001\230\234\'\003'
   _V2.methods_by_name['PostValidatePassword']._options = None
   _V2.methods_by_name['PostValidatePassword']._serialized_options = b'\202\323\344\223\002R\"1/v2/users/{user_app_id.user_id}/validate_password:\001*Z\032\"\025/v2/validate_password:\001*\230\234\'\003'
+  _V2.methods_by_name['ListGlobalPasswordPolicies']._options = None
+  _V2.methods_by_name['ListGlobalPasswordPolicies']._serialized_options = b'\202\323\344\223\002\036\022\034/v2/password_policies/global\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['ListPasswordPolicies']._options = None
+  _V2.methods_by_name['ListPasswordPolicies']._serialized_options = b'\202\323\344\223\002L\0221/v2/users/{user_app_id.user_id}/password_policiesZ\027\022\025/v2/password_policies\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostPasswordPolicies']._options = None
+  _V2.methods_by_name['PostPasswordPolicies']._serialized_options = b'\202\323\344\223\002R\"1/v2/users/{user_app_id.user_id}/password_policies:\001*Z\032\"\025/v2/password_policies:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PatchPasswordPolicies']._options = None
+  _V2.methods_by_name['PatchPasswordPolicies']._serialized_options = b'\202\323\344\223\002R21/v2/users/{user_app_id.user_id}/password_policies:\001*Z\0322\025/v2/password_policies:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['DeletePasswordPolicies']._options = None
+  _V2.methods_by_name['DeletePasswordPolicies']._serialized_options = b'\202\323\344\223\002L*1/v2/users/{user_app_id.user_id}/password_policiesZ\027*\025/v2/password_policies\210\234\'\001\230\234\'\003\220\234\'9\220\234\';\220\234\':'
+  _V2.methods_by_name['GetUserFeatureConfig']._options = None
+  _V2.methods_by_name['GetUserFeatureConfig']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/feature_flags\210\234\'\001\230\234\'\005\220\234\'G'
+  _V2.methods_by_name['PostOrganizations']._options = None
+  _V2.methods_by_name['PostOrganizations']._serialized_options = b'\202\323\344\223\002\026\"\021/v2/organizations:\001*\210\234\'\001\230\234\'\005\220\234\'W\220\234\'V'
+  _V2.methods_by_name['ListUsersOrganizations']._options = None
+  _V2.methods_by_name['ListUsersOrganizations']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/organizations\210\234\'\001\230\234\'\005\220\234\'_'
+  _V2.methods_by_name['ListOrganizations']._options = None
+  _V2.methods_by_name['ListOrganizations']._serialized_options = b'\202\323\344\223\002\023\022\021/v2/organizations\210\234\'\001\230\234\'\005\220\234\'V'
+  _V2.methods_by_name['GetOrganization']._options = None
+  _V2.methods_by_name['GetOrganization']._serialized_options = b'\202\323\344\223\002)\022\'/v2/organizations/{user_app_id.user_id}\210\234\'\001\230\234\'\005\220\234\'V'
+  _V2.methods_by_name['PatchOrganization']._options = None
+  _V2.methods_by_name['PatchOrganization']._serialized_options = b'\202\323\344\223\002,2\'/v2/organizations/{user_app_id.user_id}:\001*\210\234\'\001\230\234\'\005\220\234\'W\220\234\'V'
+  _V2.methods_by_name['DeleteOrganization']._options = None
+  _V2.methods_by_name['DeleteOrganization']._serialized_options = b'\202\323\344\223\002)*\'/v2/organizations/{user_app_id.user_id}\210\234\'\001\230\234\'\005\220\234\'X\220\234\'W\220\234\'V'
+  _V2.methods_by_name['ListOrganizationMembers']._options = None
+  _V2.methods_by_name['ListOrganizationMembers']._serialized_options = b'\202\323\344\223\0021\022//v2/organizations/{user_app_id.user_id}/members\210\234\'\001\230\234\'\005\220\234\'c'
+  _V2.methods_by_name['ListOrganizationAppMembers']._options = None
+  _V2.methods_by_name['ListOrganizationAppMembers']._serialized_options = b'\202\323\344\223\002K\022I/v2/organizations/{user_app_id.user_id}/apps/{user_app_id.app_id}/members\210\234\'\001\230\234\'\005\220\234\'c'
+  _V2.methods_by_name['PostOrganizationMember']._options = None
+  _V2.methods_by_name['PostOrganizationMember']._serialized_options = b'\202\323\344\223\0024\"//v2/organizations/{user_app_id.user_id}/members:\001*\210\234\'\001\230\234\'\005\220\234\'^'
+  _V2.methods_by_name['PatchOrganizationMember']._options = None
+  _V2.methods_by_name['PatchOrganizationMember']._serialized_options = b'\202\323\344\223\00242//v2/organizations/{user_app_id.user_id}/members:\001*\210\234\'\001\230\234\'\005\220\234\'^'
+  _V2.methods_by_name['DeleteOrganizationMember']._options = None
+  _V2.methods_by_name['DeleteOrganizationMember']._serialized_options = b'\202\323\344\223\002=*;/v2/organizations/{user_app_id.user_id}/members/{member_id}\210\234\'\001\230\234\'\005\220\234\']'
+  _V2.methods_by_name['PostOrganizationInvitations']._options = None
+  _V2.methods_by_name['PostOrganizationInvitations']._serialized_options = b'\202\323\344\223\0028\"3/v2/organizations/{user_app_id.user_id}/invitations:\001*\210\234\'\001\230\234\'\005\220\234\'d'
+  _V2.methods_by_name['PatchOrganizationInvitations']._options = None
+  _V2.methods_by_name['PatchOrganizationInvitations']._serialized_options = b'\202\323\344\223\002823/v2/organizations/{user_app_id.user_id}/invitations:\001*\210\234\'\001\230\234\'\005\220\234\'d'
+  _V2.methods_by_name['ListOrganizationInvitations']._options = None
+  _V2.methods_by_name['ListOrganizationInvitations']._serialized_options = b'\202\323\344\223\0025\0223/v2/organizations/{user_app_id.user_id}/invitations\210\234\'\001\230\234\'\005\220\234\'e'
+  _V2.methods_by_name['GetOrganizationInvitation']._options = None
+  _V2.methods_by_name['GetOrganizationInvitation']._serialized_options = b'\202\323\344\223\002:\0228/v2/organizations/{user_app_id.user_id}/invitations/{id}\210\234\'\001\230\234\'\005\220\234\'e'
+  _V2.methods_by_name['PostDeclineOrganizationInvitation']._options = None
+  _V2.methods_by_name['PostDeclineOrganizationInvitation']._serialized_options = b'\202\323\344\223\002F\"D/v2/users/{user_app_id.user_id}/organization_invitation_decline/{id}\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostAcceptOrganizationInvitation']._options = None
+  _V2.methods_by_name['PostAcceptOrganizationInvitation']._serialized_options = b'\202\323\344\223\002E\"C/v2/users/{user_app_id.user_id}/organization_invitation_accept/{id}\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetOrganizationInvitationPublic']._options = None
+  _V2.methods_by_name['GetOrganizationInvitationPublic']._serialized_options = b'\202\323\344\223\002\"\022 /v2/organization_invitation/{id}\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['DeleteRequestingUserFromOrganization']._options = None
+  _V2.methods_by_name['DeleteRequestingUserFromOrganization']._serialized_options = b'\202\323\344\223\002/*-/v2/organizations/{user_app_id.user_id}/leave\210\234\'\001\230\234\'\005'
+  _V2.methods_by_name['PostIdentityProviders']._options = None
+  _V2.methods_by_name['PostIdentityProviders']._serialized_options = b'\202\323\344\223\002?\":/v2/organizations/{user_app_id.user_id}/identity_providers:\001*\210\234\'\001\230\234\'\005\220\234\'Z\220\234\'Y'
+  _V2.methods_by_name['ListIdentityProviders']._options = None
+  _V2.methods_by_name['ListIdentityProviders']._serialized_options = b'\202\323\344\223\002<\022:/v2/organizations/{user_app_id.user_id}/identity_providers\210\234\'\001\230\234\'\005\220\234\'Y'
+  _V2.methods_by_name['GetIdentityProvider']._options = None
+  _V2.methods_by_name['GetIdentityProvider']._serialized_options = b'\202\323\344\223\002A\022?/v2/organizations/{user_app_id.user_id}/identity_providers/{id}\210\234\'\001\230\234\'\005\220\234\'Y'
+  _V2.methods_by_name['PatchIdentityProviders']._options = None
+  _V2.methods_by_name['PatchIdentityProviders']._serialized_options = b'\202\323\344\223\002?2:/v2/organizations/{user_app_id.user_id}/identity_providers:\001*\210\234\'\001\230\234\'\005\220\234\'Z\220\234\'Y'
+  _V2.methods_by_name['DeleteIdentityProviders']._options = None
+  _V2.methods_by_name['DeleteIdentityProviders']._serialized_options = b'\202\323\344\223\002?*:/v2/organizations/{user_app_id.user_id}/identity_providers:\001*\210\234\'\001\230\234\'\005\220\234\'[\220\234\'Z\220\234\'Y'
+  _V2.methods_by_name['PostTeams']._options = None
+  _V2.methods_by_name['PostTeams']._serialized_options = b'\202\323\344\223\0022\"-/v2/organizations/{user_app_id.user_id}/teams:\001*\210\234\'\001\230\234\'\005\220\234\'K\220\234\'J'
+  _V2.methods_by_name['ListTeams']._options = None
+  _V2.methods_by_name['ListTeams']._serialized_options = b'\202\323\344\223\002/\022-/v2/organizations/{user_app_id.user_id}/teams\210\234\'\001\230\234\'\005\220\234\'J'
+  _V2.methods_by_name['GetTeam']._options = None
+  _V2.methods_by_name['GetTeam']._serialized_options = b'\202\323\344\223\0024\0222/v2/organizations/{user_app_id.user_id}/teams/{id}\210\234\'\001\230\234\'\005\220\234\'J'
+  _V2.methods_by_name['PatchTeams']._options = None
+  _V2.methods_by_name['PatchTeams']._serialized_options = b'\202\323\344\223\00222-/v2/organizations/{user_app_id.user_id}/teams:\001*\210\234\'\001\230\234\'\005\220\234\'K\220\234\'J'
+  _V2.methods_by_name['DeleteTeams']._options = None
+  _V2.methods_by_name['DeleteTeams']._serialized_options = b'\202\323\344\223\0022*-/v2/organizations/{user_app_id.user_id}/teams:\001*\210\234\'\001\230\234\'\005\220\234\'L\220\234\'K\220\234\'J'
+  _V2.methods_by_name['PostTeamUsers']._options = None
+  _V2.methods_by_name['PostTeamUsers']._serialized_options = b'\202\323\344\223\002B\"=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users:\001*\210\234\'\001\230\234\'\005\220\234\'N\220\234\'M\220\234\'J'
+  _V2.methods_by_name['ListTeamUsers']._options = None
+  _V2.methods_by_name['ListTeamUsers']._serialized_options = b'\202\323\344\223\002?\022=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users\210\234\'\001\230\234\'\005\220\234\'M\220\234\'J'
+  _V2.methods_by_name['DeleteTeamUsers']._options = None
+  _V2.methods_by_name['DeleteTeamUsers']._serialized_options = b'\202\323\344\223\002B*=/v2/organizations/{user_app_id.user_id}/teams/{team_id}/users:\001*\210\234\'\001\230\234\'\005\220\234\'O\220\234\'N\220\234\'M\220\234\'J'
+  _V2.methods_by_name['PostTeamApps']._options = None
+  _V2.methods_by_name['PostTeamApps']._serialized_options = b'\202\323\344\223\002A\"</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps:\001*\210\234\'\001\230\234\'\005\220\234\'S\220\234\'T\220\234\'J\220\234\'P\220\234\'-'
+  _V2.methods_by_name['ListTeamApps']._options = None
+  _V2.methods_by_name['ListTeamApps']._serialized_options = b'\202\323\344\223\002>\022</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps\210\234\'\001\230\234\'\005\220\234\'S\220\234\'J\220\234\'P\220\234\'-'
+  _V2.methods_by_name['DeleteTeamApps']._options = None
+  _V2.methods_by_name['DeleteTeamApps']._serialized_options = b'\202\323\344\223\002A*</v2/organizations/{user_app_id.user_id}/teams/{team_id}/apps:\001*\210\234\'\001\230\234\'\005\220\234\'U\220\234\'S\220\234\'T\220\234\'J\220\234\'P\220\234\'-'
+  _V2.methods_by_name['ListRoles']._options = None
+  _V2.methods_by_name['ListRoles']._serialized_options = b'\202\323\344\223\002\013\022\t/v2/roles\210\234\'\001\230\234\'\005\220\234\'P'
+  _V2.methods_by_name['GetRole']._options = None
+  _V2.methods_by_name['GetRole']._serialized_options = b'\202\323\344\223\002\020\022\016/v2/roles/{id}\210\234\'\001\230\234\'\005\220\234\'P'
   _V2.methods_by_name['GetSearch']._options = None
   _V2.methods_by_name['GetSearch']._serialized_options = b'\202\323\344\223\002^\022G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\023\022\021/v2/searches/{id}\230\234\'\002\220\234\'r'
   _V2.methods_by_name['ListSearches']._options = None
@@ -2617,7 +4827,7 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PatchSearches']._options = None
   _V2.methods_by_name['PatchSearches']._serialized_options = b'\202\323\344\223\002Z2B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\001*Z\0212\014/v2/searches:\001*\230\234\'\002\220\234\'s\220\234\'r'
   _V2.methods_by_name['PostSearches']._options = None
-  _V2.methods_by_name['PostSearches']._serialized_options = b'\202\323\344\223\002Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\001*Z\021\"\014/v2/searches:\001*\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'\017\220\234\'\003\220\234\'\023'
+  _V2.methods_by_name['PostSearches']._serialized_options = b'\210\002\001\202\323\344\223\002Z\"B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches:\001*Z\021\"\014/v2/searches:\001*\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'\017\220\234\'\003\220\234\'\023'
   _V2.methods_by_name['PostSearchesByID']._options = None
   _V2.methods_by_name['PostSearchesByID']._serialized_options = b'\202\323\344\223\002d\"G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}:\001*Z\026\"\021/v2/searches/{id}:\001*\230\234\'\002\220\234\'r\220\234\'\003'
   _V2.methods_by_name['PostAnnotationSearchMetrics']._options = None
@@ -2630,6 +4840,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['DeleteAnnotationSearchMetrics']._serialized_options = b'\202\323\344\223\002\206\001*[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/searches/metrics/{id}Z\'*%/v2/annotations/searches/metrics/{id}\230\234\'\002\220\234\'5\220\234\'6\220\234\'?'
   _V2.methods_by_name['DeleteSearch']._options = None
   _V2.methods_by_name['DeleteSearch']._serialized_options = b'\202\323\344\223\002^*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/searches/{id}Z\023*\021/v2/searches/{id}\230\234\'\002\220\234\'r\220\234\'s\220\234\'t'
+  _V2.methods_by_name['PostAttributeSearch']._options = None
+  _V2.methods_by_name['PostAttributeSearch']._serialized_options = b'\202\323\344\223\002n\"L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/attribute_searches:\001*Z\033\"\026/v2/attribute_searches:\001*\210\234\'\001\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'\017\220\234\'\003\220\234\'\023'
   _V2.methods_by_name['ListAnnotationFilters']._options = None
   _V2.methods_by_name['ListAnnotationFilters']._serialized_options = b'\202\323\344\223\002h\022L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filtersZ\030\022\026/v2/annotation_filters\230\234\'\002\220\234\'r'
   _V2.methods_by_name['GetAnnotationFilter']._options = None
@@ -2640,10 +4852,88 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PatchAnnotationFilters']._serialized_options = b'\202\323\344\223\002n2L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\001*Z\0332\026/v2/annotation_filters:\001*\230\234\'\002\220\234\'r\220\234\'s'
   _V2.methods_by_name['DeleteAnnotationFilters']._options = None
   _V2.methods_by_name['DeleteAnnotationFilters']._serialized_options = b'\202\323\344\223\002n*L/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotation_filters:\001*Z\033*\026/v2/annotation_filters:\001*\230\234\'\002\220\234\'r\220\234\'s'
+  _V2.methods_by_name['ListClusters']._options = None
+  _V2.methods_by_name['ListClusters']._serialized_options = b'\202\323\344\223\002T\022B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clustersZ\016\022\014/v2/clusters\210\234\'\001\230\234\'\002\220\234\'\003'
+  _V2.methods_by_name['ListAnnotationsForCluster']._options = None
+  _V2.methods_by_name['ListAnnotationsForCluster']._serialized_options = b'\202\323\344\223\002\206\001\022[/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clusters/{cluster_id}/annotationsZ\'\022%/v2/clusters/{cluster_id}/annotations\210\234\'\001\230\234\'\002\220\234\'\003'
+  _V2.methods_by_name['PostClustersSearches']._options = None
+  _V2.methods_by_name['PostClustersSearches']._serialized_options = b'\202\323\344\223\002l\"K/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/clusters/searches:\001*Z\032\"\025/v2/clusters/searches:\001*\210\234\'\001\230\234\'\002\220\234\'\003'
+  _V2.methods_by_name['PostVerifyEmail']._options = None
+  _V2.methods_by_name['PostVerifyEmail']._serialized_options = b'\202\323\344\223\002\025\"\020/v2/verify_email:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostRequestResetPassword']._options = None
+  _V2.methods_by_name['PostRequestResetPassword']._serialized_options = b'\202\323\344\223\002\037\"\032/v2/request_password_reset:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostCompleteResetPassword']._options = None
+  _V2.methods_by_name['PostCompleteResetPassword']._serialized_options = b'\202\323\344\223\002 \"\033/v2/complete_password_reset:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostLogin']._options = None
+  _V2.methods_by_name['PostLogin']._serialized_options = b'\202\323\344\223\002\016\"\t/v2/login:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostSignup']._options = None
+  _V2.methods_by_name['PostSignup']._serialized_options = b'\202\323\344\223\002\017\"\n/v2/signup:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostLogout']._options = None
+  _V2.methods_by_name['PostLogout']._serialized_options = b'\202\323\344\223\002+\"&/v2/users/{user_app_id.user_id}/logout:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListAuthMethods']._options = None
+  _V2.methods_by_name['ListAuthMethods']._serialized_options = b'\202\323\344\223\002\022\022\020/v2/auth/methods\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['ListOrgAuthMethods']._options = None
+  _V2.methods_by_name['ListOrgAuthMethods']._serialized_options = b'\202\323\344\223\0026\0224/v2/organizations/{user_app_id.user_id}/auth/methods\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostIdLoginFinalizer']._options = None
+  _V2.methods_by_name['PostIdLoginFinalizer']._serialized_options = b'\202\323\344\223\0025\"0/v2/users/{user_app_id.user_id}/idloginfinalizer:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostLinkIdpUser']._options = None
+  _V2.methods_by_name['PostLinkIdpUser']._serialized_options = b'\202\323\344\223\002-\"(/v2/users/{user_app_id.user_id}/idpusers:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetLoginInfo']._options = None
+  _V2.methods_by_name['GetLoginInfo']._serialized_options = b'\202\323\344\223\0022\0220/v2/users/{user_app_id.user_id}/login/{login_id}\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListAuth2FAMethods']._options = None
+  _V2.methods_by_name['ListAuth2FAMethods']._serialized_options = b'\202\323\344\223\0022\0220/v2/users/{user_app_id.user_id}/auth/2fa/methods\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostAuth2FATotpRegisterEnable']._options = None
+  _V2.methods_by_name['PostAuth2FATotpRegisterEnable']._serialized_options = b'\202\323\344\223\002B\"=/v2/users/{user_app_id.user_id}/auth/2fa/totp/register/enable:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostAuth2FATotpRegisterVerify']._options = None
+  _V2.methods_by_name['PostAuth2FATotpRegisterVerify']._serialized_options = b'\202\323\344\223\002B\"=/v2/users/{user_app_id.user_id}/auth/2fa/totp/register/verify:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostAuth2FATotpDisable']._options = None
+  _V2.methods_by_name['PostAuth2FATotpDisable']._serialized_options = b'\202\323\344\223\002:\"5/v2/users/{user_app_id.user_id}/auth/2fa/totp/disable:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostAuth2FATotpLogin']._options = None
+  _V2.methods_by_name['PostAuth2FATotpLogin']._serialized_options = b'\202\323\344\223\002\034\"\027/v2/auth/2fa/totp/login:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostAuth2FATotpRecover']._options = None
+  _V2.methods_by_name['PostAuth2FATotpRecover']._serialized_options = b'\202\323\344\223\002\036\"\031/v2/auth/2fa/totp/recover:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['GetAuth2FATotpRecoverConfirm']._options = None
+  _V2.methods_by_name['GetAuth2FATotpRecoverConfirm']._serialized_options = b'\202\323\344\223\002#\022!/v2/auth/2fa/totp/recover/confirm\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['GetSubscription']._options = None
+  _V2.methods_by_name['GetSubscription']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/subscriptions\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostSubscription']._options = None
+  _V2.methods_by_name['PostSubscription']._serialized_options = b'\202\323\344\223\0022\"-/v2/users/{user_app_id.user_id}/subscriptions:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListCreditCards']._options = None
+  _V2.methods_by_name['ListCreditCards']._serialized_options = b'\202\323\344\223\002.\022,/v2/users/{user_app_id.user_id}/credit_cards\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostCreditCard']._options = None
+  _V2.methods_by_name['PostCreditCard']._serialized_options = b'\202\323\344\223\0021\",/v2/users/{user_app_id.user_id}/credit_cards:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['DeleteCreditCard']._options = None
+  _V2.methods_by_name['DeleteCreditCard']._serialized_options = b'\202\323\344\223\0021*,/v2/users/{user_app_id.user_id}/credit_cards:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PatchCreditCards']._options = None
+  _V2.methods_by_name['PatchCreditCards']._serialized_options = b'\202\323\344\223\00212,/v2/users/{user_app_id.user_id}/credit_cards:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetShippingAddress']._options = None
+  _V2.methods_by_name['GetShippingAddress']._serialized_options = b'\202\323\344\223\0022\0220/v2/users/{user_app_id.user_id}/shipping_address\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PutShippingAddress']._options = None
+  _V2.methods_by_name['PutShippingAddress']._serialized_options = b'\202\323\344\223\0025\0320/v2/users/{user_app_id.user_id}/shipping_address:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListPlans']._options = None
+  _V2.methods_by_name['ListPlans']._serialized_options = b'\202\323\344\223\002\'\022%/v2/users/{user_app_id.user_id}/plans\210\234\'\001\230\234\'\003'
   _V2.methods_by_name['ListStatusCodes']._options = None
   _V2.methods_by_name['ListStatusCodes']._serialized_options = b'\202\323\344\223\002\022\022\020/v2/status_codes\230\234\'\001'
   _V2.methods_by_name['GetStatusCode']._options = None
   _V2.methods_by_name['GetStatusCode']._serialized_options = b'\202\323\344\223\002#\022!/v2/status_codes/{status_code_id}\230\234\'\001'
+  _V2.methods_by_name['GetHealthz']._options = None
+  _V2.methods_by_name['GetHealthz']._serialized_options = b'\202\323\344\223\002\r\022\013/v2/healthz\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['ListUserBillingCycles']._options = None
+  _V2.methods_by_name['ListUserBillingCycles']._serialized_options = b'\202\323\344\223\0020\022./v2/users/{user_app_id.user_id}/billing_cycles\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['ListUserCycles']._options = None
+  _V2.methods_by_name['ListUserCycles']._serialized_options = b'\202\323\344\223\002.\022,/v2/users/{user_app_id.user_id}/usage_cycles\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetBillingUsage']._options = None
+  _V2.methods_by_name['GetBillingUsage']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/billing_usage\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostHistoricalUsage']._options = None
+  _V2.methods_by_name['PostHistoricalUsage']._serialized_options = b'\202\323\344\223\0025\"0/v2/users/{user_app_id.user_id}/historical_usage:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetHistoricalUsage']._options = None
+  _V2.methods_by_name['GetHistoricalUsage']._serialized_options = b'\202\323\344\223\0022\0220/v2/users/{user_app_id.user_id}/historical_usage\210\234\'\001\230\234\'\005\220\234\'|'
+  _V2.methods_by_name['ListUsageIntervals']._options = None
+  _V2.methods_by_name['ListUsageIntervals']._serialized_options = b'\202\323\344\223\002\025\022\023/v2/usage_intervals\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['GetRealtimeUsage']._options = None
+  _V2.methods_by_name['GetRealtimeUsage']._serialized_options = b'\202\323\344\223\0020\022./v2/users/{user_app_id.user_id}/realtime_usage\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PostUsage']._options = None
+  _V2.methods_by_name['PostUsage']._serialized_options = b'\202\323\344\223\002T\"?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/usage:\001*Z\016\"\t/v2/usage:\001*\210\234\'\001\230\234\'\002\220\234\'\001'
   _V2.methods_by_name['ListCollaborators']._options = None
   _V2.methods_by_name['ListCollaborators']._serialized_options = b'\202\323\344\223\002I\022G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators\230\234\'\002\220\234\'2'
   _V2.methods_by_name['PostCollaborators']._options = None
@@ -2654,12 +4944,20 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['DeleteCollaborators']._serialized_options = b'\202\323\344\223\002L*G/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/collaborators:\001*\230\234\'\002\220\234\'3\220\234\'2\220\234\'4\220\234\'7\220\234\'8'
   _V2.methods_by_name['ListCollaborations']._options = None
   _V2.methods_by_name['ListCollaborations']._serialized_options = b'\202\323\344\223\0020\022./v2/users/{user_app_id.user_id}/collaborations\230\234\'\003'
+  _V2.methods_by_name['FetchLicense']._options = None
+  _V2.methods_by_name['FetchLicense']._serialized_options = b'\202\323\344\223\002\036\"\031/v2/licenses/{license_id}:\001*\210\234\'\001\230\234\'\002\220\234\'\001'
+  _V2.methods_by_name['ListLicenses']._options = None
+  _V2.methods_by_name['ListLicenses']._serialized_options = b'\202\323\344\223\002T\022B/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/licensesZ\016\022\014/v2/licenses\210\234\'\001\230\234\'\002\220\234\'\001'
+  _V2.methods_by_name['GetLicense']._options = None
+  _V2.methods_by_name['GetLicense']._serialized_options = b'\202\323\344\223\002n\022O/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/licenses/{license_id}Z\033\022\031/v2/licenses/{license_id}\210\234\'\001\230\234\'\002\220\234\'\001'
+  _V2.methods_by_name['ValidateLicense']._options = None
+  _V2.methods_by_name['ValidateLicense']._serialized_options = b'\202\323\344\223\002\'\"\"/v2/licenses/{license_id}/validate:\001*\210\234\'\001\230\234\'\002\220\234\'\001'
   _V2.methods_by_name['PostAppDuplications']._options = None
   _V2.methods_by_name['PostAppDuplications']._serialized_options = b'\202\323\344\223\002K\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/duplications:\001*\230\234\'\002\220\234\'\016\220\234\'\017\220\234\'\032\220\234\'\n\220\234\'\013\220\234\'\004\220\234\'\005\220\234\'%\220\234\'&\220\234\'\022\220\234\'\023'
   _V2.methods_by_name['ListAppDuplications']._options = None
-  _V2.methods_by_name['ListAppDuplications']._serialized_options = b'\202\323\344\223\002.\022,/v2/users/{user_app_id.user_id}/duplications\230\234\'\003'
+  _V2.methods_by_name['ListAppDuplications']._serialized_options = b'\202\323\344\223\002.\022,/v2/users/{user_app_id.user_id}/duplications\230\234\'\005'
   _V2.methods_by_name['GetAppDuplication']._options = None
-  _V2.methods_by_name['GetAppDuplication']._serialized_options = b'\202\323\344\223\002C\022A/v2/users/{user_app_id.user_id}/duplications/{app_duplication_id}\230\234\'\003'
+  _V2.methods_by_name['GetAppDuplication']._serialized_options = b'\202\323\344\223\002C\022A/v2/users/{user_app_id.user_id}/duplications/{app_duplication_id}\230\234\'\005'
   _V2.methods_by_name['PostTasks']._options = None
   _V2.methods_by_name['PostTasks']._serialized_options = b'\202\323\344\223\002T\"?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\001*Z\016\"\t/v2/tasks:\001*\230\234\'\002\220\234\'7\220\234\'8\220\234\'\005\220\234\'\003\220\234\'r\220\234\'\013\220\234\'\023\220\234\'\017\220\234\'%\220\234\'&'
   _V2.methods_by_name['GetTaskAnnotationCount']._options = None
@@ -2674,6 +4972,8 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PatchTasks']._serialized_options = b'\202\323\344\223\002T2?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\001*Z\0162\t/v2/tasks:\001*\230\234\'\002\220\234\'7\220\234\'8\220\234\'\005\220\234\'r\220\234\'\013\220\234\'\023\220\234\'\017\220\234\'%\220\234\'&'
   _V2.methods_by_name['DeleteTasks']._options = None
   _V2.methods_by_name['DeleteTasks']._serialized_options = b'\202\323\344\223\002T*?/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks:\001*Z\016*\t/v2/tasks:\001*\230\234\'\002\220\234\'7\220\234\'8\220\234\'F'
+  _V2.methods_by_name['PatchAnnotationCountsRollup']._options = None
+  _V2.methods_by_name['PatchAnnotationCountsRollup']._serialized_options = b'\202\323\344\223\002\232\0012b/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/annotations/count/rollup:\001*Z12,/v2/tasks/{task_id}/annotations/count/rollup:\001*\210\234\'\001\230\234\'\002\220\234\'8\220\234\'%\220\234\'&'
   _V2.methods_by_name['PostLabelOrders']._options = None
   _V2.methods_by_name['PostLabelOrders']._serialized_options = b'\202\323\344\223\002b\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/label_orders:\001*Z\025\"\020/v2/label_orders:\001*\230\234\'\002\220\234\'C\220\234\'D\220\234\'7\220\234\'8\220\234\'\005\220\234\'r\220\234\'\013\220\234\'\023\220\234\'\017'
   _V2.methods_by_name['GetLabelOrder']._options = None
@@ -2698,10 +4998,34 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['PostStatValues']._serialized_options = b'\202\323\344\223\002b\"F/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values:\001*Z\025\"\020/v2/stats/values:\001*\230\234\'\002'
   _V2.methods_by_name['PostStatValuesAggregate']._options = None
   _V2.methods_by_name['PostStatValuesAggregate']._serialized_options = b'\202\323\344\223\002v\"P/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/stats/values/aggregate:\001*Z\037\"\032/v2/stats/values/aggregate:\001*\230\234\'\002'
+  _V2.methods_by_name['PostAnalytics']._options = None
+  _V2.methods_by_name['PostAnalytics']._serialized_options = b'\202\323\344\223\002\022\"\r/v2/analytics:\001*\210\234\'\001\230\234\'\002\220\234\'\001'
+  _V2.methods_by_name['PostSDKBilling']._options = None
+  _V2.methods_by_name['PostSDKBilling']._serialized_options = b'\202\323\344\223\002\023\"\016/v2/sdkbilling:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['PostFindDuplicateAnnotationsJobs']._options = None
+  _V2.methods_by_name['PostFindDuplicateAnnotationsJobs']._serialized_options = b'\202\323\344\223\002\212\001\"Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs:\001*Z)\"$/v2/annotations/find_duplicates/jobs:\001*\210\234\'\001\230\234\'\002\220\234\'&\220\234\'f\220\234\'g'
+  _V2.methods_by_name['GetFindDuplicateAnnotationsJob']._options = None
+  _V2.methods_by_name['GetFindDuplicateAnnotationsJob']._serialized_options = b'\202\323\344\223\002\216\001\022_/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs/{id}Z+\022)/v2/annotations/find_duplicates/jobs/{id}\210\234\'\001\230\234\'\002\220\234\'g'
+  _V2.methods_by_name['ListFindDuplicateAnnotationsJobs']._options = None
+  _V2.methods_by_name['ListFindDuplicateAnnotationsJobs']._serialized_options = b'\202\323\344\223\002\204\001\022Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobsZ&\022$/v2/annotations/find_duplicates/jobs\210\234\'\001\230\234\'\002\220\234\'g'
+  _V2.methods_by_name['DeleteFindDuplicateAnnotationsJobs']._options = None
+  _V2.methods_by_name['DeleteFindDuplicateAnnotationsJobs']._serialized_options = b'\202\323\344\223\002\212\001*Z/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/annotations/find_duplicates/jobs:\001*Z)*$/v2/annotations/find_duplicates/jobs:\001*\210\234\'\001\230\234\'\002\220\234\'f\220\234\'g\220\234\'h'
   _V2.methods_by_name['PostTrendingMetricsView']._options = None
   _V2.methods_by_name['PostTrendingMetricsView']._serialized_options = b'\202\323\344\223\002m\"h/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}/{object_id}:\001*\230\234\'\002'
   _V2.methods_by_name['ListTrendingMetricsViews']._options = None
   _V2.methods_by_name['ListTrendingMetricsViews']._serialized_options = b'\202\323\344\223\002\210\001\022\\/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/trending_metrics/views/{view_type}Z(\022&/v2/trending_metrics/views/{view_type}\230\234\'\002'
+  _V2.methods_by_name['PostIdValidation']._options = None
+  _V2.methods_by_name['PostIdValidation']._serialized_options = b'\202\323\344\223\002\024\"\017/v2/validate_id:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['ListTagCategories']._options = None
+  _V2.methods_by_name['ListTagCategories']._serialized_options = b'\202\323\344\223\002#\022!/v2/tags/{object_type}/categories\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['ListWebNotifications']._options = None
+  _V2.methods_by_name['ListWebNotifications']._serialized_options = b'\202\323\344\223\002/\022-/v2/users/{user_app_id.user_id}/notifications\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['GetWebNotification']._options = None
+  _V2.methods_by_name['GetWebNotification']._serialized_options = b'\202\323\344\223\002A\022?/v2/users/{user_app_id.user_id}/notifications/{notification_id}\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['PatchWebNotifications']._options = None
+  _V2.methods_by_name['PatchWebNotifications']._serialized_options = b'\202\323\344\223\00222-/v2/users/{user_app_id.user_id}/notifications:\001*\210\234\'\001\230\234\'\003'
+  _V2.methods_by_name['DeleteWebNotifications']._options = None
+  _V2.methods_by_name['DeleteWebNotifications']._serialized_options = b'\202\323\344\223\0022*-/v2/users/{user_app_id.user_id}/notifications:\001*\210\234\'\001\230\234\'\003'
   _V2.methods_by_name['GetModule']._options = None
   _V2.methods_by_name['GetModule']._serialized_options = b'\202\323\344\223\002O\022M/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/modules/{module_id}\230\234\'\002\220\234\'m'
   _V2.methods_by_name['ListModules']._options = None
@@ -2742,10 +5066,22 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['DeleteBulkOperations']._serialized_options = b'\202\323\344\223\002h*I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/bulk_operations:\001*Z\030*\023/v2/bulk_operations:\001*\230\234\'\002\220\234\'&\220\234\'%\220\234\'(\220\234\'y\220\234\'z\220\234\'{'
   _V2.methods_by_name['GetDatasetInputsSearchAddJob']._options = None
   _V2.methods_by_name['GetDatasetInputsSearchAddJob']._serialized_options = b'\202\323\344\223\002\224\001\022b/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/datasets/inputs/search_add/jobs/{job_id}Z.\022,/v2/datasets/inputs/search_add/jobs/{job_id}\230\234\'\002\220\234\'i'
+  _V2.methods_by_name['ListNextTaskAssignments']._options = None
+  _V2.methods_by_name['ListNextTaskAssignments']._serialized_options = b'\202\323\344\223\002z\022U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/assignmentsZ!\022\037/v2/tasks/{task_id}/assignments\210\234\'\001\230\234\'\002\220\234\'&\220\234\'\013\220\234\'\005\220\234\'8\220\234\'i'
+  _V2.methods_by_name['PutTaskAssignments']._options = None
+  _V2.methods_by_name['PutTaskAssignments']._serialized_options = b'\202\323\344\223\002Z\032U/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/tasks/{task_id}/assignments:\001*\210\234\'\001\230\234\'\002\220\234\'%\220\234\'&\220\234\'\013\220\234\'\005\220\234\'8\220\234\'i'
+  _V2.methods_by_name['PostWaitlistEmails']._options = None
+  _V2.methods_by_name['PostWaitlistEmails']._serialized_options = b'\202\323\344\223\002#\"\036/v2/waitlists/{feature}/emails:\001*\210\234\'\001\230\234\'\001'
+  _V2.methods_by_name['GetSampledPredictMetrics']._options = None
+  _V2.methods_by_name['GetSampledPredictMetrics']._serialized_options = b'\202\323\344\223\002r\022Q/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/sampled_predict_metricsZ\035\022\033/v2/sampled_predict_metrics\210\234\'\001\230\234\'\002'
+  _V2.methods_by_name['PostInputsAddJobs']._options = None
+  _V2.methods_by_name['PostInputsAddJobs']._serialized_options = b'\202\323\344\223\002h\"I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add:\001*Z\030\"\023/v2/inputs/jobs/add:\001*\230\234\'\002\220\234\'\005\220\234\'\004\210\234\'\001'
   _V2.methods_by_name['ListInputsAddJobs']._options = None
   _V2.methods_by_name['ListInputsAddJobs']._serialized_options = b'\202\323\344\223\002b\022I/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/addZ\025\022\023/v2/inputs/jobs/add\230\234\'\002\220\234\'\005'
   _V2.methods_by_name['GetInputsAddJob']._options = None
   _V2.methods_by_name['GetInputsAddJob']._serialized_options = b'\202\323\344\223\002l\022N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add/{id}Z\032\022\030/v2/inputs/jobs/add/{id}\230\234\'\002\220\234\'\005'
+  _V2.methods_by_name['CancelInputsAddJob']._options = None
+  _V2.methods_by_name['CancelInputsAddJob']._serialized_options = b'\202\323\344\223\002r2N/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/inputs/jobs/add/{id}:\001*Z\0352\030/v2/inputs/jobs/add/{id}:\001*\230\234\'\002\220\234\'\004\220\234\'\005\210\234\'\001'
   _V2.methods_by_name['PostUploads']._options = None
   _V2.methods_by_name['PostUploads']._serialized_options = b'\202\323\344\223\002X\"A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\001*Z\020\"\013/v2/uploads:\001*\230\234\'\002\220\234\'\201\001\220\234\'\200\001'
   _V2.methods_by_name['PutUploadContentParts']._options = None
@@ -2756,572 +5092,1064 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _V2.methods_by_name['ListUploads']._serialized_options = b'\202\323\344\223\002R\022A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploadsZ\r\022\013/v2/uploads\230\234\'\002\220\234\'\200\001'
   _V2.methods_by_name['DeleteUploads']._options = None
   _V2.methods_by_name['DeleteUploads']._serialized_options = b'\202\323\344\223\002X*A/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/uploads:\001*Z\020*\013/v2/uploads:\001*\230\234\'\002\220\234\'\200\001\220\234\'\201\001\220\234\'\202\001'
-  _ORGANIZATIONINVITATIONSTATUS._serialized_start=37379
-  _ORGANIZATIONINVITATIONSTATUS._serialized_end=37491
-  _PAGINATION._serialized_start=420
-  _PAGINATION._serialized_end=464
-  _GETANNOTATIONREQUEST._serialized_start=466
-  _GETANNOTATIONREQUEST._serialized_end=578
-  _LISTANNOTATIONSREQUEST._serialized_start=581
-  _LISTANNOTATIONSREQUEST._serialized_end=892
-  _POSTANNOTATIONSREQUEST._serialized_start=894
-  _POSTANNOTATIONSREQUEST._serialized_end=1014
-  _PATCHANNOTATIONSREQUEST._serialized_start=1017
-  _PATCHANNOTATIONSREQUEST._serialized_end=1154
-  _PATCHANNOTATIONSSTATUSREQUEST._serialized_start=1157
-  _PATCHANNOTATIONSSTATUSREQUEST._serialized_end=1342
-  _PATCHANNOTATIONSSTATUSRESPONSE._serialized_start=1344
-  _PATCHANNOTATIONSSTATUSRESPONSE._serialized_end=1462
-  _DELETEANNOTATIONREQUEST._serialized_start=1464
-  _DELETEANNOTATIONREQUEST._serialized_end=1579
-  _DELETEANNOTATIONSREQUEST._serialized_start=1581
-  _DELETEANNOTATIONSREQUEST._serialized_end=1688
-  _SINGLEANNOTATIONRESPONSE._serialized_start=1690
-  _SINGLEANNOTATIONRESPONSE._serialized_end=1807
-  _MULTIANNOTATIONRESPONSE._serialized_start=1809
-  _MULTIANNOTATIONRESPONSE._serialized_end=1932
-  _GETAPPREQUEST._serialized_start=1934
-  _GETAPPREQUEST._serialized_end=2025
-  _LISTAPPSREQUEST._serialized_start=2028
-  _LISTAPPSREQUEST._serialized_end=2321
-  _POSTAPPSREQUEST._serialized_start=2323
-  _POSTAPPSREQUEST._serialized_end=2422
-  _DELETEAPPREQUEST._serialized_start=2424
-  _DELETEAPPREQUEST._serialized_end=2491
-  _PATCHAPPSREQUEST._serialized_start=2494
-  _PATCHAPPSREQUEST._serialized_end=2679
-  _PATCHAPPREQUEST._serialized_start=2682
-  _PATCHAPPREQUEST._serialized_end=2865
-  _PATCHAPPSIDSREQUEST._serialized_start=2868
-  _PATCHAPPSIDSREQUEST._serialized_end=2997
-  _POSTAPPSSEARCHESREQUEST._serialized_start=3000
-  _POSTAPPSSEARCHESREQUEST._serialized_end=3163
-  _SINGLEAPPRESPONSE._serialized_start=3165
-  _SINGLEAPPRESPONSE._serialized_end=3261
-  _MULTIAPPRESPONSE._serialized_start=3263
-  _MULTIAPPRESPONSE._serialized_end=3365
-  _LISTCOLLABORATORSREQUEST._serialized_start=3367
-  _LISTCOLLABORATORSREQUEST._serialized_end=3474
-  _POSTCOLLABORATORSREQUEST._serialized_start=3476
-  _POSTCOLLABORATORSREQUEST._serialized_end=3602
-  _PATCHCOLLABORATORSREQUEST._serialized_start=3605
-  _PATCHCOLLABORATORSREQUEST._serialized_end=3748
-  _DELETECOLLABORATORSREQUEST._serialized_start=3750
-  _DELETECOLLABORATORSREQUEST._serialized_end=3874
-  _MULTICOLLABORATORSRESPONSE._serialized_start=3877
-  _MULTICOLLABORATORSRESPONSE._serialized_end=4007
-  _LISTCOLLABORATIONSREQUEST._serialized_start=4009
-  _LISTCOLLABORATIONSREQUEST._serialized_end=4117
-  _MULTICOLLABORATIONSRESPONSE._serialized_start=4120
-  _MULTICOLLABORATIONSRESPONSE._serialized_end=4253
-  _GETSTATUSCODEREQUEST._serialized_start=4255
-  _GETSTATUSCODEREQUEST._serialized_end=4301
-  _LISTSTATUSCODESREQUEST._serialized_start=4303
-  _LISTSTATUSCODESREQUEST._serialized_end=4327
-  _SINGLESTATUSCODERESPONSE._serialized_start=4329
-  _SINGLESTATUSCODERESPONSE._serialized_end=4400
-  _MULTISTATUSCODERESPONSE._serialized_start=4402
-  _MULTISTATUSCODERESPONSE._serialized_end=4519
-  _GETCONCEPTREQUEST._serialized_start=4521
-  _GETCONCEPTREQUEST._serialized_end=4609
-  _LISTCONCEPTSREQUEST._serialized_start=4611
-  _LISTCONCEPTSREQUEST._serialized_end=4713
-  _LISTMODELCONCEPTSREQUEST._serialized_start=4716
-  _LISTMODELCONCEPTSREQUEST._serialized_end=4861
-  _POSTCONCEPTSSEARCHESREQUEST._serialized_start=4864
-  _POSTCONCEPTSSEARCHESREQUEST._serialized_end=5039
-  _POSTCONCEPTSREQUEST._serialized_start=5041
-  _POSTCONCEPTSREQUEST._serialized_end=5152
-  _PATCHCONCEPTSREQUEST._serialized_start=5155
-  _PATCHCONCEPTSREQUEST._serialized_end=5283
-  _GETCONCEPTCOUNTSREQUEST._serialized_start=5285
-  _GETCONCEPTCOUNTSREQUEST._serialized_end=5391
-  _SINGLECONCEPTRESPONSE._serialized_start=5393
-  _SINGLECONCEPTRESPONSE._serialized_end=5501
-  _MULTICONCEPTRESPONSE._serialized_start=5503
-  _MULTICONCEPTRESPONSE._serialized_end=5617
-  _MULTICONCEPTCOUNTRESPONSE._serialized_start=5620
-  _MULTICONCEPTCOUNTRESPONSE._serialized_end=5750
-  _LISTCONCEPTRELATIONSREQUEST._serialized_start=5753
-  _LISTCONCEPTRELATIONSREQUEST._serialized_end=5930
-  _POSTCONCEPTRELATIONSREQUEST._serialized_start=5933
-  _POSTCONCEPTRELATIONSREQUEST._serialized_end=6089
-  _DELETECONCEPTRELATIONSREQUEST._serialized_start=6091
-  _DELETECONCEPTRELATIONSREQUEST._serialized_end=6204
-  _LISTKNOWLEDGEGRAPHSREQUEST._serialized_start=6206
-  _LISTKNOWLEDGEGRAPHSREQUEST._serialized_end=6283
-  _POSTKNOWLEDGEGRAPHSREQUEST._serialized_start=6286
-  _POSTKNOWLEDGEGRAPHSREQUEST._serialized_end=6419
-  _POSTCONCEPTMAPPINGJOBSREQUEST._serialized_start=6422
-  _POSTCONCEPTMAPPINGJOBSREQUEST._serialized_end=6565
-  _MULTICONCEPTRELATIONRESPONSE._serialized_start=6568
-  _MULTICONCEPTRELATIONRESPONSE._serialized_end=6707
-  _MULTIKNOWLEDGEGRAPHRESPONSE._serialized_start=6710
-  _MULTIKNOWLEDGEGRAPHRESPONSE._serialized_end=6846
-  _MULTICONCEPTMAPPINGJOBRESPONSE._serialized_start=6848
-  _MULTICONCEPTMAPPINGJOBRESPONSE._serialized_end=6938
-  _GETCONCEPTLANGUAGEREQUEST._serialized_start=6940
-  _GETCONCEPTLANGUAGEREQUEST._serialized_end=7054
-  _LISTCONCEPTLANGUAGESREQUEST._serialized_start=7057
-  _LISTCONCEPTLANGUAGESREQUEST._serialized_end=7187
-  _PATCHCONCEPTLANGUAGESREQUEST._serialized_start=7190
-  _PATCHCONCEPTLANGUAGESREQUEST._serialized_end=7363
-  _POSTCONCEPTLANGUAGESREQUEST._serialized_start=7366
-  _POSTCONCEPTLANGUAGESREQUEST._serialized_end=7522
-  _SINGLECONCEPTLANGUAGERESPONSE._serialized_start=7525
-  _SINGLECONCEPTLANGUAGERESPONSE._serialized_end=7658
-  _MULTICONCEPTLANGUAGERESPONSE._serialized_start=7661
-  _MULTICONCEPTLANGUAGERESPONSE._serialized_end=7800
-  _GETINPUTREQUEST._serialized_start=7802
-  _GETINPUTREQUEST._serialized_end=7886
-  _GETINPUTSAMPLESREQUEST._serialized_start=7888
-  _GETINPUTSAMPLESREQUEST._serialized_end=7996
-  _LISTINPUTSREQUEST._serialized_start=7999
-  _LISTINPUTSREQUEST._serialized_end=8157
-  _STREAMINPUTSREQUEST._serialized_start=8160
-  _STREAMINPUTSREQUEST._serialized_end=8306
-  _POSTINPUTSREQUEST._serialized_start=8309
-  _POSTINPUTSREQUEST._serialized_end=8441
-  _PATCHINPUTSREQUEST._serialized_start=8443
-  _PATCHINPUTSREQUEST._serialized_end=8565
-  _DELETEINPUTREQUEST._serialized_start=8567
-  _DELETEINPUTREQUEST._serialized_end=8654
-  _DELETEINPUTSREQUEST._serialized_start=8656
-  _DELETEINPUTSREQUEST._serialized_end=8745
-  _SINGLEINPUTRESPONSE._serialized_start=8747
-  _SINGLEINPUTRESPONSE._serialized_end=8849
-  _MULTIINPUTRESPONSE._serialized_start=8852
-  _MULTIINPUTRESPONSE._serialized_end=9012
-  _MULTIINPUTANNOTATIONRESPONSE._serialized_start=9014
-  _MULTIINPUTANNOTATIONRESPONSE._serialized_end=9128
-  _SINGLEINPUTCOUNTRESPONSE._serialized_start=9130
-  _SINGLEINPUTCOUNTRESPONSE._serialized_end=9243
-  _GETINPUTCOUNTREQUEST._serialized_start=9245
-  _GETINPUTCOUNTREQUEST._serialized_end=9316
-  _LISTDATASETSREQUEST._serialized_start=9318
-  _LISTDATASETSREQUEST._serialized_end=9420
-  _GETDATASETREQUEST._serialized_start=9422
-  _GETDATASETREQUEST._serialized_end=9510
-  _POSTDATASETSREQUEST._serialized_start=9512
-  _POSTDATASETSREQUEST._serialized_end=9623
-  _PATCHDATASETSREQUEST._serialized_start=9626
-  _PATCHDATASETSREQUEST._serialized_end=9754
-  _PATCHDATASETIDSREQUEST._serialized_start=9757
-  _PATCHDATASETIDSREQUEST._serialized_end=9889
-  _DELETEDATASETSREQUEST._serialized_start=9891
-  _DELETEDATASETSREQUEST._serialized_end=9984
-  _MULTIDATASETRESPONSE._serialized_start=9986
-  _MULTIDATASETRESPONSE._serialized_end=10100
-  _SINGLEDATASETRESPONSE._serialized_start=10102
-  _SINGLEDATASETRESPONSE._serialized_end=10210
-  _LISTDATASETINPUTSREQUEST._serialized_start=10212
-  _LISTDATASETINPUTSREQUEST._serialized_end=10339
-  _GETDATASETINPUTREQUEST._serialized_start=10341
-  _GETDATASETINPUTREQUEST._serialized_end=10452
-  _POSTDATASETINPUTSREQUEST._serialized_start=10455
-  _POSTDATASETINPUTSREQUEST._serialized_end=10640
-  _DELETEDATASETINPUTSREQUEST._serialized_start=10642
-  _DELETEDATASETINPUTSREQUEST._serialized_end=10758
-  _MULTIDATASETINPUTRESPONSE._serialized_start=10761
-  _MULTIDATASETINPUTRESPONSE._serialized_end=10971
-  _SINGLEDATASETINPUTRESPONSE._serialized_start=10973
-  _SINGLEDATASETINPUTRESPONSE._serialized_end=11097
-  _LISTDATASETVERSIONSREQUEST._serialized_start=11100
-  _LISTDATASETVERSIONSREQUEST._serialized_end=11229
-  _GETDATASETVERSIONREQUEST._serialized_start=11231
-  _GETDATASETVERSIONREQUEST._serialized_end=11354
-  _LISTDATASETVERSIONMETRICSGROUPSREQUEST._serialized_start=11357
-  _LISTDATASETVERSIONMETRICSGROUPSREQUEST._serialized_end=11649
-  _POSTDATASETVERSIONSREQUEST._serialized_start=11652
-  _POSTDATASETVERSIONSREQUEST._serialized_end=11805
-  _PATCHDATASETVERSIONSREQUEST._serialized_start=11808
-  _PATCHDATASETVERSIONSREQUEST._serialized_end=11978
-  _DELETEDATASETVERSIONSREQUEST._serialized_start=11981
-  _DELETEDATASETVERSIONSREQUEST._serialized_end=12109
-  _PUTDATASETVERSIONEXPORTSREQUEST._serialized_start=12112
-  _PUTDATASETVERSIONEXPORTSREQUEST._serialized_end=12295
-  _MULTIDATASETVERSIONRESPONSE._serialized_start=12298
-  _MULTIDATASETVERSIONRESPONSE._serialized_end=12434
-  _MULTIDATASETVERSIONEXPORTRESPONSE._serialized_start=12437
-  _MULTIDATASETVERSIONEXPORTRESPONSE._serialized_end=12576
-  _MULTIDATASETVERSIONMETRICSGROUPRESPONSE._serialized_start=12579
-  _MULTIDATASETVERSIONMETRICSGROUPRESPONSE._serialized_end=12753
-  _SINGLEDATASETVERSIONRESPONSE._serialized_start=12756
-  _SINGLEDATASETVERSIONRESPONSE._serialized_end=12886
-  _GETDATASETINPUTSSEARCHADDJOBREQUEST._serialized_start=12888
-  _GETDATASETINPUTSSEARCHADDJOBREQUEST._serialized_end=12990
-  _SINGLEDATASETINPUTSSEARCHADDJOBRESPONSE._serialized_start=12993
-  _SINGLEDATASETINPUTSSEARCHADDJOBRESPONSE._serialized_end=13133
-  _POSTMODELOUTPUTSREQUEST._serialized_start=13136
-  _POSTMODELOUTPUTSREQUEST._serialized_end=13321
-  _LISTMODELINPUTSREQUEST._serialized_start=13324
-  _LISTMODELINPUTSREQUEST._serialized_end=13467
-  _GETKEYREQUEST._serialized_start=13469
-  _GETKEYREQUEST._serialized_end=13549
-  _LISTKEYSREQUEST._serialized_start=13551
-  _LISTKEYSREQUEST._serialized_end=13649
-  _LISTAPPKEYSREQUEST._serialized_start=13651
-  _LISTAPPKEYSREQUEST._serialized_end=13752
-  _POSTKEYSREQUEST._serialized_start=13754
-  _POSTKEYSREQUEST._serialized_end=13853
-  _DELETEKEYREQUEST._serialized_start=13855
-  _DELETEKEYREQUEST._serialized_end=13938
-  _PATCHKEYSREQUEST._serialized_start=13940
-  _PATCHKEYSREQUEST._serialized_end=14056
-  _SINGLEKEYRESPONSE._serialized_start=14058
-  _SINGLEKEYRESPONSE._serialized_end=14154
-  _MULTIKEYRESPONSE._serialized_start=14156
-  _MULTIKEYRESPONSE._serialized_end=14258
-  _GETMODELREQUEST._serialized_start=14261
-  _GETMODELREQUEST._serialized_end=14434
-  _LISTMODELSREQUEST._serialized_start=14437
-  _LISTMODELSREQUEST._serialized_end=14954
-  _PATCHMODELTOOLKITSREQUEST._serialized_start=14957
-  _PATCHMODELTOOLKITSREQUEST._serialized_end=15085
-  _PATCHMODELCHECKCONSENTSREQUEST._serialized_start=15088
-  _PATCHMODELCHECKCONSENTSREQUEST._serialized_end=15227
-  _PATCHMODELUSECASESREQUEST._serialized_start=15230
-  _PATCHMODELUSECASESREQUEST._serialized_end=15358
-  _PATCHMODELLANGUAGESREQUEST._serialized_start=15361
-  _PATCHMODELLANGUAGESREQUEST._serialized_end=15491
-  _MULTIMODELTOOLKITRESPONSE._serialized_start=15493
-  _MULTIMODELTOOLKITRESPONSE._serialized_end=15583
-  _MULTIMODELCHECKCONSENTRESPONSE._serialized_start=15585
-  _MULTIMODELCHECKCONSENTRESPONSE._serialized_end=15686
-  _MULTIMODELUSECASERESPONSE._serialized_start=15688
-  _MULTIMODELUSECASERESPONSE._serialized_end=15778
-  _MULTIMODELLANGUAGERESPONSE._serialized_start=15780
-  _MULTIMODELLANGUAGERESPONSE._serialized_end=15872
-  _POSTMODELSREQUEST._serialized_start=15875
-  _POSTMODELSREQUEST._serialized_end=16020
-  _PATCHMODELSREQUEST._serialized_start=16022
-  _PATCHMODELSREQUEST._serialized_end=16144
-  _IDUPDATESOURCE._serialized_start=16146
-  _IDUPDATESOURCE._serialized_end=16190
-  _PATCHMODELIDSREQUEST._serialized_start=16193
-  _PATCHMODELIDSREQUEST._serialized_end=16323
-  _DELETEMODELREQUEST._serialized_start=16325
-  _DELETEMODELREQUEST._serialized_end=16412
-  _DELETEMODELSREQUEST._serialized_start=16414
-  _DELETEMODELSREQUEST._serialized_end=16517
-  _POSTMODELSSEARCHESREQUEST._serialized_start=16520
-  _POSTMODELSSEARCHESREQUEST._serialized_end=16689
-  _SINGLEMODELRESPONSE._serialized_start=16691
-  _SINGLEMODELRESPONSE._serialized_end=16793
-  _MULTIMODELRESPONSE._serialized_start=16795
-  _MULTIMODELRESPONSE._serialized_end=16903
-  _PATCHMODELVERSIONSREQUEST._serialized_start=16906
-  _PATCHMODELVERSIONSREQUEST._serialized_end=17068
-  _GETMODELVERSIONREQUEST._serialized_start=17070
-  _GETMODELVERSIONREQUEST._serialized_end=17181
-  _LISTMODELVERSIONSREQUEST._serialized_start=17184
-  _LISTMODELVERSIONSREQUEST._serialized_end=17330
-  _DELETEMODELVERSIONREQUEST._serialized_start=17332
-  _DELETEMODELVERSIONREQUEST._serialized_end=17446
-  _SINGLEMODELVERSIONRESPONSE._serialized_start=17448
-  _SINGLEMODELVERSIONRESPONSE._serialized_end=17572
-  _MULTIMODELVERSIONRESPONSE._serialized_start=17575
-  _MULTIMODELVERSIONRESPONSE._serialized_end=17705
-  _POSTMODELVERSIONSREQUEST._serialized_start=17708
-  _POSTMODELVERSIONSREQUEST._serialized_end=18134
-  _POSTWORKFLOWVERSIONSUNPUBLISHREQUEST._serialized_start=18137
-  _POSTWORKFLOWVERSIONSUNPUBLISHREQUEST._serialized_end=18314
-  _POSTWORKFLOWVERSIONSPUBLISHREQUEST._serialized_start=18317
-  _POSTWORKFLOWVERSIONSPUBLISHREQUEST._serialized_end=18490
-  _WORKFLOWVERSIONPUBLISHREQUEST._serialized_start=18492
-  _WORKFLOWVERSIONPUBLISHREQUEST._serialized_end=18543
-  _WORKFLOWVERSIONUNPUBLISHREQUEST._serialized_start=18545
-  _WORKFLOWVERSIONUNPUBLISHREQUEST._serialized_end=18598
-  _MODELVERSIONPUBLISHREQUEST._serialized_start=18600
-  _MODELVERSIONPUBLISHREQUEST._serialized_end=18648
-  _POSTMODELVERSIONSPUBLISHREQUEST._serialized_start=18651
-  _POSTMODELVERSIONSPUBLISHREQUEST._serialized_end=18815
-  _MODELVERSIONUNPUBLISHREQUEST._serialized_start=18817
-  _MODELVERSIONUNPUBLISHREQUEST._serialized_end=18867
-  _POSTMODELVERSIONSUNPUBLISHREQUEST._serialized_start=18870
-  _POSTMODELVERSIONSUNPUBLISHREQUEST._serialized_end=19038
-  _POSTMODELVERSIONMETRICSREQUEST._serialized_start=19041
-  _POSTMODELVERSIONMETRICSREQUEST._serialized_end=19268
-  _GETMODELVERSIONMETRICSREQUEST._serialized_start=19271
-  _GETMODELVERSIONMETRICSREQUEST._serialized_end=19432
-  _GETMODELTYPEREQUEST._serialized_start=19434
-  _GETMODELTYPEREQUEST._serialized_end=19527
-  _LISTMODELTYPESREQUEST._serialized_start=19529
-  _LISTMODELTYPESREQUEST._serialized_end=19633
-  _LISTOPENSOURCELICENSESREQUEST._serialized_start=19635
-  _LISTOPENSOURCELICENSESREQUEST._serialized_end=19666
-  _LISTOPENSOURCELICENSESRESPONSE._serialized_start=19668
-  _LISTOPENSOURCELICENSESRESPONSE._serialized_end=19763
-  _SINGLEMODELTYPERESPONSE._serialized_start=19765
-  _SINGLEMODELTYPERESPONSE._serialized_end=19886
-  _MULTIMODELTYPERESPONSE._serialized_start=19889
-  _MULTIMODELTYPERESPONSE._serialized_end=20065
-  _GETMODELVERSIONINPUTEXAMPLEREQUEST._serialized_start=20068
-  _GETMODELVERSIONINPUTEXAMPLEREQUEST._serialized_end=20217
-  _LISTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_start=20220
-  _LISTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_end=20383
-  _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE._serialized_start=20386
-  _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE._serialized_end=20548
-  _MULTIMODELVERSIONINPUTEXAMPLERESPONSE._serialized_start=20551
-  _MULTIMODELVERSIONINPUTEXAMPLERESPONSE._serialized_end=20713
-  _LISTMODELREFERENCESREQUEST._serialized_start=20715
-  _LISTMODELREFERENCESREQUEST._serialized_end=20842
-  _MULTIMODELREFERENCERESPONSE._serialized_start=20845
-  _MULTIMODELREFERENCERESPONSE._serialized_end=20975
-  _MULTIOUTPUTRESPONSE._serialized_start=20977
-  _MULTIOUTPUTRESPONSE._serialized_end=21088
-  _LISTSCOPESREQUEST._serialized_start=21090
-  _LISTSCOPESREQUEST._serialized_end=21176
-  _MYSCOPESREQUEST._serialized_start=21178
-  _MYSCOPESREQUEST._serialized_end=21244
-  _MYSCOPESUSERREQUEST._serialized_start=21246
-  _MYSCOPESUSERREQUEST._serialized_end=21316
-  _MYSCOPESROOTREQUEST._serialized_start=21318
-  _MYSCOPESROOTREQUEST._serialized_end=21339
-  _MULTISCOPEDEPSRESPONSE._serialized_start=21342
-  _MULTISCOPEDEPSRESPONSE._serialized_end=21507
-  _MULTISCOPERESPONSE._serialized_start=21510
-  _MULTISCOPERESPONSE._serialized_end=21670
-  _MULTISCOPEUSERRESPONSE._serialized_start=21673
-  _MULTISCOPEUSERRESPONSE._serialized_end=21805
-  _MULTISCOPEROOTRESPONSE._serialized_start=21808
-  _MULTISCOPEROOTRESPONSE._serialized_end=21940
-  _GETSEARCHREQUEST._serialized_start=21942
-  _GETSEARCHREQUEST._serialized_end=22021
-  _LISTSEARCHESREQUEST._serialized_start=22023
-  _LISTSEARCHESREQUEST._serialized_end=22125
-  _POSTSEARCHESREQUEST._serialized_start=22128
-  _POSTSEARCHESREQUEST._serialized_end=22324
-  _PATCHINPUTSSEARCHESREQUEST._serialized_start=22327
-  _PATCHINPUTSSEARCHESREQUEST._serialized_end=22460
-  _PATCHANNOTATIONSSEARCHESREQUEST._serialized_start=22463
-  _PATCHANNOTATIONSSEARCHESREQUEST._serialized_end=22601
-  _PATCHSEARCHESREQUEST._serialized_start=22603
-  _PATCHSEARCHESREQUEST._serialized_end=22730
-  _POSTSEARCHESBYIDREQUEST._serialized_start=22733
-  _POSTSEARCHESBYIDREQUEST._serialized_end=22865
-  _DELETESEARCHREQUEST._serialized_start=22867
-  _DELETESEARCHREQUEST._serialized_end=22949
-  _POSTANNOTATIONSSEARCHESREQUEST._serialized_start=22952
-  _POSTANNOTATIONSSEARCHESREQUEST._serialized_end=23119
-  _DELETEANNOTATIONSEARCHMETRICSREQUEST._serialized_start=23121
-  _DELETEANNOTATIONSEARCHMETRICSREQUEST._serialized_end=23220
-  _POSTINPUTSSEARCHESREQUEST._serialized_start=23223
-  _POSTINPUTSSEARCHESREQUEST._serialized_end=23385
-  _SINGLESEARCHRESPONSE._serialized_start=23387
-  _SINGLESEARCHRESPONSE._serialized_end=23492
-  _MULTISEARCHRESPONSE._serialized_start=23495
-  _MULTISEARCHRESPONSE._serialized_end=23688
-  _POSTANNOTATIONSEARCHMETRICSREQUEST._serialized_start=23691
-  _POSTANNOTATIONSEARCHMETRICSREQUEST._serialized_end=23967
-  _GETANNOTATIONSEARCHMETRICSREQUEST._serialized_start=23969
-  _GETANNOTATIONSEARCHMETRICSREQUEST._serialized_end=24065
-  _LISTANNOTATIONSEARCHMETRICSREQUEST._serialized_start=24067
-  _LISTANNOTATIONSEARCHMETRICSREQUEST._serialized_end=24152
-  _MULTIANNOTATIONSEARCHMETRICSRESPONSE._serialized_start=24155
-  _MULTIANNOTATIONSEARCHMETRICSRESPONSE._serialized_end=24312
-  _LISTANNOTATIONFILTERSREQUEST._serialized_start=24314
-  _LISTANNOTATIONFILTERSREQUEST._serialized_end=24425
-  _GETANNOTATIONFILTERREQUEST._serialized_start=24427
-  _GETANNOTATIONFILTERREQUEST._serialized_end=24534
-  _POSTANNOTATIONFILTERSREQUEST._serialized_start=24537
-  _POSTANNOTATIONFILTERSREQUEST._serialized_end=24676
-  _PATCHANNOTATIONFILTERSREQUEST._serialized_start=24679
-  _PATCHANNOTATIONFILTERSREQUEST._serialized_end=24835
-  _DELETEANNOTATIONFILTERSREQUEST._serialized_start=24837
-  _DELETEANNOTATIONFILTERSREQUEST._serialized_end=24949
-  _MULTIANNOTATIONFILTERRESPONSE._serialized_start=24952
-  _MULTIANNOTATIONFILTERRESPONSE._serialized_end=25094
-  _SINGLEANNOTATIONFILTERRESPONSE._serialized_start=25097
-  _SINGLEANNOTATIONFILTERRESPONSE._serialized_end=25233
-  _POSTVALIDATEPASSWORDREQUEST._serialized_start=25235
-  _POSTVALIDATEPASSWORDREQUEST._serialized_end=25355
-  _SINGLEPASSWORDVALIDATIONRESPONSE._serialized_start=25358
-  _SINGLEPASSWORDVALIDATIONRESPONSE._serialized_end=25500
-  _GETWORKFLOWREQUEST._serialized_start=25503
-  _GETWORKFLOWREQUEST._serialized_end=25690
-  _LISTWORKFLOWSREQUEST._serialized_start=25693
-  _LISTWORKFLOWSREQUEST._serialized_end=26008
-  _POSTWORKFLOWSREQUEST._serialized_start=26010
-  _POSTWORKFLOWSREQUEST._serialized_end=26124
-  _PATCHWORKFLOWSREQUEST._serialized_start=26127
-  _PATCHWORKFLOWSREQUEST._serialized_end=26258
-  _PATCHWORKFLOWIDSREQUEST._serialized_start=26261
-  _PATCHWORKFLOWIDSREQUEST._serialized_end=26394
-  _DELETEWORKFLOWREQUEST._serialized_start=26396
-  _DELETEWORKFLOWREQUEST._serialized_end=26489
-  _DELETEWORKFLOWSREQUEST._serialized_start=26491
-  _DELETEWORKFLOWSREQUEST._serialized_end=26597
-  _SINGLEWORKFLOWRESPONSE._serialized_start=26599
-  _SINGLEWORKFLOWRESPONSE._serialized_end=26710
-  _MULTIWORKFLOWRESPONSE._serialized_start=26712
-  _MULTIWORKFLOWRESPONSE._serialized_end=26829
-  _POSTWORKFLOWRESULTSREQUEST._serialized_start=26832
-  _POSTWORKFLOWRESULTSREQUEST._serialized_end=27125
-  _POSTWORKFLOWRESULTSRESPONSE._serialized_start=27128
-  _POSTWORKFLOWRESULTSRESPONSE._serialized_end=27344
-  _POSTWORKFLOWRESULTSSIMILARITYREQUEST._serialized_start=27347
-  _POSTWORKFLOWRESULTSSIMILARITYREQUEST._serialized_end=27620
-  _POSTWORKFLOWRESULTSSIMILARITYRESPONSE._serialized_start=27623
-  _POSTWORKFLOWRESULTSSIMILARITYRESPONSE._serialized_end=27765
-  _LISTWORKFLOWVERSIONSREQUEST._serialized_start=27768
-  _LISTWORKFLOWVERSIONSREQUEST._serialized_end=27899
-  _GETWORKFLOWVERSIONREQUEST._serialized_start=27901
-  _GETWORKFLOWVERSIONREQUEST._serialized_end=28027
-  _DELETEWORKFLOWVERSIONSREQUEST._serialized_start=28030
-  _DELETEWORKFLOWVERSIONSREQUEST._serialized_end=28161
-  _PATCHWORKFLOWVERSIONSREQUEST._serialized_start=28164
-  _PATCHWORKFLOWVERSIONSREQUEST._serialized_end=28338
-  _MULTIWORKFLOWVERSIONRESPONSE._serialized_start=28341
-  _MULTIWORKFLOWVERSIONRESPONSE._serialized_end=28480
-  _SINGLEWORKFLOWVERSIONRESPONSE._serialized_start=28483
-  _SINGLEWORKFLOWVERSIONRESPONSE._serialized_end=28616
-  _POSTAPPDUPLICATIONSREQUEST._serialized_start=28619
-  _POSTAPPDUPLICATIONSREQUEST._serialized_end=28752
-  _GETAPPDUPLICATIONREQUEST._serialized_start=28754
-  _GETAPPDUPLICATIONREQUEST._serialized_end=28857
-  _LISTAPPDUPLICATIONSREQUEST._serialized_start=28859
-  _LISTAPPDUPLICATIONSREQUEST._serialized_end=28968
-  _MULTIAPPDUPLICATIONSRESPONSE._serialized_start=28971
-  _MULTIAPPDUPLICATIONSRESPONSE._serialized_end=29102
-  _SINGLEAPPDUPLICATIONRESPONSE._serialized_start=29105
-  _SINGLEAPPDUPLICATIONRESPONSE._serialized_end=29235
-  _POSTTASKSREQUEST._serialized_start=29237
-  _POSTTASKSREQUEST._serialized_end=29339
-  _GETTASKREQUEST._serialized_start=29341
-  _GETTASKREQUEST._serialized_end=29450
-  _LISTTASKSREQUEST._serialized_start=29453
-  _LISTTASKSREQUEST._serialized_end=29691
-  _PATCHTASKSREQUEST._serialized_start=29693
-  _PATCHTASKSREQUEST._serialized_end=29812
-  _DELETETASKSREQUEST._serialized_start=29814
-  _DELETETASKSREQUEST._serialized_end=29896
-  _MULTITASKRESPONSE._serialized_start=29898
-  _MULTITASKRESPONSE._serialized_end=30003
-  _SINGLETASKRESPONSE._serialized_start=30005
-  _SINGLETASKRESPONSE._serialized_end=30104
-  _GETTASKCOUNTREQUEST._serialized_start=30106
-  _GETTASKCOUNTREQUEST._serialized_end=30211
-  _SINGLETASKCOUNTRESPONSE._serialized_start=30214
-  _SINGLETASKCOUNTRESPONSE._serialized_end=30371
-  _POSTLABELORDERSREQUEST._serialized_start=30373
-  _POSTLABELORDERSREQUEST._serialized_end=30494
-  _GETLABELORDERREQUEST._serialized_start=30496
-  _GETLABELORDERREQUEST._serialized_end=30591
-  _LISTLABELORDERSREQUEST._serialized_start=30593
-  _LISTLABELORDERSREQUEST._serialized_end=30698
-  _PATCHLABELORDERSREQUEST._serialized_start=30701
-  _PATCHLABELORDERSREQUEST._serialized_end=30839
-  _DELETELABELORDERSREQUEST._serialized_start=30841
-  _DELETELABELORDERSREQUEST._serialized_end=30929
-  _MULTILABELORDERRESPONSE._serialized_start=30931
-  _MULTILABELORDERRESPONSE._serialized_end=31055
-  _SINGLELABELORDERRESPONSE._serialized_start=31057
-  _SINGLELABELORDERRESPONSE._serialized_end=31175
-  _POSTCOLLECTORSREQUEST._serialized_start=31177
-  _POSTCOLLECTORSREQUEST._serialized_end=31294
-  _PATCHCOLLECTORSREQUEST._serialized_start=31297
-  _PATCHCOLLECTORSREQUEST._serialized_end=31431
-  _DELETECOLLECTORSREQUEST._serialized_start=31433
-  _DELETECOLLECTORSREQUEST._serialized_end=31540
-  _GETCOLLECTORREQUEST._serialized_start=31542
-  _GETCOLLECTORREQUEST._serialized_end=31634
-  _LISTCOLLECTORSREQUEST._serialized_start=31636
-  _LISTCOLLECTORSREQUEST._serialized_end=31740
-  _MULTICOLLECTORRESPONSE._serialized_start=31742
-  _MULTICOLLECTORRESPONSE._serialized_end=31856
-  _SINGLECOLLECTORRESPONSE._serialized_start=31858
-  _SINGLECOLLECTORRESPONSE._serialized_end=31972
-  _POSTSTATVALUESREQUEST._serialized_start=31974
-  _POSTSTATVALUESREQUEST._serialized_end=32092
-  _MULTISTATVALUERESPONSE._serialized_start=32094
-  _MULTISTATVALUERESPONSE._serialized_end=32215
-  _POSTSTATVALUESAGGREGATEREQUEST._serialized_start=32218
-  _POSTSTATVALUESAGGREGATEREQUEST._serialized_end=32376
-  _MULTISTATVALUEAGGREGATERESPONSE._serialized_start=32379
-  _MULTISTATVALUEAGGREGATERESPONSE._serialized_end=32535
-  _POSTTRENDINGMETRICSVIEWREQUEST._serialized_start=32537
-  _POSTTRENDINGMETRICSVIEWREQUEST._serialized_end=32656
-  _LISTTRENDINGMETRICSVIEWSREQUEST._serialized_start=32659
-  _LISTTRENDINGMETRICSVIEWSREQUEST._serialized_end=32792
-  _MULTITRENDINGMETRICSVIEWRESPONSE._serialized_start=32794
-  _MULTITRENDINGMETRICSVIEWRESPONSE._serialized_end=32920
-  _GETMODULEREQUEST._serialized_start=32922
-  _GETMODULEREQUEST._serialized_end=33008
-  _LISTMODULESREQUEST._serialized_start=33010
-  _LISTMODULESREQUEST._serialized_end=33111
-  _POSTMODULESREQUEST._serialized_start=33113
-  _POSTMODULESREQUEST._serialized_end=33221
-  _PATCHMODULESREQUEST._serialized_start=33223
-  _PATCHMODULESREQUEST._serialized_end=33348
-  _DELETEMODULESREQUEST._serialized_start=33350
-  _DELETEMODULESREQUEST._serialized_end=33434
-  _SINGLEMODULERESPONSE._serialized_start=33436
-  _SINGLEMODULERESPONSE._serialized_end=33541
-  _MULTIMODULERESPONSE._serialized_start=33543
-  _MULTIMODULERESPONSE._serialized_end=33654
-  _GETMODULEVERSIONREQUEST._serialized_start=33656
-  _GETMODULEVERSIONREQUEST._serialized_end=33776
-  _LISTMODULEVERSIONSREQUEST._serialized_start=33778
-  _LISTMODULEVERSIONSREQUEST._serialized_end=33905
-  _POSTMODULEVERSIONSREQUEST._serialized_start=33908
-  _POSTMODULEVERSIONSREQUEST._serialized_end=34057
-  _DELETEMODULEVERSIONSREQUEST._serialized_start=34059
-  _DELETEMODULEVERSIONSREQUEST._serialized_end=34169
-  _SINGLEMODULEVERSIONRESPONSE._serialized_start=34171
-  _SINGLEMODULEVERSIONRESPONSE._serialized_end=34298
-  _MULTIMODULEVERSIONRESPONSE._serialized_start=34301
-  _MULTIMODULEVERSIONRESPONSE._serialized_end=34434
-  _GETINSTALLEDMODULEVERSIONREQUEST._serialized_start=34436
-  _GETINSTALLEDMODULEVERSIONREQUEST._serialized_end=34556
-  _LISTINSTALLEDMODULEVERSIONSREQUEST._serialized_start=34558
-  _LISTINSTALLEDMODULEVERSIONSREQUEST._serialized_end=34675
-  _POSTINSTALLEDMODULEVERSIONSREQUEST._serialized_start=34678
-  _POSTINSTALLEDMODULEVERSIONSREQUEST._serialized_end=34836
-  _POSTINSTALLEDMODULEVERSIONSKEYREQUEST._serialized_start=34838
-  _POSTINSTALLEDMODULEVERSIONSKEYREQUEST._serialized_end=34963
-  _DELETEINSTALLEDMODULEVERSIONSREQUEST._serialized_start=34965
-  _DELETEINSTALLEDMODULEVERSIONSREQUEST._serialized_end=35065
-  _SINGLEINSTALLEDMODULEVERSIONRESPONSE._serialized_start=35068
-  _SINGLEINSTALLEDMODULEVERSIONRESPONSE._serialized_end=35223
-  _MULTIINSTALLEDMODULEVERSIONRESPONSE._serialized_start=35226
-  _MULTIINSTALLEDMODULEVERSIONRESPONSE._serialized_end=35387
-  _POSTBULKOPERATIONSREQUEST._serialized_start=35390
-  _POSTBULKOPERATIONSREQUEST._serialized_end=35520
-  _LISTBULKOPERATIONSREQUEST._serialized_start=35522
-  _LISTBULKOPERATIONSREQUEST._serialized_end=35630
-  _GETBULKOPERATIONREQUEST._serialized_start=35632
-  _GETBULKOPERATIONREQUEST._serialized_end=35718
-  _CANCELBULKOPERATIONREQUEST._serialized_start=35720
-  _CANCELBULKOPERATIONREQUEST._serialized_end=35810
-  _DELETEBULKOPERATIONREQUEST._serialized_start=35812
-  _DELETEBULKOPERATIONREQUEST._serialized_end=35902
-  _SINGLEBULKOPERATIONSRESPONSE._serialized_start=35905
-  _SINGLEBULKOPERATIONSRESPONSE._serialized_end=36033
-  _MULTIBULKOPERATIONSRESPONSE._serialized_start=36035
-  _MULTIBULKOPERATIONSRESPONSE._serialized_end=36162
-  _LISTINPUTSADDJOBSREQUEST._serialized_start=36164
-  _LISTINPUTSADDJOBSREQUEST._serialized_end=36271
-  _GETINPUTSADDJOBREQUEST._serialized_start=36273
-  _GETINPUTSADDJOBREQUEST._serialized_end=36358
-  _MULTIINPUTSADDJOBRESPONSE._serialized_start=36361
-  _MULTIINPUTSADDJOBRESPONSE._serialized_end=36492
-  _SINGLEINPUTSADDJOBRESPONSE._serialized_start=36494
-  _SINGLEINPUTSADDJOBRESPONSE._serialized_end=36619
-  _POSTUPLOADSREQUEST._serialized_start=36621
-  _POSTUPLOADSREQUEST._serialized_end=36729
-  _DELETEUPLOADSREQUEST._serialized_start=36731
-  _DELETEUPLOADSREQUEST._serialized_end=36815
-  _LISTUPLOADSREQUEST._serialized_start=36817
-  _LISTUPLOADSREQUEST._serialized_end=36918
-  _GETUPLOADREQUEST._serialized_start=36920
-  _GETUPLOADREQUEST._serialized_end=37006
-  _SINGLEUPLOADRESPONSE._serialized_start=37008
-  _SINGLEUPLOADRESPONSE._serialized_end=37113
-  _MULTIUPLOADRESPONSE._serialized_start=37115
-  _MULTIUPLOADRESPONSE._serialized_end=37220
-  _PUTUPLOADCONTENTPARTSREQUEST._serialized_start=37223
-  _PUTUPLOADCONTENTPARTSREQUEST._serialized_end=37377
-  _V2._serialized_start=37495
-  _V2._serialized_end=81973
+  _ORGANIZATIONINVITATIONSTATUS._serialized_start=67528
+  _ORGANIZATIONINVITATIONSTATUS._serialized_end=67640
+  _TESTMESSAGE._serialized_start=461
+  _TESTMESSAGE._serialized_end=644
+  _PAGINATION._serialized_start=646
+  _PAGINATION._serialized_end=690
+  _GETANNOTATIONREQUEST._serialized_start=692
+  _GETANNOTATIONREQUEST._serialized_end=804
+  _LISTANNOTATIONSREQUEST._serialized_start=807
+  _LISTANNOTATIONSREQUEST._serialized_end=1118
+  _POSTANNOTATIONSREQUEST._serialized_start=1120
+  _POSTANNOTATIONSREQUEST._serialized_end=1240
+  _PATCHANNOTATIONSREQUEST._serialized_start=1243
+  _PATCHANNOTATIONSREQUEST._serialized_end=1380
+  _PATCHANNOTATIONSSTATUSREQUEST._serialized_start=1383
+  _PATCHANNOTATIONSSTATUSREQUEST._serialized_end=1568
+  _PATCHANNOTATIONSSTATUSRESPONSE._serialized_start=1570
+  _PATCHANNOTATIONSSTATUSRESPONSE._serialized_end=1688
+  _DELETEANNOTATIONREQUEST._serialized_start=1690
+  _DELETEANNOTATIONREQUEST._serialized_end=1805
+  _DELETEANNOTATIONSREQUEST._serialized_start=1807
+  _DELETEANNOTATIONSREQUEST._serialized_end=1914
+  _SINGLEANNOTATIONRESPONSE._serialized_start=1916
+  _SINGLEANNOTATIONRESPONSE._serialized_end=2033
+  _MULTIANNOTATIONRESPONSE._serialized_start=2035
+  _MULTIANNOTATIONRESPONSE._serialized_end=2158
+  _GETAPPREQUEST._serialized_start=2160
+  _GETAPPREQUEST._serialized_end=2251
+  _LISTAPPSREQUEST._serialized_start=2254
+  _LISTAPPSREQUEST._serialized_end=2547
+  _POSTAPPSREQUEST._serialized_start=2549
+  _POSTAPPSREQUEST._serialized_end=2648
+  _DELETEAPPREQUEST._serialized_start=2650
+  _DELETEAPPREQUEST._serialized_end=2717
+  _PATCHAPPSREQUEST._serialized_start=2720
+  _PATCHAPPSREQUEST._serialized_end=2905
+  _PATCHAPPREQUEST._serialized_start=2908
+  _PATCHAPPREQUEST._serialized_end=3091
+  _PATCHAPPOWNERREQUEST._serialized_start=3093
+  _PATCHAPPOWNERREQUEST._serialized_end=3186
+  _PATCHAPPSIDSREQUEST._serialized_start=3189
+  _PATCHAPPSIDSREQUEST._serialized_end=3318
+  _POSTAPPSSEARCHESREQUEST._serialized_start=3321
+  _POSTAPPSSEARCHESREQUEST._serialized_end=3484
+  _SINGLEAPPRESPONSE._serialized_start=3486
+  _SINGLEAPPRESPONSE._serialized_end=3582
+  _MULTIAPPRESPONSE._serialized_start=3584
+  _MULTIAPPRESPONSE._serialized_end=3686
+  _LISTCOLLABORATORSREQUEST._serialized_start=3689
+  _LISTCOLLABORATORSREQUEST._serialized_end=3828
+  _POSTCOLLABORATORSREQUEST._serialized_start=3830
+  _POSTCOLLABORATORSREQUEST._serialized_end=3956
+  _PATCHCOLLABORATORSREQUEST._serialized_start=3959
+  _PATCHCOLLABORATORSREQUEST._serialized_end=4102
+  _DELETECOLLABORATORSREQUEST._serialized_start=4104
+  _DELETECOLLABORATORSREQUEST._serialized_end=4228
+  _MULTICOLLABORATORSRESPONSE._serialized_start=4231
+  _MULTICOLLABORATORSRESPONSE._serialized_end=4361
+  _LISTCOLLABORATIONSREQUEST._serialized_start=4363
+  _LISTCOLLABORATIONSREQUEST._serialized_end=4471
+  _MULTICOLLABORATIONSRESPONSE._serialized_start=4474
+  _MULTICOLLABORATIONSRESPONSE._serialized_end=4607
+  _POSTVERIFYEMAILREQUEST._serialized_start=4609
+  _POSTVERIFYEMAILREQUEST._serialized_end=4646
+  _SINGLEVERIFYEMAILRESPONSE._serialized_start=4648
+  _SINGLEVERIFYEMAILRESPONSE._serialized_end=4720
+  _LISTAUTHMETHODSREQUEST._serialized_start=4723
+  _LISTAUTHMETHODSREQUEST._serialized_end=4865
+  _POSTLINKIDPUSERREQUEST._serialized_start=4867
+  _POSTLINKIDPUSERREQUEST._serialized_end=4958
+  _GETLOGININFOREQUEST._serialized_start=4960
+  _GETLOGININFOREQUEST._serialized_end=5048
+  _GETLOGININFORESPONSE._serialized_start=5051
+  _GETLOGININFORESPONSE._serialized_end=5240
+  _POSTLINKIDPUSERRESPONSE._serialized_start=5242
+  _POSTLINKIDPUSERRESPONSE._serialized_end=5312
+  _POSTIDLOGINFINALIZERREQUEST._serialized_start=5314
+  _POSTIDLOGINFINALIZERREQUEST._serialized_end=5410
+  _POSTIDLOGINFINALIZERRESPONSE._serialized_start=5412
+  _POSTIDLOGINFINALIZERRESPONSE._serialized_end=5510
+  _LISTAUTHMETHODSRESPONSE._serialized_start=5512
+  _LISTAUTHMETHODSRESPONSE._serialized_end=5630
+  _LIST2FAMETHODSREQUEST._serialized_start=5632
+  _LIST2FAMETHODSREQUEST._serialized_end=5704
+  _LIST2FAMETHODSRESPONSE._serialized_start=5707
+  _LIST2FAMETHODSRESPONSE._serialized_end=5844
+  _POSTAUTH2FATOTPREGISTERENABLEREQUEST._serialized_start=5846
+  _POSTAUTH2FATOTPREGISTERENABLEREQUEST._serialized_end=5933
+  _POSTAUTH2FATOTPREGISTERENABLERESPONSE._serialized_start=5936
+  _POSTAUTH2FATOTPREGISTERENABLERESPONSE._serialized_end=6068
+  _POSTAUTH2FATOTPDISABLEREQUEST._serialized_start=6070
+  _POSTAUTH2FATOTPDISABLEREQUEST._serialized_end=6168
+  _POSTAUTH2FATOTPDISABLERESPONSE._serialized_start=6170
+  _POSTAUTH2FATOTPDISABLERESPONSE._serialized_end=6247
+  _POSTAUTH2FATOTPREGISTERVERIFYREQUEST._serialized_start=6249
+  _POSTAUTH2FATOTPREGISTERVERIFYREQUEST._serialized_end=6369
+  _POSTAUTH2FATOTPREGISTERVERIFYRESPONSE._serialized_start=6371
+  _POSTAUTH2FATOTPREGISTERVERIFYRESPONSE._serialized_end=6477
+  _POSTAUTH2FATOTPLOGINREQUEST._serialized_start=6479
+  _POSTAUTH2FATOTPLOGINREQUEST._serialized_end=6578
+  _POSTAUTH2FATOTPRECOVERREQUEST._serialized_start=6580
+  _POSTAUTH2FATOTPRECOVERREQUEST._serialized_end=6666
+  _POSTAUTH2FATOTPRECOVERRESPONSE._serialized_start=6668
+  _POSTAUTH2FATOTPRECOVERRESPONSE._serialized_end=6745
+  _GETAUTH2FATOTPRECOVERCONFIRMREQUEST._serialized_start=6747
+  _GETAUTH2FATOTPRECOVERCONFIRMREQUEST._serialized_end=6799
+  _GETAUTH2FATOTPRECOVERCONFIRMRESPONSE._serialized_start=6801
+  _GETAUTH2FATOTPRECOVERCONFIRMRESPONSE._serialized_end=6884
+  _REQUESTRESETPASSWORDREQUEST._serialized_start=6886
+  _REQUESTRESETPASSWORDREQUEST._serialized_end=6930
+  _COMPLETERESETPASSWORDREQUEST._serialized_start=6932
+  _COMPLETERESETPASSWORDREQUEST._serialized_end=6997
+  _POSTLOGINREQUEST._serialized_start=6999
+  _POSTLOGINREQUEST._serialized_end=7070
+  _POSTSIGNUPREQUEST._serialized_start=7073
+  _POSTSIGNUPREQUEST._serialized_end=7424
+  _UTM._serialized_start=7426
+  _UTM._serialized_end=7512
+  _SINGLELOGINRESPONSE._serialized_start=7515
+  _SINGLELOGINRESPONSE._serialized_end=8001
+  _POSTLOGOUTREQUEST._serialized_start=8003
+  _POSTLOGOUTREQUEST._serialized_end=8071
+  _SINGLELOGOUTRESPONSE._serialized_start=8073
+  _SINGLELOGOUTRESPONSE._serialized_end=8140
+  _GETBILLINGUSAGEREQUEST._serialized_start=8142
+  _GETBILLINGUSAGEREQUEST._serialized_end=8215
+  _GETBILLINGUSAGERESPONSE._serialized_start=8218
+  _GETBILLINGUSAGERESPONSE._serialized_end=8389
+  _GETSTATUSCODEREQUEST._serialized_start=8391
+  _GETSTATUSCODEREQUEST._serialized_end=8437
+  _LISTSTATUSCODESREQUEST._serialized_start=8439
+  _LISTSTATUSCODESREQUEST._serialized_end=8463
+  _SINGLESTATUSCODERESPONSE._serialized_start=8465
+  _SINGLESTATUSCODERESPONSE._serialized_end=8536
+  _MULTISTATUSCODERESPONSE._serialized_start=8538
+  _MULTISTATUSCODERESPONSE._serialized_end=8655
+  _GETCONCEPTREQUEST._serialized_start=8657
+  _GETCONCEPTREQUEST._serialized_end=8745
+  _LISTCONCEPTSREQUEST._serialized_start=8747
+  _LISTCONCEPTSREQUEST._serialized_end=8849
+  _LISTMODELCONCEPTSREQUEST._serialized_start=8852
+  _LISTMODELCONCEPTSREQUEST._serialized_end=8997
+  _POSTCONCEPTSSEARCHESREQUEST._serialized_start=9000
+  _POSTCONCEPTSSEARCHESREQUEST._serialized_end=9175
+  _POSTCONCEPTSREQUEST._serialized_start=9177
+  _POSTCONCEPTSREQUEST._serialized_end=9288
+  _PATCHCONCEPTSREQUEST._serialized_start=9291
+  _PATCHCONCEPTSREQUEST._serialized_end=9419
+  _GETCONCEPTCOUNTSREQUEST._serialized_start=9421
+  _GETCONCEPTCOUNTSREQUEST._serialized_end=9527
+  _SINGLECONCEPTRESPONSE._serialized_start=9529
+  _SINGLECONCEPTRESPONSE._serialized_end=9637
+  _MULTICONCEPTRESPONSE._serialized_start=9639
+  _MULTICONCEPTRESPONSE._serialized_end=9753
+  _MULTICONCEPTCOUNTRESPONSE._serialized_start=9756
+  _MULTICONCEPTCOUNTRESPONSE._serialized_end=9886
+  _LISTCONCEPTRELATIONSREQUEST._serialized_start=9889
+  _LISTCONCEPTRELATIONSREQUEST._serialized_end=10066
+  _POSTCONCEPTRELATIONSREQUEST._serialized_start=10069
+  _POSTCONCEPTRELATIONSREQUEST._serialized_end=10225
+  _DELETECONCEPTRELATIONSREQUEST._serialized_start=10227
+  _DELETECONCEPTRELATIONSREQUEST._serialized_end=10340
+  _LISTKNOWLEDGEGRAPHSREQUEST._serialized_start=10342
+  _LISTKNOWLEDGEGRAPHSREQUEST._serialized_end=10419
+  _POSTKNOWLEDGEGRAPHSREQUEST._serialized_start=10422
+  _POSTKNOWLEDGEGRAPHSREQUEST._serialized_end=10555
+  _LISTCONCEPTMAPPINGSREQUEST._serialized_start=10557
+  _LISTCONCEPTMAPPINGSREQUEST._serialized_end=10666
+  _POSTCONCEPTMAPPINGSREQUEST._serialized_start=10669
+  _POSTCONCEPTMAPPINGSREQUEST._serialized_end=10857
+  _POSTCONCEPTMAPPINGJOBSREQUEST._serialized_start=10860
+  _POSTCONCEPTMAPPINGJOBSREQUEST._serialized_end=11003
+  _SINGLECONCEPTRELATIONRESPONSE._serialized_start=11006
+  _SINGLECONCEPTRELATIONRESPONSE._serialized_end=11139
+  _MULTICONCEPTRELATIONRESPONSE._serialized_start=11142
+  _MULTICONCEPTRELATIONRESPONSE._serialized_end=11281
+  _SINGLEKNOWLEDGEGRAPHRESPONSE._serialized_start=11284
+  _SINGLEKNOWLEDGEGRAPHRESPONSE._serialized_end=11414
+  _MULTIKNOWLEDGEGRAPHRESPONSE._serialized_start=11417
+  _MULTIKNOWLEDGEGRAPHRESPONSE._serialized_end=11553
+  _SINGLECONCEPTMAPPINGRESPONSE._serialized_start=11556
+  _SINGLECONCEPTMAPPINGRESPONSE._serialized_end=11686
+  _MULTICONCEPTMAPPINGRESPONSE._serialized_start=11689
+  _MULTICONCEPTMAPPINGRESPONSE._serialized_end=11825
+  _SINGLECONCEPTMAPPINGJOBRESPONSE._serialized_start=11827
+  _SINGLECONCEPTMAPPINGJOBRESPONSE._serialized_end=11917
+  _MULTICONCEPTMAPPINGJOBRESPONSE._serialized_start=11919
+  _MULTICONCEPTMAPPINGJOBRESPONSE._serialized_end=12009
+  _GETCONCEPTLANGUAGEREQUEST._serialized_start=12011
+  _GETCONCEPTLANGUAGEREQUEST._serialized_end=12125
+  _LISTCONCEPTLANGUAGESREQUEST._serialized_start=12128
+  _LISTCONCEPTLANGUAGESREQUEST._serialized_end=12258
+  _PATCHCONCEPTLANGUAGESREQUEST._serialized_start=12261
+  _PATCHCONCEPTLANGUAGESREQUEST._serialized_end=12434
+  _POSTCONCEPTLANGUAGESREQUEST._serialized_start=12437
+  _POSTCONCEPTLANGUAGESREQUEST._serialized_end=12593
+  _SINGLECONCEPTLANGUAGERESPONSE._serialized_start=12596
+  _SINGLECONCEPTLANGUAGERESPONSE._serialized_end=12729
+  _MULTICONCEPTLANGUAGERESPONSE._serialized_start=12732
+  _MULTICONCEPTLANGUAGERESPONSE._serialized_end=12871
+  _LISTCONCEPTREFERENCESREQUEST._serialized_start=12874
+  _LISTCONCEPTREFERENCESREQUEST._serialized_end=13005
+  _SINGLECONCEPTREFERENCERESPONSE._serialized_start=13008
+  _SINGLECONCEPTREFERENCERESPONSE._serialized_end=13144
+  _MULTICONCEPTREFERENCERESPONSE._serialized_start=13147
+  _MULTICONCEPTREFERENCERESPONSE._serialized_end=13289
+  _GETHEALTHZREQUEST._serialized_start=13291
+  _GETHEALTHZREQUEST._serialized_end=13310
+  _GETHEALTHZRESPONSE._serialized_start=13312
+  _GETHEALTHZRESPONSE._serialized_end=13391
+  _GETINPUTREQUEST._serialized_start=13393
+  _GETINPUTREQUEST._serialized_end=13477
+  _GETINPUTSAMPLESREQUEST._serialized_start=13479
+  _GETINPUTSAMPLESREQUEST._serialized_end=13587
+  _LISTINPUTSREQUEST._serialized_start=13590
+  _LISTINPUTSREQUEST._serialized_end=13748
+  _STREAMINPUTSREQUEST._serialized_start=13751
+  _STREAMINPUTSREQUEST._serialized_end=13897
+  _POSTINPUTSREQUEST._serialized_start=13900
+  _POSTINPUTSREQUEST._serialized_end=14032
+  _POSTINPUTSFILEREQUEST._serialized_start=14034
+  _POSTINPUTSFILEREQUEST._serialized_end=14137
+  _POSTINPUTSNIFIREQUEST._serialized_start=14140
+  _POSTINPUTSNIFIREQUEST._serialized_end=14344
+  _POSTINPUTSDOCUMENTREQUEST._serialized_start=14347
+  _POSTINPUTSDOCUMENTREQUEST._serialized_end=14542
+  _POSTINPUTSDOCUMENTREQUESTBODY._serialized_start=14545
+  _POSTINPUTSDOCUMENTREQUESTBODY._serialized_end=14733
+  _PATCHINPUTSREQUEST._serialized_start=14735
+  _PATCHINPUTSREQUEST._serialized_end=14857
+  _DELETEINPUTREQUEST._serialized_start=14859
+  _DELETEINPUTREQUEST._serialized_end=14946
+  _DELETEINPUTSREQUEST._serialized_start=14948
+  _DELETEINPUTSREQUEST._serialized_end=15037
+  _SINGLEINPUTRESPONSE._serialized_start=15039
+  _SINGLEINPUTRESPONSE._serialized_end=15141
+  _MULTIINPUTRESPONSE._serialized_start=15144
+  _MULTIINPUTRESPONSE._serialized_end=15304
+  _MULTIINPUTANNOTATIONRESPONSE._serialized_start=15306
+  _MULTIINPUTANNOTATIONRESPONSE._serialized_end=15420
+  _SINGLEINPUTCOUNTRESPONSE._serialized_start=15422
+  _SINGLEINPUTCOUNTRESPONSE._serialized_end=15535
+  _GETINPUTCOUNTREQUEST._serialized_start=15537
+  _GETINPUTCOUNTREQUEST._serialized_end=15608
+  _LISTDATASETSREQUEST._serialized_start=15610
+  _LISTDATASETSREQUEST._serialized_end=15712
+  _GETDATASETREQUEST._serialized_start=15714
+  _GETDATASETREQUEST._serialized_end=15802
+  _POSTDATASETSREQUEST._serialized_start=15804
+  _POSTDATASETSREQUEST._serialized_end=15915
+  _PATCHDATASETSREQUEST._serialized_start=15918
+  _PATCHDATASETSREQUEST._serialized_end=16046
+  _PATCHDATASETIDSREQUEST._serialized_start=16049
+  _PATCHDATASETIDSREQUEST._serialized_end=16181
+  _DELETEDATASETSREQUEST._serialized_start=16183
+  _DELETEDATASETSREQUEST._serialized_end=16276
+  _MULTIDATASETRESPONSE._serialized_start=16278
+  _MULTIDATASETRESPONSE._serialized_end=16392
+  _SINGLEDATASETRESPONSE._serialized_start=16394
+  _SINGLEDATASETRESPONSE._serialized_end=16502
+  _LISTDATASETINPUTSREQUEST._serialized_start=16504
+  _LISTDATASETINPUTSREQUEST._serialized_end=16631
+  _GETDATASETINPUTREQUEST._serialized_start=16633
+  _GETDATASETINPUTREQUEST._serialized_end=16744
+  _POSTDATASETINPUTSREQUEST._serialized_start=16747
+  _POSTDATASETINPUTSREQUEST._serialized_end=16932
+  _DELETEDATASETINPUTSREQUEST._serialized_start=16934
+  _DELETEDATASETINPUTSREQUEST._serialized_end=17050
+  _MULTIDATASETINPUTRESPONSE._serialized_start=17053
+  _MULTIDATASETINPUTRESPONSE._serialized_end=17263
+  _SINGLEDATASETINPUTRESPONSE._serialized_start=17265
+  _SINGLEDATASETINPUTRESPONSE._serialized_end=17389
+  _LISTDATASETVERSIONSREQUEST._serialized_start=17392
+  _LISTDATASETVERSIONSREQUEST._serialized_end=17521
+  _GETDATASETVERSIONREQUEST._serialized_start=17523
+  _GETDATASETVERSIONREQUEST._serialized_end=17646
+  _LISTDATASETVERSIONMETRICSGROUPSREQUEST._serialized_start=17649
+  _LISTDATASETVERSIONMETRICSGROUPSREQUEST._serialized_end=17941
+  _POSTDATASETVERSIONSREQUEST._serialized_start=17944
+  _POSTDATASETVERSIONSREQUEST._serialized_end=18097
+  _PATCHDATASETVERSIONSREQUEST._serialized_start=18100
+  _PATCHDATASETVERSIONSREQUEST._serialized_end=18270
+  _DELETEDATASETVERSIONSREQUEST._serialized_start=18273
+  _DELETEDATASETVERSIONSREQUEST._serialized_end=18401
+  _PUTDATASETVERSIONEXPORTSREQUEST._serialized_start=18404
+  _PUTDATASETVERSIONEXPORTSREQUEST._serialized_end=18587
+  _MULTIDATASETVERSIONRESPONSE._serialized_start=18590
+  _MULTIDATASETVERSIONRESPONSE._serialized_end=18726
+  _MULTIDATASETVERSIONEXPORTRESPONSE._serialized_start=18729
+  _MULTIDATASETVERSIONEXPORTRESPONSE._serialized_end=18868
+  _MULTIDATASETVERSIONMETRICSGROUPRESPONSE._serialized_start=18871
+  _MULTIDATASETVERSIONMETRICSGROUPRESPONSE._serialized_end=19045
+  _SINGLEDATASETVERSIONRESPONSE._serialized_start=19048
+  _SINGLEDATASETVERSIONRESPONSE._serialized_end=19178
+  _GETDATASETINPUTSSEARCHADDJOBREQUEST._serialized_start=19180
+  _GETDATASETINPUTSSEARCHADDJOBREQUEST._serialized_end=19282
+  _SINGLEDATASETINPUTSSEARCHADDJOBRESPONSE._serialized_start=19285
+  _SINGLEDATASETINPUTSSEARCHADDJOBRESPONSE._serialized_end=19425
+  _POSTMODELOUTPUTSREQUEST._serialized_start=19428
+  _POSTMODELOUTPUTSREQUEST._serialized_end=19613
+  _LISTMODELINPUTSREQUEST._serialized_start=19616
+  _LISTMODELINPUTSREQUEST._serialized_end=19759
+  _GETKEYREQUEST._serialized_start=19761
+  _GETKEYREQUEST._serialized_end=19841
+  _LISTKEYSREQUEST._serialized_start=19843
+  _LISTKEYSREQUEST._serialized_end=19941
+  _LISTAPPKEYSREQUEST._serialized_start=19943
+  _LISTAPPKEYSREQUEST._serialized_end=20044
+  _POSTKEYSREQUEST._serialized_start=20046
+  _POSTKEYSREQUEST._serialized_end=20145
+  _DELETEKEYREQUEST._serialized_start=20147
+  _DELETEKEYREQUEST._serialized_end=20230
+  _PATCHKEYSREQUEST._serialized_start=20232
+  _PATCHKEYSREQUEST._serialized_end=20348
+  _SINGLEKEYRESPONSE._serialized_start=20350
+  _SINGLEKEYRESPONSE._serialized_end=20446
+  _MULTIKEYRESPONSE._serialized_start=20448
+  _MULTIKEYRESPONSE._serialized_end=20550
+  _FETCHLICENSEREQUEST._serialized_start=20552
+  _FETCHLICENSEREQUEST._serialized_end=20632
+  _FETCHLICENSERESPONSE._serialized_start=20635
+  _FETCHLICENSERESPONSE._serialized_end=20816
+  _VALIDATELICENSEREQUEST._serialized_start=20819
+  _VALIDATELICENSEREQUEST._serialized_end=20972
+  _VALIDATELICENSERESPONSE._serialized_start=20975
+  _VALIDATELICENSERESPONSE._serialized_end=21128
+  _LISTLICENSESREQUEST._serialized_start=21130
+  _LISTLICENSESREQUEST._serialized_end=21200
+  _GETLICENSEREQUEST._serialized_start=21202
+  _GETLICENSEREQUEST._serialized_end=21290
+  _SINGLELICENSERESPONSE._serialized_start=21292
+  _SINGLELICENSERESPONSE._serialized_end=21400
+  _MULTIPLELICENSESRESPONSE._serialized_start=21402
+  _MULTIPLELICENSESRESPONSE._serialized_end=21520
+  _GETMODELREQUEST._serialized_start=21523
+  _GETMODELREQUEST._serialized_end=21696
+  _LISTMODELSREQUEST._serialized_start=21699
+  _LISTMODELSREQUEST._serialized_end=22216
+  _PATCHMODELTOOLKITSREQUEST._serialized_start=22219
+  _PATCHMODELTOOLKITSREQUEST._serialized_end=22347
+  _PATCHMODELCHECKCONSENTSREQUEST._serialized_start=22350
+  _PATCHMODELCHECKCONSENTSREQUEST._serialized_end=22489
+  _PATCHMODELUSECASESREQUEST._serialized_start=22492
+  _PATCHMODELUSECASESREQUEST._serialized_end=22620
+  _PATCHMODELLANGUAGESREQUEST._serialized_start=22623
+  _PATCHMODELLANGUAGESREQUEST._serialized_end=22753
+  _MULTIMODELTOOLKITRESPONSE._serialized_start=22755
+  _MULTIMODELTOOLKITRESPONSE._serialized_end=22845
+  _MULTIMODELCHECKCONSENTRESPONSE._serialized_start=22847
+  _MULTIMODELCHECKCONSENTRESPONSE._serialized_end=22948
+  _MULTIMODELUSECASERESPONSE._serialized_start=22950
+  _MULTIMODELUSECASERESPONSE._serialized_end=23040
+  _MULTIMODELLANGUAGERESPONSE._serialized_start=23042
+  _MULTIMODELLANGUAGERESPONSE._serialized_end=23134
+  _POSTMODELSREQUEST._serialized_start=23137
+  _POSTMODELSREQUEST._serialized_end=23282
+  _PATCHMODELSREQUEST._serialized_start=23284
+  _PATCHMODELSREQUEST._serialized_end=23406
+  _IDUPDATESOURCE._serialized_start=23408
+  _IDUPDATESOURCE._serialized_end=23452
+  _PATCHMODELIDSREQUEST._serialized_start=23455
+  _PATCHMODELIDSREQUEST._serialized_end=23585
+  _DELETEMODELREQUEST._serialized_start=23587
+  _DELETEMODELREQUEST._serialized_end=23674
+  _DELETEMODELSREQUEST._serialized_start=23676
+  _DELETEMODELSREQUEST._serialized_end=23779
+  _POSTMODELSSEARCHESREQUEST._serialized_start=23782
+  _POSTMODELSSEARCHESREQUEST._serialized_end=23951
+  _SINGLEMODELRESPONSE._serialized_start=23953
+  _SINGLEMODELRESPONSE._serialized_end=24055
+  _MULTIMODELRESPONSE._serialized_start=24057
+  _MULTIMODELRESPONSE._serialized_end=24165
+  _PATCHMODELVERSIONSREQUEST._serialized_start=24168
+  _PATCHMODELVERSIONSREQUEST._serialized_end=24330
+  _GETMODELVERSIONREQUEST._serialized_start=24332
+  _GETMODELVERSIONREQUEST._serialized_end=24443
+  _LISTMODELVERSIONSREQUEST._serialized_start=24446
+  _LISTMODELVERSIONSREQUEST._serialized_end=24592
+  _DELETEMODELVERSIONREQUEST._serialized_start=24594
+  _DELETEMODELVERSIONREQUEST._serialized_end=24708
+  _SINGLEMODELVERSIONRESPONSE._serialized_start=24710
+  _SINGLEMODELVERSIONRESPONSE._serialized_end=24834
+  _MULTIMODELVERSIONRESPONSE._serialized_start=24837
+  _MULTIMODELVERSIONRESPONSE._serialized_end=24967
+  _POSTMODELVERSIONSREQUEST._serialized_start=24970
+  _POSTMODELVERSIONSREQUEST._serialized_end=25396
+  _POSTWORKFLOWVERSIONSUNPUBLISHREQUEST._serialized_start=25399
+  _POSTWORKFLOWVERSIONSUNPUBLISHREQUEST._serialized_end=25576
+  _POSTWORKFLOWVERSIONSPUBLISHREQUEST._serialized_start=25579
+  _POSTWORKFLOWVERSIONSPUBLISHREQUEST._serialized_end=25752
+  _WORKFLOWVERSIONPUBLISHREQUEST._serialized_start=25754
+  _WORKFLOWVERSIONPUBLISHREQUEST._serialized_end=25805
+  _WORKFLOWVERSIONUNPUBLISHREQUEST._serialized_start=25807
+  _WORKFLOWVERSIONUNPUBLISHREQUEST._serialized_end=25860
+  _MODELVERSIONPUBLISHREQUEST._serialized_start=25862
+  _MODELVERSIONPUBLISHREQUEST._serialized_end=25910
+  _POSTMODELVERSIONSPUBLISHREQUEST._serialized_start=25913
+  _POSTMODELVERSIONSPUBLISHREQUEST._serialized_end=26077
+  _MODELVERSIONUNPUBLISHREQUEST._serialized_start=26079
+  _MODELVERSIONUNPUBLISHREQUEST._serialized_end=26129
+  _POSTMODELVERSIONSUNPUBLISHREQUEST._serialized_start=26132
+  _POSTMODELVERSIONSUNPUBLISHREQUEST._serialized_end=26300
+  _POSTMODELVERSIONMETRICSREQUEST._serialized_start=26303
+  _POSTMODELVERSIONMETRICSREQUEST._serialized_end=26530
+  _GETMODELVERSIONMETRICSREQUEST._serialized_start=26533
+  _GETMODELVERSIONMETRICSREQUEST._serialized_end=26694
+  _GETMODELTYPEREQUEST._serialized_start=26696
+  _GETMODELTYPEREQUEST._serialized_end=26789
+  _LISTMODELTYPESREQUEST._serialized_start=26791
+  _LISTMODELTYPESREQUEST._serialized_end=26895
+  _LISTOPENSOURCELICENSESREQUEST._serialized_start=26897
+  _LISTOPENSOURCELICENSESREQUEST._serialized_end=26928
+  _LISTOPENSOURCELICENSESRESPONSE._serialized_start=26930
+  _LISTOPENSOURCELICENSESRESPONSE._serialized_end=27025
+  _SINGLEMODELTYPERESPONSE._serialized_start=27027
+  _SINGLEMODELTYPERESPONSE._serialized_end=27148
+  _MULTIMODELTYPERESPONSE._serialized_start=27151
+  _MULTIMODELTYPERESPONSE._serialized_end=27327
+  _GETMODELVERSIONINPUTEXAMPLEREQUEST._serialized_start=27330
+  _GETMODELVERSIONINPUTEXAMPLEREQUEST._serialized_end=27479
+  _LISTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_start=27482
+  _LISTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_end=27645
+  _POSTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_start=27648
+  _POSTMODELVERSIONINPUTEXAMPLESREQUEST._serialized_end=27857
+  _DELETEMODELVERSIONINPUTEXAMPLESREQUEST._serialized_start=27860
+  _DELETEMODELVERSIONINPUTEXAMPLESREQUEST._serialized_end=28014
+  _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE._serialized_start=28017
+  _SINGLEMODELVERSIONINPUTEXAMPLERESPONSE._serialized_end=28179
+  _MULTIMODELVERSIONINPUTEXAMPLERESPONSE._serialized_start=28182
+  _MULTIMODELVERSIONINPUTEXAMPLERESPONSE._serialized_end=28344
+  _LISTMODELREFERENCESREQUEST._serialized_start=28346
+  _LISTMODELREFERENCESREQUEST._serialized_end=28473
+  _POSTMODELREFERENCESREQUEST._serialized_start=28476
+  _POSTMODELREFERENCESREQUEST._serialized_end=28627
+  _DELETEMODELREFERENCESREQUEST._serialized_start=28629
+  _DELETEMODELREFERENCESREQUEST._serialized_end=28739
+  _MULTIMODELREFERENCERESPONSE._serialized_start=28742
+  _MULTIMODELREFERENCERESPONSE._serialized_end=28872
+  _MULTIOUTPUTRESPONSE._serialized_start=28874
+  _MULTIOUTPUTRESPONSE._serialized_end=28985
+  _LISTSCOPESREQUEST._serialized_start=28987
+  _LISTSCOPESREQUEST._serialized_end=29073
+  _MYSCOPESREQUEST._serialized_start=29075
+  _MYSCOPESREQUEST._serialized_end=29141
+  _MYSCOPESUSERREQUEST._serialized_start=29143
+  _MYSCOPESUSERREQUEST._serialized_end=29213
+  _MYSCOPESROOTREQUEST._serialized_start=29215
+  _MYSCOPESROOTREQUEST._serialized_end=29236
+  _MULTISCOPEDEPSRESPONSE._serialized_start=29239
+  _MULTISCOPEDEPSRESPONSE._serialized_end=29404
+  _MULTISCOPERESPONSE._serialized_start=29407
+  _MULTISCOPERESPONSE._serialized_end=29567
+  _MULTISCOPEUSERRESPONSE._serialized_start=29570
+  _MULTISCOPEUSERRESPONSE._serialized_end=29702
+  _MULTISCOPEROOTRESPONSE._serialized_start=29705
+  _MULTISCOPEROOTRESPONSE._serialized_end=29837
+  _GETSEARCHREQUEST._serialized_start=29839
+  _GETSEARCHREQUEST._serialized_end=29918
+  _LISTSEARCHESREQUEST._serialized_start=29920
+  _LISTSEARCHESREQUEST._serialized_end=30022
+  _POSTSEARCHESREQUEST._serialized_start=30025
+  _POSTSEARCHESREQUEST._serialized_end=30221
+  _PATCHINPUTSSEARCHESREQUEST._serialized_start=30224
+  _PATCHINPUTSSEARCHESREQUEST._serialized_end=30357
+  _PATCHANNOTATIONSSEARCHESREQUEST._serialized_start=30360
+  _PATCHANNOTATIONSSEARCHESREQUEST._serialized_end=30498
+  _PATCHSEARCHESREQUEST._serialized_start=30500
+  _PATCHSEARCHESREQUEST._serialized_end=30627
+  _POSTSEARCHESBYIDREQUEST._serialized_start=30630
+  _POSTSEARCHESBYIDREQUEST._serialized_end=30762
+  _DELETESEARCHREQUEST._serialized_start=30764
+  _DELETESEARCHREQUEST._serialized_end=30846
+  _POSTATTRIBUTESEARCHREQUEST._serialized_start=30849
+  _POSTATTRIBUTESEARCHREQUEST._serialized_end=31067
+  _POSTANNOTATIONSSEARCHESREQUEST._serialized_start=31070
+  _POSTANNOTATIONSSEARCHESREQUEST._serialized_end=31237
+  _DELETEANNOTATIONSEARCHMETRICSREQUEST._serialized_start=31239
+  _DELETEANNOTATIONSEARCHMETRICSREQUEST._serialized_end=31338
+  _POSTINPUTSSEARCHESREQUEST._serialized_start=31341
+  _POSTINPUTSSEARCHESREQUEST._serialized_end=31503
+  _SINGLESEARCHRESPONSE._serialized_start=31505
+  _SINGLESEARCHRESPONSE._serialized_end=31610
+  _MULTISEARCHRESPONSE._serialized_start=31613
+  _MULTISEARCHRESPONSE._serialized_end=31806
+  _POSTANNOTATIONSEARCHMETRICSREQUEST._serialized_start=31809
+  _POSTANNOTATIONSEARCHMETRICSREQUEST._serialized_end=32085
+  _GETANNOTATIONSEARCHMETRICSREQUEST._serialized_start=32087
+  _GETANNOTATIONSEARCHMETRICSREQUEST._serialized_end=32183
+  _LISTANNOTATIONSEARCHMETRICSREQUEST._serialized_start=32185
+  _LISTANNOTATIONSEARCHMETRICSREQUEST._serialized_end=32270
+  _MULTIANNOTATIONSEARCHMETRICSRESPONSE._serialized_start=32273
+  _MULTIANNOTATIONSEARCHMETRICSRESPONSE._serialized_end=32430
+  _LISTANNOTATIONFILTERSREQUEST._serialized_start=32432
+  _LISTANNOTATIONFILTERSREQUEST._serialized_end=32543
+  _GETANNOTATIONFILTERREQUEST._serialized_start=32545
+  _GETANNOTATIONFILTERREQUEST._serialized_end=32652
+  _POSTANNOTATIONFILTERSREQUEST._serialized_start=32655
+  _POSTANNOTATIONFILTERSREQUEST._serialized_end=32794
+  _PATCHANNOTATIONFILTERSREQUEST._serialized_start=32797
+  _PATCHANNOTATIONFILTERSREQUEST._serialized_end=32953
+  _DELETEANNOTATIONFILTERSREQUEST._serialized_start=32955
+  _DELETEANNOTATIONFILTERSREQUEST._serialized_end=33067
+  _MULTIANNOTATIONFILTERRESPONSE._serialized_start=33070
+  _MULTIANNOTATIONFILTERRESPONSE._serialized_end=33212
+  _SINGLEANNOTATIONFILTERRESPONSE._serialized_start=33215
+  _SINGLEANNOTATIONFILTERRESPONSE._serialized_end=33351
+  _LISTCLUSTERSREQUEST._serialized_start=33354
+  _LISTCLUSTERSREQUEST._serialized_end=33502
+  _LISTANNOTATIONSFORCLUSTERREQUEST._serialized_start=33505
+  _LISTANNOTATIONSFORCLUSTERREQUEST._serialized_end=33640
+  _POSTCLUSTERSSEARCHESREQUEST._serialized_start=33643
+  _POSTCLUSTERSSEARCHESREQUEST._serialized_end=33807
+  _MULTICLUSTERRESPONSE._serialized_start=33810
+  _MULTICLUSTERRESPONSE._serialized_end=33964
+  _GETSUBSCRIPTIONREQUEST._serialized_start=33966
+  _GETSUBSCRIPTIONREQUEST._serialized_end=34039
+  _POSTSUBSCRIPTIONREQUEST._serialized_start=34042
+  _POSTSUBSCRIPTIONREQUEST._serialized_end=34171
+  _SINGLESUBSCRIPTIONRESPONSE._serialized_start=34174
+  _SINGLESUBSCRIPTIONRESPONSE._serialized_end=34302
+  _LISTCREDITCARDSREQUEST._serialized_start=34304
+  _LISTCREDITCARDSREQUEST._serialized_end=34377
+  _MULTIPLECREDITCARDRESPONSE._serialized_start=34379
+  _MULTIPLECREDITCARDRESPONSE._serialized_end=34493
+  _POSTCREDITCARDREQUEST._serialized_start=34496
+  _POSTCREDITCARDREQUEST._serialized_end=34624
+  _SINGLECREDITCARDRESPONSE._serialized_start=34626
+  _SINGLECREDITCARDRESPONSE._serialized_end=34737
+  _DELETECREDITCARDREQUEST._serialized_start=34739
+  _DELETECREDITCARDREQUEST._serialized_end=34853
+  _PATCHCREDITCARDSREQUEST._serialized_start=34856
+  _PATCHCREDITCARDSREQUEST._serialized_end=35014
+  _GETSHIPPINGADDRESSREQUEST._serialized_start=35016
+  _GETSHIPPINGADDRESSREQUEST._serialized_end=35092
+  _PUTSHIPPINGADDRESSREQUEST._serialized_start=35095
+  _PUTSHIPPINGADDRESSREQUEST._serialized_end=35271
+  _SINGLESHIPPINGADDRESSRESPONSE._serialized_start=35274
+  _SINGLESHIPPINGADDRESSRESPONSE._serialized_end=35407
+  _LISTPLANSREQUEST._serialized_start=35409
+  _LISTPLANSREQUEST._serialized_end=35476
+  _MULTIPLANRESPONSE._serialized_start=35478
+  _MULTIPLANRESPONSE._serialized_end=35577
+  _GETHISTORICALUSAGEREQUEST._serialized_start=35580
+  _GETHISTORICALUSAGEREQUEST._serialized_end=35779
+  _GETHISTORICALUSAGERESPONSE._serialized_start=35781
+  _GETHISTORICALUSAGERESPONSE._serialized_end=35904
+  _POSTHISTORICALUSAGEREQUEST._serialized_start=35906
+  _POSTHISTORICALUSAGEREQUEST._serialized_end=35983
+  _POSTHISTORICALUSAGERESPONSE._serialized_start=35986
+  _POSTHISTORICALUSAGERESPONSE._serialized_end=36155
+  _GETREALTIMEUSAGEREQUEST._serialized_start=36157
+  _GETREALTIMEUSAGEREQUEST._serialized_end=36231
+  _GETREALTIMEUSAGERESPONSE._serialized_start=36233
+  _GETREALTIMEUSAGERESPONSE._serialized_end=36357
+  _LISTUSAGEINTERVALSREQUEST._serialized_start=36359
+  _LISTUSAGEINTERVALSREQUEST._serialized_end=36386
+  _LISTUSAGEINTERVALSRESPONSE._serialized_start=36388
+  _LISTUSAGEINTERVALSRESPONSE._serialized_end=36515
+  _LISTUSERBILLINGCYCLESREQUEST._serialized_start=36517
+  _LISTUSERBILLINGCYCLESREQUEST._serialized_end=36628
+  _LISTUSERCYCLESREQUEST._serialized_start=36631
+  _LISTUSERCYCLESREQUEST._serialized_end=36774
+  _LISTUSERBILLINGCYCLESRESPONSE._serialized_start=36777
+  _LISTUSERBILLINGCYCLESRESPONSE._serialized_end=36911
+  _LISTUSERCYCLESRESPONSE._serialized_start=36913
+  _LISTUSERCYCLESRESPONSE._serialized_end=37036
+  _POSTUSAGEREQUEST._serialized_start=37039
+  _POSTUSAGEREQUEST._serialized_end=37205
+  _POSTUSAGERESPONSE._serialized_start=37207
+  _POSTUSAGERESPONSE._serialized_end=37271
+  _GETUSERREQUEST._serialized_start=37273
+  _GETUSERREQUEST._serialized_end=37365
+  _LISTUSERSREQUEST._serialized_start=37368
+  _LISTUSERSREQUEST._serialized_end=37628
+  _POSTUSERCONSENTREQUEST._serialized_start=37630
+  _POSTUSERCONSENTREQUEST._serialized_end=37736
+  _SINGLEUSERRESPONSE._serialized_start=37738
+  _SINGLEUSERRESPONSE._serialized_end=37837
+  _MULTIUSERRESPONSE._serialized_start=37839
+  _MULTIUSERRESPONSE._serialized_end=37944
+  _PATCHUSERREQUEST._serialized_start=37947
+  _PATCHUSERREQUEST._serialized_end=38192
+  _POSTUSERACCESSREQUEST._serialized_start=38194
+  _POSTUSERACCESSREQUEST._serialized_end=38308
+  _GETUSERACCESSREQUEST._serialized_start=38310
+  _GETUSERACCESSREQUEST._serialized_end=38381
+  _MULTIUSERACCESSRESPONSE._serialized_start=38383
+  _MULTIUSERACCESSRESPONSE._serialized_end=38495
+  _SINGLEUSERACCESSRESPONSE._serialized_start=38497
+  _SINGLEUSERACCESSRESPONSE._serialized_end=38610
+  _POSTEMAILSREQUEST._serialized_start=38612
+  _POSTEMAILSREQUEST._serialized_end=38696
+  _SINGLEEMAILRESPONSE._serialized_start=38698
+  _SINGLEEMAILRESPONSE._serialized_end=38807
+  _MULTIPLEEMAILRESPONSE._serialized_start=38809
+  _MULTIPLEEMAILRESPONSE._serialized_end=38921
+  _LISTEMAILSREQUEST._serialized_start=38923
+  _LISTEMAILSREQUEST._serialized_end=38991
+  _POSTRESENDVERIFYREQUEST._serialized_start=38993
+  _POSTRESENDVERIFYREQUEST._serialized_end=39082
+  _SINGLERESENDVERIFYRESPONSE._serialized_start=39084
+  _SINGLERESENDVERIFYRESPONSE._serialized_end=39157
+  _DELETEEMAILREQUEST._serialized_start=39159
+  _DELETEEMAILREQUEST._serialized_end=39243
+  _POSTPRIMARYEMAILREQUEST._serialized_start=39245
+  _POSTPRIMARYEMAILREQUEST._serialized_end=39334
+  _POSTVALIDATEPASSWORDREQUEST._serialized_start=39336
+  _POSTVALIDATEPASSWORDREQUEST._serialized_end=39456
+  _SINGLEPASSWORDVALIDATIONRESPONSE._serialized_start=39459
+  _SINGLEPASSWORDVALIDATIONRESPONSE._serialized_end=39601
+  _LISTGLOBALPASSWORDPOLICIESREQUEST._serialized_start=39603
+  _LISTGLOBALPASSWORDPOLICIESREQUEST._serialized_end=39638
+  _LISTPASSWORDPOLICIESREQUEST._serialized_start=39641
+  _LISTPASSWORDPOLICIESREQUEST._serialized_end=39795
+  _POSTPASSWORDPOLICIESREQUEST._serialized_start=39798
+  _POSTPASSWORDPOLICIESREQUEST._serialized_end=39933
+  _PATCHPASSWORDPOLICIESREQUEST._serialized_start=39936
+  _PATCHPASSWORDPOLICIESREQUEST._serialized_end=40088
+  _DELETEPASSWORDPOLICIESREQUEST._serialized_start=40090
+  _DELETEPASSWORDPOLICIESREQUEST._serialized_end=40183
+  _MULTIPLEPASSWORDPOLICIESRESPONSE._serialized_start=40186
+  _MULTIPLEPASSWORDPOLICIESRESPONSE._serialized_end=40322
+  _USERFEATURECONFIGREQUEST._serialized_start=40324
+  _USERFEATURECONFIGREQUEST._serialized_end=40399
+  _SINGLEUSERFEATURECONFIGRESPONSE._serialized_start=40401
+  _SINGLEUSERFEATURECONFIGRESPONSE._serialized_end=40495
+  _POSTORGANIZATIONSREQUEST._serialized_start=40497
+  _POSTORGANIZATIONSREQUEST._serialized_end=40623
+  _LISTORGANIZATIONSREQUEST._serialized_start=40625
+  _LISTORGANIZATIONSREQUEST._serialized_end=40732
+  _LISTUSERSORGANIZATIONSREQUEST._serialized_start=40734
+  _LISTUSERSORGANIZATIONSREQUEST._serialized_end=40846
+  _DELETEREQUESTINGUSERFROMORGANIZATIONREQUEST._serialized_start=40848
+  _DELETEREQUESTINGUSERFROMORGANIZATIONREQUEST._serialized_end=40942
+  _POSTACCEPTORGANIZATIONINVITATIONREQUEST._serialized_start=40944
+  _POSTACCEPTORGANIZATIONINVITATIONREQUEST._serialized_end=41046
+  _POSTDECLINEORGANIZATIONINVITATIONREQUEST._serialized_start=41048
+  _POSTDECLINEORGANIZATIONINVITATIONREQUEST._serialized_end=41151
+  _GETORGANIZATIONREQUEST._serialized_start=41153
+  _GETORGANIZATIONREQUEST._serialized_end=41226
+  _PATCHORGANIZATIONREQUEST._serialized_start=41229
+  _PATCHORGANIZATIONREQUEST._serialized_end=41371
+  _DELETEORGANIZATIONREQUEST._serialized_start=41373
+  _DELETEORGANIZATIONREQUEST._serialized_end=41449
+  _SINGLEORGANIZATIONRESPONSE._serialized_start=41451
+  _SINGLEORGANIZATIONRESPONSE._serialized_end=41574
+  _MULTIORGANIZATIONRESPONSE._serialized_start=41577
+  _MULTIORGANIZATIONRESPONSE._serialized_end=41706
+  _MULTIUSERSORGANIZATIONSRESPONSE._serialized_start=41709
+  _MULTIUSERSORGANIZATIONSRESPONSE._serialized_end=42015
+  _MULTIUSERSORGANIZATIONSRESPONSE_USERORGANIZATION._serialized_start=41883
+  _MULTIUSERSORGANIZATIONSRESPONSE_USERORGANIZATION._serialized_end=42015
+  _LISTORGANIZATIONAPPMEMBERSREQUEST._serialized_start=42018
+  _LISTORGANIZATIONAPPMEMBERSREQUEST._serialized_end=42183
+  _LISTORGANIZATIONMEMBERSREQUEST._serialized_start=42185
+  _LISTORGANIZATIONMEMBERSREQUEST._serialized_end=42298
+  _POSTORGANIZATIONINVITATIONSREQUEST._serialized_start=42301
+  _POSTORGANIZATIONINVITATIONSREQUEST._serialized_end=42445
+  _PATCHORGANIZATIONINVITATIONSREQUEST._serialized_start=42448
+  _PATCHORGANIZATIONINVITATIONSREQUEST._serialized_end=42609
+  _LISTORGANIZATIONINVITATIONSREQUEST._serialized_start=42612
+  _LISTORGANIZATIONINVITATIONSREQUEST._serialized_end=42789
+  _GETORGANIZATIONINVITATIONREQUEST._serialized_start=42791
+  _GETORGANIZATIONINVITATIONREQUEST._serialized_end=42886
+  _GETORGANIZATIONINVITATIONPUBLICREQUEST._serialized_start=42888
+  _GETORGANIZATIONINVITATIONPUBLICREQUEST._serialized_end=42940
+  _SINGLEORGANIZATIONINVITATIONRESPONSE._serialized_start=42943
+  _SINGLEORGANIZATIONINVITATIONRESPONSE._serialized_end=43084
+  _MULTIORGANIZATIONINVITATIONRESPONSE._serialized_start=43087
+  _MULTIORGANIZATIONINVITATIONRESPONSE._serialized_end=43234
+  _PATCHORGANIZATIONMEMBERSREQUEST._serialized_start=43237
+  _PATCHORGANIZATIONMEMBERSREQUEST._serialized_end=43492
+  _PATCHORGANIZATIONMEMBERSREQUEST_PATCHORGANIZATIONMEMBER._serialized_start=43438
+  _PATCHORGANIZATIONMEMBERSREQUEST_PATCHORGANIZATIONMEMBER._serialized_end=43492
+  _POSTORGANIZATIONMEMBERREQUEST._serialized_start=43494
+  _POSTORGANIZATIONMEMBERREQUEST._serialized_end=43610
+  _DELETEORGANIZATIONMEMBERREQUEST._serialized_start=43612
+  _DELETEORGANIZATIONMEMBERREQUEST._serialized_end=43713
+  _MULTIORGANIZATIONMEMBERRESPONSE._serialized_start=43716
+  _MULTIORGANIZATIONMEMBERRESPONSE._serialized_end=43864
+  _POSTIDENTITYPROVIDERSREQUEST._serialized_start=43867
+  _POSTIDENTITYPROVIDERSREQUEST._serialized_end=44006
+  _LISTIDENTITYPROVIDERSREQUEST._serialized_start=44008
+  _LISTIDENTITYPROVIDERSREQUEST._serialized_end=44119
+  _GETIDENTITYPROVIDERREQUEST._serialized_start=44121
+  _GETIDENTITYPROVIDERREQUEST._serialized_end=44210
+  _PATCHIDENTITYPROVIDERSREQUEST._serialized_start=44213
+  _PATCHIDENTITYPROVIDERSREQUEST._serialized_end=44369
+  _DELETEIDENTITYPROVIDERSREQUEST._serialized_start=44371
+  _DELETEIDENTITYPROVIDERSREQUEST._serialized_end=44465
+  _SINGLEIDENTITYPROVIDERRESPONSE._serialized_start=44468
+  _SINGLEIDENTITYPROVIDERRESPONSE._serialized_end=44604
+  _MULTIIDENTITYPROVIDERRESPONSE._serialized_start=44607
+  _MULTIIDENTITYPROVIDERRESPONSE._serialized_end=44749
+  _POSTTEAMSREQUEST._serialized_start=44752
+  _POSTTEAMSREQUEST._serialized_end=45011
+  _POSTTEAMSREQUEST_POSTTEAM._serialized_start=44878
+  _POSTTEAMSREQUEST_POSTTEAM._serialized_end=45011
+  _LISTTEAMSREQUEST._serialized_start=45013
+  _LISTTEAMSREQUEST._serialized_end=45127
+  _GETTEAMREQUEST._serialized_start=45129
+  _GETTEAMREQUEST._serialized_end=45206
+  _PATCHTEAMSREQUEST._serialized_start=45208
+  _PATCHTEAMSREQUEST._serialized_end=45327
+  _DELETETEAMSREQUEST._serialized_start=45329
+  _DELETETEAMSREQUEST._serialized_end=45411
+  _SINGLETEAMRESPONSE._serialized_start=45413
+  _SINGLETEAMRESPONSE._serialized_end=45512
+  _MULTITEAMRESPONSE._serialized_start=45514
+  _MULTITEAMRESPONSE._serialized_end=45619
+  _APPIDENTITY._serialized_start=45621
+  _APPIDENTITY._serialized_end=45667
+  _LISTTEAMAPPSREQUEST._serialized_start=45670
+  _LISTTEAMAPPSREQUEST._serialized_end=45804
+  _POSTTEAMAPPSREQUEST._serialized_start=45807
+  _POSTTEAMAPPSREQUEST._serialized_end=46001
+  _POSTTEAMAPPSREQUEST_TEAMAPP._serialized_start=45959
+  _POSTTEAMAPPSREQUEST_TEAMAPP._serialized_end=46001
+  _DELETETEAMAPPSREQUEST._serialized_start=46003
+  _DELETETEAMAPPSREQUEST._serialized_end=46115
+  _MULTITEAMAPPSRESPONSE._serialized_start=46118
+  _MULTITEAMAPPSRESPONSE._serialized_end=46422
+  _MULTITEAMAPPSRESPONSE_TEAMAPP._serialized_start=46302
+  _MULTITEAMAPPSRESPONSE_TEAMAPP._serialized_end=46422
+  _POSTTEAMUSERSREQUEST._serialized_start=46424
+  _POSTTEAMUSERSREQUEST._serialized_end=46530
+  _LISTTEAMUSERSREQUEST._serialized_start=46533
+  _LISTTEAMUSERSREQUEST._serialized_end=46668
+  _DELETETEAMUSERSREQUEST._serialized_start=46670
+  _DELETETEAMUSERSREQUEST._serialized_end=46778
+  _MULTITEAMUSERRESPONSE._serialized_start=46780
+  _MULTITEAMUSERRESPONSE._serialized_end=46898
+  _LISTROLESREQUEST._serialized_start=46900
+  _LISTROLESREQUEST._serialized_end=46989
+  _GETROLEREQUEST._serialized_start=46991
+  _GETROLEREQUEST._serialized_end=47019
+  _SINGLEROLERESPONSE._serialized_start=47021
+  _SINGLEROLERESPONSE._serialized_end=47120
+  _MULTIROLERESPONSE._serialized_start=47122
+  _MULTIROLERESPONSE._serialized_end=47227
+  _GETVOCABREQUEST._serialized_start=47229
+  _GETVOCABREQUEST._serialized_end=47313
+  _LISTVOCABSREQUEST._serialized_start=47315
+  _LISTVOCABSREQUEST._serialized_end=47415
+  _POSTVOCABSREQUEST._serialized_start=47417
+  _POSTVOCABSREQUEST._serialized_end=47522
+  _PATCHVOCABSREQUEST._serialized_start=47524
+  _PATCHVOCABSREQUEST._serialized_end=47646
+  _DELETEVOCABREQUEST._serialized_start=47648
+  _DELETEVOCABREQUEST._serialized_end=47735
+  _DELETEVOCABSREQUEST._serialized_start=47737
+  _DELETEVOCABSREQUEST._serialized_end=47840
+  _LISTVOCABCONCEPTSREQUEST._serialized_start=47842
+  _LISTVOCABCONCEPTSREQUEST._serialized_end=47967
+  _POSTVOCABCONCEPTSREQUEST._serialized_start=47970
+  _POSTVOCABCONCEPTSREQUEST._serialized_end=48104
+  _DELETEVOCABCONCEPTREQUEST._serialized_start=48106
+  _DELETEVOCABCONCEPTREQUEST._serialized_end=48220
+  _DELETEVOCABCONCEPTSREQUEST._serialized_start=48223
+  _DELETEVOCABCONCEPTSREQUEST._serialized_end=48351
+  _SINGLEVOCABRESPONSE._serialized_start=48353
+  _SINGLEVOCABRESPONSE._serialized_end=48455
+  _MULTIVOCABRESPONSE._serialized_start=48457
+  _MULTIVOCABRESPONSE._serialized_end=48565
+  _GETWORKFLOWREQUEST._serialized_start=48568
+  _GETWORKFLOWREQUEST._serialized_end=48755
+  _LISTWORKFLOWSREQUEST._serialized_start=48758
+  _LISTWORKFLOWSREQUEST._serialized_end=49073
+  _LISTPUBLICWORKFLOWSREQUEST._serialized_start=49076
+  _LISTPUBLICWORKFLOWSREQUEST._serialized_end=49204
+  _POSTWORKFLOWSREQUEST._serialized_start=49206
+  _POSTWORKFLOWSREQUEST._serialized_end=49320
+  _PATCHWORKFLOWSREQUEST._serialized_start=49323
+  _PATCHWORKFLOWSREQUEST._serialized_end=49454
+  _PATCHWORKFLOWIDSREQUEST._serialized_start=49457
+  _PATCHWORKFLOWIDSREQUEST._serialized_end=49590
+  _DELETEWORKFLOWREQUEST._serialized_start=49592
+  _DELETEWORKFLOWREQUEST._serialized_end=49685
+  _DELETEWORKFLOWSREQUEST._serialized_start=49687
+  _DELETEWORKFLOWSREQUEST._serialized_end=49793
+  _SINGLEWORKFLOWRESPONSE._serialized_start=49795
+  _SINGLEWORKFLOWRESPONSE._serialized_end=49906
+  _MULTIWORKFLOWRESPONSE._serialized_start=49908
+  _MULTIWORKFLOWRESPONSE._serialized_end=50025
+  _POSTWORKFLOWRESULTSREQUEST._serialized_start=50028
+  _POSTWORKFLOWRESULTSREQUEST._serialized_end=50321
+  _POSTWORKFLOWRESULTSRESPONSE._serialized_start=50324
+  _POSTWORKFLOWRESULTSRESPONSE._serialized_end=50540
+  _POSTWORKFLOWRESULTSSIMILARITYREQUEST._serialized_start=50543
+  _POSTWORKFLOWRESULTSSIMILARITYREQUEST._serialized_end=50816
+  _POSTWORKFLOWRESULTSSIMILARITYRESPONSE._serialized_start=50819
+  _POSTWORKFLOWRESULTSSIMILARITYRESPONSE._serialized_end=50961
+  _LISTWORKFLOWVERSIONSREQUEST._serialized_start=50964
+  _LISTWORKFLOWVERSIONSREQUEST._serialized_end=51095
+  _GETWORKFLOWVERSIONREQUEST._serialized_start=51097
+  _GETWORKFLOWVERSIONREQUEST._serialized_end=51223
+  _DELETEWORKFLOWVERSIONSREQUEST._serialized_start=51226
+  _DELETEWORKFLOWVERSIONSREQUEST._serialized_end=51357
+  _PATCHWORKFLOWVERSIONSREQUEST._serialized_start=51360
+  _PATCHWORKFLOWVERSIONSREQUEST._serialized_end=51534
+  _MULTIWORKFLOWVERSIONRESPONSE._serialized_start=51537
+  _MULTIWORKFLOWVERSIONRESPONSE._serialized_end=51676
+  _SINGLEWORKFLOWVERSIONRESPONSE._serialized_start=51679
+  _SINGLEWORKFLOWVERSIONRESPONSE._serialized_end=51812
+  _POSTWORKFLOWMETRICSREQUEST._serialized_start=51815
+  _POSTWORKFLOWMETRICSREQUEST._serialized_end=51970
+  _GETWORKFLOWMETRICSREQUEST._serialized_start=51972
+  _GETWORKFLOWMETRICSREQUEST._serialized_end=52089
+  _GETWORKFLOWNODEMETRICSREQUEST._serialized_start=52092
+  _GETWORKFLOWNODEMETRICSREQUEST._serialized_end=52230
+  _LISTWORKFLOWMETRICSREQUEST._serialized_start=52233
+  _LISTWORKFLOWMETRICSREQUEST._serialized_end=52363
+  _DELETEWORKFLOWMETRICSREQUEST._serialized_start=52365
+  _DELETEWORKFLOWMETRICSREQUEST._serialized_end=52478
+  _SINGLEWORKFLOWMETRICSRESPONSE._serialized_start=52481
+  _SINGLEWORKFLOWMETRICSRESPONSE._serialized_end=52614
+  _SINGLEWORKFLOWNODEMETRICSRESPONSE._serialized_start=52617
+  _SINGLEWORKFLOWNODEMETRICSRESPONSE._serialized_end=52746
+  _MULTIWORKFLOWMETRICSRESPONSE._serialized_start=52749
+  _MULTIWORKFLOWMETRICSRESPONSE._serialized_end=52887
+  _POSTAPPDUPLICATIONSREQUEST._serialized_start=52890
+  _POSTAPPDUPLICATIONSREQUEST._serialized_end=53023
+  _GETAPPDUPLICATIONREQUEST._serialized_start=53025
+  _GETAPPDUPLICATIONREQUEST._serialized_end=53128
+  _LISTAPPDUPLICATIONSREQUEST._serialized_start=53130
+  _LISTAPPDUPLICATIONSREQUEST._serialized_end=53239
+  _MULTIAPPDUPLICATIONSRESPONSE._serialized_start=53242
+  _MULTIAPPDUPLICATIONSRESPONSE._serialized_end=53373
+  _SINGLEAPPDUPLICATIONRESPONSE._serialized_start=53376
+  _SINGLEAPPDUPLICATIONRESPONSE._serialized_end=53506
+  _POSTTASKSREQUEST._serialized_start=53508
+  _POSTTASKSREQUEST._serialized_end=53610
+  _GETTASKREQUEST._serialized_start=53612
+  _GETTASKREQUEST._serialized_end=53721
+  _LISTTASKSREQUEST._serialized_start=53724
+  _LISTTASKSREQUEST._serialized_end=53962
+  _PATCHTASKSREQUEST._serialized_start=53964
+  _PATCHTASKSREQUEST._serialized_end=54083
+  _DELETETASKSREQUEST._serialized_start=54085
+  _DELETETASKSREQUEST._serialized_end=54167
+  _MULTITASKRESPONSE._serialized_start=54169
+  _MULTITASKRESPONSE._serialized_end=54274
+  _SINGLETASKRESPONSE._serialized_start=54276
+  _SINGLETASKRESPONSE._serialized_end=54375
+  _GETTASKCOUNTREQUEST._serialized_start=54377
+  _GETTASKCOUNTREQUEST._serialized_end=54482
+  _SINGLETASKCOUNTRESPONSE._serialized_start=54485
+  _SINGLETASKCOUNTRESPONSE._serialized_end=54642
+  _PATCHANNOTATIONCOUNTSROLLUPREQUEST._serialized_start=54644
+  _PATCHANNOTATIONCOUNTSROLLUPREQUEST._serialized_end=54746
+  _POSTLABELORDERSREQUEST._serialized_start=54748
+  _POSTLABELORDERSREQUEST._serialized_end=54869
+  _GETLABELORDERREQUEST._serialized_start=54871
+  _GETLABELORDERREQUEST._serialized_end=54966
+  _LISTLABELORDERSREQUEST._serialized_start=54968
+  _LISTLABELORDERSREQUEST._serialized_end=55073
+  _PATCHLABELORDERSREQUEST._serialized_start=55076
+  _PATCHLABELORDERSREQUEST._serialized_end=55214
+  _DELETELABELORDERSREQUEST._serialized_start=55216
+  _DELETELABELORDERSREQUEST._serialized_end=55304
+  _MULTILABELORDERRESPONSE._serialized_start=55306
+  _MULTILABELORDERRESPONSE._serialized_end=55430
+  _SINGLELABELORDERRESPONSE._serialized_start=55432
+  _SINGLELABELORDERRESPONSE._serialized_end=55550
+  _POSTCOLLECTORSREQUEST._serialized_start=55552
+  _POSTCOLLECTORSREQUEST._serialized_end=55669
+  _PATCHCOLLECTORSREQUEST._serialized_start=55672
+  _PATCHCOLLECTORSREQUEST._serialized_end=55806
+  _DELETECOLLECTORSREQUEST._serialized_start=55808
+  _DELETECOLLECTORSREQUEST._serialized_end=55915
+  _GETCOLLECTORREQUEST._serialized_start=55917
+  _GETCOLLECTORREQUEST._serialized_end=56009
+  _LISTCOLLECTORSREQUEST._serialized_start=56011
+  _LISTCOLLECTORSREQUEST._serialized_end=56115
+  _MULTICOLLECTORRESPONSE._serialized_start=56117
+  _MULTICOLLECTORRESPONSE._serialized_end=56231
+  _SINGLECOLLECTORRESPONSE._serialized_start=56233
+  _SINGLECOLLECTORRESPONSE._serialized_end=56347
+  _POSTSTATVALUESREQUEST._serialized_start=56349
+  _POSTSTATVALUESREQUEST._serialized_end=56467
+  _MULTISTATVALUERESPONSE._serialized_start=56469
+  _MULTISTATVALUERESPONSE._serialized_end=56590
+  _POSTSTATVALUESAGGREGATEREQUEST._serialized_start=56593
+  _POSTSTATVALUESAGGREGATEREQUEST._serialized_end=56751
+  _MULTISTATVALUEAGGREGATERESPONSE._serialized_start=56754
+  _MULTISTATVALUEAGGREGATERESPONSE._serialized_end=56910
+  _POSTANALYTICSREQUEST._serialized_start=56913
+  _POSTANALYTICSREQUEST._serialized_end=57320
+  _POSTANALYTICSRESPONSE._serialized_start=57322
+  _POSTANALYTICSRESPONSE._serialized_end=57390
+  _POSTSDKBILLINGREQUEST._serialized_start=57393
+  _POSTSDKBILLINGREQUEST._serialized_end=57738
+  _POSTSDKBILLINGRESPONSE._serialized_start=57740
+  _POSTSDKBILLINGRESPONSE._serialized_end=57856
+  _MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE._serialized_start=57859
+  _MULTIFINDDUPLICATEANNOTATIONSJOBRESPONSE._serialized_end=58036
+  _SINGLEFINDDUPLICATEANNOTATIONSJOBRESPONSE._serialized_start=58039
+  _SINGLEFINDDUPLICATEANNOTATIONSJOBRESPONSE._serialized_end=58210
+  _POSTFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_start=58213
+  _POSTFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_end=58387
+  _GETFINDDUPLICATEANNOTATIONSJOBREQUEST._serialized_start=58389
+  _GETFINDDUPLICATEANNOTATIONSJOBREQUEST._serialized_end=58489
+  _LISTFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_start=58491
+  _LISTFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_end=58613
+  _DELETEFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_start=58615
+  _DELETEFINDDUPLICATEANNOTATIONSJOBSREQUEST._serialized_end=58720
+  _POSTTRENDINGMETRICSVIEWREQUEST._serialized_start=58722
+  _POSTTRENDINGMETRICSVIEWREQUEST._serialized_end=58841
+  _LISTTRENDINGMETRICSVIEWSREQUEST._serialized_start=58844
+  _LISTTRENDINGMETRICSVIEWSREQUEST._serialized_end=58977
+  _MULTITRENDINGMETRICSVIEWRESPONSE._serialized_start=58979
+  _MULTITRENDINGMETRICSVIEWRESPONSE._serialized_end=59105
+  _POSTIDVALIDATIONREQUEST._serialized_start=59107
+  _POSTIDVALIDATIONREQUEST._serialized_end=59179
+  _MULTIIDVALIDATIONRESPONSE._serialized_start=59182
+  _MULTIIDVALIDATIONRESPONSE._serialized_end=59314
+  _LISTTAGCATEGORIESREQUEST._serialized_start=59316
+  _LISTTAGCATEGORIESREQUEST._serialized_end=59363
+  _MULTITAGCATEGORYRESPONSE._serialized_start=59365
+  _MULTITAGCATEGORYRESPONSE._serialized_end=59483
+  _POSTMODELSTARSREQUEST._serialized_start=59485
+  _POSTMODELSTARSREQUEST._serialized_end=59603
+  _MULTIMODELSTARRESPONSE._serialized_start=59605
+  _MULTIMODELSTARRESPONSE._serialized_end=59720
+  _DELETEMODELSTARSREQUEST._serialized_start=59722
+  _DELETEMODELSTARSREQUEST._serialized_end=59815
+  _DELETEMODELSTARSRESPONSE._serialized_start=59817
+  _DELETEMODELSTARSRESPONSE._serialized_end=59907
+  _POSTUSERSTARSREQUEST._serialized_start=59909
+  _POSTUSERSTARSREQUEST._serialized_end=59975
+  _MULTIUSERSTARRESPONSE._serialized_start=59977
+  _MULTIUSERSTARRESPONSE._serialized_end=60089
+  _DELETEUSERSTARSREQUEST._serialized_start=60091
+  _DELETEUSERSTARSREQUEST._serialized_end=60133
+  _DELETEUSERSTARSRESPONSE._serialized_start=60135
+  _DELETEUSERSTARSRESPONSE._serialized_end=60223
+  _POSTAPPSTARSREQUEST._serialized_start=60225
+  _POSTAPPSTARSREQUEST._serialized_end=60337
+  _MULTIAPPSTARRESPONSE._serialized_start=60339
+  _MULTIAPPSTARRESPONSE._serialized_end=60448
+  _DELETEAPPSTARSREQUEST._serialized_start=60450
+  _DELETEAPPSTARSREQUEST._serialized_end=60539
+  _DELETEAPPSTARSRESPONSE._serialized_start=60541
+  _DELETEAPPSTARSRESPONSE._serialized_end=60627
+  _POSTWORKFLOWSTARSREQUEST._serialized_start=60629
+  _POSTWORKFLOWSTARSREQUEST._serialized_end=60756
+  _MULTIWORKFLOWSTARRESPONSE._serialized_start=60758
+  _MULTIWORKFLOWSTARRESPONSE._serialized_end=60882
+  _DELETEWORKFLOWSTARSREQUEST._serialized_start=60884
+  _DELETEWORKFLOWSTARSREQUEST._serialized_end=60983
+  _DELETEWORKFLOWSTARSRESPONSE._serialized_start=60985
+  _DELETEWORKFLOWSTARSRESPONSE._serialized_end=61081
+  _LISTWEBNOTIFICATIONSREQUEST._serialized_start=61084
+  _LISTWEBNOTIFICATIONSREQUEST._serialized_end=61215
+  _GETWEBNOTIFICATIONREQUEST._serialized_start=61217
+  _GETWEBNOTIFICATIONREQUEST._serialized_end=61318
+  _DELETEWEBNOTIFICATIONSREQUEST._serialized_start=61320
+  _DELETEWEBNOTIFICATIONSREQUEST._serialized_end=61413
+  _PATCHWEBNOTIFICATIONSREQUEST._serialized_start=61416
+  _PATCHWEBNOTIFICATIONSREQUEST._serialized_end=61570
+  _MULTIWEBNOTIFICATIONRESPONSE._serialized_start=61573
+  _MULTIWEBNOTIFICATIONRESPONSE._serialized_end=61702
+  _SINGLEWEBNOTIFICATIONRESPONSE._serialized_start=61705
+  _SINGLEWEBNOTIFICATIONRESPONSE._serialized_end=61834
+  _GETMODULEREQUEST._serialized_start=61836
+  _GETMODULEREQUEST._serialized_end=61922
+  _LISTMODULESREQUEST._serialized_start=61924
+  _LISTMODULESREQUEST._serialized_end=62025
+  _POSTMODULESREQUEST._serialized_start=62027
+  _POSTMODULESREQUEST._serialized_end=62135
+  _PATCHMODULESREQUEST._serialized_start=62137
+  _PATCHMODULESREQUEST._serialized_end=62262
+  _DELETEMODULESREQUEST._serialized_start=62264
+  _DELETEMODULESREQUEST._serialized_end=62348
+  _SINGLEMODULERESPONSE._serialized_start=62350
+  _SINGLEMODULERESPONSE._serialized_end=62455
+  _MULTIMODULERESPONSE._serialized_start=62457
+  _MULTIMODULERESPONSE._serialized_end=62568
+  _GETMODULEVERSIONREQUEST._serialized_start=62570
+  _GETMODULEVERSIONREQUEST._serialized_end=62690
+  _LISTMODULEVERSIONSREQUEST._serialized_start=62692
+  _LISTMODULEVERSIONSREQUEST._serialized_end=62819
+  _POSTMODULEVERSIONSREQUEST._serialized_start=62822
+  _POSTMODULEVERSIONSREQUEST._serialized_end=62971
+  _DELETEMODULEVERSIONSREQUEST._serialized_start=62973
+  _DELETEMODULEVERSIONSREQUEST._serialized_end=63083
+  _SINGLEMODULEVERSIONRESPONSE._serialized_start=63085
+  _SINGLEMODULEVERSIONRESPONSE._serialized_end=63212
+  _MULTIMODULEVERSIONRESPONSE._serialized_start=63215
+  _MULTIMODULEVERSIONRESPONSE._serialized_end=63348
+  _GETINSTALLEDMODULEVERSIONREQUEST._serialized_start=63350
+  _GETINSTALLEDMODULEVERSIONREQUEST._serialized_end=63470
+  _LISTINSTALLEDMODULEVERSIONSREQUEST._serialized_start=63472
+  _LISTINSTALLEDMODULEVERSIONSREQUEST._serialized_end=63589
+  _POSTINSTALLEDMODULEVERSIONSREQUEST._serialized_start=63592
+  _POSTINSTALLEDMODULEVERSIONSREQUEST._serialized_end=63750
+  _POSTINSTALLEDMODULEVERSIONSKEYREQUEST._serialized_start=63752
+  _POSTINSTALLEDMODULEVERSIONSKEYREQUEST._serialized_end=63877
+  _DELETEINSTALLEDMODULEVERSIONSREQUEST._serialized_start=63879
+  _DELETEINSTALLEDMODULEVERSIONSREQUEST._serialized_end=63979
+  _SINGLEINSTALLEDMODULEVERSIONRESPONSE._serialized_start=63982
+  _SINGLEINSTALLEDMODULEVERSIONRESPONSE._serialized_end=64137
+  _MULTIINSTALLEDMODULEVERSIONRESPONSE._serialized_start=64140
+  _MULTIINSTALLEDMODULEVERSIONRESPONSE._serialized_end=64301
+  _LISTNEXTTASKASSIGNMENTSREQUEST._serialized_start=64303
+  _LISTNEXTTASKASSIGNMENTSREQUEST._serialized_end=64401
+  _POSTBULKOPERATIONSREQUEST._serialized_start=64404
+  _POSTBULKOPERATIONSREQUEST._serialized_end=64534
+  _LISTBULKOPERATIONSREQUEST._serialized_start=64536
+  _LISTBULKOPERATIONSREQUEST._serialized_end=64644
+  _GETBULKOPERATIONREQUEST._serialized_start=64646
+  _GETBULKOPERATIONREQUEST._serialized_end=64732
+  _CANCELBULKOPERATIONREQUEST._serialized_start=64734
+  _CANCELBULKOPERATIONREQUEST._serialized_end=64824
+  _DELETEBULKOPERATIONREQUEST._serialized_start=64826
+  _DELETEBULKOPERATIONREQUEST._serialized_end=64916
+  _SINGLEBULKOPERATIONSRESPONSE._serialized_start=64919
+  _SINGLEBULKOPERATIONSRESPONSE._serialized_end=65047
+  _MULTIBULKOPERATIONSRESPONSE._serialized_start=65049
+  _MULTIBULKOPERATIONSRESPONSE._serialized_end=65176
+  _PUTTASKASSIGNMENTSREQUEST._serialized_start=65178
+  _PUTTASKASSIGNMENTSREQUEST._serialized_end=65289
+  _POSTWAITLISTEMAILSREQUEST._serialized_start=65292
+  _POSTWAITLISTEMAILSREQUEST._serialized_end=65457
+  _MULTIWAITLISTEMAILRESPONSE._serialized_start=65460
+  _MULTIWAITLISTEMAILRESPONSE._serialized_end=65593
+  _GETSAMPLEDPREDICTMETRICSREQUEST._serialized_start=65596
+  _GETSAMPLEDPREDICTMETRICSREQUEST._serialized_end=65874
+  _MULTISAMPLEDPREDICTMETRICSRESPONSE._serialized_start=65877
+  _MULTISAMPLEDPREDICTMETRICSRESPONSE._serialized_end=66010
+  _SAMPLEPREDICTMETRIC._serialized_start=66012
+  _SAMPLEPREDICTMETRIC._serialized_end=66090
+  _POSTINPUTSADDJOBSREQUEST._serialized_start=66093
+  _POSTINPUTSADDJOBSREQUEST._serialized_end=66221
+  _LISTINPUTSADDJOBSREQUEST._serialized_start=66223
+  _LISTINPUTSADDJOBSREQUEST._serialized_end=66330
+  _GETINPUTSADDJOBREQUEST._serialized_start=66332
+  _GETINPUTSADDJOBREQUEST._serialized_end=66417
+  _CANCELINPUTSADDJOBREQUEST._serialized_start=66419
+  _CANCELINPUTSADDJOBREQUEST._serialized_end=66507
+  _MULTIINPUTSADDJOBRESPONSE._serialized_start=66510
+  _MULTIINPUTSADDJOBRESPONSE._serialized_end=66641
+  _SINGLEINPUTSADDJOBRESPONSE._serialized_start=66643
+  _SINGLEINPUTSADDJOBRESPONSE._serialized_end=66768
+  _POSTUPLOADSREQUEST._serialized_start=66770
+  _POSTUPLOADSREQUEST._serialized_end=66878
+  _DELETEUPLOADSREQUEST._serialized_start=66880
+  _DELETEUPLOADSREQUEST._serialized_end=66964
+  _LISTUPLOADSREQUEST._serialized_start=66966
+  _LISTUPLOADSREQUEST._serialized_end=67067
+  _GETUPLOADREQUEST._serialized_start=67069
+  _GETUPLOADREQUEST._serialized_end=67155
+  _SINGLEUPLOADRESPONSE._serialized_start=67157
+  _SINGLEUPLOADRESPONSE._serialized_end=67262
+  _MULTIUPLOADRESPONSE._serialized_start=67264
+  _MULTIUPLOADRESPONSE._serialized_end=67369
+  _PUTUPLOADCONTENTPARTSREQUEST._serialized_start=67372
+  _PUTUPLOADCONTENTPARTSREQUEST._serialized_end=67526
+  _V2._serialized_start=67644
+  _V2._serialized_end=141502
 # @@protoc_insertion_point(module_scope)
