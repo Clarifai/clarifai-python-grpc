@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%proto/clarifai/auth/types/types.proto\x12\x13\x63larifai.auth.types*`\n\x08\x41uthType\x12\t\n\x05undef\x10\x00\x12\n\n\x06NoAuth\x10\x01\x12\x0b\n\x07KeyAuth\x10\x02\x12\x14\n\x10SessionTokenAuth\x10\x03\x12\r\n\tAdminAuth\x10\x04\x12\x0b\n\x07PATAuth\x10\x05\x42g\n\x1c\x63om.clarifai.grpc.auth.typesP\x01Z>github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\xa2\x02\x04\x43\x41IPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n%proto/clarifai/auth/types/types.proto\x12\x13\x63larifai.auth.types*`\n\x08\x41uthType\x12\t\n\x05undef\x10\x00\x12\n\n\x06NoAuth\x10\x01\x12\x0b\n\x07KeyAuth\x10\x02\x12\x14\n\x10SessionTokenAuth\x10\x03\x12\r\n\tAdminAuth\x10\x04\x12\x0b\n\x07PATAuth\x10\x05\x42\x92\x01\n\x1c\x63om.clarifai.grpc.auth.typesP\x01Zigithub.com/Clarifai/clarifai-go-grpc/proto/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\xa2\x02\x04\x43\x41IPb\x06proto3')
 
 _AUTHTYPE = DESCRIPTOR.enum_types_by_name['AuthType']
 AuthType = enum_type_wrapper.EnumTypeWrapper(_AUTHTYPE)
@@ -30,7 +30,7 @@ PATAuth = 5
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\034com.clarifai.grpc.auth.typesP\001Z>github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\242\002\004CAIP'
+  DESCRIPTOR._serialized_options = b'\n\034com.clarifai.grpc.auth.typesP\001Zigithub.com/Clarifai/clarifai-go-grpc/proto/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/auth/types\242\002\004CAIP'
   _AUTHTYPE._serialized_start=62
   _AUTHTYPE._serialized_end=158
 # @@protoc_insertion_point(module_scope)

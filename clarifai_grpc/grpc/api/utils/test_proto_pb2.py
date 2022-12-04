@@ -15,7 +15,7 @@ _sym_db = _symbol_database.Default()
 from clarifai_grpc.grpc.api.utils import extensions_pb2 as proto_dot_clarifai_dot_api_dot_utils_dot_extensions__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)proto/clarifai/api/utils/test_proto.proto\x12\x12\x63larifai.api.utils\x1a)proto/clarifai/api/utils/extensions.proto\"\xe5\x01\n\tTestProto\x12\n\n\x02id\x18\x01 \x01(\t\x12(\n\x07message\x18\x02 \x01(\tB\x17\x80\xb5\x18\x01\x8a\xb5\x18\x0fprotos are cool\x12\x16\n\x05value\x18\x03 \x01(\x01\x42\x07\xd5\xb5\x18\x00\x00\x80?\x12\x13\n\x0bimage_bytes\x18\x04 \x01(\x0c\x12\x16\n\x0cstring_oneof\x18\x05 \x01(\tH\x00\x12\x14\n\nbool_oneof\x18\x06 \x01(\x08H\x00\x12\x37\n\rmessage_oneof\x18\x07 \x01(\x0b\x32\x1e.clarifai.api.utils.TestProto2H\x00\x42\x0e\n\x0cone_of_field\"&\n\nTestProto2\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04\x66lip\x18\x02 \x01(\x08\x42\x65\n\x1b\x63om.clarifai.grpc.api.utilsP\x01Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\xa2\x02\x04\x43\x41IPb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)proto/clarifai/api/utils/test_proto.proto\x12\x12\x63larifai.api.utils\x1a)proto/clarifai/api/utils/extensions.proto\"\xe5\x01\n\tTestProto\x12\n\n\x02id\x18\x01 \x01(\t\x12(\n\x07message\x18\x02 \x01(\tB\x17\x80\xb5\x18\x01\x8a\xb5\x18\x0fprotos are cool\x12\x16\n\x05value\x18\x03 \x01(\x01\x42\x07\xd5\xb5\x18\x00\x00\x80?\x12\x13\n\x0bimage_bytes\x18\x04 \x01(\x0c\x12\x16\n\x0cstring_oneof\x18\x05 \x01(\tH\x00\x12\x14\n\nbool_oneof\x18\x06 \x01(\x08H\x00\x12\x37\n\rmessage_oneof\x18\x07 \x01(\x0b\x32\x1e.clarifai.api.utils.TestProto2H\x00\x42\x0e\n\x0cone_of_field\"&\n\nTestProto2\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04\x66lip\x18\x02 \x01(\x08\x42\x90\x01\n\x1b\x63om.clarifai.grpc.api.utilsP\x01Zhgithub.com/Clarifai/clarifai-go-grpc/proto/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\xa2\x02\x04\x43\x41IPb\x06proto3')
 
 
 
@@ -38,7 +38,7 @@ _sym_db.RegisterMessage(TestProto2)
 if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
-  DESCRIPTOR._serialized_options = b'\n\033com.clarifai.grpc.api.utilsP\001Z=github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\242\002\004CAIP'
+  DESCRIPTOR._serialized_options = b'\n\033com.clarifai.grpc.api.utilsP\001Zhgithub.com/Clarifai/clarifai-go-grpc/proto/github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/utils\242\002\004CAIP'
   _TESTPROTO.fields_by_name['message']._options = None
   _TESTPROTO.fields_by_name['message']._serialized_options = b'\200\265\030\001\212\265\030\017protos are cool'
   _TESTPROTO.fields_by_name['value']._options = None
