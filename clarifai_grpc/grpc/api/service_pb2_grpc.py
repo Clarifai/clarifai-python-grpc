@@ -1901,6 +1901,8 @@ class V2Servicer(object):
 
     def PostSearches(self, request, context):
         """Execute a new search and optionally save it.
+
+        Deprecated: Use PostInputsSearches or PostAnnotationsSearches instead.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
