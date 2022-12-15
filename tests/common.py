@@ -23,36 +23,6 @@ TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
 
-TEST_OPERATOR_CODE = """
-import time
-import json
-
-from clarifai_grpc.grpc.api import resources_pb2, service_pb2
-from clarifai_grpc.grpc.api.status import status_code_pb2, status_pb2
-from google.protobuf.json_format import MessageToDict, ParseDict
-from google.protobuf.struct_pb2 import Struct
-
-def main(req):
-  outputs = []
-  inputs = req.get('inputs', None)
-  if not inputs:
-    err_status = status_pb2.Status(code=status_code_pb2.INPUT_INVALID_ARGUMENT, description='No Inputs Received')
-    err_resp = service_pb2.MultiOutputResponse(status=err_status)
-    return MessageToDict(err_resp, preserving_proto_field_name=True)
-  for inp in inputs:
-    input_pbf = ParseDict(inp, resources_pb2.Input())
-    input_id = input_pbf.id
-    output = resources_pb2.Output(id=input_id)
-    metadata = Struct()
-    metadata.update({"processed_at": time.ctime()})
-    output.data.metadata.CopyFrom(metadata)
-    outputs.append(output)
-    time.sleep(1)
-  resp = service_pb2.MultiOutputResponse(outputs=outputs,
-    status=status_pb2.Status(code=status_code_pb2.SUCCESS))
-  return MessageToDict(resp, preserving_proto_field_name=True)
-  """
-
 
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
