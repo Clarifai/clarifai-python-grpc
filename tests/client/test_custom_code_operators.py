@@ -7,6 +7,7 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 
 from tests.common import (
     both_channels,
+    metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
     MAX_RETRY_ATTEMPTS,
@@ -14,6 +15,7 @@ from tests.common import (
     DOG_IMAGE_URL,
     TEST_OPERATOR_CODE,
 )
+
 
 @both_channels
 def test_post_predict_delete_custom_code_operator_model(channel):
@@ -32,13 +34,14 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         output_info=output_info,
     )
     req = service_pb2.PostModelsRequest(model=model)
-    raise_on_failure(stub.PostModels(req))
+    raise_on_failure(stub.PostModels(req, metadata=metadata()))
 
     for i in range(0, MAX_RETRY_ATTEMPTS):
-        resp = stub.GetModelVersion(
-            service_pb2.GetModelVersion(
+        resp = stub.GetModel(
+            service_pb2.GetModelRequest(
                 model_id=model_id,
-            )
+            ),
+            metadata=metadata(),
         )
         latest_status = resp.model.model_version.status
         if latest_status != status_code_pb2.MODEL_TRAINED:
@@ -60,7 +63,9 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     )
 
     req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
-    response = post_model_outputs_and_maybe_allow_retries(stub=stub, request=req, metadata=())
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub=stub, request=req, metadata=metadata()
+    )
 
     raise_on_failure(response)
     assert len(response["outputs"]) == 2
@@ -71,5 +76,6 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         < response["outputs"][1]["data"]["metadata"]["processed_at"]
     )
 
-    raise_on_failure(stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id)))
-
+    raise_on_failure(
+        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
+    )
