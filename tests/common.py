@@ -9,6 +9,8 @@ from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
+MAX_RETRY_ATTEMPTS = 15
+
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 TRAVEL_IMAGE_URL = "https://samples.clarifai.com/travel.jpg"
@@ -151,8 +153,7 @@ def _retry_on_504_on_non_prod(func):
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
-    MAX_ATTEMPTS = 15
-    for i in range(1, MAX_ATTEMPTS + 1):
+    for i in range(1, MAX_RETRY_ATTEMPTS + 1):
         try:
             response = func()
             if (
@@ -168,7 +169,7 @@ def _retry_on_504_on_non_prod(func):
             if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
                 raise e
 
-            if i == MAX_ATTEMPTS:
+            if i == MAX_RETRY_ATTEMPTS:
                 raise e
 
             print(f"Received 504, doing retry #{i}")
