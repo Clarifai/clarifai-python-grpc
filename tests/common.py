@@ -28,7 +28,7 @@ import time
 import json
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2
-from clarifai_grpc.grpc.api.status import status_code_pb2, status_pb2    
+from clarifai_grpc.grpc.api.status import status_code_pb2, status_pb2
 from google.protobuf.json_format import MessageToDict, ParseDict
 from google.protobuf.struct_pb2 import Struct
 
@@ -38,7 +38,7 @@ def main(req):
   if not inputs:
     err_status = status_pb2.Status(code=status_code_pb2.INPUT_INVALID_ARGUMENT, description='No Inputs Received')
     err_resp = service_pb2.MultiOutputResponse(status=err_status)
-    return MessageToDict(err_resp, preserving_proto_field_name=True) 
+    return MessageToDict(err_resp, preserving_proto_field_name=True)
   for inp in inputs:
     input_pbf = ParseDict(inp, resources_pb2.Input())
     input_id = input_pbf.id
