@@ -9,6 +9,8 @@ from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
+MAX_RETRY_ATTEMPTS = 15
+
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
 TRAVEL_IMAGE_URL = "https://samples.clarifai.com/travel.jpg"
@@ -19,9 +21,7 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
-ENGLISH_TEXT = (
-    "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
-)
+ENGLISH_TEXT = "My spanish test is tomorrow morning. I don't feel like studying tonight, but I must study."
 SPANISH_TEXT = "No me apetece nada estudiar esta noche."
 
 ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
@@ -127,7 +127,10 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
             )
             raise_on_failure(get_input_response)
-            if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
+            if (
+                get_input_response.input.status.code
+                == status_code_pb2.INPUT_DOWNLOAD_SUCCESS
+            ):
                 break
             elif get_input_response.input.status.code in (
                 status_code_pb2.INPUT_DOWNLOAD_PENDING,
@@ -143,7 +146,9 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
     # At this point, all inputs have been downloaded successfully.
 
 
-def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
+def wait_for_model_trained(
+    stub, metadata, model_id, model_version_id, user_app_id=None
+):
     while True:
         response = stub.GetModelVersion(
             service_pb2.GetModelVersionRequest(
@@ -176,7 +181,10 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
             metadata=metadata,
         )
         raise_on_failure(response)
-        if response.model_version.metrics.status.code == status_code_pb2.MODEL_EVALUATED:
+        if (
+            response.model_version.metrics.status.code
+            == status_code_pb2.MODEL_EVALUATED
+        ):
             break
         elif response.model_version.metrics.status.code in (
             status_code_pb2.MODEL_NOT_EVALUATED,
@@ -209,7 +217,9 @@ def post_model_outputs_and_maybe_allow_retries(
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
+    return _retry_on_504_on_non_prod(
+        lambda: stub.PostModelOutputs(request, metadata=metadata)
+    )
 
 
 def _retry_on_504_on_non_prod(func):
@@ -217,13 +227,13 @@ def _retry_on_504_on_non_prod(func):
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
-    MAX_ATTEMPTS = 15
-    for i in range(1, MAX_ATTEMPTS + 1):
+    for i in range(1, MAX_RETRY_ATTEMPTS + 1):
         try:
             response = func()
             if (
                 len(response.outputs) > 0
-                and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
+                and response.outputs[0].status.code
+                != status_code_pb2.RPC_REQUEST_TIMEOUT
             ):  # will want to retry
                 break
         except _Rendezvous as e:
@@ -231,13 +241,15 @@ def _retry_on_504_on_non_prod(func):
             if not grpc_base or grpc_base == "api.clarifai.com":
                 raise e
 
-            if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
+            if (
+                "status: 504" not in e._state.details
+                and "10020 Failure" not in e._state.details
+            ):
                 raise e
 
-            if i == MAX_ATTEMPTS:
+            if i == MAX_RETRY_ATTEMPTS:
                 raise e
 
             print(f"Received 504, doing retry #{i}")
             time.sleep(1)
     return response
-
