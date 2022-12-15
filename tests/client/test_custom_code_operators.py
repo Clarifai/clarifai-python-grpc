@@ -44,18 +44,17 @@ def test_post_predict_delete_custom_code_operator_model(channel):
             metadata=metadata(),
         )
         latest_status_code = resp.model.model_version.status.code
-        if latest_status_code != status_code_pb2.MODEL_TRAINED:
-            time.sleep(2)
+        if latest_status_code == status_code_pb2.MODEL_TRAINED:
+          break
+        time.sleep(2)
 
     assert latest_status_code == status_code_pb2.MODEL_TRAINED
 
     inputs = [
         resources_pb2.Input(
-            id="321",
             data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)),
         ),
         resources_pb2.Input(
-            id="123",
             data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL)),
         ),
     ]
