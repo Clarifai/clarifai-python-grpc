@@ -64,7 +64,6 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     output_info_params = struct_pb2.Struct()
     output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
     output_info = resources_pb2.OutputInfo(params=output_info_params)
-    output_info = (output_info,)
     req = service_pb2.PostModelVersionsRequest(
         model_id=model_id,
         model_versions=[resources_pb2.ModelVersion(output_info=output_info)],
