@@ -29,7 +29,7 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
     output_info = resources_pb2.OutputInfo(params=output_info_params)
     model = resources_pb2.Model(
-        id="custom_code_operator_model",
+        id=model_id,
         model_type_id="custom-code-operator",
         output_info=output_info,
     )
