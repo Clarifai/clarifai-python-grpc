@@ -49,18 +49,16 @@ def test_post_predict_delete_custom_code_operator_model(channel):
 
     assert latest_status_code == status_code_pb2.MODEL_TRAINED
 
-    inputs = (
-        [
-            resources_pb2.Input(
-                id="321",
-                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)),
-            ),
-            resources_pb2.Input(
-                id="123",
-                data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL)),
-            ),
-        ],
-    )
+    inputs = [
+        resources_pb2.Input(
+            id="321",
+            data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)),
+        ),
+        resources_pb2.Input(
+            id="123",
+            data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL)),
+        ),
+    ]
 
     req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
     response = post_model_outputs_and_maybe_allow_retries(
