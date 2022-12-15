@@ -25,9 +25,7 @@ from tests.common import (
 def test_list_all_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    list_response = stub.ListModels(
-        service_pb2.ListModelsRequest(), metadata=metadata()
-    )
+    list_response = stub.ListModels(service_pb2.ListModelsRequest(), metadata=metadata())
     raise_on_failure(list_response)
     assert len(list_response.models) > 0
 
@@ -36,9 +34,7 @@ def test_list_all_models(channel):
 def test_list_models_with_pagination(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    response = stub.ListModels(
-        service_pb2.ListModelsRequest(per_page=2), metadata=metadata()
-    )
+    response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata())
     raise_on_failure(response)
     assert len(response.models) == 2
 
@@ -60,17 +56,13 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
-                        image=resources_pb2.Image(
-                            url=TRUCK_IMAGE_URL, allow_duplicate_url=True
-                        ),
+                        image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True),
                         concepts=[resources_pb2.Concept(id="some-initial-concept")],
                     )
                 ),
                 resources_pb2.Input(
                     data=resources_pb2.Data(
-                        image=resources_pb2.Image(
-                            url=DOG_IMAGE_URL, allow_duplicate_url=True
-                        ),
+                        image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
                         concepts=[resources_pb2.Concept(id="some-new-concept")],
                     )
                 ),
@@ -112,11 +104,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
                         name="some new name",
                         output_info=resources_pb2.OutputInfo(
                             data=resources_pb2.Data(
-                                concepts=[
-                                    resources_pb2.Concept(
-                                        id="some-new-concept", value=1
-                                    )
-                                ]
+                                concepts=[resources_pb2.Concept(id="some-new-concept", value=1)]
                             ),
                         ),
                     )
@@ -157,9 +145,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
                 version_id=model_version_id,
                 inputs=[
                     resources_pb2.Input(
-                        data=resources_pb2.Data(
-                            image=resources_pb2.Image(url=DOG_IMAGE_URL)
-                        )
+                        data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
                     )
                 ],
             ),
@@ -168,10 +154,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         raise_on_failure(post_model_outputs_response)
         assert len(post_model_outputs_response.outputs) == 1
         assert len(post_model_outputs_response.outputs[0].data.concepts) == 1
-        assert (
-            post_model_outputs_response.outputs[0].data.concepts[0].id
-            == "some-new-concept"
-        )
+        assert post_model_outputs_response.outputs[0].data.concepts[0].id == "some-new-concept"
     finally:
         delete_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
@@ -230,9 +213,7 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     )
 
     req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
-    response = post_model_outputs_and_maybe_allow_retries(
-        stub=stub, request=req, metadata=()
-    )
+    response = post_model_outputs_and_maybe_allow_retries(stub=stub, request=req, metadata=())
 
     raise_on_failure(response)
     assert len(response["outputs"]) == 2
@@ -243,9 +224,7 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         < response["outputs"][1]["data"]["metadata"]["processed_at"]
     )
 
-    raise_on_failure(
-        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id))
-    )
+    raise_on_failure(stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id)))
 
 
 @both_channels
@@ -273,9 +252,7 @@ def test_post_model_with_hyper_params(channel):
                         data=resources_pb2.Data(
                             concepts=[resources_pb2.Concept(id="some-initial-concept")],
                         ),
-                        output_config=resources_pb2.OutputConfig(
-                            hyper_params=hyper_params
-                        ),
+                        output_config=resources_pb2.OutputConfig(hyper_params=hyper_params),
                     ),
                 )
             ]
@@ -284,9 +261,7 @@ def test_post_model_with_hyper_params(channel):
     )
     raise_on_failure(post_response)
     assert (
-        post_response.model.output_info.output_config.hyper_params[
-            "custom_training_cfg"
-        ]
+        post_response.model.output_info.output_config.hyper_params["custom_training_cfg"]
         == "custom_training_1layer"
     )
 
@@ -393,13 +368,9 @@ def test_model_creation_training_and_evaluation(channel):
     raise_on_failure(response)
 
     raise_on_failure(
-        stub.DeleteModel(
-            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
-        )
+        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
     )
 
     raise_on_failure(
-        stub.DeleteInputs(
-            service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata()
-        )
+        stub.DeleteInputs(service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata())
     )
