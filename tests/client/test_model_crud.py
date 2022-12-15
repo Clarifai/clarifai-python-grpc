@@ -4,6 +4,7 @@ import pytest
 from google.protobuf import struct_pb2
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import (
     both_channels,
     metadata,
@@ -11,8 +12,10 @@ from tests.common import (
     wait_for_model_evaluated,
     wait_for_model_trained,
     wait_for_inputs_upload,
+    MAX_ATTEMPTS,
     TRUCK_IMAGE_URL,
     DOG_IMAGE_URL,
+    TEST_OPERATOR_CODE,
 )
 
 
@@ -161,6 +164,54 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         )
         raise_on_failure(delete_inputs_response)
 
+@both_channels
+def test_post_custom_code_operator_model(channel):
+"""
+    Add custom code operator model, predict, patch model, predict, delete CCO.
+"""
+  stub = service_pb2_grpc.V2Stub(channel)
+  model_id = "coperator_" + uuid.uuid4().hex[:20]
+
+  output_info_params = Struct()
+  output_info_params.update({'operator_code': TEST_OPERATOR_CODE})
+  output_info=resources_pb2.OutputInfo(params=output_info_params)
+  model = resources_pb2.Model(id='custom_code_operator_model', model_type_id='custom-code-operator', output_info=output_info)
+  req = service_pb2.PostModelsRequest(model=model)
+  raise_on_failure(stub.PostModels(req))
+
+  for i in range(0, MAX_ATTEMPTS):
+    resp = stub.GetModelVersion(
+      service_pb2.GetModelVersion(
+        model_id=model_id,
+      )
+    )
+    latest_status = resp.model.model_version.status
+    if latest_status != status_code_pb2.MODEL_TRAINED:
+      time.sleep(2)
+
+  assert(latest_status = status_code_pb2.MODEL_TRAINED)
+
+  inputs=[
+    resources_pb2.Input(
+        id="321",
+        data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+    ),
+    resources_pb2.Input(
+        id="123,"
+        data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL))
+    )
+  ],
+
+  req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
+  response = post_model_outputs_and_maybe_allow_retries(stub, req)
+
+  raise_on_failure(response)
+  assert (len(response['outputs']) == 2)
+  assert (len(response['outputs'][0]['data']['metadata']) == 1)
+  assert (len(response['outputs'][1]['data']['metadata']) == 1)
+  assert (response['outputs'][0]['data']['metadata']['processed_at'] < response['outputs'][1]['data']['metadata']['processed_at'])
+
+  raise_on_failure(stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id)))
 
 @both_channels
 def test_post_model_with_hyper_params(channel):
