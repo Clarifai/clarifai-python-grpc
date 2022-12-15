@@ -66,12 +66,12 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     )
 
     raise_on_failure(response)
-    assert len(response["outputs"]) == 2
-    assert len(response["outputs"][0]["data"]["metadata"]) == 1
-    assert len(response["outputs"][1]["data"]["metadata"]) == 1
+    assert len(response.outputs) == 2
+    assert len(response.outputs[0].data.metadata) == 1
+    assert len(response.outputs[1].data.metadata) == 1
     assert (
-        response["outputs"][0]["data"]["metadata"]["processed_at"]
-        < response["outputs"][1]["data"]["metadata"]["processed_at"]
+        response.outputs[0].data.metadata["processed_at"]
+        < response.outputs[1].data.metadata["processed_at"]
     )
 
     raise_on_failure(
