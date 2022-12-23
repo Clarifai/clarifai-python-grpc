@@ -3,13 +3,6 @@ from google.protobuf.message import Message  # noqa
 
 from clarifai_grpc.grpc.api.utils import extensions_pb2
 
-# Python 3 deprecates getargspec and introduces getfullargspec, which Python 2 doesn't have.
-try:
-    from inspect import getfullargspec as get_args
-except ImportError:
-    from inspect import getargspec as get_args
-
-
 def dict_to_protobuf(protobuf_class, 
                      js_dict, 
                      ignore_unknown_fields=False,
