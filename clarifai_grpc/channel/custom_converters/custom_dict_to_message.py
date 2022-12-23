@@ -3,11 +3,14 @@ from google.protobuf.message import Message  # noqa
 
 from clarifai_grpc.grpc.api.utils import extensions_pb2
 
-def dict_to_protobuf(protobuf_class, 
-                     js_dict, 
-                     ignore_unknown_fields=False,
-                     descriptor_pool=None,
-                     max_recursion_depth=100):
+
+def dict_to_protobuf(
+    protobuf_class,
+    js_dict,
+    ignore_unknown_fields=False,
+    descriptor_pool=None,
+    max_recursion_depth=100,
+):
     """Parses a JSON dictionary representation into a message.
 
     Args:
@@ -23,12 +26,11 @@ def dict_to_protobuf(protobuf_class,
     Returns:
       The same message passed as argument.
     """
-    # type: (type(Message), dict, bool) -> Message
     message = protobuf_class()
 
     parser = _CustomParser(ignore_unknown_fields, descriptor_pool, max_recursion_depth)
 
-    parser.ConvertMessage(js_dict, message, path='')
+    parser.ConvertMessage(js_dict, message, path="")
     return message
 
 
