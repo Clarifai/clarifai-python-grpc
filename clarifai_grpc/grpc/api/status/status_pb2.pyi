@@ -17,6 +17,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class Status(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -69,6 +70,7 @@ class Status(google.protobuf.message.Message):
 
 global___Status = Status
 
+@typing_extensions.final
 class RedirectInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -96,6 +98,7 @@ class RedirectInfo(google.protobuf.message.Message):
 
 global___RedirectInfo = RedirectInfo
 
+@typing_extensions.final
 class BaseResponse(google.protobuf.message.Message):
     """Base message to return when there is a internal server error that
     is not caught elsewhere.
