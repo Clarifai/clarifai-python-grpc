@@ -27,7 +27,7 @@ class _DatasetVersionMetricsGroupType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _DatasetVersionMetricsGroupTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionMetricsGroupType.ValueType], builtins.type):  # noqa: F821
+class _DatasetVersionMetricsGroupTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionMetricsGroupType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     DATASET_VERSION_METRICS_GROUP_TYPE_NOT_SET: _DatasetVersionMetricsGroupType.ValueType  # 0
     INPUT_TYPE: _DatasetVersionMetricsGroupType.ValueType  # 2
@@ -116,7 +116,7 @@ class _DatasetVersionExportFormat:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _DatasetVersionExportFormatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionExportFormat.ValueType], builtins.type):  # noqa: F821
+class _DatasetVersionExportFormatEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionExportFormat.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     DATASET_VERSION_EXPORT_FORMAT_NOT_SET: _DatasetVersionExportFormat.ValueType  # 0
     CLARIFAI_DATA_PROTOBUF: _DatasetVersionExportFormat.ValueType  # 1
@@ -163,7 +163,7 @@ class _ExpirationAction:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _ExpirationActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ExpirationAction.ValueType], builtins.type):  # noqa: F821
+class _ExpirationActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ExpirationAction.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     EXPIRATION_ACTION_NOT_SET: _ExpirationAction.ValueType  # 0
     DELAY: _ExpirationAction.ValueType  # 1
@@ -184,7 +184,7 @@ class _LicenseScope:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _LicenseScopeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LicenseScope.ValueType], builtins.type):  # noqa: F821
+class _LicenseScopeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LicenseScope.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     LICENSE_SCOPE_NOT_SET: _LicenseScope.ValueType  # 0
     PREDICT: _LicenseScope.ValueType  # 1
@@ -203,7 +203,7 @@ class _DataType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _DataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DataType.ValueType], builtins.type):  # noqa: F821
+class _DataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DataType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     UNDEFINED: _DataType.ValueType  # 0
     """Default value, should not be used"""
@@ -228,7 +228,7 @@ class _ValueComparator:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _ValueComparatorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ValueComparator.ValueType], builtins.type):  # noqa: F821
+class _ValueComparatorEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ValueComparator.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     CONCEPT_THRESHOLD_NOT_SET: _ValueComparator.ValueType  # 0
     GREATER_THAN: _ValueComparator.ValueType  # 1
@@ -261,24 +261,32 @@ class _EvaluationType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _EvaluationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EvaluationType.ValueType], builtins.type):  # noqa: F821
+class _EvaluationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EvaluationType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    Classification: _EvaluationType.ValueType  # 0
+    Undefined: _EvaluationType.ValueType  # 0
+    Classification: _EvaluationType.ValueType  # 1
     """default"""
-    Detection: _EvaluationType.ValueType  # 1
+    Detection: _EvaluationType.ValueType  # 2
+    Segmentation: _EvaluationType.ValueType  # 3
+    Clustering: _EvaluationType.ValueType  # 4
+    Tracker: _EvaluationType.ValueType  # 5
 
 class EvaluationType(_EvaluationType, metaclass=_EvaluationTypeEnumTypeWrapper): ...
 
-Classification: EvaluationType.ValueType  # 0
+Undefined: EvaluationType.ValueType  # 0
+Classification: EvaluationType.ValueType  # 1
 """default"""
-Detection: EvaluationType.ValueType  # 1
+Detection: EvaluationType.ValueType  # 2
+Segmentation: EvaluationType.ValueType  # 3
+Clustering: EvaluationType.ValueType  # 4
+Tracker: EvaluationType.ValueType  # 5
 global___EvaluationType = EvaluationType
 
 class _APIEventType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _APIEventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_APIEventType.ValueType], builtins.type):  # noqa: F821
+class _APIEventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_APIEventType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     API_EVENT_TYPE_NOT_SET: _APIEventType.ValueType  # 0
     ON_PREM_PREDICT: _APIEventType.ValueType  # 1
@@ -299,7 +307,7 @@ class _UsageIntervalType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _UsageIntervalTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_UsageIntervalType.ValueType], builtins.type):  # noqa: F821
+class _UsageIntervalTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_UsageIntervalType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     undef: _UsageIntervalType.ValueType  # 0
     """undef UsageIntervalType is so that the interval field can be forced to be included"""
@@ -320,7 +328,7 @@ class _RoleType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _RoleTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RoleType.ValueType], builtins.type):  # noqa: F821
+class _RoleTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RoleType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     TEAM: _RoleType.ValueType  # 0
     ORG: _RoleType.ValueType  # 1
@@ -335,7 +343,7 @@ class _StatValueAggType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StatValueAggTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatValueAggType.ValueType], builtins.type):  # noqa: F821
+class _StatValueAggTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatValueAggType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     SUM: _StatValueAggType.ValueType  # 0
     AVG: _StatValueAggType.ValueType  # 1
@@ -350,7 +358,7 @@ class _StatTimeAggType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StatTimeAggTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatTimeAggType.ValueType], builtins.type):  # noqa: F821
+class _StatTimeAggTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatTimeAggType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     NO_TIME_AGG: _StatTimeAggType.ValueType  # 0
     YEAR: _StatTimeAggType.ValueType  # 1
@@ -375,7 +383,7 @@ class _ValidationErrorType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _ValidationErrorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ValidationErrorType.ValueType], builtins.type):  # noqa: F821
+class _ValidationErrorTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ValidationErrorType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     VALIDATION_ERROR_TYPE_NOT_SET: _ValidationErrorType.ValueType  # 0
     RESTRICTED: _ValidationErrorType.ValueType  # 1
@@ -390,6 +398,7 @@ DATABASE: ValidationErrorType.ValueType  # 2
 FORMAT: ValidationErrorType.ValueType  # 3
 global___ValidationErrorType = ValidationErrorType
 
+@typing_extensions.final
 class Annotation(google.protobuf.message.Message):
     """Annotation of an asset with metadata"""
 
@@ -476,6 +485,7 @@ class Annotation(google.protobuf.message.Message):
 
 global___Annotation = Annotation
 
+@typing_extensions.final
 class App(google.protobuf.message.Message):
     """Application with tasks and datasets"""
 
@@ -497,6 +507,7 @@ class App(google.protobuf.message.Message):
     IS_STARRED_FIELD_NUMBER: builtins.int
     STAR_COUNT_FIELD_NUMBER: builtins.int
     NOTES_FIELD_NUMBER: builtins.int
+    IMAGE_FIELD_NUMBER: builtins.int
     id: builtins.str
     name: builtins.str
     default_language: builtins.str
@@ -547,6 +558,9 @@ class App(google.protobuf.message.Message):
     """Notes for the application
     This field should be used for in-depth notes and supports up to 64Kbs.
     """
+    @property
+    def image(self) -> global___Image:
+        """Representative image for this app"""
     def __init__(
         self,
         *,
@@ -566,12 +580,14 @@ class App(google.protobuf.message.Message):
         is_starred: builtins.bool = ...,
         star_count: builtins.int = ...,
         notes: builtins.str = ...,
+        image: global___Image | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow_id", b"default_workflow_id", "description", b"description", "id", b"id", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow_id", b"default_workflow_id", "description", b"description", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___App = App
 
+@typing_extensions.final
 class AppQuery(google.protobuf.message.Message):
     """App query"""
 
@@ -589,6 +605,7 @@ class AppQuery(google.protobuf.message.Message):
 
 global___AppQuery = AppQuery
 
+@typing_extensions.final
 class Collaborator(google.protobuf.message.Message):
     """Collaborator - invited user, who shares an access to an application"""
 
@@ -648,6 +665,7 @@ class Collaborator(google.protobuf.message.Message):
 
 global___Collaborator = Collaborator
 
+@typing_extensions.final
 class Collaboration(google.protobuf.message.Message):
     """collaboration includes an app you're invited to work on."""
 
@@ -687,6 +705,7 @@ class Collaboration(google.protobuf.message.Message):
 
 global___Collaboration = Collaboration
 
+@typing_extensions.final
 class Audio(google.protobuf.message.Message):
     """Audio asset struct"""
 
@@ -733,6 +752,7 @@ class Audio(google.protobuf.message.Message):
 
 global___Audio = Audio
 
+@typing_extensions.final
 class AudioInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -760,6 +780,7 @@ class AudioInfo(google.protobuf.message.Message):
 
 global___AudioInfo = AudioInfo
 
+@typing_extensions.final
 class Track(google.protobuf.message.Message):
     """Track proto encodes information of a track over a number of frames"""
 
@@ -792,6 +813,7 @@ class Track(google.protobuf.message.Message):
 
 global___Track = Track
 
+@typing_extensions.final
 class Cluster(google.protobuf.message.Message):
     """Cluster data"""
 
@@ -827,6 +849,7 @@ class Cluster(google.protobuf.message.Message):
 
 global___Cluster = Cluster
 
+@typing_extensions.final
 class Color(google.protobuf.message.Message):
     """Color data"""
 
@@ -851,6 +874,7 @@ class Color(google.protobuf.message.Message):
 
 global___Color = Color
 
+@typing_extensions.final
 class W3C(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -868,6 +892,7 @@ class W3C(google.protobuf.message.Message):
 
 global___W3C = W3C
 
+@typing_extensions.final
 class UserAppIDSet(google.protobuf.message.Message):
     """Common message to identify the app in a url endpoint."""
 
@@ -888,6 +913,7 @@ class UserAppIDSet(google.protobuf.message.Message):
 
 global___UserAppIDSet = UserAppIDSet
 
+@typing_extensions.final
 class PatchAction(google.protobuf.message.Message):
     """PatchAction"""
 
@@ -981,6 +1007,7 @@ class PatchAction(google.protobuf.message.Message):
 
 global___PatchAction = PatchAction
 
+@typing_extensions.final
 class Concept(google.protobuf.message.Message):
     """Concept or tag"""
 
@@ -1058,6 +1085,7 @@ class Concept(google.protobuf.message.Message):
 
 global___Concept = Concept
 
+@typing_extensions.final
 class KeypointInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1079,6 +1107,7 @@ class KeypointInfo(google.protobuf.message.Message):
 
 global___KeypointInfo = KeypointInfo
 
+@typing_extensions.final
 class KeypointEdge(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1096,6 +1125,7 @@ class KeypointEdge(google.protobuf.message.Message):
 
 global___KeypointEdge = KeypointEdge
 
+@typing_extensions.final
 class ConceptCount(google.protobuf.message.Message):
     """ConceptCount"""
 
@@ -1128,6 +1158,7 @@ class ConceptCount(google.protobuf.message.Message):
 
 global___ConceptCount = ConceptCount
 
+@typing_extensions.final
 class ConceptTypeCount(google.protobuf.message.Message):
     """ConceptTypeCount"""
 
@@ -1153,6 +1184,7 @@ class ConceptTypeCount(google.protobuf.message.Message):
 
 global___ConceptTypeCount = ConceptTypeCount
 
+@typing_extensions.final
 class DetailConceptCount(google.protobuf.message.Message):
     """DetailConceptCount"""
 
@@ -1187,6 +1219,7 @@ class DetailConceptCount(google.protobuf.message.Message):
 
 global___DetailConceptCount = DetailConceptCount
 
+@typing_extensions.final
 class ConceptQuery(google.protobuf.message.Message):
     """ConceptQuery"""
 
@@ -1212,6 +1245,7 @@ class ConceptQuery(google.protobuf.message.Message):
 
 global___ConceptQuery = ConceptQuery
 
+@typing_extensions.final
 class ConceptRelation(google.protobuf.message.Message):
     """This represents a relation (i.e. edge) between the subject concept and the object concept"""
 
@@ -1289,6 +1323,7 @@ class ConceptRelation(google.protobuf.message.Message):
 
 global___ConceptRelation = ConceptRelation
 
+@typing_extensions.final
 class KnowledgeGraph(google.protobuf.message.Message):
     """A Knowledge Graph is a logical subsets of edges in the overall Concept Graph"""
 
@@ -1322,6 +1357,7 @@ class KnowledgeGraph(google.protobuf.message.Message):
 
 global___KnowledgeGraph = KnowledgeGraph
 
+@typing_extensions.final
 class ConceptMappingJob(google.protobuf.message.Message):
     """ConceptMappingJob"""
 
@@ -1344,6 +1380,7 @@ class ConceptMappingJob(google.protobuf.message.Message):
 
 global___ConceptMappingJob = ConceptMappingJob
 
+@typing_extensions.final
 class ConceptLanguage(google.protobuf.message.Message):
     """This represents a link to an outside source for the given concept.
     The values from here are sticked into Concept message into the name and definition fields when
@@ -1373,6 +1410,7 @@ class ConceptLanguage(google.protobuf.message.Message):
 
 global___ConceptLanguage = ConceptLanguage
 
+@typing_extensions.final
 class Data(google.protobuf.message.Message):
     """Data"""
 
@@ -1469,6 +1507,7 @@ class Data(google.protobuf.message.Message):
 
 global___Data = Data
 
+@typing_extensions.final
 class Region(google.protobuf.message.Message):
     """A region within the data."""
 
@@ -1507,6 +1546,7 @@ class Region(google.protobuf.message.Message):
 
 global___Region = Region
 
+@typing_extensions.final
 class RegionInfo(google.protobuf.message.Message):
     """The information of the location of the Region."""
 
@@ -1558,6 +1598,7 @@ class RegionInfo(google.protobuf.message.Message):
 
 global___RegionInfo = RegionInfo
 
+@typing_extensions.final
 class BoundingBox(google.protobuf.message.Message):
     """Rectangular bounding box for a region."""
 
@@ -1587,6 +1628,7 @@ class BoundingBox(google.protobuf.message.Message):
 
 global___BoundingBox = BoundingBox
 
+@typing_extensions.final
 class FrameInfo(google.protobuf.message.Message):
     """The information of the location of the Frame."""
 
@@ -1612,6 +1654,7 @@ class FrameInfo(google.protobuf.message.Message):
 
 global___FrameInfo = FrameInfo
 
+@typing_extensions.final
 class Frame(google.protobuf.message.Message):
     """A Frame of time-series Data such as a Video."""
 
@@ -1644,6 +1687,7 @@ class Frame(google.protobuf.message.Message):
 
 global___Frame = Frame
 
+@typing_extensions.final
 class Mask(google.protobuf.message.Message):
     """Segmentation mask."""
 
@@ -1663,6 +1707,7 @@ class Mask(google.protobuf.message.Message):
 
 global___Mask = Mask
 
+@typing_extensions.final
 class Polygon(google.protobuf.message.Message):
     """Polygon"""
 
@@ -1681,6 +1726,7 @@ class Polygon(google.protobuf.message.Message):
 
 global___Polygon = Polygon
 
+@typing_extensions.final
 class Point(google.protobuf.message.Message):
     """Point"""
 
@@ -1740,6 +1786,7 @@ class Point(google.protobuf.message.Message):
 
 global___Point = Point
 
+@typing_extensions.final
 class Span(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1760,6 +1807,7 @@ class Span(google.protobuf.message.Message):
 
 global___Span = Span
 
+@typing_extensions.final
 class Token(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1780,6 +1828,7 @@ class Token(google.protobuf.message.Message):
 
 global___Token = Token
 
+@typing_extensions.final
 class Embedding(google.protobuf.message.Message):
     """Embedding"""
 
@@ -1800,6 +1849,7 @@ class Embedding(google.protobuf.message.Message):
 
 global___Embedding = Embedding
 
+@typing_extensions.final
 class GeoPoint(google.protobuf.message.Message):
     """GeoPoint"""
 
@@ -1819,6 +1869,7 @@ class GeoPoint(google.protobuf.message.Message):
 
 global___GeoPoint = GeoPoint
 
+@typing_extensions.final
 class GeoLimit(google.protobuf.message.Message):
     """GeoLimit"""
 
@@ -1838,6 +1889,7 @@ class GeoLimit(google.protobuf.message.Message):
 
 global___GeoLimit = GeoLimit
 
+@typing_extensions.final
 class GeoBoxedPoint(google.protobuf.message.Message):
     """GeoBoxedPoint"""
 
@@ -1856,6 +1908,7 @@ class GeoBoxedPoint(google.protobuf.message.Message):
 
 global___GeoBoxedPoint = GeoBoxedPoint
 
+@typing_extensions.final
 class Geo(google.protobuf.message.Message):
     """Geo"""
 
@@ -1883,6 +1936,7 @@ class Geo(google.protobuf.message.Message):
 
 global___Geo = Geo
 
+@typing_extensions.final
 class Image(google.protobuf.message.Message):
     """Image"""
 
@@ -1926,6 +1980,7 @@ class Image(google.protobuf.message.Message):
 
 global___Image = Image
 
+@typing_extensions.final
 class ImageInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1953,6 +2008,7 @@ class ImageInfo(google.protobuf.message.Message):
 
 global___ImageInfo = ImageInfo
 
+@typing_extensions.final
 class HostedURL(google.protobuf.message.Message):
     """HostedURL"""
 
@@ -1987,6 +2043,7 @@ class HostedURL(google.protobuf.message.Message):
 
 global___HostedURL = HostedURL
 
+@typing_extensions.final
 class Input(google.protobuf.message.Message):
     """Input"""
 
@@ -2042,6 +2099,7 @@ class Input(google.protobuf.message.Message):
 
 global___Input = Input
 
+@typing_extensions.final
 class InputCount(google.protobuf.message.Message):
     """NOTE: inconsistency: this is weird mix of plural and singular words."""
 
@@ -2079,6 +2137,7 @@ class InputCount(google.protobuf.message.Message):
 
 global___InputCount = InputCount
 
+@typing_extensions.final
 class Dataset(google.protobuf.message.Message):
     """Dataset"""
 
@@ -2158,6 +2217,7 @@ class Dataset(google.protobuf.message.Message):
 
 global___Dataset = Dataset
 
+@typing_extensions.final
 class AnnotationFilter(google.protobuf.message.Message):
     """AnnotationFilter is used to create a new dataset version.
     For now, the filter is simply a wrapper over a Search.
@@ -2208,6 +2268,7 @@ class AnnotationFilter(google.protobuf.message.Message):
 
 global___AnnotationFilter = AnnotationFilter
 
+@typing_extensions.final
 class DatasetInput(google.protobuf.message.Message):
     """DatasetInput"""
 
@@ -2235,11 +2296,13 @@ class DatasetInput(google.protobuf.message.Message):
 
 global___DatasetInput = DatasetInput
 
+@typing_extensions.final
 class DatasetVersion(google.protobuf.message.Message):
     """DatasetVersion"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class MetricsEntry(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2348,6 +2411,7 @@ class DatasetVersion(google.protobuf.message.Message):
 
 global___DatasetVersion = DatasetVersion
 
+@typing_extensions.final
 class AnnotationFilterConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2364,6 +2428,7 @@ class AnnotationFilterConfig(google.protobuf.message.Message):
 
 global___AnnotationFilterConfig = AnnotationFilterConfig
 
+@typing_extensions.final
 class ModelPredictConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2381,6 +2446,7 @@ class ModelPredictConfig(google.protobuf.message.Message):
 
 global___ModelPredictConfig = ModelPredictConfig
 
+@typing_extensions.final
 class DatasetVersionMetrics(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2493,6 +2559,7 @@ class DatasetVersionMetrics(google.protobuf.message.Message):
 
 global___DatasetVersionMetrics = DatasetVersionMetrics
 
+@typing_extensions.final
 class DatasetVersionMetricsGroup(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2519,6 +2586,7 @@ class DatasetVersionMetricsGroup(google.protobuf.message.Message):
 
 global___DatasetVersionMetricsGroup = DatasetVersionMetricsGroup
 
+@typing_extensions.final
 class DatasetVersionExportInfo(google.protobuf.message.Message):
     """DatasetVersionExportInfo contains information about all exports of a dataset version.
 
@@ -2552,6 +2620,7 @@ class DatasetVersionExportInfo(google.protobuf.message.Message):
 
 global___DatasetVersionExportInfo = DatasetVersionExportInfo
 
+@typing_extensions.final
 class DatasetVersionExport(google.protobuf.message.Message):
     """DatasetVersionExport contains metadata for a single dataset version export."""
 
@@ -2583,6 +2652,7 @@ class DatasetVersionExport(google.protobuf.message.Message):
 
 global___DatasetVersionExport = DatasetVersionExport
 
+@typing_extensions.final
 class WorkflowResultsSimilarity(google.protobuf.message.Message):
     """WorkflowResultsSimilarity"""
 
@@ -2606,6 +2676,7 @@ class WorkflowResultsSimilarity(google.protobuf.message.Message):
 
 global___WorkflowResultsSimilarity = WorkflowResultsSimilarity
 
+@typing_extensions.final
 class Key(google.protobuf.message.Message):
     """Key"""
 
@@ -2669,6 +2740,7 @@ class Key(google.protobuf.message.Message):
 
 global___Key = Key
 
+@typing_extensions.final
 class Model(google.protobuf.message.Message):
     """This is the Model object which represents a created model in the platform.
     Each model has a particular type denoted by the model_type_id.
@@ -2849,6 +2921,7 @@ class Model(google.protobuf.message.Message):
 
 global___Model = Model
 
+@typing_extensions.final
 class ModelReference(google.protobuf.message.Message):
     """A link to a html/markdown/text file that stores reference material tied to a model."""
 
@@ -2886,6 +2959,7 @@ class ModelReference(google.protobuf.message.Message):
 
 global___ModelReference = ModelReference
 
+@typing_extensions.final
 class ModelVersionInputExample(google.protobuf.message.Message):
     """ModelVersionInputExample"""
 
@@ -2925,6 +2999,7 @@ class ModelVersionInputExample(google.protobuf.message.Message):
 
 global___ModelVersionInputExample = ModelVersionInputExample
 
+@typing_extensions.final
 class OutputInfo(google.protobuf.message.Message):
     """OutputInfo defines some of the settings for each model version that PatchModels can effect. These
     parameters control some of the training or inference operations that this model can do.
@@ -2978,6 +3053,7 @@ class OutputInfo(google.protobuf.message.Message):
 
 global___OutputInfo = OutputInfo
 
+@typing_extensions.final
 class InputInfo(google.protobuf.message.Message):
     """InputInfo"""
 
@@ -3007,6 +3083,7 @@ class InputInfo(google.protobuf.message.Message):
 
 global___InputInfo = InputInfo
 
+@typing_extensions.final
 class TrainInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3027,6 +3104,7 @@ class TrainInfo(google.protobuf.message.Message):
 
 global___TrainInfo = TrainInfo
 
+@typing_extensions.final
 class EvalInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3046,6 +3124,7 @@ class EvalInfo(google.protobuf.message.Message):
 
 global___EvalInfo = EvalInfo
 
+@typing_extensions.final
 class ImportInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3063,6 +3142,7 @@ class ImportInfo(google.protobuf.message.Message):
 
 global___ImportInfo = ImportInfo
 
+@typing_extensions.final
 class OutputConfig(google.protobuf.message.Message):
     """OutputConfig is a collection of parameters controlling either inference or training settings for
     the given Model. This message will be deprecated over time in favor or infer_params and
@@ -3161,6 +3241,7 @@ class OutputConfig(google.protobuf.message.Message):
 
 global___OutputConfig = OutputConfig
 
+@typing_extensions.final
 class ModelType(google.protobuf.message.Message):
     """ModelSpec is a definition of a Model type. This is used in model mode of portal
     to list out the possible models that can be created and can be used to understand more about
@@ -3179,9 +3260,9 @@ class ModelType(google.protobuf.message.Message):
     INTERNAL_ONLY_FIELD_NUMBER: builtins.int
     MODEL_TYPE_FIELDS_FIELD_NUMBER: builtins.int
     REQUIRES_SEQUENTIAL_FRAMES_FIELD_NUMBER: builtins.int
-    EVALUABLE_FIELD_NUMBER: builtins.int
     EXPECTED_INPUT_LAYERS_FIELD_NUMBER: builtins.int
     EXPECTED_OUTPUT_LAYERS_FIELD_NUMBER: builtins.int
+    EVALUATION_TYPE_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique identifies for this model type. This is differnt than the 'type' field below because
     the 'type' can be re-used for differnet input and output combinations whereas 'id' is always
@@ -3221,14 +3302,13 @@ class ModelType(google.protobuf.message.Message):
     """For sequence models we need to know when processing that they require temporal time frames
     in sequential order. This will be true for model types like trackers as an example.
     """
-    evaluable: builtins.bool
-    """Can this model be evaluated?"""
     @property
     def expected_input_layers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelLayerInfo]:
         """Expected input layers of an uploaded model"""
     @property
     def expected_output_layers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelLayerInfo]:
         """Expected output layers of an uploaded model"""
+    evaluation_type: global___EvaluationType.ValueType
     def __init__(
         self,
         *,
@@ -3242,14 +3322,15 @@ class ModelType(google.protobuf.message.Message):
         internal_only: builtins.bool = ...,
         model_type_fields: collections.abc.Iterable[global___ModelTypeField] | None = ...,
         requires_sequential_frames: builtins.bool = ...,
-        evaluable: builtins.bool = ...,
         expected_input_layers: collections.abc.Iterable[global___ModelLayerInfo] | None = ...,
         expected_output_layers: collections.abc.Iterable[global___ModelLayerInfo] | None = ...,
+        evaluation_type: global___EvaluationType.ValueType = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["creatable", b"creatable", "description", b"description", "evaluable", b"evaluable", "expected_input_layers", b"expected_input_layers", "expected_output_layers", b"expected_output_layers", "id", b"id", "input_fields", b"input_fields", "internal_only", b"internal_only", "model_type_fields", b"model_type_fields", "output_fields", b"output_fields", "requires_sequential_frames", b"requires_sequential_frames", "title", b"title", "trainable", b"trainable"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["creatable", b"creatable", "description", b"description", "evaluation_type", b"evaluation_type", "expected_input_layers", b"expected_input_layers", "expected_output_layers", b"expected_output_layers", "id", b"id", "input_fields", b"input_fields", "internal_only", b"internal_only", "model_type_fields", b"model_type_fields", "output_fields", b"output_fields", "requires_sequential_frames", b"requires_sequential_frames", "title", b"title", "trainable", b"trainable"]) -> None: ...
 
 global___ModelType = ModelType
 
+@typing_extensions.final
 class ModelLayerInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3278,6 +3359,7 @@ class ModelLayerInfo(google.protobuf.message.Message):
 
 global___ModelLayerInfo = ModelLayerInfo
 
+@typing_extensions.final
 class LayerShape(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3309,6 +3391,7 @@ class LayerShape(google.protobuf.message.Message):
 
 global___LayerShape = LayerShape
 
+@typing_extensions.final
 class ModelTypeField(google.protobuf.message.Message):
     """ModelTypeField stores a field value of a configurable type."""
 
@@ -3458,6 +3541,7 @@ class ModelTypeField(google.protobuf.message.Message):
 
 global___ModelTypeField = ModelTypeField
 
+@typing_extensions.final
 class ModelTypeRangeInfo(google.protobuf.message.Message):
     """ModelTypeRangeInfo"""
 
@@ -3485,6 +3569,7 @@ class ModelTypeRangeInfo(google.protobuf.message.Message):
 
 global___ModelTypeRangeInfo = ModelTypeRangeInfo
 
+@typing_extensions.final
 class ModelTypeEnumOption(google.protobuf.message.Message):
     """ModelTypeEnumOption"""
 
@@ -3495,6 +3580,7 @@ class ModelTypeEnumOption(google.protobuf.message.Message):
     DESCRIPTION_FIELD_NUMBER: builtins.int
     MODEL_TYPE_FIELDS_FIELD_NUMBER: builtins.int
     INTERNAL_ONLY_FIELD_NUMBER: builtins.int
+    RECOMMENDED_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The unique value of the enum option."""
     @property
@@ -3514,6 +3600,10 @@ class ModelTypeEnumOption(google.protobuf.message.Message):
         """
     internal_only: builtins.bool
     """If this enum option should be internal only."""
+    recommended: builtins.bool
+    """Whether this is the recommended enum option. Set to `true` when there 
+    are multiple options, and one is shown to be better than the others.
+    """
     def __init__(
         self,
         *,
@@ -3522,11 +3612,13 @@ class ModelTypeEnumOption(google.protobuf.message.Message):
         description: builtins.str = ...,
         model_type_fields: collections.abc.Iterable[global___ModelTypeField] | None = ...,
         internal_only: builtins.bool = ...,
+        recommended: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["aliases", b"aliases", "description", b"description", "id", b"id", "internal_only", b"internal_only", "model_type_fields", b"model_type_fields"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["aliases", b"aliases", "description", b"description", "id", b"id", "internal_only", b"internal_only", "model_type_fields", b"model_type_fields", "recommended", b"recommended"]) -> None: ...
 
 global___ModelTypeEnumOption = ModelTypeEnumOption
 
+@typing_extensions.final
 class ModelTypeEnumOptionAlias(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3546,6 +3638,7 @@ class ModelTypeEnumOptionAlias(google.protobuf.message.Message):
 
 global___ModelTypeEnumOptionAlias = ModelTypeEnumOptionAlias
 
+@typing_extensions.final
 class ModelQuery(google.protobuf.message.Message):
     """ModelQuery"""
 
@@ -3569,6 +3662,7 @@ class ModelQuery(google.protobuf.message.Message):
 
 global___ModelQuery = ModelQuery
 
+@typing_extensions.final
 class ModelVersion(google.protobuf.message.Message):
     """ModelVersion"""
 
@@ -3679,6 +3773,7 @@ class ModelVersion(google.protobuf.message.Message):
 
 global___ModelVersion = ModelVersion
 
+@typing_extensions.final
 class PretrainedModelConfig(google.protobuf.message.Message):
     """PretrainedModelConfig"""
 
@@ -3713,6 +3808,7 @@ class PretrainedModelConfig(google.protobuf.message.Message):
 
 global___PretrainedModelConfig = PretrainedModelConfig
 
+@typing_extensions.final
 class TrainStats(google.protobuf.message.Message):
     """TrainStats"""
 
@@ -3730,6 +3826,7 @@ class TrainStats(google.protobuf.message.Message):
 
 global___TrainStats = TrainStats
 
+@typing_extensions.final
 class LossCurveEntry(google.protobuf.message.Message):
     """LossCurveEntry"""
 
@@ -3757,6 +3854,7 @@ class LossCurveEntry(google.protobuf.message.Message):
 
 global___LossCurveEntry = LossCurveEntry
 
+@typing_extensions.final
 class LabelCount(google.protobuf.message.Message):
     """LabelCount"""
 
@@ -3779,6 +3877,7 @@ class LabelCount(google.protobuf.message.Message):
 
 global___LabelCount = LabelCount
 
+@typing_extensions.final
 class LabelDistribution(google.protobuf.message.Message):
     """LabelDistribution"""
 
@@ -3796,6 +3895,7 @@ class LabelDistribution(google.protobuf.message.Message):
 
 global___LabelDistribution = LabelDistribution
 
+@typing_extensions.final
 class CooccurrenceMatrixEntry(google.protobuf.message.Message):
     """NOTE: this is inefficient, should just have the order of the rows/cols"""
 
@@ -3820,6 +3920,7 @@ class CooccurrenceMatrixEntry(google.protobuf.message.Message):
 
 global___CooccurrenceMatrixEntry = CooccurrenceMatrixEntry
 
+@typing_extensions.final
 class CooccurrenceMatrix(google.protobuf.message.Message):
     """CooccurrenceMatrix"""
 
@@ -3842,6 +3943,7 @@ class CooccurrenceMatrix(google.protobuf.message.Message):
 
 global___CooccurrenceMatrix = CooccurrenceMatrix
 
+@typing_extensions.final
 class ConfusionMatrixEntry(google.protobuf.message.Message):
     """ConfusionMatrixEntry"""
 
@@ -3864,6 +3966,7 @@ class ConfusionMatrixEntry(google.protobuf.message.Message):
 
 global___ConfusionMatrixEntry = ConfusionMatrixEntry
 
+@typing_extensions.final
 class ConfusionMatrix(google.protobuf.message.Message):
     """ConfusionMatrix"""
 
@@ -3886,6 +3989,7 @@ class ConfusionMatrix(google.protobuf.message.Message):
 
 global___ConfusionMatrix = ConfusionMatrix
 
+@typing_extensions.final
 class ROC(google.protobuf.message.Message):
     """ROC"""
 
@@ -3919,6 +4023,7 @@ class ROC(google.protobuf.message.Message):
 
 global___ROC = ROC
 
+@typing_extensions.final
 class PrecisionRecallCurve(google.protobuf.message.Message):
     """PrecisionRecallCurve"""
 
@@ -3944,6 +4049,7 @@ class PrecisionRecallCurve(google.protobuf.message.Message):
 
 global___PrecisionRecallCurve = PrecisionRecallCurve
 
+@typing_extensions.final
 class BinaryMetrics(google.protobuf.message.Message):
     """BinaryMetrics"""
 
@@ -4000,6 +4106,7 @@ class BinaryMetrics(google.protobuf.message.Message):
 
 global___BinaryMetrics = BinaryMetrics
 
+@typing_extensions.final
 class TrackerMetrics(google.protobuf.message.Message):
     """TrackerMetrics"""
 
@@ -4037,6 +4144,7 @@ class TrackerMetrics(google.protobuf.message.Message):
 
 global___TrackerMetrics = TrackerMetrics
 
+@typing_extensions.final
 class EvalTestSetEntry(google.protobuf.message.Message):
     """EvalTestSetEntry"""
 
@@ -4080,6 +4188,7 @@ class EvalTestSetEntry(google.protobuf.message.Message):
 
 global___EvalTestSetEntry = EvalTestSetEntry
 
+@typing_extensions.final
 class LOPQEvalResult(google.protobuf.message.Message):
     """LOPQEvalResult"""
 
@@ -4138,6 +4247,7 @@ class LOPQEvalResult(google.protobuf.message.Message):
 
 global___LOPQEvalResult = LOPQEvalResult
 
+@typing_extensions.final
 class MetricsSummary(google.protobuf.message.Message):
     """MetricsSummary"""
 
@@ -4185,6 +4295,7 @@ class MetricsSummary(google.protobuf.message.Message):
 
 global___MetricsSummary = MetricsSummary
 
+@typing_extensions.final
 class EvalMetrics(google.protobuf.message.Message):
     """EvalMetrics"""
 
@@ -4246,6 +4357,7 @@ class EvalMetrics(google.protobuf.message.Message):
 
 global___EvalMetrics = EvalMetrics
 
+@typing_extensions.final
 class FieldsValue(google.protobuf.message.Message):
     """FieldsValue"""
 
@@ -4280,6 +4392,7 @@ class FieldsValue(google.protobuf.message.Message):
 
 global___FieldsValue = FieldsValue
 
+@typing_extensions.final
 class Output(google.protobuf.message.Message):
     """Output"""
 
@@ -4331,6 +4444,7 @@ class Output(google.protobuf.message.Message):
 
 global___Output = Output
 
+@typing_extensions.final
 class ScopeDeps(google.protobuf.message.Message):
     """ScopeDeps"""
 
@@ -4353,6 +4467,7 @@ class ScopeDeps(google.protobuf.message.Message):
 
 global___ScopeDeps = ScopeDeps
 
+@typing_extensions.final
 class EndpointDeps(google.protobuf.message.Message):
     """EndpointDeps"""
 
@@ -4375,6 +4490,7 @@ class EndpointDeps(google.protobuf.message.Message):
 
 global___EndpointDeps = EndpointDeps
 
+@typing_extensions.final
 class Hit(google.protobuf.message.Message):
     """Hit"""
 
@@ -4428,6 +4544,7 @@ class Hit(google.protobuf.message.Message):
 
 global___Hit = Hit
 
+@typing_extensions.final
 class And(google.protobuf.message.Message):
     """This is the common building block of a query which is a sequence of And messages ANDed together.
     Note that some fields are used too RANK results (affect the scores) and some are used to FILTER
@@ -4493,6 +4610,7 @@ class And(google.protobuf.message.Message):
 
 global___And = And
 
+@typing_extensions.final
 class Query(google.protobuf.message.Message):
     """This is the search query used in /searches, model training requests, bulk data exports, etc."""
 
@@ -4537,6 +4655,7 @@ class Query(google.protobuf.message.Message):
 
 global___Query = Query
 
+@typing_extensions.final
 class Search(google.protobuf.message.Message):
     """This is the new Search object used in saved searches."""
 
@@ -4621,6 +4740,7 @@ class Search(google.protobuf.message.Message):
 
 global___Search = Search
 
+@typing_extensions.final
 class Filter(google.protobuf.message.Message):
     """Filter"""
 
@@ -4658,6 +4778,7 @@ class Filter(google.protobuf.message.Message):
 
 global___Filter = Filter
 
+@typing_extensions.final
 class TimeRange(google.protobuf.message.Message):
     """TimeRange"""
 
@@ -4682,6 +4803,7 @@ class TimeRange(google.protobuf.message.Message):
 
 global___TimeRange = TimeRange
 
+@typing_extensions.final
 class Rank(google.protobuf.message.Message):
     """Rank"""
 
@@ -4707,6 +4829,7 @@ class Rank(google.protobuf.message.Message):
 
 global___Rank = Rank
 
+@typing_extensions.final
 class AnnotationSearchMetrics(google.protobuf.message.Message):
     """AnnotationSearchMetrics"""
 
@@ -4753,6 +4876,7 @@ class AnnotationSearchMetrics(google.protobuf.message.Message):
 
 global___AnnotationSearchMetrics = AnnotationSearchMetrics
 
+@typing_extensions.final
 class Text(google.protobuf.message.Message):
     """Text"""
 
@@ -4790,6 +4914,7 @@ class Text(google.protobuf.message.Message):
 
 global___Text = Text
 
+@typing_extensions.final
 class TextInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -4809,6 +4934,7 @@ class TextInfo(google.protobuf.message.Message):
 
 global___TextInfo = TextInfo
 
+@typing_extensions.final
 class User(google.protobuf.message.Message):
     """User"""
 
@@ -4918,6 +5044,7 @@ class User(google.protobuf.message.Message):
 
 global___User = User
 
+@typing_extensions.final
 class UserDetail(google.protobuf.message.Message):
     """This message holds the confidential information from the User object that we don't want to expose
     to other users. It will be accessible only from /users/{user_id}/account and with the User scopes.
@@ -4979,6 +5106,7 @@ class UserDetail(google.protobuf.message.Message):
 
 global___UserDetail = UserDetail
 
+@typing_extensions.final
 class EmailAddress(google.protobuf.message.Message):
     """EmailAddress"""
 
@@ -5001,6 +5129,7 @@ class EmailAddress(google.protobuf.message.Message):
 
 global___EmailAddress = EmailAddress
 
+@typing_extensions.final
 class Password(google.protobuf.message.Message):
     """Password"""
 
@@ -5018,6 +5147,7 @@ class Password(google.protobuf.message.Message):
 
 global___Password = Password
 
+@typing_extensions.final
 class PasswordViolations(google.protobuf.message.Message):
     """PasswordViolations"""
 
@@ -5087,6 +5217,7 @@ class PasswordViolations(google.protobuf.message.Message):
 
 global___PasswordViolations = PasswordViolations
 
+@typing_extensions.final
 class Video(google.protobuf.message.Message):
     """Video"""
 
@@ -5138,6 +5269,7 @@ class Video(google.protobuf.message.Message):
 
 global___Video = Video
 
+@typing_extensions.final
 class VideoInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -5177,6 +5309,7 @@ class VideoInfo(google.protobuf.message.Message):
 
 global___VideoInfo = VideoInfo
 
+@typing_extensions.final
 class Workflow(google.protobuf.message.Message):
     """Workflow"""
 
@@ -5277,6 +5410,7 @@ class Workflow(google.protobuf.message.Message):
 
 global___Workflow = Workflow
 
+@typing_extensions.final
 class WorkflowVersion(google.protobuf.message.Message):
     """WorkflowVersion"""
 
@@ -5353,6 +5487,7 @@ class WorkflowVersion(google.protobuf.message.Message):
 
 global___WorkflowVersion = WorkflowVersion
 
+@typing_extensions.final
 class WorkflowNode(google.protobuf.message.Message):
     """WorkflowNode"""
 
@@ -5391,6 +5526,7 @@ class WorkflowNode(google.protobuf.message.Message):
 
 global___WorkflowNode = WorkflowNode
 
+@typing_extensions.final
 class NodeInput(google.protobuf.message.Message):
     """NodeInput represents inputs to a node of the graph."""
 
@@ -5408,6 +5544,7 @@ class NodeInput(google.protobuf.message.Message):
 
 global___NodeInput = NodeInput
 
+@typing_extensions.final
 class WorkflowResult(google.protobuf.message.Message):
     """WorkflowResult"""
 
@@ -5455,6 +5592,7 @@ class WorkflowResult(google.protobuf.message.Message):
 
 global___WorkflowResult = WorkflowResult
 
+@typing_extensions.final
 class WorkflowState(google.protobuf.message.Message):
     """WorkflowState"""
 
@@ -5476,6 +5614,7 @@ class WorkflowState(google.protobuf.message.Message):
 
 global___WorkflowState = WorkflowState
 
+@typing_extensions.final
 class AppDuplication(google.protobuf.message.Message):
     """AppDuplication"""
 
@@ -5539,6 +5678,7 @@ class AppDuplication(google.protobuf.message.Message):
 
 global___AppDuplication = AppDuplication
 
+@typing_extensions.final
 class AppCopyProgress(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -5556,6 +5696,7 @@ class AppCopyProgress(google.protobuf.message.Message):
 
 global___AppCopyProgress = AppCopyProgress
 
+@typing_extensions.final
 class AppDuplicationFilters(google.protobuf.message.Message):
     """AppDuplicationFilters"""
 
@@ -5589,6 +5730,7 @@ class AppDuplicationFilters(google.protobuf.message.Message):
 
 global___AppDuplicationFilters = AppDuplicationFilters
 
+@typing_extensions.final
 class LabelOrder(google.protobuf.message.Message):
     """LabelOrder"""
 
@@ -5660,6 +5802,7 @@ class LabelOrder(google.protobuf.message.Message):
 
 global___LabelOrder = LabelOrder
 
+@typing_extensions.final
 class Task(google.protobuf.message.Message):
     """Task is the work that needs to be done for labeling the inputs in an app."""
 
@@ -5787,6 +5930,7 @@ class Task(google.protobuf.message.Message):
 
 global___Task = Task
 
+@typing_extensions.final
 class AiAssistParameters(google.protobuf.message.Message):
     """AiAssistParameters"""
 
@@ -5812,6 +5956,7 @@ class AiAssistParameters(google.protobuf.message.Message):
 
 global___AiAssistParameters = AiAssistParameters
 
+@typing_extensions.final
 class TaskWorker(google.protobuf.message.Message):
     """TaskWorker"""
 
@@ -5873,6 +6018,7 @@ class TaskWorker(google.protobuf.message.Message):
 
 global___TaskWorker = TaskWorker
 
+@typing_extensions.final
 class TaskWorkerPartitionedStrategyInfo(google.protobuf.message.Message):
     """TaskWorkerPartitionedStrategyInfo"""
 
@@ -5945,6 +6091,7 @@ class TaskWorkerPartitionedStrategyInfo(google.protobuf.message.Message):
 
 global___TaskWorkerPartitionedStrategyInfo = TaskWorkerPartitionedStrategyInfo
 
+@typing_extensions.final
 class TaskInputSource(google.protobuf.message.Message):
     """TaskInputSource"""
 
@@ -5989,6 +6136,7 @@ class TaskInputSource(google.protobuf.message.Message):
 
 global___TaskInputSource = TaskInputSource
 
+@typing_extensions.final
 class TaskReview(google.protobuf.message.Message):
     """TaskReview"""
 
@@ -6054,6 +6202,7 @@ class TaskReview(google.protobuf.message.Message):
 
 global___TaskReview = TaskReview
 
+@typing_extensions.final
 class TaskReviewManualStrategyInfo(google.protobuf.message.Message):
     """TaskReviewManualStrategyInfo"""
 
@@ -6071,6 +6220,7 @@ class TaskReviewManualStrategyInfo(google.protobuf.message.Message):
 
 global___TaskReviewManualStrategyInfo = TaskReviewManualStrategyInfo
 
+@typing_extensions.final
 class TaskReviewConsensusStrategyInfo(google.protobuf.message.Message):
     """TaskReviewConsensusStrategyInfo"""
 
@@ -6088,6 +6238,7 @@ class TaskReviewConsensusStrategyInfo(google.protobuf.message.Message):
 
 global___TaskReviewConsensusStrategyInfo = TaskReviewConsensusStrategyInfo
 
+@typing_extensions.final
 class TaskAIAssistant(google.protobuf.message.Message):
     """TaskAIAssistant"""
 
@@ -6108,6 +6259,7 @@ class TaskAIAssistant(google.protobuf.message.Message):
 
 global___TaskAIAssistant = TaskAIAssistant
 
+@typing_extensions.final
 class TaskStatusCountPerUser(google.protobuf.message.Message):
     """TaskStatusCountPerUser can represents count of human created annotations for a user for each valid status,
     count of inputs (anchor annotation) for a user for each valid status
@@ -6141,6 +6293,7 @@ class TaskStatusCountPerUser(google.protobuf.message.Message):
 
 global___TaskStatusCountPerUser = TaskStatusCountPerUser
 
+@typing_extensions.final
 class Collector(google.protobuf.message.Message):
     """Collector is a data pathway from a CollectorSource to an app to collect data automatically.
     For example, a CollectorSource
@@ -6219,6 +6372,7 @@ class Collector(google.protobuf.message.Message):
 
 global___Collector = Collector
 
+@typing_extensions.final
 class CollectorSource(google.protobuf.message.Message):
     """Configuration for the source to collect data from.
     Only one of the fields can be present at a time.
@@ -6244,6 +6398,7 @@ class CollectorSource(google.protobuf.message.Message):
 
 global___CollectorSource = CollectorSource
 
+@typing_extensions.final
 class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
     """This is configuration for using the inputs send for model prediction in our API as
     as the source for data.
@@ -6285,6 +6440,7 @@ class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
 
 global___APIPostModelOutputsCollectorSource = APIPostModelOutputsCollectorSource
 
+@typing_extensions.final
 class StatValue(google.protobuf.message.Message):
     """StatValue"""
 
@@ -6317,6 +6473,7 @@ class StatValue(google.protobuf.message.Message):
 
 global___StatValue = StatValue
 
+@typing_extensions.final
 class StatValueAggregateResult(google.protobuf.message.Message):
     """StatValueAggregateResult"""
 
@@ -6341,6 +6498,7 @@ class StatValueAggregateResult(google.protobuf.message.Message):
 
 global___StatValueAggregateResult = StatValueAggregateResult
 
+@typing_extensions.final
 class StatValueAggregate(google.protobuf.message.Message):
     """StatValueAggregate"""
 
@@ -6378,6 +6536,7 @@ class StatValueAggregate(google.protobuf.message.Message):
 
 global___StatValueAggregate = StatValueAggregate
 
+@typing_extensions.final
 class StatValueAggregateQuery(google.protobuf.message.Message):
     """StatValueAggregateQuery"""
 
@@ -6442,6 +6601,7 @@ class StatValueAggregateQuery(google.protobuf.message.Message):
 
 global___StatValueAggregateQuery = StatValueAggregateQuery
 
+@typing_extensions.final
 class DatasetInputsSearchAddJob(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6482,6 +6642,7 @@ class DatasetInputsSearchAddJob(google.protobuf.message.Message):
 
 global___DatasetInputsSearchAddJob = DatasetInputsSearchAddJob
 
+@typing_extensions.final
 class Visibility(google.protobuf.message.Message):
     """Visibility represents how visible the given resource is to other users.
     When authenticating a request we can tell if a user is a collaborator or a teammate for the
@@ -6540,6 +6701,7 @@ class Visibility(google.protobuf.message.Message):
 
 global___Visibility = Visibility
 
+@typing_extensions.final
 class TrendingMetric(google.protobuf.message.Message):
     """TrendingMetric"""
 
@@ -6565,6 +6727,7 @@ class TrendingMetric(google.protobuf.message.Message):
 
 global___TrendingMetric = TrendingMetric
 
+@typing_extensions.final
 class FullTag(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6584,6 +6747,7 @@ class FullTag(google.protobuf.message.Message):
 
 global___FullTag = FullTag
 
+@typing_extensions.final
 class TimeSegment(google.protobuf.message.Message):
     """TimeSegment"""
 
@@ -6610,6 +6774,7 @@ class TimeSegment(google.protobuf.message.Message):
 
 global___TimeSegment = TimeSegment
 
+@typing_extensions.final
 class TimeInfo(google.protobuf.message.Message):
     """TimeInfo"""
 
@@ -6635,6 +6800,7 @@ class TimeInfo(google.protobuf.message.Message):
 
 global___TimeInfo = TimeInfo
 
+@typing_extensions.final
 class Module(google.protobuf.message.Message):
     """An app module that a user created in our app module marketplace."""
 
@@ -6699,11 +6865,13 @@ class Module(google.protobuf.message.Message):
 
 global___Module = Module
 
+@typing_extensions.final
 class ModuleVersion(google.protobuf.message.Message):
     """A specific version of an app module that is available for assigning to apps."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
     class ModuleSubNav(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6727,6 +6895,7 @@ class ModuleVersion(google.protobuf.message.Message):
         ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["query_key", b"query_key", "query_value", b"query_value", "title", b"title"]) -> None: ...
 
+    @typing_extensions.final
     class ModuleNav(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6834,6 +7003,7 @@ class ModuleVersion(google.protobuf.message.Message):
 
 global___ModuleVersion = ModuleVersion
 
+@typing_extensions.final
 class InstalledModuleVersion(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6920,6 +7090,7 @@ class InstalledModuleVersion(google.protobuf.message.Message):
 
 global___InstalledModuleVersion = InstalledModuleVersion
 
+@typing_extensions.final
 class BulkOperation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6983,6 +7154,7 @@ class BulkOperation(google.protobuf.message.Message):
 
 global___BulkOperation = BulkOperation
 
+@typing_extensions.final
 class InputIDs(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6998,6 +7170,7 @@ class InputIDs(google.protobuf.message.Message):
 
 global___InputIDs = InputIDs
 
+@typing_extensions.final
 class Progress(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7015,6 +7188,7 @@ class Progress(google.protobuf.message.Message):
 
 global___Progress = Progress
 
+@typing_extensions.final
 class Operation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7052,6 +7226,7 @@ class Operation(google.protobuf.message.Message):
 
 global___Operation = Operation
 
+@typing_extensions.final
 class AddConcepts(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7067,21 +7242,27 @@ class AddConcepts(google.protobuf.message.Message):
 
 global___AddConcepts = AddConcepts
 
+@typing_extensions.final
 class DeleteConcepts(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CONCEPTS_FIELD_NUMBER: builtins.int
+    USER_IDS_FIELD_NUMBER: builtins.int
     @property
     def concepts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Concept]: ...
+    @property
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         concepts: collections.abc.Iterable[global___Concept] | None = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concepts", b"concepts"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concepts", b"concepts", "user_ids", b"user_ids"]) -> None: ...
 
 global___DeleteConcepts = DeleteConcepts
 
+@typing_extensions.final
 class AddMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7101,6 +7282,7 @@ class AddMetadata(google.protobuf.message.Message):
 
 global___AddMetadata = AddMetadata
 
+@typing_extensions.final
 class DeleteMetadata(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7120,6 +7302,7 @@ class DeleteMetadata(google.protobuf.message.Message):
 
 global___DeleteMetadata = DeleteMetadata
 
+@typing_extensions.final
 class OverwriteGeo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7137,6 +7320,7 @@ class OverwriteGeo(google.protobuf.message.Message):
 
 global___OverwriteGeo = OverwriteGeo
 
+@typing_extensions.final
 class DeleteGeo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7146,6 +7330,7 @@ class DeleteGeo(google.protobuf.message.Message):
 
 global___DeleteGeo = DeleteGeo
 
+@typing_extensions.final
 class InputsAddJob(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7156,6 +7341,7 @@ class InputsAddJob(google.protobuf.message.Message):
     PROGRESS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    EXTRACTION_JOBS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """id of the job"""
     cloud_storage_url: builtins.str
@@ -7181,6 +7367,9 @@ class InputsAddJob(google.protobuf.message.Message):
         The format is https://www.ietf.org/rfc/rfc3339.txt.
         Example: "2006-01-02T15:04:05.999999Z".
         """
+    @property
+    def extraction_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InputsExtractionJob]:
+        """Sub-jobs that extract inputs from the cloud and/or archives"""
     def __init__(
         self,
         *,
@@ -7191,12 +7380,14 @@ class InputsAddJob(google.protobuf.message.Message):
         progress: global___InputsAddJobProgress | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        extraction_jobs: collections.abc.Iterable[global___InputsExtractionJob] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "cloud_storage_url", b"cloud_storage_url", "created_at", b"created_at", "id", b"id", "modified_at", b"modified_at", "progress", b"progress"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "cloud_storage_url", b"cloud_storage_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress"]) -> None: ...
 
 global___InputsAddJob = InputsAddJob
 
+@typing_extensions.final
 class InputsAddJobProgress(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7220,6 +7411,7 @@ class InputsAddJobProgress(google.protobuf.message.Message):
 
 global___InputsAddJobProgress = InputsAddJobProgress
 
+@typing_extensions.final
 class Upload(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7277,6 +7469,7 @@ class Upload(google.protobuf.message.Message):
 
 global___Upload = Upload
 
+@typing_extensions.final
 class UploadContentPart(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7296,3 +7489,170 @@ class UploadContentPart(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "part_number", b"part_number", "range_start", b"range_start"]) -> None: ...
 
 global___UploadContentPart = UploadContentPart
+
+@typing_extensions.final
+class InputsExtractionJob(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    PROGRESS_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    id: builtins.str
+    """ID of extraction job"""
+    url: builtins.str
+    """Url of archive or bucket"""
+    @property
+    def progress(self) -> global___InputsExtractionJobProgress:
+        """Progress counts of the job"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the extraction job was started.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the extraction job was updated.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        id: builtins.str = ...,
+        url: builtins.str = ...,
+        progress: global___InputsExtractionJobProgress | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "url", b"url"]) -> None: ...
+
+global___InputsExtractionJob = InputsExtractionJob
+
+@typing_extensions.final
+class InputsExtractionJobProgress(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    READ_OBJECTS_COUNT_FIELD_NUMBER: builtins.int
+    AUDIO_INPUTS_COUNT_FIELD_NUMBER: builtins.int
+    IMAGE_INPUTS_COUNT_FIELD_NUMBER: builtins.int
+    VIDEO_INPUTS_COUNT_FIELD_NUMBER: builtins.int
+    TEXT_INPUTS_COUNT_FIELD_NUMBER: builtins.int
+    read_objects_count: builtins.int
+    audio_inputs_count: builtins.int
+    image_inputs_count: builtins.int
+    video_inputs_count: builtins.int
+    text_inputs_count: builtins.int
+    def __init__(
+        self,
+        *,
+        read_objects_count: builtins.int = ...,
+        audio_inputs_count: builtins.int = ...,
+        image_inputs_count: builtins.int = ...,
+        video_inputs_count: builtins.int = ...,
+        text_inputs_count: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_inputs_count", b"audio_inputs_count", "image_inputs_count", b"image_inputs_count", "read_objects_count", b"read_objects_count", "text_inputs_count", b"text_inputs_count", "video_inputs_count", b"video_inputs_count"]) -> None: ...
+
+global___InputsExtractionJobProgress = InputsExtractionJobProgress
+
+@typing_extensions.final
+class InputsDataSource(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    inputs_add_job_id: builtins.str
+    """Collect statistics about created inputs in job with given ID.
+    On Post call:
+    * If job ID is empty, then job is automatically created with random ID
+    * If job ID is non-empty, then a new job will be created with given ID.
+    """
+    @property
+    def url(self) -> global___DataSourceURL: ...
+    def __init__(
+        self,
+        *,
+        inputs_add_job_id: builtins.str = ...,
+        url: global___DataSourceURL | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["url", b"url"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_add_job_id", b"inputs_add_job_id", "url", b"url"]) -> None: ...
+
+global___InputsDataSource = InputsDataSource
+
+@typing_extensions.final
+class DataSourceURL(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    URL_FIELD_NUMBER: builtins.int
+    CREDENTIALS_FIELD_NUMBER: builtins.int
+    url: builtins.str
+    """Supported providers are AWS S3, Azure blob, GCP cloud storage."""
+    @property
+    def credentials(self) -> global___DataSourceCredentials:
+        """Credentials that would allow access to the provided url"""
+    def __init__(
+        self,
+        *,
+        url: builtins.str = ...,
+        credentials: global___DataSourceCredentials | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["credentials", b"credentials"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["credentials", b"credentials", "url", b"url"]) -> None: ...
+
+global___DataSourceURL = DataSourceURL
+
+@typing_extensions.final
+class DataSourceCredentials(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    S3_CREDS_FIELD_NUMBER: builtins.int
+    GCP_CREDS_FIELD_NUMBER: builtins.int
+    AZURE_BLOB_CREDS_FIELD_NUMBER: builtins.int
+    @property
+    def s3_creds(self) -> global___AWSCreds:
+        """AWS S3 uses creds: “{accessKey}:{secretKey}” and “region” for authentication."""
+    gcp_creds: builtins.bytes
+    """GCP Cloud Storage uses service account key data(creds.json) as Byte array for authentication."""
+    azure_blob_creds: builtins.str
+    """Azure Blob storage uses creds: “{storageAccount}:{storageKey}” for authentication."""
+    def __init__(
+        self,
+        *,
+        s3_creds: global___AWSCreds | None = ...,
+        gcp_creds: builtins.bytes = ...,
+        azure_blob_creds: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["azure_blob_creds", b"azure_blob_creds", "credentials", b"credentials", "gcp_creds", b"gcp_creds", "s3_creds", b"s3_creds"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["azure_blob_creds", b"azure_blob_creds", "credentials", b"credentials", "gcp_creds", b"gcp_creds", "s3_creds", b"s3_creds"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["credentials", b"credentials"]) -> typing_extensions.Literal["s3_creds", "gcp_creds", "azure_blob_creds"] | None: ...
+
+global___DataSourceCredentials = DataSourceCredentials
+
+@typing_extensions.final
+class AWSCreds(google.protobuf.message.Message):
+    """AWS S3 uses creds: “{accessKey}:{secretKey}” and “region” for authentication."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CREDS_FIELD_NUMBER: builtins.int
+    REGION_FIELD_NUMBER: builtins.int
+    creds: builtins.str
+    region: builtins.str
+    def __init__(
+        self,
+        *,
+        creds: builtins.str = ...,
+        region: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["creds", b"creds", "region", b"region"]) -> None: ...
+
+global___AWSCreds = AWSCreds

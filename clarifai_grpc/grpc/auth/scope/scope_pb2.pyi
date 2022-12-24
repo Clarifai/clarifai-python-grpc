@@ -24,7 +24,7 @@ class _S:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_S.ValueType], builtins.type):  # noqa: F821
+class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_S.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     undef: _S.ValueType  # 0
     """introduce undef so that the zero (default/unset) value of the enum is not a real
@@ -419,6 +419,7 @@ Uploads_Add: S.ValueType  # 129
 Uploads_Delete: S.ValueType  # 130
 global___S = S
 
+@typing_extensions.final
 class ScopeList(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

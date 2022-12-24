@@ -19,7 +19,7 @@ class _StatusCode:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatusCode.ValueType], builtins.type):  # noqa: F821
+class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatusCode.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ZERO: _StatusCode.ValueType  # 0
     """to be revised and greatly expanded"""
@@ -226,13 +226,6 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     BULK_OPERATION_CANCELLED: _StatusCode.ValueType  # 25405
     BULK_OPERATION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25406
     BULK_OPERATION_DELETED: _StatusCode.ValueType  # 25407
-    INPUTS_EXTRACTION_JOB_SUCCESS: _StatusCode.ValueType  # 25500
-    """INPUTS EXTRACTION JOB related codes 255xx"""
-    INPUTS_EXTRACTION_JOB_FAILED: _StatusCode.ValueType  # 25501
-    INPUTS_EXTRACTION_JOB_PENDING: _StatusCode.ValueType  # 25502
-    INPUTS_EXTRACTION_JOB_IN_PROGRESS: _StatusCode.ValueType  # 25503
-    INPUTS_EXTRACTION_JOB_CANCELLED: _StatusCode.ValueType  # 25505
-    INPUTS_EXTRACTION_JOB_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25506
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -445,6 +438,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     JOB_RUNNING: _StatusCode.ValueType  # 64001
     JOB_COMPLETED: _StatusCode.ValueType  # 64002
     JOB_FAILED: _StatusCode.ValueType  # 64003
+    JOB_CANCELLED: _StatusCode.ValueType  # 64004
+    JOB_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64006
     AUTH_MISSING_IDP_ASSOC: _StatusCode.ValueType  # 65000
     """auth issues
     TODO: Knowledge graph related 80xxx
@@ -691,13 +686,6 @@ BULK_OPERATION_INVALID_REQUEST: StatusCode.ValueType  # 25404
 BULK_OPERATION_CANCELLED: StatusCode.ValueType  # 25405
 BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
 BULK_OPERATION_DELETED: StatusCode.ValueType  # 25407
-INPUTS_EXTRACTION_JOB_SUCCESS: StatusCode.ValueType  # 25500
-"""INPUTS EXTRACTION JOB related codes 255xx"""
-INPUTS_EXTRACTION_JOB_FAILED: StatusCode.ValueType  # 25501
-INPUTS_EXTRACTION_JOB_PENDING: StatusCode.ValueType  # 25502
-INPUTS_EXTRACTION_JOB_IN_PROGRESS: StatusCode.ValueType  # 25503
-INPUTS_EXTRACTION_JOB_CANCELLED: StatusCode.ValueType  # 25505
-INPUTS_EXTRACTION_JOB_UNEXPECTED_ERROR: StatusCode.ValueType  # 25506
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
@@ -910,6 +898,8 @@ JOB_QUEUED: StatusCode.ValueType  # 64000
 JOB_RUNNING: StatusCode.ValueType  # 64001
 JOB_COMPLETED: StatusCode.ValueType  # 64002
 JOB_FAILED: StatusCode.ValueType  # 64003
+JOB_CANCELLED: StatusCode.ValueType  # 64004
+JOB_UNEXPECTED_ERROR: StatusCode.ValueType  # 64006
 AUTH_MISSING_IDP_ASSOC: StatusCode.ValueType  # 65000
 """auth issues
 TODO: Knowledge graph related 80xxx

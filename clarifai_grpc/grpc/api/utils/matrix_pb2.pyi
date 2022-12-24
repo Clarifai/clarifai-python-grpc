@@ -16,6 +16,7 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+@typing_extensions.final
 class MatrixUint64(google.protobuf.message.Message):
     """Store matrix of uint64s values.
     It is recommended to store the matrix as a 1D array
