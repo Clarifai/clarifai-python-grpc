@@ -19,7 +19,7 @@ class _AuthType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _AuthTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AuthType.ValueType], builtins.type):  # noqa: F821
+class _AuthTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AuthType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     undef: _AuthType.ValueType  # 0
     """introduce undef so that the zero (default/unset) value of the enum is not a real

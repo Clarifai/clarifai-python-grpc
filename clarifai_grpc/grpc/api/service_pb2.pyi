@@ -26,7 +26,7 @@ class _OrganizationInvitationStatus:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _OrganizationInvitationStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrganizationInvitationStatus.ValueType], builtins.type):  # noqa: F821
+class _OrganizationInvitationStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_OrganizationInvitationStatus.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     NOT_SET: _OrganizationInvitationStatus.ValueType  # 0
     PENDING: _OrganizationInvitationStatus.ValueType  # 1
@@ -45,6 +45,7 @@ DECLINED: OrganizationInvitationStatus.ValueType  # 4
 EXPIRED: OrganizationInvitationStatus.ValueType  # 5
 global___OrganizationInvitationStatus = OrganizationInvitationStatus
 
+@typing_extensions.final
 class Pagination(google.protobuf.message.Message):
     """Split the results into pages."""
 
@@ -66,6 +67,7 @@ class Pagination(google.protobuf.message.Message):
 
 global___Pagination = Pagination
 
+@typing_extensions.final
 class GetAnnotationRequest(google.protobuf.message.Message):
     """GetAnnotationRequest"""
 
@@ -90,6 +92,7 @@ class GetAnnotationRequest(google.protobuf.message.Message):
 
 global___GetAnnotationRequest = GetAnnotationRequest
 
+@typing_extensions.final
 class ListAnnotationsRequest(google.protobuf.message.Message):
     """ListAnnotationsRequest"""
 
@@ -178,6 +181,7 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
 
 global___ListAnnotationsRequest = ListAnnotationsRequest
 
+@typing_extensions.final
 class PostAnnotationsRequest(google.protobuf.message.Message):
     """PostAnnotationsRequest"""
 
@@ -200,6 +204,7 @@ class PostAnnotationsRequest(google.protobuf.message.Message):
 
 global___PostAnnotationsRequest = PostAnnotationsRequest
 
+@typing_extensions.final
 class PatchAnnotationsRequest(google.protobuf.message.Message):
     """PatchAnnotationsRequest"""
 
@@ -228,6 +233,7 @@ class PatchAnnotationsRequest(google.protobuf.message.Message):
 
 global___PatchAnnotationsRequest = PatchAnnotationsRequest
 
+@typing_extensions.final
 class PatchAnnotationsStatusRequest(google.protobuf.message.Message):
     """PatchAnnotationsStatusRequest"""
 
@@ -261,6 +267,7 @@ class PatchAnnotationsStatusRequest(google.protobuf.message.Message):
 
 global___PatchAnnotationsStatusRequest = PatchAnnotationsStatusRequest
 
+@typing_extensions.final
 class PatchAnnotationsStatusResponse(google.protobuf.message.Message):
     """PatchAnnotationsStatusResponse"""
 
@@ -286,6 +293,7 @@ class PatchAnnotationsStatusResponse(google.protobuf.message.Message):
 
 global___PatchAnnotationsStatusResponse = PatchAnnotationsStatusResponse
 
+@typing_extensions.final
 class DeleteAnnotationRequest(google.protobuf.message.Message):
     """DeleteAnnotationRequest"""
 
@@ -310,6 +318,7 @@ class DeleteAnnotationRequest(google.protobuf.message.Message):
 
 global___DeleteAnnotationRequest = DeleteAnnotationRequest
 
+@typing_extensions.final
 class DeleteAnnotationsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -344,6 +353,7 @@ class DeleteAnnotationsRequest(google.protobuf.message.Message):
 
 global___DeleteAnnotationsRequest = DeleteAnnotationsRequest
 
+@typing_extensions.final
 class SingleAnnotationResponse(google.protobuf.message.Message):
     """SingleAnnotationResponse"""
 
@@ -366,6 +376,7 @@ class SingleAnnotationResponse(google.protobuf.message.Message):
 
 global___SingleAnnotationResponse = SingleAnnotationResponse
 
+@typing_extensions.final
 class MultiAnnotationResponse(google.protobuf.message.Message):
     """MultiAnnotationResponse"""
 
@@ -388,6 +399,7 @@ class MultiAnnotationResponse(google.protobuf.message.Message):
 
 global___MultiAnnotationResponse = MultiAnnotationResponse
 
+@typing_extensions.final
 class GetAppRequest(google.protobuf.message.Message):
     """GetAppRequest"""
 
@@ -411,6 +423,7 @@ class GetAppRequest(google.protobuf.message.Message):
 
 global___GetAppRequest = GetAppRequest
 
+@typing_extensions.final
 class ListAppsRequest(google.protobuf.message.Message):
     """ListAppsRequest"""
 
@@ -483,6 +496,7 @@ class ListAppsRequest(google.protobuf.message.Message):
 
 global___ListAppsRequest = ListAppsRequest
 
+@typing_extensions.final
 class PostAppsRequest(google.protobuf.message.Message):
     """PostAppsRequest"""
 
@@ -505,6 +519,7 @@ class PostAppsRequest(google.protobuf.message.Message):
 
 global___PostAppsRequest = PostAppsRequest
 
+@typing_extensions.final
 class DeleteAppRequest(google.protobuf.message.Message):
     """DeleteAppRequest"""
 
@@ -523,6 +538,7 @@ class DeleteAppRequest(google.protobuf.message.Message):
 
 global___DeleteAppRequest = DeleteAppRequest
 
+@typing_extensions.final
 class PatchAppsRequest(google.protobuf.message.Message):
     """PatchAppsRequest"""
 
@@ -560,6 +576,7 @@ class PatchAppsRequest(google.protobuf.message.Message):
 
 global___PatchAppsRequest = PatchAppsRequest
 
+@typing_extensions.final
 class PatchAppRequest(google.protobuf.message.Message):
     """PatchAppRequest"""
 
@@ -597,6 +614,7 @@ class PatchAppRequest(google.protobuf.message.Message):
 
 global___PatchAppRequest = PatchAppRequest
 
+@typing_extensions.final
 class PatchAppsIdsRequest(google.protobuf.message.Message):
     """PatchAppsIdsRequest"""
 
@@ -626,6 +644,7 @@ class PatchAppsIdsRequest(google.protobuf.message.Message):
 
 global___PatchAppsIdsRequest = PatchAppsIdsRequest
 
+@typing_extensions.final
 class PostAppsSearchesRequest(google.protobuf.message.Message):
     """Search over the available applications."""
 
@@ -656,6 +675,7 @@ class PostAppsSearchesRequest(google.protobuf.message.Message):
 
 global___PostAppsSearchesRequest = PostAppsSearchesRequest
 
+@typing_extensions.final
 class SingleAppResponse(google.protobuf.message.Message):
     """SingleAppResponse"""
 
@@ -678,6 +698,7 @@ class SingleAppResponse(google.protobuf.message.Message):
 
 global___SingleAppResponse = SingleAppResponse
 
+@typing_extensions.final
 class MultiAppResponse(google.protobuf.message.Message):
     """MultiAppResponse"""
 
@@ -700,6 +721,7 @@ class MultiAppResponse(google.protobuf.message.Message):
 
 global___MultiAppResponse = MultiAppResponse
 
+@typing_extensions.final
 class ListCollaboratorsRequest(google.protobuf.message.Message):
     """ListCollaboratorsRequest"""
 
@@ -736,6 +758,7 @@ class ListCollaboratorsRequest(google.protobuf.message.Message):
 
 global___ListCollaboratorsRequest = ListCollaboratorsRequest
 
+@typing_extensions.final
 class PostCollaboratorsRequest(google.protobuf.message.Message):
     """PostCollaboratorsRequest"""
 
@@ -758,6 +781,7 @@ class PostCollaboratorsRequest(google.protobuf.message.Message):
 
 global___PostCollaboratorsRequest = PostCollaboratorsRequest
 
+@typing_extensions.final
 class PatchCollaboratorsRequest(google.protobuf.message.Message):
     """PatchCollaboratorsRequest"""
 
@@ -786,6 +810,7 @@ class PatchCollaboratorsRequest(google.protobuf.message.Message):
 
 global___PatchCollaboratorsRequest = PatchCollaboratorsRequest
 
+@typing_extensions.final
 class DeleteCollaboratorsRequest(google.protobuf.message.Message):
     """DeleteCollaboratorsRequest"""
 
@@ -812,6 +837,7 @@ class DeleteCollaboratorsRequest(google.protobuf.message.Message):
 
 global___DeleteCollaboratorsRequest = DeleteCollaboratorsRequest
 
+@typing_extensions.final
 class MultiCollaboratorsResponse(google.protobuf.message.Message):
     """MultiCollaboratorsResponse"""
 
@@ -834,6 +860,7 @@ class MultiCollaboratorsResponse(google.protobuf.message.Message):
 
 global___MultiCollaboratorsResponse = MultiCollaboratorsResponse
 
+@typing_extensions.final
 class ListCollaborationsRequest(google.protobuf.message.Message):
     """ListCollaborationsRequest"""
 
@@ -864,6 +891,7 @@ class ListCollaborationsRequest(google.protobuf.message.Message):
 
 global___ListCollaborationsRequest = ListCollaborationsRequest
 
+@typing_extensions.final
 class MultiCollaborationsResponse(google.protobuf.message.Message):
     """MultiCollaborationsResponse"""
 
@@ -886,6 +914,7 @@ class MultiCollaborationsResponse(google.protobuf.message.Message):
 
 global___MultiCollaborationsResponse = MultiCollaborationsResponse
 
+@typing_extensions.final
 class GetStatusCodeRequest(google.protobuf.message.Message):
     """GetStatusCodeRequest"""
 
@@ -902,6 +931,7 @@ class GetStatusCodeRequest(google.protobuf.message.Message):
 
 global___GetStatusCodeRequest = GetStatusCodeRequest
 
+@typing_extensions.final
 class ListStatusCodesRequest(google.protobuf.message.Message):
     """ListStatusCodesRequest"""
 
@@ -913,6 +943,7 @@ class ListStatusCodesRequest(google.protobuf.message.Message):
 
 global___ListStatusCodesRequest = ListStatusCodesRequest
 
+@typing_extensions.final
 class SingleStatusCodeResponse(google.protobuf.message.Message):
     """SingleStatusCodeResponse"""
 
@@ -932,6 +963,7 @@ class SingleStatusCodeResponse(google.protobuf.message.Message):
 
 global___SingleStatusCodeResponse = SingleStatusCodeResponse
 
+@typing_extensions.final
 class MultiStatusCodeResponse(google.protobuf.message.Message):
     """MultiStatusCodeResponse"""
 
@@ -954,6 +986,7 @@ class MultiStatusCodeResponse(google.protobuf.message.Message):
 
 global___MultiStatusCodeResponse = MultiStatusCodeResponse
 
+@typing_extensions.final
 class GetConceptRequest(google.protobuf.message.Message):
     """GetConceptRequest"""
 
@@ -976,6 +1009,7 @@ class GetConceptRequest(google.protobuf.message.Message):
 
 global___GetConceptRequest = GetConceptRequest
 
+@typing_extensions.final
 class ListConceptsRequest(google.protobuf.message.Message):
     """ListConceptsRequest"""
 
@@ -1006,6 +1040,7 @@ class ListConceptsRequest(google.protobuf.message.Message):
 
 global___ListConceptsRequest = ListConceptsRequest
 
+@typing_extensions.final
 class ListModelConceptsRequest(google.protobuf.message.Message):
     """ListModelConceptsRequest"""
 
@@ -1044,6 +1079,7 @@ class ListModelConceptsRequest(google.protobuf.message.Message):
 
 global___ListModelConceptsRequest = ListModelConceptsRequest
 
+@typing_extensions.final
 class PostConceptsSearchesRequest(google.protobuf.message.Message):
     """PostConceptsSearchesRequest"""
 
@@ -1075,6 +1111,7 @@ class PostConceptsSearchesRequest(google.protobuf.message.Message):
 
 global___PostConceptsSearchesRequest = PostConceptsSearchesRequest
 
+@typing_extensions.final
 class PostConceptsRequest(google.protobuf.message.Message):
     """PostConceptsRequest"""
 
@@ -1098,6 +1135,7 @@ class PostConceptsRequest(google.protobuf.message.Message):
 
 global___PostConceptsRequest = PostConceptsRequest
 
+@typing_extensions.final
 class PatchConceptsRequest(google.protobuf.message.Message):
     """PatchConceptsRequest"""
 
@@ -1127,6 +1165,7 @@ class PatchConceptsRequest(google.protobuf.message.Message):
 
 global___PatchConceptsRequest = PatchConceptsRequest
 
+@typing_extensions.final
 class GetConceptCountsRequest(google.protobuf.message.Message):
     """GetConceptCountsRequest"""
 
@@ -1157,6 +1196,7 @@ class GetConceptCountsRequest(google.protobuf.message.Message):
 
 global___GetConceptCountsRequest = GetConceptCountsRequest
 
+@typing_extensions.final
 class SingleConceptResponse(google.protobuf.message.Message):
     """SingleConceptResponse"""
 
@@ -1181,6 +1221,7 @@ class SingleConceptResponse(google.protobuf.message.Message):
 
 global___SingleConceptResponse = SingleConceptResponse
 
+@typing_extensions.final
 class MultiConceptResponse(google.protobuf.message.Message):
     """MultiConceptResponse"""
 
@@ -1205,6 +1246,7 @@ class MultiConceptResponse(google.protobuf.message.Message):
 
 global___MultiConceptResponse = MultiConceptResponse
 
+@typing_extensions.final
 class MultiConceptCountResponse(google.protobuf.message.Message):
     """MultiConceptCountResponse"""
 
@@ -1229,6 +1271,7 @@ class MultiConceptCountResponse(google.protobuf.message.Message):
 
 global___MultiConceptCountResponse = MultiConceptCountResponse
 
+@typing_extensions.final
 class ListConceptRelationsRequest(google.protobuf.message.Message):
     """GET all relations such that the concept_id refers to the subject of the relation"""
 
@@ -1294,6 +1337,7 @@ class ListConceptRelationsRequest(google.protobuf.message.Message):
 
 global___ListConceptRelationsRequest = ListConceptRelationsRequest
 
+@typing_extensions.final
 class PostConceptRelationsRequest(google.protobuf.message.Message):
     """POST new concept relations"""
 
@@ -1322,6 +1366,7 @@ class PostConceptRelationsRequest(google.protobuf.message.Message):
 
 global___PostConceptRelationsRequest = PostConceptRelationsRequest
 
+@typing_extensions.final
 class DeleteConceptRelationsRequest(google.protobuf.message.Message):
     """DELETE concept relations"""
 
@@ -1350,6 +1395,7 @@ class DeleteConceptRelationsRequest(google.protobuf.message.Message):
 
 global___DeleteConceptRelationsRequest = DeleteConceptRelationsRequest
 
+@typing_extensions.final
 class ListKnowledgeGraphsRequest(google.protobuf.message.Message):
     """GET all knowledge graphs"""
 
@@ -1369,6 +1415,7 @@ class ListKnowledgeGraphsRequest(google.protobuf.message.Message):
 
 global___ListKnowledgeGraphsRequest = ListKnowledgeGraphsRequest
 
+@typing_extensions.final
 class PostKnowledgeGraphsRequest(google.protobuf.message.Message):
     """POST new knowledge graphs"""
 
@@ -1392,6 +1439,7 @@ class PostKnowledgeGraphsRequest(google.protobuf.message.Message):
 
 global___PostKnowledgeGraphsRequest = PostKnowledgeGraphsRequest
 
+@typing_extensions.final
 class PostConceptMappingJobsRequest(google.protobuf.message.Message):
     """Start concept mapping jobs"""
 
@@ -1416,6 +1464,7 @@ class PostConceptMappingJobsRequest(google.protobuf.message.Message):
 
 global___PostConceptMappingJobsRequest = PostConceptMappingJobsRequest
 
+@typing_extensions.final
 class MultiConceptRelationResponse(google.protobuf.message.Message):
     """MultiConceptRelationResponse"""
 
@@ -1440,6 +1489,7 @@ class MultiConceptRelationResponse(google.protobuf.message.Message):
 
 global___MultiConceptRelationResponse = MultiConceptRelationResponse
 
+@typing_extensions.final
 class MultiKnowledgeGraphResponse(google.protobuf.message.Message):
     """MultiKnowledgeGraphResponse"""
 
@@ -1464,6 +1514,7 @@ class MultiKnowledgeGraphResponse(google.protobuf.message.Message):
 
 global___MultiKnowledgeGraphResponse = MultiKnowledgeGraphResponse
 
+@typing_extensions.final
 class MultiConceptMappingJobResponse(google.protobuf.message.Message):
     """MultiConceptMappingJobResponse"""
 
@@ -1488,6 +1539,7 @@ class MultiConceptMappingJobResponse(google.protobuf.message.Message):
 
 global___MultiConceptMappingJobResponse = MultiConceptMappingJobResponse
 
+@typing_extensions.final
 class GetConceptLanguageRequest(google.protobuf.message.Message):
     """GET single concept language for the given concept."""
 
@@ -1513,6 +1565,7 @@ class GetConceptLanguageRequest(google.protobuf.message.Message):
 
 global___GetConceptLanguageRequest = GetConceptLanguageRequest
 
+@typing_extensions.final
 class ListConceptLanguagesRequest(google.protobuf.message.Message):
     """List multiple concept languages for the given concept."""
 
@@ -1546,6 +1599,7 @@ class ListConceptLanguagesRequest(google.protobuf.message.Message):
 
 global___ListConceptLanguagesRequest = ListConceptLanguagesRequest
 
+@typing_extensions.final
 class PatchConceptLanguagesRequest(google.protobuf.message.Message):
     """PATCH multiple concept languages for the given concept."""
 
@@ -1575,6 +1629,7 @@ class PatchConceptLanguagesRequest(google.protobuf.message.Message):
 
 global___PatchConceptLanguagesRequest = PatchConceptLanguagesRequest
 
+@typing_extensions.final
 class PostConceptLanguagesRequest(google.protobuf.message.Message):
     """// DELETE multiple concept languages for the given concept.
     message DeleteConceptLanguagesRequest {
@@ -1610,6 +1665,7 @@ class PostConceptLanguagesRequest(google.protobuf.message.Message):
 
 global___PostConceptLanguagesRequest = PostConceptLanguagesRequest
 
+@typing_extensions.final
 class SingleConceptLanguageResponse(google.protobuf.message.Message):
     """SingleConceptLanguageResponse"""
 
@@ -1632,6 +1688,7 @@ class SingleConceptLanguageResponse(google.protobuf.message.Message):
 
 global___SingleConceptLanguageResponse = SingleConceptLanguageResponse
 
+@typing_extensions.final
 class MultiConceptLanguageResponse(google.protobuf.message.Message):
     """MultiConceptLanguageResponse"""
 
@@ -1654,6 +1711,7 @@ class MultiConceptLanguageResponse(google.protobuf.message.Message):
 
 global___MultiConceptLanguageResponse = MultiConceptLanguageResponse
 
+@typing_extensions.final
 class GetInputRequest(google.protobuf.message.Message):
     """GetInputRequest"""
 
@@ -1675,6 +1733,7 @@ class GetInputRequest(google.protobuf.message.Message):
 
 global___GetInputRequest = GetInputRequest
 
+@typing_extensions.final
 class GetInputSamplesRequest(google.protobuf.message.Message):
     """GetInputSamplesRequest"""
 
@@ -1701,6 +1760,7 @@ class GetInputSamplesRequest(google.protobuf.message.Message):
 
 global___GetInputSamplesRequest = GetInputSamplesRequest
 
+@typing_extensions.final
 class ListInputsRequest(google.protobuf.message.Message):
     """ListInputsRequest"""
 
@@ -1740,6 +1800,7 @@ class ListInputsRequest(google.protobuf.message.Message):
 
 global___ListInputsRequest = ListInputsRequest
 
+@typing_extensions.final
 class StreamInputsRequest(google.protobuf.message.Message):
     """StreamInputsRequest"""
 
@@ -1776,6 +1837,7 @@ class StreamInputsRequest(google.protobuf.message.Message):
 
 global___StreamInputsRequest = StreamInputsRequest
 
+@typing_extensions.final
 class PostInputsRequest(google.protobuf.message.Message):
     """PostInputsRequest"""
 
@@ -1812,6 +1874,7 @@ class PostInputsRequest(google.protobuf.message.Message):
 
 global___PostInputsRequest = PostInputsRequest
 
+@typing_extensions.final
 class PatchInputsRequest(google.protobuf.message.Message):
     """PatchInputsRequest"""
 
@@ -1845,6 +1908,7 @@ class PatchInputsRequest(google.protobuf.message.Message):
 
 global___PatchInputsRequest = PatchInputsRequest
 
+@typing_extensions.final
 class DeleteInputRequest(google.protobuf.message.Message):
     """DeleteInputRequest"""
 
@@ -1866,6 +1930,7 @@ class DeleteInputRequest(google.protobuf.message.Message):
 
 global___DeleteInputRequest = DeleteInputRequest
 
+@typing_extensions.final
 class DeleteInputsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -1888,6 +1953,7 @@ class DeleteInputsRequest(google.protobuf.message.Message):
 
 global___DeleteInputsRequest = DeleteInputsRequest
 
+@typing_extensions.final
 class SingleInputResponse(google.protobuf.message.Message):
     """SingleInputResponse"""
 
@@ -1910,6 +1976,7 @@ class SingleInputResponse(google.protobuf.message.Message):
 
 global___SingleInputResponse = SingleInputResponse
 
+@typing_extensions.final
 class MultiInputResponse(google.protobuf.message.Message):
     """MultiInputResponse"""
 
@@ -1936,6 +2003,7 @@ class MultiInputResponse(google.protobuf.message.Message):
 
 global___MultiInputResponse = MultiInputResponse
 
+@typing_extensions.final
 class MultiInputAnnotationResponse(google.protobuf.message.Message):
     """MultiInputAnnotationResponse"""
 
@@ -1958,6 +2026,7 @@ class MultiInputAnnotationResponse(google.protobuf.message.Message):
 
 global___MultiInputAnnotationResponse = MultiInputAnnotationResponse
 
+@typing_extensions.final
 class SingleInputCountResponse(google.protobuf.message.Message):
     """SingleInputCountResponse"""
 
@@ -1980,6 +2049,7 @@ class SingleInputCountResponse(google.protobuf.message.Message):
 
 global___SingleInputCountResponse = SingleInputCountResponse
 
+@typing_extensions.final
 class GetInputCountRequest(google.protobuf.message.Message):
     """GetInputCountRequest"""
 
@@ -1998,6 +2068,7 @@ class GetInputCountRequest(google.protobuf.message.Message):
 
 global___GetInputCountRequest = GetInputCountRequest
 
+@typing_extensions.final
 class ListDatasetsRequest(google.protobuf.message.Message):
     """ListDatasetsRequest"""
 
@@ -2028,6 +2099,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
 
 global___ListDatasetsRequest = ListDatasetsRequest
 
+@typing_extensions.final
 class GetDatasetRequest(google.protobuf.message.Message):
     """GetDatasetRequest"""
 
@@ -2050,6 +2122,7 @@ class GetDatasetRequest(google.protobuf.message.Message):
 
 global___GetDatasetRequest = GetDatasetRequest
 
+@typing_extensions.final
 class PostDatasetsRequest(google.protobuf.message.Message):
     """Request to add one or more datasets."""
 
@@ -2073,6 +2146,7 @@ class PostDatasetsRequest(google.protobuf.message.Message):
 
 global___PostDatasetsRequest = PostDatasetsRequest
 
+@typing_extensions.final
 class PatchDatasetsRequest(google.protobuf.message.Message):
     """Request to patch several datasets."""
 
@@ -2102,6 +2176,7 @@ class PatchDatasetsRequest(google.protobuf.message.Message):
 
 global___PatchDatasetsRequest = PatchDatasetsRequest
 
+@typing_extensions.final
 class PatchDatasetIdsRequest(google.protobuf.message.Message):
     """PatchDatasetIdsRequest"""
 
@@ -2131,6 +2206,7 @@ class PatchDatasetIdsRequest(google.protobuf.message.Message):
 
 global___PatchDatasetIdsRequest = PatchDatasetIdsRequest
 
+@typing_extensions.final
 class DeleteDatasetsRequest(google.protobuf.message.Message):
     """Request to delete several datasets by list of ids."""
 
@@ -2153,6 +2229,7 @@ class DeleteDatasetsRequest(google.protobuf.message.Message):
 
 global___DeleteDatasetsRequest = DeleteDatasetsRequest
 
+@typing_extensions.final
 class MultiDatasetResponse(google.protobuf.message.Message):
     """MultiDatasetResponse"""
 
@@ -2175,6 +2252,7 @@ class MultiDatasetResponse(google.protobuf.message.Message):
 
 global___MultiDatasetResponse = MultiDatasetResponse
 
+@typing_extensions.final
 class SingleDatasetResponse(google.protobuf.message.Message):
     """SingleDatasetResponse"""
 
@@ -2197,6 +2275,7 @@ class SingleDatasetResponse(google.protobuf.message.Message):
 
 global___SingleDatasetResponse = SingleDatasetResponse
 
+@typing_extensions.final
 class ListDatasetInputsRequest(google.protobuf.message.Message):
     """ListDatasetInputsRequest"""
 
@@ -2231,6 +2310,7 @@ class ListDatasetInputsRequest(google.protobuf.message.Message):
 
 global___ListDatasetInputsRequest = ListDatasetInputsRequest
 
+@typing_extensions.final
 class GetDatasetInputRequest(google.protobuf.message.Message):
     """GetDatasetInputRequest"""
 
@@ -2257,6 +2337,7 @@ class GetDatasetInputRequest(google.protobuf.message.Message):
 
 global___GetDatasetInputRequest = GetDatasetInputRequest
 
+@typing_extensions.final
 class PostDatasetInputsRequest(google.protobuf.message.Message):
     """Request to add one or more datasets."""
 
@@ -2291,6 +2372,7 @@ class PostDatasetInputsRequest(google.protobuf.message.Message):
 
 global___PostDatasetInputsRequest = PostDatasetInputsRequest
 
+@typing_extensions.final
 class DeleteDatasetInputsRequest(google.protobuf.message.Message):
     """Request to delete several dataset inputs by list of ids."""
 
@@ -2318,6 +2400,7 @@ class DeleteDatasetInputsRequest(google.protobuf.message.Message):
 
 global___DeleteDatasetInputsRequest = DeleteDatasetInputsRequest
 
+@typing_extensions.final
 class MultiDatasetInputResponse(google.protobuf.message.Message):
     """MultiDatasetInputResponse"""
 
@@ -2344,6 +2427,7 @@ class MultiDatasetInputResponse(google.protobuf.message.Message):
 
 global___MultiDatasetInputResponse = MultiDatasetInputResponse
 
+@typing_extensions.final
 class SingleDatasetInputResponse(google.protobuf.message.Message):
     """SingleDatasetInputResponse"""
 
@@ -2366,6 +2450,7 @@ class SingleDatasetInputResponse(google.protobuf.message.Message):
 
 global___SingleDatasetInputResponse = SingleDatasetInputResponse
 
+@typing_extensions.final
 class ListDatasetVersionsRequest(google.protobuf.message.Message):
     """ListDatasetVersionsRequest"""
 
@@ -2400,6 +2485,7 @@ class ListDatasetVersionsRequest(google.protobuf.message.Message):
 
 global___ListDatasetVersionsRequest = ListDatasetVersionsRequest
 
+@typing_extensions.final
 class GetDatasetVersionRequest(google.protobuf.message.Message):
     """GetDatasetVersionRequest"""
 
@@ -2426,6 +2512,7 @@ class GetDatasetVersionRequest(google.protobuf.message.Message):
 
 global___GetDatasetVersionRequest = GetDatasetVersionRequest
 
+@typing_extensions.final
 class ListDatasetVersionMetricsGroupsRequest(google.protobuf.message.Message):
     """ListDatasetVersionMetricsGroupsRequest"""
 
@@ -2479,6 +2566,7 @@ class ListDatasetVersionMetricsGroupsRequest(google.protobuf.message.Message):
 
 global___ListDatasetVersionMetricsGroupsRequest = ListDatasetVersionMetricsGroupsRequest
 
+@typing_extensions.final
 class PostDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to add one or more dataset versions."""
 
@@ -2506,6 +2594,7 @@ class PostDatasetVersionsRequest(google.protobuf.message.Message):
 
 global___PostDatasetVersionsRequest = PostDatasetVersionsRequest
 
+@typing_extensions.final
 class PatchDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to patch several dataset versions."""
 
@@ -2539,6 +2628,7 @@ class PatchDatasetVersionsRequest(google.protobuf.message.Message):
 
 global___PatchDatasetVersionsRequest = PatchDatasetVersionsRequest
 
+@typing_extensions.final
 class DeleteDatasetVersionsRequest(google.protobuf.message.Message):
     """Request to delete several dataset versions by list of ids."""
 
@@ -2565,6 +2655,7 @@ class DeleteDatasetVersionsRequest(google.protobuf.message.Message):
 
 global___DeleteDatasetVersionsRequest = DeleteDatasetVersionsRequest
 
+@typing_extensions.final
 class PutDatasetVersionExportsRequest(google.protobuf.message.Message):
     """Request to create exports of a dataset version."""
 
@@ -2598,6 +2689,7 @@ class PutDatasetVersionExportsRequest(google.protobuf.message.Message):
 
 global___PutDatasetVersionExportsRequest = PutDatasetVersionExportsRequest
 
+@typing_extensions.final
 class MultiDatasetVersionResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2618,6 +2710,7 @@ class MultiDatasetVersionResponse(google.protobuf.message.Message):
 
 global___MultiDatasetVersionResponse = MultiDatasetVersionResponse
 
+@typing_extensions.final
 class MultiDatasetVersionExportResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2638,6 +2731,7 @@ class MultiDatasetVersionExportResponse(google.protobuf.message.Message):
 
 global___MultiDatasetVersionExportResponse = MultiDatasetVersionExportResponse
 
+@typing_extensions.final
 class MultiDatasetVersionMetricsGroupResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2658,6 +2752,7 @@ class MultiDatasetVersionMetricsGroupResponse(google.protobuf.message.Message):
 
 global___MultiDatasetVersionMetricsGroupResponse = MultiDatasetVersionMetricsGroupResponse
 
+@typing_extensions.final
 class SingleDatasetVersionResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2678,6 +2773,7 @@ class SingleDatasetVersionResponse(google.protobuf.message.Message):
 
 global___SingleDatasetVersionResponse = SingleDatasetVersionResponse
 
+@typing_extensions.final
 class GetDatasetInputsSearchAddJobRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2697,6 +2793,7 @@ class GetDatasetInputsSearchAddJobRequest(google.protobuf.message.Message):
 
 global___GetDatasetInputsSearchAddJobRequest = GetDatasetInputsSearchAddJobRequest
 
+@typing_extensions.final
 class SingleDatasetInputsSearchAddJobResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -2717,6 +2814,7 @@ class SingleDatasetInputsSearchAddJobResponse(google.protobuf.message.Message):
 
 global___SingleDatasetInputsSearchAddJobResponse = SingleDatasetInputsSearchAddJobResponse
 
+@typing_extensions.final
 class PostModelOutputsRequest(google.protobuf.message.Message):
     """//////////////////////////////////////////////////
     Model prediction related stuff needs inputs and produces outputs.
@@ -2756,6 +2854,7 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
 
 global___PostModelOutputsRequest = PostModelOutputsRequest
 
+@typing_extensions.final
 class ListModelInputsRequest(google.protobuf.message.Message):
     """Listing the inputs that went into training this model."""
 
@@ -2792,6 +2891,7 @@ class ListModelInputsRequest(google.protobuf.message.Message):
 
 global___ListModelInputsRequest = ListModelInputsRequest
 
+@typing_extensions.final
 class GetKeyRequest(google.protobuf.message.Message):
     """GetKeyRequest"""
 
@@ -2813,6 +2913,7 @@ class GetKeyRequest(google.protobuf.message.Message):
 
 global___GetKeyRequest = GetKeyRequest
 
+@typing_extensions.final
 class ListKeysRequest(google.protobuf.message.Message):
     """ListKeysRequest"""
 
@@ -2843,6 +2944,7 @@ class ListKeysRequest(google.protobuf.message.Message):
 
 global___ListKeysRequest = ListKeysRequest
 
+@typing_extensions.final
 class ListAppKeysRequest(google.protobuf.message.Message):
     """ListAppKeysRequest"""
 
@@ -2873,6 +2975,7 @@ class ListAppKeysRequest(google.protobuf.message.Message):
 
 global___ListAppKeysRequest = ListAppKeysRequest
 
+@typing_extensions.final
 class PostKeysRequest(google.protobuf.message.Message):
     """PostKeysRequest"""
 
@@ -2895,6 +2998,7 @@ class PostKeysRequest(google.protobuf.message.Message):
 
 global___PostKeysRequest = PostKeysRequest
 
+@typing_extensions.final
 class DeleteKeyRequest(google.protobuf.message.Message):
     """DeleteKeyRequest"""
 
@@ -2916,6 +3020,7 @@ class DeleteKeyRequest(google.protobuf.message.Message):
 
 global___DeleteKeyRequest = DeleteKeyRequest
 
+@typing_extensions.final
 class PatchKeysRequest(google.protobuf.message.Message):
     """PatchKeysRequest"""
 
@@ -2944,6 +3049,7 @@ class PatchKeysRequest(google.protobuf.message.Message):
 
 global___PatchKeysRequest = PatchKeysRequest
 
+@typing_extensions.final
 class SingleKeyResponse(google.protobuf.message.Message):
     """SingleKeyResponse"""
 
@@ -2966,6 +3072,7 @@ class SingleKeyResponse(google.protobuf.message.Message):
 
 global___SingleKeyResponse = SingleKeyResponse
 
+@typing_extensions.final
 class MultiKeyResponse(google.protobuf.message.Message):
     """MultiKeyResponse"""
 
@@ -2988,6 +3095,7 @@ class MultiKeyResponse(google.protobuf.message.Message):
 
 global___MultiKeyResponse = MultiKeyResponse
 
+@typing_extensions.final
 class GetModelRequest(google.protobuf.message.Message):
     """GetModelRequest"""
 
@@ -3026,6 +3134,7 @@ class GetModelRequest(google.protobuf.message.Message):
 
 global___GetModelRequest = GetModelRequest
 
+@typing_extensions.final
 class ListModelsRequest(google.protobuf.message.Message):
     """ListModelsRequest"""
 
@@ -3052,6 +3161,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     USE_CASES_FIELD_NUMBER: builtins.int
     LANGUAGES_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    DONT_FETCH_FROM_MAIN_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -3116,6 +3226,10 @@ class ListModelsRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
+    dont_fetch_from_main: builtins.bool
+    """Old API behavior resulted in returning clarifai main models when calling ListModels while scoped to an app. While we transition
+    away from that, we can use this flag to not always fetch clarifai main models, unless that is the app we are explicitly listing for.
+    """
     def __init__(
         self,
         *,
@@ -3140,13 +3254,15 @@ class ListModelsRequest(google.protobuf.message.Message):
         use_cases: collections.abc.Iterable[builtins.str] | None = ...,
         languages: collections.abc.Iterable[builtins.str] | None = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        dont_fetch_from_main: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at"] | None: ...
 
 global___ListModelsRequest = ListModelsRequest
 
+@typing_extensions.final
 class PatchModelToolkitsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3174,6 +3290,7 @@ class PatchModelToolkitsRequest(google.protobuf.message.Message):
 
 global___PatchModelToolkitsRequest = PatchModelToolkitsRequest
 
+@typing_extensions.final
 class PatchModelCheckConsentsRequest(google.protobuf.message.Message):
     """PatchModelCheckConsentsRequest"""
 
@@ -3205,6 +3322,7 @@ class PatchModelCheckConsentsRequest(google.protobuf.message.Message):
 
 global___PatchModelCheckConsentsRequest = PatchModelCheckConsentsRequest
 
+@typing_extensions.final
 class PatchModelUseCasesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3232,6 +3350,7 @@ class PatchModelUseCasesRequest(google.protobuf.message.Message):
 
 global___PatchModelUseCasesRequest = PatchModelUseCasesRequest
 
+@typing_extensions.final
 class PatchModelLanguagesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3259,6 +3378,7 @@ class PatchModelLanguagesRequest(google.protobuf.message.Message):
 
 global___PatchModelLanguagesRequest = PatchModelLanguagesRequest
 
+@typing_extensions.final
 class MultiModelToolkitResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3279,6 +3399,7 @@ class MultiModelToolkitResponse(google.protobuf.message.Message):
 
 global___MultiModelToolkitResponse = MultiModelToolkitResponse
 
+@typing_extensions.final
 class MultiModelCheckConsentResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3299,6 +3420,7 @@ class MultiModelCheckConsentResponse(google.protobuf.message.Message):
 
 global___MultiModelCheckConsentResponse = MultiModelCheckConsentResponse
 
+@typing_extensions.final
 class MultiModelUseCaseResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3319,6 +3441,7 @@ class MultiModelUseCaseResponse(google.protobuf.message.Message):
 
 global___MultiModelUseCaseResponse = MultiModelUseCaseResponse
 
+@typing_extensions.final
 class MultiModelLanguageResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3339,6 +3462,7 @@ class MultiModelLanguageResponse(google.protobuf.message.Message):
 
 global___MultiModelLanguageResponse = MultiModelLanguageResponse
 
+@typing_extensions.final
 class PostModelsRequest(google.protobuf.message.Message):
     """PostModelsRequest"""
 
@@ -3371,6 +3495,7 @@ class PostModelsRequest(google.protobuf.message.Message):
 
 global___PostModelsRequest = PostModelsRequest
 
+@typing_extensions.final
 class PatchModelsRequest(google.protobuf.message.Message):
     """PatchModelsRequest"""
 
@@ -3399,6 +3524,7 @@ class PatchModelsRequest(google.protobuf.message.Message):
 
 global___PatchModelsRequest = PatchModelsRequest
 
+@typing_extensions.final
 class IdUpdateSource(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3418,6 +3544,7 @@ class IdUpdateSource(google.protobuf.message.Message):
 
 global___IdUpdateSource = IdUpdateSource
 
+@typing_extensions.final
 class PatchModelIdsRequest(google.protobuf.message.Message):
     """PatchModelIdsRequest"""
 
@@ -3447,6 +3574,7 @@ class PatchModelIdsRequest(google.protobuf.message.Message):
 
 global___PatchModelIdsRequest = PatchModelIdsRequest
 
+@typing_extensions.final
 class DeleteModelRequest(google.protobuf.message.Message):
     """DeleteModelRequest"""
 
@@ -3468,6 +3596,7 @@ class DeleteModelRequest(google.protobuf.message.Message):
 
 global___DeleteModelRequest = DeleteModelRequest
 
+@typing_extensions.final
 class DeleteModelsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -3493,6 +3622,7 @@ class DeleteModelsRequest(google.protobuf.message.Message):
 
 global___DeleteModelsRequest = DeleteModelsRequest
 
+@typing_extensions.final
 class PostModelsSearchesRequest(google.protobuf.message.Message):
     """Search over the available models."""
 
@@ -3524,6 +3654,7 @@ class PostModelsSearchesRequest(google.protobuf.message.Message):
 
 global___PostModelsSearchesRequest = PostModelsSearchesRequest
 
+@typing_extensions.final
 class SingleModelResponse(google.protobuf.message.Message):
     """SingleModelResponse"""
 
@@ -3546,6 +3677,7 @@ class SingleModelResponse(google.protobuf.message.Message):
 
 global___SingleModelResponse = SingleModelResponse
 
+@typing_extensions.final
 class MultiModelResponse(google.protobuf.message.Message):
     """MultiModelResponse"""
 
@@ -3568,6 +3700,7 @@ class MultiModelResponse(google.protobuf.message.Message):
 
 global___MultiModelResponse = MultiModelResponse
 
+@typing_extensions.final
 class PatchModelVersionsRequest(google.protobuf.message.Message):
     """PatchModelVersionsRequest"""
 
@@ -3599,6 +3732,7 @@ class PatchModelVersionsRequest(google.protobuf.message.Message):
 
 global___PatchModelVersionsRequest = PatchModelVersionsRequest
 
+@typing_extensions.final
 class GetModelVersionRequest(google.protobuf.message.Message):
     """request for different endpoints currently."""
 
@@ -3623,6 +3757,7 @@ class GetModelVersionRequest(google.protobuf.message.Message):
 
 global___GetModelVersionRequest = GetModelVersionRequest
 
+@typing_extensions.final
 class ListModelVersionsRequest(google.protobuf.message.Message):
     """ListModelVersionsRequest"""
 
@@ -3661,6 +3796,7 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
 
 global___ListModelVersionsRequest = ListModelVersionsRequest
 
+@typing_extensions.final
 class DeleteModelVersionRequest(google.protobuf.message.Message):
     """DeleteModelVersionRequest"""
 
@@ -3685,6 +3821,7 @@ class DeleteModelVersionRequest(google.protobuf.message.Message):
 
 global___DeleteModelVersionRequest = DeleteModelVersionRequest
 
+@typing_extensions.final
 class SingleModelVersionResponse(google.protobuf.message.Message):
     """SingleModelVersionResponse"""
 
@@ -3707,6 +3844,7 @@ class SingleModelVersionResponse(google.protobuf.message.Message):
 
 global___SingleModelVersionResponse = SingleModelVersionResponse
 
+@typing_extensions.final
 class MultiModelVersionResponse(google.protobuf.message.Message):
     """MultiModelVersionResponse"""
 
@@ -3729,6 +3867,7 @@ class MultiModelVersionResponse(google.protobuf.message.Message):
 
 global___MultiModelVersionResponse = MultiModelVersionResponse
 
+@typing_extensions.final
 class PostModelVersionsRequest(google.protobuf.message.Message):
     """Create (train) a new model version."""
 
@@ -3748,14 +3887,11 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
     @property
-    def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]:
-        """This lets you post an existing model version rather than training a new one.
-        For internal Clarifai use only to start.
-        """
+    def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]: ...
     @property
     def search(self) -> proto.clarifai.api.resources_pb2.Search:
         """Use this to filter inputs that are used in training
-        Alternatively, use train_search & test_search fields OR dataset_version field.
+        Alternatively, dataset_version field.
         """
     @property
     def train_search(self) -> proto.clarifai.api.resources_pb2.Search:
@@ -3768,7 +3904,9 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
         Alternatively, use dataset_version field.
         """
     evaluate_after_training: builtins.bool
-    """whether to evaluate the transfer trained model after training"""
+    """whether to evaluate the transfer trained model after training
+    Deprecated, models will not be evaluated automatically after training.
+    """
     description: builtins.str
     """Description about this training run"""
     @property
@@ -3804,6 +3942,7 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
 
 global___PostModelVersionsRequest = PostModelVersionsRequest
 
+@typing_extensions.final
 class PostWorkflowVersionsUnPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3827,6 +3966,7 @@ class PostWorkflowVersionsUnPublishRequest(google.protobuf.message.Message):
 
 global___PostWorkflowVersionsUnPublishRequest = PostWorkflowVersionsUnPublishRequest
 
+@typing_extensions.final
 class PostWorkflowVersionsPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3850,6 +3990,7 @@ class PostWorkflowVersionsPublishRequest(google.protobuf.message.Message):
 
 global___PostWorkflowVersionsPublishRequest = PostWorkflowVersionsPublishRequest
 
+@typing_extensions.final
 class WorkflowVersionPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3864,6 +4005,7 @@ class WorkflowVersionPublishRequest(google.protobuf.message.Message):
 
 global___WorkflowVersionPublishRequest = WorkflowVersionPublishRequest
 
+@typing_extensions.final
 class WorkflowVersionUnPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3878,6 +4020,7 @@ class WorkflowVersionUnPublishRequest(google.protobuf.message.Message):
 
 global___WorkflowVersionUnPublishRequest = WorkflowVersionUnPublishRequest
 
+@typing_extensions.final
 class ModelVersionPublishRequest(google.protobuf.message.Message):
     """ModelVersionPublishRequest"""
 
@@ -3894,6 +4037,7 @@ class ModelVersionPublishRequest(google.protobuf.message.Message):
 
 global___ModelVersionPublishRequest = ModelVersionPublishRequest
 
+@typing_extensions.final
 class PostModelVersionsPublishRequest(google.protobuf.message.Message):
     """PostModelVersionsPublishRequest"""
 
@@ -3919,6 +4063,7 @@ class PostModelVersionsPublishRequest(google.protobuf.message.Message):
 
 global___PostModelVersionsPublishRequest = PostModelVersionsPublishRequest
 
+@typing_extensions.final
 class ModelVersionUnpublishRequest(google.protobuf.message.Message):
     """ModelVersionUnpublishRequest"""
 
@@ -3935,6 +4080,7 @@ class ModelVersionUnpublishRequest(google.protobuf.message.Message):
 
 global___ModelVersionUnpublishRequest = ModelVersionUnpublishRequest
 
+@typing_extensions.final
 class PostModelVersionsUnPublishRequest(google.protobuf.message.Message):
     """PostModelVersionsUnPublishRequest"""
 
@@ -3960,6 +4106,7 @@ class PostModelVersionsUnPublishRequest(google.protobuf.message.Message):
 
 global___PostModelVersionsUnPublishRequest = PostModelVersionsUnPublishRequest
 
+@typing_extensions.final
 class PostModelVersionMetricsRequest(google.protobuf.message.Message):
     """Evaluate this model version."""
 
@@ -3968,14 +4115,12 @@ class PostModelVersionMetricsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
-    MAX_EXAMPLES_FIELD_NUMBER: builtins.int
     TEST_SEARCH_FIELD_NUMBER: builtins.int
     EVAL_INFO_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
     version_id: builtins.str
-    max_examples: builtins.int
     @property
     def test_search(self) -> proto.clarifai.api.resources_pb2.Search:
         """Use this to filter inputs that are used in evaluation"""
@@ -3988,15 +4133,15 @@ class PostModelVersionMetricsRequest(google.protobuf.message.Message):
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         model_id: builtins.str = ...,
         version_id: builtins.str = ...,
-        max_examples: builtins.int = ...,
         test_search: proto.clarifai.api.resources_pb2.Search | None = ...,
         eval_info: proto.clarifai.api.resources_pb2.EvalInfo | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "test_search", b"test_search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "max_examples", b"max_examples", "model_id", b"model_id", "test_search", b"test_search", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "model_id", b"model_id", "test_search", b"test_search", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
 
 global___PostModelVersionMetricsRequest = PostModelVersionMetricsRequest
 
+@typing_extensions.final
 class GetModelVersionMetricsRequest(google.protobuf.message.Message):
     """Get the already computed evaluation metrics for this model
     version.
@@ -4028,6 +4173,7 @@ class GetModelVersionMetricsRequest(google.protobuf.message.Message):
 
 global___GetModelVersionMetricsRequest = GetModelVersionMetricsRequest
 
+@typing_extensions.final
 class GetModelTypeRequest(google.protobuf.message.Message):
     """// Request to delete several things by the list of ids.
     message DeleteModelVersionsRequest {
@@ -4059,6 +4205,7 @@ class GetModelTypeRequest(google.protobuf.message.Message):
 
 global___GetModelTypeRequest = GetModelTypeRequest
 
+@typing_extensions.final
 class ListModelTypesRequest(google.protobuf.message.Message):
     """ListModelTypesRequest"""
 
@@ -4090,6 +4237,7 @@ class ListModelTypesRequest(google.protobuf.message.Message):
 
 global___ListModelTypesRequest = ListModelTypesRequest
 
+@typing_extensions.final
 class ListOpenSourceLicensesRequest(google.protobuf.message.Message):
     """ListOpenSourceLicensesRequest"""
 
@@ -4101,6 +4249,7 @@ class ListOpenSourceLicensesRequest(google.protobuf.message.Message):
 
 global___ListOpenSourceLicensesRequest = ListOpenSourceLicensesRequest
 
+@typing_extensions.final
 class ListOpenSourceLicensesResponse(google.protobuf.message.Message):
     """ListOpenSourceLicensesResponse"""
 
@@ -4123,6 +4272,7 @@ class ListOpenSourceLicensesResponse(google.protobuf.message.Message):
 
 global___ListOpenSourceLicensesResponse = ListOpenSourceLicensesResponse
 
+@typing_extensions.final
 class SingleModelTypeResponse(google.protobuf.message.Message):
     """SingleModelTypeResponse"""
 
@@ -4147,6 +4297,7 @@ class SingleModelTypeResponse(google.protobuf.message.Message):
 
 global___SingleModelTypeResponse = SingleModelTypeResponse
 
+@typing_extensions.final
 class MultiModelTypeResponse(google.protobuf.message.Message):
     """MultiModelTypeResponse"""
 
@@ -4176,6 +4327,7 @@ class MultiModelTypeResponse(google.protobuf.message.Message):
 
 global___MultiModelTypeResponse = MultiModelTypeResponse
 
+@typing_extensions.final
 class GetModelVersionInputExampleRequest(google.protobuf.message.Message):
     """GetModelVersionInputExampleRequest"""
 
@@ -4207,6 +4359,7 @@ class GetModelVersionInputExampleRequest(google.protobuf.message.Message):
 
 global___GetModelVersionInputExampleRequest = GetModelVersionInputExampleRequest
 
+@typing_extensions.final
 class ListModelVersionInputExamplesRequest(google.protobuf.message.Message):
     """ListModelVersionInputExamplesRequest"""
 
@@ -4242,6 +4395,7 @@ class ListModelVersionInputExamplesRequest(google.protobuf.message.Message):
 
 global___ListModelVersionInputExamplesRequest = ListModelVersionInputExamplesRequest
 
+@typing_extensions.final
 class SingleModelVersionInputExampleResponse(google.protobuf.message.Message):
     """SingleModelVersionInputExampleResponse"""
 
@@ -4266,6 +4420,7 @@ class SingleModelVersionInputExampleResponse(google.protobuf.message.Message):
 
 global___SingleModelVersionInputExampleResponse = SingleModelVersionInputExampleResponse
 
+@typing_extensions.final
 class MultiModelVersionInputExampleResponse(google.protobuf.message.Message):
     """MultiModelVersionInputExampleResponse"""
 
@@ -4290,6 +4445,7 @@ class MultiModelVersionInputExampleResponse(google.protobuf.message.Message):
 
 global___MultiModelVersionInputExampleResponse = MultiModelVersionInputExampleResponse
 
+@typing_extensions.final
 class ListModelReferencesRequest(google.protobuf.message.Message):
     """ListModelReferencesRequest"""
 
@@ -4319,6 +4475,7 @@ class ListModelReferencesRequest(google.protobuf.message.Message):
 
 global___ListModelReferencesRequest = ListModelReferencesRequest
 
+@typing_extensions.final
 class MultiModelReferenceResponse(google.protobuf.message.Message):
     """MultiModelReferenceResponse"""
 
@@ -4341,6 +4498,7 @@ class MultiModelReferenceResponse(google.protobuf.message.Message):
 
 global___MultiModelReferenceResponse = MultiModelReferenceResponse
 
+@typing_extensions.final
 class MultiOutputResponse(google.protobuf.message.Message):
     """MultiOutputResponse"""
 
@@ -4363,6 +4521,7 @@ class MultiOutputResponse(google.protobuf.message.Message):
 
 global___MultiOutputResponse = MultiOutputResponse
 
+@typing_extensions.final
 class ListScopesRequest(google.protobuf.message.Message):
     """ListScopesRequest"""
 
@@ -4388,6 +4547,7 @@ class ListScopesRequest(google.protobuf.message.Message):
 
 global___ListScopesRequest = ListScopesRequest
 
+@typing_extensions.final
 class MyScopesRequest(google.protobuf.message.Message):
     """MyScopesRequest"""
 
@@ -4406,6 +4566,7 @@ class MyScopesRequest(google.protobuf.message.Message):
 
 global___MyScopesRequest = MyScopesRequest
 
+@typing_extensions.final
 class MyScopesUserRequest(google.protobuf.message.Message):
     """MyScopesUserRequest"""
 
@@ -4424,6 +4585,7 @@ class MyScopesUserRequest(google.protobuf.message.Message):
 
 global___MyScopesUserRequest = MyScopesUserRequest
 
+@typing_extensions.final
 class MyScopesRootRequest(google.protobuf.message.Message):
     """MyScopesRootRequest"""
 
@@ -4435,6 +4597,7 @@ class MyScopesRootRequest(google.protobuf.message.Message):
 
 global___MyScopesRootRequest = MyScopesRootRequest
 
+@typing_extensions.final
 class MultiScopeDepsResponse(google.protobuf.message.Message):
     """MultiScopeDepsResponse"""
 
@@ -4467,6 +4630,7 @@ class MultiScopeDepsResponse(google.protobuf.message.Message):
 
 global___MultiScopeDepsResponse = MultiScopeDepsResponse
 
+@typing_extensions.final
 class MultiScopeResponse(google.protobuf.message.Message):
     """MultiScopeResponse"""
 
@@ -4504,6 +4668,7 @@ class MultiScopeResponse(google.protobuf.message.Message):
 
 global___MultiScopeResponse = MultiScopeResponse
 
+@typing_extensions.final
 class MultiScopeUserResponse(google.protobuf.message.Message):
     """MultiScopeUserResponse"""
 
@@ -4536,6 +4701,7 @@ class MultiScopeUserResponse(google.protobuf.message.Message):
 
 global___MultiScopeUserResponse = MultiScopeUserResponse
 
+@typing_extensions.final
 class MultiScopeRootResponse(google.protobuf.message.Message):
     """MultiScopeRootResponse"""
 
@@ -4568,6 +4734,7 @@ class MultiScopeRootResponse(google.protobuf.message.Message):
 
 global___MultiScopeRootResponse = MultiScopeRootResponse
 
+@typing_extensions.final
 class GetSearchRequest(google.protobuf.message.Message):
     """GetSearchRequest"""
 
@@ -4589,6 +4756,7 @@ class GetSearchRequest(google.protobuf.message.Message):
 
 global___GetSearchRequest = GetSearchRequest
 
+@typing_extensions.final
 class ListSearchesRequest(google.protobuf.message.Message):
     """ListSearchesRequest"""
 
@@ -4619,6 +4787,7 @@ class ListSearchesRequest(google.protobuf.message.Message):
 
 global___ListSearchesRequest = ListSearchesRequest
 
+@typing_extensions.final
 class PostSearchesRequest(google.protobuf.message.Message):
     """PostSearchesRequest"""
 
@@ -4657,6 +4826,7 @@ class PostSearchesRequest(google.protobuf.message.Message):
 
 global___PostSearchesRequest = PostSearchesRequest
 
+@typing_extensions.final
 class PatchInputsSearchesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -4685,6 +4855,7 @@ class PatchInputsSearchesRequest(google.protobuf.message.Message):
 
 global___PatchInputsSearchesRequest = PatchInputsSearchesRequest
 
+@typing_extensions.final
 class PatchAnnotationsSearchesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -4713,6 +4884,7 @@ class PatchAnnotationsSearchesRequest(google.protobuf.message.Message):
 
 global___PatchAnnotationsSearchesRequest = PatchAnnotationsSearchesRequest
 
+@typing_extensions.final
 class PatchSearchesRequest(google.protobuf.message.Message):
     """PatchSearchesRequest"""
 
@@ -4743,6 +4915,7 @@ class PatchSearchesRequest(google.protobuf.message.Message):
 
 global___PatchSearchesRequest = PatchSearchesRequest
 
+@typing_extensions.final
 class PostSearchesByIDRequest(google.protobuf.message.Message):
     """PostSearchesByIDRequest performs returns results of a saved search given its ID"""
 
@@ -4770,6 +4943,7 @@ class PostSearchesByIDRequest(google.protobuf.message.Message):
 
 global___PostSearchesByIDRequest = PostSearchesByIDRequest
 
+@typing_extensions.final
 class DeleteSearchRequest(google.protobuf.message.Message):
     """DeleteSearchRequest"""
 
@@ -4791,6 +4965,7 @@ class DeleteSearchRequest(google.protobuf.message.Message):
 
 global___DeleteSearchRequest = DeleteSearchRequest
 
+@typing_extensions.final
 class PostAnnotationsSearchesRequest(google.protobuf.message.Message):
     """Execute a new annotation search and optionally save it
     annotation search over annotations using rank and filter proto
@@ -4822,6 +4997,7 @@ class PostAnnotationsSearchesRequest(google.protobuf.message.Message):
 
 global___PostAnnotationsSearchesRequest = PostAnnotationsSearchesRequest
 
+@typing_extensions.final
 class DeleteAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """DeleteAnnotationSearchMetricsRequest"""
 
@@ -4843,6 +5019,7 @@ class DeleteAnnotationSearchMetricsRequest(google.protobuf.message.Message):
 
 global___DeleteAnnotationSearchMetricsRequest = DeleteAnnotationSearchMetricsRequest
 
+@typing_extensions.final
 class PostInputsSearchesRequest(google.protobuf.message.Message):
     """Execute a new input search and optionally save it"""
 
@@ -4872,6 +5049,7 @@ class PostInputsSearchesRequest(google.protobuf.message.Message):
 
 global___PostInputsSearchesRequest = PostInputsSearchesRequest
 
+@typing_extensions.final
 class SingleSearchResponse(google.protobuf.message.Message):
     """SingleSearchResponse returns saved search in response to GetSearchRequest"""
 
@@ -4895,6 +5073,7 @@ class SingleSearchResponse(google.protobuf.message.Message):
 
 global___SingleSearchResponse = SingleSearchResponse
 
+@typing_extensions.final
 class MultiSearchResponse(google.protobuf.message.Message):
     """MultiSearchResponse"""
 
@@ -4933,6 +5112,7 @@ class MultiSearchResponse(google.protobuf.message.Message):
 
 global___MultiSearchResponse = MultiSearchResponse
 
+@typing_extensions.final
 class PostAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """PostAnnotationSearchMetricsRequest"""
 
@@ -4976,6 +5156,7 @@ class PostAnnotationSearchMetricsRequest(google.protobuf.message.Message):
 
 global___PostAnnotationSearchMetricsRequest = PostAnnotationSearchMetricsRequest
 
+@typing_extensions.final
 class GetAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """GetAnnotationSearchMetricsRequest"""
 
@@ -4998,6 +5179,7 @@ class GetAnnotationSearchMetricsRequest(google.protobuf.message.Message):
 
 global___GetAnnotationSearchMetricsRequest = GetAnnotationSearchMetricsRequest
 
+@typing_extensions.final
 class ListAnnotationSearchMetricsRequest(google.protobuf.message.Message):
     """ListAnnotationSearchMetricsRequest"""
 
@@ -5016,6 +5198,7 @@ class ListAnnotationSearchMetricsRequest(google.protobuf.message.Message):
 
 global___ListAnnotationSearchMetricsRequest = ListAnnotationSearchMetricsRequest
 
+@typing_extensions.final
 class MultiAnnotationSearchMetricsResponse(google.protobuf.message.Message):
     """MultiAnnotationSearchMetricsResponse"""
 
@@ -5039,6 +5222,7 @@ class MultiAnnotationSearchMetricsResponse(google.protobuf.message.Message):
 
 global___MultiAnnotationSearchMetricsResponse = MultiAnnotationSearchMetricsResponse
 
+@typing_extensions.final
 class ListAnnotationFiltersRequest(google.protobuf.message.Message):
     """ListAnnotationFiltersRequest"""
 
@@ -5069,6 +5253,7 @@ class ListAnnotationFiltersRequest(google.protobuf.message.Message):
 
 global___ListAnnotationFiltersRequest = ListAnnotationFiltersRequest
 
+@typing_extensions.final
 class GetAnnotationFilterRequest(google.protobuf.message.Message):
     """GetAnnotationFilterRequest"""
 
@@ -5091,6 +5276,7 @@ class GetAnnotationFilterRequest(google.protobuf.message.Message):
 
 global___GetAnnotationFilterRequest = GetAnnotationFilterRequest
 
+@typing_extensions.final
 class PostAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to add one or more annotation filters."""
 
@@ -5114,6 +5300,7 @@ class PostAnnotationFiltersRequest(google.protobuf.message.Message):
 
 global___PostAnnotationFiltersRequest = PostAnnotationFiltersRequest
 
+@typing_extensions.final
 class PatchAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to patch several annotation filters."""
 
@@ -5143,6 +5330,7 @@ class PatchAnnotationFiltersRequest(google.protobuf.message.Message):
 
 global___PatchAnnotationFiltersRequest = PatchAnnotationFiltersRequest
 
+@typing_extensions.final
 class DeleteAnnotationFiltersRequest(google.protobuf.message.Message):
     """Request to delete several annotation filters by list of ids."""
 
@@ -5166,6 +5354,7 @@ class DeleteAnnotationFiltersRequest(google.protobuf.message.Message):
 
 global___DeleteAnnotationFiltersRequest = DeleteAnnotationFiltersRequest
 
+@typing_extensions.final
 class MultiAnnotationFilterResponse(google.protobuf.message.Message):
     """MultiAnnotationFilterResponse"""
 
@@ -5188,6 +5377,7 @@ class MultiAnnotationFilterResponse(google.protobuf.message.Message):
 
 global___MultiAnnotationFilterResponse = MultiAnnotationFilterResponse
 
+@typing_extensions.final
 class SingleAnnotationFilterResponse(google.protobuf.message.Message):
     """SingleAnnotationFilterResponse"""
 
@@ -5210,6 +5400,7 @@ class SingleAnnotationFilterResponse(google.protobuf.message.Message):
 
 global___SingleAnnotationFilterResponse = SingleAnnotationFilterResponse
 
+@typing_extensions.final
 class PostValidatePasswordRequest(google.protobuf.message.Message):
     """PostValidatePasswordRequest"""
 
@@ -5233,6 +5424,7 @@ class PostValidatePasswordRequest(google.protobuf.message.Message):
 
 global___PostValidatePasswordRequest = PostValidatePasswordRequest
 
+@typing_extensions.final
 class SinglePasswordValidationResponse(google.protobuf.message.Message):
     """SinglePasswordValidationResponse"""
 
@@ -5256,6 +5448,7 @@ class SinglePasswordValidationResponse(google.protobuf.message.Message):
 
 global___SinglePasswordValidationResponse = SinglePasswordValidationResponse
 
+@typing_extensions.final
 class GetWorkflowRequest(google.protobuf.message.Message):
     """GetWorkflowRequest"""
 
@@ -5294,6 +5487,7 @@ class GetWorkflowRequest(google.protobuf.message.Message):
 
 global___GetWorkflowRequest = GetWorkflowRequest
 
+@typing_extensions.final
 class ListWorkflowsRequest(google.protobuf.message.Message):
     """ListWorkflowsRequest"""
 
@@ -5368,6 +5562,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
 
 global___ListWorkflowsRequest = ListWorkflowsRequest
 
+@typing_extensions.final
 class PostWorkflowsRequest(google.protobuf.message.Message):
     """PostWorkflowsRequest"""
 
@@ -5390,6 +5585,7 @@ class PostWorkflowsRequest(google.protobuf.message.Message):
 
 global___PostWorkflowsRequest = PostWorkflowsRequest
 
+@typing_extensions.final
 class PatchWorkflowsRequest(google.protobuf.message.Message):
     """PatchWorkflowsRequest"""
 
@@ -5418,6 +5614,7 @@ class PatchWorkflowsRequest(google.protobuf.message.Message):
 
 global___PatchWorkflowsRequest = PatchWorkflowsRequest
 
+@typing_extensions.final
 class PatchWorkflowIdsRequest(google.protobuf.message.Message):
     """PatchWorkflowIdsRequest"""
 
@@ -5447,6 +5644,7 @@ class PatchWorkflowIdsRequest(google.protobuf.message.Message):
 
 global___PatchWorkflowIdsRequest = PatchWorkflowIdsRequest
 
+@typing_extensions.final
 class DeleteWorkflowRequest(google.protobuf.message.Message):
     """DeleteWorkflowRequest"""
 
@@ -5468,6 +5666,7 @@ class DeleteWorkflowRequest(google.protobuf.message.Message):
 
 global___DeleteWorkflowRequest = DeleteWorkflowRequest
 
+@typing_extensions.final
 class DeleteWorkflowsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -5493,6 +5692,7 @@ class DeleteWorkflowsRequest(google.protobuf.message.Message):
 
 global___DeleteWorkflowsRequest = DeleteWorkflowsRequest
 
+@typing_extensions.final
 class SingleWorkflowResponse(google.protobuf.message.Message):
     """SingleWorkflowResponse"""
 
@@ -5515,6 +5715,7 @@ class SingleWorkflowResponse(google.protobuf.message.Message):
 
 global___SingleWorkflowResponse = SingleWorkflowResponse
 
+@typing_extensions.final
 class MultiWorkflowResponse(google.protobuf.message.Message):
     """MultiWorkflowResponse"""
 
@@ -5537,6 +5738,7 @@ class MultiWorkflowResponse(google.protobuf.message.Message):
 
 global___MultiWorkflowResponse = MultiWorkflowResponse
 
+@typing_extensions.final
 class PostWorkflowResultsRequest(google.protobuf.message.Message):
     """PostWorkflowResultsRequest"""
 
@@ -5595,6 +5797,7 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
 
 global___PostWorkflowResultsRequest = PostWorkflowResultsRequest
 
+@typing_extensions.final
 class PostWorkflowResultsResponse(google.protobuf.message.Message):
     """PostWorkflowResultsResponse"""
 
@@ -5634,6 +5837,7 @@ class PostWorkflowResultsResponse(google.protobuf.message.Message):
 
 global___PostWorkflowResultsResponse = PostWorkflowResultsResponse
 
+@typing_extensions.final
 class PostWorkflowResultsSimilarityRequest(google.protobuf.message.Message):
     """PostWorkflowResultsSimilarityRequest"""
 
@@ -5679,6 +5883,7 @@ class PostWorkflowResultsSimilarityRequest(google.protobuf.message.Message):
 
 global___PostWorkflowResultsSimilarityRequest = PostWorkflowResultsSimilarityRequest
 
+@typing_extensions.final
 class PostWorkflowResultsSimilarityResponse(google.protobuf.message.Message):
     """PostWorkflowResultsSimilarityResponse"""
 
@@ -5701,6 +5906,7 @@ class PostWorkflowResultsSimilarityResponse(google.protobuf.message.Message):
 
 global___PostWorkflowResultsSimilarityResponse = PostWorkflowResultsSimilarityResponse
 
+@typing_extensions.final
 class ListWorkflowVersionsRequest(google.protobuf.message.Message):
     """ListWorkflowVersionsRequest"""
 
@@ -5735,6 +5941,7 @@ class ListWorkflowVersionsRequest(google.protobuf.message.Message):
 
 global___ListWorkflowVersionsRequest = ListWorkflowVersionsRequest
 
+@typing_extensions.final
 class GetWorkflowVersionRequest(google.protobuf.message.Message):
     """GetWorkflowVersionRequest"""
 
@@ -5761,6 +5968,7 @@ class GetWorkflowVersionRequest(google.protobuf.message.Message):
 
 global___GetWorkflowVersionRequest = GetWorkflowVersionRequest
 
+@typing_extensions.final
 class DeleteWorkflowVersionsRequest(google.protobuf.message.Message):
     """DeleteWorkflowVersionsRequest"""
 
@@ -5788,6 +5996,7 @@ class DeleteWorkflowVersionsRequest(google.protobuf.message.Message):
 
 global___DeleteWorkflowVersionsRequest = DeleteWorkflowVersionsRequest
 
+@typing_extensions.final
 class PatchWorkflowVersionsRequest(google.protobuf.message.Message):
     """PatchWorkflowVersionsRequest"""
 
@@ -5821,6 +6030,7 @@ class PatchWorkflowVersionsRequest(google.protobuf.message.Message):
 
 global___PatchWorkflowVersionsRequest = PatchWorkflowVersionsRequest
 
+@typing_extensions.final
 class MultiWorkflowVersionResponse(google.protobuf.message.Message):
     """MultiWorkflowVersionResponse"""
 
@@ -5843,6 +6053,7 @@ class MultiWorkflowVersionResponse(google.protobuf.message.Message):
 
 global___MultiWorkflowVersionResponse = MultiWorkflowVersionResponse
 
+@typing_extensions.final
 class SingleWorkflowVersionResponse(google.protobuf.message.Message):
     """SingleWorkflowVersionResponse"""
 
@@ -5865,6 +6076,7 @@ class SingleWorkflowVersionResponse(google.protobuf.message.Message):
 
 global___SingleWorkflowVersionResponse = SingleWorkflowVersionResponse
 
+@typing_extensions.final
 class PostAppDuplicationsRequest(google.protobuf.message.Message):
     """Request to start a app duplication process"""
 
@@ -5887,6 +6099,7 @@ class PostAppDuplicationsRequest(google.protobuf.message.Message):
 
 global___PostAppDuplicationsRequest = PostAppDuplicationsRequest
 
+@typing_extensions.final
 class GetAppDuplicationRequest(google.protobuf.message.Message):
     """Request to check app duplication status"""
 
@@ -5909,6 +6122,7 @@ class GetAppDuplicationRequest(google.protobuf.message.Message):
 
 global___GetAppDuplicationRequest = GetAppDuplicationRequest
 
+@typing_extensions.final
 class ListAppDuplicationsRequest(google.protobuf.message.Message):
     """Request to list all the app duplication that user triggered."""
 
@@ -5939,6 +6153,7 @@ class ListAppDuplicationsRequest(google.protobuf.message.Message):
 
 global___ListAppDuplicationsRequest = ListAppDuplicationsRequest
 
+@typing_extensions.final
 class MultiAppDuplicationsResponse(google.protobuf.message.Message):
     """MultiAppDuplicationsResponse"""
 
@@ -5961,6 +6176,7 @@ class MultiAppDuplicationsResponse(google.protobuf.message.Message):
 
 global___MultiAppDuplicationsResponse = MultiAppDuplicationsResponse
 
+@typing_extensions.final
 class SingleAppDuplicationResponse(google.protobuf.message.Message):
     """SingleAppDuplicationResponse"""
 
@@ -5983,6 +6199,7 @@ class SingleAppDuplicationResponse(google.protobuf.message.Message):
 
 global___SingleAppDuplicationResponse = SingleAppDuplicationResponse
 
+@typing_extensions.final
 class PostTasksRequest(google.protobuf.message.Message):
     """Request to create Tasks."""
 
@@ -6005,6 +6222,7 @@ class PostTasksRequest(google.protobuf.message.Message):
 
 global___PostTasksRequest = PostTasksRequest
 
+@typing_extensions.final
 class GetTaskRequest(google.protobuf.message.Message):
     """Request to get one task."""
 
@@ -6033,6 +6251,7 @@ class GetTaskRequest(google.protobuf.message.Message):
 
 global___GetTaskRequest = GetTaskRequest
 
+@typing_extensions.final
 class ListTasksRequest(google.protobuf.message.Message):
     """Request to list multiple tasks."""
 
@@ -6091,6 +6310,7 @@ class ListTasksRequest(google.protobuf.message.Message):
 
 global___ListTasksRequest = ListTasksRequest
 
+@typing_extensions.final
 class PatchTasksRequest(google.protobuf.message.Message):
     """Request to patch a list of tasks."""
 
@@ -6119,6 +6339,7 @@ class PatchTasksRequest(google.protobuf.message.Message):
 
 global___PatchTasksRequest = PatchTasksRequest
 
+@typing_extensions.final
 class DeleteTasksRequest(google.protobuf.message.Message):
     """Request to delete a list of tasks."""
 
@@ -6141,6 +6362,7 @@ class DeleteTasksRequest(google.protobuf.message.Message):
 
 global___DeleteTasksRequest = DeleteTasksRequest
 
+@typing_extensions.final
 class MultiTaskResponse(google.protobuf.message.Message):
     """Response with multiple Tasks."""
 
@@ -6163,6 +6385,7 @@ class MultiTaskResponse(google.protobuf.message.Message):
 
 global___MultiTaskResponse = MultiTaskResponse
 
+@typing_extensions.final
 class SingleTaskResponse(google.protobuf.message.Message):
     """Response with a single Task."""
 
@@ -6185,6 +6408,7 @@ class SingleTaskResponse(google.protobuf.message.Message):
 
 global___SingleTaskResponse = SingleTaskResponse
 
+@typing_extensions.final
 class GetTaskCountRequest(google.protobuf.message.Message):
     """GetTaskCountRequest can be used for fetching -
     1. Task annotation count per user, per status
@@ -6215,6 +6439,7 @@ class GetTaskCountRequest(google.protobuf.message.Message):
 
 global___GetTaskCountRequest = GetTaskCountRequest
 
+@typing_extensions.final
 class SingleTaskCountResponse(google.protobuf.message.Message):
     """SingleTaskCountResponse represent counts of annotations or inputs(anchor annotations) for labelers in given task"""
 
@@ -6243,6 +6468,7 @@ class SingleTaskCountResponse(google.protobuf.message.Message):
 
 global___SingleTaskCountResponse = SingleTaskCountResponse
 
+@typing_extensions.final
 class PostLabelOrdersRequest(google.protobuf.message.Message):
     """//////////////////////////////////////////////////////////////////////////////
     Label Orders
@@ -6270,6 +6496,7 @@ class PostLabelOrdersRequest(google.protobuf.message.Message):
 
 global___PostLabelOrdersRequest = PostLabelOrdersRequest
 
+@typing_extensions.final
 class GetLabelOrderRequest(google.protobuf.message.Message):
     """Request to get one label order."""
 
@@ -6291,6 +6518,7 @@ class GetLabelOrderRequest(google.protobuf.message.Message):
 
 global___GetLabelOrderRequest = GetLabelOrderRequest
 
+@typing_extensions.final
 class ListLabelOrdersRequest(google.protobuf.message.Message):
     """Request to list multiple label orders."""
 
@@ -6321,6 +6549,7 @@ class ListLabelOrdersRequest(google.protobuf.message.Message):
 
 global___ListLabelOrdersRequest = ListLabelOrdersRequest
 
+@typing_extensions.final
 class PatchLabelOrdersRequest(google.protobuf.message.Message):
     """Request to patch a list of label orders."""
 
@@ -6349,6 +6578,7 @@ class PatchLabelOrdersRequest(google.protobuf.message.Message):
 
 global___PatchLabelOrdersRequest = PatchLabelOrdersRequest
 
+@typing_extensions.final
 class DeleteLabelOrdersRequest(google.protobuf.message.Message):
     """Request to delete a list of label orders."""
 
@@ -6371,6 +6601,7 @@ class DeleteLabelOrdersRequest(google.protobuf.message.Message):
 
 global___DeleteLabelOrdersRequest = DeleteLabelOrdersRequest
 
+@typing_extensions.final
 class MultiLabelOrderResponse(google.protobuf.message.Message):
     """Response with multiple label order."""
 
@@ -6393,6 +6624,7 @@ class MultiLabelOrderResponse(google.protobuf.message.Message):
 
 global___MultiLabelOrderResponse = MultiLabelOrderResponse
 
+@typing_extensions.final
 class SingleLabelOrderResponse(google.protobuf.message.Message):
     """Response with a label order."""
 
@@ -6415,6 +6647,7 @@ class SingleLabelOrderResponse(google.protobuf.message.Message):
 
 global___SingleLabelOrderResponse = SingleLabelOrderResponse
 
+@typing_extensions.final
 class PostCollectorsRequest(google.protobuf.message.Message):
     """Request to create Collectors."""
 
@@ -6437,6 +6670,7 @@ class PostCollectorsRequest(google.protobuf.message.Message):
 
 global___PostCollectorsRequest = PostCollectorsRequest
 
+@typing_extensions.final
 class PatchCollectorsRequest(google.protobuf.message.Message):
     """PatchCollectorsRequest"""
 
@@ -6465,6 +6699,7 @@ class PatchCollectorsRequest(google.protobuf.message.Message):
 
 global___PatchCollectorsRequest = PatchCollectorsRequest
 
+@typing_extensions.final
 class DeleteCollectorsRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -6490,6 +6725,7 @@ class DeleteCollectorsRequest(google.protobuf.message.Message):
 
 global___DeleteCollectorsRequest = DeleteCollectorsRequest
 
+@typing_extensions.final
 class GetCollectorRequest(google.protobuf.message.Message):
     """Request to GET a single Collector."""
 
@@ -6512,6 +6748,7 @@ class GetCollectorRequest(google.protobuf.message.Message):
 
 global___GetCollectorRequest = GetCollectorRequest
 
+@typing_extensions.final
 class ListCollectorsRequest(google.protobuf.message.Message):
     """Request to GET all the Collectors."""
 
@@ -6542,6 +6779,7 @@ class ListCollectorsRequest(google.protobuf.message.Message):
 
 global___ListCollectorsRequest = ListCollectorsRequest
 
+@typing_extensions.final
 class MultiCollectorResponse(google.protobuf.message.Message):
     """Response with multiple Collectors."""
 
@@ -6564,6 +6802,7 @@ class MultiCollectorResponse(google.protobuf.message.Message):
 
 global___MultiCollectorResponse = MultiCollectorResponse
 
+@typing_extensions.final
 class SingleCollectorResponse(google.protobuf.message.Message):
     """Response with a single Collector."""
 
@@ -6586,6 +6825,7 @@ class SingleCollectorResponse(google.protobuf.message.Message):
 
 global___SingleCollectorResponse = SingleCollectorResponse
 
+@typing_extensions.final
 class PostStatValuesRequest(google.protobuf.message.Message):
     """PostStatValuesRequest"""
 
@@ -6610,6 +6850,7 @@ class PostStatValuesRequest(google.protobuf.message.Message):
 
 global___PostStatValuesRequest = PostStatValuesRequest
 
+@typing_extensions.final
 class MultiStatValueResponse(google.protobuf.message.Message):
     """MultiStatValueResponse"""
 
@@ -6634,6 +6875,7 @@ class MultiStatValueResponse(google.protobuf.message.Message):
 
 global___MultiStatValueResponse = MultiStatValueResponse
 
+@typing_extensions.final
 class PostStatValuesAggregateRequest(google.protobuf.message.Message):
     """PostStatValuesAggregateRequest"""
 
@@ -6658,6 +6900,7 @@ class PostStatValuesAggregateRequest(google.protobuf.message.Message):
 
 global___PostStatValuesAggregateRequest = PostStatValuesAggregateRequest
 
+@typing_extensions.final
 class MultiStatValueAggregateResponse(google.protobuf.message.Message):
     """MultiStatValueAggregateResponse"""
 
@@ -6682,6 +6925,7 @@ class MultiStatValueAggregateResponse(google.protobuf.message.Message):
 
 global___MultiStatValueAggregateResponse = MultiStatValueAggregateResponse
 
+@typing_extensions.final
 class PostTrendingMetricsViewRequest(google.protobuf.message.Message):
     """PostTrendingMetricsViewRequest"""
 
@@ -6709,6 +6953,7 @@ class PostTrendingMetricsViewRequest(google.protobuf.message.Message):
 
 global___PostTrendingMetricsViewRequest = PostTrendingMetricsViewRequest
 
+@typing_extensions.final
 class ListTrendingMetricsViewsRequest(google.protobuf.message.Message):
     """ListTrendingMetricsViewsRequest"""
 
@@ -6744,6 +6989,7 @@ class ListTrendingMetricsViewsRequest(google.protobuf.message.Message):
 
 global___ListTrendingMetricsViewsRequest = ListTrendingMetricsViewsRequest
 
+@typing_extensions.final
 class MultiTrendingMetricsViewResponse(google.protobuf.message.Message):
     """MultiTrendingMetricsViewResponse"""
 
@@ -6766,6 +7012,7 @@ class MultiTrendingMetricsViewResponse(google.protobuf.message.Message):
 
 global___MultiTrendingMetricsViewResponse = MultiTrendingMetricsViewResponse
 
+@typing_extensions.final
 class GetModuleRequest(google.protobuf.message.Message):
     """GetModuleRequest"""
 
@@ -6787,6 +7034,7 @@ class GetModuleRequest(google.protobuf.message.Message):
 
 global___GetModuleRequest = GetModuleRequest
 
+@typing_extensions.final
 class ListModulesRequest(google.protobuf.message.Message):
     """ListModulesRequest"""
 
@@ -6817,6 +7065,7 @@ class ListModulesRequest(google.protobuf.message.Message):
 
 global___ListModulesRequest = ListModulesRequest
 
+@typing_extensions.final
 class PostModulesRequest(google.protobuf.message.Message):
     """PostModulesRequest"""
 
@@ -6840,6 +7089,7 @@ class PostModulesRequest(google.protobuf.message.Message):
 
 global___PostModulesRequest = PostModulesRequest
 
+@typing_extensions.final
 class PatchModulesRequest(google.protobuf.message.Message):
     """PatchModulesRequest"""
 
@@ -6868,6 +7118,7 @@ class PatchModulesRequest(google.protobuf.message.Message):
 
 global___PatchModulesRequest = PatchModulesRequest
 
+@typing_extensions.final
 class DeleteModulesRequest(google.protobuf.message.Message):
     """Request to delete several things by the list of ids."""
 
@@ -6890,6 +7141,7 @@ class DeleteModulesRequest(google.protobuf.message.Message):
 
 global___DeleteModulesRequest = DeleteModulesRequest
 
+@typing_extensions.final
 class SingleModuleResponse(google.protobuf.message.Message):
     """SingleModuleResponse"""
 
@@ -6912,6 +7164,7 @@ class SingleModuleResponse(google.protobuf.message.Message):
 
 global___SingleModuleResponse = SingleModuleResponse
 
+@typing_extensions.final
 class MultiModuleResponse(google.protobuf.message.Message):
     """MultiModuleResponse"""
 
@@ -6934,6 +7187,7 @@ class MultiModuleResponse(google.protobuf.message.Message):
 
 global___MultiModuleResponse = MultiModuleResponse
 
+@typing_extensions.final
 class GetModuleVersionRequest(google.protobuf.message.Message):
     """request for different endpoints currently."""
 
@@ -6958,6 +7212,7 @@ class GetModuleVersionRequest(google.protobuf.message.Message):
 
 global___GetModuleVersionRequest = GetModuleVersionRequest
 
+@typing_extensions.final
 class ListModuleVersionsRequest(google.protobuf.message.Message):
     """ListModuleVersionsRequest"""
 
@@ -6991,6 +7246,7 @@ class ListModuleVersionsRequest(google.protobuf.message.Message):
 
 global___ListModuleVersionsRequest = ListModuleVersionsRequest
 
+@typing_extensions.final
 class PostModuleVersionsRequest(google.protobuf.message.Message):
     """PostModuleVersionsRequest"""
 
@@ -7017,6 +7273,7 @@ class PostModuleVersionsRequest(google.protobuf.message.Message):
 
 global___PostModuleVersionsRequest = PostModuleVersionsRequest
 
+@typing_extensions.final
 class DeleteModuleVersionsRequest(google.protobuf.message.Message):
     """Request to delete several module versions by the list of ids."""
 
@@ -7042,6 +7299,7 @@ class DeleteModuleVersionsRequest(google.protobuf.message.Message):
 
 global___DeleteModuleVersionsRequest = DeleteModuleVersionsRequest
 
+@typing_extensions.final
 class SingleModuleVersionResponse(google.protobuf.message.Message):
     """SingleModuleVersionResponse"""
 
@@ -7064,6 +7322,7 @@ class SingleModuleVersionResponse(google.protobuf.message.Message):
 
 global___SingleModuleVersionResponse = SingleModuleVersionResponse
 
+@typing_extensions.final
 class MultiModuleVersionResponse(google.protobuf.message.Message):
     """MultiModuleVersionResponse"""
 
@@ -7086,6 +7345,7 @@ class MultiModuleVersionResponse(google.protobuf.message.Message):
 
 global___MultiModuleVersionResponse = MultiModuleVersionResponse
 
+@typing_extensions.final
 class GetInstalledModuleVersionRequest(google.protobuf.message.Message):
     """GetInstalledModuleVersionRequest"""
 
@@ -7108,6 +7368,7 @@ class GetInstalledModuleVersionRequest(google.protobuf.message.Message):
 
 global___GetInstalledModuleVersionRequest = GetInstalledModuleVersionRequest
 
+@typing_extensions.final
 class ListInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """ListInstalledModuleVersionsRequest"""
 
@@ -7138,6 +7399,7 @@ class ListInstalledModuleVersionsRequest(google.protobuf.message.Message):
 
 global___ListInstalledModuleVersionsRequest = ListInstalledModuleVersionsRequest
 
+@typing_extensions.final
 class PostInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """PostInstalledModuleVersionsRequest to install a module version into the app in the URL"""
 
@@ -7161,6 +7423,7 @@ class PostInstalledModuleVersionsRequest(google.protobuf.message.Message):
 
 global___PostInstalledModuleVersionsRequest = PostInstalledModuleVersionsRequest
 
+@typing_extensions.final
 class PostInstalledModuleVersionsKeyRequest(google.protobuf.message.Message):
     """PostInstalledModuleVersionsKeyRequest to associate a key of the caller's to the installed module
     version.
@@ -7190,6 +7453,7 @@ class PostInstalledModuleVersionsKeyRequest(google.protobuf.message.Message):
 
 global___PostInstalledModuleVersionsKeyRequest = PostInstalledModuleVersionsKeyRequest
 
+@typing_extensions.final
 class DeleteInstalledModuleVersionsRequest(google.protobuf.message.Message):
     """Request to delete several installed module versions by the list of ids."""
 
@@ -7212,6 +7476,7 @@ class DeleteInstalledModuleVersionsRequest(google.protobuf.message.Message):
 
 global___DeleteInstalledModuleVersionsRequest = DeleteInstalledModuleVersionsRequest
 
+@typing_extensions.final
 class SingleInstalledModuleVersionResponse(google.protobuf.message.Message):
     """SingleInstalledModuleVersionResponse"""
 
@@ -7234,6 +7499,7 @@ class SingleInstalledModuleVersionResponse(google.protobuf.message.Message):
 
 global___SingleInstalledModuleVersionResponse = SingleInstalledModuleVersionResponse
 
+@typing_extensions.final
 class MultiInstalledModuleVersionResponse(google.protobuf.message.Message):
     """MultiInstalledModuleVersionResponse"""
 
@@ -7256,6 +7522,7 @@ class MultiInstalledModuleVersionResponse(google.protobuf.message.Message):
 
 global___MultiInstalledModuleVersionResponse = MultiInstalledModuleVersionResponse
 
+@typing_extensions.final
 class PostBulkOperationsRequest(google.protobuf.message.Message):
     """Request to perform bulk operations on a list of inputs based on input source."""
 
@@ -7279,6 +7546,7 @@ class PostBulkOperationsRequest(google.protobuf.message.Message):
 
 global___PostBulkOperationsRequest = PostBulkOperationsRequest
 
+@typing_extensions.final
 class ListBulkOperationsRequest(google.protobuf.message.Message):
     """Request to list all the bulk operations."""
 
@@ -7309,6 +7577,7 @@ class ListBulkOperationsRequest(google.protobuf.message.Message):
 
 global___ListBulkOperationsRequest = ListBulkOperationsRequest
 
+@typing_extensions.final
 class GetBulkOperationRequest(google.protobuf.message.Message):
     """Request to get the details of a bulk operation by ID."""
 
@@ -7331,6 +7600,7 @@ class GetBulkOperationRequest(google.protobuf.message.Message):
 
 global___GetBulkOperationRequest = GetBulkOperationRequest
 
+@typing_extensions.final
 class CancelBulkOperationRequest(google.protobuf.message.Message):
     """Cancel a list of bulk operation ids"""
 
@@ -7354,6 +7624,7 @@ class CancelBulkOperationRequest(google.protobuf.message.Message):
 
 global___CancelBulkOperationRequest = CancelBulkOperationRequest
 
+@typing_extensions.final
 class DeleteBulkOperationRequest(google.protobuf.message.Message):
     """Request to delete the terminated bulk operations by ID
     Only operations in terminated state can be deleted.
@@ -7379,6 +7650,7 @@ class DeleteBulkOperationRequest(google.protobuf.message.Message):
 
 global___DeleteBulkOperationRequest = DeleteBulkOperationRequest
 
+@typing_extensions.final
 class SingleBulkOperationsResponse(google.protobuf.message.Message):
     """SingleBulkOperationsResponse"""
 
@@ -7401,6 +7673,7 @@ class SingleBulkOperationsResponse(google.protobuf.message.Message):
 
 global___SingleBulkOperationsResponse = SingleBulkOperationsResponse
 
+@typing_extensions.final
 class MultiBulkOperationsResponse(google.protobuf.message.Message):
     """MultiBulkOperationsResponse"""
 
@@ -7423,6 +7696,7 @@ class MultiBulkOperationsResponse(google.protobuf.message.Message):
 
 global___MultiBulkOperationsResponse = MultiBulkOperationsResponse
 
+@typing_extensions.final
 class ListInputsAddJobsRequest(google.protobuf.message.Message):
     """List all the input ingestion jobs"""
 
@@ -7453,6 +7727,7 @@ class ListInputsAddJobsRequest(google.protobuf.message.Message):
 
 global___ListInputsAddJobsRequest = ListInputsAddJobsRequest
 
+@typing_extensions.final
 class GetInputsAddJobRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7473,6 +7748,7 @@ class GetInputsAddJobRequest(google.protobuf.message.Message):
 
 global___GetInputsAddJobRequest = GetInputsAddJobRequest
 
+@typing_extensions.final
 class MultiInputsAddJobResponse(google.protobuf.message.Message):
     """MultiInputsAddJobResponse"""
 
@@ -7495,6 +7771,7 @@ class MultiInputsAddJobResponse(google.protobuf.message.Message):
 
 global___MultiInputsAddJobResponse = MultiInputsAddJobResponse
 
+@typing_extensions.final
 class SingleInputsAddJobResponse(google.protobuf.message.Message):
     """SingleInputsAddJobResponse"""
 
@@ -7517,6 +7794,7 @@ class SingleInputsAddJobResponse(google.protobuf.message.Message):
 
 global___SingleInputsAddJobResponse = SingleInputsAddJobResponse
 
+@typing_extensions.final
 class PostUploadsRequest(google.protobuf.message.Message):
     """Start a multipart upload"""
 
@@ -7539,6 +7817,7 @@ class PostUploadsRequest(google.protobuf.message.Message):
 
 global___PostUploadsRequest = PostUploadsRequest
 
+@typing_extensions.final
 class DeleteUploadsRequest(google.protobuf.message.Message):
     """Stops or deletes multipart upload"""
 
@@ -7561,6 +7840,7 @@ class DeleteUploadsRequest(google.protobuf.message.Message):
 
 global___DeleteUploadsRequest = DeleteUploadsRequest
 
+@typing_extensions.final
 class ListUploadsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7589,6 +7869,7 @@ class ListUploadsRequest(google.protobuf.message.Message):
 
 global___ListUploadsRequest = ListUploadsRequest
 
+@typing_extensions.final
 class GetUploadRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7609,6 +7890,7 @@ class GetUploadRequest(google.protobuf.message.Message):
 
 global___GetUploadRequest = GetUploadRequest
 
+@typing_extensions.final
 class SingleUploadResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7629,6 +7911,7 @@ class SingleUploadResponse(google.protobuf.message.Message):
 
 global___SingleUploadResponse = SingleUploadResponse
 
+@typing_extensions.final
 class MultiUploadResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7649,6 +7932,7 @@ class MultiUploadResponse(google.protobuf.message.Message):
 
 global___MultiUploadResponse = MultiUploadResponse
 
+@typing_extensions.final
 class PutUploadContentPartsRequest(google.protobuf.message.Message):
     """Upload part of multipart upload"""
 
@@ -7673,3 +7957,125 @@ class PutUploadContentPartsRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["content_parts", b"content_parts", "upload_id", b"upload_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PutUploadContentPartsRequest = PutUploadContentPartsRequest
+
+@typing_extensions.final
+class PostInputsDataSourcesRequest(google.protobuf.message.Message):
+    """Request to initiate ingestion of inputs from cloud storage"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    DATA_SOURCES_FIELD_NUMBER: builtins.int
+    CALL_BACK_URL_FIELD_NUMBER: builtins.int
+    APP_PAT_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def data_sources(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InputsDataSource]: ...
+    call_back_url: builtins.str
+    """If call back url is set, we will send a Post request to this endpoint with job status."""
+    app_pat: builtins.str
+    """Personal Access Token to the application to which inputs are added"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        data_sources: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InputsDataSource] | None = ...,
+        call_back_url: builtins.str = ...,
+        app_pat: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "data_sources", b"data_sources", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostInputsDataSourcesRequest = PostInputsDataSourcesRequest
+
+@typing_extensions.final
+class GetInputsExtractionJobRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INPUTS_EXTRACTION_JOB_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    inputs_extraction_job_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        inputs_extraction_job_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_extraction_job_id", b"inputs_extraction_job_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetInputsExtractionJobRequest = GetInputsExtractionJobRequest
+
+@typing_extensions.final
+class ListInputsExtractionJobsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListInputsExtractionJobsRequest = ListInputsExtractionJobsRequest
+
+@typing_extensions.final
+class SingleInputsExtractionJobResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    INPUTS_EXTRACTION_JOB_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def inputs_extraction_job(self) -> proto.clarifai.api.resources_pb2.InputsExtractionJob: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        inputs_extraction_job: proto.clarifai.api.resources_pb2.InputsExtractionJob | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["inputs_extraction_job", b"inputs_extraction_job", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_extraction_job", b"inputs_extraction_job", "status", b"status"]) -> None: ...
+
+global___SingleInputsExtractionJobResponse = SingleInputsExtractionJobResponse
+
+@typing_extensions.final
+class MultiInputsExtractionJobResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    INPUTS_EXTRACTION_JOBS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def inputs_extraction_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InputsExtractionJob]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        inputs_extraction_jobs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InputsExtractionJob] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_extraction_jobs", b"inputs_extraction_jobs", "status", b"status"]) -> None: ...
+
+global___MultiInputsExtractionJobResponse = MultiInputsExtractionJobResponse
