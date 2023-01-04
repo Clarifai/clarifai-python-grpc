@@ -150,7 +150,7 @@ HELSINKINLP_TRANSLATION_MODELS = {
     "JAPANESE_EN_MODEL": [
         "Helsinki-NLP/opus-mt-jap-en",
         "text-translation-japanese-english",
-    ]
+    ],
 }
 
 FACEBOOK_TRANSLATION_MODELS = {
