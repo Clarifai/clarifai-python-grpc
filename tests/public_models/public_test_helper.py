@@ -128,7 +128,7 @@ OBJECT_DETECTION_MODELS_SHORT = {
 
 HELSINKINLP_TRANSLATION_MODELS = {
     "ROMANCE_EN_MODEL": [
-        "Text Translation: Romance to English",
+        "Helsinki-NLP/opus-mt-ROMANCE-en",
         "text-translation-romance-lang-english",
     ],
     "EN_SPANISH_MODEL": [
@@ -147,40 +147,16 @@ HELSINKINLP_TRANSLATION_MODELS = {
         "Helsinki-NLP/opus-mt-ar-en",
         "text-translation-arabic-english",
     ],
-    "WELSH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-cy-en",
-        "text-translation-welsh-english",
-    ],
-    "CZECH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-cs-en",
-        "text-translation-czech-english",
-    ],
     "JAPANESE_EN_MODEL": [
         "Helsinki-NLP/opus-mt-jap-en",
         "text-translation-japanese-english",
     ],
-    "DANISH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-da-en",
-        "text-translation-danish-english",
-    ],
 }
 
 FACEBOOK_TRANSLATION_MODELS = {
-    "GERMAN_EN_FB_MODEL": [
-        "translation-german-to-english-text",
-        "translation-german-to-english-text",
-    ],
-    "EN_GERMAN_FB_MODEL": [
-        "translation-english-to-german-text",
-        "translation-english-to-german-text",
-    ],
     "SPANISH_EN_FB_MODEL": [
         "translation-spanish-to-english-text",
         "translation-spanish-to-english-text",
-    ],
-    "EN_SPANISH_FB_MODEL": [
-        "translation-english-to-spanish-text",
-        "translation-english-to-spanish-text",
     ],
     "CHINESE_EN_FB_MODEL": [
         "translation-chinese-to-english-text",
@@ -198,14 +174,6 @@ FACEBOOK_TRANSLATION_MODELS = {
         "translation-english-to-russian-text",
         "translation-english-to-russian-text",
     ],
-    "TURKISH_EN_MODEL": [
-        "translation-turkish-to-english-text",
-        "translation-turkish-to-english-text",
-    ],
-    "EN_TURKISH_MODEL": [
-        "translation-english-to-turkish-text",
-        "translation-english-to-turkish-text",
-    ],
     "FRENCH_EN_MODEL": [
         "translation-french-to-english-text",
         "translation-french-to-english-text",
@@ -214,14 +182,6 @@ FACEBOOK_TRANSLATION_MODELS = {
         "translation-english-to-french-text",
         "translation-english-to-french-text",
     ],
-    "INDONESIAN_EN_MODEL": [
-        "translation-indonesian-to-english-text",
-        "translation-indonesian-to-english-text",
-    ],
-    "EN_INDONESIAN_MODEL": [
-        "translation-english-to-indonesian-text",
-        "translation-english-to-indonesian-text",
-    ],
     "ARABIC_EN_FB_MODEL": [
         "translation-arabic-to-english-text",
         "translation-arabic-to-english-text",
@@ -229,22 +189,6 @@ FACEBOOK_TRANSLATION_MODELS = {
     "EN_ARABIC_FB_MODEL": [
         "translation-english-to-arabic-text",
         "translation-english-to-arabic-text",
-    ],
-    "WELSH_EN_FB_MODEL": [
-        "translation-welsh-to-english-text",
-        "translation-welsh-to-english-text",
-    ],
-    "EN_WELSH_FB_MODEL": [
-        "translation-english-to-welsh-text",
-        "translation-english-to-welsh-text",
-    ],
-    "PORTUGESE_EN_MODEL": [
-        "translation-portuguese-to-english-text",
-        "translation-portuguese-to-english-text",
-    ],
-    "EN_PORTUGESE_MODEL": [
-        "translation-english-to-portuguese-text",
-        "translation-english-to-portuguese-text",
     ],
 }
 

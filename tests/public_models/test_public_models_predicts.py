@@ -1,5 +1,4 @@
 import pytest
-
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     BEER_VIDEO_URL,
@@ -99,7 +98,6 @@ def test_text_fb_translation_predict_on_public_models(channel):
         )
 
 
-@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels
 def test_text_helsinki_translation_predict_on_public_models(channel):
     """Test language translation models.
