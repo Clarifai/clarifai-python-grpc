@@ -128,7 +128,7 @@ OBJECT_DETECTION_MODELS_SHORT = {
 
 HELSINKINLP_TRANSLATION_MODELS = {
     "ROMANCE_EN_MODEL": [
-        "Text Translation: Romance to English",
+        "Helsinki-NLP/opus-mt-ROMANCE-en",
         "text-translation-romance-lang-english",
     ],
     "EN_SPANISH_MODEL": [
@@ -147,29 +147,13 @@ HELSINKINLP_TRANSLATION_MODELS = {
         "Helsinki-NLP/opus-mt-ar-en",
         "text-translation-arabic-english",
     ],
-    "WELSH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-cy-en",
-        "text-translation-welsh-english",
-    ],
-    "CZECH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-cs-en",
-        "text-translation-czech-english",
-    ],
     "JAPANESE_EN_MODEL": [
         "Helsinki-NLP/opus-mt-jap-en",
         "text-translation-japanese-english",
-    ],
-    "DANISH_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-da-en",
-        "text-translation-danish-english",
-    ],
+    ]
 }
 
 FACEBOOK_TRANSLATION_MODELS = {
-    "EN_GERMAN_FB_MODEL": [
-        "translation-english-to-german-text",
-        "translation-english-to-german-text",
-    ],
     "SPANISH_EN_FB_MODEL": [
         "translation-spanish-to-english-text",
         "translation-spanish-to-english-text",
@@ -189,10 +173,6 @@ FACEBOOK_TRANSLATION_MODELS = {
     "EN_RUSSIAN_MODEL": [
         "translation-english-to-russian-text",
         "translation-english-to-russian-text",
-    ],
-    "TURKISH_EN_MODEL": [
-        "translation-turkish-to-english-text",
-        "translation-turkish-to-english-text",
     ],
     "FRENCH_EN_MODEL": [
         "translation-french-to-english-text",
