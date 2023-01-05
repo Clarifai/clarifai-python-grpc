@@ -3879,7 +3879,6 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
     SEARCH_FIELD_NUMBER: builtins.int
     TRAIN_SEARCH_FIELD_NUMBER: builtins.int
     TEST_SEARCH_FIELD_NUMBER: builtins.int
-    EVALUATE_AFTER_TRAINING_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     DATASET_VERSION_FIELD_NUMBER: builtins.int
     EVAL_INFO_FIELD_NUMBER: builtins.int
@@ -3903,10 +3902,6 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
         """test_search is used to specify what data to test on.
         Alternatively, use dataset_version field.
         """
-    evaluate_after_training: builtins.bool
-    """whether to evaluate the transfer trained model after training
-    Deprecated, models will not be evaluated automatically after training.
-    """
     description: builtins.str
     """Description about this training run"""
     @property
@@ -3932,13 +3927,12 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
         search: proto.clarifai.api.resources_pb2.Search | None = ...,
         train_search: proto.clarifai.api.resources_pb2.Search | None = ...,
         test_search: proto.clarifai.api.resources_pb2.Search | None = ...,
-        evaluate_after_training: builtins.bool = ...,
         description: builtins.str = ...,
         dataset_version: proto.clarifai.api.resources_pb2.DatasetVersion | None = ...,
         eval_info: proto.clarifai.api.resources_pb2.EvalInfo | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "eval_info", b"eval_info", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "description", b"description", "eval_info", b"eval_info", "evaluate_after_training", b"evaluate_after_training", "model_id", b"model_id", "model_versions", b"model_versions", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "description", b"description", "eval_info", b"eval_info", "model_id", b"model_id", "model_versions", b"model_versions", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostModelVersionsRequest = PostModelVersionsRequest
 
