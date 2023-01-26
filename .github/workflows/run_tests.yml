@@ -36,6 +36,7 @@ jobs:
         CLARIFAI_USER_EMAIL_SECURE_HOSTING: ${{ secrets.CLARIFAI_USER_EMAIL_SECURE_HOSTING }}
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
+
       shell: bash
       run: |
         export PYTHONPATH=.
@@ -43,9 +44,9 @@ jobs:
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
-	export CLARIFAI_APP_ID_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-app python-github-secure-hosting)"
-	export CLARIFAI_APP_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
-	export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
+        export CLARIFAI_APP_ID_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-app python-github-secure-hosting)"
+        export CLARIFAI_APP_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
+        export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
         pip install pytest
         pytest tests/ -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
