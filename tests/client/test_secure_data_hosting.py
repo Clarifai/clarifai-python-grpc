@@ -39,7 +39,7 @@ if env_subdomain == "api-staging":
     default_secure_data_hosting_url = "https//data-staging.clarifai.com"
 else:
     default_secure_data_hosting_url = "https//data.clarifai.com"
-secure_data_hosting_url = os.envrion.get(
+secure_data_hosting_url = os.environ.get(
     "CLARIFAI_SECURE_DATA_HOSTING_URL", default_secure_data_hosting_url
 )
 ########
