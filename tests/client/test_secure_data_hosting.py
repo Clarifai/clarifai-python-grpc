@@ -1,5 +1,6 @@
-import requests
 import hashlib
+import os
+import requests
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
