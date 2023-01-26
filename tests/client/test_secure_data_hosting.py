@@ -19,11 +19,11 @@ from tests.common import (
 def metadata(pat=False):
     if pat:
         return (
-            ("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY_SECURE_DATA_HOSTING")),
+            ("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")),
         )
     else:
         return (
-            ("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY_SECURE_DATA_HOSTING")),
+            ("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")),
         )
 
 
