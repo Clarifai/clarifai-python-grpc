@@ -63,15 +63,17 @@ def test_adding_inputs(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     # Get app req to fetch custom-facing user/app ids
-    get_user_response = stub.GetUser(
-        service_pb2.GetUserRequest(user_app_id=resources_pn2.UserAppIDSet(user_id="me")),
+    app_cfid = os.environ["CLARIFAI_APP_ID_SECURE_HOSTING"]
+    get_app_response = stub.GetApp(
+        service_pb2.GetAppRequest(
+            user_app_id=resources_pn2.UserAppIDSet(user_id="me", app_id=app_cfid)
+        ),
         metadata=metadata(pat=True),
     )
-    raise_on_failure(get_user_response)
+    raise_on_failure(get_app_response)
 
     # needed to build secure hosting url
-    user_cfid = get_user_response.user.id  # get user cfid
-    app_cfid = os.environ["CLARIFAI_APP_ID_SECURE_HOSTING"]
+    user_cfid = get_app_response.app.user_id  # get user cfid
 
     post_image_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
