@@ -28,13 +28,12 @@ def get_bytes_hash(url):
     return hashlib.md5(r.raw.data).hexdigest()
 
 
+default_secure_data_hosting_url = "https//data.clarifai.com"
 env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
 if env_subdomain == "api-dev":
     default_secure_data_hosting_url = "https//data-dev.clarifai.com"
-if env_subdomain == "api-staging":
+elif env_subdomain == "api-staging":
     default_secure_data_hosting_url = "https//data-staging.clarifai.com"
-else:
-    default_secure_data_hosting_url = "https//data.clarifai.com"
 secure_data_hosting_url = os.environ.get(
     "CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url
 )
