@@ -143,7 +143,7 @@ def test_adding_inputs(channel):
             raise_on_failure(delete_response)
 
 
-def get_expected_input_urls(input_id, app_cfid, user_cfid, size, input_type, filename):
+def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
     expected_input_url = "%s/%s/users/%s/apps/%s/inputs/%s/%s" % (
         secure_data_hosting_url,
         size,
