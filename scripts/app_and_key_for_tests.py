@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+
+import argparse
 import json
 import os
 import sys
@@ -187,47 +190,36 @@ def _login():
 
 
 def run(arguments):
-    command = arguments[0] if arguments else '--help'
-    if command == '--create-app':
-        if len(arguments) != 2:
-            raise Exception('--create-app takes one argument')
-
-        env_name = arguments[1]
-        create_app(env_name)
-    elif command == '--create-key':
-        if len(arguments) != 2:
-            raise Exception('--create-key takes one argument')
-
-        app_id = arguments[1]
-        create_key(app_id)
-    elif command == '--create-pat':
-        if len(arguments) != 1:
-            raise Exception('--create-pat takes zero arguments')
-
+    if arguments.email:
+        EMAIL = arguments.email # override the default testing email
+    if arguments.password:
+        PASSWORD = arguments.password # override the default testing password
+    # these options are mutually exclusive
+    if arguments.env_name:
+        create_app(arguments.env_name)
+    elif arguments.app_id_for_key:
+        create_key(arguments.app_id_for_key)
+    elif arguments.create_pat:
         create_pat()
-    elif command == '--delete-app':
-        if len(arguments) != 2:
-            raise Exception('--delete-app takes one argument')
-        app_id = arguments[1]
-        delete(app_id)
-    elif command == '--create-workflow':
-        if len(arguments) != 2:
-            raise Exception('--create-workflow takes one argument')
-        api_key = arguments[1]
-        create_sample_workflow(api_key)
-    elif command == '--help':
-        print('''DESCRIPTION: Creates and delete applications and API keys
-ARGUMENTS:
---create-app [env_name]      ... Creates a new application.
---create-key [app_id]        ... Creates a new API key.
---create-pat                 ... Creates a new PAT key.
---delete-app [app_id]        ... Deletes an application (API keys that use it are deleted as well).
---create-workflow [api_key]  ... Creates a sample workflow to be used in int. tests.
---help                       ... This text.''')
+    elif arguments.app_id_to_delete:
+        delete(arguments.app_id_to_delete)
+    elif arguments.wf_api_key:
+        create_sample_workflow(arguments.wf_api_key)
     else:
-        print('Unknown argument. Please see --help')
+        print(f'No relevant arguments specified. Run {sys.argv[0]} --help to see available options')
         exit(1)
 
 
 if __name__ == '__main__':
-    run(arguments=sys.argv[1:])
+    parser = argparse.ArgumentParser(description="Create Applications, Keys, and Workflows for testing.")
+    parser.add_argument("--user-email", dest='email', help='The email of the account for which the command will run. (Defaults to ${CLARIFAI_USER_EMAIL})')
+    parser.add_argument("--user-password", dest='password', help='The password of the account for which the command will run. (Defaults to ${CLARIFAI_USER_PASSWORD})')
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument("--create-app", dest='env_name', help='Creates a new application.') 
+    group.add_argument("--create-key", dest='app_id_for_key', help='Creates a new API key.')
+    group.add_argument("--create-pat", action='store_true', help=' Creates a new PAT key.')
+    group.add_argument("--delete-app", dest='app_id_to_delete', help='Deletes an application (API keys that use it are deleted as well).') 
+    group.add_argument("--create-workflow", dest='wf_api_key', help='Creates a sample workflow to be used in client tests.')
+
+    args = parser.parse_args()
+    run(args)
