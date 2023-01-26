@@ -124,11 +124,18 @@ def test_adding_inputs(channel):
                 expected_input_url = get_expected_input_url(
                     inp, app_cfid, user_cfid, size, input_type, bytes_data_hashes[inp]
                 )
-                input_url = os.path.join(
-                    get_input_response.input.data.image.hosted.prefix,
-                    size,
-                    get_input_response.input.data.image.hosted.suffix,
-                )
+                if input_type == 'image':
+                    input_url = os.path.join(
+                        get_input_response.input.data.image.hosted.prefix,
+                        size,
+                        get_input_response.input.data.image.hosted.suffix,
+                    )
+                else:
+                    input_url = os.path.join(
+                        get_input_response.input.data.video.hosted.prefix,
+                        size,
+                        get_input_response.input.data.video.hosted.suffix,
+                    )
         assert expected_input_url == input_url, "URLs didnt match"
 
         list_inputs_response = stub.ListInputs(
