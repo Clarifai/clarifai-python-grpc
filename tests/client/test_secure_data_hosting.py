@@ -66,7 +66,7 @@ def test_adding_inputs(channel):
     app_cfid = os.environ["CLARIFAI_APP_ID_SECURE_HOSTING"]
     get_app_response = stub.GetApp(
         service_pb2.GetAppRequest(
-            user_app_id=resources_pn2.UserAppIDSet(user_id="me", app_id=app_cfid)
+            user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_cfid)
         ),
         metadata=metadata(pat=True),
     )
