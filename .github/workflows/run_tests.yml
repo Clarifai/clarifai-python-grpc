@@ -48,6 +48,6 @@ jobs:
         export CLARIFAI_APP_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
         export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
         pip install pytest
-        pytest tests/client/test_secura_data_hosting.py -n auto
+        pytest tests/client/test_secure_data_hosting.py -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
         python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
