@@ -175,6 +175,8 @@ def _auth_headers_for_api_key_key(api_key):
 def _login():
     url = '/login'
     payload = {'email': EMAIL, 'password': PASSWORD}
+    print(payload)
+    print(EMAIL)
     data = _request(method='POST', url=url, payload=payload)
     _assert_response_success(data)
 
@@ -191,6 +193,7 @@ def _login():
 
 def run(arguments):
     if arguments.email:
+        global EMAIL
         EMAIL = arguments.email # override the default testing email
     if arguments.password:
         PASSWORD = arguments.password # override the default testing password
