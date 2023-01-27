@@ -182,7 +182,7 @@ def test_adding_inputs(channel):
 
 
 def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
-    return f"{secure_data_hosting_url}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
+    return f"{get_secure_hosting_url()}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
 
     # TODO: Delete app afterwards in gh wf
     # TODO: Add new secret for CLARIFAI_USER_EMAIL_SECURE_HOSTING in ~/work/crons-api-client-tests/.github/workflows/grpc-python-client-test.yml
