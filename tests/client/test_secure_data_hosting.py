@@ -14,13 +14,12 @@ from tests.common import (
 
 req_session = requests.Session()
 
-# CLARIFAI_SESSION_TOKEN_SECURE_HOSTING
-PAT_AUTH_HEADER = (
-    ("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")),
-)
-API_AUTH_HEADER = (
-    ("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")),
-)
+PAT = os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")
+API_KEY = os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")
+SESSION_TOKEN = os.environ.get("CLARIFAI_SESSION_TOKEN_SECURE_HOSTING")
+
+PAT_AUTH_HEADER = (("authorization", "Key %s" % PAT),)
+API_AUTH_HEADER = (("authorization", "Key %s" % API_KEY),)
 
 
 def get_secure_hosting_url():
@@ -62,20 +61,20 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
 
 
 def verify_url_with_all_auths(expected_input_url):
-    pass
-
-
-"""
-    session_token_cookie = {'x_clarifai_session_token': ''}
-    session_token_header = {'X-Clarifai-Session-Token': ''}
-    api_key_cookie = {'x-clarifai-api-key': ''}
-    api_key_header = {'Authorization': ''}
-    pat_key_cookie = {'x-clarifai-api-key': ''}
-    pat_key_header = {'Authorization': ''}
+    session_token_cookie = {"x_clarifai_session_token": SESSION_TOKEN}
+    session_token_header = {"X-Clarifai-Session-Token": SESSION_TOKEN}
+    api_key_cookie = {"x-clarifai-api-key": API_KEY}
+    api_key_header = {API_AUTH_HEADER[0][0]: API_AUTH_HEADER[0][1]}
+    pat_cookie = {"x-clarifai-api-key": PAT}
+    pat_header = {PAT_AUTH_HEADER[0][0]: PAT_AUTH_HEADER[0][1]}
+    headers = [session_token_header, api_key_header, pat_header]
+    cookies = [session_token_cookie, api_key_cookie, pat_cookie]
     for header in headers:
-    r = req_session.get(expected_input_url, stream=True, headers={}, cookies={})
-    assert len(r.raw.data) != 0, f'No data was fetched from URL {expected_input_url}'
-"""
+        r = req_session.get(expected_input_url, stream=True, headers=header)
+        assert len(r.raw.data) != 0, f"No data was fetched from URL {expected_input_url}"
+    for cookie in cookies:
+        r = req_session.get(expected_input_url, stream=True, cookies=cookie)
+        assert len(r.raw.data) != 0, f"No data was fetched from URL {expected_input_url}"
 
 
 @both_channels
