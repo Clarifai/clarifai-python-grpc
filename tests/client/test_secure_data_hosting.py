@@ -72,6 +72,10 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
         )
 
 
+def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
+    return f"{get_secure_hosting_url()}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
+
+
 def verify_url_with_all_auths(expected_input_url):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
@@ -186,11 +190,3 @@ def test_adding_inputs(channel):
         delete_request = service_pb2.DeleteInputRequest(input_id=inp)
         delete_response = stub.DeleteInput(delete_request, metadata=API_CLIENT_AUTH)
         raise_on_failure(delete_response)
-
-
-def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
-    return f"{get_secure_hosting_url()}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
-
-    # TODO: Delete app afterwards in gh wf
-    # TODO: Add new secret for CLARIFAI_USER_EMAIL_SECURE_HOSTING in ~/work/crons-api-client-tests/.github/workflows/grpc-python-client-test.yml
-    #         both run_tests.yml and grpc-python-client-test.yml
