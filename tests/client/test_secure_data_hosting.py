@@ -53,7 +53,7 @@ def get_rehost_sizes(input_type):
     if input_type == "image":
         sizes = ["orig", "small", "large", "tiny"]
     elif input_type == "video":
-        sizes = ["orig"]  # , "thumbnail"]
+        sizes = ["orig", "thumbnail"]
     return sizes
 
 
