@@ -22,16 +22,17 @@ PAT_CLIENT_AUTH = (("authorization", "Key %s" % PAT),)
 API_CLIENT_AUTH = (("authorization", "Key %s" % API_KEY),)
 
 HTTP_AUTH_HEADERS = {
-    'session_token_header': {"X-Clarifai-Session-Token": SESSION_TOKEN}
-    'api_key_header': {API_CLIENT_AUTH[0][0]: API_CLIENT_AUTH[0][1]}
-    'pat_header': {PAT_CLIENT_AUTH[0][0]: PAT_CLIENT_AUTH[0][1]}
+    "session_token_header": {"X-Clarifai-Session-Token": SESSION_TOKEN},
+    "api_key_header": {API_CLIENT_AUTH[0][0]: API_CLIENT_AUTH[0][1]},
+    "pat_header": {PAT_CLIENT_AUTH[0][0]: PAT_CLIENT_AUTH[0][1]},
 }
 
 HTTP_COOKIE_HEADERS = {
-    'session_token_cookie': {"x_clarifai_session_token": SESSION_TOKEN}
-    'api_key_cookie': {"x-clarifai-api-key": API_KEY}
-    'pat_cookie': {"x-clarifai-api-key": PAT}
+    "session_token_cookie": {"x_clarifai_session_token": SESSION_TOKEN},
+    "api_key_cookie": {"x-clarifai-api-key": API_KEY},
+    "pat_cookie": {"x-clarifai-api-key": PAT},
 }
+
 
 def get_secure_hosting_url():
     default_secure_data_hosting_url = "https://data.clarifai.com"
@@ -42,9 +43,11 @@ def get_secure_hosting_url():
         default_secure_data_hosting_url = "https://data-staging.clarifai.com"
     return os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
 
+
 def get_bytes_hash_from_url(url):
     r = req_session.get(url, stream=True)
     return hashlib.md5(r.raw.data).hexdigest()
+
 
 def get_rehost_sizes(input_type):
     if input_type == "image":
@@ -52,6 +55,7 @@ def get_rehost_sizes(input_type):
     elif input_type == "video":
         sizes = ["orig", "thumbnail"]
     return sizes
+
 
 def build_rehost_url_from_api_input(api_input, size, input_type):
     if input_type == "image":
@@ -67,13 +71,19 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
             api_input.data.video.hosted.suffix,
         )
 
+
 def verify_url_with_all_auths(expected_input_url):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
-        assert len(r.raw.data) != 0, f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
+        assert (
+            len(r.raw.data) != 0
+        ), f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
-        assert len(r.raw.data) != 0, f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+        assert (
+            len(r.raw.data) != 0
+        ), f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+
 
 @both_channels
 def test_adding_inputs(channel):
