@@ -8,67 +8,105 @@ from tests.common import (
     TRAVEL_IMAGE_URL,
     BEER_VIDEO_URL,
     both_channels,
-    # metadata,
-    # secure_data_hosting_metadata, # make this a dict with all the headers we want to test
     raise_on_failure,
     wait_for_inputs_upload,
 )
 
-########
-# TODO: make sure we use different authentication methods
-def metadata(pat=False):
-    if pat:
-        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")),)
-    else:
-        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")),)
+req_session = requests.Session()
+
+# CLARIFAI_SESSION_TOKEN_SECURE_HOSTING
+PAT_AUTH_HEADER = (
+    ("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")),
+)
+API_AUTH_HEADER = (
+    ("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")),
+)
 
 
-def get_bytes_hash(url):
-    r = requests.get(url, stream=True)
+def get_secure_hosting_url():
+    default_secure_data_hosting_url = "https://data.clarifai.com"
+    env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
+    if env_subdomain == "api-dev":
+        default_secure_data_hosting_url = "https://data-dev.clarifai.com"
+    elif env_subdomain == "api-staging":
+        default_secure_data_hosting_url = "https://data-staging.clarifai.com"
+    return os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
+
+
+def get_bytes_hash_from_url(url):
+    r = req_session.get(url, stream=True)
     return hashlib.md5(r.raw.data).hexdigest()
 
 
-default_secure_data_hosting_url = "https://data.clarifai.com"
-env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
-if env_subdomain == "api-dev":
-    default_secure_data_hosting_url = "https://data-dev.clarifai.com"
-elif env_subdomain == "api-staging":
-    default_secure_data_hosting_url = "https://data-staging.clarifai.com"
-secure_data_hosting_url = os.environ.get(
-    "CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url
-)
-########
+def get_rehost_sizes(input_type):
+    if input_type == "image":
+        sizes = ["orig", "small", "large", "tiny"]
+    elif input_type == "video":
+        sizes = ["orig", "thumbnail"]
+    return sizes
+
+
+def build_rehost_url_from_api_input(api_input, input_type):
+    if input_type == "image":
+        return os.path.join(
+            api_input.data.image.hosted.prefix,
+            size,
+            api_input.data.image.hosted.suffix,
+        )
+    elif input_type == "video":
+        return os.path.join(
+            api_input.data.video.hosted.prefix,
+            size,
+            api_input.data.video.hosted.suffix,
+        )
+
+
+def verify_url_with_all_auths(expected_input_url):
+    pass
+
+
+"""
+    session_token_cookie = {'x_clarifai_session_token': ''}
+    session_token_header = {'X-Clarifai-Session-Token': ''}
+    api_key_cookie = {'x-clarifai-api-key': ''}
+    api_key_header = {'Authorization': ''}
+    pat_key_cookie = {'x-clarifai-api-key': ''}
+    pat_key_header = {'Authorization': ''}
+    for header in headers:
+    r = req_session.get(expected_input_url, stream=True, headers={}, cookies={})
+    assert len(r.raw.data) != 0, f'No data was fetched from URL {expected_input_url}'
+"""
 
 
 @both_channels
 def test_adding_inputs(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
 
     input_img1 = "truck-img"
     input_img2 = "travel-img"
     input_vid1 = "beer-vid"
 
-    bytes_data_hashes = {
-        input_img1: get_bytes_hash(TRUCK_IMAGE_URL),
-        input_img2: get_bytes_hash(TRAVEL_IMAGE_URL),
-        input_vid1: get_bytes_hash(BEER_VIDEO_URL),
+    bytes_data_hash_by_id = {
+        input_img1: get_bytes_hash_from_url(TRUCK_IMAGE_URL),
+        input_img2: get_bytes_hash_from_url(TRAVEL_IMAGE_URL),
+        input_vid1: get_bytes_hash_from_url(BEER_VIDEO_URL),
+    }
+    media_type_by_id = {
+        input_img1: "image",
+        input_img2: "image",
+        input_vid1: "video",
     }
 
-    inputs = [input_img1, input_img2, input_vid1]
-
-    stub = service_pb2_grpc.V2Stub(channel)
-
-    # Get app req to fetch custom-facing user/app ids
+    # Get app req to fetch customer-facing user id
     app_cfid = os.environ["CLARIFAI_APP_ID_SECURE_HOSTING"]
     get_app_response = stub.GetApp(
         service_pb2.GetAppRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_cfid)
         ),
-        metadata=metadata(pat=True),
+        metadata=PAT_AUTH_HEADER,
     )
     raise_on_failure(get_app_response)
-
-    # needed to build secure hosting url
-    user_cfid = get_app_response.app.user_id  # get user cfid
+    user_cfid = get_app_response.app.user_id  # needed to build expected secure url
 
     post_image_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
@@ -87,11 +125,11 @@ def test_adding_inputs(channel):
                 ),
             ]
         ),
-        metadata=metadata(),
+        metadata=API_AUTH_HEADER,
     )
     raise_on_failure(post_image_response)
 
-    post_video_response = stub.PostInputs(
+    post_video_response = stub.PostInputs(  # videos must be uploaded individually
         service_pb2.PostInputsRequest(
             inputs=[
                 resources_pb2.Input(
@@ -102,75 +140,50 @@ def test_adding_inputs(channel):
                 )
             ]
         ),
-        metadata=metadata(),
+        metadata=API_AUTH_HEADER,
     )
     raise_on_failure(post_video_response)
 
-    try:
-        wait_for_inputs_upload(stub, metadata(), inputs)
+    wait_for_inputs_upload(stub, API_AUTH_HEADER, bytes_data_hash_by_id.keys())
 
-        for inp in inputs:
-            get_input_response = stub.GetInput(
-                service_pb2.GetInputRequest(input_id=inp), metadata=metadata()
-            )
-            raise_on_failure(get_input_response)
-
-            input_type = "image" if "img" in inp else "video"
-            if "img" in inp:
-                sizes = ["orig", "small", "large", "tiny"]
-            elif "vid" in inp:
-                sizes = ["orig", "thumbnail"]
-            for size in sizes:
-                expected_input_url = get_expected_input_url(
-                    inp, app_cfid, user_cfid, size, input_type, bytes_data_hashes[inp]
-                )
-                if input_type == "image":
-                    input_url = os.path.join(
-                        get_input_response.input.data.image.hosted.prefix,
-                        size,
-                        get_input_response.input.data.image.hosted.suffix,
-                    )
-                else:
-                    input_url = os.path.join(
-                        get_input_response.input.data.video.hosted.prefix,
-                        size,
-                        get_input_response.input.data.video.hosted.suffix,
-                    )
-        assert expected_input_url == input_url, "URLs didnt match"
-
-        list_inputs_response = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=10), metadata=metadata()
+    # list input
+    list_inputs_response = stub.ListInputs(
+        service_pb2.ListInputsRequest(per_page=10), metadata=API_AUTH_HEADER
+    )
+    raise_on_failure(list_inputs_response)
+    assert len(list_inputs_response.inputs) == len(bytes_data_hash_by_id.keys())
+    # verify get and list inputs are fetchable and have the correct data
+    for api_input in list_inputs_response.inputs:
+        input_id = api_input.id
+        get_input_response = stub.GetInput(
+            service_pb2.GetInputRequest(input_id=input_id), metadata=API_AUTH_HEADER
         )
-        raise_on_failure(list_inputs_response)
-        assert len(list_inputs_response.inputs) == len(inputs)
-    finally:
-        for inp in inputs:
-            delete_request = service_pb2.DeleteInputRequest(input_id=inp)
-            delete_response = stub.DeleteInput(delete_request, metadata=metadata())
-            raise_on_failure(delete_response)
+        raise_on_failure(get_input_response)
+
+        input_type = media_type_by_id[input_id]
+        sizes = get_rehost_sizes(input_type)
+        for size in sizes:
+            expected_input_url = get_expected_input_url(
+                input_id, app_cfid, user_cfid, size, input_type, bytes_data_hash_by_id[input_id]
+            )
+            input_url_from_list = build_rehost_url_from_api_input(api_input, input_type)
+            assert expected_input_url == input_url_from_list, "URL from List Inputs didnt match"
+            input_url_from_get = build_rehost_url_from_api_input(
+                get_input_response.input, input_type
+            )
+            assert expected_input_url == input_url_from_get, "URL fron Get Input didnt match"
+            verify_url_with_all_auths(expected_input_url)
+
+    # delete inputs
+    for inp in bytes_data_hash_by_id.keys():
+        delete_request = service_pb2.DeleteInputRequest(input_id=inp)
+        delete_response = stub.DeleteInput(delete_request, metadata=API_AUTH_HEADER)
+        raise_on_failure(delete_response)
 
 
 def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
-    expected_input_url = "%s/%s/users/%s/apps/%s/inputs/%s/%s" % (
-        secure_data_hosting_url,
-        size,
-        user_cfid,
-        app_cfid,
-        input_type,
-        filename,
-    )
-    return expected_input_url
+    return f"{secure_data_hosting_url}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
 
-    # TODO: Get password of current test user (and reuse it?) -- done
-    # TODO: Create User in dev/staging/prod (delete suffixed emails) -- done
-    # TODO: Use admin API to enable secure data hosting -- done
-    # TODO: Add github secret for CLARIFAI_USER_EMAIL_SECURE_HOSTING to add to ~/work/clarifai-python-grpc/.github/workflows/run_tests.yml -- done
-    # TODO: Update secure data hosting version of CLARIFAI_APP_ID, CLARIFAI_API_KEY, CLARIFAI_PAT_KEY in -- done
-    # write tests:
-    # POST inputs to the app
-    # list inputs for the app
-    # get individual inputs
-    # fetch inputs with requests library
-
+    # TODO: Delete app afterwards in gh wf
     # TODO: Add new secret for CLARIFAI_USER_EMAIL_SECURE_HOSTING in ~/work/crons-api-client-tests/.github/workflows/grpc-python-client-test.yml
     #         both run_tests.yml and grpc-python-client-test.yml
