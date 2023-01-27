@@ -139,7 +139,7 @@ def test_adding_inputs(channel):
         assert expected_input_url == input_url, "URLs didnt match"
 
         list_inputs_response = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=1), metadata=metadata()
+            service_pb2.ListInputsRequest(per_page=10), metadata=metadata()
         )
         raise_on_failure(list_inputs_response)
         assert len(list_inputs_response.inputs) == len(inputs)
