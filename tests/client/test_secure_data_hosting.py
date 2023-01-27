@@ -46,7 +46,7 @@ def get_rehost_sizes(input_type):
     return sizes
 
 
-def build_rehost_url_from_api_input(api_input, input_type):
+def build_rehost_url_from_api_input(api_input, size, input_type):
     if input_type == "image":
         return os.path.join(
             api_input.data.image.hosted.prefix,
@@ -166,10 +166,10 @@ def test_adding_inputs(channel):
             expected_input_url = get_expected_input_url(
                 input_id, app_cfid, user_cfid, size, input_type, bytes_data_hash_by_id[input_id]
             )
-            input_url_from_list = build_rehost_url_from_api_input(api_input, input_type)
+            input_url_from_list = build_rehost_url_from_api_input(api_input, size, input_type)
             assert expected_input_url == input_url_from_list, "URL from List Inputs didnt match"
             input_url_from_get = build_rehost_url_from_api_input(
-                get_input_response.input, input_type
+                get_input_response.input, size, input_type
             )
             assert expected_input_url == input_url_from_get, "URL fron Get Input didnt match"
             verify_url_with_all_auths(expected_input_url)
