@@ -83,10 +83,14 @@ def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, file
 def verify_url_with_all_auths(expected_input_url):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
-        assert r.status_code == 200, f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
+        assert (
+            r.status_code == 200
+        ), f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
-        assert r.status_code == 200, f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+        assert (
+            r.status_code == 200
+        ), f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
 
 
 @both_channels
