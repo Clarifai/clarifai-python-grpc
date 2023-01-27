@@ -59,16 +59,20 @@ def get_rehost_sizes(input_type):
 
 def build_rehost_url_from_api_input(api_input, size, input_type):
     if input_type == "image":
-        return os.path.join(
-            api_input.data.image.hosted.prefix,
-            size,
-            api_input.data.image.hosted.suffix,
+        return "/".join(
+            [
+                api_input.data.image.hosted.prefix,
+                size,
+                api_input.data.image.hosted.suffix,
+            ]
         )
     elif input_type == "video":
-        return os.path.join(
-            api_input.data.video.hosted.prefix,
-            size,
-            api_input.data.video.hosted.suffix,
+        return "/".join(
+            [
+                api_input.data.video.hosted.prefix,
+                size,
+                api_input.data.video.hosted.suffix,
+            ]
         )
 
 
