@@ -22,13 +22,13 @@ PAT_CLIENT_AUTH = (("authorization", "Key %s" % PAT),)
 API_CLIENT_AUTH = (("authorization", "Key %s" % API_KEY),)
 
 HTTP_AUTH_HEADERS = {
-    "session_token_header": {"X-Clarifai-Session-Token": SESSION_TOKEN},
+    # "session_token_header": {"X-Clarifai-Session-Token": SESSION_TOKEN},
     "api_key_header": {API_CLIENT_AUTH[0][0]: API_CLIENT_AUTH[0][1]},
     "pat_header": {PAT_CLIENT_AUTH[0][0]: PAT_CLIENT_AUTH[0][1]},
 }
 
 HTTP_COOKIE_HEADERS = {
-    "session_token_cookie": {"x_clarifai_session_token": SESSION_TOKEN},
+    # "session_token_cookie": {"x_clarifai_session_token": SESSION_TOKEN},
     "api_key_cookie": {"x-clarifai-api-key": API_KEY},
     "pat_cookie": {"x-clarifai-api-key": PAT},
 }
