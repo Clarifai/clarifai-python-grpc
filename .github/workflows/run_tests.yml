@@ -39,13 +39,13 @@ jobs:
 
       shell: bash
       run: |
-        echo "test run for staging"
-        echo "test run for staging"
-        echo "test run for staging"
-        echo "test run for staging"
+        echo "test run for dev"
+        echo "test run for dev"
+        echo "test run for dev"
+        echo "test run for dev"
         export PYTHONPATH=.
-        export CLARIFAI_SECURE_HOSTING_URL='https://data-staging.clarifai.com' #TODO: DELETE
-        export CLARIFAI_GRPC_BASE="api-staging.clarifai.com"  #TODO: DELETE
+        export CLARIFAI_SECURE_HOSTING_URL='https://data-dev.clarifai.com' #TODO: DELETE
+        export CLARIFAI_GRPC_BASE="api-dev.clarifai.com"  #TODO: DELETE
         export CLARIFAI_API_BASE="https://${CLARIFAI_GRPC_BASE}" # CLARIFAI_GRPC_BASE is used by the gRPC channel #TODO:  DELETE
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
