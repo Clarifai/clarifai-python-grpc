@@ -3170,6 +3170,7 @@ class OutputConfig(google.protobuf.message.Message):
     closed_environment: builtins.bool
     """For custom concept model training: Whether negatives should only be sampled from within the app during
     training, for custom models.
+    Deprecated field. Use train_info.params.enrich_dataset for the model types that support it.
     """
     existing_model_id: builtins.str
     """DEPRECATED: For custom models, this is the base model to use for image embeddings.
