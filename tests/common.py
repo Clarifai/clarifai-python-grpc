@@ -1,4 +1,3 @@
-import logging
 import os
 import time
 from typing import Tuple
@@ -10,18 +9,6 @@ from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
-
-def setup_logger():
-    handler = logging.StreamHandler()
-    logging.basicConfig(
-        level=logging.DEBUG,
-        format="[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s --- %(message)s",
-        handlers=[handler],
-    )
-
-
-setup_logger()
-logger = logging.getLogger("Tests_Logger")
 
 MAX_RETRY_ATTEMPTS = 15
 
