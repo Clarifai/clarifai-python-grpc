@@ -1,6 +1,5 @@
 import logging
 import os
-import sys
 import time
 from typing import Tuple
 
@@ -13,7 +12,7 @@ from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
 
 def setup_logger():
-    handler = logging.StreamHandler(stream=sys.stdout)
+    handler = logging.StreamHandler()
     logging.basicConfig(
         level=logging.DEBUG,
         format="[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s --- %(message)s",
