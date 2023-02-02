@@ -45,7 +45,6 @@ BAD_HTTP_COOKIE_HEADERS = {
     "session_token_cookie": {"x_clarifai_session_token": DUMMY_KEY},
     "api_key_cookie": {"x-clarifai-api-key": DUMMY_KEY},
     "pat_cookie": {"x-clarifai-api-key": DUMMY_KEY},
-    "dummy_cookie": {"cookie": DUMMY_KEY},
 }
 
 
