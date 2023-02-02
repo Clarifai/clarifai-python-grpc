@@ -8,9 +8,11 @@ from tests.common import (
     TRAVEL_IMAGE_URL,
     BEER_VIDEO_URL,
     both_channels,
+    logger,
     raise_on_failure,
     wait_for_inputs_upload,
 )
+
 
 req_session = requests.Session()
 
@@ -55,7 +57,6 @@ def get_secure_hosting_url():
     elif env_subdomain == "api-staging":
         default_secure_data_hosting_url = "https://data-staging.clarifai.com"
     url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
-    print(f"Secure Hosting URL '{url}'")
     return url
 
 
@@ -138,6 +139,7 @@ def verify_url_with_bad_auth(expected_input_url):
 
 @both_channels
 def test_adding_inputs(channel):
+    logger.info(f"Secure Hosting URL for tests: '{get_secure_data_hosting_url()}'")
     stub = service_pb2_grpc.V2Stub(channel)
 
     input_img1 = "truck-img"
