@@ -54,7 +54,9 @@ def get_secure_hosting_url():
         default_secure_data_hosting_url = "https://data-dev.clarifai.com"
     elif env_subdomain == "api-staging":
         default_secure_data_hosting_url = "https://data-staging.clarifai.com"
-    return os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
+    url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
+    print(f"Secure Hosting URL '{url}'")
+    return url
 
 
 def get_bytes_hash_from_url(url):
@@ -89,7 +91,7 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
         )
 
 
-def verify_url_with_all_auths(expected_input_url):
+def verify_url_with_all_auths(expected_input_url, verify_func=None):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
         assert (
@@ -98,6 +100,10 @@ def verify_url_with_all_auths(expected_input_url):
         assert len(
             r.raw.data
         ), f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
+        if verify_func:
+            assert verify_func(
+                r.raw.data
+            ), f"Data fetched for header type {header_type}, didn't match expected hash"
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
         assert (
@@ -106,6 +112,10 @@ def verify_url_with_all_auths(expected_input_url):
         assert len(
             r.raw.data
         ), f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+        if verify_func:
+            assert verify_func(
+                r.raw.data
+            ), f"Data fetched for cookie type {cookie_type}, didn't match expected hash"
 
 
 def verify_url_with_bad_auth(expected_input_url):
@@ -134,7 +144,7 @@ def test_adding_inputs(channel):
     input_img2 = "travel-img"
     input_vid1 = "beer-vid"
 
-    bytes_data_hash_by_id = {
+    bytes_hash_by_id = {
         input_img1: get_bytes_hash_from_url(TRUCK_IMAGE_URL),
         input_img2: get_bytes_hash_from_url(TRAVEL_IMAGE_URL),
         input_vid1: get_bytes_hash_from_url(BEER_VIDEO_URL),
@@ -188,28 +198,28 @@ def test_adding_inputs(channel):
         )
         raise_on_failure(post_video_response)
 
-        wait_for_inputs_upload(stub, API_CLIENT_AUTH, bytes_data_hash_by_id.keys())
+        wait_for_inputs_upload(stub, API_CLIENT_AUTH, bytes_hash_by_id.keys())
 
         # list input
         list_inputs_response = stub.ListInputs(
             service_pb2.ListInputsRequest(per_page=10), metadata=API_CLIENT_AUTH
         )
         raise_on_failure(list_inputs_response)
-        assert len(list_inputs_response.inputs) == len(bytes_data_hash_by_id.keys())
+        assert len(list_inputs_response.inputs) == len(bytes_hash_by_id.keys())
         # verify get and list inputs are fetchable and have the correct data
         for api_input in list_inputs_response.inputs:
-            input_id = api_input.id
+            cfid = api_input.id
             get_input_response = stub.GetInput(
-                service_pb2.GetInputRequest(input_id=input_id), metadata=API_CLIENT_AUTH
+                service_pb2.GetInputRequest(input_id=cfid), metadata=API_CLIENT_AUTH
             )
             raise_on_failure(get_input_response)
 
-            input_type = media_type_by_id[input_id]
+            input_type = media_type_by_id[cfid]
             sizes = get_rehost_sizes(input_type)
-            for size in sizes:
-                input_url_from_list = build_rehost_url_from_api_input(api_input, size, input_type)
+            for s in sizes:
+                input_url_from_list = build_rehost_url_from_api_input(api_input, s, input_type)
                 input_url_from_get = build_rehost_url_from_api_input(
-                    get_input_response.input, size, input_type
+                    get_input_response.input, s, input_type
                 )
                 assert (
                     input_url_from_list == input_url_from_get
@@ -217,12 +227,16 @@ def test_adding_inputs(channel):
                 assert (
                     get_secure_hosting_url() in input_url_from_get
                 ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
-
-                verify_url_with_all_auths(input_url_from_get)  # these should pass
+                fn = (
+                    lambda byts: hashlib.md5(byts).hexdigest() == bytes_hash_by_id[cfid]
+                    if s == orig
+                    else None
+                )
+                verify_url_with_all_auths(input_url_from_get, verify_func=fn)
                 verify_url_with_bad_auth(input_url_from_get)  # these should fail
     finally:
         # delete inputs
-        for inp in bytes_data_hash_by_id.keys():
-            delete_request = service_pb2.DeleteInputRequest(input_id=inp)
+        for cfid in bytes_hash_by_id.keys():
+            delete_request = service_pb2.DeleteInputRequest(input_id=cfid)
             delete_response = stub.DeleteInput(delete_request, metadata=API_CLIENT_AUTH)
             raise_on_failure(delete_response)
