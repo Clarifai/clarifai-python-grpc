@@ -1,3 +1,4 @@
+import logging
 import hashlib
 import os
 import requests
@@ -14,6 +15,7 @@ from tests.common import (
 
 req_session = requests.Session()
 
+DUMMY_KEY = "0" * 32
 PAT = os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")
 API_KEY = os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")
 SESSION_TOKEN = os.environ.get("CLARIFAI_SESSION_TOKEN_SECURE_HOSTING")
@@ -27,10 +29,23 @@ HTTP_AUTH_HEADERS = {
     "pat_header": {PAT_CLIENT_AUTH[0][0]: PAT_CLIENT_AUTH[0][1]},
 }
 
+BAD_HTTP_AUTH_HEADERS = {
+    "session_token_header": {"X-Clarifai-Session-Token": DUMMY_KEY},
+    "api_key_header": {API_CLIENT_AUTH[0][0]: "Key %s" % DUMMY_KEY},
+    "pat_header": {PAT_CLIENT_AUTH[0][0]: "Key %s" % DUMMY_KEY},
+}
+
 HTTP_COOKIE_HEADERS = {
     "session_token_cookie": {"x_clarifai_session_token": SESSION_TOKEN},
     "api_key_cookie": {"x-clarifai-api-key": API_KEY},
     "pat_cookie": {"x-clarifai-api-key": PAT},
+}
+
+BAD_HTTP_COOKIE_HEADERS = {
+    "session_token_cookie": {"x_clarifai_session_token": DUMMY_KEY},
+    "api_key_cookie": {"x-clarifai-api-key": DUMMY_KEY},
+    "pat_cookie": {"x-clarifai-api-key": DUMMY_KEY},
+    "dummy_cookie": {"cookie": DUMMY_KEY},
 }
 
 
@@ -76,25 +91,46 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
         )
 
 
-def get_expected_input_url(input_id, app_cfid, user_cfid, size, input_type, filename):
-    return f"{get_secure_hosting_url()}/{size}/users/{user_cfid}/apps/{app_cfid}/inputs/{input_type}/{filename}"
-
-
 def verify_url_with_all_auths(expected_input_url):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
         assert (
             r.status_code == 200
+        ), f"Non-200 response obtained for URL {expected_input_url}; header type: {header_type}"
+        assert len(
+            r.raw.data
         ), f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
         assert (
             r.status_code == 200
+        ), f"Non-200 response obtained for URL {expected_input_url}; cookie type: {cookie_type}"
+        assert len(
+            r.raw.data
         ), f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+
+
+def verify_url_with_bad_auth(expected_input_url):
+    for header_type, header in BAD_HTTP_AUTH_HEADERS.items():
+        r = req_session.get(expected_input_url, stream=True, headers=header)
+        assert (
+            r.status_code == 401
+        ), f"Expected Code: 401, Actual: {r.status_code} header type: {header_type}"
+    for cookie_type, cookie in BAD_HTTP_COOKIE_HEADERS.items():
+        r = req_session.get(expected_input_url, stream=True, cookies=cookie)
+        assert (
+            r.status_code == 401
+        ), f"Expected Code: 401, Actual: {r.status_code} cookie type: {cookie_type}"
+    # No header/cookie results should result in BAD REQUEST (400)
+    r = req_session.get(expected_input_url, stream=True)
+    assert (
+        r.status_code == 400
+    ), f"Expected Code: 400, Actual: {r.status_code} cookie type: {cookie_type}"
 
 
 @both_channels
 def test_adding_inputs(channel):
+    logging.info("SIMPLE LOGGING LOG ENV!!!!!!!!")
     stub = service_pb2_grpc.V2Stub(channel)
 
     input_img1 = "truck-img"
@@ -111,17 +147,6 @@ def test_adding_inputs(channel):
         input_img2: "image",
         input_vid1: "video",
     }
-
-    # Get app req to fetch customer-facing user id
-    app_cfid = os.environ["CLARIFAI_APP_ID_SECURE_HOSTING"]
-    get_app_response = stub.GetApp(
-        service_pb2.GetAppRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_cfid)
-        ),
-        metadata=PAT_CLIENT_AUTH,
-    )
-    raise_on_failure(get_app_response)
-    user_cfid = get_app_response.app.user_id  # needed to build expected secure url
 
     try:
         post_image_response = stub.PostInputs(
@@ -185,23 +210,19 @@ def test_adding_inputs(channel):
             input_type = media_type_by_id[input_id]
             sizes = get_rehost_sizes(input_type)
             for size in sizes:
-                expected_input_url = get_expected_input_url(
-                    input_id,
-                    app_cfid,
-                    user_cfid,
-                    size,
-                    input_type,
-                    bytes_data_hash_by_id[input_id],
-                )
                 input_url_from_list = build_rehost_url_from_api_input(api_input, size, input_type)
-                assert (
-                    expected_input_url == input_url_from_list
-                ), "URL from List Inputs didnt match"
                 input_url_from_get = build_rehost_url_from_api_input(
                     get_input_response.input, size, input_type
                 )
-                assert expected_input_url == input_url_from_get, "URL fron Get Input didnt match"
-                verify_url_with_all_auths(expected_input_url)
+                assert (
+                    input_url_from_list == input_url_from_get
+                ), "URL from Get and List calls  didnt match."
+                assert (
+                    get_secure_hosting_url() in input_url_from_get
+                ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
+
+                verify_url_with_all_auths(expected_input_url)  # these should pass
+                verify_url_with_bad_auth(expected_input_url)  # these should fail
     finally:
         # delete inputs
         for inp in bytes_data_hash_by_id.keys():
