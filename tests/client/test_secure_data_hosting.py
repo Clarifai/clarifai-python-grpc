@@ -228,7 +228,7 @@ def test_adding_inputs(channel):
                     get_secure_hosting_url() in input_url_from_get
                 ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
                 fn = (
-                    lambda byts: hashlib.md5(byts).hexdigest() == bytes_hash_by_id[cfid]
+                    (lambda byts: hashlib.md5(byts).hexdigest() == bytes_hash_by_id[cfid])
                     if s == "orig"
                     else None
                 )
