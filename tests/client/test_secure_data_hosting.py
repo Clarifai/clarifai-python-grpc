@@ -229,7 +229,7 @@ def test_adding_inputs(channel):
                 ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
                 fn = (
                     lambda byts: hashlib.md5(byts).hexdigest() == bytes_hash_by_id[cfid]
-                    if s == orig
+                    if s == "orig"
                     else None
                 )
                 verify_url_with_all_auths(input_url_from_get, verify_func=fn)
