@@ -1,4 +1,3 @@
-import logging
 import hashlib
 import os
 import requests
@@ -129,7 +128,6 @@ def verify_url_with_bad_auth(expected_input_url):
 
 @both_channels
 def test_adding_inputs(channel):
-    logging.info("SIMPLE LOGGING LOG ENV!!!!!!!!")
     stub = service_pb2_grpc.V2Stub(channel)
 
     input_img1 = "truck-img"
