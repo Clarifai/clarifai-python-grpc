@@ -10,16 +10,18 @@ from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
+
 def setup_logger():
     handler = logging.StreamHandler()
     logging.basicConfig(
         level=logging.DEBUG,
-        format='[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s --- %(message)s',
+        format="[%(asctime)s] {%(filename)s:%(lineno)d} %(levelname)s --- %(message)s",
         handlers=[handler],
     )
 
+
 setup_logger()
-logger = logging.getLogger('Tests_Logger')
+logger = logging.getLogger("Tests_Logger")
 
 MAX_RETRY_ATTEMPTS = 15
 
@@ -34,6 +36,7 @@ CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
+
 
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
