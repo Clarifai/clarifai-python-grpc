@@ -221,8 +221,8 @@ def test_adding_inputs(channel):
                     get_secure_hosting_url() in input_url_from_get
                 ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
 
-                verify_url_with_all_auths(expected_input_url)  # these should pass
-                verify_url_with_bad_auth(expected_input_url)  # these should fail
+                verify_url_with_all_auths(input_url_from_get)  # these should pass
+                verify_url_with_bad_auth(input_url_from_get)  # these should fail
     finally:
         # delete inputs
         for inp in bytes_data_hash_by_id.keys():
