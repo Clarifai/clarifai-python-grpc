@@ -216,7 +216,7 @@ def test_adding_inputs(channel):
                 )
                 assert (
                     input_url_from_list == input_url_from_get
-                ), "URL from Get and List calls  didnt match."
+                ), "URL from Get and List calls didn't match."
                 assert (
                     get_secure_hosting_url() in input_url_from_get
                 ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
