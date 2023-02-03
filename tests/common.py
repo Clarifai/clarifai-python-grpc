@@ -9,6 +9,7 @@ from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
+
 MAX_RETRY_ATTEMPTS = 15
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
@@ -162,8 +163,8 @@ def _retry_on_504_on_non_prod(func):
             ):  # will want to retry
                 break
         except _Rendezvous as e:
-            grpc_base = os.environ.get("CLARIFAI_GRPC_BASE")
-            if not grpc_base or grpc_base == "api.clarifai.com":
+            grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+            if grpc_base == "api.clarifai.com":
                 raise e
 
             if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
