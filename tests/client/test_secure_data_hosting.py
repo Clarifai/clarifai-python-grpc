@@ -141,9 +141,9 @@ def verify_url_with_bad_auth(expected_input_url):
 def test_adding_inputs(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    input_img1 = "truck-img-" + str(time.time())
-    input_img2 = "travel-img-" + str(time.time())
-    input_vid1 = "beer-vid-" + str(time.time())
+    input_img1 = "truck-img-" + str(time.time()).replace(".", "-")
+    input_img2 = "travel-img-" + str(time.time()).replace(".", "-")
+    input_vid1 = "beer-vid-" + str(time.time()).replace(".", "-")
 
     bytes_hash_by_id = {
         input_img1: get_bytes_hash_from_url(TRUCK_IMAGE_URL),
