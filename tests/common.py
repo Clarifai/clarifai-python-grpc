@@ -149,7 +149,7 @@ def post_model_outputs_and_maybe_allow_retries(
 ):
     # first make sure we don't run into GRPC timeout issues and that the API can be reached.
     response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
-    # check individual outputs of the previous response, if there are any, to see if their code means we retry prediction
+    # retry when status of response is FAILURE
     response = _retry_on_unsuccessful_predicts_on_non_prod(
         stub.PostModelOutputs,
         request=request,
@@ -165,7 +165,8 @@ def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, re
         return response  # only retry in non-prod
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
         if response.status != status_code_pb2.FAILURE:
-            return response  # don't retry if top-level response code is not FAILURE
+            return response  # don't retry on non-FAILURE codes
+        print("request retry attempt {i}")
         response = stub_call(request=request, metadata=metadata)
     return response
 
