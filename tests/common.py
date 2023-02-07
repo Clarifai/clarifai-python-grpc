@@ -166,7 +166,7 @@ def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, re
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
         if response.status.code != status_code_pb2.SUCCESS:
             return response  # don't retry on non-FAILURE codes
-        print("request retry attempt {i}")
+        print(f"request retry attempt {i}")
         response = stub_call(request=request, metadata=metadata)
     return response
 
