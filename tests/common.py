@@ -169,7 +169,7 @@ def _retry_on_unsuccessful_predicts_on_non_prod(
     if response.status == status_code_pb2.SUCCESS:
         return response  # don't retry if top-level response code is SUCCESS
     if not retryable_output_codes or all(
-        [out.status_code not in retrayble_codes for out in response.outputs]
+        [out.status.code not in retryable_output_codes for out in response.outputs]
     ):
         return response  # return if condition to retry is not met
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
