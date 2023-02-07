@@ -164,7 +164,7 @@ def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, re
     if grpc_base == "api.clarifai.com":
         return response  # only retry in non-prod
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
-        if response.status != status_code_pb2.FAILURE:
+        if response.status.code != status_code_pb2.SUCCESS:
             return response  # don't retry on non-FAILURE codes
         print("request retry attempt {i}")
         response = stub_call(request=request, metadata=metadata)
