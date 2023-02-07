@@ -1,6 +1,5 @@
 import pytest
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import (
     BEER_VIDEO_URL,
     DOG_IMAGE_URL,
