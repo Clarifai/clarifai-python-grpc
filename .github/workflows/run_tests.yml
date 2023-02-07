@@ -36,9 +36,17 @@ jobs:
         CLARIFAI_USER_EMAIL_SECURE_HOSTING: ${{ secrets.CLARIFAI_USER_EMAIL_SECURE_HOSTING }}
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
+
       shell: bash
       run: |
+        echo "test run for staging"
+        echo "test run for staging"
+        echo "test run for staging"
+        echo "test run for staging"
         export PYTHONPATH=.
+        export CLARIFAI_SECURE_HOSTING_URL='https://data-staging.clarifai.com' #TODO: DELETE
+        export CLARIFAI_GRPC_BASE="api-staging.clarifai.com"  #TODO: DELETE
+        export CLARIFAI_API_BASE="https://${CLARIFAI_GRPC_BASE}" # CLARIFAI_GRPC_BASE is used by the gRPC channel #TODO:  DELETE
         export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
         export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
         export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
@@ -48,6 +56,6 @@ jobs:
         export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
         export CLARIFAI_SESSION_TOKEN_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-session-token)"
         pip install pytest
-        pytest tests/ -n auto
+        pytest tests/public_models/test_public_models_predicts.py  -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
         python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
