@@ -146,7 +146,7 @@ def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub,
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
-    retryable_output_codes: List[int] = [],
+    retryable_output_codes: List[int] = [status_code_pb2.INTERNAL_UNCATEGORIZED],
 ):
     # first make sure we don't run into GRPC timeout issues and that the API can be reached.
     response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
