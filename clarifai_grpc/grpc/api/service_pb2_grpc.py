@@ -449,6 +449,21 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse),
                 )
+        self.PostModelVersionEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/PostModelVersionEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse),
+                )
+        self.ListModelVersionEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/ListModelVersionEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse),
+                )
+        self.GetModelVersionEvaluation = channel.unary_unary(
+                '/clarifai.api.V2/GetModelVersionEvaluation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse),
+                )
         self.ListModelReferences = channel.unary_unary(
                 '/clarifai.api.V2/ListModelReferences',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelReferencesRequest.SerializeToString,
@@ -1623,14 +1638,36 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetModelVersionMetrics(self, request, context):
-        """Get the evaluation metrics for a model version.
+        """Deprecated: Use GetModelVersionEvaluation instead
+        Get the evaluation metrics for a model version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def PostModelVersionMetrics(self, request, context):
-        """Run the evaluation metrics for a model version.
+        """Deprecated, use PostModelVersionEvaluations instead
+        Run the evaluation metrics for a model version.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostModelVersionEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListModelVersionEvaluations(self, request, context):
+        """List the evaluation metrics for a model version.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetModelVersionEvaluation(self, request, context):
+        """Get an evaluation metrics for a model version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2855,6 +2892,21 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostModelVersionMetrics,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.SerializeToString,
+            ),
+            'PostModelVersionEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelVersionEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.SerializeToString,
+            ),
+            'ListModelVersionEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListModelVersionEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.SerializeToString,
+            ),
+            'GetModelVersionEvaluation': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetModelVersionEvaluation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.SerializeToString,
             ),
             'ListModelReferences': grpc.unary_unary_rpc_method_handler(
                     servicer.ListModelReferences,
@@ -4847,6 +4899,57 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelVersionMetrics',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionMetricsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostModelVersionEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelVersionEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListModelVersionEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListModelVersionEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListModelVersionEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetModelVersionEvaluation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetModelVersionEvaluation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

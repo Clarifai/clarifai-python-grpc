@@ -2100,6 +2100,26 @@ class Input(google.protobuf.message.Message):
 global___Input = Input
 
 @typing_extensions.final
+class InputBatch(google.protobuf.message.Message):
+    """InputBatch is a batch of Input resources. Large amounts of inputs are usually
+    divided into multiple InputBatches.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_FIELD_NUMBER: builtins.int
+    @property
+    def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Input]: ...
+    def __init__(
+        self,
+        *,
+        inputs: collections.abc.Iterable[global___Input] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs"]) -> None: ...
+
+global___InputBatch = InputBatch
+
+@typing_extensions.final
 class InputCount(google.protobuf.message.Message):
     """NOTE: inconsistency: this is weird mix of plural and singular words."""
 
@@ -6644,6 +6664,27 @@ class DatasetInputsSearchAddJob(google.protobuf.message.Message):
 global___DatasetInputsSearchAddJob = DatasetInputsSearchAddJob
 
 @typing_extensions.final
+class DuplicateAnnotationsResults(google.protobuf.message.Message):
+    """DuplicateAnnotationsResults"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DUPLICATE_CFID_FIELD_NUMBER: builtins.int
+    UNIQUE_COUNT_FIELD_NUMBER: builtins.int
+    @property
+    def duplicate_cfid(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    unique_count: builtins.int
+    def __init__(
+        self,
+        *,
+        duplicate_cfid: collections.abc.Iterable[builtins.str] | None = ...,
+        unique_count: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["duplicate_cfid", b"duplicate_cfid", "unique_count", b"unique_count"]) -> None: ...
+
+global___DuplicateAnnotationsResults = DuplicateAnnotationsResults
+
+@typing_extensions.final
 class Visibility(google.protobuf.message.Message):
     """Visibility represents how visible the given resource is to other users.
     When authenticating a request we can tell if a user is a collaborator or a teammate for the
@@ -7490,6 +7531,33 @@ class UploadContentPart(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "part_number", b"part_number", "range_start", b"range_start"]) -> None: ...
 
 global___UploadContentPart = UploadContentPart
+
+@typing_extensions.final
+class CustomCodeOperatorRequest(google.protobuf.message.Message):
+    """We use this message to communicate with Custom Code Operator Backend. You can use this message
+    to test your custom operator code locally.
+    We expect the response to come in the format of the MultiOutputResponse protobuf message.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    @property
+    def inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Input]: ...
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """support arbitrary metadata"""
+    def __init__(
+        self,
+        *,
+        inputs: collections.abc.Iterable[global___Input] | None = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "metadata", b"metadata"]) -> None: ...
+
+global___CustomCodeOperatorRequest = CustomCodeOperatorRequest
 
 @typing_extensions.final
 class InputsExtractionJob(google.protobuf.message.Message):
