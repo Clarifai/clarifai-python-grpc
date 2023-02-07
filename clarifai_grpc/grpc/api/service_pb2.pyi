@@ -4101,6 +4101,146 @@ class PostModelVersionsUnPublishRequest(google.protobuf.message.Message):
 global___PostModelVersionsUnPublishRequest = PostModelVersionsUnPublishRequest
 
 @typing_extensions.final
+class PostModelVersionEvaluationsRequest(google.protobuf.message.Message):
+    """Evaluate this model vesion"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    EVAL_METRICS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    model_version_id: builtins.str
+    @property
+    def eval_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.EvalMetrics]:
+        """EvalInfo and ID will be used when creating the evaluation"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        eval_metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.EvalMetrics] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["eval_metrics", b"eval_metrics", "model_id", b"model_id", "model_version_id", b"model_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostModelVersionEvaluationsRequest = PostModelVersionEvaluationsRequest
+
+@typing_extensions.final
+class ListModelVersionEvaluationsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    model_version_id: builtins.str
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "model_version_id", b"model_version_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListModelVersionEvaluationsRequest = ListModelVersionEvaluationsRequest
+
+@typing_extensions.final
+class GetModelVersionEvaluationRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    EVALUATION_ID_FIELD_NUMBER: builtins.int
+    FIELDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    model_version_id: builtins.str
+    evaluation_id: builtins.str
+    @property
+    def fields(self) -> proto.clarifai.api.resources_pb2.FieldsValue:
+        """Any of the fields you wish to return from multiclass_metrics
+        By default, only the summary is returned.
+        """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        evaluation_id: builtins.str = ...,
+        fields: proto.clarifai.api.resources_pb2.FieldsValue | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["fields", b"fields", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["evaluation_id", b"evaluation_id", "fields", b"fields", "model_id", b"model_id", "model_version_id", b"model_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetModelVersionEvaluationRequest = GetModelVersionEvaluationRequest
+
+@typing_extensions.final
+class SingleEvalMetricsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    EVAL_METRICS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def eval_metrics(self) -> proto.clarifai.api.resources_pb2.EvalMetrics: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        eval_metrics: proto.clarifai.api.resources_pb2.EvalMetrics | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["eval_metrics", b"eval_metrics", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["eval_metrics", b"eval_metrics", "status", b"status"]) -> None: ...
+
+global___SingleEvalMetricsResponse = SingleEvalMetricsResponse
+
+@typing_extensions.final
+class MultiEvalMetricsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    EVAL_METRICS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def eval_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.EvalMetrics]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        eval_metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.EvalMetrics] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["eval_metrics", b"eval_metrics", "status", b"status"]) -> None: ...
+
+global___MultiEvalMetricsResponse = MultiEvalMetricsResponse
+
+@typing_extensions.final
 class PostModelVersionMetricsRequest(google.protobuf.message.Message):
     """Evaluate this model version."""
 
@@ -4153,7 +4293,9 @@ class GetModelVersionMetricsRequest(google.protobuf.message.Message):
     version_id: builtins.str
     @property
     def fields(self) -> proto.clarifai.api.resources_pb2.FieldsValue:
-        """Any of the fields you wish to return from multiclass_metrics"""
+        """Any of the fields you wish to return from multiclass_metrics
+        By default, only the summary will be returned
+        """
     def __init__(
         self,
         *,
