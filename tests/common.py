@@ -148,8 +148,9 @@ def post_model_outputs_and_maybe_allow_retries(
     metadata: Tuple,
     retryable_output_codes: List[int] = [],
 ):
+    # first make sure we don't run into GRPC timeout issues and that the API can be reached.
     response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
-    # this inspect the individual outputs to see if the code means we should retry prediction (returns if retryable_output_codes not passed)
+    # check individual outputs of the previous response, if there are any, to see if their code means we retry prediction
     response = _retry_on_unsuccessful_predicts_on_non_prod(
         stub.PostModelOutputs,
         request=request,
