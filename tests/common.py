@@ -10,8 +10,8 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
 
-MAX_PREDICT_ATTEMPTS = 3 # PostModelOutputs unsuccessful predict retry limit
-MAX_RETRY_ATTEMPTS = 15 # gRPC exceeded deadlines/timeout retry limit.
+MAX_PREDICT_ATTEMPTS = 3  # PostModelOutputs unsuccessful predict retry limit
+MAX_RETRY_ATTEMPTS = 15  # gRPC exceeded deadlines/timeout retry limit.
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
@@ -150,31 +150,45 @@ def post_model_outputs_and_maybe_allow_retries(
 ):
     response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
     # this inspect the individual outputs to see if the code means we should retry prediction (returns if retryable_output_codes not passed)
-    response = _retry_on_unsuccessful_predicts_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata, response=response, retryable_output_codes=retryable_output_codes)
+    response = _retry_on_unsuccessful_predicts_on_non_prod(
+        stub.PostModelOutputs,
+        request=request,
+        metadata=metadata,
+        response=response,
+        retryable_output_codes=retryable_output_codes,
+    )
     return response
 
 
-def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, response, retryable_output_codes):
+def _retry_on_unsuccessful_predicts_on_non_prod(
+    stub_call, request, metadata, response, retryable_output_codes
+):
     grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
     if grpc_base == "api.clarifai.com":
-            return response # only retry in nonprod
+        return response  # only retry in nonprod
     if response.status == status_code_pb2.SUCCESS:
-        return response # don't retry if top-level response code is SUCCESS
-    if not retryable_output_codes or all([out.status_code not in retrayble_codes for out in response.outputs]):
-        return response # return if condition to retry is not met
+        return response  # don't retry if top-level response code is SUCCESS
+    if not retryable_output_codes or all(
+        [out.status_code not in retrayble_codes for out in response.outputs]
+    ):
+        return response  # return if condition to retry is not met
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
-        retry_inputs_by_id = [out.input for out in response.outputs if out.status.code in retryable_output_codes]
+        retry_inputs_by_id = [
+            out.input for out in response.outputs if out.status.code in retryable_output_codes
+        ]
         if not retry_inputs_by_id:
             return response
         del request.inputs[:]
-        request.inputs.extend(retry_inputs_by_id) # update the request inputs
+        request.inputs.extend(retry_inputs_by_id)  # update the request inputs
         r = stub_call(request=request, metadata=metadata)
-        for idx in range(len(r.outputs)): # update response object in-place
+        for idx in range(len(r.outputs)):  # update response object in-place
             for prev_idx in range(len(response.outputs)):
                 if response.outputs[prev_idx].id == r.outputs[idx].id:
-                    response.outputs[prev_idx] = r.outputs[idx] # overwrite the output in the response
-                    break # move on to the next new output
-    return response        
+                    response.outputs[prev_idx] = r.outputs[
+                        idx
+                    ]  # overwrite the output in the response
+                    break  # move on to the next new output
+    return response
 
 
 def _retry_on_504_on_non_prod(stub_call, request, metadata):

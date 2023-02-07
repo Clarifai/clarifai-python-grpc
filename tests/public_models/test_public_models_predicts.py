@@ -141,8 +141,12 @@ def test_image_predict_on_public_models(channel):
                 )
             ],
         )
-        retryable_output_codes = [status_code_pb2.INTERNAL_UNCATEGORIZED] # if any of the output statuses matches this, retry prediction
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata(), retryable_codes=retryable_output_codes)
+        retryable_output_codes = [
+            status_code_pb2.INTERNAL_UNCATEGORIZED
+        ]  # if any of the output statuses matches this, retry prediction
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(), retryable_codes=retryable_output_codes
+        )
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
