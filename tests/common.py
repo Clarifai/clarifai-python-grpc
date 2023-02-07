@@ -1,6 +1,6 @@
 import os
 import time
-from typing import List, Tuple
+from typing import Tuple
 
 from grpc._channel import _Rendezvous
 
@@ -146,7 +146,6 @@ def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub,
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
-    retryable_output_codes: List[int] = [status_code_pb2.INTERNAL_UNCATEGORIZED],
 ):
     # first make sure we don't run into GRPC timeout issues and that the API can be reached.
     response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
@@ -156,38 +155,18 @@ def post_model_outputs_and_maybe_allow_retries(
         request=request,
         metadata=metadata,
         response=response,
-        retryable_output_codes=retryable_output_codes,
     )
     return response
 
 
-def _retry_on_unsuccessful_predicts_on_non_prod(
-    stub_call, request, metadata, response, retryable_output_codes
-):
+def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, response):
     grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
     if grpc_base == "api.clarifai.com":
-        return response  # only retry in nonprod
-    if response.status == status_code_pb2.SUCCESS:
-        return response  # don't retry if top-level response code is SUCCESS
-    if not retryable_output_codes or all(
-        [out.status.code not in retryable_output_codes for out in response.outputs]
-    ):
-        return response  # return if condition to retry is not met
+        return response  # only retry in non-prod
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
-        retry_inputs_by_id = [
-            out.input for out in response.outputs if out.status.code in retryable_output_codes
-        ]
-        if not retry_inputs_by_id:
-            return response
-        del request.inputs[:]
-        request.inputs.extend(retry_inputs_by_id)  # update the request inputs
-        r = stub_call(request=request, metadata=metadata)
-        for idx in range(len(r.outputs)):  # update response object in-place
-            for prev_idx in range(len(response.outputs)):
-                if response.outputs[prev_idx].input.id == r.outputs[idx].input.id:
-                    response.outputs[prev_idx].CopyFrom(r.outputs[idx])
-                    break  # copied output; move on to the next new output.
-        response.status.CopyFrom(r.status)  # copy last resp status to original response
+        if response.status != status_code_pb2.FAILURE:
+            return response  # don't retry if top-level response code is not FAILURE
+        response = stub_call(request=request, metadata=metadata)
     return response
 
 
