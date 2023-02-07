@@ -146,7 +146,7 @@ def test_image_predict_on_public_models(channel):
             status_code_pb2.INTERNAL_UNCATEGORIZED
         ]  # if any of the output statuses matches this, retry prediction
         response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(), retryable_codes=retryable_output_codes
+            stub, request, metadata=metadata(), retryable_output_codes=retryable_output_codes
         )
         raise_on_failure(
             response,
