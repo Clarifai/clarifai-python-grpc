@@ -10,7 +10,8 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
 
-MAX_RETRY_ATTEMPTS = 15
+MAX_PREDICT_ATTEMPTS = 3  # PostModelOutputs unsuccessful predict retry limit
+MAX_RETRY_ATTEMPTS = 15  # gRPC exceeded deadlines/timeout retry limit.
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
 TRUCK_IMAGE_URL = "https://s3.amazonaws.com/samples.clarifai.com/red-truck.png"
@@ -146,17 +147,37 @@ def post_model_outputs_and_maybe_allow_retries(
     request: service_pb2.PostModelOutputsRequest,
     metadata: Tuple,
 ):
-    return _retry_on_504_on_non_prod(lambda: stub.PostModelOutputs(request, metadata=metadata))
+    # first make sure we don't run into GRPC timeout issues and that the API can be reached.
+    response = _retry_on_504_on_non_prod(stub.PostModelOutputs, request=request, metadata=metadata)
+    # retry when status of response is FAILURE
+    response = _retry_on_unsuccessful_predicts_on_non_prod(
+        stub.PostModelOutputs,
+        request=request,
+        metadata=metadata,
+        response=response,
+    )
+    return response
 
 
-def _retry_on_504_on_non_prod(func):
+def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, response):
+    grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+    if grpc_base == "api.clarifai.com":
+        return response  # only retry in non-prod
+    for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
+        if response.status.code != status_code_pb2.FAILURE:
+            return response  # don't retry on non-FAILURE codes
+        response = stub_call(request=request, metadata=metadata)
+    return response
+
+
+def _retry_on_504_on_non_prod(stub_call, request, metadata):
     """
     On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
     We don't care about those as long as, after a few seconds, the response is a success.
     """
     for i in range(1, MAX_RETRY_ATTEMPTS + 1):
         try:
-            response = func()
+            response = stub_call(request=request, metadata=metadata)
             if (
                 len(response.outputs) > 0
                 and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT

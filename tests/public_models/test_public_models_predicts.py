@@ -141,7 +141,7 @@ def test_image_predict_on_public_models(channel):
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata())
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
