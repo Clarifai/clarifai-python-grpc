@@ -183,11 +183,10 @@ def _retry_on_unsuccessful_predicts_on_non_prod(
         r = stub_call(request=request, metadata=metadata)
         for idx in range(len(r.outputs)):  # update response object in-place
             for prev_idx in range(len(response.outputs)):
-                if response.outputs[prev_idx].id == r.outputs[idx].id:
-                    response.outputs[prev_idx] = r.outputs[
-                        idx
-                    ]  # overwrite the output in the response
-                    break  # move on to the next new output
+                if response.outputs[prev_idx].input.id == r.outputs[idx].input.id:
+                    response.outputs[prev_idx].CopyFrom(r.outputs[idx])
+                    break  # copied output; move on to the next new output.
+        response.status.CopyFrom(r.status)  # copy last resp status to original response
     return response
 
 
