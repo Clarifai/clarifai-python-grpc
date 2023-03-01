@@ -513,7 +513,8 @@ class App(google.protobuf.message.Message):
     default_language: builtins.str
     default_workflow_id: builtins.str
     user_id: builtins.str
-    """why is user_id present here when this message type is used in PostApps but completely ignored there? PostApp already specifies the userid in path but doesn't even actually use neither of userids, it instead used the id from auth context.
+    """why is user_id present here when this message type is used in PostApps but completely ignored there? PostApp already
+    specifies the userid in path but doesn't even actually use neither of userids, it instead used the id from auth context.
     This creates a lot of ambiguity, should always have different message types for Post/Get endpoints so that the minimum interface for each op can be described
     """
     @property
@@ -2436,15 +2437,23 @@ class AnnotationFilterConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ANNOTATION_FILTER_FIELD_NUMBER: builtins.int
+    IGNORE_EMPTY_INPUTS_FIELD_NUMBER: builtins.int
     @property
-    def annotation_filter(self) -> global___AnnotationFilter: ...
+    def annotation_filter(self) -> global___AnnotationFilter:
+        """The annotation filter that is used."""
+    ignore_empty_inputs: builtins.bool
+    """If true, empty inputs are not included in the dataset version.
+    If false, empty inputs are included in the dataset version.
+    We define an empty input as an input without any annotations after annotation filter is applied.
+    """
     def __init__(
         self,
         *,
         annotation_filter: global___AnnotationFilter | None = ...,
+        ignore_empty_inputs: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter", "ignore_empty_inputs", b"ignore_empty_inputs"]) -> None: ...
 
 global___AnnotationFilterConfig = AnnotationFilterConfig
 
@@ -3451,8 +3460,8 @@ class ModelTypeField(google.protobuf.message.Message):
         ARRAY_OF_STRINGS: ModelTypeField._ModelTypeFieldType.ValueType  # 13
         """Such as ['a', 'b', 'cantaloupe']"""
         RECURSIVE_ENUM: ModelTypeField._ModelTypeFieldType.ValueType  # 14
-        """If RECURSIVE_ENUM is used then the "enum_options" field should also be filled in with the respective ID and description
-        for the different RECURSIVE_ENUM options, as well as model_type_fields for each enum choice.
+        """If RECURSIVE_ENUM is used then the "enum_options" field should also be filled in with the respective ID and
+        description for the different RECURSIVE_ENUM options, as well as model_type_fields for each enum choice.
         """
         PYTHON_CODE: ModelTypeField._ModelTypeFieldType.ValueType  # 15
         """For blocks of code that need to be specified by the user for setup or execution during workflow runs."""
@@ -3491,8 +3500,8 @@ class ModelTypeField(google.protobuf.message.Message):
     ARRAY_OF_STRINGS: ModelTypeField.ModelTypeFieldType.ValueType  # 13
     """Such as ['a', 'b', 'cantaloupe']"""
     RECURSIVE_ENUM: ModelTypeField.ModelTypeFieldType.ValueType  # 14
-    """If RECURSIVE_ENUM is used then the "enum_options" field should also be filled in with the respective ID and description
-    for the different RECURSIVE_ENUM options, as well as model_type_fields for each enum choice.
+    """If RECURSIVE_ENUM is used then the "enum_options" field should also be filled in with the respective ID and
+    description for the different RECURSIVE_ENUM options, as well as model_type_fields for each enum choice.
     """
     PYTHON_CODE: ModelTypeField.ModelTypeFieldType.ValueType  # 15
     """For blocks of code that need to be specified by the user for setup or execution during workflow runs."""
@@ -3622,7 +3631,7 @@ class ModelTypeEnumOption(google.protobuf.message.Message):
     internal_only: builtins.bool
     """If this enum option should be internal only."""
     recommended: builtins.bool
-    """Whether this is the recommended enum option. Set to `true` when there 
+    """Whether this is the recommended enum option. Set to `true` when there
     are multiple options, and one is shown to be better than the others.
     """
     def __init__(
@@ -3709,6 +3718,7 @@ class ModelVersion(google.protobuf.message.Message):
     INPUT_INFO_FIELD_NUMBER: builtins.int
     TRAIN_INFO_FIELD_NUMBER: builtins.int
     IMPORT_INFO_FIELD_NUMBER: builtins.int
+    TRAIN_LOG_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -3752,7 +3762,10 @@ class ModelVersion(google.protobuf.message.Message):
     license: builtins.str
     @property
     def dataset_version(self) -> global___DatasetVersion:
-        """Dataset version used to create this model version."""
+        """Deprecated: For explicit dataset versions, please use PostDatasetVersions 
+        and provide the dataset version ID in the train_info.params.
+        Dataset version used to create this model version.
+        """
     @property
     def output_info(self) -> global___OutputInfo:
         """Info about the model's output and configuration."""
@@ -3765,6 +3778,7 @@ class ModelVersion(google.protobuf.message.Message):
     @property
     def import_info(self) -> global___ImportInfo:
         """Configuration used to import model from third-party toolkits"""
+    train_log: builtins.str
     def __init__(
         self,
         *,
@@ -3788,9 +3802,10 @@ class ModelVersion(google.protobuf.message.Message):
         input_info: global___InputInfo | None = ...,
         train_info: global___TrainInfo | None = ...,
         import_info: global___ImportInfo | None = ...,
+        train_log: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["completed_at", b"completed_at", "created_at", b"created_at", "dataset_version", b"dataset_version", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "completed_at", b"completed_at", "created_at", b"created_at", "dataset_version", b"dataset_version", "description", b"description", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "completed_at", b"completed_at", "created_at", b"created_at", "dataset_version", b"dataset_version", "description", b"description", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ModelVersion = ModelVersion
 
@@ -4682,6 +4697,25 @@ class Search(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _Metric:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _MetricEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Search._Metric.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        METRIC_NOT_SET: Search._Metric.ValueType  # 0
+        EUCLIDEAN_DISTANCE: Search._Metric.ValueType  # 1
+        COSINE_DISTANCE: Search._Metric.ValueType  # 2
+
+    class Metric(_Metric, metaclass=_MetricEnumTypeWrapper):
+        """Metric used for search. Can be EUCLIDEAN_DISTANCE (default) or COSINE_DISTANCE. 
+        Currently only brute force search supports non-eudlicean metrics.
+        """
+
+    METRIC_NOT_SET: Search.Metric.ValueType  # 0
+    EUCLIDEAN_DISTANCE: Search.Metric.ValueType  # 1
+    COSINE_DISTANCE: Search.Metric.ValueType  # 2
+
     QUERY_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     APPLICATION_ID_FIELD_NUMBER: builtins.int
@@ -4694,6 +4728,7 @@ class Search(google.protobuf.message.Message):
     SAVE_FIELD_NUMBER: builtins.int
     MIN_VALUE_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
+    METRIC_FIELD_NUMBER: builtins.int
     @property
     def query(self) -> global___Query:
         """Search query."""
@@ -4740,6 +4775,7 @@ class Search(google.protobuf.message.Message):
         To be visible to the public the App that contains it AND the User that contains the App must
         also be publicly visible.
         """
+    metric: global___Search.Metric.ValueType
     def __init__(
         self,
         *,
@@ -4755,9 +4791,10 @@ class Search(google.protobuf.message.Message):
         save: builtins.bool = ...,
         min_value: builtins.float = ...,
         visibility: global___Visibility | None = ...,
+        metric: global___Search.Metric.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["as_of", b"as_of", "created_at", b"created_at", "modified_at", b"modified_at", "query", b"query", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["algorithm", b"algorithm", "application_id", b"application_id", "as_of", b"as_of", "created_at", b"created_at", "git_hash", b"git_hash", "id", b"id", "min_value", b"min_value", "modified_at", b"modified_at", "name", b"name", "query", b"query", "save", b"save", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["algorithm", b"algorithm", "application_id", b"application_id", "as_of", b"as_of", "created_at", b"created_at", "git_hash", b"git_hash", "id", b"id", "metric", b"metric", "min_value", b"min_value", "modified_at", b"modified_at", "name", b"name", "query", b"query", "save", b"save", "visibility", b"visibility"]) -> None: ...
 
 global___Search = Search
 
@@ -6664,6 +6701,28 @@ class DatasetInputsSearchAddJob(google.protobuf.message.Message):
 global___DatasetInputsSearchAddJob = DatasetInputsSearchAddJob
 
 @typing_extensions.final
+class PCAProjectionComparator(google.protobuf.message.Message):
+    """PCAProjectionComparator"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DISTANCE_THRESHOLD_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    distance_threshold: builtins.float
+    """Within what distance do we consider two annotations duplicates"""
+    model_version_id: builtins.str
+    """What cluster model version generated these"""
+    def __init__(
+        self,
+        *,
+        distance_threshold: builtins.float = ...,
+        model_version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["distance_threshold", b"distance_threshold", "model_version_id", b"model_version_id"]) -> None: ...
+
+global___PCAProjectionComparator = PCAProjectionComparator
+
+@typing_extensions.final
 class DuplicateAnnotationsResults(google.protobuf.message.Message):
     """DuplicateAnnotationsResults"""
 
@@ -7373,6 +7432,28 @@ class DeleteGeo(google.protobuf.message.Message):
 global___DeleteGeo = DeleteGeo
 
 @typing_extensions.final
+class WaitlistEmail(google.protobuf.message.Message):
+    """WaitlistEmail is an e-mail address on a feature waiting list.
+    Note that 'created_at' is explicitly NOT included in the API resources
+    returned by unauthenticated PostWaitlistEmails requests. Otherwise, the
+    timestamp could be used to determine if the e-mail was already on the
+    feature waiting list, leaking the contents of the list.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    EMAIL_FIELD_NUMBER: builtins.int
+    email: builtins.str
+    def __init__(
+        self,
+        *,
+        email: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["email", b"email"]) -> None: ...
+
+global___WaitlistEmail = WaitlistEmail
+
+@typing_extensions.final
 class InputsAddJob(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7384,6 +7465,7 @@ class InputsAddJob(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     EXTRACTION_JOBS_FIELD_NUMBER: builtins.int
+    UPLOADS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """id of the job"""
     cloud_storage_url: builtins.str
@@ -7412,6 +7494,9 @@ class InputsAddJob(google.protobuf.message.Message):
     @property
     def extraction_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InputsExtractionJob]:
         """Sub-jobs that extract inputs from the cloud and/or archives"""
+    @property
+    def uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Upload]:
+        """Archive uploads"""
     def __init__(
         self,
         *,
@@ -7423,9 +7508,10 @@ class InputsAddJob(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         extraction_jobs: collections.abc.Iterable[global___InputsExtractionJob] | None = ...,
+        uploads: collections.abc.Iterable[global___Upload] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "cloud_storage_url", b"cloud_storage_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "cloud_storage_url", b"cloud_storage_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "uploads", b"uploads"]) -> None: ...
 
 global___InputsAddJob = InputsAddJob
 
@@ -7641,7 +7727,7 @@ class InputsDataSource(google.protobuf.message.Message):
     inputs_add_job_id: builtins.str
     """Collect statistics about created inputs in job with given ID.
     On Post call:
-    * If job ID is empty, then job is automatically created with random ID
+    * If job ID is empty, then job is automatically created with random ID.
     * If job ID is non-empty, then a new job will be created with given ID.
     """
     @property
@@ -7725,3 +7811,31 @@ class AWSCreds(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["creds", b"creds", "region", b"region"]) -> None: ...
 
 global___AWSCreds = AWSCreds
+
+@typing_extensions.final
+class InputsUpload(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
+    APP_PAT_FIELD_NUMBER: builtins.int
+    UPLOAD_FIELD_NUMBER: builtins.int
+    inputs_add_job_id: builtins.str
+    """Collect statistics about created inputs in job with given ID.
+    * If job ID is empty, then job is automatically created with random ID.
+    * If job ID is non-empty, then a new job will be created with given ID.
+    """
+    app_pat: builtins.str
+    """Personal Access Token to the application to which inputs are added"""
+    @property
+    def upload(self) -> global___Upload: ...
+    def __init__(
+        self,
+        *,
+        inputs_add_job_id: builtins.str = ...,
+        app_pat: builtins.str = ...,
+        upload: global___Upload | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["upload", b"upload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
+
+global___InputsUpload = InputsUpload

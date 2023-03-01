@@ -1019,6 +1019,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsExtractionJobsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse),
                 )
+        self.CancelInputsExtractionJobs = channel.unary_unary(
+                '/clarifai.api.V2/CancelInputsExtractionJobs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsExtractionJobsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse),
+                )
+        self.PostInputsUploads = channel.unary_unary(
+                '/clarifai.api.V2/PostInputsUploads',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse),
+                )
 
 
 class V2Servicer(object):
@@ -2475,6 +2485,18 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CancelInputsExtractionJobs(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostInputsUploads(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3462,6 +3484,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListInputsExtractionJobs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsExtractionJobsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse.SerializeToString,
+            ),
+            'CancelInputsExtractionJobs': grpc.unary_unary_rpc_method_handler(
+                    servicer.CancelInputsExtractionJobs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsExtractionJobsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse.SerializeToString,
+            ),
+            'PostInputsUploads': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostInputsUploads,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -6837,5 +6869,39 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListInputsExtractionJobs',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsExtractionJobsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CancelInputsExtractionJobs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/CancelInputsExtractionJobs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsExtractionJobsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsExtractionJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostInputsUploads(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsUploads',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
