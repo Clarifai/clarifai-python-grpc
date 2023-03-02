@@ -225,7 +225,6 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     BULK_OPERATION_INVALID_REQUEST: _StatusCode.ValueType  # 25404
     BULK_OPERATION_CANCELLED: _StatusCode.ValueType  # 25405
     BULK_OPERATION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25406
-    BULK_OPERATION_DELETED: _StatusCode.ValueType  # 25407
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -300,6 +299,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     CLUSTER_INTERNAL_FAILURE: _StatusCode.ValueType  # 43040
     EXTERNAL_CONNECTION_ERROR: _StatusCode.ValueType  # 40034
     """could not connect to external services"""
+    QUERY_INVALID_SYNTAX: _StatusCode.ValueType  # 40050
     QUEUE_CONN_ERROR: _StatusCode.ValueType  # 41000
     """Queue related errors 41xxx"""
     QUEUE_CLOSE_REQUEST_TIMEOUT: _StatusCode.ValueType  # 41002
@@ -433,6 +433,16 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """The dataset input is a duplicate.
     Deprecated: Unused.
     """
+    DATASET_VERSION_EXPORT_SUCCESS: _StatusCode.ValueType  # 64200
+    """The dataset version export is completed."""
+    DATASET_VERSION_EXPORT_PENDING: _StatusCode.ValueType  # 64201
+    """The dataset version is pending to be exported."""
+    DATASET_VERSION_EXPORT_FAILED: _StatusCode.ValueType  # 64202
+    """An error occurred during the dataset version export."""
+    DATASET_VERSION_EXPORT_IN_PROGRESS: _StatusCode.ValueType  # 64203
+    """The dataset version is currently being exported."""
+    DATASET_VERSION_EXPORT_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64204
+    """An unexpected error occurred during the dataset version export."""
     JOB_QUEUED: _StatusCode.ValueType  # 64000
     """Generic Job status codes"""
     JOB_RUNNING: _StatusCode.ValueType  # 64001
@@ -685,7 +695,6 @@ BULK_OPERATION_IN_PROGRESS: StatusCode.ValueType  # 25403
 BULK_OPERATION_INVALID_REQUEST: StatusCode.ValueType  # 25404
 BULK_OPERATION_CANCELLED: StatusCode.ValueType  # 25405
 BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
-BULK_OPERATION_DELETED: StatusCode.ValueType  # 25407
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
@@ -760,6 +769,7 @@ REQUEST_CANCELED_BY_USER: StatusCode.ValueType  # 40037
 CLUSTER_INTERNAL_FAILURE: StatusCode.ValueType  # 43040
 EXTERNAL_CONNECTION_ERROR: StatusCode.ValueType  # 40034
 """could not connect to external services"""
+QUERY_INVALID_SYNTAX: StatusCode.ValueType  # 40050
 QUEUE_CONN_ERROR: StatusCode.ValueType  # 41000
 """Queue related errors 41xxx"""
 QUEUE_CLOSE_REQUEST_TIMEOUT: StatusCode.ValueType  # 41002
@@ -893,6 +903,16 @@ DATASET_INPUT_DUPLICATE: StatusCode.ValueType  # 64101
 """The dataset input is a duplicate.
 Deprecated: Unused.
 """
+DATASET_VERSION_EXPORT_SUCCESS: StatusCode.ValueType  # 64200
+"""The dataset version export is completed."""
+DATASET_VERSION_EXPORT_PENDING: StatusCode.ValueType  # 64201
+"""The dataset version is pending to be exported."""
+DATASET_VERSION_EXPORT_FAILED: StatusCode.ValueType  # 64202
+"""An error occurred during the dataset version export."""
+DATASET_VERSION_EXPORT_IN_PROGRESS: StatusCode.ValueType  # 64203
+"""The dataset version is currently being exported."""
+DATASET_VERSION_EXPORT_UNEXPECTED_ERROR: StatusCode.ValueType  # 64204
+"""An unexpected error occurred during the dataset version export."""
 JOB_QUEUED: StatusCode.ValueType  # 64000
 """Generic Job status codes"""
 JOB_RUNNING: StatusCode.ValueType  # 64001

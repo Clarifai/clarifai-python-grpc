@@ -8215,3 +8215,48 @@ class MultiInputsExtractionJobResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["inputs_extraction_jobs", b"inputs_extraction_jobs", "status", b"status"]) -> None: ...
 
 global___MultiInputsExtractionJobResponse = MultiInputsExtractionJobResponse
+
+@typing_extensions.final
+class CancelInputsExtractionJobsRequest(google.protobuf.message.Message):
+    """Cancel a list of extraction job ids"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of extraction job ids to be cancelled"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___CancelInputsExtractionJobsRequest = CancelInputsExtractionJobsRequest
+
+@typing_extensions.final
+class PostInputsUploadsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INPUTS_UPLOADS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def inputs_uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InputsUpload]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        inputs_uploads: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InputsUpload] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_uploads", b"inputs_uploads", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostInputsUploadsRequest = PostInputsUploadsRequest
