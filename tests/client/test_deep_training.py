@@ -6,6 +6,7 @@ from google.protobuf import struct_pb2
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
     raise_on_failure,
+    metadata,
     wait_for_inputs_upload,
     wait_for_model_trained,
     post_model_outputs_and_maybe_allow_retries,
@@ -27,10 +28,6 @@ URLS = [
 ]
 
 
-def pat_key_metadata():
-    return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
-
-
 def api_key_metadata(api_key: str):
     return (("authorization", "Key %s" % api_key),)
 
@@ -47,7 +44,7 @@ def test_deep_classification_training_with_queries(channel):
             ),
             apps=[resources_pb2.App(id=app_id, default_workflow_id="General", user_id="me")],
         ),
-        metadata=pat_key_metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_apps_response)
 
@@ -65,7 +62,7 @@ def test_deep_classification_training_with_queries(channel):
                 )
             ],
         ),
-        metadata=pat_key_metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_keys_response)
     api_key = post_keys_response.keys[0].id
@@ -199,7 +196,7 @@ def test_deep_classification_training_with_queries(channel):
         service_pb2.DeleteAppRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
         ),
-        metadata=pat_key_metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(delete_app_response)
 
