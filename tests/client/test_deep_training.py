@@ -1,4 +1,3 @@
-import os
 import uuid
 
 from google.protobuf import struct_pb2

@@ -13,7 +13,7 @@ def test_search_for_model(channel):
                 user_id="clarifai",
                 app_id="main",
             ),
-            model_query=resources_pb2.ModelQuery(name="*general*")
+            model_query=resources_pb2.ModelQuery(name="*general*"),
         ),
         metadata=metadata(pat=True),
     )

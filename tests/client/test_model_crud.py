@@ -38,14 +38,14 @@ def test_list_models_with_pagination(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     response = stub.ListModels(
-            service_pb2.ListModelsRequest(
-                per_page=2,
-                user_app_id=resources_pb2.UserAppIDSet(
-                    user_id="clarifai",
-                    app_id="main",
-                ),
+        service_pb2.ListModelsRequest(
+            per_page=2,
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="clarifai",
+                app_id="main",
             ),
-            metadata=metadata(pat=True),
+        ),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(response)
     assert len(response.models) == 2

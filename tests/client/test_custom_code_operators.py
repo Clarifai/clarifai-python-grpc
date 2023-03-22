@@ -110,5 +110,7 @@ def test_post_predict_delete_custom_code_operator_model(channel):
 
     finally:
         raise_on_failure(
-            stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
+            stub.DeleteModel(
+                service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
+            )
         )
