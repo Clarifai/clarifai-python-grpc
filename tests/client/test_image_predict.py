@@ -5,6 +5,8 @@ from tests.common import (
     GENERAL_MODEL_ID,
     NON_EXISTING_IMAGE_URL,
     RED_TRUCK_IMAGE_FILE_PATH,
+    MAIN_APP_ID,
+    MAIN_APP_USER_ID,
     both_channels,
     metadata,
     raise_on_failure,
@@ -17,6 +19,7 @@ def test_predict_image_url(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -37,6 +40,7 @@ def test_predict_image_url_with_max_concepts(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -66,6 +70,7 @@ def test_predict_image_url_with_min_value(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -97,6 +102,7 @@ def test_predict_image_url_with_selected_concepts(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -138,6 +144,7 @@ def test_predict_image_bytes(channel):
         file_bytes = f.read()
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -158,6 +165,7 @@ def test_predict_image_bytes(channel):
 def test_failed_predict(channel):
     stub = service_pb2_grpc.V2Stub(channel)
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -179,6 +187,7 @@ def test_failed_predict(channel):
 def test_mixed_success_predict(channel):
     stub = service_pb2_grpc.V2Stub(channel)
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(

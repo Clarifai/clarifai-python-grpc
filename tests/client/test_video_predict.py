@@ -3,6 +3,8 @@ from tests.common import (
     CONAN_GIF_VIDEO_URL,
     GENERAL_MODEL_ID,
     TOY_VIDEO_FILE_PATH,
+    MAIN_APP_ID,
+    MAIN_APP_USER_ID,
     both_channels,
     metadata,
     raise_on_failure,
@@ -16,6 +18,7 @@ def test_predict_video_url(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -38,6 +41,7 @@ def test_predict_video_url_with_min_value(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -67,6 +71,7 @@ def test_predict_video_url_with_max_concepts(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -94,6 +99,7 @@ def test_predict_video_url_with_custom_sample_ms(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
@@ -129,6 +135,7 @@ def test_predict_video_bytes(channel):
         file_bytes = f.read()
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
         inputs=[
             resources_pb2.Input(
