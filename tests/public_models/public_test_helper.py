@@ -2,7 +2,6 @@ import os
 
 from tests.common import GENERAL_MODEL_ID
 
-
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
 COLOR_MODEL_ID = "eeed0b6733a644cea07cf4c60f87ebb7"
 FACE_MODEL_ID = "e15d0f873e66047e579f90cf82c9882z"
