@@ -54,59 +54,61 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     stub = service_pb2_grpc.V2Stub(channel)
     model_id = "coperator_" + uuid.uuid4().hex[:20]
 
-    model = resources_pb2.Model(
-        id=model_id,
-        model_type_id="custom-code-operator",
-    )
-    req = service_pb2.PostModelsRequest(model=model)
-    raise_on_failure(stub.PostModels(req, metadata=metadata()))
-
-    output_info_params = struct_pb2.Struct()
-    output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
-    output_info = resources_pb2.OutputInfo(params=output_info_params)
-    req = service_pb2.PostModelVersionsRequest(
-        model_id=model_id,
-        model_versions=[resources_pb2.ModelVersion(output_info=output_info)],
-    )
-    raise_on_failure(stub.PostModelVersions(req, metadata=metadata()))
-
-    for i in range(0, MAX_RETRY_ATTEMPTS):
-        resp = stub.GetModel(
-            service_pb2.GetModelRequest(
-                model_id=model_id,
-            ),
-            metadata=metadata(),
+    try:
+        model = resources_pb2.Model(
+            id=model_id,
+            model_type_id="custom-code-operator",
         )
-        latest_status_code = resp.model.model_version.status.code
-        if latest_status_code == status_code_pb2.MODEL_TRAINED:
-            break
-        time.sleep(2)
+        req = service_pb2.PostModelsRequest(model=model)
+        raise_on_failure(stub.PostModels(req, metadata=metadata()))
 
-    assert latest_status_code == status_code_pb2.MODEL_TRAINED
+        output_info_params = struct_pb2.Struct()
+        output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
+        output_info = resources_pb2.OutputInfo(params=output_info_params)
+        req = service_pb2.PostModelVersionsRequest(
+            model_id=model_id,
+            model_versions=[resources_pb2.ModelVersion(output_info=output_info)],
+        )
+        raise_on_failure(stub.PostModelVersions(req, metadata=metadata()))
 
-    inputs = [
-        resources_pb2.Input(
-            data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)),
-        ),
-        resources_pb2.Input(
-            data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL)),
-        ),
-    ]
+        for i in range(0, MAX_RETRY_ATTEMPTS):
+            resp = stub.GetModel(
+                service_pb2.GetModelRequest(
+                    model_id=model_id,
+                ),
+                metadata=metadata(),
+            )
+            latest_status_code = resp.model.model_version.status.code
+            if latest_status_code == status_code_pb2.MODEL_TRAINED:
+                break
+            time.sleep(2)
 
-    req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
-    response = post_model_outputs_and_maybe_allow_retries(
-        stub=stub, request=req, metadata=metadata()
-    )
+        assert latest_status_code == status_code_pb2.MODEL_TRAINED
 
-    raise_on_failure(response)
-    assert len(response.outputs) == 2
-    assert len(response.outputs[0].data.metadata) == 1
-    assert len(response.outputs[1].data.metadata) == 1
-    assert (
-        response.outputs[0].data.metadata["processed_at"]
-        < response.outputs[1].data.metadata["processed_at"]
-    )
+        inputs = [
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL)),
+            ),
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=TRUCK_IMAGE_URL)),
+            ),
+        ]
 
-    raise_on_failure(
-        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
-    )
+        req = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub=stub, request=req, metadata=metadata()
+        )
+
+        raise_on_failure(response)
+        assert len(response.outputs) == 2
+        assert len(response.outputs[0].data.metadata) == 1
+        assert len(response.outputs[1].data.metadata) == 1
+        assert (
+            response.outputs[0].data.metadata["processed_at"]
+            < response.outputs[1].data.metadata["processed_at"]
+        )
+
+    finally:
+        raise_on_failure(
+            stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
+        )

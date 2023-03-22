@@ -22,7 +22,7 @@ def test_workflow_predict_image_url(channel):
             ],
             output_config=resources_pb2.OutputConfig(max_concepts=3),
         ),
-        metadata=metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_workflows_response)
 
@@ -46,7 +46,7 @@ def test_workflow_predict_image_bytes(channel):
             ],
             output_config=resources_pb2.OutputConfig(max_concepts=3),
         ),
-        metadata=metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_workflows_response)
 
