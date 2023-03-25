@@ -71,7 +71,7 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         )
         post_model_version_resp = stub.PostModelVersions(post_version_request, metadata=metadata())
         raise_on_failure(post_model_version_resp)
-        version_id = post_model_version_resp.model.model_version.id # used for delete
+        version_id = post_model_version_resp.model.model_version.id  # used for delete
 
         for i in range(0, MAX_RETRY_ATTEMPTS):
             resp = stub.GetModel(
@@ -96,7 +96,9 @@ def test_post_predict_delete_custom_code_operator_model(channel):
             ),
         ]
 
-        post_model_outputs_request = service_pb2.PostModelOutputsRequest(model_id=model_id, inputs=inputs)
+        post_model_outputs_request = service_pb2.PostModelOutputsRequest(
+            model_id=model_id, inputs=inputs
+        )
         post_model_outputs_resp = post_model_outputs_and_maybe_allow_retries(
             stub=stub, request=post_model_outputs_request, metadata=metadata()
         )
@@ -113,12 +115,11 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     finally:
         delete_mv_response = stub.DeleteModelVersion(
             service_pb2.DeleteModelVersionRequest(model_id=model_id, version_id=version_id),
-            metadata=metadata()
+            metadata=metadata(),
         )
         raise_on_failure(delete_mv_response)
 
         delete_model_response = stub.DeleteModel(
-            service_pb2.DeleteModelRequest(model_id=model_id),
-            metadata=metadata()
+            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
         )
         raise_on_failure(delete_model_response)
