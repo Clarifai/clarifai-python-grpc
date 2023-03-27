@@ -113,13 +113,14 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         )
 
     finally:
+        delete_model_response = stub.DeleteModel(
+            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
+        )
+        raise_on_failure(delete_model_response)
+
         delete_mv_response = stub.DeleteModelVersion(
             service_pb2.DeleteModelVersionRequest(model_id=model_id, version_id=version_id),
             metadata=metadata(),
         )
         raise_on_failure(delete_mv_response)
 
-        delete_model_response = stub.DeleteModel(
-            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
-        )
-        raise_on_failure(delete_model_response)
