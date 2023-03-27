@@ -4,6 +4,8 @@ from tests.common import (
     BEER_VIDEO_URL,
     DOG_IMAGE_URL,
     GENERAL_MODEL_ID,
+    MAIN_APP_ID,
+    MAIN_APP_USER_ID,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -134,6 +136,7 @@ def test_image_predict_on_public_models(channel):
 
     for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
         request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
@@ -141,7 +144,7 @@ def test_image_predict_on_public_models(channel):
                 )
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata())
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata(pat=True))
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
@@ -182,6 +185,7 @@ def test_video_predict_on_public_models(channel):
     model_id = GENERAL_MODEL_ID
 
     request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=model_id,
         inputs=[
             resources_pb2.Input(
@@ -189,7 +193,9 @@ def test_video_predict_on_public_models(channel):
             )
         ],
     )
-    response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
     raise_on_failure(
         response,
         custom_message=f"Video predict failed for the {title} model (ID: {model_id}).",
@@ -205,6 +211,7 @@ def test_multimodal_predict_on_public_models(channel):
 
     for title, model_id in MULTIMODAL_MODEL_TITLE_AND_IDS:
         request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
@@ -217,7 +224,9 @@ def test_multimodal_predict_on_public_models(channel):
                 ),
             ],
         )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata=metadata())
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
         raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",

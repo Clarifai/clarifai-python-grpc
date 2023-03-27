@@ -23,6 +23,8 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+MAIN_APP_ID = "main"
+MAIN_APP_USER_ID = "clarifai"
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
 
 

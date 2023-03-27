@@ -2,6 +2,8 @@ from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
     both_channels,
     DOG_IMAGE_URL,
+    MAIN_APP_ID,
+    MAIN_APP_USER_ID,
     metadata,
     raise_on_failure,
     RED_TRUCK_IMAGE_FILE_PATH,
@@ -14,6 +16,7 @@ def test_workflow_predict_image_url(channel):
 
     post_workflows_response = stub.PostWorkflowResults(
         service_pb2.PostWorkflowResultsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
             workflow_id="General",
             inputs=[
                 resources_pb2.Input(
@@ -22,7 +25,7 @@ def test_workflow_predict_image_url(channel):
             ],
             output_config=resources_pb2.OutputConfig(max_concepts=3),
         ),
-        metadata=metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_workflows_response)
 
@@ -38,6 +41,7 @@ def test_workflow_predict_image_bytes(channel):
 
     post_workflows_response = stub.PostWorkflowResults(
         service_pb2.PostWorkflowResultsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
             workflow_id="General",
             inputs=[
                 resources_pb2.Input(
@@ -46,7 +50,7 @@ def test_workflow_predict_image_bytes(channel):
             ],
             output_config=resources_pb2.OutputConfig(max_concepts=3),
         ),
-        metadata=metadata(),
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_workflows_response)
 

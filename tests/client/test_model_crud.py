@@ -17,10 +17,18 @@ from tests.common import (
 
 
 @both_channels
-def test_list_all_models(channel):
+def test_list_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    list_response = stub.ListModels(service_pb2.ListModelsRequest(), metadata=metadata())
+    list_response = stub.ListModels(
+        service_pb2.ListModelsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="clarifai",
+                app_id="main",
+            ),
+        ),
+        metadata=metadata(pat=True),
+    )
     raise_on_failure(list_response)
     assert len(list_response.models) > 0
 
@@ -29,7 +37,16 @@ def test_list_all_models(channel):
 def test_list_models_with_pagination(channel):
     stub = service_pb2_grpc.V2Stub(channel)
 
-    response = stub.ListModels(service_pb2.ListModelsRequest(per_page=2), metadata=metadata())
+    response = stub.ListModels(
+        service_pb2.ListModelsRequest(
+            per_page=2,
+            user_app_id=resources_pb2.UserAppIDSet(
+                user_id="clarifai",
+                app_id="main",
+            ),
+        ),
+        metadata=metadata(pat=True),
+    )
     raise_on_failure(response)
     assert len(response.models) == 2
 
