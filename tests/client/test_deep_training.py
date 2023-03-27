@@ -41,7 +41,11 @@ def test_deep_classification_training_with_datasets(channel):
                 user_id="me",
                 app_id=app_id,
             ),
-            apps=[resources_pb2.App(id=app_id, default_workflow_id="General", user_id="me")],
+            apps=[
+                resources_pb2.App(
+                    id=app_id, default_workflow_id="General", user_id="me"
+                )
+            ],
         ),
         metadata=metadata(pat=True),
     )
@@ -67,7 +71,7 @@ def test_deep_classification_training_with_datasets(channel):
         raise_on_failure(post_keys_response)
         api_key = post_keys_response.keys[0].id
 
-        dataset_id = 'train'
+        dataset_id = "train"
         post_datasets_response = stub.PostDatasets(
             service_pb2.PostDatasetsRequest(
                 user_app_id=resources_pb2.UserAppIDSet(
@@ -118,21 +122,27 @@ def test_deep_classification_training_with_datasets(channel):
         annotations = []
         for i, url in enumerate(URLS):
             input_id = str(i)
-            dataset_ids = [dataset_id] if i%2 == 0 else []
+            dataset_ids = [dataset_id] if i % 2 == 0 else []
             inputs.append(
                 resources_pb2.Input(
-                    id=input_id, dataset_ids=dataset_ids, data=resources_pb2.Data(image=resources_pb2.Image(url=url))
+                    id=input_id,
+                    dataset_ids=dataset_ids,
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=url)),
                 )
             )
 
             ann = resources_pb2.Annotation(
                 input_id=input_id,
-                data=resources_pb2.Data(concepts=[resources_pb2.Concept(id="train-concept", value=1)]),
+                data=resources_pb2.Data(
+                    concepts=[resources_pb2.Concept(id="train-concept", value=1)]
+                ),
             )
             # Add an extra concept to the blank set which should have a bad score since there is
             # no instance of it in the train set.
             if i % 2 == 1:
-                ann.data.concepts.append(resources_pb2.Concept(id="test-only-concept", value=1))
+                ann.data.concepts.append(
+                    resources_pb2.Concept(id="test-only-concept", value=1)
+                )
             annotations.append(ann)
 
         post_inputs_response = stub.PostInputs(
@@ -140,14 +150,15 @@ def test_deep_classification_training_with_datasets(channel):
             metadata=api_key_metadata(api_key),
         )
         raise_on_failure(post_inputs_response)
-        wait_for_inputs_upload(stub, api_key_metadata(api_key), [str(i) for i in range(len(URLS))])
+        wait_for_inputs_upload(
+            stub, api_key_metadata(api_key), [str(i) for i in range(len(URLS))]
+        )
 
         post_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(annotations=annotations),
             metadata=api_key_metadata(api_key),
         )
         raise_on_failure(post_annotations_response)
-
 
         post_model_versions_response = stub.PostModelVersions(
             service_pb2.PostModelVersionsRequest(
@@ -158,13 +169,17 @@ def test_deep_classification_training_with_datasets(channel):
         raise_on_failure(post_model_versions_response)
         model_version_id = post_model_versions_response.model.model_version.id
 
-        wait_for_model_trained(stub, api_key_metadata(api_key), model_id, model_version_id)
+        wait_for_model_trained(
+            stub, api_key_metadata(api_key), model_id, model_version_id
+        )
 
         post_model_outputs_request = service_pb2.PostModelOutputsRequest(
             model_id=model_id,
             version_id=model_version_id,
             inputs=[
-                resources_pb2.Input(data=resources_pb2.Data(image=resources_pb2.Image(url=URLS[0])))
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=URLS[0]))
+                )
             ],
         )
 
