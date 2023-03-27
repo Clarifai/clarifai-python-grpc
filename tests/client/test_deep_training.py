@@ -62,7 +62,7 @@ def test_deep_classification_training_with_datasets(channel):
                     )
                 ],
             ),
-            metadata=pat_key_metadata(),
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_keys_response)
         api_key = post_keys_response.keys[0].id
@@ -183,7 +183,7 @@ def test_deep_classification_training_with_datasets(channel):
             service_pb2.DeleteAppRequest(
                 user_app_id=resources_pb2.UserAppIDSet(user_id="me", app_id=app_id)
             ),
-            metadata=pat_key_metadata(),
+            metadata=metadata(pat=True),
         )
         raise_on_failure(delete_app_response)
 
