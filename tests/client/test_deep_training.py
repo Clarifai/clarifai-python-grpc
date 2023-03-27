@@ -41,11 +41,7 @@ def test_deep_classification_training_with_datasets(channel):
                 user_id="me",
                 app_id=app_id,
             ),
-            apps=[
-                resources_pb2.App(
-                    id=app_id, default_workflow_id="General", user_id="me"
-                )
-            ],
+            apps=[resources_pb2.App(id=app_id, default_workflow_id="General", user_id="me")],
         ),
         metadata=metadata(pat=True),
     )
@@ -140,9 +136,7 @@ def test_deep_classification_training_with_datasets(channel):
             # Add an extra concept to the blank set which should have a bad score since there is
             # no instance of it in the train set.
             if i % 2 == 1:
-                ann.data.concepts.append(
-                    resources_pb2.Concept(id="test-only-concept", value=1)
-                )
+                ann.data.concepts.append(resources_pb2.Concept(id="test-only-concept", value=1))
             annotations.append(ann)
 
         post_inputs_response = stub.PostInputs(
@@ -150,9 +144,7 @@ def test_deep_classification_training_with_datasets(channel):
             metadata=api_key_metadata(api_key),
         )
         raise_on_failure(post_inputs_response)
-        wait_for_inputs_upload(
-            stub, api_key_metadata(api_key), [str(i) for i in range(len(URLS))]
-        )
+        wait_for_inputs_upload(stub, api_key_metadata(api_key), [str(i) for i in range(len(URLS))])
 
         post_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(annotations=annotations),
@@ -169,9 +161,7 @@ def test_deep_classification_training_with_datasets(channel):
         raise_on_failure(post_model_versions_response)
         model_version_id = post_model_versions_response.model.model_version.id
 
-        wait_for_model_trained(
-            stub, api_key_metadata(api_key), model_id, model_version_id
-        )
+        wait_for_model_trained(stub, api_key_metadata(api_key), model_id, model_version_id)
 
         post_model_outputs_request = service_pb2.PostModelOutputsRequest(
             model_id=model_id,
