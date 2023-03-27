@@ -123,4 +123,3 @@ def test_post_predict_delete_custom_code_operator_model(channel):
             metadata=metadata(),
         )
         raise_on_failure(delete_mv_response)
-
