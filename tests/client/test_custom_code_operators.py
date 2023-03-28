@@ -54,25 +54,25 @@ def test_post_predict_delete_custom_code_operator_model(channel):
     stub = service_pb2_grpc.V2Stub(channel)
     model_id = "coperator_" + uuid.uuid4().hex[:20]
 
+    model = resources_pb2.Model(
+        id=model_id,
+        model_type_id="custom-code-operator",
+    )
+    post_model_request = service_pb2.PostModelsRequest(model=model)
+    raise_on_failure(stub.PostModels(post_model_request, metadata=metadata()))
+
+    output_info_params = struct_pb2.Struct()
+    output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
+    output_info = resources_pb2.OutputInfo(params=output_info_params)
+    post_version_request = service_pb2.PostModelVersionsRequest(
+        model_id=model_id,
+        model_versions=[resources_pb2.ModelVersion(output_info=output_info)],
+    )
+    post_model_version_resp = stub.PostModelVersions(post_version_request, metadata=metadata())
+    raise_on_failure(post_model_version_resp)
+    version_id = post_model_version_resp.model.model_version.id  # used for DELETE
+
     try:
-        model = resources_pb2.Model(
-            id=model_id,
-            model_type_id="custom-code-operator",
-        )
-        post_model_request = service_pb2.PostModelsRequest(model=model)
-        raise_on_failure(stub.PostModels(post_model_request, metadata=metadata()))
-
-        output_info_params = struct_pb2.Struct()
-        output_info_params.update({"operator_code": TEST_OPERATOR_CODE})
-        output_info = resources_pb2.OutputInfo(params=output_info_params)
-        post_version_request = service_pb2.PostModelVersionsRequest(
-            model_id=model_id,
-            model_versions=[resources_pb2.ModelVersion(output_info=output_info)],
-        )
-        post_model_version_resp = stub.PostModelVersions(post_version_request, metadata=metadata())
-        raise_on_failure(post_model_version_resp)
-        version_id = post_model_version_resp.model.model_version.id  # used for delete
-
         for i in range(0, MAX_RETRY_ATTEMPTS):
             resp = stub.GetModel(
                 service_pb2.GetModelRequest(
