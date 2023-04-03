@@ -2659,6 +2659,7 @@ class DatasetVersionExport(google.protobuf.message.Message):
     STATUS_FIELD_NUMBER: builtins.int
     URL_FIELD_NUMBER: builtins.int
     SIZE_FIELD_NUMBER: builtins.int
+    INCLUDE_EMBEDDINGS_FIELD_NUMBER: builtins.int
     format: global___DatasetVersionExportFormat.ValueType
     """format is the format of the dataset version export."""
     @property
@@ -2668,6 +2669,8 @@ class DatasetVersionExport(google.protobuf.message.Message):
     """url is the URL from where the dataset version export can be downloaded."""
     size: builtins.int
     """size is the size of the dataset version export in number of bytes."""
+    include_embeddings: builtins.bool
+    """whether to include embeddings in the export or not."""
     def __init__(
         self,
         *,
@@ -2675,9 +2678,10 @@ class DatasetVersionExport(google.protobuf.message.Message):
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         url: builtins.str = ...,
         size: builtins.int = ...,
+        include_embeddings: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "size", b"size", "status", b"status", "url", b"url"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "include_embeddings", b"include_embeddings", "size", b"size", "status", b"status", "url", b"url"]) -> None: ...
 
 global___DatasetVersionExport = DatasetVersionExport
 
@@ -3390,6 +3394,24 @@ class ModelLayerInfo(google.protobuf.message.Message):
 global___ModelLayerInfo = ModelLayerInfo
 
 @typing_extensions.final
+class TritonCondaEnvInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CONDA_PACK_URL_FIELD_NUMBER: builtins.int
+    CONDA_YAML_URL_FIELD_NUMBER: builtins.int
+    conda_pack_url: builtins.str
+    conda_yaml_url: builtins.str
+    def __init__(
+        self,
+        *,
+        conda_pack_url: builtins.str = ...,
+        conda_yaml_url: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["conda_pack_url", b"conda_pack_url", "conda_yaml_url", b"conda_yaml_url"]) -> None: ...
+
+global___TritonCondaEnvInfo = TritonCondaEnvInfo
+
+@typing_extensions.final
 class LayerShape(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3713,7 +3735,6 @@ class ModelVersion(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     LICENSE_FIELD_NUMBER: builtins.int
-    DATASET_VERSION_FIELD_NUMBER: builtins.int
     OUTPUT_INFO_FIELD_NUMBER: builtins.int
     INPUT_INFO_FIELD_NUMBER: builtins.int
     TRAIN_INFO_FIELD_NUMBER: builtins.int
@@ -3761,12 +3782,6 @@ class ModelVersion(google.protobuf.message.Message):
         """
     license: builtins.str
     @property
-    def dataset_version(self) -> global___DatasetVersion:
-        """Deprecated: For explicit dataset versions, please use PostDatasetVersions 
-        and provide the dataset version ID in the train_info.params.
-        Dataset version used to create this model version.
-        """
-    @property
     def output_info(self) -> global___OutputInfo:
         """Info about the model's output and configuration."""
     @property
@@ -3797,15 +3812,14 @@ class ModelVersion(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         license: builtins.str = ...,
-        dataset_version: global___DatasetVersion | None = ...,
         output_info: global___OutputInfo | None = ...,
         input_info: global___InputInfo | None = ...,
         train_info: global___TrainInfo | None = ...,
         import_info: global___ImportInfo | None = ...,
         train_log: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["completed_at", b"completed_at", "created_at", b"created_at", "dataset_version", b"dataset_version", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "completed_at", b"completed_at", "created_at", b"created_at", "dataset_version", b"dataset_version", "description", b"description", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["completed_at", b"completed_at", "created_at", b"created_at", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ModelVersion = ModelVersion
 
@@ -4708,7 +4722,7 @@ class Search(google.protobuf.message.Message):
         COSINE_DISTANCE: Search._Metric.ValueType  # 2
 
     class Metric(_Metric, metaclass=_MetricEnumTypeWrapper):
-        """Metric used for search. Can be EUCLIDEAN_DISTANCE (default) or COSINE_DISTANCE. 
+        """Metric used for search. Can be EUCLIDEAN_DISTANCE (default) or COSINE_DISTANCE.
         Currently only brute force search supports non-eudlicean metrics.
         """
 
@@ -5555,6 +5569,7 @@ class WorkflowNode(google.protobuf.message.Message):
     MODEL_FIELD_NUMBER: builtins.int
     NODE_INPUTS_FIELD_NUMBER: builtins.int
     SUPPRESS_OUTPUT_FIELD_NUMBER: builtins.int
+    OUTPUT_INFO_OVERRIDE_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An identifier for this node in the graph. This is used when connecting NodeInputs
     together.
@@ -5571,6 +5586,11 @@ class WorkflowNode(google.protobuf.message.Message):
         """
     suppress_output: builtins.bool
     """suppress the output for workflow prediction"""
+    @property
+    def output_info_override(self) -> global___OutputInfo:
+        """Used to override the output_info.data and output_info.params of the model specified by the node.
+        Values for fields_map, message, and output_config are ignored.
+        """
     def __init__(
         self,
         *,
@@ -5578,9 +5598,10 @@ class WorkflowNode(google.protobuf.message.Message):
         model: global___Model | None = ...,
         node_inputs: collections.abc.Iterable[global___NodeInput] | None = ...,
         suppress_output: builtins.bool = ...,
+        output_info_override: global___OutputInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model", b"model"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "model", b"model", "node_inputs", b"node_inputs", "suppress_output", b"suppress_output"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "output_info_override", b"output_info_override"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "model", b"model", "node_inputs", b"node_inputs", "output_info_override", b"output_info_override", "suppress_output", b"suppress_output"]) -> None: ...
 
 global___WorkflowNode = WorkflowNode
 
@@ -7299,6 +7320,7 @@ class Operation(google.protobuf.message.Message):
     DELETE_METADATA_FIELD_NUMBER: builtins.int
     OVERWRITE_GEO_FIELD_NUMBER: builtins.int
     DELETE_GEO_FIELD_NUMBER: builtins.int
+    DELETE_FROM_DATASET_FIELD_NUMBER: builtins.int
     @property
     def add_concepts(self) -> global___AddConcepts: ...
     @property
@@ -7311,6 +7333,8 @@ class Operation(google.protobuf.message.Message):
     def overwrite_geo(self) -> global___OverwriteGeo: ...
     @property
     def delete_geo(self) -> global___DeleteGeo: ...
+    @property
+    def delete_from_dataset(self) -> global___DeleteFromDataset: ...
     def __init__(
         self,
         *,
@@ -7320,10 +7344,11 @@ class Operation(google.protobuf.message.Message):
         delete_metadata: global___DeleteMetadata | None = ...,
         overwrite_geo: global___OverwriteGeo | None = ...,
         delete_geo: global___DeleteGeo | None = ...,
+        delete_from_dataset: global___DeleteFromDataset | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo", "delete_from_dataset"] | None: ...
 
 global___Operation = Operation
 
@@ -7432,33 +7457,25 @@ class DeleteGeo(google.protobuf.message.Message):
 global___DeleteGeo = DeleteGeo
 
 @typing_extensions.final
-class WaitlistEmail(google.protobuf.message.Message):
-    """WaitlistEmail is an e-mail address on a feature waiting list.
-    Note that 'created_at' is explicitly NOT included in the API resources
-    returned by unauthenticated PostWaitlistEmails requests. Otherwise, the
-    timestamp could be used to determine if the e-mail was already on the
-    feature waiting list, leaking the contents of the list.
-    """
-
+class DeleteFromDataset(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    EMAIL_FIELD_NUMBER: builtins.int
-    email: builtins.str
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    dataset_id: builtins.str
     def __init__(
         self,
         *,
-        email: builtins.str = ...,
+        dataset_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["email", b"email"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id"]) -> None: ...
 
-global___WaitlistEmail = WaitlistEmail
+global___DeleteFromDataset = DeleteFromDataset
 
 @typing_extensions.final
 class InputsAddJob(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    CLOUD_STORAGE_URL_FIELD_NUMBER: builtins.int
     CALL_BACK_URL_FIELD_NUMBER: builtins.int
     APP_PAT_FIELD_NUMBER: builtins.int
     PROGRESS_FIELD_NUMBER: builtins.int
@@ -7468,10 +7485,6 @@ class InputsAddJob(google.protobuf.message.Message):
     UPLOADS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """id of the job"""
-    cloud_storage_url: builtins.str
-    """Cloud storage url from which the inputs can be accessed.
-    Supported providers are AWS S3, Azure blob, GCP cloud storage.
-    """
     call_back_url: builtins.str
     """If call back url is set, we will send a Post request to this endpoint with job status."""
     app_pat: builtins.str
@@ -7501,7 +7514,6 @@ class InputsAddJob(google.protobuf.message.Message):
         self,
         *,
         id: builtins.str = ...,
-        cloud_storage_url: builtins.str = ...,
         call_back_url: builtins.str = ...,
         app_pat: builtins.str = ...,
         progress: global___InputsAddJobProgress | None = ...,
@@ -7511,7 +7523,7 @@ class InputsAddJob(google.protobuf.message.Message):
         uploads: collections.abc.Iterable[global___Upload] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "cloud_storage_url", b"cloud_storage_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "uploads", b"uploads"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "uploads", b"uploads"]) -> None: ...
 
 global___InputsAddJob = InputsAddJob
 
@@ -7774,17 +7786,18 @@ class DataSourceCredentials(google.protobuf.message.Message):
     AZURE_BLOB_CREDS_FIELD_NUMBER: builtins.int
     @property
     def s3_creds(self) -> global___AWSCreds:
-        """AWS S3 uses creds: “{accessKey}:{secretKey}” and “region” for authentication."""
+        """AWS S3 credentials for authentication."""
     gcp_creds: builtins.bytes
     """GCP Cloud Storage uses service account key data(creds.json) as Byte array for authentication."""
-    azure_blob_creds: builtins.str
-    """Azure Blob storage uses creds: “{storageAccount}:{storageKey}” for authentication."""
+    @property
+    def azure_blob_creds(self) -> global___AzureBlobCreds:
+        """Azure Blob credentials for authentication."""
     def __init__(
         self,
         *,
         s3_creds: global___AWSCreds | None = ...,
         gcp_creds: builtins.bytes = ...,
-        azure_blob_creds: builtins.str = ...,
+        azure_blob_creds: global___AzureBlobCreds | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["azure_blob_creds", b"azure_blob_creds", "credentials", b"credentials", "gcp_creds", b"gcp_creds", "s3_creds", b"s3_creds"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["azure_blob_creds", b"azure_blob_creds", "credentials", b"credentials", "gcp_creds", b"gcp_creds", "s3_creds", b"s3_creds"]) -> None: ...
@@ -7794,23 +7807,49 @@ global___DataSourceCredentials = DataSourceCredentials
 
 @typing_extensions.final
 class AWSCreds(google.protobuf.message.Message):
-    """AWS S3 uses creds: “{accessKey}:{secretKey}” and “region” for authentication."""
+    """AWS S3 storage credentials."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    CREDS_FIELD_NUMBER: builtins.int
     REGION_FIELD_NUMBER: builtins.int
-    creds: builtins.str
+    ID_FIELD_NUMBER: builtins.int
+    SECRET_FIELD_NUMBER: builtins.int
+    TOKEN_FIELD_NUMBER: builtins.int
     region: builtins.str
+    id: builtins.str
+    secret: builtins.str
+    token: builtins.str
     def __init__(
         self,
         *,
-        creds: builtins.str = ...,
         region: builtins.str = ...,
+        id: builtins.str = ...,
+        secret: builtins.str = ...,
+        token: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["creds", b"creds", "region", b"region"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "region", b"region", "secret", b"secret", "token", b"token"]) -> None: ...
 
 global___AWSCreds = AWSCreds
+
+@typing_extensions.final
+class AzureBlobCreds(google.protobuf.message.Message):
+    """Azure Blob storage credentials."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ACCOUNT_NAME_FIELD_NUMBER: builtins.int
+    ACCOUNT_KEY_FIELD_NUMBER: builtins.int
+    account_name: builtins.str
+    account_key: builtins.str
+    def __init__(
+        self,
+        *,
+        account_name: builtins.str = ...,
+        account_key: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["account_key", b"account_key", "account_name", b"account_name"]) -> None: ...
+
+global___AzureBlobCreds = AzureBlobCreds
 
 @typing_extensions.final
 class InputsUpload(google.protobuf.message.Message):
