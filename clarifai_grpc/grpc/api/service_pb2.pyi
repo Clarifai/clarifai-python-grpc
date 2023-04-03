@@ -2922,6 +2922,9 @@ class ListKeysRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    NOT_EXPIRED_FIELD_NUMBER: builtins.int
+    SCOPES_FIELD_NUMBER: builtins.int
+    ENDPOINTS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -2932,15 +2935,23 @@ class ListKeysRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    not_expired: builtins.bool
+    @property
+    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        not_expired: builtins.bool = ...,
+        scopes: collections.abc.Iterable[builtins.str] | None = ...,
+        endpoints: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["endpoints", b"endpoints", "not_expired", b"not_expired", "page", b"page", "per_page", b"per_page", "scopes", b"scopes", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListKeysRequest = ListKeysRequest
 
@@ -3876,43 +3887,15 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSIONS_FIELD_NUMBER: builtins.int
-    SEARCH_FIELD_NUMBER: builtins.int
-    TRAIN_SEARCH_FIELD_NUMBER: builtins.int
-    TEST_SEARCH_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
-    DATASET_VERSION_FIELD_NUMBER: builtins.int
     EVAL_INFO_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
     @property
     def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]: ...
-    @property
-    def search(self) -> proto.clarifai.api.resources_pb2.Search:
-        """Use this to filter inputs that are used in training
-        Alternatively, dataset_version field.
-        """
-    @property
-    def train_search(self) -> proto.clarifai.api.resources_pb2.Search:
-        """train_search is used to specify what data to train on.
-        Alternatively, use dataset_version field.
-        """
-    @property
-    def test_search(self) -> proto.clarifai.api.resources_pb2.Search:
-        """test_search is used to specify what data to test on.
-        Alternatively, use dataset_version field.
-        """
     description: builtins.str
     """Description about this training run"""
-    @property
-    def dataset_version(self) -> proto.clarifai.api.resources_pb2.DatasetVersion:
-        """Use the data from this dataset version for training.
-        Set dataset_version.dataset_id to identify the dataset that you would like to use.
-        When dataset_version.id field is set,
-        the system will reuse the data from provided dataset version.
-        When dataset_version.id is not set,
-        a new dataset version will be created in the dataset using provided dataset_version fields.
-        """
     @property
     def eval_info(self) -> proto.clarifai.api.resources_pb2.EvalInfo:
         """When evaluate_after_training set to true, we will do evaluation immediately after training finishes.
@@ -3924,15 +3907,11 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         model_id: builtins.str = ...,
         model_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersion] | None = ...,
-        search: proto.clarifai.api.resources_pb2.Search | None = ...,
-        train_search: proto.clarifai.api.resources_pb2.Search | None = ...,
-        test_search: proto.clarifai.api.resources_pb2.Search | None = ...,
         description: builtins.str = ...,
-        dataset_version: proto.clarifai.api.resources_pb2.DatasetVersion | None = ...,
         eval_info: proto.clarifai.api.resources_pb2.EvalInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "eval_info", b"eval_info", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "description", b"description", "eval_info", b"eval_info", "model_id", b"model_id", "model_versions", b"model_versions", "search", b"search", "test_search", b"test_search", "train_search", b"train_search", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["eval_info", b"eval_info", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "eval_info", b"eval_info", "model_id", b"model_id", "model_versions", b"model_versions", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostModelVersionsRequest = PostModelVersionsRequest
 
@@ -4442,6 +4421,7 @@ class MultiModelTypeResponse(google.protobuf.message.Message):
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_TYPES_FIELD_NUMBER: builtins.int
     MODEL_IMPORTERS_FIELD_NUMBER: builtins.int
+    TRITON_CONDA_ENVS_INFO_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of the response."""
@@ -4451,15 +4431,19 @@ class MultiModelTypeResponse(google.protobuf.message.Message):
     @property
     def model_importers(self) -> proto.clarifai.api.resources_pb2.ModelTypeField:
         """List of model importers"""
+    @property
+    def triton_conda_envs_info(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TritonCondaEnvInfo]:
+        """Triton model envs that can be used for model upload"""
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         model_types: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelType] | None = ...,
         model_importers: proto.clarifai.api.resources_pb2.ModelTypeField | None = ...,
+        triton_conda_envs_info: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TritonCondaEnvInfo] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["model_importers", b"model_importers", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_importers", b"model_importers", "model_types", b"model_types", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_importers", b"model_importers", "model_types", b"model_types", "status", b"status", "triton_conda_envs_info", b"triton_conda_envs_info"]) -> None: ...
 
 global___MultiModelTypeResponse = MultiModelTypeResponse
 
