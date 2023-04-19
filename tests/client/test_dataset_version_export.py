@@ -30,6 +30,9 @@ def test_export_dataset_version(channel):
     raise_on_failure(post_datasets_response)
 
     try:
+        # Declare variables for the finally-block.
+        input_ids = None
+
         post_inputs_response = stub.PostInputs(
             service_pb2.PostInputsRequest(
                 inputs=[
@@ -119,10 +122,11 @@ def test_export_dataset_version(channel):
             metadata=metadata(),
         )
 
-        delete_inputs_response = stub.DeleteInputs(
-            service_pb2.DeleteInputsRequest(ids=input_ids),
-            metadata=metadata(),
-        )
+        if input_ids:
+            delete_inputs_response = stub.DeleteInputs(
+                service_pb2.DeleteInputsRequest(ids=input_ids),
+                metadata=metadata(),
+            )
+            raise_on_failure(delete_inputs_response)
 
         raise_on_failure(delete_datasets_response)
-        raise_on_failure(delete_inputs_response)
