@@ -32,6 +32,7 @@ def test_export_dataset_version(channel):
     try:
         # Declare variables for the finally-block.
         input_ids = None
+        dataset_version_id = None
 
         post_inputs_response = stub.PostInputs(
             service_pb2.PostInputsRequest(
@@ -63,16 +64,19 @@ def test_export_dataset_version(channel):
         input_ids = [input.id for input in post_inputs_response.inputs]
         wait_for_inputs_upload(stub, metadata(), input_ids)
 
-        dataset_version_id = dataset_id  # Reuse dataset external ID for version.
         post_dataset_versions_response = stub.PostDatasetVersions(
             service_pb2.PostDatasetVersionsRequest(
                 dataset_id=dataset_id,
-                dataset_versions=[resources_pb2.DatasetVersion(id=dataset_version_id)],
+                dataset_versions=[
+                    # Reuse dataset external ID for version.
+                    resources_pb2.DatasetVersion(id=dataset_id),
+                ],
             ),
             metadata=metadata(),
         )
         raise_on_failure(post_dataset_versions_response)
 
+        dataset_version_id = post_dataset_versions_response.dataset_versions[0].id
         wait_for_dataset_version_ready(stub, metadata(), dataset_id, dataset_version_id)
 
         put_dataset_version_exports_response = stub.PutDatasetVersionExports(
@@ -117,16 +121,28 @@ def test_export_dataset_version(channel):
             input_batch = resources_pb2.InputBatch().FromString(zip_file.read(namelist[0]))
             assert len(input_batch.inputs) == len(input_ids)
     finally:
-        delete_datasets_response = stub.DeleteDatasets(
-            service_pb2.DeleteDatasetsRequest(dataset_ids=[dataset_id]),
-            metadata=metadata(),
-        )
+        if dataset_version_id:
+            delete_dataset_versions_response = stub.DeleteDatasetVersions(
+                service_pb2.DeleteDatasetVersionsRequest(
+                    dataset_id=dataset_id,
+                    dataset_version_ids=[dataset_version_id],
+                ),
+                metadata=metadata(),
+            )
 
         if input_ids:
             delete_inputs_response = stub.DeleteInputs(
                 service_pb2.DeleteInputsRequest(ids=input_ids),
                 metadata=metadata(),
             )
-            raise_on_failure(delete_inputs_response)
 
+        delete_datasets_response = stub.DeleteDatasets(
+            service_pb2.DeleteDatasetsRequest(dataset_ids=[dataset_id]),
+            metadata=metadata(),
+        )
+
+        if dataset_version_id:
+            raise_on_failure(delete_dataset_versions_response)
+        if input_ids:
+            raise_on_failure(delete_inputs_response)
         raise_on_failure(delete_datasets_response)
