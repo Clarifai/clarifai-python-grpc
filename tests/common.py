@@ -23,6 +23,8 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+ARCHIVE_CLOUD_URL = "s3://clarifai-storage-test/all_types/Archive.zip"
+
 MAIN_APP_ID = "main"
 MAIN_APP_USER_ID = "clarifai"
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
@@ -130,6 +132,25 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
                 f"Expected model to evaluate, but got {error_message}. Full response: {response}"
             )
     # At this point, the model has successfully finished evaluation.
+
+
+def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_job_id: str):
+    while True:
+        response = stub.GetInputsExtractionJob(
+            service_pb2.GetInputsExtractionJobRequest(
+                inputs_extraction_job_id=extraction_job_id
+            )
+        )
+        raise_on_failure(response)
+        if response.status.code == status_code_pb2.JOB_COMPLETED:
+            return response
+        elif response.status.code in (status_code_pb2.JOB_QUEUED,  status_code_pb2.JOB_RUNNING):
+            time.sleep(1)
+        else:
+            error_message = get_status_message(response.status)
+            raise Exception(
+                f"Expected extraction job to be completed, but got {error_message}. Full response: {response}"
+            )
 
 
 def raise_on_failure(response, custom_message=""):
