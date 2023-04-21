@@ -24,6 +24,7 @@ CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
 ARCHIVE_CLOUD_URL = "s3://samples.clarifai.com/Archive.zip"
+CLOUD_URL = "s3://samples.clarifai.com/storage/"
 
 MAIN_APP_ID = "main"
 MAIN_APP_USER_ID = "clarifai"
