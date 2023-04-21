@@ -143,7 +143,10 @@ def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_
         raise_on_failure(response)
         if response.inputs_extraction_job.status.code == status_code_pb2.JOB_COMPLETED:
             return response
-        elif response.inputs_extraction_job.status.code in (status_code_pb2.JOB_QUEUED, status_code_pb2.JOB_RUNNING):
+        elif response.inputs_extraction_job.status.code in (
+            status_code_pb2.JOB_QUEUED,
+            status_code_pb2.JOB_RUNNING,
+        ):
             time.sleep(1)
         else:
             error_message = get_status_message(response.inputs_extraction_job.status)
