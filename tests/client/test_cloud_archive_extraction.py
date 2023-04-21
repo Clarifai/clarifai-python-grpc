@@ -20,9 +20,9 @@ def test_post_inputs_data_source_single_public_archive(channel):
                     url=resources_pb2.DataSourceURL(url=ARCHIVE_CLOUD_URL)
                 )
             ],
-            app_pat=os.environ.get("CLARIFAI_API_KEY")
+            app_pat=os.environ.get("CLARIFAI_API_KEY"),
         ),
-        metadata=metadata()
+        metadata=metadata(),
     )
     raise_on_failure(post_data_source_response)
 
