@@ -1,9 +1,11 @@
+import os
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
 from tests.common import (
     ARCHIVE_CLOUD_URL,
     raise_on_failure,
     wait_for_extraction_job_completed,
     both_channels,
+    metadata,
 )
 
 
@@ -17,8 +19,10 @@ def test_post_inputs_data_source_single_public_archive(channel):
                 resources_pb2.InputsDataSource(
                     url=resources_pb2.DataSourceURL(url=ARCHIVE_CLOUD_URL)
                 )
-            ]
-        )
+            ],
+            app_pat=os.environ.get("CLARIFAI_API_KEY")
+        ),
+        metadata=metadata()
     )
     raise_on_failure(post_data_source_response)
 
