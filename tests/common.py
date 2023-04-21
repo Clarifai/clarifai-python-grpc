@@ -137,14 +137,12 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
 def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_job_id: str):
     while True:
         response = stub.GetInputsExtractionJob(
-            service_pb2.GetInputsExtractionJobRequest(
-                inputs_extraction_job_id=extraction_job_id
-            )
+            service_pb2.GetInputsExtractionJobRequest(inputs_extraction_job_id=extraction_job_id)
         )
         raise_on_failure(response)
         if response.status.code == status_code_pb2.JOB_COMPLETED:
             return response
-        elif response.status.code in (status_code_pb2.JOB_QUEUED,  status_code_pb2.JOB_RUNNING):
+        elif response.status.code in (status_code_pb2.JOB_QUEUED, status_code_pb2.JOB_RUNNING):
             time.sleep(1)
         else:
             error_message = get_status_message(response.status)

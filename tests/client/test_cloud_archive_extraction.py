@@ -13,18 +13,17 @@ def test_post_inputs_data_source_single_public_archive(channel):
 
     post_data_source_response = stub.PostInputsDataSources(
         service_pb2.PostInputsDataSourcesRequest(
-            data_sources=[resources_pb2.InputsDataSource(
-                url=resources_pb2.DataSourceURL(
-                    url=ARCHIVE_CLOUD_URL
+            data_sources=[
+                resources_pb2.InputsDataSource(
+                    url=resources_pb2.DataSourceURL(url=ARCHIVE_CLOUD_URL)
                 )
-            )]
+            ]
         )
     )
     raise_on_failure(post_data_source_response)
 
     completed_response = wait_for_extraction_job_completed(
-        stub,
-        post_data_source_response.inputs_add_jobs[0].extraction_jobs[0].id
+        stub, post_data_source_response.inputs_add_jobs[0].extraction_jobs[0].id
     )
 
     assert completed_response.inputs_extraction_job.progress.read_objects_count == 4
