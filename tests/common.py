@@ -23,6 +23,9 @@ BEER_VIDEO_URL = "https://samples.clarifai.com/beer.mp4"
 CONAN_GIF_VIDEO_URL = "https://samples.clarifai.com/3o6gb3kkXfLvdKEZs4.gif"
 TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 
+ARCHIVE_CLOUD_URL = "s3://samples.clarifai.com/Archive.zip"
+CLOUD_URL = "s3://samples.clarifai.com/storage/"
+
 MAIN_APP_ID = "main"
 MAIN_APP_USER_ID = "clarifai"
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
@@ -181,6 +184,27 @@ def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_
                 f"Expected dataset version to export, but got {error_message}. Full response: {response}"
             )
     # At this point, the dataset version has successfully finished exporting.
+
+
+def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_job_id: str):
+    while True:
+        response = stub.GetInputsExtractionJob(
+            service_pb2.GetInputsExtractionJobRequest(inputs_extraction_job_id=extraction_job_id),
+            metadata=metadata(),
+        )
+        raise_on_failure(response)
+        if response.inputs_extraction_job.status.code == status_code_pb2.JOB_COMPLETED:
+            return response
+        elif response.inputs_extraction_job.status.code in (
+            status_code_pb2.JOB_QUEUED,
+            status_code_pb2.JOB_RUNNING,
+        ):
+            time.sleep(1)
+        else:
+            error_message = get_status_message(response.inputs_extraction_job.status)
+            raise Exception(
+                f"Expected extraction job to be completed, but got {error_message}. Full response: {response}"
+            )
 
 
 def raise_on_failure(response, custom_message=""):
