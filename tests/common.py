@@ -186,9 +186,6 @@ def post_model_outputs_and_maybe_allow_retries(
 
 
 def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, response):
-    grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
-    if grpc_base == "api.clarifai.com":
-        return response  # only retry in non-prod
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
         if response.status.code not in [status_code_pb2.MODEL_DEPLOYING, status_code_pb2.FAILURE]:
             return response  # don't retry on non-FAILURE codes
