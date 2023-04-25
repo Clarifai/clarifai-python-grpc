@@ -135,6 +135,57 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     # At this point, the model has successfully finished evaluation.
 
 
+def wait_for_dataset_version_ready(stub, metadata, dataset_id, dataset_version_id):
+    while True:
+        response = stub.GetDatasetVersion(
+            service_pb2.GetDatasetVersionRequest(
+                dataset_id=dataset_id,
+                dataset_version_id=dataset_version_id,
+            ),
+            metadata=metadata,
+        )
+        raise_on_failure(response)
+        if response.dataset_version.status.code == status_code_pb2.DATASET_VERSION_READY:
+            break
+        elif response.dataset_version.status.code in (
+            status_code_pb2.DATASET_VERSION_PENDING,
+            status_code_pb2.DATASET_VERSION_IN_PROGRESS,
+        ):
+            time.sleep(1)
+        else:
+            error_message = get_status_message(response.dataset_version.status)
+            raise Exception(
+                f"Expected dataset version to be ready, but got {error_message}. Full response: {response}"
+            )
+    # At this point, the dataset version is ready.
+
+
+def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_version_id):
+    while True:
+        response = stub.GetDatasetVersion(
+            service_pb2.GetDatasetVersionRequest(
+                dataset_id=dataset_id,
+                dataset_version_id=dataset_version_id,
+            ),
+            metadata=metadata,
+        )
+        raise_on_failure(response)
+        export = response.dataset_version.export_info.clarifai_data_protobuf
+        if export.status.code == status_code_pb2.DATASET_VERSION_EXPORT_SUCCESS:
+            break
+        elif export.status.code in (
+            status_code_pb2.DATASET_VERSION_EXPORT_PENDING,
+            status_code_pb2.DATASET_VERSION_EXPORT_IN_PROGRESS,
+        ):
+            time.sleep(1)
+        else:
+            error_message = get_status_message(export.status)
+            raise Exception(
+                f"Expected dataset version to export, but got {error_message}. Full response: {response}"
+            )
+    # At this point, the dataset version has successfully finished exporting.
+
+
 def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_job_id: str):
     while True:
         response = stub.GetInputsExtractionJob(
