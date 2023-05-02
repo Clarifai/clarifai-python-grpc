@@ -495,6 +495,7 @@ class App(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     DEFAULT_LANGUAGE_FIELD_NUMBER: builtins.int
     DEFAULT_WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    DEFAULT_WORKFLOW_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
@@ -512,6 +513,9 @@ class App(google.protobuf.message.Message):
     name: builtins.str
     default_language: builtins.str
     default_workflow_id: builtins.str
+    """Default workflow id deprecated in favor of default_workflow"""
+    @property
+    def default_workflow(self) -> global___Workflow: ...
     user_id: builtins.str
     """why is user_id present here when this message type is used in PostApps but completely ignored there? PostApp already
     specifies the userid in path but doesn't even actually use neither of userids, it instead used the id from auth context.
@@ -569,6 +573,7 @@ class App(google.protobuf.message.Message):
         name: builtins.str = ...,
         default_language: builtins.str = ...,
         default_workflow_id: builtins.str = ...,
+        default_workflow: global___Workflow | None = ...,
         user_id: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -583,8 +588,8 @@ class App(google.protobuf.message.Message):
         notes: builtins.str = ...,
         image: global___Image | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow_id", b"default_workflow_id", "description", b"description", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___App = App
 
@@ -4595,6 +4600,22 @@ class Hit(google.protobuf.message.Message):
 global___Hit = Hit
 
 @typing_extensions.final
+class HitCount(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ESTIMATED_TOTAL_FIELD_NUMBER: builtins.int
+    estimated_total: builtins.int
+    """The estimated total number of hits for the search query, not just the current page."""
+    def __init__(
+        self,
+        *,
+        estimated_total: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["estimated_total", b"estimated_total"]) -> None: ...
+
+global___HitCount = HitCount
+
+@typing_extensions.final
 class And(google.protobuf.message.Message):
     """This is the common building block of a query which is a sequence of And messages ANDed together.
     Note that some fields are used too RANK results (affect the scores) and some are used to FILTER
@@ -7321,6 +7342,7 @@ class Operation(google.protobuf.message.Message):
     OVERWRITE_GEO_FIELD_NUMBER: builtins.int
     DELETE_GEO_FIELD_NUMBER: builtins.int
     DELETE_FROM_DATASET_FIELD_NUMBER: builtins.int
+    ADD_TO_DATASET_FIELD_NUMBER: builtins.int
     @property
     def add_concepts(self) -> global___AddConcepts: ...
     @property
@@ -7335,6 +7357,8 @@ class Operation(google.protobuf.message.Message):
     def delete_geo(self) -> global___DeleteGeo: ...
     @property
     def delete_from_dataset(self) -> global___DeleteFromDataset: ...
+    @property
+    def add_to_dataset(self) -> global___AddToDataset: ...
     def __init__(
         self,
         *,
@@ -7345,10 +7369,11 @@ class Operation(google.protobuf.message.Message):
         overwrite_geo: global___OverwriteGeo | None = ...,
         delete_geo: global___DeleteGeo | None = ...,
         delete_from_dataset: global___DeleteFromDataset | None = ...,
+        add_to_dataset: global___AddToDataset | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo", "delete_from_dataset"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo", "delete_from_dataset", "add_to_dataset"] | None: ...
 
 global___Operation = Operation
 
@@ -7455,6 +7480,21 @@ class DeleteGeo(google.protobuf.message.Message):
     ) -> None: ...
 
 global___DeleteGeo = DeleteGeo
+
+@typing_extensions.final
+class AddToDataset(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    dataset_id: builtins.str
+    def __init__(
+        self,
+        *,
+        dataset_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id"]) -> None: ...
+
+global___AddToDataset = AddToDataset
 
 @typing_extensions.final
 class DeleteFromDataset(google.protobuf.message.Message):
@@ -7712,11 +7752,19 @@ class InputsExtractionJobProgress(google.protobuf.message.Message):
     IMAGE_INPUTS_COUNT_FIELD_NUMBER: builtins.int
     VIDEO_INPUTS_COUNT_FIELD_NUMBER: builtins.int
     TEXT_INPUTS_COUNT_FIELD_NUMBER: builtins.int
+    PENDING_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
+    IN_PROGRESS_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
+    COMPLETED_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
+    FAILED_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
     read_objects_count: builtins.int
     audio_inputs_count: builtins.int
     image_inputs_count: builtins.int
     video_inputs_count: builtins.int
     text_inputs_count: builtins.int
+    pending_archives_count: builtins.int
+    in_progress_archives_count: builtins.int
+    completed_archives_count: builtins.int
+    failed_archives_count: builtins.int
     def __init__(
         self,
         *,
@@ -7725,8 +7773,12 @@ class InputsExtractionJobProgress(google.protobuf.message.Message):
         image_inputs_count: builtins.int = ...,
         video_inputs_count: builtins.int = ...,
         text_inputs_count: builtins.int = ...,
+        pending_archives_count: builtins.int = ...,
+        in_progress_archives_count: builtins.int = ...,
+        completed_archives_count: builtins.int = ...,
+        failed_archives_count: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_inputs_count", b"audio_inputs_count", "image_inputs_count", b"image_inputs_count", "read_objects_count", b"read_objects_count", "text_inputs_count", b"text_inputs_count", "video_inputs_count", b"video_inputs_count"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_inputs_count", b"audio_inputs_count", "completed_archives_count", b"completed_archives_count", "failed_archives_count", b"failed_archives_count", "image_inputs_count", b"image_inputs_count", "in_progress_archives_count", b"in_progress_archives_count", "pending_archives_count", b"pending_archives_count", "read_objects_count", b"read_objects_count", "text_inputs_count", b"text_inputs_count", "video_inputs_count", b"video_inputs_count"]) -> None: ...
 
 global___InputsExtractionJobProgress = InputsExtractionJobProgress
 

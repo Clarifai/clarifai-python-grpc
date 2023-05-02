@@ -3779,6 +3779,12 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
+    TRAINED_ONLY_FIELD_NUMBER: builtins.int
+    SORT_ASCENDING_FIELD_NUMBER: builtins.int
+    SORT_BY_STATUS_CODE_FIELD_NUMBER: builtins.int
+    SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
+    SORT_BY_DESCRIPTION_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -3792,7 +3798,25 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     """
     @property
     def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """To list only the model versions that have these concept ids present in them."""
+        """Filtering options:
+        To list only the model versions that have these concept ids present in them.
+        """
+    trained_only: builtins.bool
+    """To list only the model versions that have been trained."""
+    sort_ascending: builtins.bool
+    """Sorting options:
+    Whether to sort in ascending order. If false, will order in descending order.
+    """
+    sort_by_status_code: builtins.bool
+    """Whether to order by the status code"""
+    sort_by_num_inputs: builtins.bool
+    """Whether to order by the number of training inputs"""
+    sort_by_description: builtins.bool
+    """Whether to sort by the description"""
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at time
+    If neither sort option is set to true, will sort by created_at.
+    """
     def __init__(
         self,
         *,
@@ -3801,9 +3825,16 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        trained_only: builtins.bool = ...,
+        sort_ascending: builtins.bool = ...,
+        sort_by_status_code: builtins.bool = ...,
+        sort_by_num_inputs: builtins.bool = ...,
+        sort_by_description: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_description", b"sort_by_description", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_status_code", b"sort_by_status_code", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "model_id", b"model_id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_description", b"sort_by_description", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_status_code", b"sort_by_status_code", "trained_only", b"trained_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_status_code", "sort_by_num_inputs", "sort_by_description", "sort_by_created_at"] | None: ...
 
 global___ListModelVersionsRequest = ListModelVersionsRequest
 
@@ -5148,6 +5179,7 @@ class PostInputsSearchesRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
+    ONLY_COUNT_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """The user_id and app_id to query from."""
@@ -5157,15 +5189,20 @@ class PostInputsSearchesRequest(google.protobuf.message.Message):
     @property
     def pagination(self) -> global___Pagination:
         """Pagination information to paginate through search result Hits."""
+    only_count: builtins.bool
+    """If only_count is set, then the response will not contain hits,
+    but hit_counts instead.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
         pagination: global___Pagination | None = ...,
+        only_count: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["only_count", b"only_count", "pagination", b"pagination", "searches", b"searches", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostInputsSearchesRequest = PostInputsSearchesRequest
 
@@ -5204,6 +5241,7 @@ class MultiSearchResponse(google.protobuf.message.Message):
     HITS_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     SEARCHES_FIELD_NUMBER: builtins.int
+    HIT_COUNTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of whether the search was successful."""
@@ -5218,6 +5256,11 @@ class MultiSearchResponse(google.protobuf.message.Message):
     @property
     def searches(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Search]:
         """The original Searches provided in the request."""
+    @property
+    def hit_counts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.HitCount]:
+        """The counts of hits for each search, in the same order as searches.
+        Only returned if the request set only_count.
+        """
     def __init__(
         self,
         *,
@@ -5226,9 +5269,10 @@ class MultiSearchResponse(google.protobuf.message.Message):
         hits: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Hit] | None = ...,
         query: proto.clarifai.api.resources_pb2.Query | None = ...,
         searches: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Search] | None = ...,
+        hit_counts: collections.abc.Iterable[proto.clarifai.api.resources_pb2.HitCount] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["query", b"query", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["hits", b"hits", "id", b"id", "query", b"query", "searches", b"searches", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["hit_counts", b"hit_counts", "hits", b"hits", "id", b"id", "query", b"query", "searches", b"searches", "status", b"status"]) -> None: ...
 
 global___MultiSearchResponse = MultiSearchResponse
 
@@ -5519,6 +5563,56 @@ class SingleAnnotationFilterResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["annotation_filter", b"annotation_filter", "status", b"status"]) -> None: ...
 
 global___SingleAnnotationFilterResponse = SingleAnnotationFilterResponse
+
+@typing_extensions.final
+class GetUserRequest(google.protobuf.message.Message):
+    """GetUserRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """we used to have user_id but moved to the standard convention. Since this endpoint
+        hasn't been exposed and only used by portal as a url this won't effect anything external.
+        """
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetUserRequest = GetUserRequest
+
+@typing_extensions.final
+class SingleUserResponse(google.protobuf.message.Message):
+    """SingleUserResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    USER_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def user(self) -> proto.clarifai.api.resources_pb2.User: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        user: proto.clarifai.api.resources_pb2.User | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "user", b"user"]) -> None: ...
+
+global___SingleUserResponse = SingleUserResponse
 
 @typing_extensions.final
 class PostValidatePasswordRequest(google.protobuf.message.Message):
@@ -7643,6 +7737,28 @@ class MultiInstalledModuleVersionResponse(google.protobuf.message.Message):
 global___MultiInstalledModuleVersionResponse = MultiInstalledModuleVersionResponse
 
 @typing_extensions.final
+class ListNextTaskAssignmentsRequest(google.protobuf.message.Message):
+    """ListNextTaskAssignmentsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    TASK_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    task_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        task_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListNextTaskAssignmentsRequest = ListNextTaskAssignmentsRequest
+
+@typing_extensions.final
 class PostBulkOperationsRequest(google.protobuf.message.Message):
     """Request to perform bulk operations on a list of inputs based on input source."""
 
@@ -7815,6 +7931,31 @@ class MultiBulkOperationsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "status", b"status"]) -> None: ...
 
 global___MultiBulkOperationsResponse = MultiBulkOperationsResponse
+
+@typing_extensions.final
+class PutTaskAssignmentsRequest(google.protobuf.message.Message):
+    """PutTaskAssignmentsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    TASK_ID_FIELD_NUMBER: builtins.int
+    INPUT_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    task_id: builtins.str
+    input_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        task_id: builtins.str = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id", b"input_id", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PutTaskAssignmentsRequest = PutTaskAssignmentsRequest
 
 @typing_extensions.final
 class ListInputsAddJobsRequest(google.protobuf.message.Message):
@@ -8054,7 +8195,9 @@ global___MultiUploadResponse = MultiUploadResponse
 
 @typing_extensions.final
 class PutUploadContentPartsRequest(google.protobuf.message.Message):
-    """Upload part of multipart upload"""
+    """Upload a part of a multipart upload.
+    Behaviour on completion depends on the endpoint that was used to initiate the upload.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -8080,7 +8223,20 @@ global___PutUploadContentPartsRequest = PutUploadContentPartsRequest
 
 @typing_extensions.final
 class PostInputsDataSourcesRequest(google.protobuf.message.Message):
-    """Request to initiate ingestion of inputs from cloud storage"""
+    """Initiates retrieval of inputs from cloud storage from a user provided data source.
+    Will create and return an inputs-add-job for tracking progress.
+    Archives will be extracted and their contents will be processed as inputs.
+
+    The cloud URL will be treated as a filter prefix. For example s3:/bucket/images_folder/abc will process
+    files in the images_folder beginning with abc or in a subfolder beginning with abc.
+    For example:
+    bucket/images_folder/abcImage.png
+    bucket/images_folder/abc-1/Data.zip
+
+    If given URL is for a private bucket or file, then credentials should be provided to access the bucket.
+    Credentials should include rights to list the objects in the bucket, except when pointed directly at a file archive,
+    in which case it only requires rights to access that particular file.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -8226,6 +8382,13 @@ global___CancelInputsExtractionJobsRequest = CancelInputsExtractionJobsRequest
 
 @typing_extensions.final
 class PostInputsUploadsRequest(google.protobuf.message.Message):
+    """Start uploading a file archive containing inputs.
+    Will create and return an inputs-add-job for tracking progress.
+
+    Associated inputs-add-job contains an upload id which should be completed through `PutUploadContentParts` endpoint.
+    Completing the upload will automatically begin unpacking the archive and uploading the contents as inputs.
+    """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int

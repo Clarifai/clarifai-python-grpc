@@ -634,6 +634,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
                 )
+        self.GetUser = channel.unary_unary(
+                '/clarifai.api.V2/GetUser',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse),
+                )
         self.PostValidatePassword = channel.unary_unary(
                 '/clarifai.api.V2/PostValidatePassword',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.SerializeToString,
@@ -968,6 +973,16 @@ class V2Stub(object):
                 '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
+                )
+        self.ListNextTaskAssignments = channel.unary_unary(
+                '/clarifai.api.V2/ListNextTaskAssignments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse),
+                )
+        self.PutTaskAssignments = channel.unary_unary(
+                '/clarifai.api.V2/PutTaskAssignments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.ListInputsAddJobs = channel.unary_unary(
                 '/clarifai.api.V2/ListInputsAddJobs',
@@ -1933,6 +1948,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetUser(self, request, context):
+        """Get user information
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostValidatePassword(self, request, context):
         """Validate new password in real-time for a user
         """
@@ -2421,6 +2443,20 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListNextTaskAssignments(self, request, context):
+        """List next non-labeled and unassigned inputs from task's dataset
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutTaskAssignments(self, request, context):
+        """PutTaskAssignments evaluates all the annotations by labeler (authenticated user) for given task (task_id) and input (input_id).
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListInputsAddJobs(self, request, context):
         """List all the inputs add jobs
         """
@@ -2442,7 +2478,9 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PutUploadContentParts(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Upload a part of a multipart upload.
+        Behaviour on completion depends on the endpoint that was used to initiate the upload.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2466,7 +2504,20 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostInputsDataSources(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Initiates retrieval of inputs from cloud storage from a user provided data source.
+        Will create and return an inputs-add-job for tracking progress.
+        Archives will be extracted and their contents will be processed as inputs.
+
+        The cloud URL will be treated as a filter prefix. For example s3:/bucket/images_folder/abc will process
+        files in the images_folder beginning with abc or in a subfolder beginning with abc.
+        For example:
+        bucket/images_folder/abcImage.png
+        bucket/images_folder/abc-1/Data.zip
+
+        If given URL is for a private bucket or file, then credentials should be provided to access the bucket.
+        Credentials should include rights to list the objects in the bucket, except when pointed directly at a file archive,
+        in which case it only requires rights to access that particular file.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2492,7 +2543,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostInputsUploads(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Start uploading a file archive containing inputs.
+        Will create and return an inputs-add-job for tracking progress.
+
+        Associated inputs-add-job contains an upload id which should be completed through `PutUploadContentParts` endpoint.
+        Completing the upload will automatically begin unpacking the archive and uploading the contents as inputs.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -3100,6 +3156,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAppsSearchesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
             ),
+            'GetUser': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetUser,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.SerializeToString,
+            ),
             'PostValidatePassword': grpc.unary_unary_rpc_method_handler(
                     servicer.PostValidatePassword,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostValidatePasswordRequest.FromString,
@@ -3434,6 +3495,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.GetDatasetInputsSearchAddJob,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
+            ),
+            'ListNextTaskAssignments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListNextTaskAssignments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.SerializeToString,
+            ),
+            'PutTaskAssignments': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutTaskAssignments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'ListInputsAddJobs': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInputsAddJobs,
@@ -5564,6 +5635,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def GetUser(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetUser',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetUserRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostValidatePassword(request,
             target,
             options=(),
@@ -6699,6 +6787,40 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListNextTaskAssignments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListNextTaskAssignments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutTaskAssignments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutTaskAssignments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
