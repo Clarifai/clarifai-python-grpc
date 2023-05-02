@@ -288,6 +288,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     DATABASE_FAIL_TO_GET_CONNECTIONS: _StatusCode.ValueType  # 40015
     DATABASE_TOO_MANY_CLIENTS: _StatusCode.ValueType  # 40016
     DATABASE_CONSTRAINT_VIOLATED: _StatusCode.ValueType  # 40017
+    DATABASE_CANCELED: _StatusCode.ValueType  # 40021
     ASYNC_WORKER_MULTI_ERRORS: _StatusCode.ValueType  # 40020
     RPC_REQUEST_QUEUE_FULL: _StatusCode.ValueType  # 40030
     RPC_SERVER_UNAVAILABLE: _StatusCode.ValueType  # 40031
@@ -322,6 +323,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     SEARCH_PREDICTION_FAILURE: _StatusCode.ValueType  # 43003
     SEARCH_BY_NOT_FULLY_INDEXED_INPUT: _StatusCode.ValueType  # 43004
     SAVED_SEARCH_MODIFY_FAILED: _StatusCode.ValueType  # 43005
+    SEARCH_COUNTS_UNAVAILABLE: _StatusCode.ValueType  # 43006
     EVALUATION_QUEUED: _StatusCode.ValueType  # 43100
     """Workflow evaluation err code"""
     EVALUATION_IN_PROGRESS: _StatusCode.ValueType  # 43101
@@ -758,6 +760,7 @@ DATABASE_FAIL_TASK: StatusCode.ValueType  # 40014
 DATABASE_FAIL_TO_GET_CONNECTIONS: StatusCode.ValueType  # 40015
 DATABASE_TOO_MANY_CLIENTS: StatusCode.ValueType  # 40016
 DATABASE_CONSTRAINT_VIOLATED: StatusCode.ValueType  # 40017
+DATABASE_CANCELED: StatusCode.ValueType  # 40021
 ASYNC_WORKER_MULTI_ERRORS: StatusCode.ValueType  # 40020
 RPC_REQUEST_QUEUE_FULL: StatusCode.ValueType  # 40030
 RPC_SERVER_UNAVAILABLE: StatusCode.ValueType  # 40031
@@ -792,6 +795,7 @@ SEARCH_PROJECTION_FAILURE: StatusCode.ValueType  # 43002
 SEARCH_PREDICTION_FAILURE: StatusCode.ValueType  # 43003
 SEARCH_BY_NOT_FULLY_INDEXED_INPUT: StatusCode.ValueType  # 43004
 SAVED_SEARCH_MODIFY_FAILED: StatusCode.ValueType  # 43005
+SEARCH_COUNTS_UNAVAILABLE: StatusCode.ValueType  # 43006
 EVALUATION_QUEUED: StatusCode.ValueType  # 43100
 """Workflow evaluation err code"""
 EVALUATION_IN_PROGRESS: StatusCode.ValueType  # 43101
