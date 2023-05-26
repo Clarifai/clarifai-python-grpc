@@ -189,7 +189,7 @@ def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_
                     f"Expected dataset version to export, but got {error_message}. Full response: {response}"
                 )
         else:
-            break # break the while True
+            break  # break the while True
     # At this point, the dataset version has successfully finished exporting.
 
 

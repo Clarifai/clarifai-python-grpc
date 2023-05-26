@@ -114,15 +114,23 @@ def test_export_dataset_version(channel):
             input_batch = resources_pb2.InputBatch().FromString(batch_str)
             assert len(input_batch.inputs) == len(input_ids)
 
-        _check_export(export_info.clarifai_data_protobuf, resources_pb2.CLARIFAI_DATA_PROTOBUF,
-                      "application/x.clarifai-data+protobuf", check_protobuf)
+        _check_export(
+            export_info.clarifai_data_protobuf,
+            resources_pb2.CLARIFAI_DATA_PROTOBUF,
+            "application/x.clarifai-data+protobuf",
+            check_protobuf,
+        )
 
         def check_json(batch_str):
             input_batch = json.loads(batch_str)
             assert len(input_batch["inputs"]) == len(input_ids)
 
-        _check_export(export_info.clarifai_data_json, resources_pb2.CLARIFAI_DATA_JSON,
-                      "application/x.clarifai-data+json", check_json)
+        _check_export(
+            export_info.clarifai_data_json,
+            resources_pb2.CLARIFAI_DATA_JSON,
+            "application/x.clarifai-data+json",
+            check_json,
+        )
     finally:
         if dataset_version_id:
             delete_dataset_versions_response = stub.DeleteDatasetVersions(
