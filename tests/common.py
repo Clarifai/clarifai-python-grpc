@@ -170,19 +170,26 @@ def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_
             metadata=metadata,
         )
         raise_on_failure(response)
-        export = response.dataset_version.export_info.clarifai_data_protobuf
-        if export.status.code == status_code_pb2.DATASET_VERSION_EXPORT_SUCCESS:
-            break
-        elif export.status.code in (
-            status_code_pb2.DATASET_VERSION_EXPORT_PENDING,
-            status_code_pb2.DATASET_VERSION_EXPORT_IN_PROGRESS,
-        ):
-            time.sleep(1)
+
+        for field in ["clarifai_data_protobuf", "clarifai_data_json"]:
+            if not response.dataset_version.export_info.HasField(field):
+                continue
+            export = getattr(response.dataset_version.export_info, field)
+            if export.status.code == status_code_pb2.DATASET_VERSION_EXPORT_SUCCESS:
+                continue
+            elif export.status.code in (
+                status_code_pb2.DATASET_VERSION_EXPORT_PENDING,
+                status_code_pb2.DATASET_VERSION_EXPORT_IN_PROGRESS,
+            ):
+                time.sleep(1)
+                break
+            else:
+                error_message = get_status_message(export.status)
+                raise Exception(
+                    f"Expected dataset version to export, but got {error_message}. Full response: {response}"
+                )
         else:
-            error_message = get_status_message(export.status)
-            raise Exception(
-                f"Expected dataset version to export, but got {error_message}. Full response: {response}"
-            )
+            break # break the while True
     # At this point, the dataset version has successfully finished exporting.
 
 
