@@ -1,6 +1,6 @@
 import os
 import time
-from typing import Tuple
+from typing import List, Tuple
 
 from grpc._channel import _Rendezvous
 
@@ -161,7 +161,7 @@ def wait_for_dataset_version_ready(stub, metadata, dataset_id, dataset_version_i
 
 
 def wait_for_dataset_version_export_success(
-    stub, metadata, dataset_id, dataset_version_id, export_info_fields: list[str]
+    stub, metadata, dataset_id, dataset_version_id, export_info_fields: List[str]
 ):
     while True:
         response = stub.GetDatasetVersion(
