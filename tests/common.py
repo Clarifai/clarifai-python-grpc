@@ -175,7 +175,9 @@ def wait_for_dataset_version_export_success(
 
         for field in export_info_fields:
             if not response.dataset_version.export_info.HasField(field):
-                continue
+                raise Exception(
+                    f"Missing expected dataset version export info field '{field}'. Full response: {response}"
+                )
             export = getattr(response.dataset_version.export_info, field)
             if export.status.code == status_code_pb2.DATASET_VERSION_EXPORT_SUCCESS:
                 continue
