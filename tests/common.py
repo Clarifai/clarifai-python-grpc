@@ -160,7 +160,9 @@ def wait_for_dataset_version_ready(stub, metadata, dataset_id, dataset_version_i
     # At this point, the dataset version is ready.
 
 
-def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_version_id):
+def wait_for_dataset_version_export_success(
+    stub, metadata, dataset_id, dataset_version_id, export_info_fields: list[str]
+):
     while True:
         response = stub.GetDatasetVersion(
             service_pb2.GetDatasetVersionRequest(
@@ -171,7 +173,7 @@ def wait_for_dataset_version_export_success(stub, metadata, dataset_id, dataset_
         )
         raise_on_failure(response)
 
-        for field in ["clarifai_data_protobuf", "clarifai_data_json"]:
+        for field in export_info_fields:
             if not response.dataset_version.export_info.HasField(field):
                 continue
             export = getattr(response.dataset_version.export_info, field)

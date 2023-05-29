@@ -97,7 +97,13 @@ def test_export_dataset_version(channel):
         )
         raise_on_failure(put_dataset_version_exports_response)
 
-        wait_for_dataset_version_export_success(stub, metadata(), dataset_id, dataset_version_id)
+        wait_for_dataset_version_export_success(
+            stub,
+            metadata(),
+            dataset_id,
+            dataset_version_id,
+            ["clarifai_data_protobuf", "clarifai_data_json"],
+        )
 
         get_dataset_version_response = stub.GetDatasetVersion(
             service_pb2.GetDatasetVersionRequest(
