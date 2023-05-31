@@ -184,6 +184,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse),
                 )
+        self.GetInputVideoManifest = channel.unary_unary(
+                '/clarifai.api.V2/GetInputVideoManifest',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestResponse),
+                )
         self.ListInputs = channel.unary_unary(
                 '/clarifai.api.V2/ListInputs',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsRequest.SerializeToString,
@@ -1282,6 +1287,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetInputVideoManifest(self, request, context):
+        """Get a video input manifest.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListInputs(self, request, context):
         """List all the inputs.
         """
@@ -1290,9 +1302,8 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostInputs(self, request, context):
-        """Add an input (or set of inputs) to an app.
-        This call is synchronous if the PostInputsRequest contains exactly one image input. Otherwise,
-        it is asynchronous.
+        """Add 1 or more input to an app.
+        The actual inputs processing is asynchronous.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2706,6 +2717,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse.SerializeToString,
             ),
+            'GetInputVideoManifest': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetInputVideoManifest,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestResponse.SerializeToString,
+            ),
             'ListInputs': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInputs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInputsRequest.FromString,
@@ -4101,6 +4117,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInput',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetInputRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetInputVideoManifest(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInputVideoManifest',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetVideoManifestResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
