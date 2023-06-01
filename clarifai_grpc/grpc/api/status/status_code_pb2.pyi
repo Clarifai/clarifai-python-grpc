@@ -200,6 +200,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     DATA_DUMP_FAILED: _StatusCode.ValueType  # 25152
     DATA_DUMP_IN_PROGRESS: _StatusCode.ValueType  # 25153
     DATA_DUMP_NO_DATA: _StatusCode.ValueType  # 25154
+    """DEPRECATED: Not used anymore. Now for an empty data dump, DATA_DUMP_SUCCESS is returned. To detect an empty data dump, check if the inptus count is 0."""
     DATA_DUMP_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25155
     DATA_DUMP_EXPORT_SUCCESS: _StatusCode.ValueType  # 25170
     DATA_DUMP_EXPORT_PENDING: _StatusCode.ValueType  # 25171
@@ -273,6 +274,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INPUT_CONNECTION_FAILED: _StatusCode.ValueType  # 39996
     REQUEST_DISABLED_FOR_MAINTENANCE: _StatusCode.ValueType  # 39997
     INPUT_WRITES_DISABLED_FOR_MAINTENANCE: _StatusCode.ValueType  # 39998
+    """deprecate this one. Use REQUEST_DISABLED_FOR_MAINTENANCE"""
     INPUT_INVALID_REQUEST: _StatusCode.ValueType  # 39999
     PREDICT_INVALID_REQUEST: _StatusCode.ValueType  # 40001
     """API formatting issues 4000x"""
@@ -672,6 +674,7 @@ DATA_DUMP_PENDING: StatusCode.ValueType  # 25151
 DATA_DUMP_FAILED: StatusCode.ValueType  # 25152
 DATA_DUMP_IN_PROGRESS: StatusCode.ValueType  # 25153
 DATA_DUMP_NO_DATA: StatusCode.ValueType  # 25154
+"""DEPRECATED: Not used anymore. Now for an empty data dump, DATA_DUMP_SUCCESS is returned. To detect an empty data dump, check if the inptus count is 0."""
 DATA_DUMP_UNEXPECTED_ERROR: StatusCode.ValueType  # 25155
 DATA_DUMP_EXPORT_SUCCESS: StatusCode.ValueType  # 25170
 DATA_DUMP_EXPORT_PENDING: StatusCode.ValueType  # 25171
@@ -745,6 +748,7 @@ ALL_INPUT_VIDEOS_INVALID_BYTES: StatusCode.ValueType  # 31300
 INPUT_CONNECTION_FAILED: StatusCode.ValueType  # 39996
 REQUEST_DISABLED_FOR_MAINTENANCE: StatusCode.ValueType  # 39997
 INPUT_WRITES_DISABLED_FOR_MAINTENANCE: StatusCode.ValueType  # 39998
+"""deprecate this one. Use REQUEST_DISABLED_FOR_MAINTENANCE"""
 INPUT_INVALID_REQUEST: StatusCode.ValueType  # 39999
 PREDICT_INVALID_REQUEST: StatusCode.ValueType  # 40001
 """API formatting issues 4000x"""
