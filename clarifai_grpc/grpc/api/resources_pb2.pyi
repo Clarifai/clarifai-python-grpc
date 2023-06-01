@@ -11,6 +11,7 @@ import google.protobuf.message
 import google.protobuf.struct_pb2
 import google.protobuf.timestamp_pb2
 import google.protobuf.wrappers_pb2
+import proto.clarifai.api.status.status_code_pb2
 import proto.clarifai.api.status.status_pb2
 import proto.clarifai.api.utils.matrix_pb2
 import sys
@@ -323,6 +324,29 @@ day: UsageIntervalType.ValueType  # 1
 month: UsageIntervalType.ValueType  # 2
 year: UsageIntervalType.ValueType  # 3
 global___UsageIntervalType = UsageIntervalType
+
+class _AnnotationDataType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _AnnotationDataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AnnotationDataType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    ANNOTATION_DATA_TYPE_NOT_SET: _AnnotationDataType.ValueType  # 0
+    BOUNDING_BOX: _AnnotationDataType.ValueType  # 1
+    POLYGON: _AnnotationDataType.ValueType  # 2
+    POINT: _AnnotationDataType.ValueType  # 4
+    SPAN: _AnnotationDataType.ValueType  # 8
+    MASK: _AnnotationDataType.ValueType  # 16
+
+class AnnotationDataType(_AnnotationDataType, metaclass=_AnnotationDataTypeEnumTypeWrapper): ...
+
+ANNOTATION_DATA_TYPE_NOT_SET: AnnotationDataType.ValueType  # 0
+BOUNDING_BOX: AnnotationDataType.ValueType  # 1
+POLYGON: AnnotationDataType.ValueType  # 2
+POINT: AnnotationDataType.ValueType  # 4
+SPAN: AnnotationDataType.ValueType  # 8
+MASK: AnnotationDataType.ValueType  # 16
+global___AnnotationDataType = AnnotationDataType
 
 class _RoleType:
     ValueType = typing.NewType("ValueType", builtins.int)
@@ -2180,6 +2204,8 @@ class Dataset(google.protobuf.message.Message):
     DEFAULT_ANNOTATION_FILTER_FIELD_NUMBER: builtins.int
     NOTES_FIELD_NUMBER: builtins.int
     VERSION_FIELD_NUMBER: builtins.int
+    IS_STARRED_FIELD_NUMBER: builtins.int
+    STAR_COUNT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the dataset"""
     @property
@@ -2223,6 +2249,10 @@ class Dataset(google.protobuf.message.Message):
         """Dataset version associated with this dataset. This is used in listing Datasets
         and including the latest version.
         """
+    is_starred: builtins.bool
+    """Whether the dataset is starred by the requesting user."""
+    star_count: builtins.int
+    """Number of users that starred this dataset."""
     def __init__(
         self,
         *,
@@ -2237,9 +2267,11 @@ class Dataset(google.protobuf.message.Message):
         default_annotation_filter: global___AnnotationFilter | None = ...,
         notes: builtins.str = ...,
         version: global___DatasetVersion | None = ...,
+        is_starred: builtins.bool = ...,
+        star_count: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "metadata", b"metadata", "modified_at", b"modified_at", "version", b"version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "description", b"description", "id", b"id", "metadata", b"metadata", "modified_at", b"modified_at", "notes", b"notes", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "notes", b"notes", "star_count", b"star_count", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
 
 global___Dataset = Dataset
 
@@ -4205,15 +4237,10 @@ class EvalTestSetEntry(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ID_FIELD_NUMBER: builtins.int
-    URL_FIELD_NUMBER: builtins.int
     INPUT_FIELD_NUMBER: builtins.int
     PREDICTED_CONCEPTS_FIELD_NUMBER: builtins.int
     GROUND_TRUTH_CONCEPTS_FIELD_NUMBER: builtins.int
     ANNOTATION_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Input CFID"""
-    url: builtins.str
     @property
     def input(self) -> global___Input:
         """the input information"""
@@ -4231,15 +4258,13 @@ class EvalTestSetEntry(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        id: builtins.str = ...,
-        url: builtins.str = ...,
         input: global___Input | None = ...,
         predicted_concepts: collections.abc.Iterable[global___Concept] | None = ...,
         ground_truth_concepts: collections.abc.Iterable[global___Concept] | None = ...,
         annotation: global___Annotation | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "input", b"input"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "ground_truth_concepts", b"ground_truth_concepts", "id", b"id", "input", b"input", "predicted_concepts", b"predicted_concepts", "url", b"url"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "ground_truth_concepts", b"ground_truth_concepts", "input", b"input", "predicted_concepts", b"predicted_concepts"]) -> None: ...
 
 global___EvalTestSetEntry = EvalTestSetEntry
 
@@ -4636,6 +4661,24 @@ class And(google.protobuf.message.Message):
         This can include human provided concepts, geo location info, metadata, etc.
         This is effectively searching over only the trusted annotation attached to an input in your
         app. To search by more specific annotation fields use the Annotation object here.
+        ########## Supported fields ##########
+         - data.concepts[].id
+         - data.concepts[].name
+         - data.concepts[].value
+         - data.geo.geo_box[].geo_point.latitude
+         - data.geo.geo_box[].geo_point.longitude
+         - data.geo.geo_limit.type
+         - data.geo.geo_limit.value
+         - data.geo.geo_point.latitude
+         - data.geo.geo_point.longitude
+         - data.image.url
+         - data.metadata - allow search with empty metadata
+           note that searching by empty metadata will actually not influence the search results.
+           however, in order to be user-friendly, we are still supporting searching by empty metadata.
+         - data.metadata.fields - filter by metadata. metadata key&value fields are OR-ed.
+         - dataset_ids[] - filter by dataset IDs
+         - id - filter by input ID
+         - status.code - filter by input status
         """
     @property
     def output(self) -> global___Output:
@@ -4650,6 +4693,16 @@ class And(google.protobuf.message.Message):
         to the score returned if you search for Output concept "dog" in your query. This provides
         a natural ranking to search results based on confidence of predictions from the models and
         is used when ANDing multiple of these types of RANK by Output queries together as well.
+
+        ########## Supported fields ##########
+         - data.clusters[].id
+         - data.concepts[].id
+         - data.concepts[].name
+         - data.concepts[].value
+         - input.data.image - empty image is required when searching by input ID
+         - input.data.image.base64[]
+         - input.data.image.url
+         - input.id
         """
     negate: builtins.bool
     """If True then this will flip the meaning of this part of the
@@ -4667,6 +4720,33 @@ class And(google.protobuf.message.Message):
         Since all the annotations under the hood are joined to the embedding model's annotation
         using worker_id's of other models like cluster models or concept models should be
         combinable with queries like visual search (a query with Output filled in).
+
+        ########## Supported fields ##########
+         - annotation_info - allows searching by empty annotation info
+           note that searching by empty annotation info will actually not influence the search results.
+           however, in order to be user-friendly, we are still supporting searching by empty annotation info.
+         - annotation_info.fields - filter by annotation info
+         - data.concepts[].id
+         - data.concepts[].name
+         - data.concepts[].value
+         - data.geo.geo_box[].geo_point.latitude
+         - data.geo.geo_box[].geo_point.longitude
+         - data.geo.geo_limit.type
+         - data.geo.geo_limit.value
+         - data.geo.geo_point.latitude
+         - data.geo.geo_point.longitude
+         - data.image.url
+         - data.metadata - allow search with empty metadata
+           note that searching by empty metadata will actually not influence the search results.
+           however, in order to be user-friendly, we are still supporting searching by empty metadata.
+         - data.metadata.fields - filter by metadata. metadata key&value fields are OR-ed.
+         - input_id
+         - input_level
+         - model_version_id
+         - status.code
+         - task_id
+         - trusted
+         - user_id
         """
     def __init__(
         self,
@@ -4849,11 +4929,51 @@ class Filter(google.protobuf.message.Message):
     """
     @property
     def annotation(self) -> global___Annotation:
-        """FILTER by annotation information."""
+        """FILTER by annotation information.
+        ########## Supported fields ##########
+         - annotation_info - allows searching by empty annotation info
+           note that searching by empty annotation info will actually not influence the search results.
+           however, in order to be user-friendly, we are still supporting searching by empty annotation info.
+         - annotation_info.fields - filter by annotation info
+         - data.clusters[].id
+         - data.concepts[].id
+         - data.concepts[].name
+         - data.concepts[].value
+         - data.frames[].frame_info - filter by frame annotations
+         - data.geo.geo_box[].geo_point.latitude
+         - data.geo.geo_box[].geo_point.longitude
+         - data.geo.geo_limit.type
+         - data.geo.geo_limit.value
+         - data.geo.geo_point.latitude
+         - data.geo.geo_point.longitude
+         - data.metadata - allow search with empty metadata
+           note that searching by empty metadata will actually not influence the search results.
+           however, in order to be user-friendly, we are still supporting searching by empty metadata.
+         - data.metadata.fields - filter by metadata. metadata key&value fields are OR-ed.
+         - data.regions[].region_info.bounding_box - filter by bounding box annotations
+         - data.regions[].region_info.mask - filter by mask annotations
+         - data.regions[].region_info.point - filter by point annotations
+         - data.regions[].region_info.polygon - filter by polygon annotations
+         - data.regions[].region_info.span - filter by span annotations
+         - data.text - filter by text annotations
+         - data.time_segments[].time_info - filter by time-segment annotations
+         - id
+         - input_id
+         - input_level
+         - status.code
+         - task_id
+         - user_id
+        """
     @property
     def input(self) -> global___Input:
         """FILTER by input information.
-        For example you can filter inputs by status,
+        ########## Supported fields ##########
+         - data.audio - filter audio inputs
+         - data.image - filter image inputs
+         - data.text - filter text inputs
+         - data.video - filter video inputs
+         - dataset_ids[] - filter by dataset IDs
+         - status.code - filter by input status
         """
     @property
     def last_updated_time_range(self) -> global___TimeRange:
@@ -4910,7 +5030,20 @@ class Rank(google.protobuf.message.Message):
     """
     @property
     def annotation(self) -> global___Annotation:
-        """RANK by annotation information."""
+        """RANK by annotation information.
+        ########## Supported fields ##########
+         - data.concepts[].id
+         - data.concepts[].name
+         - data.concepts[].value
+         - data.embeddings[].num_dimensions
+         - data.embeddings[].vector[]
+         - data.image.base64[]
+         - data.image.url
+         - data.lopq_code[]
+         - data.text.raw
+         - input_id
+         - model_version_id
+        """
     def __init__(
         self,
         *,
@@ -5949,6 +6082,8 @@ class Task(google.protobuf.message.Message):
     APP_ID_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     LABEL_ORDER_ID_FIELD_NUMBER: builtins.int
+    CONCEPTS_FIELD_NUMBER: builtins.int
+    DELETE_PREVIOUS_ANNOTATIONS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Unique ID for the task."""
     @property
@@ -6003,6 +6138,13 @@ class Task(google.protobuf.message.Message):
     """The user the task belongs to."""
     label_order_id: builtins.str
     """The label order the task belongs to."""
+    @property
+    def concepts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TaskConcept]:
+        """Ignore Task.concept_ids field if Task.TaskConcept are supplied."""
+    delete_previous_annotations: builtins.bool
+    """Specify whether existing Annotations within the same app that are generated by other auto annotation tasks
+    with the specified Concept from the selected Model or Workflow should deleted before executing the Task
+    """
     def __init__(
         self,
         *,
@@ -6024,9 +6166,11 @@ class Task(google.protobuf.message.Message):
         app_id: builtins.str = ...,
         user_id: builtins.str = ...,
         label_order_id: builtins.str = ...,
+        concepts: collections.abc.Iterable[global___TaskConcept] | None = ...,
+        delete_previous_annotations: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "created_at", b"created_at", "input_source", b"input_source", "modified_at", b"modified_at", "review", b"review", "status", b"status", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "created_at", b"created_at", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "modified_at", b"modified_at", "name", b"name", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "modified_at", b"modified_at", "name", b"name", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
 
 global___Task = Task
 
@@ -6088,6 +6232,8 @@ class TaskWorker(google.protobuf.message.Message):
     STRATEGY_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     USERS_FIELD_NUMBER: builtins.int
+    MODELS_FIELD_NUMBER: builtins.int
+    WORKFLOWS_FIELD_NUMBER: builtins.int
     PARTITIONED_STRATEGY_INFO_FIELD_NUMBER: builtins.int
     strategy: global___TaskWorker.TaskWorkerStrategy.ValueType
     """Worker strategy."""
@@ -6103,6 +6249,12 @@ class TaskWorker(google.protobuf.message.Message):
         info is filled for the workers. Otherwise, only the user 'id' is filled.
         """
     @property
+    def models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Model]:
+        """Models that will work on this task. For Auto Annotation Tasks. Currently only supports 1 entry."""
+    @property
+    def workflows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Workflow]:
+        """Workflows that will work on this task. For Auto Annotation Tasks. Currently only supports 1 entry."""
+    @property
     def partitioned_strategy_info(self) -> global___TaskWorkerPartitionedStrategyInfo: ...
     def __init__(
         self,
@@ -6110,10 +6262,12 @@ class TaskWorker(google.protobuf.message.Message):
         strategy: global___TaskWorker.TaskWorkerStrategy.ValueType = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
         users: collections.abc.Iterable[global___User] | None = ...,
+        models: collections.abc.Iterable[global___Model] | None = ...,
+        workflows: collections.abc.Iterable[global___Workflow] | None = ...,
         partitioned_strategy_info: global___TaskWorkerPartitionedStrategyInfo | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy_info", b"strategy_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "user_ids", b"user_ids", "users", b"users"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["models", b"models", "partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "user_ids", b"user_ids", "users", b"users", "workflows", b"workflows"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["strategy_info", b"strategy_info"]) -> typing_extensions.Literal["partitioned_strategy_info"] | None: ...
 
 global___TaskWorker = TaskWorker
@@ -6392,6 +6546,86 @@ class TaskStatusCountPerUser(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["awaiting_consensus_review", b"awaiting_consensus_review", "awaiting_review", b"awaiting_review", "pending", b"pending", "review_denied", b"review_denied", "success", b"success", "user_id", b"user_id"]) -> None: ...
 
 global___TaskStatusCountPerUser = TaskStatusCountPerUser
+
+@typing_extensions.final
+class ThresholdRange(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_LOWER_INCLUSIVE_FIELD_NUMBER: builtins.int
+    IS_UPPER_INCLUSIVE_FIELD_NUMBER: builtins.int
+    LOWER_FIELD_NUMBER: builtins.int
+    UPPER_FIELD_NUMBER: builtins.int
+    is_lower_inclusive: builtins.bool
+    """The range used to filter over concept values.
+    e.g. GREATER_THAN_OR_EQUAL_TO 0.7 -> is_lower_inclusive = true, lower = 0.7, is_upper_inclusive = true, upper = 1.0
+    e.g. (0.3, 0.75] -> is_lower_inclusive = false, lower = 0.3, is_upper_inclusive = true, upper = 0.75
+    """
+    is_upper_inclusive: builtins.bool
+    lower: builtins.float
+    upper: builtins.float
+    def __init__(
+        self,
+        *,
+        is_lower_inclusive: builtins.bool = ...,
+        is_upper_inclusive: builtins.bool = ...,
+        lower: builtins.float = ...,
+        upper: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["is_lower_inclusive", b"is_lower_inclusive", "is_upper_inclusive", b"is_upper_inclusive", "lower", b"lower", "upper", b"upper"]) -> None: ...
+
+global___ThresholdRange = ThresholdRange
+
+@typing_extensions.final
+class TaskConceptAutoAnnotationConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ANNOTATION_DATA_TYPES_FIELD_NUMBER: builtins.int
+    THRESHOLD_RANGE_FIELD_NUMBER: builtins.int
+    STATUS_CODE_FIELD_NUMBER: builtins.int
+    annotation_data_types: builtins.int
+    """Filter anontations by their annotation data type.
+    This specifies types in an OR fashion, e.g. a `dog` concept that appears as a mask or a bbox.
+    """
+    @property
+    def threshold_range(self) -> global___ThresholdRange:
+        """Filter annotations by concept value.
+        Only concepts that fit in the threshold will be used to generate annotations.
+        """
+    status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+    """The output annotations will be created using this status code."""
+    def __init__(
+        self,
+        *,
+        annotation_data_types: builtins.int = ...,
+        threshold_range: global___ThresholdRange | None = ...,
+        status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["threshold_range", b"threshold_range"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_data_types", b"annotation_data_types", "status_code", b"status_code", "threshold_range", b"threshold_range"]) -> None: ...
+
+global___TaskConceptAutoAnnotationConfig = TaskConceptAutoAnnotationConfig
+
+@typing_extensions.final
+class TaskConcept(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CONCEPT_FIELD_NUMBER: builtins.int
+    AUTO_ANNOTATION_CONFIG_FIELD_NUMBER: builtins.int
+    @property
+    def concept(self) -> global___Concept:
+        """For auto annotation, id/name and value, user + app id must be specified. For other tasks, only the id field is required."""
+    @property
+    def auto_annotation_config(self) -> global___TaskConceptAutoAnnotationConfig: ...
+    def __init__(
+        self,
+        *,
+        concept: global___Concept | None = ...,
+        auto_annotation_config: global___TaskConceptAutoAnnotationConfig | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["auto_annotation_config", b"auto_annotation_config", "concept", b"concept"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["auto_annotation_config", b"auto_annotation_config", "concept", b"concept"]) -> None: ...
+
+global___TaskConcept = TaskConcept
 
 @typing_extensions.final
 class Collector(google.protobuf.message.Message):
@@ -6944,6 +7178,41 @@ class TimeInfo(google.protobuf.message.Message):
 global___TimeInfo = TimeInfo
 
 @typing_extensions.final
+class DatasetStar(google.protobuf.message.Message):
+    """DatasetStar"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATASET_ID_FIELD_NUMBER: builtins.int
+    dataset_id: builtins.str
+    def __init__(
+        self,
+        *,
+        dataset_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id"]) -> None: ...
+
+global___DatasetStar = DatasetStar
+
+@typing_extensions.final
+class ModuleStar(google.protobuf.message.Message):
+    """ModuleStar"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    module_id: builtins.str
+    """Module id of the star"""
+    def __init__(
+        self,
+        *,
+        module_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id"]) -> None: ...
+
+global___ModuleStar = ModuleStar
+
+@typing_extensions.final
 class Module(google.protobuf.message.Message):
     """An app module that a user created in our app module marketplace."""
 
@@ -6958,6 +7227,8 @@ class Module(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
     MODULE_VERSION_FIELD_NUMBER: builtins.int
+    IS_STARRED_FIELD_NUMBER: builtins.int
+    STAR_COUNT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this app module."""
     description: builtins.str
@@ -6990,6 +7261,14 @@ class Module(google.protobuf.message.Message):
         """A ModuleVersion which is used when listing modules to include the latest module version
         in the response.
         """
+    is_starred: builtins.bool
+    """Is starred by the requesting user (only showed on get/list requests)
+    Please use PostModuleStars/DeleteModuleStars endpoints to star/unstar a module
+    """
+    star_count: builtins.int
+    """How many users have starred the module (only showed on get/list requests)
+    Computed value, not editable
+    """
     def __init__(
         self,
         *,
@@ -7002,9 +7281,11 @@ class Module(google.protobuf.message.Message):
         user_id: builtins.str = ...,
         app_id: builtins.str = ...,
         module_version: global___ModuleVersion | None = ...,
+        is_starred: builtins.bool = ...,
+        star_count: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___Module = Module
 
@@ -7240,6 +7521,7 @@ class BulkOperation(google.protobuf.message.Message):
     ID_FIELD_NUMBER: builtins.int
     INPUT_IDS_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
+    DATASET_FIELD_NUMBER: builtins.int
     OPERATION_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
@@ -7253,6 +7535,8 @@ class BulkOperation(google.protobuf.message.Message):
     def input_ids(self) -> global___InputIDs: ...
     @property
     def search(self) -> global___Search: ...
+    @property
+    def dataset(self) -> global___Dataset: ...
     @property
     def operation(self) -> global___Operation:
         """Operation to perform"""
@@ -7283,6 +7567,7 @@ class BulkOperation(google.protobuf.message.Message):
         id: builtins.str = ...,
         input_ids: global___InputIDs | None = ...,
         search: global___Search | None = ...,
+        dataset: global___Dataset | None = ...,
         operation: global___Operation | None = ...,
         app_id: builtins.str = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
@@ -7291,9 +7576,9 @@ class BulkOperation(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         last_modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "input_ids", b"input_ids", "input_source", b"input_source", "last_modified_at", b"last_modified_at", "operation", b"operation", "progress", b"progress", "search", b"search", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "created_by", b"created_by", "id", b"id", "input_ids", b"input_ids", "input_source", b"input_source", "last_modified_at", b"last_modified_at", "operation", b"operation", "progress", b"progress", "search", b"search", "status", b"status"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["input_source", b"input_source"]) -> typing_extensions.Literal["input_ids", "search"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "dataset", b"dataset", "input_ids", b"input_ids", "input_source", b"input_source", "last_modified_at", b"last_modified_at", "operation", b"operation", "progress", b"progress", "search", b"search", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "created_by", b"created_by", "dataset", b"dataset", "id", b"id", "input_ids", b"input_ids", "input_source", b"input_source", "last_modified_at", b"last_modified_at", "operation", b"operation", "progress", b"progress", "search", b"search", "status", b"status"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["input_source", b"input_source"]) -> typing_extensions.Literal["input_ids", "search", "dataset"] | None: ...
 
 global___BulkOperation = BulkOperation
 
@@ -7343,6 +7628,7 @@ class Operation(google.protobuf.message.Message):
     DELETE_GEO_FIELD_NUMBER: builtins.int
     DELETE_FROM_DATASET_FIELD_NUMBER: builtins.int
     ADD_TO_DATASET_FIELD_NUMBER: builtins.int
+    SPLIT_INTO_DATASETS_FIELD_NUMBER: builtins.int
     @property
     def add_concepts(self) -> global___AddConcepts: ...
     @property
@@ -7359,6 +7645,8 @@ class Operation(google.protobuf.message.Message):
     def delete_from_dataset(self) -> global___DeleteFromDataset: ...
     @property
     def add_to_dataset(self) -> global___AddToDataset: ...
+    @property
+    def split_into_datasets(self) -> global___SplitIntoDatasets: ...
     def __init__(
         self,
         *,
@@ -7370,10 +7658,11 @@ class Operation(google.protobuf.message.Message):
         delete_geo: global___DeleteGeo | None = ...,
         delete_from_dataset: global___DeleteFromDataset | None = ...,
         add_to_dataset: global___AddToDataset | None = ...,
+        split_into_datasets: global___SplitIntoDatasets | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo", "delete_from_dataset", "add_to_dataset"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo", "split_into_datasets", b"split_into_datasets"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["add_concepts", b"add_concepts", "add_metadata", b"add_metadata", "add_to_dataset", b"add_to_dataset", "delete_concepts", b"delete_concepts", "delete_from_dataset", b"delete_from_dataset", "delete_geo", b"delete_geo", "delete_metadata", b"delete_metadata", "operation", b"operation", "overwrite_geo", b"overwrite_geo", "split_into_datasets", b"split_into_datasets"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["operation", b"operation"]) -> typing_extensions.Literal["add_concepts", "delete_concepts", "add_metadata", "delete_metadata", "overwrite_geo", "delete_geo", "delete_from_dataset", "add_to_dataset", "split_into_datasets"] | None: ...
 
 global___Operation = Operation
 
@@ -7510,6 +7799,65 @@ class DeleteFromDataset(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id"]) -> None: ...
 
 global___DeleteFromDataset = DeleteFromDataset
+
+@typing_extensions.final
+class SplitIntoDatasets(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _DatasetSplitMethod:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _DatasetSplitMethodEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[SplitIntoDatasets._DatasetSplitMethod.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        NOT_SET: SplitIntoDatasets._DatasetSplitMethod.ValueType  # 0
+        RANDOM_PERCENTAGE_SPLIT: SplitIntoDatasets._DatasetSplitMethod.ValueType  # 1
+        """We will randomly split inputs into the datasets"""
+
+    class DatasetSplitMethod(_DatasetSplitMethod, metaclass=_DatasetSplitMethodEnumTypeWrapper): ...
+    NOT_SET: SplitIntoDatasets.DatasetSplitMethod.ValueType  # 0
+    RANDOM_PERCENTAGE_SPLIT: SplitIntoDatasets.DatasetSplitMethod.ValueType  # 1
+    """We will randomly split inputs into the datasets"""
+
+    DATASET_SPLITS_FIELD_NUMBER: builtins.int
+    METHOD_FIELD_NUMBER: builtins.int
+    @property
+    def dataset_splits(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___DatasetSplit]: ...
+    method: global___SplitIntoDatasets.DatasetSplitMethod.ValueType
+    def __init__(
+        self,
+        *,
+        dataset_splits: collections.abc.Iterable[global___DatasetSplit] | None = ...,
+        method: global___SplitIntoDatasets.DatasetSplitMethod.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_splits", b"dataset_splits", "method", b"method"]) -> None: ...
+
+global___SplitIntoDatasets = SplitIntoDatasets
+
+@typing_extensions.final
+class DatasetSplit(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATASET_FIELD_NUMBER: builtins.int
+    PERCENTAGE_FIELD_NUMBER: builtins.int
+    @property
+    def dataset(self) -> global___Dataset:
+        """Expected to have ID"""
+    percentage: builtins.int
+    """For RANDOM_PERCENTAGE_SPLIT.
+    Values from (0,100]
+    """
+    def __init__(
+        self,
+        *,
+        dataset: global___Dataset | None = ...,
+        percentage: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "method_info", b"method_info", "percentage", b"percentage"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "method_info", b"method_info", "percentage", b"percentage"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["method_info", b"method_info"]) -> typing_extensions.Literal["percentage"] | None: ...
+
+global___DatasetSplit = DatasetSplit
 
 @typing_extensions.final
 class InputsAddJob(google.protobuf.message.Message):

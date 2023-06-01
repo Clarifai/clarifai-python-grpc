@@ -1734,6 +1734,26 @@ class GetInputRequest(google.protobuf.message.Message):
 global___GetInputRequest = GetInputRequest
 
 @typing_extensions.final
+class GetVideoManifestRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INPUT_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    input_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id", b"input_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetVideoManifestRequest = GetVideoManifestRequest
+
+@typing_extensions.final
 class GetInputSamplesRequest(google.protobuf.message.Message):
     """GetInputSamplesRequest"""
 
@@ -1977,6 +1997,26 @@ class SingleInputResponse(google.protobuf.message.Message):
 global___SingleInputResponse = SingleInputResponse
 
 @typing_extensions.final
+class GetVideoManifestResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    MANIFEST_URL_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    manifest_url: builtins.str
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        manifest_url: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["manifest_url", b"manifest_url", "status", b"status"]) -> None: ...
+
+global___GetVideoManifestResponse = GetVideoManifestResponse
+
+@typing_extensions.final
 class MultiInputResponse(google.protobuf.message.Message):
     """MultiInputResponse"""
 
@@ -2077,6 +2117,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    STARRED_ONLY_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -2087,15 +2129,20 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    starred_only: builtins.bool
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        starred_only: builtins.bool = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "page", b"page", "per_page", b"per_page", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListDatasetsRequest = ListDatasetsRequest
 
@@ -2107,18 +2154,22 @@ class GetDatasetRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     DATASET_ID_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     dataset_id: builtins.str
     """Identify dataset by id."""
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         dataset_id: builtins.str = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "dataset_id", b"dataset_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___GetDatasetRequest = GetDatasetRequest
 
@@ -7234,17 +7285,21 @@ class GetModuleRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODULE_ID_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     module_id: builtins.str
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         module_id: builtins.str = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "module_id", b"module_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___GetModuleRequest = GetModuleRequest
 
@@ -7257,6 +7312,8 @@ class ListModulesRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    STARRED_ONLY_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -7267,15 +7324,20 @@ class ListModulesRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    starred_only: builtins.bool
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        starred_only: builtins.bool = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "page", b"page", "per_page", b"per_page", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListModulesRequest = ListModulesRequest
 
