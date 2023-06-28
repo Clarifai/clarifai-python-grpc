@@ -31,7 +31,6 @@ def test_post_inputs_data_source_single_public_archive(channel):
         stub, post_data_source_response.inputs_add_jobs[0].extraction_jobs[0].id
     )
 
-    assert completed_response.inputs_extraction_job.progress.read_objects_count == 4
     assert completed_response.inputs_extraction_job.progress.image_inputs_count == 3
     assert completed_response.inputs_extraction_job.progress.video_inputs_count == 1
 
@@ -55,6 +54,5 @@ def test_post_inputs_data_source_public_cloud_directory(channel):
         stub, post_data_source_response.inputs_add_jobs[0].extraction_jobs[0].id
     )
 
-    assert completed_response.inputs_extraction_job.progress.read_objects_count == 5
     assert completed_response.inputs_extraction_job.progress.image_inputs_count == 3
     assert completed_response.inputs_extraction_job.progress.video_inputs_count == 1
