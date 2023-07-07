@@ -249,11 +249,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse),
                 )
-        self.PatchDatasetIds = channel.unary_unary(
-                '/clarifai.api.V2/PatchDatasetIds',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse),
-                )
         self.DeleteDatasets = channel.unary_unary(
                 '/clarifai.api.V2/DeleteDatasets',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetsRequest.SerializeToString,
@@ -343,6 +338,11 @@ class V2Stub(object):
                 '/clarifai.api.V2/ListModels',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse),
+                )
+        self.GetResourceCounts = channel.unary_unary(
+                '/clarifai.api.V2/GetResourceCounts',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsResponse),
                 )
         self.PostModelsSearches = channel.unary_unary(
                 '/clarifai.api.V2/PostModelsSearches',
@@ -467,6 +467,21 @@ class V2Stub(object):
         self.GetModelVersionEvaluation = channel.unary_unary(
                 '/clarifai.api.V2/GetModelVersionEvaluation',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse),
+                )
+        self.PostEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/PostEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse),
+                )
+        self.ListEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/ListEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse),
+                )
+        self.GetEvaluation = channel.unary_unary(
+                '/clarifai.api.V2/GetEvaluation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetEvaluationRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse),
                 )
         self.ListModelReferences = channel.unary_unary(
@@ -999,6 +1014,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse),
                 )
+        self.CancelInputsAddJob = channel.unary_unary(
+                '/clarifai.api.V2/CancelInputsAddJob',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse),
+                )
         self.PostUploads = channel.unary_unary(
                 '/clarifai.api.V2/PostUploads',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostUploadsRequest.SerializeToString,
@@ -1386,13 +1406,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def PatchDatasetIds(self, request, context):
-        """Patch one or more dataset ids.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def DeleteDatasets(self, request, context):
         """Delete one or more datasets in a single request.
         """
@@ -1526,6 +1539,13 @@ class V2Servicer(object):
 
     def ListModels(self, request, context):
         """List all the models.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetResourceCounts(self, request, context):
+        """List the resource counts for the app.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1674,7 +1694,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetModelVersionMetrics(self, request, context):
-        """Deprecated: Use GetModelVersionEvaluation instead
+        """Deprecated: Use GetEvaluation instead
         Get the evaluation metrics for a model version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1682,7 +1702,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostModelVersionMetrics(self, request, context):
-        """Deprecated, use PostModelVersionEvaluations instead
+        """Deprecated, use PostEvaluations instead
         Run the evaluation metrics for a model version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -1690,21 +1710,42 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostModelVersionEvaluations(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Deprecated, use PostEvaluations instead
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListModelVersionEvaluations(self, request, context):
-        """List the evaluation metrics for a model version.
+        """Deprecated, use GetEvaluation instead
+        List the evaluation metrics for a model version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetModelVersionEvaluation(self, request, context):
-        """Get an evaluation metrics for a model version.
+        """Deprecated, use GetEvaluation instead
+        Get an evaluation metrics for a model version.
         """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetEvaluation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2482,6 +2523,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def CancelInputsAddJob(self, request, context):
+        """cancel the input add job by ID
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostUploads(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -2782,11 +2830,6 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.SerializeToString,
             ),
-            'PatchDatasetIds': grpc.unary_unary_rpc_method_handler(
-                    servicer.PatchDatasetIds,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.SerializeToString,
-            ),
             'DeleteDatasets': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteDatasets,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDatasetsRequest.FromString,
@@ -2876,6 +2919,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListModels,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.SerializeToString,
+            ),
+            'GetResourceCounts': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetResourceCounts,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsResponse.SerializeToString,
             ),
             'PostModelsSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PostModelsSearches,
@@ -3000,6 +3048,21 @@ def add_V2Servicer_to_server(servicer, server):
             'GetModelVersionEvaluation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModelVersionEvaluation,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.SerializeToString,
+            ),
+            'PostEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.SerializeToString,
+            ),
+            'ListEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.SerializeToString,
+            ),
+            'GetEvaluation': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetEvaluation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetEvaluationRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.SerializeToString,
             ),
             'ListModelReferences': grpc.unary_unary_rpc_method_handler(
@@ -3530,6 +3593,11 @@ def add_V2Servicer_to_server(servicer, server):
             'GetInputsAddJob': grpc.unary_unary_rpc_method_handler(
                     servicer.GetInputsAddJob,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.SerializeToString,
+            ),
+            'CancelInputsAddJob': grpc.unary_unary_rpc_method_handler(
+                    servicer.CancelInputsAddJob,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.SerializeToString,
             ),
             'PostUploads': grpc.unary_unary_rpc_method_handler(
@@ -4342,23 +4410,6 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def PatchDatasetIds(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchDatasetIds',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PatchDatasetIdsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDatasetResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
     def DeleteDatasets(request,
             target,
             options=(),
@@ -4661,6 +4712,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListModels',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListModelsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiModelResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetResourceCounts(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetResourceCounts',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetResourceCountsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -5085,6 +5153,57 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetModelVersionEvaluation',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionEvaluationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiEvalMetricsResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetEvaluation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetEvaluation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetEvaluationRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleEvalMetricsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -6887,6 +7006,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetInputsAddJob',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetInputsAddJobRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CancelInputsAddJob(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/CancelInputsAddJob',
+            proto_dot_clarifai_dot_api_dot_service__pb2.CancelInputsAddJobRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleInputsAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

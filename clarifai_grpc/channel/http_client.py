@@ -8,7 +8,7 @@ import requests
 
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = "6.8.1"
+CLIENT_VERSION = "9.6.0"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(
@@ -125,7 +125,7 @@ class HttpClient:
         Encodes message params into format for use in GET args
         """
         encoded_params = {}
-        for (k, v) in params.items():
+        for k, v in params.items():
             if isinstance(v, str):
                 encoded_params[k] = v
             elif isinstance(v, bytes):
@@ -133,7 +133,7 @@ class HttpClient:
             elif isinstance(v, (int, float, bool)):
                 encoded_params[k] = str(v)
             elif isinstance(v, dict):
-                for (subk, subv) in self._encode_get_params(v).items():
+                for subk, subv in self._encode_get_params(v).items():
                     encoded_params[k + "." + subk] = subv
             elif isinstance(v, list):
                 if v:

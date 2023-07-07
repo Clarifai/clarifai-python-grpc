@@ -332,20 +332,22 @@ class _AnnotationDataType:
 class _AnnotationDataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AnnotationDataType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     ANNOTATION_DATA_TYPE_NOT_SET: _AnnotationDataType.ValueType  # 0
-    BOUNDING_BOX: _AnnotationDataType.ValueType  # 1
-    POLYGON: _AnnotationDataType.ValueType  # 2
-    POINT: _AnnotationDataType.ValueType  # 4
-    SPAN: _AnnotationDataType.ValueType  # 8
-    MASK: _AnnotationDataType.ValueType  # 16
+    TAG: _AnnotationDataType.ValueType  # 1
+    BOUNDING_BOX: _AnnotationDataType.ValueType  # 2
+    POLYGON: _AnnotationDataType.ValueType  # 4
+    POINT: _AnnotationDataType.ValueType  # 8
+    SPAN: _AnnotationDataType.ValueType  # 16
+    MASK: _AnnotationDataType.ValueType  # 32
 
 class AnnotationDataType(_AnnotationDataType, metaclass=_AnnotationDataTypeEnumTypeWrapper): ...
 
 ANNOTATION_DATA_TYPE_NOT_SET: AnnotationDataType.ValueType  # 0
-BOUNDING_BOX: AnnotationDataType.ValueType  # 1
-POLYGON: AnnotationDataType.ValueType  # 2
-POINT: AnnotationDataType.ValueType  # 4
-SPAN: AnnotationDataType.ValueType  # 8
-MASK: AnnotationDataType.ValueType  # 16
+TAG: AnnotationDataType.ValueType  # 1
+BOUNDING_BOX: AnnotationDataType.ValueType  # 2
+POLYGON: AnnotationDataType.ValueType  # 4
+POINT: AnnotationDataType.ValueType  # 8
+SPAN: AnnotationDataType.ValueType  # 16
+MASK: AnnotationDataType.ValueType  # 32
 global___AnnotationDataType = AnnotationDataType
 
 class _RoleType:
@@ -421,6 +423,29 @@ RESTRICTED: ValidationErrorType.ValueType  # 1
 DATABASE: ValidationErrorType.ValueType  # 2
 FORMAT: ValidationErrorType.ValueType  # 3
 global___ValidationErrorType = ValidationErrorType
+
+class _InputIDConflictResolution:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _InputIDConflictResolutionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_InputIDConflictResolution.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    INPUT_ID_CONFLICT_RESOLUTION_NOT_SET: _InputIDConflictResolution.ValueType  # 0
+    """Defaults to SKIP"""
+    SKIP: _InputIDConflictResolution.ValueType  # 1
+    """Mark duplicate inputs as error and skip processing them."""
+    SUFFIX: _InputIDConflictResolution.ValueType  # 2
+    """Add a suffix to inputs with conflicting IDs. Attempts numeric suffixes "-1" to "-9" and then a randomized suffix. Identical ID's in the same request are still treated as errors."""
+
+class InputIDConflictResolution(_InputIDConflictResolution, metaclass=_InputIDConflictResolutionEnumTypeWrapper): ...
+
+INPUT_ID_CONFLICT_RESOLUTION_NOT_SET: InputIDConflictResolution.ValueType  # 0
+"""Defaults to SKIP"""
+SKIP: InputIDConflictResolution.ValueType  # 1
+"""Mark duplicate inputs as error and skip processing them."""
+SUFFIX: InputIDConflictResolution.ValueType  # 2
+"""Add a suffix to inputs with conflicting IDs. Attempts numeric suffixes "-1" to "-9" and then a randomized suffix. Identical ID's in the same request are still treated as errors."""
+global___InputIDConflictResolution = InputIDConflictResolution
 
 @typing_extensions.final
 class Annotation(google.protobuf.message.Message):
@@ -2388,6 +2413,7 @@ class DatasetVersion(google.protobuf.message.Message):
     MODEL_PREDICT_CONFIG_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
+    PROCESSING_INFO_FIELD_NUMBER: builtins.int
     METRICS_FIELD_NUMBER: builtins.int
     EXPORT_INFO_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
@@ -2425,6 +2451,9 @@ class DatasetVersion(google.protobuf.message.Message):
     description: builtins.str
     """Description of the dataset version"""
     @property
+    def processing_info(self) -> global___DatasetVersionProcessingInfo:
+        """Dataset version processing"""
+    @property
     def metrics(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___DatasetVersionMetrics]:
         """Dataset version metrics"""
     @property
@@ -2457,14 +2486,15 @@ class DatasetVersion(google.protobuf.message.Message):
         model_predict_config: global___ModelPredictConfig | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         description: builtins.str = ...,
+        processing_info: global___DatasetVersionProcessingInfo | None = ...,
         metrics: collections.abc.Mapping[builtins.str, global___DatasetVersionMetrics] | None = ...,
         export_info: global___DatasetVersionExportInfo | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         visibility: global___Visibility | None = ...,
         embed_model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "created_at", b"created_at", "data_config", b"data_config", "export_info", b"export_info", "metadata", b"metadata", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "status", b"status", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "app_id", b"app_id", "created_at", b"created_at", "data_config", b"data_config", "dataset_id", b"dataset_id", "description", b"description", "embed_model_version_ids", b"embed_model_version_ids", "export_info", b"export_info", "id", b"id", "metadata", b"metadata", "metrics", b"metrics", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "status", b"status", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "created_at", b"created_at", "data_config", b"data_config", "export_info", b"export_info", "metadata", b"metadata", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "processing_info", b"processing_info", "status", b"status", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "app_id", b"app_id", "created_at", b"created_at", "data_config", b"data_config", "dataset_id", b"dataset_id", "description", b"description", "embed_model_version_ids", b"embed_model_version_ids", "export_info", b"export_info", "id", b"id", "metadata", b"metadata", "metrics", b"metrics", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "processing_info", b"processing_info", "status", b"status", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["data_config", b"data_config"]) -> typing_extensions.Literal["annotation_filter_config", "model_predict_config"] | None: ...
 
 global___DatasetVersion = DatasetVersion
@@ -2721,6 +2751,53 @@ class DatasetVersionExport(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["format", b"format", "include_embeddings", b"include_embeddings", "size", b"size", "status", b"status", "url", b"url"]) -> None: ...
 
 global___DatasetVersionExport = DatasetVersionExport
+
+@typing_extensions.final
+class DatasetVersionProcessingInfo(google.protobuf.message.Message):
+    """DatasetVersionProcessingInfo contains information about processing applied
+    to a dataset version.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    FRAME_INTERPOLATION_INFO_FIELD_NUMBER: builtins.int
+    @property
+    def frame_interpolation_info(self) -> global___FrameInterpolationInfo:
+        """If frame_interpolation_info is set, then these settings are used to
+        interpolate new frame annotation from other video annotations.
+        """
+    def __init__(
+        self,
+        *,
+        frame_interpolation_info: global___FrameInterpolationInfo | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["frame_interpolation_info", b"frame_interpolation_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["frame_interpolation_info", b"frame_interpolation_info"]) -> None: ...
+
+global___DatasetVersionProcessingInfo = DatasetVersionProcessingInfo
+
+@typing_extensions.final
+class FrameInterpolationInfo(google.protobuf.message.Message):
+    """FrameInterpolationInfo contains information about frame annotations
+    interpolated from other video annotations, such as image object-detection
+    regions generated from video object-tracking regions.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SAMPLE_MS_FIELD_NUMBER: builtins.int
+    sample_ms: builtins.int
+    """sample_ms is the sampling rate at which frame annotations are interpolated.
+    If zero, then the input frame prediction sampling rate is used.
+    """
+    def __init__(
+        self,
+        *,
+        sample_ms: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["sample_ms", b"sample_ms"]) -> None: ...
+
+global___FrameInterpolationInfo = FrameInterpolationInfo
 
 @typing_extensions.final
 class WorkflowResultsSimilarity(google.protobuf.message.Message):
@@ -3222,7 +3299,6 @@ class OutputConfig(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     CONCEPTS_MUTUALLY_EXCLUSIVE_FIELD_NUMBER: builtins.int
-    CLOSED_ENVIRONMENT_FIELD_NUMBER: builtins.int
     EXISTING_MODEL_ID_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     HYPER_PARAMETERS_FIELD_NUMBER: builtins.int
@@ -3237,11 +3313,6 @@ class OutputConfig(google.protobuf.message.Message):
     MODEL_METADATA_FIELD_NUMBER: builtins.int
     concepts_mutually_exclusive: builtins.bool
     """For custom concept model training: whether the concept predictions must sum to 1."""
-    closed_environment: builtins.bool
-    """For custom concept model training: Whether negatives should only be sampled from within the app during
-    training, for custom models.
-    Deprecated field. Use train_info.params.enrich_dataset for the model types that support it.
-    """
     existing_model_id: builtins.str
     """DEPRECATED: For custom models, this is the base model to use for image embeddings.
     Default is general model.
@@ -3293,7 +3364,6 @@ class OutputConfig(google.protobuf.message.Message):
         self,
         *,
         concepts_mutually_exclusive: builtins.bool = ...,
-        closed_environment: builtins.bool = ...,
         existing_model_id: builtins.str = ...,
         language: builtins.str = ...,
         hyper_parameters: builtins.str = ...,
@@ -3308,7 +3378,7 @@ class OutputConfig(google.protobuf.message.Message):
         model_metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["hyper_params", b"hyper_params", "model_metadata", b"model_metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["closed_environment", b"closed_environment", "concepts_mutually_exclusive", b"concepts_mutually_exclusive", "embed_model_version_id", b"embed_model_version_id", "existing_model_id", b"existing_model_id", "fail_on_missing_positive_examples", b"fail_on_missing_positive_examples", "hyper_parameters", b"hyper_parameters", "hyper_params", b"hyper_params", "language", b"language", "max_concepts", b"max_concepts", "min_value", b"min_value", "model_metadata", b"model_metadata", "sample_ms", b"sample_ms", "select_concepts", b"select_concepts", "training_timeout", b"training_timeout"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concepts_mutually_exclusive", b"concepts_mutually_exclusive", "embed_model_version_id", b"embed_model_version_id", "existing_model_id", b"existing_model_id", "fail_on_missing_positive_examples", b"fail_on_missing_positive_examples", "hyper_parameters", b"hyper_parameters", "hyper_params", b"hyper_params", "language", b"language", "max_concepts", b"max_concepts", "min_value", b"min_value", "model_metadata", b"model_metadata", "sample_ms", b"sample_ms", "select_concepts", b"select_concepts", "training_timeout", b"training_timeout"]) -> None: ...
 
 global___OutputConfig = OutputConfig
 
@@ -4382,7 +4452,11 @@ class EvalMetrics(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     STATUS_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    GROUND_TRUTH_DATASET_FIELD_NUMBER: builtins.int
     SUMMARY_FIELD_NUMBER: builtins.int
     CONFUSION_MATRIX_FIELD_NUMBER: builtins.int
     COOCCURRENCE_MATRIX_FIELD_NUMBER: builtins.int
@@ -4395,7 +4469,18 @@ class EvalMetrics(google.protobuf.message.Message):
     EVAL_INFO_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    user_id: builtins.str
+    """user id that owns this evaluation"""
+    app_id: builtins.str
+    """app id that owns this evaluation"""
     id: builtins.str
+    """Id of this evaluation"""
+    @property
+    def model(self) -> global___Model:
+        """Model to evaluate"""
+    @property
+    def ground_truth_dataset(self) -> global___Dataset:
+        """The ground truth dataset"""
     @property
     def summary(self) -> global___MetricsSummary: ...
     @property
@@ -4415,12 +4500,19 @@ class EvalMetrics(google.protobuf.message.Message):
     @property
     def tracker_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___TrackerMetrics]: ...
     @property
-    def eval_info(self) -> global___EvalInfo: ...
+    def eval_info(self) -> global___EvalInfo:
+        """Evaluation parameters to pass. Expected to match what
+        is defined in the model type for the respective model.
+        """
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        user_id: builtins.str = ...,
+        app_id: builtins.str = ...,
         id: builtins.str = ...,
+        model: global___Model | None = ...,
+        ground_truth_dataset: global___Dataset | None = ...,
         summary: global___MetricsSummary | None = ...,
         confusion_matrix: global___ConfusionMatrix | None = ...,
         cooccurrence_matrix: global___CooccurrenceMatrix | None = ...,
@@ -4432,8 +4524,8 @@ class EvalMetrics(google.protobuf.message.Message):
         tracker_metrics: collections.abc.Iterable[global___TrackerMetrics] | None = ...,
         eval_info: global___EvalInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "label_counts", b"label_counts", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "ground_truth_dataset", b"ground_truth_dataset", "label_counts", b"label_counts", "model", b"model", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "ground_truth_dataset", b"ground_truth_dataset", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "model", b"model", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics", "user_id", b"user_id"]) -> None: ...
 
 global___EvalMetrics = EvalMetrics
 
@@ -7871,6 +7963,7 @@ class InputsAddJob(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     EXTRACTION_JOBS_FIELD_NUMBER: builtins.int
     UPLOADS_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """id of the job"""
     call_back_url: builtins.str
@@ -7898,6 +7991,9 @@ class InputsAddJob(google.protobuf.message.Message):
     @property
     def uploads(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Upload]:
         """Archive uploads"""
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """Status of the job"""
     def __init__(
         self,
         *,
@@ -7909,9 +8005,10 @@ class InputsAddJob(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         extraction_jobs: collections.abc.Iterable[global___InputsExtractionJob] | None = ...,
         uploads: collections.abc.Iterable[global___Upload] | None = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "uploads", b"uploads"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "call_back_url", b"call_back_url", "created_at", b"created_at", "extraction_jobs", b"extraction_jobs", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "uploads", b"uploads"]) -> None: ...
 
 global___InputsAddJob = InputsAddJob
 
@@ -8055,6 +8152,7 @@ class InputsExtractionJob(google.protobuf.message.Message):
     PROGRESS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     id: builtins.str
@@ -8076,6 +8174,8 @@ class InputsExtractionJob(google.protobuf.message.Message):
         The format is https://www.ietf.org/rfc/rfc3339.txt.
         Example: "2006-01-02T15:04:05.999999Z".
         """
+    input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
+    """How to handle input ID conflicts."""
     def __init__(
         self,
         *,
@@ -8085,9 +8185,10 @@ class InputsExtractionJob(google.protobuf.message.Message):
         progress: global___InputsExtractionJobProgress | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "url", b"url"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "input_id_conflict_resolution", b"input_id_conflict_resolution", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "url", b"url"]) -> None: ...
 
 global___InputsExtractionJob = InputsExtractionJob
 
@@ -8095,7 +8196,6 @@ global___InputsExtractionJob = InputsExtractionJob
 class InputsExtractionJobProgress(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    READ_OBJECTS_COUNT_FIELD_NUMBER: builtins.int
     AUDIO_INPUTS_COUNT_FIELD_NUMBER: builtins.int
     IMAGE_INPUTS_COUNT_FIELD_NUMBER: builtins.int
     VIDEO_INPUTS_COUNT_FIELD_NUMBER: builtins.int
@@ -8104,7 +8204,6 @@ class InputsExtractionJobProgress(google.protobuf.message.Message):
     IN_PROGRESS_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
     COMPLETED_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
     FAILED_ARCHIVES_COUNT_FIELD_NUMBER: builtins.int
-    read_objects_count: builtins.int
     audio_inputs_count: builtins.int
     image_inputs_count: builtins.int
     video_inputs_count: builtins.int
@@ -8116,7 +8215,6 @@ class InputsExtractionJobProgress(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        read_objects_count: builtins.int = ...,
         audio_inputs_count: builtins.int = ...,
         image_inputs_count: builtins.int = ...,
         video_inputs_count: builtins.int = ...,
@@ -8126,7 +8224,7 @@ class InputsExtractionJobProgress(google.protobuf.message.Message):
         completed_archives_count: builtins.int = ...,
         failed_archives_count: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio_inputs_count", b"audio_inputs_count", "completed_archives_count", b"completed_archives_count", "failed_archives_count", b"failed_archives_count", "image_inputs_count", b"image_inputs_count", "in_progress_archives_count", b"in_progress_archives_count", "pending_archives_count", b"pending_archives_count", "read_objects_count", b"read_objects_count", "text_inputs_count", b"text_inputs_count", "video_inputs_count", b"video_inputs_count"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio_inputs_count", b"audio_inputs_count", "completed_archives_count", b"completed_archives_count", "failed_archives_count", b"failed_archives_count", "image_inputs_count", b"image_inputs_count", "in_progress_archives_count", b"in_progress_archives_count", "pending_archives_count", b"pending_archives_count", "text_inputs_count", b"text_inputs_count", "video_inputs_count", b"video_inputs_count"]) -> None: ...
 
 global___InputsExtractionJobProgress = InputsExtractionJobProgress
 
@@ -8136,6 +8234,7 @@ class InputsDataSource(google.protobuf.message.Message):
 
     INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
     URL_FIELD_NUMBER: builtins.int
+    INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
     inputs_add_job_id: builtins.str
     """Collect statistics about created inputs in job with given ID.
     On Post call:
@@ -8144,14 +8243,17 @@ class InputsDataSource(google.protobuf.message.Message):
     """
     @property
     def url(self) -> global___DataSourceURL: ...
+    input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
+    """How to handle input ID conflicts."""
     def __init__(
         self,
         *,
         inputs_add_job_id: builtins.str = ...,
         url: global___DataSourceURL | None = ...,
+        input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["url", b"url"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs_add_job_id", b"inputs_add_job_id", "url", b"url"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id_conflict_resolution", b"input_id_conflict_resolution", "inputs_add_job_id", b"inputs_add_job_id", "url", b"url"]) -> None: ...
 
 global___InputsDataSource = InputsDataSource
 
@@ -8258,6 +8360,7 @@ class InputsUpload(google.protobuf.message.Message):
     INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
     APP_PAT_FIELD_NUMBER: builtins.int
     UPLOAD_FIELD_NUMBER: builtins.int
+    INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
     inputs_add_job_id: builtins.str
     """Collect statistics about created inputs in job with given ID.
     * If job ID is empty, then job is automatically created with random ID.
@@ -8267,14 +8370,17 @@ class InputsUpload(google.protobuf.message.Message):
     """Personal Access Token to the application to which inputs are added"""
     @property
     def upload(self) -> global___Upload: ...
+    input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
+    """How to handle input ID conflicts."""
     def __init__(
         self,
         *,
         inputs_add_job_id: builtins.str = ...,
         app_pat: builtins.str = ...,
         upload: global___Upload | None = ...,
+        input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["upload", b"upload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "input_id_conflict_resolution", b"input_id_conflict_resolution", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
 
 global___InputsUpload = InputsUpload

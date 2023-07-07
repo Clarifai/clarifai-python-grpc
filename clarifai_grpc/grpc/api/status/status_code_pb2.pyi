@@ -271,6 +271,12 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INPUT_VIDEO_MODIFY_FAILED: _StatusCode.ValueType  # 31203
     INPUT_VIDEO_STORAGE_HOST_FAILED: _StatusCode.ValueType  # 31210
     ALL_INPUT_VIDEOS_INVALID_BYTES: _StatusCode.ValueType  # 31300
+    INPUT_VIDEO_PROCESSING_SUCCESS: _StatusCode.ValueType  # 31400
+    INPUT_VIDEO_PROCESSING_PENDING: _StatusCode.ValueType  # 31410
+    INPUT_VIDEO_PROCESSING_FAILED: _StatusCode.ValueType  # 31420
+    INPUT_VIDEO_STORAGE_INCONSISTENCY: _StatusCode.ValueType  # 31430
+    INPUT_VIDEO_STORAGE_FAILURE: _StatusCode.ValueType  # 31440
+    INPUT_VIDEO_URL_GENERATION_FAILURE: _StatusCode.ValueType  # 31450
     INPUT_CONNECTION_FAILED: _StatusCode.ValueType  # 39996
     REQUEST_DISABLED_FOR_MAINTENANCE: _StatusCode.ValueType  # 39997
     INPUT_WRITES_DISABLED_FOR_MAINTENANCE: _StatusCode.ValueType  # 39998
@@ -454,6 +460,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     JOB_FAILED: _StatusCode.ValueType  # 64003
     JOB_CANCELLED: _StatusCode.ValueType  # 64004
     JOB_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64006
+    JOB_CONFLICT: _StatusCode.ValueType  # 64007
     AUTH_MISSING_IDP_ASSOC: _StatusCode.ValueType  # 65000
     """auth issues
     TODO: Knowledge graph related 80xxx
@@ -466,6 +473,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     UPLOAD_FAILED: _StatusCode.ValueType  # 68002
     UPLOAD_UNEXPECTED_ERROR: _StatusCode.ValueType  # 68003
     UPLOAD_EXPIRED: _StatusCode.ValueType  # 68004
+    UPLOAD_CANCELED: _StatusCode.ValueType  # 68005
+    UPLOAD_CONFLICT: _StatusCode.ValueType  # 68006
     BILLING_INVALID_INFO: _StatusCode.ValueType  # 69000
     """Billing related issues: 69xxx"""
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
@@ -745,6 +754,12 @@ INPUT_VIDEO_MODIFY_PENDING: StatusCode.ValueType  # 31201
 INPUT_VIDEO_MODIFY_FAILED: StatusCode.ValueType  # 31203
 INPUT_VIDEO_STORAGE_HOST_FAILED: StatusCode.ValueType  # 31210
 ALL_INPUT_VIDEOS_INVALID_BYTES: StatusCode.ValueType  # 31300
+INPUT_VIDEO_PROCESSING_SUCCESS: StatusCode.ValueType  # 31400
+INPUT_VIDEO_PROCESSING_PENDING: StatusCode.ValueType  # 31410
+INPUT_VIDEO_PROCESSING_FAILED: StatusCode.ValueType  # 31420
+INPUT_VIDEO_STORAGE_INCONSISTENCY: StatusCode.ValueType  # 31430
+INPUT_VIDEO_STORAGE_FAILURE: StatusCode.ValueType  # 31440
+INPUT_VIDEO_URL_GENERATION_FAILURE: StatusCode.ValueType  # 31450
 INPUT_CONNECTION_FAILED: StatusCode.ValueType  # 39996
 REQUEST_DISABLED_FOR_MAINTENANCE: StatusCode.ValueType  # 39997
 INPUT_WRITES_DISABLED_FOR_MAINTENANCE: StatusCode.ValueType  # 39998
@@ -928,6 +943,7 @@ JOB_COMPLETED: StatusCode.ValueType  # 64002
 JOB_FAILED: StatusCode.ValueType  # 64003
 JOB_CANCELLED: StatusCode.ValueType  # 64004
 JOB_UNEXPECTED_ERROR: StatusCode.ValueType  # 64006
+JOB_CONFLICT: StatusCode.ValueType  # 64007
 AUTH_MISSING_IDP_ASSOC: StatusCode.ValueType  # 65000
 """auth issues
 TODO: Knowledge graph related 80xxx
@@ -940,6 +956,8 @@ UPLOAD_DONE: StatusCode.ValueType  # 68001
 UPLOAD_FAILED: StatusCode.ValueType  # 68002
 UPLOAD_UNEXPECTED_ERROR: StatusCode.ValueType  # 68003
 UPLOAD_EXPIRED: StatusCode.ValueType  # 68004
+UPLOAD_CANCELED: StatusCode.ValueType  # 68005
+UPLOAD_CONFLICT: StatusCode.ValueType  # 68006
 BILLING_INVALID_INFO: StatusCode.ValueType  # 69000
 """Billing related issues: 69xxx"""
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
