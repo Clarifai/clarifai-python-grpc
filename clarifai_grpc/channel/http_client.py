@@ -58,9 +58,7 @@ class HttpClient:
             elif method == "POST":
                 res = self._session.post(url, data=json.dumps(params), headers=headers)
             elif method == "DELETE":
-                res = self._session.delete(
-                    url, data=json.dumps(params), headers=headers
-                )
+                res = self._session.delete(url, data=json.dumps(params), headers=headers)
             elif method == "PATCH":
                 res = self._session.patch(url, data=json.dumps(params), headers=headers)
             elif method == "PUT":
@@ -109,12 +107,7 @@ class HttpClient:
         params_copy = copy.deepcopy(params)
         queries = params_copy["query"]["ands"]
         for query in queries:
-            image = (
-                query.get("output", {})
-                .get("input", {})
-                .get("data", {})
-                .get("image", {})
-            )
+            image = query.get("output", {}).get("input", {}).get("data", {}).get("image", {})
             base64_val = image.get("base64")
             if base64_val:
                 image["base64"] = self._shortened_base64_value(base64_val)
