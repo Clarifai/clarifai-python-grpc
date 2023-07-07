@@ -8,7 +8,7 @@ import requests
 
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = '9.6.0'
+CLIENT_VERSION = "9.6.0"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(
@@ -58,7 +58,9 @@ class HttpClient:
             elif method == "POST":
                 res = self._session.post(url, data=json.dumps(params), headers=headers)
             elif method == "DELETE":
-                res = self._session.delete(url, data=json.dumps(params), headers=headers)
+                res = self._session.delete(
+                    url, data=json.dumps(params), headers=headers
+                )
             elif method == "PATCH":
                 res = self._session.patch(url, data=json.dumps(params), headers=headers)
             elif method == "PUT":
@@ -107,7 +109,12 @@ class HttpClient:
         params_copy = copy.deepcopy(params)
         queries = params_copy["query"]["ands"]
         for query in queries:
-            image = query.get("output", {}).get("input", {}).get("data", {}).get("image", {})
+            image = (
+                query.get("output", {})
+                .get("input", {})
+                .get("data", {})
+                .get("image", {})
+            )
             base64_val = image.get("base64")
             if base64_val:
                 image["base64"] = self._shortened_base64_value(base64_val)
@@ -125,7 +132,7 @@ class HttpClient:
         Encodes message params into format for use in GET args
         """
         encoded_params = {}
-        for (k, v) in params.items():
+        for k, v in params.items():
             if isinstance(v, str):
                 encoded_params[k] = v
             elif isinstance(v, bytes):
@@ -133,7 +140,7 @@ class HttpClient:
             elif isinstance(v, (int, float, bool)):
                 encoded_params[k] = str(v)
             elif isinstance(v, dict):
-                for (subk, subv) in self._encode_get_params(v).items():
+                for subk, subv in self._encode_get_params(v).items():
                     encoded_params[k + "." + subk] = subv
             elif isinstance(v, list):
                 if v:
