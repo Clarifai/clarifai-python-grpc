@@ -495,7 +495,6 @@ def test_save_and_execute_annotations_search_by_id(channel):
     my_concept_id = "my-anno-conc-" + uuid.uuid4().hex[:15]
 
     with SetupImage(stub) as input1, SetupImage(stub) as input2:
-
         list_annotations_response = stub.ListAnnotations(
             service_pb2.ListAnnotationsRequest(input_ids=[input1.id, input2.id]),
             metadata=metadata(),
