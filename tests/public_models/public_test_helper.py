@@ -192,30 +192,20 @@ FACEBOOK_TRANSLATION_MODELS = {
 # Large Language Models
 # Data Structure: [(model_id, model_name, app_id, user_id),...]
 LLM_TITLE_ID_TUPLES = [
-    (
-        "Llama2-7b-chat",
-        "Llama2-7b-chat",
-        "Llama-2",
-        "meta-llama"
-    ),
-    (
-        "claude-v2",
-        "claude-v2",
-        "completion",
-        "anthropic"
-    ),
+    ("Llama2-7b-chat", "Llama2-7b-chat", "Llama-2", "meta-llama"),
+    ("claude-v2", "claude-v2", "completion", "anthropic"),
     (
         "tiiuae-falcon-7b-instruct",
         "tiiuae-falcon-7b-instruct",
         "LLM-OpenSource-Models-Training-Inference-Test",
-        "clarifai"
+        "clarifai",
     ),
     (
         "hkunlp_instructor-xl",
         "hkunlp_instructor-xl",
         "LLM-OpenSource-Models-Training-Inference-Test",
-        "clarifai"
-    )
+        "clarifai",
+    ),
 ]
 
 MODEL_TITLE_AND_ID_PAIRS = [

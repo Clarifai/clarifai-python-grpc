@@ -22,7 +22,7 @@ from tests.public_models.public_test_helper import (
     TEXT_MODEL_TITLE_IDS_TUPLE,
     LLM_TITLE_ID_TUPLES,
     TRANSLATION_TEST_DATA,
-    TEXT_GEN_PROMPT
+    TEXT_GEN_PROMPT,
 )
 
 
@@ -62,9 +62,7 @@ def test_text_gen_on_public_llms(channel):
             model_id=model_id,
             inputs=[
                 resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        text=resources_pb2.Text(raw=TEXT_GEN_PROMPT)
-                    )
+                    data=resources_pb2.Data(text=resources_pb2.Text(raw=TEXT_GEN_PROMPT))
                 )
             ],
         )
