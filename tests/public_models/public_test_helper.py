@@ -30,7 +30,6 @@ GENERAL_ASR_NEMO_JASPER_MODEL_ID = "general-asr-nemo_jasper"
 
 NER_ENGLISH_MODEL_ID = "ner_english_v2"
 TEXT_SUM_MODEL_ID = "distilbart-cnn-12-6"
-TEXT_GEN_MODEL_ID = "distilgpt2"
 TEXT_SENTIMENT_MODEL_ID = "multilingual-uncased-sentiment"  # bert-based
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 
@@ -52,6 +51,7 @@ TRANSLATION_TEST_DATA = {
     "JAPANESE": "今夜は勉強したくない",
     "DANISH": "Jeg har ikke lyst til at studere i aften",
 }
+TEXT_GEN_PROMPT = "What are the main events that led to the American Revolution?"
 
 # general visual detection models (yolo, detic)
 # Data Structure: {MODEL_NAME: [title, model, app, user]}
@@ -189,6 +189,34 @@ FACEBOOK_TRANSLATION_MODELS = {
     ],
 }
 
+# Large Language Models
+# Data Structure: [(model_id, model_name, app_id, user_id),...]
+LLM_TITLE_ID_TUPLES = [
+    (
+        "Llama2-7b-chat",
+        "Llama2-7b-chat",
+        "Llama-2",
+        "meta-llama"
+    ),
+    (
+        "claude-v2",
+        "claude-v2",
+        "completion",
+        "anthropic"
+    ),
+    (
+        "tiiuae-falcon-7b-instruct",
+        "tiiuae-falcon-7b-instruct",
+        "LLM-OpenSource-Models-Training-Inference-Test",
+        "clarifai"
+    ),
+    (
+        "hkunlp_instructor-xl",
+        "hkunlp_instructor-xl",
+        "LLM-OpenSource-Models-Training-Inference-Test",
+        "clarifai"
+    )
+]
 
 MODEL_TITLE_AND_ID_PAIRS = [
     ("apparel", APPAREL_MODEL_ID),
@@ -225,7 +253,6 @@ for _, values in OBJECT_DETECTION_MODELS_SHORT.items():
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
     ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
-    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "textgen"),
     ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "nlptownres"),
     (
         "text multilingual moderation",
