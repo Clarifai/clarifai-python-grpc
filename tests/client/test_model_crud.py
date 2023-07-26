@@ -230,7 +230,7 @@ def test_post_model_with_hyper_params(channel):
     raise_on_failure(post_model_versions_response)
 
     assert (
-        post_model_versions_response.model_version.output_info.output_config.hyper_params[
+        post_model_versions_response.model.model_version.output_info.output_config.hyper_params[
             "custom_training_cfg"
         ]
         == "custom_training_1layer"
