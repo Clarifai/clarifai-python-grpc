@@ -68,13 +68,17 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
-                        image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True),
+                        image=resources_pb2.Image(
+                            url=TRUCK_IMAGE_URL, allow_duplicate_url=True
+                        ),
                         concepts=[resources_pb2.Concept(id="some-initial-concept")],
                     )
                 ),
                 resources_pb2.Input(
                     data=resources_pb2.Data(
-                        image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
+                        image=resources_pb2.Image(
+                            url=DOG_IMAGE_URL, allow_duplicate_url=True
+                        ),
                         concepts=[resources_pb2.Concept(id="some-new-concept")],
                     )
                 ),
@@ -83,7 +87,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         metadata=metadata(),
     )
     raise_on_failure(post_inputs_response)
-    
+
     input_id_1 = post_inputs_response.inputs[0].id
     input_id_2 = post_inputs_response.inputs[1].id
     wait_for_inputs_upload(stub, metadata(), [input_id_1, input_id_2])
@@ -119,17 +123,18 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
 
         post_model_versions_response = stub.PostModelVersions(
             service_pb2.PostModelVersionsRequest(
-            model_id=model_id,
-            model_versions=[
-                resources_pb2.ModelVersion(
-                    output_info=resources_pb2.OutputInfo(
-                        data=resources_pb2.Data(
-                            concepts=[resources_pb2.Concept(id="some-new-concept")],
-                        ),
+                model_id=model_id,
+                model_versions=[
+                    resources_pb2.ModelVersion(
+                        output_info=resources_pb2.OutputInfo(
+                            data=resources_pb2.Data(
+                                concepts=[resources_pb2.Concept(id="some-new-concept")],
+                            ),
+                        )
                     )
-                )
                 ],
-            ), metadata=metadata()
+            ),
+            metadata=metadata(),
         )
         raise_on_failure(post_model_versions_response)
         model_version_id = post_model_versions_response.model.model_version.id
@@ -159,7 +164,9 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
                 version_id=model_version_id,
                 inputs=[
                     resources_pb2.Input(
-                        data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                        data=resources_pb2.Data(
+                            image=resources_pb2.Image(url=DOG_IMAGE_URL)
+                        )
                     )
                 ],
             ),
@@ -168,7 +175,10 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         raise_on_failure(post_model_outputs_response)
         assert len(post_model_outputs_response.outputs) == 1
         assert len(post_model_outputs_response.outputs[0].data.concepts) == 1
-        assert post_model_outputs_response.outputs[0].data.concepts[0].id == "some-new-concept"
+        assert (
+            post_model_outputs_response.outputs[0].data.concepts[0].id
+            == "some-new-concept"
+        )
     finally:
         delete_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
@@ -176,7 +186,8 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         raise_on_failure(delete_response)
 
         delete_inputs_response = stub.DeleteInputs(
-            service_pb2.DeleteInputsRequest(ids=[input_id_1, input_id_2]), metadata=metadata()
+            service_pb2.DeleteInputsRequest(ids=[input_id_1, input_id_2]),
+            metadata=metadata(),
         )
         raise_on_failure(delete_inputs_response)
 
@@ -210,7 +221,7 @@ def test_post_model_with_hyper_params(channel):
     raise_on_failure(post_response)
 
     post_model_versions_response = stub.PostModelVersions(
-            service_pb2.PostModelVersionsRequest(
+        service_pb2.PostModelVersionsRequest(
             model_id=model_id,
             model_versions=[
                 resources_pb2.ModelVersion(
@@ -218,16 +229,21 @@ def test_post_model_with_hyper_params(channel):
                         data=resources_pb2.Data(
                             concepts=[resources_pb2.Concept(id="some-initial-concept")],
                         ),
-                        output_config=resources_pb2.OutputConfig(hyper_params=hyper_params),
+                        output_config=resources_pb2.OutputConfig(
+                            hyper_params=hyper_params
+                        ),
                     )
                 )
-                ],
-            ), metadata=metadata()
-        )
+            ],
+        ),
+        metadata=metadata(),
+    )
     raise_on_failure(post_model_versions_response)
 
     assert (
-        post_model_versions_response.model_version.output_info.output_config.hyper_params["custom_training_cfg"]
+        post_model_versions_response.model_version.output_info.output_config.hyper_params[
+            "custom_training_cfg"
+        ]
         == "custom_training_1layer"
     )
 
@@ -291,19 +307,21 @@ def test_model_creation_training_and_evaluation(channel):
 
     response = stub.PostModelVersions(
         service_pb2.PostModelVersionsRequest(
-        model_id=model_id,
-        model_versions=[
-            resources_pb2.ModelVersion(
-                        output_info=resources_pb2.OutputInfo(
-                            data=resources_pb2.Data(
-                                concepts=[
-                                    resources_pb2.Concept(id="dog"),
-                                    resources_pb2.Concept(id="toddler"),
-                                ]
-                            )
-                        ),
-            ),
-        ]), metadata=metadata()
+            model_id=model_id,
+            model_versions=[
+                resources_pb2.ModelVersion(
+                    output_info=resources_pb2.OutputInfo(
+                        data=resources_pb2.Data(
+                            concepts=[
+                                resources_pb2.Concept(id="dog"),
+                                resources_pb2.Concept(id="toddler"),
+                            ]
+                        )
+                    ),
+                ),
+            ],
+        ),
+        metadata=metadata(),
     )
     raise_on_failure(response)
 
@@ -339,9 +357,13 @@ def test_model_creation_training_and_evaluation(channel):
     raise_on_failure(response)
 
     raise_on_failure(
-        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
+        stub.DeleteModel(
+            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
+        )
     )
 
     raise_on_failure(
-        stub.DeleteInputs(service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata())
+        stub.DeleteInputs(
+            service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata()
+        )
     )
