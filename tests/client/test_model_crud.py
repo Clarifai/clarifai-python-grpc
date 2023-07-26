@@ -83,6 +83,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         metadata=metadata(),
     )
     raise_on_failure(post_inputs_response)
+    
     input_id_1 = post_inputs_response.inputs[0].id
     input_id_2 = post_inputs_response.inputs[1].id
     wait_for_inputs_upload(stub, metadata(), [input_id_1, input_id_2])
