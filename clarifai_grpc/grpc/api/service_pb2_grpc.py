@@ -28,7 +28,7 @@ class V2Stub(object):
     """
 
     def __init__(self, channel):
-        from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
+          from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
         """Constructor.
 
         Args:
@@ -1068,6 +1068,36 @@ class V2Stub(object):
                 '/clarifai.api.V2/PostInputsUploads',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse),
+                )
+        self.GetRunner = channel.unary_unary(
+                '/clarifai.api.V2/GetRunner',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRunnerRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleRunnerResponse),
+                )
+        self.ListRunners = channel.unary_unary(
+                '/clarifai.api.V2/ListRunners',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse),
+                )
+        self.PostRunners = channel.unary_unary(
+                '/clarifai.api.V2/PostRunners',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse),
+                )
+        self.DeleteRunners = channel.unary_unary(
+                '/clarifai.api.V2/DeleteRunners',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRunnersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListRunnerItems = channel.unary_unary(
+                '/clarifai.api.V2/ListRunnerItems',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnerItemsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse),
+                )
+        self.PostRunnerItemOutputs = channel.unary_unary(
+                '/clarifai.api.V2/PostRunnerItemOutputs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse),
                 )
 
 
@@ -2612,6 +2642,48 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetRunner(self, request, context):
+        """Get a specific runner from an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListRunners(self, request, context):
+        """List all the runners in community, by user or by app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostRunners(self, request, context):
+        """Add a runners to an app.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteRunners(self, request, context):
+        """Delete multiple runners in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListRunnerItems(self, request, context):
+        """List items for the remote runner to work on.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostRunnerItemOutputs(self, request, context):
+        """Post back outputs from remote runners
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3649,6 +3721,36 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostInputsUploads,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.SerializeToString,
+            ),
+            'GetRunner': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetRunner,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetRunnerRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleRunnerResponse.SerializeToString,
+            ),
+            'ListRunners': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListRunners,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.SerializeToString,
+            ),
+            'PostRunners': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostRunners,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.SerializeToString,
+            ),
+            'DeleteRunners': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteRunners,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRunnersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListRunnerItems': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListRunnerItems,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnerItemsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse.SerializeToString,
+            ),
+            'PostRunnerItemOutputs': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostRunnerItemOutputs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -7194,5 +7296,107 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostInputsUploads',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostInputsUploadsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiInputsAddJobResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetRunner(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetRunner',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetRunnerRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleRunnerResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListRunners(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListRunners',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostRunners(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRunners',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteRunners(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteRunners',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRunnersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListRunnerItems(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListRunnerItems',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListRunnerItemsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostRunnerItemOutputs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRunnerItemOutputs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
