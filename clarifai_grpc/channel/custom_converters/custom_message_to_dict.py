@@ -46,7 +46,6 @@ class _CustomPrinter(_Printer):
 
         message_descriptor = message.DESCRIPTOR
         for field in message_descriptor.fields:
-
             if (
                 self._ignore_show_empty
                 and not field.GetOptions().Extensions[extensions_pb2.cl_default_float]

@@ -226,6 +226,12 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     BULK_OPERATION_INVALID_REQUEST: _StatusCode.ValueType  # 25404
     BULK_OPERATION_CANCELLED: _StatusCode.ValueType  # 25405
     BULK_OPERATION_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25406
+    RUNNER_DOES_NOT_EXIST: _StatusCode.ValueType  # 25600
+    """Runner related codes 256xx"""
+    RUNNER_PERMISSION_DENIED: _StatusCode.ValueType  # 25601
+    RUNNER_INVALID_ARGUMENT: _StatusCode.ValueType  # 25602
+    RUNNER_INVALID_REQUEST: _StatusCode.ValueType  # 25603
+    RUNNER_NEEDS_RETRY: _StatusCode.ValueType  # 25604
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -390,8 +396,10 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """The task is completed."""
     TASK_WONT_DO: _StatusCode.ValueType  # 54003
     """The task is marked as abandoned."""
-    TASK_ADD_ANNOTATIONS_FAILURE: _StatusCode.ValueType  # 54005
-    """An error occurred during add-task-annotations pipeline."""
+    TASK_FAILED: _StatusCode.ValueType  # 54005
+    """An error occurred during add-task-annotations or add-auto-annotations pipeline."""
+    TASK_IDLE: _StatusCode.ValueType  # 54006
+    """When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets."""
     TASK_CONFLICT: _StatusCode.ValueType  # 54100
     """The task operation is in conflict with the current state of the server."""
     TASK_NOT_IMPLEMENTED: _StatusCode.ValueType  # 54101
@@ -709,6 +717,12 @@ BULK_OPERATION_IN_PROGRESS: StatusCode.ValueType  # 25403
 BULK_OPERATION_INVALID_REQUEST: StatusCode.ValueType  # 25404
 BULK_OPERATION_CANCELLED: StatusCode.ValueType  # 25405
 BULK_OPERATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 25406
+RUNNER_DOES_NOT_EXIST: StatusCode.ValueType  # 25600
+"""Runner related codes 256xx"""
+RUNNER_PERMISSION_DENIED: StatusCode.ValueType  # 25601
+RUNNER_INVALID_ARGUMENT: StatusCode.ValueType  # 25602
+RUNNER_INVALID_REQUEST: StatusCode.ValueType  # 25603
+RUNNER_NEEDS_RETRY: StatusCode.ValueType  # 25604
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
@@ -873,8 +887,10 @@ TASK_DONE: StatusCode.ValueType  # 54002
 """The task is completed."""
 TASK_WONT_DO: StatusCode.ValueType  # 54003
 """The task is marked as abandoned."""
-TASK_ADD_ANNOTATIONS_FAILURE: StatusCode.ValueType  # 54005
-"""An error occurred during add-task-annotations pipeline."""
+TASK_FAILED: StatusCode.ValueType  # 54005
+"""An error occurred during add-task-annotations or add-auto-annotations pipeline."""
+TASK_IDLE: StatusCode.ValueType  # 54006
+"""When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets."""
 TASK_CONFLICT: StatusCode.ValueType  # 54100
 """The task operation is in conflict with the current state of the server."""
 TASK_NOT_IMPLEMENTED: StatusCode.ValueType  # 54101
