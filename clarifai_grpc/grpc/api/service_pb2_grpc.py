@@ -17,7 +17,7 @@ class V2Stub(object):
     scope dependencies in clarifai/auth/scope/scope.proto
 
     For new endpoints you should typically only add the fully qualified url that includes the user_id
-    and the app_id.
+    and app_id.
 
     You should typicaly use KeyAuth (the most restricted auth type) for new endpoints unless they are
     for resources not contained in an app or need access from things across apps. See more about the
@@ -28,7 +28,7 @@ class V2Stub(object):
     """
 
     def __init__(self, channel):
-          from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
+        from clarifai_grpc.channel.clarifai_channel import wrap_response_deserializer
         """Constructor.
 
         Args:
