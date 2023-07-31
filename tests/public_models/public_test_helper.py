@@ -297,3 +297,11 @@ AUDIO_MODEL_TITLE_IDS_TUPLE = [
     #     "nvidia",
     # ),
 ]
+IMAGE_CAPTION_TITLE_ID_TUPLES = [
+    (
+        "general-english-image-caption-blip-2-6_7B",
+        "general-english-image-caption-blip-2-6_7B",
+        "blip",
+        "salesforce",
+    )
+]
