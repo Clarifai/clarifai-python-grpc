@@ -206,6 +206,12 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     Uploads_Add: _S.ValueType  # 129
     """To upload files or archives through the Uploads endpoints"""
     Uploads_Delete: _S.ValueType  # 130
+    Runners_Get: _S.ValueType  # 131
+    """To read allo control over remote runners"""
+    Runners_Add: _S.ValueType  # 132
+    Runners_Delete: _S.ValueType  # 133
+    RunnerItems_Get: _S.ValueType  # 134
+    RunnerItems_Add: _S.ValueType  # 135
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -417,6 +423,12 @@ Uploads_Get: S.ValueType  # 128
 Uploads_Add: S.ValueType  # 129
 """To upload files or archives through the Uploads endpoints"""
 Uploads_Delete: S.ValueType  # 130
+Runners_Get: S.ValueType  # 131
+"""To read allo control over remote runners"""
+Runners_Add: S.ValueType  # 132
+Runners_Delete: S.ValueType  # 133
+RunnerItems_Get: S.ValueType  # 134
+RunnerItems_Add: S.ValueType  # 135
 global___S = S
 
 @typing_extensions.final

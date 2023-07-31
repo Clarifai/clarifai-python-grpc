@@ -467,6 +467,7 @@ class Annotation(google.protobuf.message.Message):
     INPUT_LEVEL_FIELD_NUMBER: builtins.int
     CONSENSUS_INFO_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the annotation"""
     input_id: builtins.str
@@ -511,6 +512,8 @@ class Annotation(google.protobuf.message.Message):
         """
     task_id: builtins.str
     """The id of the task annotation belongs to"""
+    workflow_version_id: builtins.str
+    """ID of the workflow version this annotation is created by"""
     def __init__(
         self,
         *,
@@ -528,9 +531,10 @@ class Annotation(google.protobuf.message.Message):
         input_level: builtins.bool = ...,
         consensus_info: google.protobuf.struct_pb2.Struct | None = ...,
         task_id: builtins.str = ...,
+        workflow_version_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotation_info", b"annotation_info", "consensus_info", b"consensus_info", "created_at", b"created_at", "data", b"data", "modified_at", b"modified_at", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_info", b"annotation_info", "consensus_info", b"consensus_info", "created_at", b"created_at", "data", b"data", "embed_model_version_id", b"embed_model_version_id", "id", b"id", "input_id", b"input_id", "input_level", b"input_level", "model_version_id", b"model_version_id", "modified_at", b"modified_at", "status", b"status", "task_id", b"task_id", "trusted", b"trusted", "user_id", b"user_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_info", b"annotation_info", "consensus_info", b"consensus_info", "created_at", b"created_at", "data", b"data", "embed_model_version_id", b"embed_model_version_id", "id", b"id", "input_id", b"input_id", "input_level", b"input_level", "model_version_id", b"model_version_id", "modified_at", b"modified_at", "status", b"status", "task_id", b"task_id", "trusted", b"trusted", "user_id", b"user_id", "workflow_version_id", b"workflow_version_id"]) -> None: ...
 
 global___Annotation = Annotation
 
@@ -2227,10 +2231,12 @@ class Dataset(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     DEFAULT_ANNOTATION_FILTER_FIELD_NUMBER: builtins.int
+    DEFAULT_PROCESSING_INFO_FIELD_NUMBER: builtins.int
     NOTES_FIELD_NUMBER: builtins.int
     VERSION_FIELD_NUMBER: builtins.int
     IS_STARRED_FIELD_NUMBER: builtins.int
     STAR_COUNT_FIELD_NUMBER: builtins.int
+    BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the dataset"""
     @property
@@ -2265,6 +2271,9 @@ class Dataset(google.protobuf.message.Message):
     @property
     def default_annotation_filter(self) -> global___AnnotationFilter:
         """Default annotation filter used for this dataset."""
+    @property
+    def default_processing_info(self) -> global___DatasetVersionProcessingInfo:
+        """Default processing info used for this dataset."""
     notes: builtins.str
     """Notes for the dataset
     This field should be used for in-depth notes and supports up to 64Kbs.
@@ -2278,6 +2287,11 @@ class Dataset(google.protobuf.message.Message):
     """Whether the dataset is starred by the requesting user."""
     star_count: builtins.int
     """Number of users that starred this dataset."""
+    @property
+    def bookmark_origin(self) -> global___BookmarkOrigin:
+        """bookmark info. When set, this dataset is a bookmarked dataset of this app.
+        Info in this field will allow you to find/access original dataset.
+        """
     def __init__(
         self,
         *,
@@ -2290,13 +2304,15 @@ class Dataset(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         visibility: global___Visibility | None = ...,
         default_annotation_filter: global___AnnotationFilter | None = ...,
+        default_processing_info: global___DatasetVersionProcessingInfo | None = ...,
         notes: builtins.str = ...,
         version: global___DatasetVersion | None = ...,
         is_starred: builtins.bool = ...,
         star_count: builtins.int = ...,
+        bookmark_origin: global___BookmarkOrigin | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "metadata", b"metadata", "modified_at", b"modified_at", "version", b"version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "notes", b"notes", "star_count", b"star_count", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "default_processing_info", b"default_processing_info", "metadata", b"metadata", "modified_at", b"modified_at", "version", b"version", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_annotation_filter", b"default_annotation_filter", "default_processing_info", b"default_processing_info", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "notes", b"notes", "star_count", b"star_count", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
 
 global___Dataset = Dataset
 
@@ -2452,7 +2468,10 @@ class DatasetVersion(google.protobuf.message.Message):
     """Description of the dataset version"""
     @property
     def processing_info(self) -> global___DatasetVersionProcessingInfo:
-        """Dataset version processing"""
+        """Dataset version processing. If this is not set when the dataset version is
+        created, then the dataset default_processing_info is copied instead. Later
+        updates to default_processing_info will not apply to existing versions.
+        """
     @property
     def metrics(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___DatasetVersionMetrics]:
         """Dataset version metrics"""
@@ -2765,6 +2784,10 @@ class DatasetVersionProcessingInfo(google.protobuf.message.Message):
     def frame_interpolation_info(self) -> global___FrameInterpolationInfo:
         """If frame_interpolation_info is set, then these settings are used to
         interpolate new frame annotation from other video annotations.
+
+        If frame_interpolation_info is set in the dataset default_processing_info,
+        then it can be disabled for a single dataset version by setting
+        processing_info but not setting processing_info.frame_interpolation_info.
         """
     def __init__(
         self,
@@ -2788,7 +2811,9 @@ class FrameInterpolationInfo(google.protobuf.message.Message):
     SAMPLE_MS_FIELD_NUMBER: builtins.int
     sample_ms: builtins.int
     """sample_ms is the sampling rate at which frame annotations are interpolated.
-    If zero, then the input frame prediction sampling rate is used.
+    If sample_ms is zero, then the dataset default_processing_info value is used.
+    If the dataset default is zero or not set, then the input frame prediction
+    sampling rate is used.
     """
     def __init__(
         self,
@@ -2932,6 +2957,7 @@ class Model(google.protobuf.message.Message):
     STAR_COUNT_FIELD_NUMBER: builtins.int
     IMPORT_INFO_FIELD_NUMBER: builtins.int
     WORKFLOW_RECOMMENDED_FIELD_NUMBER: builtins.int
+    BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -3031,6 +3057,11 @@ class Model(google.protobuf.message.Message):
     @property
     def workflow_recommended(self) -> google.protobuf.wrappers_pb2.BoolValue:
         """Whether it's recommended that this model is used within a workflow"""
+    @property
+    def bookmark_origin(self) -> global___BookmarkOrigin:
+        """bookmark info. When set, this model is a bookmarked model of this app.
+        Info in this field will allow you to find/access original model.
+        """
     def __init__(
         self,
         *,
@@ -3062,9 +3093,10 @@ class Model(google.protobuf.message.Message):
         star_count: builtins.int = ...,
         import_info: global___ImportInfo | None = ...,
         workflow_recommended: google.protobuf.wrappers_pb2.BoolValue | None = ...,
+        bookmark_origin: global___BookmarkOrigin | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_eval_info", b"default_eval_info", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "train_info", b"train_info", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "check_consents", b"check_consents", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "train_info", b"train_info", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "train_info", b"train_info", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "train_info", b"train_info", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
@@ -3208,6 +3240,7 @@ class InputInfo(google.protobuf.message.Message):
 
     FIELDS_MAP_FIELD_NUMBER: builtins.int
     PARAMS_FIELD_NUMBER: builtins.int
+    BASE_EMBED_MODEL_FIELD_NUMBER: builtins.int
     @property
     def fields_map(self) -> google.protobuf.struct_pb2.Struct:
         """Map from the api.Data field names to the underlying model graph's inputs. When using a
@@ -3219,14 +3252,18 @@ class InputInfo(google.protobuf.message.Message):
         defined for each ModelType as a Struct (JSON object) here. During training or inference, the
         settings contained within are sent to the training processor to alter the training process.
         """
+    @property
+    def base_embed_model(self) -> global___Model:
+        """For base model to get embeddings from for transfer learned models."""
     def __init__(
         self,
         *,
         fields_map: google.protobuf.struct_pb2.Struct | None = ...,
         params: google.protobuf.struct_pb2.Struct | None = ...,
+        base_embed_model: global___Model | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["fields_map", b"fields_map", "params", b"params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["fields_map", b"fields_map", "params", b"params"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["base_embed_model", b"base_embed_model", "fields_map", b"fields_map", "params", b"params"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["base_embed_model", b"base_embed_model", "fields_map", b"fields_map", "params", b"params"]) -> None: ...
 
 global___InputInfo = InputInfo
 
@@ -3346,6 +3383,7 @@ class OutputConfig(google.protobuf.message.Message):
     embed_model_version_id: builtins.str
     """For custom model training: this is the base model version to use for image embeddings.
     This has to be one of the embed models in the app workflow.
+    Use input_info.base_embed_model instead.
     """
     fail_on_missing_positive_examples: builtins.bool
     """For custom model training: Use this flag to fail on missing positive examples
@@ -3598,6 +3636,8 @@ class ModelTypeField(google.protobuf.message.Message):
         """For selecting a dataset id in model parameters. String in API request."""
         DATASET_VERSION_ID: ModelTypeField._ModelTypeFieldType.ValueType  # 17
         """For selecting a dataset version id. String."""
+        ARRAY_OF_MODEL_CONCEPTS: ModelTypeField._ModelTypeFieldType.ValueType  # 18
+        """For auto-completing to concepts in the model."""
 
     class ModelTypeFieldType(_ModelTypeFieldType, metaclass=_ModelTypeFieldTypeEnumTypeWrapper):
         """These are various types of fields that we have UIs for."""
@@ -3638,6 +3678,8 @@ class ModelTypeField(google.protobuf.message.Message):
     """For selecting a dataset id in model parameters. String in API request."""
     DATASET_VERSION_ID: ModelTypeField.ModelTypeFieldType.ValueType  # 17
     """For selecting a dataset version id. String."""
+    ARRAY_OF_MODEL_CONCEPTS: ModelTypeField.ModelTypeFieldType.ValueType  # 18
+    """For auto-completing to concepts in the model."""
 
     PATH_FIELD_NUMBER: builtins.int
     FIELD_TYPE_FIELD_NUMBER: builtins.int
@@ -5052,9 +5094,11 @@ class Filter(google.protobuf.message.Message):
          - id
          - input_id
          - input_level
+         - model_version_id
          - status.code
          - task_id
          - user_id
+         - workflow_version_id
         """
     @property
     def input(self) -> global___Input:
@@ -5648,6 +5692,7 @@ class Workflow(google.protobuf.message.Message):
     NOTES_FIELD_NUMBER: builtins.int
     USE_CASES_FIELD_NUMBER: builtins.int
     CHECK_CONSENTS_FIELD_NUMBER: builtins.int
+    BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The workflows's unique id."""
     app_id: builtins.str
@@ -5704,6 +5749,11 @@ class Workflow(google.protobuf.message.Message):
     @property
     def check_consents(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Tags for check consents"""
+    @property
+    def bookmark_origin(self) -> global___BookmarkOrigin:
+        """bookmark info. When set, this workflow is a bookmarked workflow of this app.
+        Info in this field will allow you to find/access original workflow.
+        """
     def __init__(
         self,
         *,
@@ -5722,9 +5772,10 @@ class Workflow(google.protobuf.message.Message):
         notes: builtins.str = ...,
         use_cases: collections.abc.Iterable[builtins.str] | None = ...,
         check_consents: collections.abc.Iterable[builtins.str] | None = ...,
+        bookmark_origin: global___BookmarkOrigin | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "version", b"version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "check_consents", b"check_consents", "created_at", b"created_at", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "nodes", b"nodes", "notes", b"notes", "star_count", b"star_count", "use_cases", b"use_cases", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "version", b"version", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "nodes", b"nodes", "notes", b"notes", "star_count", b"star_count", "use_cases", b"use_cases", "user_id", b"user_id", "version", b"version", "visibility", b"visibility"]) -> None: ...
 
 global___Workflow = Workflow
 
@@ -6199,7 +6250,9 @@ class Task(google.protobuf.message.Message):
         """Worker details."""
     @property
     def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """List of concept ids used in the work of this task if label type is classification."""
+        """List of concept ids used in the work of this task.
+        DEPRECATED: Use task.concepts instead.
+        """
     @property
     def input_source(self) -> global___TaskInputSource:
         """List of inputs used in this task will be taken from this source."""
@@ -7321,6 +7374,7 @@ class Module(google.protobuf.message.Message):
     MODULE_VERSION_FIELD_NUMBER: builtins.int
     IS_STARRED_FIELD_NUMBER: builtins.int
     STAR_COUNT_FIELD_NUMBER: builtins.int
+    BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this app module."""
     description: builtins.str
@@ -7361,6 +7415,11 @@ class Module(google.protobuf.message.Message):
     """How many users have starred the module (only showed on get/list requests)
     Computed value, not editable
     """
+    @property
+    def bookmark_origin(self) -> global___BookmarkOrigin:
+        """bookmark info. When set, this module is a bookmarked module of this app.
+        Info in this field will allow you to find/access original module.
+        """
     def __init__(
         self,
         *,
@@ -7375,9 +7434,10 @@ class Module(google.protobuf.message.Message):
         module_version: global___ModuleVersion | None = ...,
         is_starred: builtins.bool = ...,
         star_count: builtins.int = ...,
+        bookmark_origin: global___BookmarkOrigin | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "description", b"description", "id", b"id", "is_starred", b"is_starred", "metadata", b"metadata", "modified_at", b"modified_at", "module_version", b"module_version", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___Module = Module
 
@@ -8384,3 +8444,100 @@ class InputsUpload(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "input_id_conflict_resolution", b"input_id_conflict_resolution", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
 
 global___InputsUpload = InputsUpload
+
+@typing_extensions.final
+class BookmarkOrigin(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _BookmarkType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _BookmarkTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[BookmarkOrigin._BookmarkType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        unknown: BookmarkOrigin._BookmarkType.ValueType  # 0
+        model: BookmarkOrigin._BookmarkType.ValueType  # 1
+        workflow: BookmarkOrigin._BookmarkType.ValueType  # 2
+        dataset: BookmarkOrigin._BookmarkType.ValueType  # 3
+        module: BookmarkOrigin._BookmarkType.ValueType  # 4
+
+    class BookmarkType(_BookmarkType, metaclass=_BookmarkTypeEnumTypeWrapper): ...
+    unknown: BookmarkOrigin.BookmarkType.ValueType  # 0
+    model: BookmarkOrigin.BookmarkType.ValueType  # 1
+    workflow: BookmarkOrigin.BookmarkType.ValueType  # 2
+    dataset: BookmarkOrigin.BookmarkType.ValueType  # 3
+    module: BookmarkOrigin.BookmarkType.ValueType  # 4
+
+    ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    RESOURCE_TYPE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """original resource id"""
+    app_id: builtins.str
+    """original resource app id"""
+    user_id: builtins.str
+    """original resource user id"""
+    resource_type: global___BookmarkOrigin.BookmarkType.ValueType
+    """resource type."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        resource_type: global___BookmarkOrigin.BookmarkType.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "id", b"id", "resource_type", b"resource_type", "user_id", b"user_id"]) -> None: ...
+
+global___BookmarkOrigin = BookmarkOrigin
+
+@typing_extensions.final
+class Runner(google.protobuf.message.Message):
+    """An app module that a user created in our app module marketplace."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """A unique ID for this app module."""
+    description: builtins.str
+    """A short description for this app module to be used in grids of modules."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the app module was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the app module was last modified."""
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle arbitrary json metadata you can use a struct field:
+        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
+        This is an optional arg.
+        """
+    user_id: builtins.str
+    """The creator of the app module."""
+    @property
+    def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Labels to match."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        description: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        user_id: builtins.str = ...,
+        labels: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "user_id", b"user_id"]) -> None: ...
+
+global___Runner = Runner

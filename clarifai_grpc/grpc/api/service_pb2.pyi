@@ -442,6 +442,8 @@ class ListAppsRequest(google.protobuf.message.Message):
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_NAME_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
@@ -465,8 +467,12 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Whether to order by the name"""
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time.
-    If neither sort option is set to true, will sort by modified_at.
+    If none of the sort options is set to true, will sort by modified_at.
     """
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at time."""
+    sort_by_star_count: builtins.bool
+    """Whether to order by the number of users stared the app"""
     query: builtins.str
     """Filtering options:
     Query various text fields that can contain the words in the query string
@@ -491,15 +497,17 @@ class ListAppsRequest(google.protobuf.message.Message):
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_star_count: builtins.bool = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListAppsRequest = ListAppsRequest
 
@@ -2134,6 +2142,11 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    SORT_ASCENDING_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -2147,6 +2160,18 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     starred_only: builtins.bool
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    sort_ascending: builtins.bool
+    """Sorting opitons:
+    Whether to sort in ascending order. If false, will order in descending order.
+    """
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at time."""
+    sort_by_star_count: builtins.bool
+    """Whether to order by the number of users stared the app"""
+    sort_by_modified_at: builtins.bool
+    """If neither sort option is set to true, will sort by modified_at."""
+    bookmark: builtins.bool
+    """Filter datasets by bookmark. If set, only return bookmarked datasets. Otherwise none bookmarked datasets only."""
     def __init__(
         self,
         *,
@@ -2155,9 +2180,15 @@ class ListDatasetsRequest(google.protobuf.message.Message):
         per_page: builtins.int = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        sort_ascending: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_star_count: builtins.bool = ...,
+        sort_by_modified_at: builtins.bool = ...,
+        bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "page", b"page", "per_page", b"per_page", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at"] | None: ...
 
 global___ListDatasetsRequest = ListDatasetsRequest
 
@@ -3194,6 +3225,8 @@ class ListModelsRequest(google.protobuf.message.Message):
     SORT_BY_NAME_FIELD_NUMBER: builtins.int
     SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
@@ -3209,6 +3242,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     LANGUAGES_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     DONT_FETCH_FROM_MAIN_FIELD_NUMBER: builtins.int
+    BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -3229,8 +3263,12 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Whether to order by the number of training inputs"""
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time of the latest model version.
-    If neither sort option is set to true, will sort by modified_at.
+    If none of the sort options is set to true, will sort by modified_at.
     """
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at"""
+    sort_by_star_count: builtins.bool
+    """Whether to order by count of stars"""
     query: builtins.str
     """Filtering options:
     Query name, description and id fields, that can contain the words in the query string. Does NOT support wildcards - full words only. Supports operators "OR" and "-" as NOT.
@@ -3277,6 +3315,11 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Old API behavior resulted in returning clarifai main models when calling ListModels while scoped to an app. While we transition
     away from that, we can use this flag to not always fetch clarifai main models, unless that is the app we are explicitly listing for.
     """
+    bookmark: builtins.bool
+    """Filter models by bookmark. If set, only return bookmarked models. Otherwise none bookmarked models only.
+    Note: you can not filter `trained_only` and bookmark at the same time.
+    When filter by bookmark, we will return trained and untrained models.
+    """
     def __init__(
         self,
         *,
@@ -3287,6 +3330,8 @@ class ListModelsRequest(google.protobuf.message.Message):
         sort_by_name: builtins.bool = ...,
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_star_count: builtins.bool = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
         filter_by_user_id: builtins.bool = ...,
@@ -3302,10 +3347,11 @@ class ListModelsRequest(google.protobuf.message.Message):
         languages: collections.abc.Iterable[builtins.str] | None = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         dont_fetch_from_main: builtins.bool = ...,
+        bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListModelsRequest = ListModelsRequest
 
@@ -5881,12 +5927,15 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SEARCH_TERM_FIELD_NUMBER: builtins.int
+    BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -5905,8 +5954,12 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """Whether to order by the name"""
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time.
-    If neither sort option is set to true, will sort by modified_at.
+    If none of the sort options is set to true, will sort by modified_at.
     """
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at time."""
+    sort_by_star_count: builtins.bool
+    """Whether to order by the number of users stared the workflow"""
     query: builtins.str
     """Query various text fields that can contain the words in the query string."""
     id: builtins.str
@@ -5922,6 +5975,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     search_term: builtins.str
     """(optional) search_term. Full text and prefix matching on description, id, owner id. Searchable fields may be added"""
+    bookmark: builtins.bool
+    """Filter workflows by bookmark. If set, only return bookmarked workflows. Otherwise none bookmarked workflows only."""
     def __init__(
         self,
         *,
@@ -5931,16 +5986,19 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         sort_ascending: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_star_count: builtins.bool = ...,
         query: builtins.str = ...,
         id: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         search_term: builtins.str = ...,
+        bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "search_term", b"search_term", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_id", "sort_by_modified_at"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "search_term", b"search_term", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_id", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListWorkflowsRequest = ListWorkflowsRequest
 
@@ -7431,6 +7489,11 @@ class ListModulesRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    SORT_ASCENDING_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -7444,6 +7507,18 @@ class ListModulesRequest(google.protobuf.message.Message):
     starred_only: builtins.bool
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    sort_ascending: builtins.bool
+    """Sorting opitons:
+    Whether to sort in ascending order. If false, will order in descending order.
+    """
+    sort_by_created_at: builtins.bool
+    """Whether to order by the created_at time."""
+    sort_by_star_count: builtins.bool
+    """Whether to order by the number of users stared the app"""
+    sort_by_modified_at: builtins.bool
+    """If neither sort option is set to true, will sort by modified_at."""
+    bookmark: builtins.bool
+    """Filter modules by bookmark. If set, only return bookmarked modules. Otherwise none bookmarked modules only."""
     def __init__(
         self,
         *,
@@ -7452,9 +7527,15 @@ class ListModulesRequest(google.protobuf.message.Message):
         per_page: builtins.int = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        sort_ascending: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_star_count: builtins.bool = ...,
+        sort_by_modified_at: builtins.bool = ...,
+        bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "page", b"page", "per_page", b"per_page", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at"] | None: ...
 
 global___ListModulesRequest = ListModulesRequest
 
@@ -8607,3 +8688,292 @@ class PostInputsUploadsRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["inputs_uploads", b"inputs_uploads", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostInputsUploadsRequest = PostInputsUploadsRequest
+
+@typing_extensions.final
+class GetRunnerRequest(google.protobuf.message.Message):
+    """GetRunnerRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    runner_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        runner_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetRunnerRequest = GetRunnerRequest
+
+@typing_extensions.final
+class ListRunnersRequest(google.protobuf.message.Message):
+    """ListRunnersRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListRunnersRequest = ListRunnersRequest
+
+@typing_extensions.final
+class PostRunnersRequest(google.protobuf.message.Message):
+    """PostRunnersRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    RUNNERS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def runners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Runner]:
+        """This allows you to create one or more runner by posting it to the API."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        runners: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Runner] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runners", b"runners", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostRunnersRequest = PostRunnersRequest
+
+@typing_extensions.final
+class DeleteRunnersRequest(google.protobuf.message.Message):
+    """Request to delete several things by the list of ids."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___DeleteRunnersRequest = DeleteRunnersRequest
+
+@typing_extensions.final
+class SingleRunnerResponse(google.protobuf.message.Message):
+    """SingleRunnerResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    RUNNER_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def runner(self) -> proto.clarifai.api.resources_pb2.Runner: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        runner: proto.clarifai.api.resources_pb2.Runner | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["runner", b"runner", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner", b"runner", "status", b"status"]) -> None: ...
+
+global___SingleRunnerResponse = SingleRunnerResponse
+
+@typing_extensions.final
+class MultiRunnerResponse(google.protobuf.message.Message):
+    """MultiRunnerResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    RUNNERS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def runners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Runner]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        runners: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Runner] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runners", b"runners", "status", b"status"]) -> None: ...
+
+global___MultiRunnerResponse = MultiRunnerResponse
+
+@typing_extensions.final
+class ListRunnerItemsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    runner_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        runner_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListRunnerItemsRequest = ListRunnerItemsRequest
+
+@typing_extensions.final
+class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
+    """PostRunnerItemOutputsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    ITEM_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ITEM_OUTPUTS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    runner_id: builtins.str
+    item_id: builtins.str
+    @property
+    def runner_item_outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItemOutput]:
+        """This allows you to create one or more runner by posting it to the API."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        runner_id: builtins.str = ...,
+        item_id: builtins.str = ...,
+        runner_item_outputs: collections.abc.Iterable[global___RunnerItemOutput] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["item_id", b"item_id", "runner_id", b"runner_id", "runner_item_outputs", b"runner_item_outputs", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostRunnerItemOutputsRequest = PostRunnerItemOutputsRequest
+
+@typing_extensions.final
+class MultiRunnerItemResponse(google.protobuf.message.Message):
+    """MultiRunnerItemResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    ITEMS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItem]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        items: collections.abc.Iterable[global___RunnerItem] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["items", b"items", "status", b"status"]) -> None: ...
+
+global___MultiRunnerItemResponse = MultiRunnerItemResponse
+
+@typing_extensions.final
+class RunnerItem(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """A UUID hash for this work item."""
+    description: builtins.str
+    """A description of the work to be done in case needed for UIs."""
+    @property
+    def post_model_outputs_request(self) -> global___PostModelOutputsRequest:
+        """TODO(zeiler): make these options a oneof.
+        first work to do would be an inference runner.
+        training request next.
+        """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        description: builtins.str = ...,
+        post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["post_model_outputs_request", b"post_model_outputs_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "id", b"id", "post_model_outputs_request", b"post_model_outputs_request"]) -> None: ...
+
+global___RunnerItem = RunnerItem
+
+@typing_extensions.final
+class RunnerItemOutput(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MULTI_OUTPUT_RESPONSE_FIELD_NUMBER: builtins.int
+    @property
+    def multi_output_response(self) -> global___MultiOutputResponse:
+        """The output of the first task type.
+        TODO(zeiler): should the interface be more like pairs of things wiht request/response in one "item"?
+        """
+    def __init__(
+        self,
+        *,
+        multi_output_response: global___MultiOutputResponse | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response"]) -> None: ...
+
+global___RunnerItemOutput = RunnerItemOutput
+
+@typing_extensions.final
+class MultiRunnerItemOutputResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    RUNNER_ITEM_OUTPUTS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def runner_item_outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItemOutput]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        runner_item_outputs: collections.abc.Iterable[global___RunnerItemOutput] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner_item_outputs", b"runner_item_outputs", "status", b"status"]) -> None: ...
+
+global___MultiRunnerItemOutputResponse = MultiRunnerItemOutputResponse
