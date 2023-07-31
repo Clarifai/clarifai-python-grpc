@@ -142,8 +142,8 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         raise_on_failure(get_response)
         assert get_response.model.id == model_id
         assert get_response.model.name == "some new name"
-        assert len(get_response.model.output_info.data.concepts) == 1
-        assert get_response.model.output_info.data.concepts[0].id == "some-new-concept"
+        assert len(get_response.model.model_version.output_info.data.concepts) == 1
+        assert get_response.model.model_version.output_info.data.concepts[0].id == "some-new-concept"
 
         post_model_version_metrics_response = stub.PostModelVersionMetrics(
             service_pb2.PostModelVersionMetricsRequest(
