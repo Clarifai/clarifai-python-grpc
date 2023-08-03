@@ -57,7 +57,7 @@ def test_text_gen_on_public_llms(channel):
     """
     stub = service_pb2_grpc.V2Stub(channel)
 
-    for title, model_id, app_id, user_id in LLM_TITLE_ID_TUPLES[0]:
+    for title, model_id, app_id, user_id in LLM_TITLE_ID_TUPLES:
         # test only llama2 model for fast tests execution
         request = service_pb2.PostModelOutputsRequest(
             user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
