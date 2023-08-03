@@ -192,7 +192,7 @@ FACEBOOK_TRANSLATION_MODELS = {
 # Large Language Models
 # Data Structure: [(model_id, model_name, app_id, user_id),...]
 LLM_TITLE_ID_TUPLES = [
-    ("Llama2-7b-chat", "Llama2-7b-chat", "Llama-2", "meta-llama"),
+    ("llama2-13b-chat", "llama2-13b-chat", "Llama-2", "meta"),
     ("claude-v2", "claude-v2", "completion", "anthropic"),
     (
         "tiiuae-falcon-7b-instruct",
@@ -224,10 +224,9 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("wedding", WEDDING_MODEL_ID),
     ("logo v2", LOGO_V2_MODEL_ID),
     ("people detection yolov5", PEOPLE_DETECTION_YOLOV5_MODEL_ID),
-    ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
     ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
     ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
-]
+]  # ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
 
 # title, model, app, user
 DETECTION_MODEL_TITLE_AND_IDS = []
