@@ -125,17 +125,18 @@ def verify_url_with_bad_auth(expected_input_url):
         assert (
             r.status_code == 401
         ), f"Expected Code: 401, Actual: {r.status_code} header type: {header_type}"
+
     for cookie_type, cookie in BAD_HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
         assert (
             r.status_code == 401
         ), f"Expected Code: 401, Actual: {r.status_code} cookie type: {cookie_type}"
+
     # No header/cookie results should result in NOT FOUND (404)
     r = req_session.get(expected_input_url, stream=True)
     assert (
-        r.status_code == 404
-    ), f"Expected Code: 404, Actual: {r.status_code} cookie type: {cookie_type}"
-
+        r.status_code in [400, 404]  # temporarily allow old status 400
+    ), f"Expected Code: 404, Actual: {r.status_code}"
 
 @both_channels
 def test_adding_inputs(channel):
