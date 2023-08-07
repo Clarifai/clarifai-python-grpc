@@ -2938,8 +2938,6 @@ class Model(google.protobuf.message.Message):
     MODEL_VERSION_FIELD_NUMBER: builtins.int
     DISPLAY_NAME_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
-    INPUT_INFO_FIELD_NUMBER: builtins.int
-    TRAIN_INFO_FIELD_NUMBER: builtins.int
     DEFAULT_EVAL_INFO_FIELD_NUMBER: builtins.int
     MODEL_TYPE_ID_FIELD_NUMBER: builtins.int
     TASK_FIELD_NUMBER: builtins.int
@@ -2955,7 +2953,6 @@ class Model(google.protobuf.message.Message):
     CHECK_CONSENTS_FIELD_NUMBER: builtins.int
     IS_STARRED_FIELD_NUMBER: builtins.int
     STAR_COUNT_FIELD_NUMBER: builtins.int
-    IMPORT_INFO_FIELD_NUMBER: builtins.int
     WORKFLOW_RECOMMENDED_FIELD_NUMBER: builtins.int
     BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
@@ -2989,16 +2986,6 @@ class Model(google.protobuf.message.Message):
     """DEPRECATED: Please use the model id to name the model."""
     user_id: builtins.str
     """The user id that the model belongs to."""
-    @property
-    def input_info(self) -> global___InputInfo:
-        """Info about the models' input and configuration of them.
-        DEPRECATED: Will be moved to model version
-        """
-    @property
-    def train_info(self) -> global___TrainInfo:
-        """Configuration for the training process of this model.
-        DEPRECATED: Will be moved to model version
-        """
     @property
     def default_eval_info(self) -> global___EvalInfo:
         """The default evaluation info. Can be overwritten by eval request."""
@@ -3050,11 +3037,6 @@ class Model(google.protobuf.message.Message):
     Computed value, not editable
     """
     @property
-    def import_info(self) -> global___ImportInfo:
-        """Configuration used to import model from third-party toolkits
-        DEPRECATED: Will be moved to model version
-        """
-    @property
     def workflow_recommended(self) -> google.protobuf.wrappers_pb2.BoolValue:
         """Whether it's recommended that this model is used within a workflow"""
     @property
@@ -3074,8 +3056,6 @@ class Model(google.protobuf.message.Message):
         model_version: global___ModelVersion | None = ...,
         display_name: builtins.str = ...,
         user_id: builtins.str = ...,
-        input_info: global___InputInfo | None = ...,
-        train_info: global___TrainInfo | None = ...,
         default_eval_info: global___EvalInfo | None = ...,
         model_type_id: builtins.str = ...,
         task: builtins.str = ...,
@@ -3091,12 +3071,11 @@ class Model(google.protobuf.message.Message):
         check_consents: collections.abc.Iterable[builtins.str] | None = ...,
         is_starred: builtins.bool = ...,
         star_count: builtins.int = ...,
-        import_info: global___ImportInfo | None = ...,
         workflow_recommended: google.protobuf.wrappers_pb2.BoolValue | None = ...,
         bookmark_origin: global___BookmarkOrigin | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "train_info", b"train_info", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "train_info", b"train_info", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
@@ -4061,18 +4040,20 @@ class LabelCount(google.protobuf.message.Message):
 
     CONCEPT_NAME_FIELD_NUMBER: builtins.int
     COUNT_FIELD_NUMBER: builtins.int
+    CONCEPT_FIELD_NUMBER: builtins.int
     concept_name: builtins.str
-    """FIXME: should move to Concept object and return the whole thing (including name and id)
-    otherwise if two concepts have same name then you won't tell them apart in confusion matrix.
-    """
     count: builtins.int
+    @property
+    def concept(self) -> global___Concept: ...
     def __init__(
         self,
         *,
         concept_name: builtins.str = ...,
         count: builtins.int = ...,
+        concept: global___Concept | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_name", b"concept_name", "count", b"count"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["concept", b"concept"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept", b"concept", "concept_name", b"concept_name", "count", b"count"]) -> None: ...
 
 global___LabelCount = LabelCount
 
