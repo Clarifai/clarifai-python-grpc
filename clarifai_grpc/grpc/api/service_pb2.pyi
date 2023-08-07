@@ -4275,6 +4275,14 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    SORT_ASCENDING_FIELD_NUMBER: builtins.int
+    SORT_BY_APP_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_ROC_AUC_FIELD_NUMBER: builtins.int
+    SORT_BY_F1_FIELD_NUMBER: builtins.int
+    SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_MEAN_AVG_PRECISION_FIELD_NUMBER: builtins.int
+    SORT_BY_PRECISION_FIELD_NUMBER: builtins.int
+    SORT_BY_RECALL_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -4285,15 +4293,40 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    sort_ascending: builtins.bool
+    """If true, sort in ascending order, otherwise sort in descending order."""
+    sort_by_app_id: builtins.bool
+    """Whether to order by application id"""
+    sort_by_roc_auc: builtins.bool
+    """Whether to order by eval metric summary.macro_avg_roc_auc"""
+    sort_by_f1: builtins.bool
+    """Whether to order by eval metric summary.f1"""
+    sort_by_created_at: builtins.bool
+    """Whether to order by when the metric was created"""
+    sort_by_mean_avg_precision: builtins.bool
+    """Whether to order by eval metric summary.mean_avg_precision_iou_50"""
+    sort_by_precision: builtins.bool
+    """Whether to order by eval metric summary.macro_avg_precision"""
+    sort_by_recall: builtins.bool
+    """Whether to order by eval metric summary.macro_avg_recall"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        sort_ascending: builtins.bool = ...,
+        sort_by_app_id: builtins.bool = ...,
+        sort_by_roc_auc: builtins.bool = ...,
+        sort_by_f1: builtins.bool = ...,
+        sort_by_created_at: builtins.bool = ...,
+        sort_by_mean_avg_precision: builtins.bool = ...,
+        sort_by_precision: builtins.bool = ...,
+        sort_by_recall: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_app_id", "sort_by_roc_auc", "sort_by_f1", "sort_by_created_at", "sort_by_mean_avg_precision", "sort_by_precision", "sort_by_recall"] | None: ...
 
 global___ListEvaluationsRequest = ListEvaluationsRequest
 
