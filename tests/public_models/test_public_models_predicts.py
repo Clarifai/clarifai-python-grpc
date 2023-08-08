@@ -183,6 +183,7 @@ def test_image_caption_predict_on_public_models(channel):
             custom_message=f"Image caption predict failed for the {title} model (ID: {model_id}).",
         )
 
+
 @both_channels
 def test_image_predict_on_public_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
