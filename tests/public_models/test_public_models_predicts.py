@@ -20,7 +20,10 @@ from tests.public_models.public_test_helper import (
     TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_MODEL_TITLE_IDS_TUPLE,
+    LLM_TITLE_ID_TUPLES,
+    IMAGE_CAPTION_TITLE_ID_TUPLES,
     TRANSLATION_TEST_DATA,
+    TEXT_GEN_PROMPT,
 )
 
 
@@ -44,6 +47,33 @@ def test_audio_predict_on_public_models(channel):
         raise_on_failure(
             response,
             custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+@both_channels
+def test_text_gen_on_public_llms(channel):
+    """Test text generation for public large language models.
+    All these models can take the same test text prompt.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in LLM_TITLE_ID_TUPLES:
+        # test only llama2 model for fast tests execution
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(text=resources_pb2.Text(raw=TEXT_GEN_PROMPT))
+                )
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+        raise_on_failure(
+            response,
+            custom_message=f"Text generation failed for the {title} model (ID: {model_id}).",
         )
 
 
@@ -127,6 +157,30 @@ def test_text_helsinki_translation_predict_on_public_models(channel):
         raise_on_failure(
             response,
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+@both_channels
+def test_image_caption_predict_on_public_models(channel):
+    """Test blip image caption predict."""
+    # model too large so creating a separate test with pred. request
+    # retry until model is fully deployed.
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in IMAGE_CAPTION_TITLE_ID_TUPLES:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                )
+            ],
+        )
+        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata(pat=True))
+        raise_on_failure(
+            response,
+            custom_message=f"Image caption predict failed for the {title} model (ID: {model_id}).",
         )
 
 
