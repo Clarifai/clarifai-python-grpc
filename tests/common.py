@@ -10,7 +10,7 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
 
-MAX_PREDICT_ATTEMPTS = 10  # PostModelOutputs unsuccessful predict retry limit
+MAX_PREDICT_ATTEMPTS = 6  # PostModelOutputs unsuccessful predict retry limit
 MAX_RETRY_ATTEMPTS = 15  # gRPC exceeded deadlines/timeout retry limit.
 
 DOG_IMAGE_URL = "https://samples.clarifai.com/dog2.jpeg"
