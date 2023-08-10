@@ -134,9 +134,7 @@ def verify_url_with_bad_auth(expected_input_url):
 
     # No header/cookie results should result in NOT FOUND (404)
     r = req_session.get(expected_input_url, stream=True)
-    assert (
-        r.status_code == 404
-    ), f"Expected Code: 404, Actual: {r.status_code}"
+    assert r.status_code == 404, f"Expected Code: 404, Actual: {r.status_code}"
 
 
 @both_channels
