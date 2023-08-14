@@ -221,8 +221,10 @@ def test_search_by_image_bytes(channel):
                     ands=[
                         resources_pb2.And(
                             output=resources_pb2.Output(
-                                data=resources_pb2.Data(
-                                    image=resources_pb2.Image(base64=url_bytes)
+                                input=resources_pb2.Input(
+                                    data=resources_pb2.Data(
+                                        image=resources_pb2.Image(base64=url_bytes)
+                                    )
                                 )
                             )
                         )
