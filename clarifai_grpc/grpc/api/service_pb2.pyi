@@ -4283,6 +4283,13 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     SORT_BY_MEAN_AVG_PRECISION_FIELD_NUMBER: builtins.int
     SORT_BY_PRECISION_FIELD_NUMBER: builtins.int
     SORT_BY_RECALL_FIELD_NUMBER: builtins.int
+    SORT_BY_MODEL_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_EVAL_DATASET_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_TRAIN_DATASET_ID_FIELD_NUMBER: builtins.int
+    MODEL_TYPE_ID_FIELD_NUMBER: builtins.int
+    EVAL_DATASET_IDS_FIELD_NUMBER: builtins.int
+    TRAIN_DATASET_IDS_FIELD_NUMBER: builtins.int
+    CONCEPT_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -4309,6 +4316,20 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     """Whether to order by eval metric summary.macro_avg_precision"""
     sort_by_recall: builtins.bool
     """Whether to order by eval metric summary.macro_avg_recall"""
+    sort_by_model_id: builtins.bool
+    sort_by_eval_dataset_id: builtins.bool
+    sort_by_train_dataset_id: builtins.bool
+    model_type_id: builtins.str
+    """Filter on model type id"""
+    @property
+    def eval_dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter on dataset ID of the dataset version specified in the metric version"""
+    @property
+    def train_dataset_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter on dataset ID of the dataset version specified by the model version"""
+    @property
+    def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter on concept IDs specified in the modele version's output_info"""
     def __init__(
         self,
         *,
@@ -4323,10 +4344,17 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
         sort_by_mean_avg_precision: builtins.bool = ...,
         sort_by_precision: builtins.bool = ...,
         sort_by_recall: builtins.bool = ...,
+        sort_by_model_id: builtins.bool = ...,
+        sort_by_eval_dataset_id: builtins.bool = ...,
+        sort_by_train_dataset_id: builtins.bool = ...,
+        model_type_id: builtins.str = ...,
+        eval_dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        train_dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_app_id", "sort_by_roc_auc", "sort_by_f1", "sort_by_created_at", "sort_by_mean_avg_precision", "sort_by_precision", "sort_by_recall"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_eval_dataset_id", b"sort_by_eval_dataset_id", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_model_id", b"sort_by_model_id", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "sort_by_train_dataset_id", b"sort_by_train_dataset_id", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "eval_dataset_ids", b"eval_dataset_ids", "model_type_id", b"model_type_id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_eval_dataset_id", b"sort_by_eval_dataset_id", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_model_id", b"sort_by_model_id", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "sort_by_train_dataset_id", b"sort_by_train_dataset_id", "train_dataset_ids", b"train_dataset_ids", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_app_id", "sort_by_roc_auc", "sort_by_f1", "sort_by_created_at", "sort_by_mean_avg_precision", "sort_by_precision", "sort_by_recall", "sort_by_model_id", "sort_by_eval_dataset_id", "sort_by_train_dataset_id"] | None: ...
 
 global___ListEvaluationsRequest = ListEvaluationsRequest
 
