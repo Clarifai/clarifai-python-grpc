@@ -4132,17 +4132,26 @@ class ConfusionMatrixEntry(google.protobuf.message.Message):
     PREDICTED_FIELD_NUMBER: builtins.int
     ACTUAL_FIELD_NUMBER: builtins.int
     VALUE_FIELD_NUMBER: builtins.int
+    PREDICTED_CONCEPT_FIELD_NUMBER: builtins.int
+    ACTUAL_CONCEPT_FIELD_NUMBER: builtins.int
     predicted: builtins.str
     actual: builtins.str
     value: builtins.float
+    @property
+    def predicted_concept(self) -> global___Concept: ...
+    @property
+    def actual_concept(self) -> global___Concept: ...
     def __init__(
         self,
         *,
         predicted: builtins.str = ...,
         actual: builtins.str = ...,
         value: builtins.float = ...,
+        predicted_concept: global___Concept | None = ...,
+        actual_concept: global___Concept | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["actual", b"actual", "predicted", b"predicted", "value", b"value"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["actual_concept", b"actual_concept", "predicted_concept", b"predicted_concept"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["actual", b"actual", "actual_concept", b"actual_concept", "predicted", b"predicted", "predicted_concept", b"predicted_concept", "value", b"value"]) -> None: ...
 
 global___ConfusionMatrixEntry = ConfusionMatrixEntry
 
