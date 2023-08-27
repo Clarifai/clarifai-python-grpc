@@ -8,7 +8,7 @@ from clarifai_grpc.grpc.api import service_pb2_grpc
 
 RETRIES = 2  # if connections fail retry a couple times.
 CONNECTIONS = 20  # number of connections to maintain in pool.
-MAX_MESSAGE_LENGTH = 67108864
+MAX_MESSAGE_LENGTH = 128 * 1024 * 1024  # 128MB
 
 wrap_response_deserializer = None
 
