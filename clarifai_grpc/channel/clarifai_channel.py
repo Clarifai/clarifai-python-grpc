@@ -90,5 +90,6 @@ class ClarifaiChannel:
         channel_address = "{}:{}".format(base, port)
 
         return service_pb2_grpc.grpc.insecure_channel(
-            channel_address, options=[("grpc.service_config", grpc_json_config)]
+            channel_address, options=[("grpc.service_config", grpc_json_config), 
+                                        ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH)]
         )
