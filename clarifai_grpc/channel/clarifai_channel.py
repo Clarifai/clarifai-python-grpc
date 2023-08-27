@@ -72,8 +72,10 @@ class ClarifaiChannel:
         return service_pb2_grpc.grpc.secure_channel(
             base,
             service_pb2_grpc.grpc.ssl_channel_credentials(),
-            options=[("grpc.service_config", grpc_json_config), 
-                     ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)],
+            options=[
+                ("grpc.service_config", grpc_json_config),
+                ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+            ],
         )
 
     @staticmethod
@@ -90,6 +92,9 @@ class ClarifaiChannel:
         channel_address = "{}:{}".format(base, port)
 
         return service_pb2_grpc.grpc.insecure_channel(
-            channel_address, options=[("grpc.service_config", grpc_json_config), 
-                                      ('grpc.max_receive_message_length', MAX_MESSAGE_LENGTH)]
+            channel_address,
+            options=[
+                ("grpc.service_config", grpc_json_config),
+                ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+            ],
         )
