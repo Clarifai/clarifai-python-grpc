@@ -8,6 +8,7 @@ from clarifai_grpc.grpc.api import service_pb2_grpc
 
 RETRIES = 2  # if connections fail retry a couple times.
 CONNECTIONS = 20  # number of connections to maintain in pool.
+MAX_MESSAGE_LENGTH = 67108864
 
 wrap_response_deserializer = None
 
@@ -71,7 +72,8 @@ class ClarifaiChannel:
         return service_pb2_grpc.grpc.secure_channel(
             base,
             service_pb2_grpc.grpc.ssl_channel_credentials(),
-            options=[("grpc.service_config", grpc_json_config)],
+            options=[("grpc.service_config", grpc_json_config), 
+                     ('grpc.max_send_message_length', MAX_MESSAGE_LENGTH)],
         )
 
     @staticmethod
