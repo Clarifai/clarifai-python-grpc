@@ -446,6 +446,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
@@ -481,6 +482,8 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Filter by the name of the app. This supports wilcard queries like "gen*" to match "general" as an example.
     Deprecated in favor of query
     """
+    id: builtins.str
+    """Filter by the user-unique-id of the app. This supports wilcard queries like "gen*" to match "general" as an example."""
     featured_only: builtins.bool
     """If true, we only return apps that are handpicked by clarifai staff"""
     starred_only: builtins.bool
@@ -501,12 +504,13 @@ class ListAppsRequest(google.protobuf.message.Message):
         sort_by_star_count: builtins.bool = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
+        id: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListAppsRequest = ListAppsRequest
@@ -1102,6 +1106,7 @@ class PostConceptsSearchesRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     CONCEPT_QUERY_FIELD_NUMBER: builtins.int
+    EXTRA_INFO_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
@@ -1109,6 +1114,9 @@ class PostConceptsSearchesRequest(google.protobuf.message.Message):
     @property
     def concept_query(self) -> proto.clarifai.api.resources_pb2.ConceptQuery:
         """The body of the request."""
+    @property
+    def extra_info(self) -> global___ConceptExtraInfoRequest:
+        """Request additional info to be retrieved for each concept in the response."""
     @property
     def pagination(self) -> global___Pagination:
         """Pagination parameters here since there are no url args in this
@@ -1119,12 +1127,38 @@ class PostConceptsSearchesRequest(google.protobuf.message.Message):
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         concept_query: proto.clarifai.api.resources_pb2.ConceptQuery | None = ...,
+        extra_info: global___ConceptExtraInfoRequest | None = ...,
         pagination: global___Pagination | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "extra_info", b"extra_info", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_query", b"concept_query", "extra_info", b"extra_info", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostConceptsSearchesRequest = PostConceptsSearchesRequest
+
+@typing_extensions.final
+class ConceptExtraInfoRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    RANKABLE_MODEL_FIELD_NUMBER: builtins.int
+    @property
+    def rankable_model(self) -> proto.clarifai.api.resources_pb2.Model:
+        """Determine if the concept is searchable by rank using this model.
+        Currently, only embedder models are supported.
+        ########## Supported fields ##########
+        - app_id
+        - id
+        - model_version.id
+        - user_id
+        """
+    def __init__(
+        self,
+        *,
+        rankable_model: proto.clarifai.api.resources_pb2.Model | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["rankable_model", b"rankable_model"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["rankable_model", b"rankable_model"]) -> None: ...
+
+global___ConceptExtraInfoRequest = ConceptExtraInfoRequest
 
 @typing_extensions.final
 class PostConceptsRequest(google.protobuf.message.Message):
@@ -2152,6 +2186,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_ID_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
@@ -2176,6 +2211,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """Whether to order by the number of users stared the app"""
     sort_by_modified_at: builtins.bool
     """If neither sort option is set to true, will sort by modified_at."""
+    sort_by_id: builtins.bool
+    """Whether to order by the external id"""
     bookmark: builtins.bool
     """Filter datasets by bookmark. If set, only return bookmarked datasets. Otherwise none bookmarked datasets only."""
     def __init__(
@@ -2190,11 +2227,12 @@ class ListDatasetsRequest(google.protobuf.message.Message):
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
+        sort_by_id: builtins.bool = ...,
         bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListDatasetsRequest = ListDatasetsRequest
 
@@ -7560,6 +7598,7 @@ class ListModulesRequest(google.protobuf.message.Message):
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
+    SORT_BY_ID_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
@@ -7584,6 +7623,8 @@ class ListModulesRequest(google.protobuf.message.Message):
     """Whether to order by the number of users stared the app"""
     sort_by_modified_at: builtins.bool
     """If neither sort option is set to true, will sort by modified_at."""
+    sort_by_id: builtins.bool
+    """Whether to order by the external id"""
     bookmark: builtins.bool
     """Filter modules by bookmark. If set, only return bookmarked modules. Otherwise none bookmarked modules only."""
     def __init__(
@@ -7598,11 +7639,12 @@ class ListModulesRequest(google.protobuf.message.Message):
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
+        sort_by_id: builtins.bool = ...,
         bookmark: builtins.bool = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListModulesRequest = ListModulesRequest
 

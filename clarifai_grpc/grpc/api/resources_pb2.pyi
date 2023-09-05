@@ -1083,6 +1083,7 @@ class Concept(google.protobuf.message.Message):
     VISIBILITY_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     KEYPOINT_INFO_FIELD_NUMBER: builtins.int
+    EXTRA_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The concept's unique id."""
     name: builtins.str
@@ -1124,6 +1125,9 @@ class Concept(google.protobuf.message.Message):
     @property
     def keypoint_info(self) -> global___KeypointInfo:
         """Information about keypoints for this concept"""
+    @property
+    def extra_info(self) -> global___ConceptExtraInfo:
+        """Optional extra info."""
     def __init__(
         self,
         *,
@@ -1138,9 +1142,10 @@ class Concept(google.protobuf.message.Message):
         visibility: global___Visibility | None = ...,
         user_id: builtins.str = ...,
         keypoint_info: global___KeypointInfo | None = ...,
+        extra_info: global___ConceptExtraInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "keypoint_info", b"keypoint_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "definition", b"definition", "id", b"id", "keypoint_info", b"keypoint_info", "language", b"language", "name", b"name", "user_id", b"user_id", "value", b"value", "visibility", b"visibility", "vocab_id", b"vocab_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "extra_info", b"extra_info", "keypoint_info", b"keypoint_info", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "definition", b"definition", "extra_info", b"extra_info", "id", b"id", "keypoint_info", b"keypoint_info", "language", b"language", "name", b"name", "user_id", b"user_id", "value", b"value", "visibility", b"visibility", "vocab_id", b"vocab_id"]) -> None: ...
 
 global___Concept = Concept
 
@@ -1183,6 +1188,26 @@ class KeypointEdge(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["k1", b"k1", "k2", b"k2"]) -> None: ...
 
 global___KeypointEdge = KeypointEdge
+
+@typing_extensions.final
+class ConceptExtraInfo(google.protobuf.message.Message):
+    """ConceptExtraInfo represents extra information related to a concept that is context-dependent.
+    It is only set when requested in ConceptExtraInfoRequest.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    IS_RANKABLE_FIELD_NUMBER: builtins.int
+    is_rankable: builtins.bool
+    """Whether this concept is rankable based on ConceptExtraInfoRequest configuration."""
+    def __init__(
+        self,
+        *,
+        is_rankable: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["is_rankable", b"is_rankable"]) -> None: ...
+
+global___ConceptExtraInfo = ConceptExtraInfo
 
 @typing_extensions.final
 class ConceptCount(google.protobuf.message.Message):
