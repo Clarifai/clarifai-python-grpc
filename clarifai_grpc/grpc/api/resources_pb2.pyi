@@ -3276,19 +3276,24 @@ class TrainInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     PARAMS_FIELD_NUMBER: builtins.int
+    DATASET_FIELD_NUMBER: builtins.int
     @property
     def params(self) -> google.protobuf.struct_pb2.Struct:
         """To control the training process when PostModelVersions is used we allow a list of parameters
         defined for each ModelType as a Struct (JSON object) here. During training, the settings
         contained within are sent to the training processor to alter the training process.
         """
+    @property
+    def dataset(self) -> global___Dataset:
+        """The dataset and dataset version this model version was or will be trained on"""
     def __init__(
         self,
         *,
         params: google.protobuf.struct_pb2.Struct | None = ...,
+        dataset: global___Dataset | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["params", b"params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["params", b"params"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params"]) -> None: ...
 
 global___TrainInfo = TrainInfo
 
@@ -3642,6 +3647,10 @@ class ModelTypeField(google.protobuf.message.Message):
         """For selecting a dataset version id. String."""
         ARRAY_OF_MODEL_CONCEPTS: ModelTypeField._ModelTypeFieldType.ValueType  # 18
         """For auto-completing to concepts in the model."""
+        DATASET: ModelTypeField._ModelTypeFieldType.ValueType  # 19
+        """For selecting a dataset"""
+        DATASET_VERSION: ModelTypeField._ModelTypeFieldType.ValueType  # 20
+        """For selecting a dataset version"""
 
     class ModelTypeFieldType(_ModelTypeFieldType, metaclass=_ModelTypeFieldTypeEnumTypeWrapper):
         """These are various types of fields that we have UIs for."""
@@ -3684,6 +3693,10 @@ class ModelTypeField(google.protobuf.message.Message):
     """For selecting a dataset version id. String."""
     ARRAY_OF_MODEL_CONCEPTS: ModelTypeField.ModelTypeFieldType.ValueType  # 18
     """For auto-completing to concepts in the model."""
+    DATASET: ModelTypeField.ModelTypeFieldType.ValueType  # 19
+    """For selecting a dataset"""
+    DATASET_VERSION: ModelTypeField.ModelTypeFieldType.ValueType  # 20
+    """For selecting a dataset version"""
 
     PATH_FIELD_NUMBER: builtins.int
     FIELD_TYPE_FIELD_NUMBER: builtins.int
@@ -3947,6 +3960,7 @@ class ModelVersion(google.protobuf.message.Message):
     def import_info(self) -> global___ImportInfo:
         """Configuration used to import model from third-party toolkits"""
     train_log: builtins.str
+    """Contains the training logs if available"""
     def __init__(
         self,
         *,
@@ -6905,6 +6919,7 @@ class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
     POST_INPUTS_KEY_ID_FIELD_NUMBER: builtins.int
+    CALLER_USER_ID_FIELD_NUMBER: builtins.int
     model_user_id: builtins.str
     """To define the model that we should collect from we need to specify the following 4 IDs:
     The User ID of the model we want to collect from.
@@ -6921,6 +6936,16 @@ class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
     PAT. This needs the permissions that are needed for POST /inputs for the app_id this
     Collector is defined in.
     """
+    caller_user_id: builtins.str
+    """The User ID of the caller of the model we want to collect from.
+    This is needed because the below Model's ids could be used by multiple users like the
+    clarifai/main models are or any model that has been shared with a collaborator. Therefore we
+    need to know which caller of the model to collect inputs from.
+    This is User A in the example.
+
+    This is a private field that defaults to the app owner for public users.
+    If this is left blank then this collector will collect from ALL users calling the given model.
+    """
     def __init__(
         self,
         *,
@@ -6929,8 +6954,9 @@ class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
         model_id: builtins.str = ...,
         model_version_id: builtins.str = ...,
         post_inputs_key_id: builtins.str = ...,
+        caller_user_id: builtins.str = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_app_id", b"model_app_id", "model_id", b"model_id", "model_user_id", b"model_user_id", "model_version_id", b"model_version_id", "post_inputs_key_id", b"post_inputs_key_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["caller_user_id", b"caller_user_id", "model_app_id", b"model_app_id", "model_id", b"model_id", "model_user_id", b"model_user_id", "model_version_id", b"model_version_id", "post_inputs_key_id", b"post_inputs_key_id"]) -> None: ...
 
 global___APIPostModelOutputsCollectorSource = APIPostModelOutputsCollectorSource
 
