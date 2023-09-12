@@ -1037,6 +1037,7 @@ class ListConceptsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -1047,15 +1048,18 @@ class ListConceptsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    id: builtins.str
+    """Fuzzy match on concept ID"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListConceptsRequest = ListConceptsRequest
 
@@ -2188,6 +2192,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -2215,6 +2220,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """Whether to order by the external id"""
     bookmark: builtins.bool
     """Filter datasets by bookmark. If set, only return bookmarked datasets. Otherwise none bookmarked datasets only."""
+    id: builtins.str
+    """Fuzzy filter on dataset ID"""
     def __init__(
         self,
         *,
@@ -2229,9 +2236,10 @@ class ListDatasetsRequest(google.protobuf.message.Message):
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "id", b"id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListDatasetsRequest = ListDatasetsRequest
