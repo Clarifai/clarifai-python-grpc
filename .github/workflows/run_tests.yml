@@ -51,3 +51,14 @@ jobs:
         pytest tests/ -n auto
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
         python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
+    - name: Slack Notify
+      if: ${{ failure() }}
+      uses: rtCamp/action-slack-notify@v2
+      env:
+        SLACK_ICON: "https://raw.githubusercontent.com/github/explore/2c7e603b797535e5ad8b4beb575ab3b7354666e1/topics/actions/actions.png"
+        SLACK_USERNAME: "GitHub Alerts"
+        SLACK_CHANNEL: "#grpc-client-repo-alerts"
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+        SLACK_COLOR: ${{ job.status }}
+        SLACK_MESSAGE: "Test failure"
+        SLACK_FOOTER: "Clarifai Python GRPC Repo"
