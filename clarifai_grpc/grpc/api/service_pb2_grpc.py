@@ -164,6 +164,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
                 )
+        self.ListAnnotationWorkers = channel.unary_unary(
+                '/clarifai.api.V2/ListAnnotationWorkers',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationWorkersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkerResponse),
+                )
         self.GetInputCount = channel.unary_unary(
                 '/clarifai.api.V2/GetInputCount',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.SerializeToString,
@@ -1304,6 +1309,14 @@ class V2Servicer(object):
 
     def PostAnnotationsSearches(self, request, context):
         """Execute a search over annotations
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAnnotationWorkers(self, request, context):
+        """ListAnnotationWorkers lists users, models, and workflows (collectively
+        known as "workers") that have added annotations to the application.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2817,6 +2830,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
             ),
+            'ListAnnotationWorkers': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAnnotationWorkers,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationWorkersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkerResponse.SerializeToString,
+            ),
             'GetInputCount': grpc.unary_unary_rpc_method_handler(
                     servicer.GetInputCount,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInputCountRequest.FromString,
@@ -4219,6 +4237,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAnnotationsSearches',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsSearchesRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListAnnotationWorkers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAnnotationWorkers',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationWorkersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

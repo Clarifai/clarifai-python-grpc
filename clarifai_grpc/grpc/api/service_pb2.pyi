@@ -407,6 +407,71 @@ class MultiAnnotationResponse(google.protobuf.message.Message):
 global___MultiAnnotationResponse = MultiAnnotationResponse
 
 @typing_extensions.final
+class ListAnnotationWorkersRequest(google.protobuf.message.Message):
+    """ListAnnotationWorkersRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    TRUSTED_ONLY_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) List of additional fields to be included in the response.
+        Currently supported: all, names
+        """
+    trusted_only: builtins.bool
+    """(optional URL parameter) Only list workers that have created trusted annotations."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        trusted_only: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "page", b"page", "per_page", b"per_page", "trusted_only", b"trusted_only", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListAnnotationWorkersRequest = ListAnnotationWorkersRequest
+
+@typing_extensions.final
+class MultiWorkerResponse(google.protobuf.message.Message):
+    """MultiWorkerResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    WORKERS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Worker]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Worker] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workers", b"workers"]) -> None: ...
+
+global___MultiWorkerResponse = MultiWorkerResponse
+
+@typing_extensions.final
 class GetAppRequest(google.protobuf.message.Message):
     """GetAppRequest"""
 
@@ -4342,6 +4407,7 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     EVAL_DATASET_IDS_FIELD_NUMBER: builtins.int
     TRAIN_DATASET_IDS_FIELD_NUMBER: builtins.int
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
+    SHOW_FAILED_METRICS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -4382,6 +4448,8 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
     @property
     def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Filter on concept IDs specified in the modele version's output_info"""
+    show_failed_metrics: builtins.bool
+    """Whether to show failed metrics, defaults to false"""
     def __init__(
         self,
         *,
@@ -4403,9 +4471,10 @@ class ListEvaluationsRequest(google.protobuf.message.Message):
         eval_dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
         train_dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
         concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        show_failed_metrics: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_eval_dataset_id", b"sort_by_eval_dataset_id", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_model_id", b"sort_by_model_id", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "sort_by_train_dataset_id", b"sort_by_train_dataset_id", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "eval_dataset_ids", b"eval_dataset_ids", "model_type_id", b"model_type_id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_eval_dataset_id", b"sort_by_eval_dataset_id", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_model_id", b"sort_by_model_id", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "sort_by_train_dataset_id", b"sort_by_train_dataset_id", "train_dataset_ids", b"train_dataset_ids", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "eval_dataset_ids", b"eval_dataset_ids", "model_type_id", b"model_type_id", "page", b"page", "per_page", b"per_page", "show_failed_metrics", b"show_failed_metrics", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_app_id", b"sort_by_app_id", "sort_by_created_at", b"sort_by_created_at", "sort_by_eval_dataset_id", b"sort_by_eval_dataset_id", "sort_by_f1", b"sort_by_f1", "sort_by_mean_avg_precision", b"sort_by_mean_avg_precision", "sort_by_model_id", b"sort_by_model_id", "sort_by_precision", b"sort_by_precision", "sort_by_recall", b"sort_by_recall", "sort_by_roc_auc", b"sort_by_roc_auc", "sort_by_train_dataset_id", b"sort_by_train_dataset_id", "train_dataset_ids", b"train_dataset_ids", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_app_id", "sort_by_roc_auc", "sort_by_f1", "sort_by_created_at", "sort_by_mean_avg_precision", "sort_by_precision", "sort_by_recall", "sort_by_model_id", "sort_by_eval_dataset_id", "sort_by_train_dataset_id"] | None: ...
 
 global___ListEvaluationsRequest = ListEvaluationsRequest

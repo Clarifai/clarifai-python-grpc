@@ -539,6 +539,41 @@ class Annotation(google.protobuf.message.Message):
 global___Annotation = Annotation
 
 @typing_extensions.final
+class Worker(google.protobuf.message.Message):
+    """Worker is the author of an annotation."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
+    @property
+    def user(self) -> global___User:
+        """User is the human that created the annotation.
+
+        By default no real names of users are returned in responses. These can
+        be requested with the 'names' additional field.
+        """
+    @property
+    def model(self) -> global___Model:
+        """Model is the model that created the annotation."""
+    @property
+    def workflow(self) -> global___Workflow:
+        """Workflow is the workflow that created the annotation."""
+    def __init__(
+        self,
+        *,
+        user: global___User | None = ...,
+        model: global___Model | None = ...,
+        workflow: global___Workflow | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "user", b"user", "worker", b"worker", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "user", b"user", "worker", b"worker", "workflow", b"workflow"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["worker", b"worker"]) -> typing_extensions.Literal["user", "model", "workflow"] | None: ...
+
+global___Worker = Worker
+
+@typing_extensions.final
 class App(google.protobuf.message.Message):
     """Application with tasks and datasets"""
 
@@ -8254,6 +8289,7 @@ class InputsExtractionJob(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
+    INPUT_TEMPLATE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     id: builtins.str
@@ -8277,6 +8313,9 @@ class InputsExtractionJob(google.protobuf.message.Message):
         """
     input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
     """How to handle input ID conflicts."""
+    @property
+    def input_template(self) -> global___Input:
+        """Fields set in the template are added to all generated inputs"""
     def __init__(
         self,
         *,
@@ -8287,9 +8326,10 @@ class InputsExtractionJob(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
+        input_template: global___Input | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "progress", b"progress", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "input_id_conflict_resolution", b"input_id_conflict_resolution", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "url", b"url"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "input_template", b"input_template", "modified_at", b"modified_at", "progress", b"progress", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "input_id_conflict_resolution", b"input_id_conflict_resolution", "input_template", b"input_template", "modified_at", b"modified_at", "progress", b"progress", "status", b"status", "url", b"url"]) -> None: ...
 
 global___InputsExtractionJob = InputsExtractionJob
 
@@ -8336,6 +8376,7 @@ class InputsDataSource(google.protobuf.message.Message):
     INPUTS_ADD_JOB_ID_FIELD_NUMBER: builtins.int
     URL_FIELD_NUMBER: builtins.int
     INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
+    INPUT_TEMPLATE_FIELD_NUMBER: builtins.int
     inputs_add_job_id: builtins.str
     """Collect statistics about created inputs in job with given ID.
     On Post call:
@@ -8346,15 +8387,19 @@ class InputsDataSource(google.protobuf.message.Message):
     def url(self) -> global___DataSourceURL: ...
     input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
     """How to handle input ID conflicts."""
+    @property
+    def input_template(self) -> global___Input:
+        """Fields set in the template will also be added to all generated inputs"""
     def __init__(
         self,
         *,
         inputs_add_job_id: builtins.str = ...,
         url: global___DataSourceURL | None = ...,
         input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
+        input_template: global___Input | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["url", b"url"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_id_conflict_resolution", b"input_id_conflict_resolution", "inputs_add_job_id", b"inputs_add_job_id", "url", b"url"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input_template", b"input_template", "url", b"url"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_id_conflict_resolution", b"input_id_conflict_resolution", "input_template", b"input_template", "inputs_add_job_id", b"inputs_add_job_id", "url", b"url"]) -> None: ...
 
 global___InputsDataSource = InputsDataSource
 
@@ -8462,6 +8507,7 @@ class InputsUpload(google.protobuf.message.Message):
     APP_PAT_FIELD_NUMBER: builtins.int
     UPLOAD_FIELD_NUMBER: builtins.int
     INPUT_ID_CONFLICT_RESOLUTION_FIELD_NUMBER: builtins.int
+    INPUT_TEMPLATE_FIELD_NUMBER: builtins.int
     inputs_add_job_id: builtins.str
     """Collect statistics about created inputs in job with given ID.
     * If job ID is empty, then job is automatically created with random ID.
@@ -8473,6 +8519,9 @@ class InputsUpload(google.protobuf.message.Message):
     def upload(self) -> global___Upload: ...
     input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
     """How to handle input ID conflicts."""
+    @property
+    def input_template(self) -> global___Input:
+        """Fields set in the template will also be added to all generated inputs"""
     def __init__(
         self,
         *,
@@ -8480,9 +8529,10 @@ class InputsUpload(google.protobuf.message.Message):
         app_pat: builtins.str = ...,
         upload: global___Upload | None = ...,
         input_id_conflict_resolution: global___InputIDConflictResolution.ValueType = ...,
+        input_template: global___Input | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["upload", b"upload"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "input_id_conflict_resolution", b"input_id_conflict_resolution", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input_template", b"input_template", "upload", b"upload"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_pat", b"app_pat", "input_id_conflict_resolution", b"input_id_conflict_resolution", "input_template", b"input_template", "inputs_add_job_id", b"inputs_add_job_id", "upload", b"upload"]) -> None: ...
 
 global___InputsUpload = InputsUpload
 
