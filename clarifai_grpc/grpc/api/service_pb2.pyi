@@ -541,10 +541,10 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Whether to order by the number of users stared the app"""
     query: builtins.str
     """Filtering options:
-    Query various text fields that can contain the words in the query string
+    Query various text fields ( id, name, description, and notes) that can contain the words in the query string
     """
     name: builtins.str
-    """Filter by the name of the app. This supports wilcard queries like "gen*" to match "general" as an example.
+    """Filter by the id, name and notes of the app. This supports wilcard queries like "gen*" to match "general" as an example.
     Deprecated in favor of query
     """
     id: builtins.str
@@ -6143,7 +6143,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     sort_by_star_count: builtins.bool
     """Whether to order by the number of users stared the workflow"""
     query: builtins.str
-    """Query various text fields that can contain the words in the query string."""
+    """Query various text fields (id, description and notes) that can contain the words in the query string."""
     id: builtins.str
     """Filter by the id of the workflow. This supports wilcard queries like "gen*" to match "general" as an example.
     Deprecated in favor of query
@@ -6156,7 +6156,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     search_term: builtins.str
-    """(optional) search_term. Full text and prefix matching on description, id, owner id. Searchable fields may be added"""
+    """(optional) search_term. Full text and prefix matching on id, owner id, description and notes. Searchable fields may be added"""
     bookmark: builtins.bool
     """Filter workflows by bookmark. If set, only return bookmarked workflows. Otherwise none bookmarked workflows only."""
     def __init__(
@@ -7677,6 +7677,8 @@ class ListModulesRequest(google.protobuf.message.Message):
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -7704,6 +7706,10 @@ class ListModulesRequest(google.protobuf.message.Message):
     """Whether to order by the external id"""
     bookmark: builtins.bool
     """Filter modules by bookmark. If set, only return bookmarked modules. Otherwise none bookmarked modules only."""
+    name: builtins.str
+    """Filter by the description and name of the model. This supports wildcard queries like "gen*" to match "general" as an example."""
+    filter_by_user_id: builtins.bool
+    """Filter by the application owner whose this module belongs to"""
     def __init__(
         self,
         *,
@@ -7718,9 +7724,11 @@ class ListModulesRequest(google.protobuf.message.Message):
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        name: builtins.str = ...,
+        filter_by_user_id: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "filter_by_user_id", b"filter_by_user_id", "name", b"name", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListModulesRequest = ListModulesRequest
