@@ -183,8 +183,10 @@ def test_failed_predict(channel):
     ]
 
     assert response.outputs[0].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
-    assert response.outputs[0].status.details == "404 Client Error: Not Found for url: " \
-                                                 "http://example.com/non-existing.jpg"
+    assert (
+        response.outputs[0].status.details == "404 Client Error: Not Found for url: "
+        "http://example.com/non-existing.jpg"
+    )
 
 
 @both_channels
