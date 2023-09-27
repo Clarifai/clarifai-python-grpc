@@ -177,10 +177,14 @@ def test_failed_predict(channel):
         stub, request, metadata=metadata(pat=True)
     )
 
-    assert response.status.code == status_code_pb2.FAILURE
-    assert response.status.description == "Failure"
+    assert response.status.code in [
+        status_code_pb2.FAILURE,  # temporarily allow old status
+        status_code_pb2.INPUT_DOWNLOAD_FAILED,
+    ]
 
     assert response.outputs[0].status.code == status_code_pb2.INPUT_DOWNLOAD_FAILED
+    assert response.outputs[0].status.details == "404 Client Error: Not Found for url: " \
+                                                 "http://example.com/non-existing.jpg"
 
 
 @both_channels
