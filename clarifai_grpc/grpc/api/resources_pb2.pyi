@@ -3246,6 +3246,7 @@ class OutputInfo(google.protobuf.message.Message):
     MESSAGE_FIELD_NUMBER: builtins.int
     FIELDS_MAP_FIELD_NUMBER: builtins.int
     PARAMS_FIELD_NUMBER: builtins.int
+    PARAMS_SPECS_FIELD_NUMBER: builtins.int
     @property
     def data(self) -> global___Data:
         """List of concepts or other output related data for the model."""
@@ -3267,6 +3268,8 @@ class OutputInfo(google.protobuf.message.Message):
         that the ModelTypeField defines. During inference, the settings contained within are sent
         to the model predictor to alter predictions from this Model.
         """
+    @property
+    def params_specs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]: ...
     def __init__(
         self,
         *,
@@ -3275,9 +3278,10 @@ class OutputInfo(google.protobuf.message.Message):
         message: builtins.str = ...,
         fields_map: google.protobuf.struct_pb2.Struct | None = ...,
         params: google.protobuf.struct_pb2.Struct | None = ...,
+        params_specs: collections.abc.Iterable[global___ModelTypeField] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["data", b"data", "fields_map", b"fields_map", "output_config", b"output_config", "params", b"params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "fields_map", b"fields_map", "message", b"message", "output_config", b"output_config", "params", b"params"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "fields_map", b"fields_map", "message", b"message", "output_config", b"output_config", "params", b"params", "params_specs", b"params_specs"]) -> None: ...
 
 global___OutputInfo = OutputInfo
 
@@ -7402,16 +7406,16 @@ class TimeInfo(google.protobuf.message.Message):
     END_TIME_FIELD_NUMBER: builtins.int
     num_frames: builtins.int
     """Number of frames"""
-    begin_time: builtins.int
+    begin_time: builtins.float
     """Timestamp where track begins."""
-    end_time: builtins.int
+    end_time: builtins.float
     """Timestamp where track ends."""
     def __init__(
         self,
         *,
         num_frames: builtins.int = ...,
-        begin_time: builtins.int = ...,
-        end_time: builtins.int = ...,
+        begin_time: builtins.float = ...,
+        end_time: builtins.float = ...,
     ) -> None: ...
     def ClearField(self, field_name: typing_extensions.Literal["begin_time", b"begin_time", "end_time", b"end_time", "num_frames", b"num_frames"]) -> None: ...
 
