@@ -597,6 +597,7 @@ class App(google.protobuf.message.Message):
     STAR_COUNT_FIELD_NUMBER: builtins.int
     NOTES_FIELD_NUMBER: builtins.int
     IMAGE_FIELD_NUMBER: builtins.int
+    EXTRA_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     name: builtins.str
     default_language: builtins.str
@@ -654,6 +655,8 @@ class App(google.protobuf.message.Message):
     @property
     def image(self) -> global___Image:
         """Representative image for this app"""
+    @property
+    def extra_info(self) -> global___AppExtraInfo: ...
     def __init__(
         self,
         *,
@@ -675,11 +678,35 @@ class App(google.protobuf.message.Message):
         star_count: builtins.int = ...,
         notes: builtins.str = ...,
         image: global___Image | None = ...,
+        extra_info: global___AppExtraInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "extra_info", b"extra_info", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "extra_info", b"extra_info", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___App = App
+
+@typing_extensions.final
+class AppExtraInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    SEARCH_REVISION_MARKER_FIELD_NUMBER: builtins.int
+    search_revision_marker: builtins.str
+    """Revision marker for this application.
+    The value of the revision changes when
+    * inputs are added, updated or deleted
+    * annotations are added, updated or deleted
+    * inputs are added to or removed from datasets
+    For example, this value can be used to detect if client side caches related to searching should be invalidated.
+    Field not filled in for list endpoints, use GetApp
+    """
+    def __init__(
+        self,
+        *,
+        search_revision_marker: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["search_revision_marker", b"search_revision_marker"]) -> None: ...
+
+global___AppExtraInfo = AppExtraInfo
 
 @typing_extensions.final
 class AppQuery(google.protobuf.message.Message):
