@@ -4618,6 +4618,7 @@ class EvalMetrics(google.protobuf.message.Message):
     METRICS_BY_CLASS_FIELD_NUMBER: builtins.int
     TRACKER_METRICS_FIELD_NUMBER: builtins.int
     EVAL_INFO_FIELD_NUMBER: builtins.int
+    EXTENDED_METRICS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     user_id: builtins.str
@@ -4655,6 +4656,8 @@ class EvalMetrics(google.protobuf.message.Message):
         """Evaluation parameters to pass. Expected to match what
         is defined in the model type for the respective model.
         """
+    @property
+    def extended_metrics(self) -> global___ExtendedMetrics: ...
     def __init__(
         self,
         *,
@@ -4674,11 +4677,29 @@ class EvalMetrics(google.protobuf.message.Message):
         metrics_by_class: collections.abc.Iterable[global___BinaryMetrics] | None = ...,
         tracker_metrics: collections.abc.Iterable[global___TrackerMetrics] | None = ...,
         eval_info: global___EvalInfo | None = ...,
+        extended_metrics: global___ExtendedMetrics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "ground_truth_dataset", b"ground_truth_dataset", "label_counts", b"label_counts", "model", b"model", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "ground_truth_dataset", b"ground_truth_dataset", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "model", b"model", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "label_counts", b"label_counts", "model", b"model", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "model", b"model", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics", "user_id", b"user_id"]) -> None: ...
 
 global___EvalMetrics = EvalMetrics
+
+@typing_extensions.final
+class ExtendedMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_METRICS_FIELD_NUMBER: builtins.int
+    @property
+    def user_metrics(self) -> google.protobuf.struct_pb2.Struct: ...
+    def __init__(
+        self,
+        *,
+        user_metrics: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_metrics", b"user_metrics"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user_metrics", b"user_metrics"]) -> None: ...
+
+global___ExtendedMetrics = ExtendedMetrics
 
 @typing_extensions.final
 class FieldsValue(google.protobuf.message.Message):

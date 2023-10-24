@@ -5,6 +5,7 @@ isort:skip_file
 import builtins
 import collections.abc
 import google.protobuf.descriptor
+import google.protobuf.duration_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
@@ -504,17 +505,18 @@ class ListAppsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_NAME_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    FEATURED_ONLY_FIELD_NUMBER: builtins.int
+    STARRED_ONLY_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
-    FEATURED_ONLY_FIELD_NUMBER: builtins.int
-    STARRED_ONLY_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -525,8 +527,11 @@ class ListAppsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     sort_ascending: builtins.bool
-    """Sorting opitons:
+    """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
     """
     sort_by_name: builtins.bool
@@ -539,43 +544,61 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time."""
     sort_by_star_count: builtins.bool
     """Whether to order by the number of users stared the app"""
-    query: builtins.str
+    featured_only: builtins.bool
     """Filtering options:
-    Query various text fields ( id, name, description, and notes) that can contain the words in the query string
+    If true, we only return apps that are handpicked by clarifai staff
+    """
+    starred_only: builtins.bool
+    """If true, we only return apps that are starred by the requesting user"""
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the application:
+      - id
+      - name
+      - description
+      - notes
+      - user_id (unless user_app_id.user_id is already set)
+
+    Keywords are both normalized for search (so searching for "satisfy" matches "satisfied")
+    and used for partial prefix-matching (so searching for "clari" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
+    query: builtins.str
+    """Query various text fields (id, name, description, and notes) that can contain the words in the query string
+    Deprecated: use search instead.
     """
     name: builtins.str
     """Filter by the id, name and notes of the app. This supports wilcard queries like "gen*" to match "general" as an example.
-    Deprecated in favor of query
+    Deprecated: use search instead.
     """
     id: builtins.str
-    """Filter by the user-unique-id of the app. This supports wilcard queries like "gen*" to match "general" as an example."""
-    featured_only: builtins.bool
-    """If true, we only return apps that are handpicked by clarifai staff"""
-    starred_only: builtins.bool
-    """If true, we only return apps that are starred by the requesting user"""
-    @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
+    """Filter by the user-unique-id of the app. This supports wilcard queries like "gen*" to match "general" as an example.
+    Deprecated: use search instead.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
+        featured_only: builtins.bool = ...,
+        starred_only: builtins.bool = ...,
+        search: builtins.str = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
         id: builtins.str = ...,
-        featured_only: builtins.bool = ...,
-        starred_only: builtins.bool = ...,
-        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListAppsRequest = ListAppsRequest
@@ -2249,14 +2272,15 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
-    STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
+    STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
@@ -2268,11 +2292,10 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-    starred_only: builtins.bool
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     sort_ascending: builtins.bool
-    """Sorting opitons:
+    """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
     """
     sort_by_created_at: builtins.bool
@@ -2283,28 +2306,48 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """If neither sort option is set to true, will sort by modified_at."""
     sort_by_id: builtins.bool
     """Whether to order by the external id"""
+    starred_only: builtins.bool
+    """Filtering options:"""
     bookmark: builtins.bool
     """Filter datasets by bookmark. If set, only return bookmarked datasets. Otherwise none bookmarked datasets only."""
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the dataset:
+      - id
+      - description
+      - notes
+      - user_id (unless user_app_id.user_id is already set)
+
+    Keywords are both normalized for search (so searching for "satisfy" matches "satisfied")
+    and used for partial prefix-matching (so searching for "clari" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
     id: builtins.str
-    """Fuzzy filter on dataset ID"""
+    """Fuzzy filter on dataset ID
+    Deprecated: use search instead.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
+        starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        search: builtins.str = ...,
         id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "id", b"id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "id", b"id", "page", b"page", "per_page", b"per_page", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListDatasetsRequest = ListDatasetsRequest
@@ -3338,15 +3381,13 @@ class ListModelsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_NAME_FIELD_NUMBER: builtins.int
     SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
-    QUERY_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     MODEL_TYPE_ID_FIELD_NUMBER: builtins.int
     TRAINED_ONLY_FIELD_NUMBER: builtins.int
     INPUT_FIELDS_FIELD_NUMBER: builtins.int
@@ -3357,9 +3398,12 @@ class ListModelsRequest(google.protobuf.message.Message):
     TOOLKITS_FIELD_NUMBER: builtins.int
     USE_CASES_FIELD_NUMBER: builtins.int
     LANGUAGES_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     DONT_FETCH_FROM_MAIN_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
+    QUERY_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -3370,6 +3414,9 @@ class ListModelsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -3386,16 +3433,9 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at"""
     sort_by_star_count: builtins.bool
     """Whether to order by count of stars"""
-    query: builtins.str
-    """Filtering options:
-    Query name, description and id fields, that can contain the words in the query string. Does NOT support wildcards - full words only. Supports operators "OR" and "-" as NOT.
-    """
-    name: builtins.str
-    """Filter by the description and id of the model. This supports wildcard queries like "gen*" to match "general" as an example."""
-    filter_by_user_id: builtins.bool
-    """Extends the name filter to include the user_id of the application owner that the model belongs to."""
     model_type_id: builtins.str
-    """Filter models by the specific model_type_id. See ListModelTypes for the list of ModelType.Id's
+    """Filtering options:
+    Filter models by the specific model_type_id. See ListModelTypes for the list of ModelType.Id's
     supported.
     """
     trained_only: builtins.bool
@@ -3425,9 +3465,6 @@ class ListModelsRequest(google.protobuf.message.Message):
     @property
     def languages(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of language tags to filter by"""
-    @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
     dont_fetch_from_main: builtins.bool
     """Old API behavior resulted in returning clarifai main models when calling ListModels while scoped to an app. While we transition
     away from that, we can use this flag to not always fetch clarifai main models, unless that is the app we are explicitly listing for.
@@ -3437,21 +3474,47 @@ class ListModelsRequest(google.protobuf.message.Message):
     Note: you can not filter `trained_only` and bookmark at the same time.
     When filter by bookmark, we will return trained and untrained models.
     """
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the model:
+      - id
+      - name
+      - description
+      - notes
+      - user_id (unless user_app_id.user_id is already set)
+
+    Keywords are both normalized for search (so searching for "satisfy" matches "satisfied")
+    and used for partial prefix-matching (so searching for "clari" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
+    query: builtins.str
+    """Query name, description and id fields, that can contain the words in the query string. Does NOT support wildcards - full words only. Supports operators "OR" and "-" as NOT.
+    Deprecated: use search instead.
+    """
+    name: builtins.str
+    """Filter by the description and id of the model. This supports wildcard queries like "gen*" to match "general" as an example.
+    Deprecated: use search instead.
+    """
+    filter_by_user_id: builtins.bool
+    """Extends the name filter to include the user_id of the application owner that the model belongs to.
+    Deprecated: use search instead of name.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
-        query: builtins.str = ...,
-        name: builtins.str = ...,
-        filter_by_user_id: builtins.bool = ...,
         model_type_id: builtins.str = ...,
         trained_only: builtins.bool = ...,
         input_fields: collections.abc.Iterable[builtins.str] | None = ...,
@@ -3462,12 +3525,15 @@ class ListModelsRequest(google.protobuf.message.Message):
         toolkits: collections.abc.Iterable[builtins.str] | None = ...,
         use_cases: collections.abc.Iterable[builtins.str] | None = ...,
         languages: collections.abc.Iterable[builtins.str] | None = ...,
-        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         dont_fetch_from_main: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        search: builtins.str = ...,
+        query: builtins.str = ...,
+        name: builtins.str = ...,
+        filter_by_user_id: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListModelsRequest = ListModelsRequest
@@ -6106,18 +6172,19 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
-    QUERY_FIELD_NUMBER: builtins.int
-    ID_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
-    ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    SEARCH_TERM_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
+    QUERY_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
+    SEARCH_TERM_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -6128,6 +6195,9 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    @property
+    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -6142,44 +6212,63 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time."""
     sort_by_star_count: builtins.bool
     """Whether to order by the number of users stared the workflow"""
-    query: builtins.str
-    """Query various text fields (id, description and notes) that can contain the words in the query string."""
-    id: builtins.str
-    """Filter by the id of the workflow. This supports wilcard queries like "gen*" to match "general" as an example.
-    Deprecated in favor of query
-    """
     featured_only: builtins.bool
-    """If true, we only return workflows that are handpicked by clarifai staff"""
+    """Filtering options:
+    If true, we only return workflows that are handpicked by clarifai staff
+    """
     starred_only: builtins.bool
     """If true, we only return workflows that are starred by the requesting user"""
-    @property
-    def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-    search_term: builtins.str
-    """(optional) search_term. Full text and prefix matching on id, owner id, description and notes. Searchable fields may be added"""
     bookmark: builtins.bool
     """Filter workflows by bookmark. If set, only return bookmarked workflows. Otherwise none bookmarked workflows only."""
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the workflow:
+      - id
+      - description
+      - notes
+      - user_id (unless user_app_id.user_id is already set)
+
+    Keywords are both normalized for search (so searching for "satisfy" matches "satisfied")
+    and used for partial prefix-matching (so searching for "clari" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
+    query: builtins.str
+    """Query various text fields (id, description and notes) that can contain the words in the query string.
+    Deprecated: use search instead.
+    """
+    id: builtins.str
+    """Filter by the id of the workflow. This supports wilcard queries like "gen*" to match "general" as an example.
+    Deprecated: use search instead.
+    """
+    search_term: builtins.str
+    """Full text and prefix matching on id, owner id, description and notes. Searchable fields may be added
+    Deprecated: use search instead.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
-        query: builtins.str = ...,
-        id: builtins.str = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
-        additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
-        search_term: builtins.str = ...,
         bookmark: builtins.bool = ...,
+        search: builtins.str = ...,
+        query: builtins.str = ...,
+        id: builtins.str = ...,
+        search_term: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "search_term", b"search_term", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "featured_only", b"featured_only", "id", b"id", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "search_term", b"search_term", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_id", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListWorkflowsRequest = ListWorkflowsRequest
@@ -7669,14 +7758,15 @@ class ListModulesRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
-    STARRED_ONLY_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
+    STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     @property
@@ -7689,11 +7779,10 @@ class ListModulesRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-    starred_only: builtins.bool
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     sort_ascending: builtins.bool
-    """Sorting opitons:
+    """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
     """
     sort_by_created_at: builtins.bool
@@ -7704,31 +7793,52 @@ class ListModulesRequest(google.protobuf.message.Message):
     """If neither sort option is set to true, will sort by modified_at."""
     sort_by_id: builtins.bool
     """Whether to order by the external id"""
+    starred_only: builtins.bool
+    """Filtering options:"""
     bookmark: builtins.bool
     """Filter modules by bookmark. If set, only return bookmarked modules. Otherwise none bookmarked modules only."""
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the module:
+      - id
+      - description
+      - user_id (unless user_app_id.user_id is already set)
+
+    Keywords are both normalized for search (so searching for "satisfy" matches "satisfied")
+    and used for partial prefix-matching (so searching for "clari" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
     name: builtins.str
-    """Filter by the description and name of the model. This supports wildcard queries like "gen*" to match "general" as an example."""
+    """Filter by the id and description of the module. This supports wildcard queries like "gen*" to match "general" as an example.
+    Deprecated: use search instead.
+    """
     filter_by_user_id: builtins.bool
-    """Filter by the application owner whose this module belongs to"""
+    """Filter by the application owner whose this module belongs to
+    Deprecated: use search instead of name.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        starred_only: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
+        starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        search: builtins.str = ...,
         name: builtins.str = ...,
         filter_by_user_id: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "filter_by_user_id", b"filter_by_user_id", "name", b"name", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "filter_by_user_id", b"filter_by_user_id", "name", b"name", "page", b"page", "per_page", b"per_page", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"] | None: ...
 
 global___ListModulesRequest = ListModulesRequest
@@ -9171,3 +9281,55 @@ class MultiRunnerItemOutputResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["runner_item_outputs", b"runner_item_outputs", "status", b"status"]) -> None: ...
 
 global___MultiRunnerItemOutputResponse = MultiRunnerItemOutputResponse
+
+@typing_extensions.final
+class PostModelVersionsTrainingTimeEstimateRequest(google.protobuf.message.Message):
+    """Get the estimated training time for a model version"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSIONS_FIELD_NUMBER: builtins.int
+    ESTIMATED_INPUT_COUNT_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    @property
+    def model_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModelVersion]: ...
+    estimated_input_count: builtins.int
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModelVersion] | None = ...,
+        estimated_input_count: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["estimated_input_count", b"estimated_input_count", "model_id", b"model_id", "model_versions", b"model_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostModelVersionsTrainingTimeEstimateRequest = PostModelVersionsTrainingTimeEstimateRequest
+
+@typing_extensions.final
+class MultiTrainingTimeEstimateResponse(google.protobuf.message.Message):
+    """Estimated training time in seconds"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    TRAINING_TIME_ESTIMATES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def training_time_estimates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[google.protobuf.duration_pb2.Duration]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        training_time_estimates: collections.abc.Iterable[google.protobuf.duration_pb2.Duration] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "training_time_estimates", b"training_time_estimates"]) -> None: ...
+
+global___MultiTrainingTimeEstimateResponse = MultiTrainingTimeEstimateResponse

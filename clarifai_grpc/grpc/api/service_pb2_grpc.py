@@ -1104,6 +1104,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse),
                 )
+        self.PostModelVersionsTrainingTimeEstimate = channel.unary_unary(
+                '/clarifai.api.V2/PostModelVersionsTrainingTimeEstimate',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse),
+                )
 
 
 class V2Servicer(object):
@@ -2697,6 +2702,12 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostModelVersionsTrainingTimeEstimate(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3769,6 +3780,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostRunnerItemOutputs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.SerializeToString,
+            ),
+            'PostModelVersionsTrainingTimeEstimate': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelVersionsTrainingTimeEstimate,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -7433,5 +7449,22 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRunnerItemOutputs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostModelVersionsTrainingTimeEstimate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelVersionsTrainingTimeEstimate',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
