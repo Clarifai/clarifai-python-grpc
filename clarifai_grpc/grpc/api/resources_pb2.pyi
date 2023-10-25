@@ -5440,6 +5440,7 @@ class User(google.protobuf.message.Message):
     COMPANY_NAME_FIELD_NUMBER: builtins.int
     JOB_TITLE_FIELD_NUMBER: builtins.int
     JOB_ROLE_FIELD_NUMBER: builtins.int
+    INTENTION_FIELD_NUMBER: builtins.int
     BILL_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     DATE_GDPR_CONSENT_FIELD_NUMBER: builtins.int
@@ -5461,6 +5462,8 @@ class User(google.protobuf.message.Message):
     company_name: builtins.str
     job_title: builtins.str
     job_role: builtins.str
+    intention: builtins.str
+    """This specifies user intent when registering on clarifai"""
     bill_type: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -5517,6 +5520,7 @@ class User(google.protobuf.message.Message):
         company_name: builtins.str = ...,
         job_title: builtins.str = ...,
         job_role: builtins.str = ...,
+        intention: builtins.str = ...,
         bill_type: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         date_gdpr_consent: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -5533,7 +5537,7 @@ class User(google.protobuf.message.Message):
         user_detail: global___UserDetail | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "metadata", b"metadata", "user_detail", b"user_detail", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "company_name", b"company_name", "created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "first_name", b"first_name", "id", b"id", "is_starred", b"is_starred", "job_role", b"job_role", "job_title", b"job_title", "last_name", b"last_name", "metadata", b"metadata", "primary_email", b"primary_email", "star_count", b"star_count", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled", "user_detail", b"user_detail", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "company_name", b"company_name", "created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "first_name", b"first_name", "id", b"id", "intention", b"intention", "is_starred", b"is_starred", "job_role", b"job_role", "job_title", b"job_title", "last_name", b"last_name", "metadata", b"metadata", "primary_email", b"primary_email", "star_count", b"star_count", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled", "user_detail", b"user_detail", "visibility", b"visibility"]) -> None: ...
 
 global___User = User
 
