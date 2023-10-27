@@ -5725,6 +5725,7 @@ class Video(google.protobuf.message.Message):
     ALLOW_DUPLICATE_URL_FIELD_NUMBER: builtins.int
     THUMBNAIL_URL_FIELD_NUMBER: builtins.int
     HOSTED_FIELD_NUMBER: builtins.int
+    HOSTED_THUMBNAIL_FIELD_NUMBER: builtins.int
     VIDEO_INFO_FIELD_NUMBER: builtins.int
     url: builtins.str
     """This is a URL to a publicly accessible video file. The platform will download this file server
@@ -5742,11 +5743,17 @@ class Video(google.protobuf.message.Message):
     thumbnail_url: builtins.str
     """URL of thumbnail image, which is currently frame at position of 1s. This field is currently
     used only in response.
+    Deprecated in favour of thumbnail_hosted, which also contains alternate sizes of thumbnail
     """
     @property
     def hosted(self) -> global___HostedURL:
         """The hosted field lists original video hosted in Clarifai storage. This field is currently used
         only in response.
+        """
+    @property
+    def hosted_thumbnail(self) -> global___HostedURL:
+        """The hosted field lists various sizes of the vide thumbnail hosted in Clarifai storage, with 'thumbnail' as the full size
+        This field is currently used only in response.
         """
     @property
     def video_info(self) -> global___VideoInfo:
@@ -5759,10 +5766,11 @@ class Video(google.protobuf.message.Message):
         allow_duplicate_url: builtins.bool = ...,
         thumbnail_url: builtins.str = ...,
         hosted: global___HostedURL | None = ...,
+        hosted_thumbnail: global___HostedURL | None = ...,
         video_info: global___VideoInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["hosted", b"hosted", "video_info", b"video_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allow_duplicate_url", b"allow_duplicate_url", "base64", b"base64", "hosted", b"hosted", "thumbnail_url", b"thumbnail_url", "url", b"url", "video_info", b"video_info"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["hosted", b"hosted", "hosted_thumbnail", b"hosted_thumbnail", "video_info", b"video_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["allow_duplicate_url", b"allow_duplicate_url", "base64", b"base64", "hosted", b"hosted", "hosted_thumbnail", b"hosted_thumbnail", "thumbnail_url", b"thumbnail_url", "url", b"url", "video_info", b"video_info"]) -> None: ...
 
 global___Video = Video
 
