@@ -90,7 +90,7 @@ def cleanup_inputs(stub, input_ids, metadata):
     delete_request = service_pb2.DeleteInputsRequest(ids=input_ids)
     delete_response = stub.DeleteInputs(delete_request, metadata=metadata)
     raise_on_failure(delete_response)
-    wait_for_inputs_delete(stub, metadata, input_ids)
+    wait_for_inputs_delete(stub, input_ids, metadata=metadata)
 
 
 def wait_for_inputs_delete(stub, input_ids, metadata):
