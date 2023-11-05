@@ -5,6 +5,7 @@ from tests.common import (
     wait_for_inputs_upload,
     metadata,
     both_channels,
+    cleanup_inputs,
     TRAVEL_IMAGE_URL,
 )
 
@@ -204,7 +205,4 @@ class SetupImage:
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        delete_response = self._stub.DeleteInput(
-            service_pb2.DeleteInputRequest(input_id=self._input.id), metadata=metadata()
-        )
-        raise_on_failure(delete_response)
+        cleanup_inputs(self._stub, [self._input.id], metadata=metadata())

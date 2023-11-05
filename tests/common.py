@@ -85,6 +85,26 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
                 )
     # At this point, all inputs have been downloaded successfully.
 
+def cleanup_inputs(stub, input_ids, metadata):
+    delete_request = service_pb2.DeleteInputsRequest(ids=input_ids)
+    delete_response = stub.DeleteInputs(delete_request, metadata=metadata)
+    raise_on_failure(delete_response)
+    wait_for_inputs_delete(stub, metadata, input_ids)
+
+def wait_for_inputs_delete(stub, input_ids, metadata):
+    remaining_input_ids = list(input_ids)
+    while remaining_input_ids:
+        for input_id in remaining_input_ids:
+            get_input_response = stub.GetInput(
+                service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
+            )
+            if get_input_response.status.code == status_code_pb2.CONN_DOES_NOT_EXIST:
+                remaining_input_ids.remove(input_id)
+            else:
+                print(f"Waiting for input '{input_id}' to be deleted")
+                time.sleep(1)
+                break
+
 
 def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None):
     while True:

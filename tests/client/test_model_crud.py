@@ -6,6 +6,7 @@ from google.protobuf import struct_pb2
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     both_channels,
+    cleanup_inputs,
     metadata,
     raise_on_failure,
     wait_for_model_evaluated,
@@ -186,11 +187,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         )
         raise_on_failure(delete_response)
 
-        delete_inputs_response = stub.DeleteInputs(
-            service_pb2.DeleteInputsRequest(ids=[input_id_1, input_id_2]),
-            metadata=metadata(),
-        )
-        raise_on_failure(delete_inputs_response)
+        cleanup_inputs(stub, [input_id_1, input_id_2], metadata=metadata())
 
 
 @both_channels
@@ -359,6 +356,4 @@ def test_model_creation_training_and_evaluation(channel):
         stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
     )
 
-    raise_on_failure(
-        stub.DeleteInputs(service_pb2.DeleteInputsRequest(ids=input_ids), metadata=metadata())
-    )
+    cleanup_inputs(stub, input_ids, metadata=metadata())

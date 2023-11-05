@@ -17,6 +17,7 @@ from clarifai_grpc.grpc.api.resources_pb2 import (
 from clarifai_grpc.grpc.api.service_pb2 import PostInputsSearchesRequest
 from tests.common import (
     both_channels,
+    cleanup_inputs,
     metadata,
     raise_on_failure,
     DOG_IMAGE_URL,
@@ -433,7 +434,4 @@ class SetupImage:
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        delete_response = self._stub.DeleteInput(
-            service_pb2.DeleteInputRequest(input_id=self._input.id), metadata=metadata()
-        )
-        raise_on_failure(delete_response)
+        cleanup_inputs(self._stub, [self._input.id], metadata=metadata())

@@ -11,6 +11,7 @@ from tests.common import (
     both_channels,
     metadata,
     raise_on_failure,
+    wait_for_inputs_delete,
     wait_for_inputs_upload,
     wait_for_dataset_version_ready,
     wait_for_dataset_version_export_success,
@@ -162,6 +163,7 @@ def test_export_dataset_version(channel):
             raise_on_failure(delete_dataset_versions_response)
         if input_ids:
             raise_on_failure(delete_inputs_response)
+            wait_for_inputs_delete(stub, input_ids, metadata=metadata())
         raise_on_failure(delete_datasets_response)
 
 

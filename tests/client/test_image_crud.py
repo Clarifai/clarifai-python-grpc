@@ -7,6 +7,7 @@ from tests.common import (
     RED_TRUCK_IMAGE_FILE_PATH,
     TRUCK_IMAGE_URL,
     both_channels,
+    cleanup_inputs,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -71,9 +72,7 @@ def test_post_list_patch_get_delete_image(channel):
         raise_on_failure(get_response)
         assert get_response.input.data.concepts[0].name == "some-new-concept"
     finally:
-        delete_request = service_pb2.DeleteInputRequest(input_id=input_id)
-        delete_response = stub.DeleteInput(delete_request, metadata=metadata())
-        raise_on_failure(delete_response)
+        cleanup_inputs(stub, [input_id], metadata=metadata())
 
 
 @both_channels
@@ -103,10 +102,7 @@ def test_post_delete_batch_images(channel):
 
     wait_for_inputs_upload(stub, metadata(), [input_id1, input_id2])
 
-    delete_response = stub.DeleteInputs(
-        service_pb2.DeleteInputsRequest(ids=[input_id1, input_id2]), metadata=metadata()
-    )
-    raise_on_failure(delete_response)
+    cleanup_inputs(stub, [input_id1, input_id2], metadata=metadata())
 
 
 @both_channels
@@ -198,10 +194,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
         inp.data.metadata["key1"] == 123
     )  # Since we use the merge action, the old values should remain
 
-    delete_response = stub.DeleteInputs(
-        service_pb2.DeleteInputsRequest(ids=[input_id]), metadata=metadata()
-    )
-    raise_on_failure(delete_response)
+    cleanup_inputs(stub, [input_id], metadata=metadata())
 
 
 @both_channels
@@ -225,8 +218,4 @@ def test_image_with_bytes(channel):
     input_id = post_response.inputs[0].id
 
     wait_for_inputs_upload(stub, metadata(), [input_id])
-
-    delete_response = stub.DeleteInputs(
-        service_pb2.DeleteInputsRequest(ids=[input_id]), metadata=metadata()
-    )
-    raise_on_failure(delete_response)
+    cleanup_inputs(stub, [input_id], metadata=metadata())

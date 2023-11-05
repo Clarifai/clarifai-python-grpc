@@ -9,6 +9,7 @@ from tests.common import (
     TRAVEL_IMAGE_URL,
     BEER_VIDEO_URL,
     both_channels,
+    cleanup_inputs,
     raise_on_failure,
     wait_for_inputs_upload,
 )
@@ -236,8 +237,4 @@ def test_adding_inputs(channel):
                 verify_url_with_all_auths(input_url_from_get, verify_func=fn)
                 verify_url_with_bad_auth(input_url_from_get)  # these should fail
     finally:
-        # delete inputs
-        for cfid in bytes_hash_by_id.keys():
-            delete_request = service_pb2.DeleteInputRequest(input_id=cfid)
-            delete_response = stub.DeleteInput(delete_request, metadata=API_CLIENT_AUTH)
-            raise_on_failure(delete_response)
+        cleanup_inputs(stub, bytes_hash_by_id.keys(), metadata=API_CLIENT_AUTH)
