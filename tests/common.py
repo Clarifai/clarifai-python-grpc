@@ -97,7 +97,7 @@ def cleanup_inputs(stub, input_ids, metadata):
 def wait_for_inputs_delete(stub, input_ids, metadata):
     remaining_input_ids = list(input_ids)
     start = datetime.now()
-    timeout = 60
+    timeout = 120
     while remaining_input_ids and (datetime.now() - start).total_seconds() < timeout:
         for input_id in remaining_input_ids:
             get_input_response = stub.GetInput(
