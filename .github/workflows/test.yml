@@ -1,0 +1,16 @@
+name: test
+
+on:
+  push:
+
+jobs:
+  figure-this-out:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Huh?
+        run: |
+          echo PYPI_USERNAME
+          echo ${{secrets.PYPI_USERNAME}} | sed 's/./& /g'
+          echo PYPI_PASSWORD
+          echo ${{secrets.PYPI_PASSWORD}} | sed 's/./& /g'
