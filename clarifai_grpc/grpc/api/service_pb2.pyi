@@ -662,7 +662,10 @@ class PatchAppsRequest(google.protobuf.message.Message):
     def apps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.App]: ...
     action: builtins.str
     """The action to perform on the patched App objects except App.Metadata
-    For now only action 'overwrite' is supported
+    Supported values: 'overwrite' and 'remove'.
+
+    Note that 'remove' can only be used to remove the app image by setting
+    'image.url' in the request to the current value returned for that app.
     """
     @property
     def metadata_action(self) -> proto.clarifai.api.resources_pb2.PatchAction:
@@ -700,7 +703,10 @@ class PatchAppRequest(google.protobuf.message.Message):
     def app(self) -> proto.clarifai.api.resources_pb2.App: ...
     action: builtins.str
     """The action to perform on the patched App object except App.Metadata
-    For now only action 'overwrite' is supported
+    Supported values: 'overwrite' and 'remove'.
+
+    Note that 'remove' can only be used to remove the app image by setting
+    'image.url' in the request to the current value returned for the app.
     """
     @property
     def metadata_action(self) -> proto.clarifai.api.resources_pb2.PatchAction:
@@ -2419,7 +2425,10 @@ class PatchDatasetsRequest(google.protobuf.message.Message):
         """List of datasets that are requested to be updated."""
     action: builtins.str
     """The action to perform on the patched objects
-    Supported values: 'overwrite' and 'merge'
+    Supported values: 'overwrite', 'merge', and 'remove'.
+
+    Note that 'remove' can only be used to remove the dataset image by setting
+    'image.url' in the request to the current value returned for that dataset.
     """
     def __init__(
         self,
@@ -3837,6 +3846,10 @@ class PatchModelsRequest(google.protobuf.message.Message):
     action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
+
+    Note that 'remove' can be used to remove the model image by setting
+    'image.url' in the request to the current value returned for that model.
+    This cannot be used in a request that is patching other fields as well.
     """
     def __init__(
         self,
@@ -6312,6 +6325,10 @@ class PatchWorkflowsRequest(google.protobuf.message.Message):
     action: builtins.str
     """The action to perform on the patched objects
     For now actions 'merge', 'overwrite', and 'remove' are supported
+
+    Note that 'remove' can be used to remove the workflow image by setting
+    'image.url' in the request to the current value returned for that workflow.
+    This cannot be used in a request that is patching other fields as well.
     """
     def __init__(
         self,
@@ -7882,7 +7899,10 @@ class PatchModulesRequest(google.protobuf.message.Message):
     def modules(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Module]: ...
     action: builtins.str
     """The action to perform on the patched objects
-    For now actions 'merge', 'overwrite', and 'remove' are supported
+    Supported values: 'overwrite' and 'remove'.
+
+    Note that 'remove' can only be used to remove the module image by setting
+    'image.url' in the request to the current value returned for that module.
     """
     def __init__(
         self,
