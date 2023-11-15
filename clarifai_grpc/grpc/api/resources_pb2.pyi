@@ -597,6 +597,7 @@ class App(google.protobuf.message.Message):
     STAR_COUNT_FIELD_NUMBER: builtins.int
     NOTES_FIELD_NUMBER: builtins.int
     IMAGE_FIELD_NUMBER: builtins.int
+    IS_TEMPLATE_FIELD_NUMBER: builtins.int
     EXTRA_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     name: builtins.str
@@ -656,6 +657,11 @@ class App(google.protobuf.message.Message):
     def image(self) -> global___Image:
         """Representative image for this app"""
     @property
+    def is_template(self) -> google.protobuf.wrappers_pb2.BoolValue:
+        """An app marked as a template can be duplicated by any user that can see it,
+        including all visible resources within it.
+        """
+    @property
     def extra_info(self) -> global___AppExtraInfo: ...
     def __init__(
         self,
@@ -678,10 +684,11 @@ class App(google.protobuf.message.Message):
         star_count: builtins.int = ...,
         notes: builtins.str = ...,
         image: global___Image | None = ...,
+        is_template: google.protobuf.wrappers_pb2.BoolValue | None = ...,
         extra_info: global___AppExtraInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "extra_info", b"extra_info", "image", b"image", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "extra_info", b"extra_info", "id", b"id", "image", b"image", "is_starred", b"is_starred", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "extra_info", b"extra_info", "image", b"image", "is_template", b"is_template", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "extra_info", b"extra_info", "id", b"id", "image", b"image", "is_starred", b"is_starred", "is_template", b"is_template", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___App = App
 
@@ -2424,7 +2431,7 @@ class AnnotationFilter(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
-    SAVED_SEARCH_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the annotation filter"""
     @property
@@ -2444,8 +2451,8 @@ class AnnotationFilter(google.protobuf.message.Message):
     app_id: builtins.str
     """The app the annotation filter belongs to."""
     @property
-    def saved_search(self) -> global___Search:
-        """The saved search that this filter uses."""
+    def search(self) -> global___Search:
+        """The search that this filter uses."""
     def __init__(
         self,
         *,
@@ -2454,10 +2461,10 @@ class AnnotationFilter(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         user_id: builtins.str = ...,
         app_id: builtins.str = ...,
-        saved_search: global___Search | None = ...,
+        search: global___Search | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "saved_search", b"saved_search"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "id", b"id", "modified_at", b"modified_at", "saved_search", b"saved_search", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "search", b"search"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "id", b"id", "modified_at", b"modified_at", "search", b"search", "user_id", b"user_id"]) -> None: ...
 
 global___AnnotationFilter = AnnotationFilter
 
@@ -6146,24 +6153,40 @@ class AppDuplication(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
+    EXISTING_APP_ID_FIELD_NUMBER: builtins.int
     NEW_APP_ID_FIELD_NUMBER: builtins.int
     NEW_APP_NAME_FIELD_NUMBER: builtins.int
+    NEW_APP_DESCRIPTION_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     LAST_MODIFIED_AT_FIELD_NUMBER: builtins.int
     FILTER_FIELD_NUMBER: builtins.int
-    EXISTING_APP_ID_FIELD_NUMBER: builtins.int
     PROGRESS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """the id of app duplication"""
+    existing_app_id: builtins.str
+    """The ID of an existing app you want to copy data into.
+
+    If not provided, then we will create a new application as the destination instead.
+    The various new_app_* fields can be used to set fields of this new application.
+    """
     new_app_id: builtins.str
-    """the id of new app. If provided, we will create a new application with this id. If the app id exists, we will return err.
-    if new_app_name is empty, the name will be the same as this id.
-    You can not set this if existing_app_id is set.
+    """The ID to use when creating a new application.
+    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
+
+    If not provided, then it will be generated automatically.
     """
     new_app_name: builtins.str
-    """the name of new app. If provided, we will create a new application with this name.
-    You can not set this if existing_app_id is set.
+    """The name to use when creating a new application.
+    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
+
+    If not provided, then the ID of the new application is also used as the name.
+    """
+    new_app_description: builtins.str
+    """The description to use when creating a new application.
+    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
+
+    If not provided, then the description of the source application is copied.
     """
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
@@ -6177,11 +6200,6 @@ class AppDuplication(google.protobuf.message.Message):
     @property
     def filter(self) -> global___AppDuplicationFilters:
         """Only copy resources depending on the filters"""
-    existing_app_id: builtins.str
-    """the id of existing app you want to copy data into.
-    you can not set this if either new_app_id or new_app_name is set.
-    if new_app_id, new_app_name and existing_app_id are all empty, we will create a new app with random app id/name
-    """
     @property
     def progress(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AppCopyProgress]:
         """contains progress for each requested filter"""
@@ -6189,17 +6207,18 @@ class AppDuplication(google.protobuf.message.Message):
         self,
         *,
         id: builtins.str = ...,
+        existing_app_id: builtins.str = ...,
         new_app_id: builtins.str = ...,
         new_app_name: builtins.str = ...,
+        new_app_description: builtins.str = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         last_modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         filter: global___AppDuplicationFilters | None = ...,
-        existing_app_id: builtins.str = ...,
         progress: collections.abc.Iterable[global___AppCopyProgress] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "filter", b"filter", "last_modified_at", b"last_modified_at", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "existing_app_id", b"existing_app_id", "filter", b"filter", "id", b"id", "last_modified_at", b"last_modified_at", "new_app_id", b"new_app_id", "new_app_name", b"new_app_name", "progress", b"progress", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "existing_app_id", b"existing_app_id", "filter", b"filter", "id", b"id", "last_modified_at", b"last_modified_at", "new_app_description", b"new_app_description", "new_app_id", b"new_app_id", "new_app_name", b"new_app_name", "progress", b"progress", "status", b"status"]) -> None: ...
 
 global___AppDuplication = AppDuplication
 
