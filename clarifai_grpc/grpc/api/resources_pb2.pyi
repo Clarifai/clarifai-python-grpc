@@ -3362,6 +3362,7 @@ class TrainInfo(google.protobuf.message.Message):
 
     PARAMS_FIELD_NUMBER: builtins.int
     DATASET_FIELD_NUMBER: builtins.int
+    RESUME_FROM_MODEL_FIELD_NUMBER: builtins.int
     @property
     def params(self) -> google.protobuf.struct_pb2.Struct:
         """To control the training process when PostModelVersions is used we allow a list of parameters
@@ -3371,14 +3372,18 @@ class TrainInfo(google.protobuf.message.Message):
     @property
     def dataset(self) -> global___Dataset:
         """The dataset and dataset version this model version was or will be trained on"""
+    @property
+    def resume_from_model(self) -> global___Model:
+        """The model to resume training from."""
     def __init__(
         self,
         *,
         params: google.protobuf.struct_pb2.Struct | None = ...,
         dataset: global___Dataset | None = ...,
+        resume_from_model: global___Model | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params", "resume_from_model", b"resume_from_model"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset", b"dataset", "params", b"params", "resume_from_model", b"resume_from_model"]) -> None: ...
 
 global___TrainInfo = TrainInfo
 
@@ -3715,9 +3720,7 @@ class ModelTypeField(google.protobuf.message.Message):
         ARRAY_OF_NUMBERS: ModelTypeField._ModelTypeFieldType.ValueType  # 11
         """Such as [1.0, 2.0, 3.5]"""
         WORKFLOW_EMBED_MODELS: ModelTypeField._ModelTypeFieldType.ValueType  # 12
-        """For selecting the embed_model_version_id for context based models.
-        This is a string type in the API request.
-        """
+        """For selecting the embed_model_version_id for context based models."""
         ARRAY_OF_STRINGS: ModelTypeField._ModelTypeFieldType.ValueType  # 13
         """Such as ['a', 'b', 'cantaloupe']"""
         RECURSIVE_ENUM: ModelTypeField._ModelTypeFieldType.ValueType  # 14
@@ -3738,6 +3741,8 @@ class ModelTypeField(google.protobuf.message.Message):
         """For selecting a dataset version"""
         ENCRYPTED_STRING: ModelTypeField._ModelTypeFieldType.ValueType  # 21
         """To pass a string downstream, that is encrypted in the DB and API."""
+        CHECKPOINT_MODEL: ModelTypeField._ModelTypeFieldType.ValueType  # 22
+        """For selecting a model version of the same model type to resume training from."""
 
     class ModelTypeFieldType(_ModelTypeFieldType, metaclass=_ModelTypeFieldTypeEnumTypeWrapper):
         """These are various types of fields that we have UIs for."""
@@ -3763,9 +3768,7 @@ class ModelTypeField(google.protobuf.message.Message):
     ARRAY_OF_NUMBERS: ModelTypeField.ModelTypeFieldType.ValueType  # 11
     """Such as [1.0, 2.0, 3.5]"""
     WORKFLOW_EMBED_MODELS: ModelTypeField.ModelTypeFieldType.ValueType  # 12
-    """For selecting the embed_model_version_id for context based models.
-    This is a string type in the API request.
-    """
+    """For selecting the embed_model_version_id for context based models."""
     ARRAY_OF_STRINGS: ModelTypeField.ModelTypeFieldType.ValueType  # 13
     """Such as ['a', 'b', 'cantaloupe']"""
     RECURSIVE_ENUM: ModelTypeField.ModelTypeFieldType.ValueType  # 14
@@ -3786,6 +3789,8 @@ class ModelTypeField(google.protobuf.message.Message):
     """For selecting a dataset version"""
     ENCRYPTED_STRING: ModelTypeField.ModelTypeFieldType.ValueType  # 21
     """To pass a string downstream, that is encrypted in the DB and API."""
+    CHECKPOINT_MODEL: ModelTypeField.ModelTypeFieldType.ValueType  # 22
+    """For selecting a model version of the same model type to resume training from."""
 
     PATH_FIELD_NUMBER: builtins.int
     FIELD_TYPE_FIELD_NUMBER: builtins.int

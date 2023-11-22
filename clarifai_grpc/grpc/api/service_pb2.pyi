@@ -248,30 +248,37 @@ class PatchAnnotationsStatusRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
-    STATUS_CODE_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
+    STATUS_CODES_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
+    STATUS_CODE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
-    """Annotation Status code"""
     @property
-    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter by user IDs"""
     task_id: builtins.str
+    """Filter by task ID"""
+    @property
+    def status_codes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType]:
+        """Filter by Status codes"""
     action: builtins.str
     """'overwrite' is supported"""
+    status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+    """Update filtered annotations to this status"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
         task_id: builtins.str = ...,
+        status_codes: collections.abc.Iterable[proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType] | None = ...,
         action: builtins.str = ...,
+        status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "status_code", b"status_code", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "status_code", b"status_code", "status_codes", b"status_codes", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
 
 global___PatchAnnotationsStatusRequest = PatchAnnotationsStatusRequest
 
@@ -513,6 +520,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
+    TEMPLATE_ONLY_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -550,6 +558,8 @@ class ListAppsRequest(google.protobuf.message.Message):
     """
     starred_only: builtins.bool
     """If true, we only return apps that are starred by the requesting user"""
+    template_only: builtins.bool
+    """If true, we only return apps that are marked as a template by the app owner."""
     search: builtins.str
     """Searching options:
     Specify a search parameter in order to perform keyword search on the
@@ -592,13 +602,14 @@ class ListAppsRequest(google.protobuf.message.Message):
         sort_by_star_count: builtins.bool = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
+        template_only: builtins.bool = ...,
         search: builtins.str = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
         id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "template_only", b"template_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListAppsRequest = ListAppsRequest
@@ -958,18 +969,31 @@ class MultiCollaboratorsResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     COLLABORATORS_FIELD_NUMBER: builtins.int
+    APP_OWNER_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def collaborators(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Collaborator]: ...
+    @property
+    def app_owner(self) -> proto.clarifai.api.resources_pb2.User:
+        """The owner of the application.
+
+        When listing users that have access to the application, i.e. collaborators,
+        it is often relevant to also include the application owner, so return
+        their information here for convenience.
+
+        Note: app_owner is only returned by ListCollaborators and only if the
+        owner is a regular user, not an organization.
+        """
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         collaborators: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collaborator] | None = ...,
+        app_owner: proto.clarifai.api.resources_pb2.User | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collaborators", b"collaborators", "status", b"status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app_owner", b"app_owner", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_owner", b"app_owner", "collaborators", b"collaborators", "status", b"status"]) -> None: ...
 
 global___MultiCollaboratorsResponse = MultiCollaboratorsResponse
 
@@ -982,6 +1006,7 @@ class ListCollaborationsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    TEMPLATE_ONLY_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -992,15 +1017,20 @@ class ListCollaborationsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    template_only: builtins.bool
+    """Filtering options:
+    If true, we only return collaborations on apps that are marked as a template by the app owner.
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        template_only: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "template_only", b"template_only", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListCollaborationsRequest = ListCollaborationsRequest
 
@@ -3577,12 +3607,14 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
     MODELS_FIELD_NUMBER: builtins.int
     WORKFLOWS_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
+    INPUTS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     datasets: builtins.int
     models: builtins.int
     workflows: builtins.int
     modules: builtins.int
+    inputs: builtins.int
     def __init__(
         self,
         *,
@@ -3591,9 +3623,10 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
         models: builtins.int = ...,
         workflows: builtins.int = ...,
         modules: builtins.int = ...,
+        inputs: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["datasets", b"datasets", "models", b"models", "modules", b"modules", "status", b"status", "workflows", b"workflows"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["datasets", b"datasets", "inputs", b"inputs", "models", b"models", "modules", b"modules", "status", b"status", "workflows", b"workflows"]) -> None: ...
 
 global___GetResourceCountsResponse = GetResourceCountsResponse
 
