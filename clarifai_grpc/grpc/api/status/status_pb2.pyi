@@ -30,6 +30,7 @@ class Status(google.protobuf.message.Message):
     REQ_ID_FIELD_NUMBER: builtins.int
     INTERNAL_DETAILS_FIELD_NUMBER: builtins.int
     REDIRECT_INFO_FIELD_NUMBER: builtins.int
+    DEVELOPER_NOTES_FIELD_NUMBER: builtins.int
     code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """Status code from internal codes."""
     description: builtins.str
@@ -52,6 +53,8 @@ class Status(google.protobuf.message.Message):
     @property
     def redirect_info(self) -> global___RedirectInfo:
         """Resource location info for redirect, when resource location has been changed."""
+    developer_notes: builtins.str
+    """Notes for developer."""
     def __init__(
         self,
         *,
@@ -64,9 +67,10 @@ class Status(google.protobuf.message.Message):
         req_id: builtins.str = ...,
         internal_details: builtins.str = ...,
         redirect_info: global___RedirectInfo | None = ...,
+        developer_notes: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["redirect_info", b"redirect_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["code", b"code", "description", b"description", "details", b"details", "internal_details", b"internal_details", "percent_completed", b"percent_completed", "redirect_info", b"redirect_info", "req_id", b"req_id", "stack_trace", b"stack_trace", "time_remaining", b"time_remaining"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["code", b"code", "description", b"description", "details", b"details", "developer_notes", b"developer_notes", "internal_details", b"internal_details", "percent_completed", b"percent_completed", "redirect_info", b"redirect_info", "req_id", b"req_id", "stack_trace", b"stack_trace", "time_remaining", b"time_remaining"]) -> None: ...
 
 global___Status = Status
 

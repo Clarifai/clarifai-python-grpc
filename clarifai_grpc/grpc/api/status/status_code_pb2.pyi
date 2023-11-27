@@ -31,11 +31,12 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     NOT_IMPLEMENTED: _StatusCode.ValueType  # 10040
     MOVED: _StatusCode.ValueType  # 10050
     """Resource moved. Respond with Http status 307 and add new Location header to response"""
-    CONN_ACCOUNT_ISSUES: _StatusCode.ValueType  # 11000
+    TEAPOT: _StatusCode.ValueType  # 10060
     """SUCCESS_WARNING_API_DEPRECATED = 10001;
     SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
-
-    Clarifai Connection Codes: 11xxx
+    """
+    CONN_ACCOUNT_ISSUES: _StatusCode.ValueType  # 11000
+    """Clarifai Connection Codes: 11xxx
     expired cc, still in trial, feature not supported in your tier
     """
     CONN_TOKEN_INVALID: _StatusCode.ValueType  # 11001
@@ -522,11 +523,12 @@ TRY_AGAIN: StatusCode.ValueType  # 10030
 NOT_IMPLEMENTED: StatusCode.ValueType  # 10040
 MOVED: StatusCode.ValueType  # 10050
 """Resource moved. Respond with Http status 307 and add new Location header to response"""
-CONN_ACCOUNT_ISSUES: StatusCode.ValueType  # 11000
+TEAPOT: StatusCode.ValueType  # 10060
 """SUCCESS_WARNING_API_DEPRECATED = 10001;
 SUCCESS_WARNING_CLIENT_DEPRECATED = 10002;
-
-Clarifai Connection Codes: 11xxx
+"""
+CONN_ACCOUNT_ISSUES: StatusCode.ValueType  # 11000
+"""Clarifai Connection Codes: 11xxx
 expired cc, still in trial, feature not supported in your tier
 """
 CONN_TOKEN_INVALID: StatusCode.ValueType  # 11001
