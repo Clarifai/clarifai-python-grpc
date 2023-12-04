@@ -2674,22 +2674,22 @@ class MultiDatasetInputResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_INPUTS_FIELD_NUMBER: builtins.int
-    DATASET_INPUTS_SEARCH_ADD_JOB_FIELD_NUMBER: builtins.int
+    BULK_OPERATION_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def dataset_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.DatasetInput]: ...
     @property
-    def dataset_inputs_search_add_job(self) -> proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob: ...
+    def bulk_operation(self) -> proto.clarifai.api.resources_pb2.BulkOperation: ...
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         dataset_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetInput] | None = ...,
-        dataset_inputs_search_add_job: proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob | None = ...,
+        bulk_operation: proto.clarifai.api.resources_pb2.BulkOperation | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["dataset_inputs_search_add_job", b"dataset_inputs_search_add_job", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_inputs", b"dataset_inputs", "dataset_inputs_search_add_job", b"dataset_inputs_search_add_job", "status", b"status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bulk_operation", b"bulk_operation", "dataset_inputs", b"dataset_inputs", "status", b"status"]) -> None: ...
 
 global___MultiDatasetInputResponse = MultiDatasetInputResponse
 
@@ -3038,47 +3038,6 @@ class SingleDatasetVersionResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["dataset_version", b"dataset_version", "status", b"status"]) -> None: ...
 
 global___SingleDatasetVersionResponse = SingleDatasetVersionResponse
-
-@typing_extensions.final
-class GetDatasetInputsSearchAddJobRequest(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    JOB_ID_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    job_id: builtins.str
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        job_id: builtins.str = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job_id", b"job_id", "user_app_id", b"user_app_id"]) -> None: ...
-
-global___GetDatasetInputsSearchAddJobRequest = GetDatasetInputsSearchAddJobRequest
-
-@typing_extensions.final
-class SingleDatasetInputsSearchAddJobResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    JOB_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    @property
-    def job(self) -> proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob: ...
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        job: proto.clarifai.api.resources_pb2.DatasetInputsSearchAddJob | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["job", b"job", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["job", b"job", "status", b"status"]) -> None: ...
-
-global___SingleDatasetInputsSearchAddJobResponse = SingleDatasetInputsSearchAddJobResponse
 
 @typing_extensions.final
 class PostModelOutputsRequest(google.protobuf.message.Message):

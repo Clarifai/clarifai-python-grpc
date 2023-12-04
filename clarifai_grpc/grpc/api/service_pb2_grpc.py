@@ -994,11 +994,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteBulkOperationRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
-        self.GetDatasetInputsSearchAddJob = channel.unary_unary(
-                '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse),
-                )
         self.ListNextTaskAssignments = channel.unary_unary(
                 '/clarifai.api.V2/ListNextTaskAssignments',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNextTaskAssignmentsRequest.SerializeToString,
@@ -2536,13 +2531,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetDatasetInputsSearchAddJob(self, request, context):
-        """Get a specific job.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def ListNextTaskAssignments(self, request, context):
         """List next non-labeled and unassigned inputs from task's dataset
         """
@@ -3670,11 +3658,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteBulkOperations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteBulkOperationRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-            ),
-            'GetDatasetInputsSearchAddJob': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetDatasetInputsSearchAddJob,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.SerializeToString,
             ),
             'ListNextTaskAssignments': grpc.unary_unary_rpc_method_handler(
                     servicer.ListNextTaskAssignments,
@@ -7075,23 +7058,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteBulkOperations',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteBulkOperationRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetDatasetInputsSearchAddJob(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDatasetInputsSearchAddJob',
-            proto_dot_clarifai_dot_api_dot_service__pb2.GetDatasetInputsSearchAddJobRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleDatasetInputsSearchAddJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

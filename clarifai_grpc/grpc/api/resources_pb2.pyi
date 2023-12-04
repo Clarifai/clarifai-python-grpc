@@ -7266,47 +7266,6 @@ class StatValueAggregateQuery(google.protobuf.message.Message):
 global___StatValueAggregateQuery = StatValueAggregateQuery
 
 @typing_extensions.final
-class DatasetInputsSearchAddJob(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    SEARCH_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """The id of this job"""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the job was created."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the job was last modified."""
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """Status of the job and rough estimated progress"""
-    dataset_id: builtins.str
-    """Dataset which will receive inputs"""
-    @property
-    def search(self) -> global___Search:
-        """The search that the job uses"""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        dataset_id: builtins.str = ...,
-        search: global___Search | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "search", b"search", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "dataset_id", b"dataset_id", "id", b"id", "modified_at", b"modified_at", "search", b"search", "status", b"status"]) -> None: ...
-
-global___DatasetInputsSearchAddJob = DatasetInputsSearchAddJob
-
-@typing_extensions.final
 class PCAProjectionComparator(google.protobuf.message.Message):
     """PCAProjectionComparator"""
 
