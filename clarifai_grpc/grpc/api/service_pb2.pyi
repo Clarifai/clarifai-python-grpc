@@ -1198,6 +1198,7 @@ class ListModelConceptsRequest(google.protobuf.message.Message):
     VERSION_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -1212,6 +1213,18 @@ class ListModelConceptsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    search: builtins.str
+    """Searching options:
+    Specify a search parameter in order to perform keyword search on the
+    following fields of the concept:
+      - id
+      - name
+
+    Keywords are used for partial prefix-matching (so searching for "larif" matches "clarifai").
+
+    NOTE: Both the list of fields searched and the exact keyword matching
+    rules are subject to change and not guaranteed to be backwards-compatible.
+    """
     def __init__(
         self,
         *,
@@ -1220,9 +1233,10 @@ class ListModelConceptsRequest(google.protobuf.message.Message):
         version_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        search: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "page", b"page", "per_page", b"per_page", "search", b"search", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
 
 global___ListModelConceptsRequest = ListModelConceptsRequest
 
@@ -7456,7 +7470,6 @@ class GetCollectorRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     collector_id: builtins.str
-    """The collecgtor id"""
     def __init__(
         self,
         *,

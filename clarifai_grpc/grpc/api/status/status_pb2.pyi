@@ -34,9 +34,12 @@ class Status(google.protobuf.message.Message):
     code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """Status code from internal codes."""
     description: builtins.str
-    """A longer description of the error."""
+    """A short description of the error."""
     details: builtins.str
-    """More details of the given error."""
+    """More details of the given error.
+    These details may be exposed to non-technical users.
+    For technical details, try to use developer_notes field.
+    """
     @property
     def stack_trace(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """For some environment we may return a stack trace to help debug
@@ -47,14 +50,17 @@ class Status(google.protobuf.message.Message):
     time_remaining: builtins.int
     """if status is pending, how much time is remaining (in seconds)"""
     req_id: builtins.str
-    """If we want to return a request id in the base status field"""
+    """A request ID may be present, to help monitoring and tracking requests"""
     internal_details: builtins.str
     """Internal Annotation (do not set in production, for internal Clarifai use only)."""
     @property
     def redirect_info(self) -> global___RedirectInfo:
         """Resource location info for redirect, when resource location has been changed."""
     developer_notes: builtins.str
-    """Notes for developer."""
+    """Notes for developer.
+    These notes are rather technical details for developers how to interpret the status,
+    e.g. why an error occurred and how to avoid getting the error.
+    """
     def __init__(
         self,
         *,
