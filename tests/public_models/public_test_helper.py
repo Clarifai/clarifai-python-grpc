@@ -205,7 +205,6 @@ MODEL_TITLE_AND_ID_PAIRS = [
     ("travel", TRAVEL_MODEL_ID),
     ("wedding", WEDDING_MODEL_ID),
     ("logo v2", LOGO_V2_MODEL_ID),
-    ("people detection yolov5", PEOPLE_DETECTION_YOLOV5_MODEL_ID),
     ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
     ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
     ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
