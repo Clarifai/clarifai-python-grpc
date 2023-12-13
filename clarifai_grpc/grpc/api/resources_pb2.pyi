@@ -6211,72 +6211,94 @@ class AppDuplication(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
+    DESTINATION_APP_FIELD_NUMBER: builtins.int
     EXISTING_APP_ID_FIELD_NUMBER: builtins.int
     NEW_APP_ID_FIELD_NUMBER: builtins.int
     NEW_APP_NAME_FIELD_NUMBER: builtins.int
-    NEW_APP_DESCRIPTION_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     LAST_MODIFIED_AT_FIELD_NUMBER: builtins.int
     FILTER_FIELD_NUMBER: builtins.int
     PROGRESS_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """the id of app duplication"""
+    """The unique identifier of an app duplication job."""
+    @property
+    def destination_app(self) -> global___App:
+        """The destination application where resources are written.
+
+        If the destination does not exist, then the fields from the request are
+        used to create the application. If a field is not set or not supported,
+        then it will be copied from the source app, unless otherwise noted.
+
+        Note: this field can be empty when reading app duplication jobs in cases
+        where the app has been deleted or is just not visible to the caller.
+
+        ########## Supported fields ##########
+         - description
+         - id      - if not set, then generated automatically
+         - user_id - if not set, then the calling user is used as the app owner
+        """
     existing_app_id: builtins.str
     """The ID of an existing app you want to copy data into.
 
     If not provided, then we will create a new application as the destination instead.
     The various new_app_* fields can be used to set fields of this new application.
+
+    Deprecated: Use destination_app.id with an existing ID instead.
     """
     new_app_id: builtins.str
     """The ID to use when creating a new application.
     You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
 
     If not provided, then it will be generated automatically.
+
+    Deprecated: Use destination_app.id with a new ID instead.
     """
     new_app_name: builtins.str
     """The name to use when creating a new application.
     You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
 
     If not provided, then the ID of the new application is also used as the name.
-    """
-    new_app_description: builtins.str
-    """The description to use when creating a new application.
-    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
 
-    If not provided, then the description of the source application is copied.
+    Deprecated: Application names are deprecated, use application IDs instead.
     """
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """the status of app duplication"""
+        """The status of the app duplication job."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """when is the app duplication triggered"""
+        """The time when the app duplication job was created."""
     @property
     def last_modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """The last time when is the status got updated"""
+        """The last time when the app duplication job status was updated."""
     @property
     def filter(self) -> global___AppDuplicationFilters:
-        """Only copy resources depending on the filters"""
+        """The filter specifies which resources are copied by the app duplication job."""
     @property
     def progress(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AppCopyProgress]:
-        """contains progress for each requested filter"""
+        """Copy progress for each resource type requested by the filter. Possible fields:
+         - inputs
+         - concepts
+         - annotations
+         - models
+         - workflows
+        """
     def __init__(
         self,
         *,
         id: builtins.str = ...,
+        destination_app: global___App | None = ...,
         existing_app_id: builtins.str = ...,
         new_app_id: builtins.str = ...,
         new_app_name: builtins.str = ...,
-        new_app_description: builtins.str = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         last_modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         filter: global___AppDuplicationFilters | None = ...,
         progress: collections.abc.Iterable[global___AppCopyProgress] | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "filter", b"filter", "last_modified_at", b"last_modified_at", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "existing_app_id", b"existing_app_id", "filter", b"filter", "id", b"id", "last_modified_at", b"last_modified_at", "new_app_description", b"new_app_description", "new_app_id", b"new_app_id", "new_app_name", b"new_app_name", "progress", b"progress", "status", b"status"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "destination_app", b"destination_app", "filter", b"filter", "last_modified_at", b"last_modified_at", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "destination_app", b"destination_app", "existing_app_id", b"existing_app_id", "filter", b"filter", "id", b"id", "last_modified_at", b"last_modified_at", "new_app_id", b"new_app_id", "new_app_name", b"new_app_name", "progress", b"progress", "status", b"status"]) -> None: ...
 
 global___AppDuplication = AppDuplication
 
@@ -6310,15 +6332,17 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     COPY_MODELS_FIELD_NUMBER: builtins.int
     COPY_WORKFLOWS_FIELD_NUMBER: builtins.int
     copy_inputs: builtins.bool
-    """Copy inputs what what it depends on: input level annotation and concepts"""
+    """Copy inputs. Requires that copy_concepts is also set.
+    Note that this will still copy input-level annotations even if copy_annotations is not set.
+    """
     copy_concepts: builtins.bool
-    """Copy only concepts"""
+    """Copy concepts."""
     copy_annotations: builtins.bool
-    """Copy annotations and what it depends on: inputs and concepts"""
+    """Copy annotations. Requires that copy_inputs and copy_concepts are also set."""
     copy_models: builtins.bool
-    """Copy models and what it depends on: concepts"""
+    """Copy models. Requires that copy_concepts is also set."""
     copy_workflows: builtins.bool
-    """Copy workflows and what it depends on: models and concepts"""
+    """Copy workflows. Requires that copy_models and copy_concepts are also set."""
     def __init__(
         self,
         *,

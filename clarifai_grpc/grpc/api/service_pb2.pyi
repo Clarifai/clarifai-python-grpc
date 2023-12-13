@@ -6812,14 +6812,15 @@ global___SingleWorkflowVersionResponse = SingleWorkflowVersionResponse
 
 @typing_extensions.final
 class PostAppDuplicationsRequest(google.protobuf.message.Message):
-    """Request to start a app duplication process"""
+    """Request to start app duplication jobs."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_DUPLICATIONS_FIELD_NUMBER: builtins.int
     @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """The user and application ID of the source application to duplicate."""
     @property
     def app_duplications(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AppDuplication]: ...
     def __init__(
@@ -6835,16 +6836,16 @@ global___PostAppDuplicationsRequest = PostAppDuplicationsRequest
 
 @typing_extensions.final
 class GetAppDuplicationRequest(google.protobuf.message.Message):
-    """Request to check app duplication status"""
+    """Request to get an app duplication job."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     APP_DUPLICATION_ID_FIELD_NUMBER: builtins.int
     @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """The ID of the user that created the app duplication job."""
     app_duplication_id: builtins.str
-    """The app duplication id"""
     def __init__(
         self,
         *,
@@ -6858,7 +6859,7 @@ global___GetAppDuplicationRequest = GetAppDuplicationRequest
 
 @typing_extensions.final
 class ListAppDuplicationsRequest(google.protobuf.message.Message):
-    """Request to list all the app duplication that user triggered."""
+    """Request to list all the app duplication jobs that a user created."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6866,7 +6867,8 @@ class ListAppDuplicationsRequest(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """The ID of the user whose app duplication jobs to list."""
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to 1.
