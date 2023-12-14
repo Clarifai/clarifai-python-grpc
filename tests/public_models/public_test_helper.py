@@ -55,31 +55,6 @@ TRANSLATION_TEST_DATA = {
 # general visual detection models (yolo, detic)
 # Data Structure: {MODEL_NAME: [title, model, app, user]}
 OBJECT_DETECTION_MODELS = {
-    "YOLOV6_S": [
-        "general-detector-yolov6s-coco",
-        "yolov6s-coco",
-        "yolov6",
-        "meituan",
-    ],
-    "YOLOV6_NANO": [
-        "general-detector-yolov6n-coco",
-        "yolov6n-coco",
-        "yolov6",
-        "meituan",
-    ],
-    "YOLOV7": ["general-detector-yolov7-coco", "yolov7", "yolov7", "wongkinyiu"],
-    "YOLOV7_E6": [
-        "general-image-detector-yolov7-e6-coco",
-        "yolov7-e6",
-        "yolov7",
-        "wongkinyiu",
-    ],
-    "YOLOV7_X": [
-        "general-image-detector-yolov7-x-coco",
-        "yolov7-x",
-        "yolov7",
-        "wongkinyiu",
-    ],
     "BLAZE_FACE_DETECTOR": [
         "general-image-detector-blazeface_ssh-widerface",
         "general-image-detector-blazeface_ssh-widerface",
