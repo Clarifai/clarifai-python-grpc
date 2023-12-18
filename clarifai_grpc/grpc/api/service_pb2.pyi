@@ -8105,6 +8105,31 @@ class DeleteModuleVersionsRequest(google.protobuf.message.Message):
 global___DeleteModuleVersionsRequest = DeleteModuleVersionsRequest
 
 @typing_extensions.final
+class GetModuleVersionUsageCountRequest(google.protobuf.message.Message):
+    """Request to get the number of installations (by all users) for the module version"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    MODULE_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: builtins.str
+    module_version_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+        module_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["module_id", b"module_id", "module_version_id", b"module_version_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetModuleVersionUsageCountRequest = GetModuleVersionUsageCountRequest
+
+@typing_extensions.final
 class SingleModuleVersionResponse(google.protobuf.message.Message):
     """SingleModuleVersionResponse"""
 
@@ -8149,6 +8174,28 @@ class MultiModuleVersionResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["module_versions", b"module_versions", "status", b"status"]) -> None: ...
 
 global___MultiModuleVersionResponse = MultiModuleVersionResponse
+
+@typing_extensions.final
+class SingleModuleVersionUsageCountResponse(google.protobuf.message.Message):
+    """SingleModuleVersionUsageCountResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    USAGE_COUNT_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    usage_count: builtins.int
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        usage_count: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "usage_count", b"usage_count"]) -> None: ...
+
+global___SingleModuleVersionUsageCountResponse = SingleModuleVersionUsageCountResponse
 
 @typing_extensions.final
 class GetInstalledModuleVersionRequest(google.protobuf.message.Message):

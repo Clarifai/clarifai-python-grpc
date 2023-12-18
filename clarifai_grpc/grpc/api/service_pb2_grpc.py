@@ -944,6 +944,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.GetModuleVersionUsageCount = channel.unary_unary(
+                '/clarifai.api.V2/GetModuleVersionUsageCount',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleVersionUsageCountRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleVersionUsageCountResponse),
+                )
         self.GetInstalledModuleVersion = channel.unary_unary(
                 '/clarifai.api.V2/GetInstalledModuleVersion',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetInstalledModuleVersionRequest.SerializeToString,
@@ -2465,6 +2470,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetModuleVersionUsageCount(self, request, context):
+        """Get usage count for specific module version.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetInstalledModuleVersion(self, request, context):
         """Get installed modules vesrions for an app.
         """
@@ -3617,6 +3629,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteModuleVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'GetModuleVersionUsageCount': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetModuleVersionUsageCount,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleVersionUsageCountRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleVersionUsageCountResponse.SerializeToString,
             ),
             'GetInstalledModuleVersion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetInstalledModuleVersion,
@@ -6897,6 +6914,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteModuleVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetModuleVersionUsageCount(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetModuleVersionUsageCount',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleVersionUsageCountRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleModuleVersionUsageCountResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
