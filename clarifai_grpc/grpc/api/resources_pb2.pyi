@@ -7038,6 +7038,7 @@ class Collector(google.protobuf.message.Message):
     POST_QUEUE_WORKFLOW_ID_FIELD_NUMBER: builtins.int
     COLLECTOR_SOURCE_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
+    COLLECT_OUTPUTS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Unique ID for the collector."""
     description: builtins.str
@@ -7093,6 +7094,10 @@ class Collector(google.protobuf.message.Message):
         Status for the collector. This allows you to pause a collector without having to delete it as
         an example.
         """
+    collect_outputs: builtins.bool
+    """Whether to collect outputs or not. Default is false. If selected, outputs from the 
+    original model predict call will be posted as annotations along with the input with success status.
+    """
     def __init__(
         self,
         *,
@@ -7104,9 +7109,10 @@ class Collector(google.protobuf.message.Message):
         post_queue_workflow_id: builtins.str = ...,
         collector_source: global___CollectorSource | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        collect_outputs: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["collector_source", b"collector_source", "created_at", b"created_at", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["collector_source", b"collector_source", "created_at", b"created_at", "description", b"description", "id", b"id", "post_queue_workflow_id", b"post_queue_workflow_id", "pre_queue_random_sample", b"pre_queue_random_sample", "pre_queue_workflow_id", b"pre_queue_workflow_id", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["collect_outputs", b"collect_outputs", "collector_source", b"collector_source", "created_at", b"created_at", "description", b"description", "id", b"id", "post_queue_workflow_id", b"post_queue_workflow_id", "pre_queue_random_sample", b"pre_queue_random_sample", "pre_queue_workflow_id", b"pre_queue_workflow_id", "status", b"status"]) -> None: ...
 
 global___Collector = Collector
 

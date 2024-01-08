@@ -1672,7 +1672,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListModelInputs(self, request, context):
-        """List all the inputs.
+        """Deprecated: Unmaintained and ideally replaced with usage of datasets
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
