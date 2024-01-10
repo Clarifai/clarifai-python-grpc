@@ -3521,9 +3521,8 @@ global___OutputConfig = OutputConfig
 
 @typing_extensions.final
 class ModelType(google.protobuf.message.Message):
-    """ModelSpec is a definition of a Model type. This is used in model mode of portal
-    to list out the possible models that can be created and can be used to understand more about
-    the possible models in our platform.
+    """ModelType is a definition of a set of models that generally have the same input and output fields. 
+    This is used to understand more about the possible models in our platform.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -3542,24 +3541,26 @@ class ModelType(google.protobuf.message.Message):
     EXPECTED_OUTPUT_LAYERS_FIELD_NUMBER: builtins.int
     EVALUATION_TYPE_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """A unique identifies for this model type. This is differnt than the 'type' field below because
-    the 'type' can be re-used for differnet input and output combinations whereas 'id' is always
-    unique.
-    """
+    """A unique identifier for this model type."""
     title: builtins.str
-    """title for this model in model gallery"""
+    """A display title for this model."""
     description: builtins.str
     """Description of this model type."""
     @property
     def input_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The list of input fields that this model accepts. These are the keys of the Model's
-        InputInfo.fields_map
+        """For both input_fields and output_fields below, the following hold true:
+        - They are both lists of strings that name the fields from the Data proto
+        - Individual entries in the list can be comma-separated lists. Each element of it is expected to be present in an incoming data example.
+        - There is not currently a notion of fields that can be "OR separated". "OR separated" meaning any combination of the fields can be present.
+        - Multiple entries in the list imply that inputs come from different input sources.
+        - Both are used to validate which models can be chained before and after each other inside a workflow.
+
+        The list of input fields that this model expects as inputs.
+        Used to validate that request input data has the expected fields.
         """
     @property
     def output_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The list of output fields that this model accepts. These are the keys of the Model's
-        OutputInfo.fields_map
-        """
+        """The list of output fields that this model accepts."""
     trainable: builtins.bool
     """Is this model trainable in our platform."""
     creatable: builtins.bool
@@ -3570,23 +3571,19 @@ class ModelType(google.protobuf.message.Message):
     """Is this model type only for internal users at this time."""
     @property
     def model_type_fields(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]:
-        """The remaining fields are definitions of the configurable fields that exist.
-        Each field has path into the Model object such as "name" as a top level or "output_info.data"
-        if it's the Data object within the OutputInfo object. We decided to not break these up
-        into input_info, train_info and output_info related parameters and instead use the path
-        so that they are most flexible.
-        """
+        """The remaining fields are definitions of the configurable fields that exist."""
     requires_sequential_frames: builtins.bool
     """For sequence models we need to know when processing that they require temporal time frames
     in sequential order. This will be true for model types like trackers as an example.
     """
     @property
     def expected_input_layers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelLayerInfo]:
-        """Expected input layers of an uploaded model"""
+        """Expected input layers of an uploaded model."""
     @property
     def expected_output_layers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelLayerInfo]:
         """Expected output layers of an uploaded model"""
     evaluation_type: global___EvaluationType.ValueType
+    """What type of evaluation is supported for this model type."""
     def __init__(
         self,
         *,
@@ -3802,7 +3799,7 @@ class ModelTypeField(google.protobuf.message.Message):
     REQUIRED_FIELD_NUMBER: builtins.int
     MODEL_TYPE_RANGE_INFO_FIELD_NUMBER: builtins.int
     path: builtins.str
-    """The path where the value of the field will be stored.
+    """The path where the value of the field will be stored in the model version object.
     Example:
     "output_info.data" would be the Data message in the OutputInfo message.
     "output_info.output_config.language" is in the OutputConfig message within OutputInfo
@@ -4043,13 +4040,18 @@ class ModelVersion(google.protobuf.message.Message):
     license: builtins.str
     @property
     def output_info(self) -> global___OutputInfo:
-        """Info about the model's output and configuration."""
+        """Info about the model's output. Besides `output_info.data`, these fields should
+        be reserved for parameters that affect the models outputs when inferencing.
+        `output_info.data` is used to specify the training concepts for this model version.
+        """
     @property
     def input_info(self) -> global___InputInfo:
-        """Info about the models' input and configuration of them."""
+        """Info about preprocessing the models inputs, before they are sent to this model for training or inferencing.
+        E.g.: `input_info.base_embed_model` lets us know inputs should be ran through a base model before being sent to an embedding-classifier.
+        """
     @property
     def train_info(self) -> global___TrainInfo:
-        """Configuration for the training process of this model."""
+        """Configuration for the training process of this model version."""
     @property
     def import_info(self) -> global___ImportInfo:
         """Configuration used to import model from third-party toolkits"""
