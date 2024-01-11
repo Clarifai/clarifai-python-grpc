@@ -4624,6 +4624,7 @@ class EvalMetrics(google.protobuf.message.Message):
     ID_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     GROUND_TRUTH_DATASET_FIELD_NUMBER: builtins.int
+    PREDICTIONS_DATASET_FIELD_NUMBER: builtins.int
     SUMMARY_FIELD_NUMBER: builtins.int
     CONFUSION_MATRIX_FIELD_NUMBER: builtins.int
     COOCCURRENCE_MATRIX_FIELD_NUMBER: builtins.int
@@ -4649,6 +4650,9 @@ class EvalMetrics(google.protobuf.message.Message):
     @property
     def ground_truth_dataset(self) -> global___Dataset:
         """The ground truth dataset"""
+    @property
+    def predictions_dataset(self) -> global___Dataset:
+        """The dataset with predictions"""
     @property
     def summary(self) -> global___MetricsSummary: ...
     @property
@@ -4683,6 +4687,7 @@ class EvalMetrics(google.protobuf.message.Message):
         id: builtins.str = ...,
         model: global___Model | None = ...,
         ground_truth_dataset: global___Dataset | None = ...,
+        predictions_dataset: global___Dataset | None = ...,
         summary: global___MetricsSummary | None = ...,
         confusion_matrix: global___ConfusionMatrix | None = ...,
         cooccurrence_matrix: global___CooccurrenceMatrix | None = ...,
@@ -4695,8 +4700,8 @@ class EvalMetrics(google.protobuf.message.Message):
         eval_info: global___EvalInfo | None = ...,
         extended_metrics: global___ExtendedMetrics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "label_counts", b"label_counts", "model", b"model", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "model", b"model", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "label_counts", b"label_counts", "model", b"model", "predictions_dataset", b"predictions_dataset", "status", b"status", "summary", b"summary"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "binary_metrics", b"binary_metrics", "confusion_matrix", b"confusion_matrix", "cooccurrence_matrix", b"cooccurrence_matrix", "eval_info", b"eval_info", "extended_metrics", b"extended_metrics", "ground_truth_dataset", b"ground_truth_dataset", "id", b"id", "label_counts", b"label_counts", "metrics_by_area", b"metrics_by_area", "metrics_by_class", b"metrics_by_class", "model", b"model", "predictions_dataset", b"predictions_dataset", "status", b"status", "summary", b"summary", "test_set", b"test_set", "tracker_metrics", b"tracker_metrics", "user_id", b"user_id"]) -> None: ...
 
 global___EvalMetrics = EvalMetrics
 
