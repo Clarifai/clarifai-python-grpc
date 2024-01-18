@@ -939,6 +939,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModuleVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse),
                 )
+        self.PatchModuleVersions = channel.unary_unary(
+                '/clarifai.api.V2/PatchModuleVersions',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModuleVersionsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse),
+                )
         self.DeleteModuleVersions = channel.unary_unary(
                 '/clarifai.api.V2/DeleteModuleVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModuleVersionsRequest.SerializeToString,
@@ -2463,6 +2468,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchModuleVersions(self, request, context):
+        """Modify details of an existing module version.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DeleteModuleVersions(self, request, context):
         """Delete a multiple module version.
         """
@@ -3623,6 +3635,11 @@ def add_V2Servicer_to_server(servicer, server):
             'PostModuleVersions': grpc.unary_unary_rpc_method_handler(
                     servicer.PostModuleVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModuleVersionsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.SerializeToString,
+            ),
+            'PatchModuleVersions': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchModuleVersions,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchModuleVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.SerializeToString,
             ),
             'DeleteModuleVersions': grpc.unary_unary_rpc_method_handler(
@@ -6896,6 +6913,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModuleVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModuleVersionsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchModuleVersions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchModuleVersions',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchModuleVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiModuleVersionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

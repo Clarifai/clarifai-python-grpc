@@ -8079,6 +8079,50 @@ class PostModuleVersionsRequest(google.protobuf.message.Message):
 global___PostModuleVersionsRequest = PostModuleVersionsRequest
 
 @typing_extensions.final
+class PatchModuleVersionsRequest(google.protobuf.message.Message):
+    """PatchModuleVersionsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODULE_ID_FIELD_NUMBER: builtins.int
+    MODULE_VERSIONS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    module_id: builtins.str
+    @property
+    def module_versions(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ModuleVersion]:
+        """This allows you to modify the module version details.
+        ########## Supported fields ##########
+        - description
+        - id
+        - metadata.fields
+        - module_nav.module_sub_navs[].query_key
+        - module_nav.module_sub_navs[].query_value
+        - module_nav.module_sub_navs[].title
+        - module_nav.title
+        - notes
+        - visibility.gettable
+        """
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now only action 'merge' is supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        module_id: builtins.str = ...,
+        module_versions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ModuleVersion] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "module_id", b"module_id", "module_versions", b"module_versions", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchModuleVersionsRequest = PatchModuleVersionsRequest
+
+@typing_extensions.final
 class DeleteModuleVersionsRequest(google.protobuf.message.Message):
     """Request to delete several module versions by the list of ids."""
 
