@@ -7001,6 +7001,7 @@ class ListTasksRequest(google.protobuf.message.Message):
     LABEL_ORDER_IDS_FIELD_NUMBER: builtins.int
     INCLUDING_LABEL_ORDER_TASKS_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -7029,6 +7030,9 @@ class ListTasksRequest(google.protobuf.message.Message):
         """(optional URL parameter) List of additional fields to be included in the response.
         Currently supported: all, worker.users, review.users.
         """
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional) task IDs to filter on"""
     def __init__(
         self,
         *,
@@ -7040,9 +7044,10 @@ class ListTasksRequest(google.protobuf.message.Message):
         label_order_ids: collections.abc.Iterable[builtins.str] | None = ...,
         including_label_order_tasks: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "including_label_order_tasks", b"including_label_order_tasks", "label_order_ids", b"label_order_ids", "page", b"page", "per_page", b"per_page", "review_user_ids", b"review_user_ids", "user_app_id", b"user_app_id", "worker_user_ids", b"worker_user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "ids", b"ids", "including_label_order_tasks", b"including_label_order_tasks", "label_order_ids", b"label_order_ids", "page", b"page", "per_page", b"per_page", "review_user_ids", b"review_user_ids", "user_app_id", b"user_app_id", "worker_user_ids", b"worker_user_ids"]) -> None: ...
 
 global___ListTasksRequest = ListTasksRequest
 
