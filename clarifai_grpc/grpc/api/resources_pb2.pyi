@@ -24,6 +24,35 @@ else:
 
 DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 
+class _WorkflowModelUseCase:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _WorkflowModelUseCaseEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_WorkflowModelUseCase.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    WORKFLOW_MODEL_USE_CASE_NOT_SET: _WorkflowModelUseCase.ValueType  # 0
+    CLASSIFICATION: _WorkflowModelUseCase.ValueType  # 1
+    """Classifier models without a detector parent (recursive check) in a workflow
+    are used for classification.
+    """
+    DETECTION: _WorkflowModelUseCase.ValueType  # 2
+    """Detector models in a workflow are used for detection.
+    Classifier models that run after a detector model are also used for detection.
+    """
+
+class WorkflowModelUseCase(_WorkflowModelUseCase, metaclass=_WorkflowModelUseCaseEnumTypeWrapper): ...
+
+WORKFLOW_MODEL_USE_CASE_NOT_SET: WorkflowModelUseCase.ValueType  # 0
+CLASSIFICATION: WorkflowModelUseCase.ValueType  # 1
+"""Classifier models without a detector parent (recursive check) in a workflow
+are used for classification.
+"""
+DETECTION: WorkflowModelUseCase.ValueType  # 2
+"""Detector models in a workflow are used for detection.
+Classifier models that run after a detector model are also used for detection.
+"""
+global___WorkflowModelUseCase = WorkflowModelUseCase
+
 class _DatasetVersionMetricsGroupType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -1381,20 +1410,27 @@ class ConceptQuery(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     LANGUAGE_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    USE_CASES_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the concept to search."""
     language: builtins.str
-    """(optional) The language of the concept name in a search. Defaults to English."""
+    """The language of the concept name in a search. Defaults to English."""
     workflow_id: builtins.str
-    """(optional) The id of workflow. If no id is provided, then application base workflow is used."""
+    """The id of workflow. If no id is provided, then application base workflow is used."""
+    @property
+    def use_cases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___WorkflowModelUseCase.ValueType]:
+        """The concepts must belong to workflow models with specified use cases.
+        Multiple values are joined using an OR condition.
+        """
     def __init__(
         self,
         *,
         name: builtins.str = ...,
         language: builtins.str = ...,
         workflow_id: builtins.str = ...,
+        use_cases: collections.abc.Iterable[global___WorkflowModelUseCase.ValueType] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "name", b"name", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "name", b"name", "use_cases", b"use_cases", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___ConceptQuery = ConceptQuery
 
@@ -3521,7 +3557,7 @@ global___OutputConfig = OutputConfig
 
 @typing_extensions.final
 class ModelType(google.protobuf.message.Message):
-    """ModelType is a definition of a set of models that generally have the same input and output fields. 
+    """ModelType is a definition of a set of models that generally have the same input and output fields.
     This is used to understand more about the possible models in our platform.
     """
 
@@ -6289,6 +6325,7 @@ class AppDuplication(google.protobuf.message.Message):
          - annotations
          - models
          - workflows
+         - installed_module_versions
         """
     def __init__(
         self,
@@ -6338,6 +6375,7 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     COPY_ANNOTATIONS_FIELD_NUMBER: builtins.int
     COPY_MODELS_FIELD_NUMBER: builtins.int
     COPY_WORKFLOWS_FIELD_NUMBER: builtins.int
+    COPY_INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     copy_inputs: builtins.bool
     """Copy inputs. Requires that copy_concepts is also set.
     Note that this will still copy input-level annotations even if copy_annotations is not set.
@@ -6350,6 +6388,8 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     """Copy models. Requires that copy_concepts is also set."""
     copy_workflows: builtins.bool
     """Copy workflows. Requires that copy_models and copy_concepts are also set."""
+    copy_installed_module_versions: builtins.bool
+    """Copy installed module versions."""
     def __init__(
         self,
         *,
@@ -6358,8 +6398,9 @@ class AppDuplicationFilters(google.protobuf.message.Message):
         copy_annotations: builtins.bool = ...,
         copy_models: builtins.bool = ...,
         copy_workflows: builtins.bool = ...,
+        copy_installed_module_versions: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["copy_annotations", b"copy_annotations", "copy_concepts", b"copy_concepts", "copy_inputs", b"copy_inputs", "copy_models", b"copy_models", "copy_workflows", b"copy_workflows"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["copy_annotations", b"copy_annotations", "copy_concepts", b"copy_concepts", "copy_inputs", b"copy_inputs", "copy_installed_module_versions", b"copy_installed_module_versions", "copy_models", b"copy_models", "copy_workflows", b"copy_workflows"]) -> None: ...
 
 global___AppDuplicationFilters = AppDuplicationFilters
 
@@ -7102,7 +7143,7 @@ class Collector(google.protobuf.message.Message):
         an example.
         """
     collect_outputs: builtins.bool
-    """Whether to collect outputs or not. Default is false. If selected, outputs from the 
+    """Whether to collect outputs or not. Default is false. If selected, outputs from the
     original model predict call will be posted as annotations along with the input with success status.
     """
     def __init__(
