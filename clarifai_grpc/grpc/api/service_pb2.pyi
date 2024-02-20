@@ -6973,7 +6973,7 @@ class GetTaskRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
-        Currently supported: all, worker.users, review.users.
+        Currently supported: all, worker.users, review.users, metrics.estimated_labeled_inputs_count.
         """
     def __init__(
         self,
@@ -7028,7 +7028,7 @@ class ListTasksRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
-        Currently supported: all, worker.users, review.users.
+        Currently supported: all, worker.users, review.users, metrics.estimated_labeled_inputs_count.
         """
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:

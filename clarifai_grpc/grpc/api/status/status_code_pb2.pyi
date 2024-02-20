@@ -490,6 +490,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Internal issues: 98xxx"""
     INTERNAL_FETCHING_ISSUE: _StatusCode.ValueType  # 98005
     INTERNAL_DATABASE_ISSUE: _StatusCode.ValueType  # 98006
+    INTERNAL_CONTEXT_CANCELED: _StatusCode.ValueType  # 98008
     INTERNAL_UNEXPECTED_TIMEOUT: _StatusCode.ValueType  # 98009
     INTERNAL_UNEXPECTED_V1: _StatusCode.ValueType  # 98010
     INTERNAL_UNEXPECTED_PANIC: _StatusCode.ValueType  # 98011
@@ -982,6 +983,7 @@ INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 INTERNAL_FETCHING_ISSUE: StatusCode.ValueType  # 98005
 INTERNAL_DATABASE_ISSUE: StatusCode.ValueType  # 98006
+INTERNAL_CONTEXT_CANCELED: StatusCode.ValueType  # 98008
 INTERNAL_UNEXPECTED_TIMEOUT: StatusCode.ValueType  # 98009
 INTERNAL_UNEXPECTED_V1: StatusCode.ValueType  # 98010
 INTERNAL_UNEXPECTED_PANIC: StatusCode.ValueType  # 98011
