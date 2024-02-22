@@ -6181,7 +6181,9 @@ global___NodeInput = NodeInput
 
 @typing_extensions.final
 class WorkflowResult(google.protobuf.message.Message):
-    """WorkflowResult"""
+    """WorkflowResult
+    One result per input in the workflow.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6204,11 +6206,17 @@ class WorkflowResult(google.protobuf.message.Message):
         "2017-04-11T21:50:50.223962Z"
         """
     @property
-    def model(self) -> global___Model: ...
+    def model(self) -> global___Model:
+        """The model that this WorkflowResult is for.
+        DEPRECATED: not sure why there ever was a model here because each output shows the model
+        that process this given input.
+        """
     @property
-    def input(self) -> global___Input: ...
+    def input(self) -> global___Input:
+        """The input that ran through the workflow to generate the outputs in this WorkflowResult."""
     @property
-    def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Output]: ...
+    def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Output]:
+        """For each model in the workflow we return an Output."""
     suppress_output: builtins.bool
     """Indicate if the output of this model is suppressed."""
     def __init__(

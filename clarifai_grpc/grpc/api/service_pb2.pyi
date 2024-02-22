@@ -5141,7 +5141,8 @@ class MultiOutputResponse(google.protobuf.message.Message):
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Output]: ...
+    def outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Output]:
+        """For each input processed during model prediction we create one output."""
     def __init__(
         self,
         *,
