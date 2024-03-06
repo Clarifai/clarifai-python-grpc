@@ -6660,7 +6660,7 @@ global___AiAssistParameters = AiAssistParameters
 
 @typing_extensions.final
 class TaskWorker(google.protobuf.message.Message):
-    """TaskWorker"""
+    """TaskWorker includes information about the workers that will work on this task."""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6690,42 +6690,46 @@ class TaskWorker(google.protobuf.message.Message):
     STRATEGY_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     USERS_FIELD_NUMBER: builtins.int
-    MODELS_FIELD_NUMBER: builtins.int
-    WORKFLOWS_FIELD_NUMBER: builtins.int
     PARTITIONED_STRATEGY_INFO_FIELD_NUMBER: builtins.int
+    WORKERS_FIELD_NUMBER: builtins.int
     strategy: global___TaskWorker.TaskWorkerStrategy.ValueType
     """Worker strategy."""
     @property
     def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Who will work on this task.
-        DEPRECATED: Use users.id instead.
+        DEPRECATED: Use workers.user.id instead.
         """
     @property
     def users(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___User]:
         """Users who will work on this task.
         When the 'worker.users' field is additionally requested, then all user
         info is filled for the workers. Otherwise, only the user 'id' is filled.
+        DEPRECATED: Use workers.user instead.
         """
     @property
-    def models(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Model]:
-        """Models that will work on this task. For Auto Annotation Tasks. Currently only supports 1 entry."""
-    @property
-    def workflows(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Workflow]:
-        """Workflows that will work on this task. For Auto Annotation Tasks. Currently only supports 1 entry."""
-    @property
     def partitioned_strategy_info(self) -> global___TaskWorkerPartitionedStrategyInfo: ...
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Worker]:
+        """Workers that will work on this task.
+
+        For Auto Annotation Tasks:
+          the worker can be either a model or a workflow;
+          currently only supports 1 worker.
+        For manual labeling Tasks:
+          the workers can only be users;
+          no limitation on number of workers.
+        """
     def __init__(
         self,
         *,
         strategy: global___TaskWorker.TaskWorkerStrategy.ValueType = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
         users: collections.abc.Iterable[global___User] | None = ...,
-        models: collections.abc.Iterable[global___Model] | None = ...,
-        workflows: collections.abc.Iterable[global___Workflow] | None = ...,
         partitioned_strategy_info: global___TaskWorkerPartitionedStrategyInfo | None = ...,
+        workers: collections.abc.Iterable[global___Worker] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy_info", b"strategy_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["models", b"models", "partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "user_ids", b"user_ids", "users", b"users", "workflows", b"workflows"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "user_ids", b"user_ids", "users", b"users", "workers", b"workers"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["strategy_info", b"strategy_info"]) -> typing_extensions.Literal["partitioned_strategy_info"] | None: ...
 
 global___TaskWorker = TaskWorker
