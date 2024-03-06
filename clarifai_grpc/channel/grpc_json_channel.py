@@ -116,9 +116,115 @@ class GRPCJSONChannel(object):
             response_deserializer,
         )
 
+    def stream_stream(self, name, request_serializer, response_deserializer):
+        # type: (str, typing.Callable, typing.Callable) -> JSONStreamStream
+        """Method to create the callable JSONStreamStream."""
+        request_message_descriptor, resources = self.name_to_resources[name]
+        return JSONStreamStream(
+            self.session,
+            request_message_descriptor,
+            resources,
+            request_serializer,
+            response_deserializer,
+        )
+
 
 class JSONUnaryUnary(object):
     """This mimics the unary_unary calls and is actually the thing doing the http requests."""
+
+    def __init__(
+        self,
+        session,  # type: requests.Session
+        request_message_descriptor,  # type: Descriptor
+        resources,  # type: typing.List[typing.Tuple[str, typing.Any]]
+        request_serializer,  # type: typing.Callable
+        response_deserializer,  # type: typing.Callable
+    ):
+        # type: (...) -> None
+        """
+        Args:
+          session: a request session
+          request_message_descriptor: this is a MessageDescriptor for the input type.
+          resources: a list of available resource endpoints
+          request_serializer: the method to use to serialize the request proto
+          response_deserializer: the response proto deserializer which will be used to convert the http
+                                 response will be parsed into this.
+
+        Returns:
+          response: a proto object of class response_deserializer filled in with the response.
+        """
+        self.session = session
+        self.request_message_descriptor = request_message_descriptor
+        self.resources = resources
+        self.request_serializer = request_serializer
+        self.response_deserializer = response_deserializer
+
+    def __call__(self, request, metadata=None):  # type: (Message, tuple) -> Message
+        """This is where the actually calls come through when the stub is called such as
+        stub.PostInputs(). They get passed to this method which actually makes the request.
+
+        Args:
+          request: the proto object for the request. It must be the proper type for the request or the
+            server will complain. Note: this doesn't type check the incoming request in the client but
+            does make sure it can serialize before sending to the server atleast.
+          metadata: the authorization string (either API key or Personal Access Token)
+
+        Returns:
+          response: the proto object that this method returns.
+        """
+        # if metadata is not None:
+        #   raise Exception("No support currently for metadata field.")
+
+        # There is no __self__ attribute on the request_serializer unfortunately.
+        expected_object_name = self.request_message_descriptor.name
+        if type(request).__name__ != expected_object_name:
+            raise Exception(
+                "The input request must be of type: %s from %s"
+                % (expected_object_name, self.request_message_descriptor.file.name)
+            )
+
+        params = protobuf_to_dict(request, use_integers_for_enums=False, ignore_show_empty=True)
+
+        url, method, url_fields = _pick_proper_endpoint(self.resources, params)
+
+        for url_field in url_fields:
+            if url_field in params:
+                del params[url_field]
+
+        auth_string = self._read_auth_string(metadata)
+
+        http = http_client.HttpClient(self.session, auth_string)
+        response_json = http.execute_request(method, params, url)
+
+        # Get the actual message object to construct
+        message = self.response_deserializer
+        result = dict_to_protobuf(message, response_json, ignore_unknown_fields=True)
+
+        return result
+
+    def _read_auth_string(self, metadata: typing.Tuple) -> str:
+        """
+        The auth string returned is either an API key or a PAT (Personal Access Token).
+        :param metadata: The call metadata.
+        :return: The auth string.
+        """
+
+        authorization_values = [v for k, v in metadata if k.lower() == "authorization"]
+        if (
+            len(authorization_values) != 1
+            or not authorization_values[0].startswith("Key ")
+            or len(authorization_values[0].split(" ")) != 2
+        ):
+            raise UsageError(
+                "Please provide metadata with the format of "
+                "(('authorization', 'Key YOUR_CLARIFAI_API_KEY'),)"
+            )
+        api_key = authorization_values[0].split(" ")[1]
+        return api_key
+
+
+class JSONStreamStream(object):
+    """This mimics the stream_stream calls and is actually the thing doing the http requests."""
 
     def __init__(
         self,

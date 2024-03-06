@@ -1058,6 +1058,63 @@ class MultiCollaborationsResponse(google.protobuf.message.Message):
 global___MultiCollaborationsResponse = MultiCollaborationsResponse
 
 @typing_extensions.final
+class GetResourcePriceRequest(google.protobuf.message.Message):
+    """Get Resource Price - new billing"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def model(self) -> proto.clarifai.api.resources_pb2.Model:
+        """########## Supported fields ##########
+        - id
+        - model_version.id
+        """
+    @property
+    def workflow(self) -> proto.clarifai.api.resources_pb2.Workflow:
+        """########## Supported fields ##########
+        - id
+        - version.id
+        """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model: proto.clarifai.api.resources_pb2.Model | None = ...,
+        workflow: proto.clarifai.api.resources_pb2.Workflow | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "resource", b"resource", "user_app_id", b"user_app_id", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "resource", b"resource", "user_app_id", b"user_app_id", "workflow", b"workflow"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["resource", b"resource"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
+
+global___GetResourcePriceRequest = GetResourcePriceRequest
+
+@typing_extensions.final
+class GetResourcePriceResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    price: builtins.int
+    """Price is in millicents, i.e. $1/100000"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        price: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["price", b"price", "status", b"status"]) -> None: ...
+
+global___GetResourcePriceResponse = GetResourcePriceResponse
+
+@typing_extensions.final
 class GetStatusCodeRequest(google.protobuf.message.Message):
     """GetStatusCodeRequest"""
 
@@ -4279,6 +4336,82 @@ class PostModelVersionsRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "eval_info", b"eval_info", "model_id", b"model_id", "model_versions", b"model_versions", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostModelVersionsRequest = PostModelVersionsRequest
+
+@typing_extensions.final
+class PostModelVersionsUploadRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    UPLOAD_CONFIG_FIELD_NUMBER: builtins.int
+    CONTENT_PART_FIELD_NUMBER: builtins.int
+    @property
+    def upload_config(self) -> global___PostModelVersionsUploadConfig: ...
+    @property
+    def content_part(self) -> proto.clarifai.api.resources_pb2.UploadContentPart: ...
+    def __init__(
+        self,
+        *,
+        upload_config: global___PostModelVersionsUploadConfig | None = ...,
+        content_part: proto.clarifai.api.resources_pb2.UploadContentPart | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["content_part", b"content_part", "upload_config", b"upload_config", "upload_data", b"upload_data"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["content_part", b"content_part", "upload_config", b"upload_config", "upload_data", b"upload_data"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["upload_data", b"upload_data"]) -> typing_extensions.Literal["upload_config", "content_part"] | None: ...
+
+global___PostModelVersionsUploadRequest = PostModelVersionsUploadRequest
+
+@typing_extensions.final
+class PostModelVersionsUploadResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    BYTES_REMAINING_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    bytes_remaining: builtins.int
+    model_version_id: builtins.str
+    """ID of the model version being uploaded"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        bytes_remaining: builtins.int = ...,
+        model_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bytes_remaining", b"bytes_remaining", "model_version_id", b"model_version_id", "status", b"status"]) -> None: ...
+
+global___PostModelVersionsUploadResponse = PostModelVersionsUploadResponse
+
+@typing_extensions.final
+class PostModelVersionsUploadConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_FIELD_NUMBER: builtins.int
+    TOTAL_SIZE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    """model to create version of"""
+    @property
+    def model_version(self) -> proto.clarifai.api.resources_pb2.ModelVersion:
+        """specification for the model version to be uploaded"""
+    total_size: builtins.int
+    """number of bytes in the model files to be uploaded"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version: proto.clarifai.api.resources_pb2.ModelVersion | None = ...,
+        total_size: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model_version", b"model_version", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "model_version", b"model_version", "total_size", b"total_size", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostModelVersionsUploadConfig = PostModelVersionsUploadConfig
 
 @typing_extensions.final
 class PostWorkflowVersionsUnPublishRequest(google.protobuf.message.Message):
