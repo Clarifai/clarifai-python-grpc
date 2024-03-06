@@ -115,7 +115,7 @@ class GRPCJSONChannel(object):
             request_serializer,
             response_deserializer,
         )
-    
+
     def stream_stream(self, name, request_serializer, response_deserializer):
         # type: (str, typing.Callable, typing.Callable) -> JSONStreamStream
         """Method to create the callable JSONStreamStream."""
@@ -315,6 +315,7 @@ class JSONStreamStream(object):
             )
         api_key = authorization_values[0].split(" ")[1]
         return api_key
+
 
 def _read_app_info(data):
     """
