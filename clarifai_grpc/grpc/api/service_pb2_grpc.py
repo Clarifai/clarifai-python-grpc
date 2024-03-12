@@ -454,6 +454,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse),
                 )
+        self.PutModelVersionExports = channel.unary_unary(
+                '/clarifai.api.V2/PutModelVersionExports',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutModelVersionExportsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse),
+                )
+        self.GetModelVersionExport = channel.unary_unary(
+                '/clarifai.api.V2/GetModelVersionExport',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionExportRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse),
+                )
         self.GetModelVersionMetrics = channel.unary_unary(
                 '/clarifai.api.V2/GetModelVersionMetrics',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionMetricsRequest.SerializeToString,
@@ -1022,7 +1032,7 @@ class V2Stub(object):
         self.PutTaskAssignments = channel.unary_unary(
                 '/clarifai.api.V2/PutTaskAssignments',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskAssignmentResponse),
                 )
         self.ListInputsAddJobs = channel.unary_unary(
                 '/clarifai.api.V2/ListInputsAddJobs',
@@ -1759,9 +1769,25 @@ class V2Servicer(object):
     def PostModelVersionsUpload(self, request_iterator, context):
         """This is a streaming endpoint, the request has a field, upload_data, which can either be the config for the upload or the actual data to upload.
         The config must be sent first before the model_bytes can be uploaded.
-        Once the config has been sent, the server will respond with a confirmation containing the model_version_id. 
+        Once the config has been sent, the server will respond with a confirmation containing the model_version_id.
         This is so that if your upload is interrupted, you can resume the upload by sending the config again with the model_version_id specified for your model_version.
         The actual upload will be done via a multipart upload, the latest successful part_id will be sent from the server in the response to the model_bytes.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PutModelVersionExports(self, request, context):
+        """Export a model
+
+        Export a model
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetModelVersionExport(self, request, context):
+        """GetModelVersionExport
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3184,6 +3210,16 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse.SerializeToString,
             ),
+            'PutModelVersionExports': grpc.unary_unary_rpc_method_handler(
+                    servicer.PutModelVersionExports,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutModelVersionExportsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse.SerializeToString,
+            ),
+            'GetModelVersionExport': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetModelVersionExport,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionExportRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse.SerializeToString,
+            ),
             'GetModelVersionMetrics': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModelVersionMetrics,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionMetricsRequest.FromString,
@@ -3752,7 +3788,7 @@ def add_V2Servicer_to_server(servicer, server):
             'PutTaskAssignments': grpc.unary_unary_rpc_method_handler(
                     servicer.PutTaskAssignments,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskAssignmentResponse.SerializeToString,
             ),
             'ListInputsAddJobs': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInputsAddJobs,
@@ -5307,6 +5343,40 @@ class V2(object):
         return grpc.experimental.stream_stream(request_iterator, target, '/clarifai.api.V2/PostModelVersionsUpload',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PutModelVersionExports(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutModelVersionExports',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PutModelVersionExportsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetModelVersionExport(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetModelVersionExport',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetModelVersionExportRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelVersionExportResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -7244,7 +7314,7 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PutTaskAssignments',
             proto_dot_clarifai_dot_api_dot_service__pb2.PutTaskAssignmentsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTaskAssignmentResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

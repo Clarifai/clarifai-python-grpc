@@ -145,6 +145,11 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Used when a model reference field is not set properly"""
     MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: _StatusCode.ValueType  # 21420
     """Used when a model example input field is not set properly"""
+    MODEL_EXPORTED: _StatusCode.ValueType  # 21500
+    """Model Export status codes"""
+    MODEL_EXPORTING: _StatusCode.ValueType  # 21501
+    MODEL_EXPORTING_FAILED: _StatusCode.ValueType  # 21502
+    MODEL_EXPORT_PENDING: _StatusCode.ValueType  # 21503
     WORKFLOW_NO_MATCHING_INPUT: _StatusCode.ValueType  # 22001
     """Workflow related 22xxx
 
@@ -407,6 +412,10 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Certain task-related scenarios are not implemented."""
     TASK_MISSING: _StatusCode.ValueType  # 54102
     """Task was not found."""
+    TASK_ASSIGNMENT_SUCCESS: _StatusCode.ValueType  # 54200
+    TASK_ASSIGNMENT_PENDING: _StatusCode.ValueType  # 54201
+    TASK_ASSIGNMENT_AWAITING_REVIEW: _StatusCode.ValueType  # 54202
+    TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: _StatusCode.ValueType  # 54203
     LABEL_ORDER_PENDING: _StatusCode.ValueType  # 55001
     """Label Order Related Status Code 55xxx"""
     LABEL_ORDER_IN_PROGRESS: _StatusCode.ValueType  # 55002
@@ -638,6 +647,11 @@ MODEL_REFERENCE_INVALID_ARGUMENT: StatusCode.ValueType  # 21400
 """Used when a model reference field is not set properly"""
 MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: StatusCode.ValueType  # 21420
 """Used when a model example input field is not set properly"""
+MODEL_EXPORTED: StatusCode.ValueType  # 21500
+"""Model Export status codes"""
+MODEL_EXPORTING: StatusCode.ValueType  # 21501
+MODEL_EXPORTING_FAILED: StatusCode.ValueType  # 21502
+MODEL_EXPORT_PENDING: StatusCode.ValueType  # 21503
 WORKFLOW_NO_MATCHING_INPUT: StatusCode.ValueType  # 22001
 """Workflow related 22xxx
 
@@ -900,6 +914,10 @@ TASK_NOT_IMPLEMENTED: StatusCode.ValueType  # 54101
 """Certain task-related scenarios are not implemented."""
 TASK_MISSING: StatusCode.ValueType  # 54102
 """Task was not found."""
+TASK_ASSIGNMENT_SUCCESS: StatusCode.ValueType  # 54200
+TASK_ASSIGNMENT_PENDING: StatusCode.ValueType  # 54201
+TASK_ASSIGNMENT_AWAITING_REVIEW: StatusCode.ValueType  # 54202
+TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: StatusCode.ValueType  # 54203
 LABEL_ORDER_PENDING: StatusCode.ValueType  # 55001
 """Label Order Related Status Code 55xxx"""
 LABEL_ORDER_IN_PROGRESS: StatusCode.ValueType  # 55002

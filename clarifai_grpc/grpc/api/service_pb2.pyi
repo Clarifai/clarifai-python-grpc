@@ -46,6 +46,29 @@ DECLINED: OrganizationInvitationStatus.ValueType  # 4
 EXPIRED: OrganizationInvitationStatus.ValueType  # 5
 global___OrganizationInvitationStatus = OrganizationInvitationStatus
 
+class _PutTaskAssignmentsRequestAction:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _PutTaskAssignmentsRequestActionEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_PutTaskAssignmentsRequestAction.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    PUT_TASK_ASSIGNMENTS_REQUEST_ACTION_NOT_SET: _PutTaskAssignmentsRequestAction.ValueType  # 0
+    LABEL_START: _PutTaskAssignmentsRequestAction.ValueType  # 1
+    LABEL_SUBMIT: _PutTaskAssignmentsRequestAction.ValueType  # 2
+    REVIEW_START: _PutTaskAssignmentsRequestAction.ValueType  # 10
+    REVIEW_APPROVE: _PutTaskAssignmentsRequestAction.ValueType  # 11
+    REVIEW_REQUEST_CHANGES: _PutTaskAssignmentsRequestAction.ValueType  # 12
+
+class PutTaskAssignmentsRequestAction(_PutTaskAssignmentsRequestAction, metaclass=_PutTaskAssignmentsRequestActionEnumTypeWrapper): ...
+
+PUT_TASK_ASSIGNMENTS_REQUEST_ACTION_NOT_SET: PutTaskAssignmentsRequestAction.ValueType  # 0
+LABEL_START: PutTaskAssignmentsRequestAction.ValueType  # 1
+LABEL_SUBMIT: PutTaskAssignmentsRequestAction.ValueType  # 2
+REVIEW_START: PutTaskAssignmentsRequestAction.ValueType  # 10
+REVIEW_APPROVE: PutTaskAssignmentsRequestAction.ValueType  # 11
+REVIEW_REQUEST_CHANGES: PutTaskAssignmentsRequestAction.ValueType  # 12
+global___PutTaskAssignmentsRequestAction = PutTaskAssignmentsRequestAction
+
 @typing_extensions.final
 class Pagination(google.protobuf.message.Message):
     """Split the results into pages."""
@@ -4414,6 +4437,79 @@ class PostModelVersionsUploadConfig(google.protobuf.message.Message):
 global___PostModelVersionsUploadConfig = PostModelVersionsUploadConfig
 
 @typing_extensions.final
+class PutModelVersionExportsRequest(google.protobuf.message.Message):
+    """PutModelVersionExportsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    version_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
+global___PutModelVersionExportsRequest = PutModelVersionExportsRequest
+
+@typing_extensions.final
+class GetModelVersionExportRequest(google.protobuf.message.Message):
+    """GetModelVersionExportRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    version_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+
+global___GetModelVersionExportRequest = GetModelVersionExportRequest
+
+@typing_extensions.final
+class SingleModelVersionExportResponse(google.protobuf.message.Message):
+    """SingleModelVersionExportResponse"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    EXPORT_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def export(self) -> proto.clarifai.api.resources_pb2.ModelVersionExport: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        export: proto.clarifai.api.resources_pb2.ModelVersionExport | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["export", b"export", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["export", b"export", "status", b"status"]) -> None: ...
+
+global___SingleModelVersionExportResponse = SingleModelVersionExportResponse
+
+@typing_extensions.final
 class PostWorkflowVersionsUnPublishRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -7107,7 +7203,12 @@ class GetTaskRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
-        Currently supported: all, worker.users, review.users, metrics.estimated_labeled_inputs_count.
+        Currently supported additional fields:
+        - all
+        - worker.users
+        - review.users
+        - metrics.work.inputs_count_estimated
+        - metrics.work.inputs_percent_estimated
         """
     def __init__(
         self,
@@ -7162,7 +7263,12 @@ class ListTasksRequest(google.protobuf.message.Message):
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response.
-        Currently supported: all, worker.users, review.users, metrics.estimated_labeled_inputs_count.
+        Currently supported additional fields:
+        - all
+        - worker.users
+        - review.users
+        - metrics.work.inputs_count_estimated
+        - metrics.work.inputs_percent_estimated
         """
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -8762,21 +8868,72 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    LABEL_SUBMIT_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     task_id: builtins.str
     input_id: builtins.str
+    """Deprecated: use action and action_config instead.
+    Supported for backwards compatibility: setting this field is equivalent with
+    * action = LABEL_SUBMIT
+    * label_submit_config = [{"task_assignments": {"input": {"id": <input-id>}}}]
+    """
+    action: global___PutTaskAssignmentsRequestAction.ValueType
+    """Action to perform on selected task."""
+    @property
+    def label_submit_config(self) -> global___LabelSubmitConfig: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         task_id: builtins.str = ...,
         input_id: builtins.str = ...,
+        action: global___PutTaskAssignmentsRequestAction.ValueType = ...,
+        label_submit_config: global___LabelSubmitConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_id", b"input_id", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config"] | None: ...
 
 global___PutTaskAssignmentsRequest = PutTaskAssignmentsRequest
+
+@typing_extensions.final
+class LabelSubmitConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_ASSIGNMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def task_assignments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskAssignment]: ...
+    def __init__(
+        self,
+        *,
+        task_assignments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskAssignment] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments"]) -> None: ...
+
+global___LabelSubmitConfig = LabelSubmitConfig
+
+@typing_extensions.final
+class MultiTaskAssignmentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    TASK_ASSIGNMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def task_assignments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskAssignment]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        task_assignments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskAssignment] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "task_assignments", b"task_assignments"]) -> None: ...
+
+global___MultiTaskAssignmentResponse = MultiTaskAssignmentResponse
 
 @typing_extensions.final
 class ListInputsAddJobsRequest(google.protobuf.message.Message):
