@@ -4125,6 +4125,34 @@ class ModelVersion(google.protobuf.message.Message):
 global___ModelVersion = ModelVersion
 
 @typing_extensions.final
+class ModelVersionExport(google.protobuf.message.Message):
+    """ModelVersionExport contains metadata for a single Model version export."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    SIZE_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """status is the current status of the dataset version export."""
+    url: builtins.str
+    """url is the URL from where the model version export can be downloaded."""
+    size: builtins.int
+    """size of model file"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        url: builtins.str = ...,
+        size: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["size", b"size", "status", b"status", "url", b"url"]) -> None: ...
+
+global___ModelVersionExport = ModelVersionExport
+
+@typing_extensions.final
 class PretrainedModelConfig(google.protobuf.message.Message):
     """PretrainedModelConfig"""
 
@@ -6976,6 +7004,55 @@ class TaskAIAssistant(google.protobuf.message.Message):
 global___TaskAIAssistant = TaskAIAssistant
 
 @typing_extensions.final
+class TaskAssignment(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    WORKER_FIELD_NUMBER: builtins.int
+    INPUT_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Creation time.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent modification time.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    @property
+    def worker(self) -> global___Worker:
+        """Assigned worker."""
+    @property
+    def input(self) -> global___Input:
+        """Assigned input."""
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """Assignment status.
+        Read as: This is the status of the work assigned to worker W, on input I in task T.
+        """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        worker: global___Worker | None = ...,
+        input: global___Input | None = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "input", b"input", "modified_at", b"modified_at", "status", b"status", "worker", b"worker"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "id", b"id", "input", b"input", "modified_at", b"modified_at", "status", b"status", "worker", b"worker"]) -> None: ...
+
+global___TaskAssignment = TaskAssignment
+
+@typing_extensions.final
 class TaskStatusCountPerUser(google.protobuf.message.Message):
     """TaskStatusCountPerUser can represents count of human created annotations for a user for each valid status,
     count of inputs (anchor annotation) for a user for each valid status
@@ -7095,16 +7172,40 @@ global___TaskConcept = TaskConcept
 class TaskMetrics(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    ESTIMATED_LABELED_INPUTS_COUNT_FIELD_NUMBER: builtins.int
-    estimated_labeled_inputs_count: builtins.int
+    WORK_FIELD_NUMBER: builtins.int
+    @property
+    def work(self) -> global___TaskWorkMetrics: ...
     def __init__(
         self,
         *,
-        estimated_labeled_inputs_count: builtins.int = ...,
+        work: global___TaskWorkMetrics | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["estimated_labeled_inputs_count", b"estimated_labeled_inputs_count"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["work", b"work"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["work", b"work"]) -> None: ...
 
 global___TaskMetrics = TaskMetrics
+
+@typing_extensions.final
+class TaskWorkMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_COUNT_ESTIMATED_FIELD_NUMBER: builtins.int
+    INPUTS_PERCENT_ESTIMATED_FIELD_NUMBER: builtins.int
+    inputs_count_estimated: builtins.int
+    """Estimated number of inputs that workers have worked on."""
+    inputs_percent_estimated: builtins.int
+    """Estimated percent of inputs that workers have worked on.
+    This is a value between 0 and 100, where 0 = 0% and 100 = 100%.
+    """
+    def __init__(
+        self,
+        *,
+        inputs_count_estimated: builtins.int = ...,
+        inputs_percent_estimated: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
+
+global___TaskWorkMetrics = TaskWorkMetrics
 
 @typing_extensions.final
 class Collector(google.protobuf.message.Message):
