@@ -27,7 +27,7 @@ def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
 
     opener = build_opener(HTTPHandler)
-    full_url = f"https://{base_url}/v2{url}"
+    full_url = f"{base_url}/v2{url}"
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
