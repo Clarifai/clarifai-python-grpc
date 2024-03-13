@@ -18,11 +18,14 @@ def test_concept_post_get_patch(channel):
             concepts=[resources_pb2.Concept(id=random_concept_id, name=random_concept_name)]
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_concepts_response)
 
     get_concepts_response = stub.GetConcept(
-        service_pb2.GetConceptRequest(concept_id=random_concept_id), metadata=metadata()
+        service_pb2.GetConceptRequest(concept_id=random_concept_id),
+        metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(get_concepts_response)
     assert get_concepts_response.concept.id == random_concept_id
@@ -37,6 +40,7 @@ def test_concept_post_get_patch(channel):
             ]
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     assert (
         duplicated_post_concepts_response.status.code
@@ -50,6 +54,7 @@ def test_concept_post_get_patch(channel):
             concept_query=resources_pb2.ConceptQuery(name=random_concept_name)
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_concepts_searches_response)
     assert random_concept_name in post_concepts_searches_response.concepts[0].name
@@ -60,6 +65,7 @@ def test_concept_post_get_patch(channel):
             concepts=[resources_pb2.Concept(id=random_concept_id, name="some new concept name")],
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(patch_concepts_response)
 
@@ -79,6 +85,7 @@ def test_patching_public_concept_fails(channel):
             ],
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     assert (
         patch_concepts_searches_response.status.code

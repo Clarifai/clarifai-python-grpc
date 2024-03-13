@@ -196,6 +196,7 @@ class SetupImage:
                 ]
             ),
             metadata=metadata(),
+            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(post_response)
         self._input = post_response.inputs[0]

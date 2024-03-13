@@ -11,6 +11,7 @@ def test_search_public_concepts_in_english(channel):
             concept_query=resources_pb2.ConceptQuery(name="dog*")
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_concepts_searches_response)
     assert len(post_concepts_searches_response.concepts) > 0
@@ -25,6 +26,7 @@ def test_search_public_concepts_in_chinese(channel):
             concept_query=resources_pb2.ConceptQuery(name="狗*", language="zh")
         ),
         metadata=metadata(),
+        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_concepts_searches_response)
     assert len(post_concepts_searches_response.concepts) > 0
