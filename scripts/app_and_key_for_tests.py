@@ -25,7 +25,11 @@ def _assert_response_success(response):
 
 def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+    base_url_port = os.environ.get("CLARIFAI_GRPC_BASE_PORT", "")
     base_scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
+
+    if base_url_port != '':
+        base_url = base_url + ':' + base_url_port
 
     opener = build_opener(HTTPHandler)
     full_url = f"{base_scheme}://{base_url}/v2{url}"
