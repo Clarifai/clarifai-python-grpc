@@ -24,7 +24,6 @@ def test_post_inputs_data_source_single_public_archive(channel):
             app_pat=os.environ.get("CLARIFAI_API_KEY"),
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_data_source_response)
 
@@ -48,7 +47,6 @@ def test_post_inputs_data_source_public_cloud_directory(channel):
             app_pat=os.environ.get("CLARIFAI_API_KEY"),
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_data_source_response)
 

@@ -16,7 +16,6 @@ def test_list_collaborators_with_pat(channel):
             )
         ),
         metadata=metadata,
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     # We should have at least one app. If this turns out not to be the case and the
     # test fails, we should create it in this test.
@@ -31,6 +30,5 @@ def test_list_collaborators_with_pat(channel):
             )
         ),
         metadata=metadata,
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(list_collaborators_response)

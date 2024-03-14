@@ -28,7 +28,6 @@ def test_export_dataset_version(channel):
             datasets=[resources_pb2.Dataset(id=dataset_id)],
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_datasets_response)
 
@@ -61,7 +60,6 @@ def test_export_dataset_version(channel):
                 ],
             ),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(post_inputs_response)
 
@@ -97,7 +95,6 @@ def test_export_dataset_version(channel):
                 ],
             ),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(put_dataset_version_exports_response)
 
@@ -115,7 +112,6 @@ def test_export_dataset_version(channel):
                 dataset_version_id=dataset_version_id,
             ),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(get_dataset_version_response)
 
@@ -150,20 +146,17 @@ def test_export_dataset_version(channel):
                     dataset_version_ids=[dataset_version_id],
                 ),
                 metadata=metadata(),
-                insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
             )
 
         if input_ids:
             delete_inputs_response = stub.DeleteInputs(
                 service_pb2.DeleteInputsRequest(ids=input_ids),
                 metadata=metadata(),
-                insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
             )
 
         delete_datasets_response = stub.DeleteDatasets(
             service_pb2.DeleteDatasetsRequest(dataset_ids=[dataset_id]),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
 
         if dataset_version_id:

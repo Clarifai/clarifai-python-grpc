@@ -30,7 +30,6 @@ def test_post_list_patch_get_delete_image(channel):
             ]
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_response)
     input_id = post_response.inputs[0].id
@@ -39,9 +38,7 @@ def test_post_list_patch_get_delete_image(channel):
         wait_for_inputs_upload(stub, metadata(), [input_id])
 
         list_response = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=1),
-            metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
+            service_pb2.ListInputsRequest(per_page=1), metadata=metadata()
         )
         raise_on_failure(list_response)
         assert len(list_response.inputs) == 1
@@ -66,14 +63,11 @@ def test_post_list_patch_get_delete_image(channel):
                 ],
             ),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(patch_response)
 
         get_response = stub.GetInput(
-            service_pb2.GetInputRequest(input_id=input_id),
-            metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
+            service_pb2.GetInputRequest(input_id=input_id), metadata=metadata()
         )
         raise_on_failure(get_response)
         assert get_response.input.data.concepts[0].name == "some-new-concept"
@@ -101,7 +95,6 @@ def test_post_delete_batch_images(channel):
             ]
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_response)
     input_id1 = post_response.inputs[0].id
@@ -149,16 +142,13 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
             ]
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_response)
 
     wait_for_inputs_upload(stub, metadata(), [input_id])
 
     get_response = stub.GetInput(
-        service_pb2.GetInputRequest(input_id=input_id),
-        metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
+        service_pb2.GetInputRequest(input_id=input_id), metadata=metadata()
     )
     raise_on_failure(get_response)
 
@@ -193,7 +183,6 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
             ],
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(patch_response)
     inp = patch_response.inputs[0]
@@ -224,7 +213,6 @@ def test_image_with_bytes(channel):
             ]
         ),
         metadata=metadata(),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
     raise_on_failure(post_response)
     input_id = post_response.inputs[0].id

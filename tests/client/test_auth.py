@@ -9,7 +9,6 @@ def test_invalid_api_key(channel):
     response = stub.ListModels(
         service_pb2.ListModelsRequest(),
         metadata=(("authorization", "Key SOME_INVALID_KEY"),),
-        insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
     )
 
     assert response.status.code == status_code_pb2.StatusCode.CONN_KEY_INVALID

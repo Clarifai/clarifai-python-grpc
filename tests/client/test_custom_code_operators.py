@@ -116,6 +116,5 @@ def test_post_predict_delete_custom_code_operator_model(channel):
         delete_mv_response = stub.DeleteModelVersion(
             service_pb2.DeleteModelVersionRequest(model_id=model_id, version_id=version_id),
             metadata=metadata(),
-            insecure=os.environ.get("CLARIFAI_INSECURE_GRPC", False),
         )
         raise_on_failure(delete_mv_response)
