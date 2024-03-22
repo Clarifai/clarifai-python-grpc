@@ -4035,6 +4035,8 @@ class ModelVersion(google.protobuf.message.Message):
     TRAIN_INFO_FIELD_NUMBER: builtins.int
     IMPORT_INFO_FIELD_NUMBER: builtins.int
     TRAIN_LOG_FIELD_NUMBER: builtins.int
+    INFERENCE_COMPUTE_INFO_FIELD_NUMBER: builtins.int
+    BUILD_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -4095,6 +4097,12 @@ class ModelVersion(google.protobuf.message.Message):
         """Configuration used to import model from third-party toolkits"""
     train_log: builtins.str
     """Contains the training logs if available"""
+    @property
+    def inference_compute_info(self) -> global___ComputeInfo:
+        """The minimum required compute resource for this model for inference."""
+    @property
+    def build_info(self) -> global___BuildInfo:
+        """Build information for the model version"""
     def __init__(
         self,
         *,
@@ -4118,11 +4126,37 @@ class ModelVersion(google.protobuf.message.Message):
         train_info: global___TrainInfo | None = ...,
         import_info: global___ImportInfo | None = ...,
         train_log: builtins.str = ...,
+        inference_compute_info: global___ComputeInfo | None = ...,
+        build_info: global___BuildInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["completed_at", b"completed_at", "created_at", b"created_at", "import_info", b"import_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ModelVersion = ModelVersion
+
+@typing_extensions.final
+class BuildInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DOCKER_IMAGE_NAME_FIELD_NUMBER: builtins.int
+    DOCKER_IMAGE_TAG_FIELD_NUMBER: builtins.int
+    DOCKER_IMAGE_DIGEST_FIELD_NUMBER: builtins.int
+    docker_image_name: builtins.str
+    """Docker image name"""
+    docker_image_tag: builtins.str
+    """Docker image tag"""
+    docker_image_digest: builtins.str
+    """Docker image digest"""
+    def __init__(
+        self,
+        *,
+        docker_image_name: builtins.str = ...,
+        docker_image_tag: builtins.str = ...,
+        docker_image_digest: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["docker_image_digest", b"docker_image_digest", "docker_image_name", b"docker_image_name", "docker_image_tag", b"docker_image_tag"]) -> None: ...
+
+global___BuildInfo = BuildInfo
 
 @typing_extensions.final
 class ModelVersionExport(google.protobuf.message.Message):
@@ -4544,6 +4578,8 @@ class EvalTestSetEntry(google.protobuf.message.Message):
     PREDICTED_CONCEPTS_FIELD_NUMBER: builtins.int
     GROUND_TRUTH_CONCEPTS_FIELD_NUMBER: builtins.int
     ANNOTATION_FIELD_NUMBER: builtins.int
+    PREDICTED_ANNOTATION_FIELD_NUMBER: builtins.int
+    GROUND_TRUTH_ANNOTATION_FIELD_NUMBER: builtins.int
     @property
     def input(self) -> global___Input:
         """the input information"""
@@ -4558,6 +4594,11 @@ class EvalTestSetEntry(google.protobuf.message.Message):
         Each annotation only contains one region
         And the concepts is in ground_truth_concepts instead of this annotation
         """
+    @property
+    def predicted_annotation(self) -> global___Annotation:
+        """For region based models, region and associated concepts are stored together."""
+    @property
+    def ground_truth_annotation(self) -> global___Annotation: ...
     def __init__(
         self,
         *,
@@ -4565,9 +4606,11 @@ class EvalTestSetEntry(google.protobuf.message.Message):
         predicted_concepts: collections.abc.Iterable[global___Concept] | None = ...,
         ground_truth_concepts: collections.abc.Iterable[global___Concept] | None = ...,
         annotation: global___Annotation | None = ...,
+        predicted_annotation: global___Annotation | None = ...,
+        ground_truth_annotation: global___Annotation | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "input", b"input"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "ground_truth_concepts", b"ground_truth_concepts", "input", b"input", "predicted_concepts", b"predicted_concepts"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "ground_truth_annotation", b"ground_truth_annotation", "input", b"input", "predicted_annotation", b"predicted_annotation"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation", b"annotation", "ground_truth_annotation", b"ground_truth_annotation", "ground_truth_concepts", b"ground_truth_concepts", "input", b"input", "predicted_annotation", b"predicted_annotation", "predicted_concepts", b"predicted_concepts"]) -> None: ...
 
 global___EvalTestSetEntry = EvalTestSetEntry
 
@@ -8935,7 +8978,15 @@ global___BookmarkOrigin = BookmarkOrigin
 
 @typing_extensions.final
 class Runner(google.protobuf.message.Message):
-    """An app module that a user created in our app module marketplace."""
+    """Moving the runner label matching into it's own object so that it can be used
+    next to other resource types that a Runner might match work on.
+    message RunnerLabels { // FUTURE
+      repeated string labels = 1;
+    }
+
+    A worker for compute within a nodepool of instances.
+    This asks the API for work
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -8946,8 +8997,14 @@ class Runner(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
+    NODEPOOL_FIELD_NUMBER: builtins.int
+    COMPUTE_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """A unique ID for this app module."""
+    """A unique ID for this app module.
+    This is a UUID since runners can be automatically orchestrated.
+    """
     description: builtins.str
     """A short description for this app module to be used in grids of modules."""
     @property
@@ -8963,10 +9020,37 @@ class Runner(google.protobuf.message.Message):
         This is an optional arg.
         """
     user_id: builtins.str
-    """The creator of the app module."""
+    """The owner of the runner. Runners belong to a user/org account."""
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Labels to match."""
+        """Labels to match in order to find work."""
+    @property
+    def model(self) -> global___Model:
+        """Model: match work to only a specific model."""
+    @property
+    def workflow(self) -> global___Workflow:
+        """Workflow: match work to only a specific workflow.
+        We could also support matching by labels here for future "job" like functionality where
+        the item itself fully defines the work that needs to be done.
+        RunnerLabels runner_labels = 11; // FUTURE
+        """
+    @property
+    def nodepool(self) -> global___Nodepool:
+        """Runners are defined within nodepools so this field needs the id and user_id of the nodepool
+        to be provided when creating a Runner.
+        This nodepool must be accessible to you or an org you are part of.
+        """
+    @property
+    def compute_info(self) -> global___ComputeInfo:
+        """//////////////////////////
+        Need resources on the runner so we can schedule this Runner into the Nodepool.
+        If this runner is being orchestrated for a model then the orchestrator will set this to the
+        model resource requirements. If a workflow then it'll compute those requirements and set
+        populate this resource field.
+        Having this on the underlying object like Model and Workflow allows us to represent the minimum
+        requirements on those object, which may be less than what the Runner allocates (as a safety
+        margin for the runner to for sure run the resource).
+        """
     def __init__(
         self,
         *,
@@ -8977,8 +9061,404 @@ class Runner(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         user_id: builtins.str = ...,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
+        model: global___Model | None = ...,
+        workflow: global___Workflow | None = ...,
+        nodepool: global___Nodepool | None = ...,
+        compute_info: global___ComputeInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "metadata", b"metadata", "model", b"model", "modified_at", b"modified_at", "nodepool", b"nodepool", "object", b"object", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "model", b"model", "modified_at", b"modified_at", "nodepool", b"nodepool", "object", b"object", "user_id", b"user_id", "workflow", b"workflow"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["object", b"object"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
 
 global___Runner = Runner
+
+@typing_extensions.final
+class Nodepool(google.protobuf.message.Message):
+    """A nodepool is a set of nodes dedicated for a given user's compute needs.
+    This compute will typically be consumed by runners and in the future other objects
+    like UI modules may be assigned to node pools.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _CapacityType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CapacityTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Nodepool._CapacityType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UKNOWN_CAPACITY_TYPE: Nodepool._CapacityType.ValueType  # 0
+        ONDEMAND_TYPE: Nodepool._CapacityType.ValueType  # 1
+        SPOT_TYPE: Nodepool._CapacityType.ValueType  # 2
+
+    class CapacityType(_CapacityType, metaclass=_CapacityTypeEnumTypeWrapper):
+        """Type of nodes that are ok for instances in this pool.
+        If both spot and on-demand are provided then the runner will be able to run on either
+        with a preference for spot until they are not available.
+        """
+
+    UKNOWN_CAPACITY_TYPE: Nodepool.CapacityType.ValueType  # 0
+    ONDEMAND_TYPE: Nodepool.CapacityType.ValueType  # 1
+    SPOT_TYPE: Nodepool.CapacityType.ValueType  # 2
+
+    ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    CLOUD_REGION_FIELD_NUMBER: builtins.int
+    CAPACITY_TYPES_FIELD_NUMBER: builtins.int
+    INSTANCE_TYPES_FIELD_NUMBER: builtins.int
+    MIN_INSTANCES_FIELD_NUMBER: builtins.int
+    MAX_INSTANCES_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """The user defined ID of the nodepool."""
+    user_id: builtins.str
+    """The user/org that this nodepool belongs to."""
+    @property
+    def cloud_region(self) -> global___CloudRegion:
+        """Which cloud region this nodepool is within."""
+    @property
+    def capacity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Nodepool.CapacityType.ValueType]: ...
+    @property
+    def instance_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """////////////////////////////////////
+        The instance types that will be available in this pool of nodes.
+        Clarifai offers multiple different choices that combine cpu cores, memory and accelerator.
+        ////////////////////////////////////
+        """
+    min_instances: builtins.int
+    """Minimum number of instances in this nodepool. This allows the nodeool to scale down to this
+    amount. A nodepool needs a minimum of 1 instance.
+    """
+    max_instances: builtins.int
+    """An upper limit on the number of instances in this nodepool. This allows the nodepool to scale
+    up to this amount.
+    """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        cloud_region: global___CloudRegion | None = ...,
+        capacity_types: collections.abc.Iterable[global___Nodepool.CapacityType.ValueType] | None = ...,
+        instance_types: collections.abc.Iterable[builtins.str] | None = ...,
+        min_instances: builtins.int = ...,
+        max_instances: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_region", b"cloud_region"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["capacity_types", b"capacity_types", "cloud_region", b"cloud_region", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "min_instances", b"min_instances", "user_id", b"user_id"]) -> None: ...
+
+global___Nodepool = Nodepool
+
+@typing_extensions.final
+class CloudRegion(google.protobuf.message.Message):
+    """We define a cloud region here to be used in Nodepools and by the cloud agent.
+    There will be one cloud agent per CloudRegion.
+    This allows us to define CloudRegions that are VPCs within one physical cloud and have that
+    managed by one cloud agent which can list all nodepools for that VPC to deploy them and
+    orchestrate work within them.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Cloud:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CloudEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[CloudRegion._Cloud.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UNKOWN_CLOUD: CloudRegion._Cloud.ValueType  # 0
+        SELF_HOSTED: CloudRegion._Cloud.ValueType  # 1
+        """Run on a user's own infrastructure. This has restrictions on who can access resources
+        that are being run by SELF_HOSTED runners. Only those who are part of the user/org where they
+        exist can leverage them.
+        """
+        AWS: CloudRegion._Cloud.ValueType  # 2
+        GCP: CloudRegion._Cloud.ValueType  # 3
+        AZURE: CloudRegion._Cloud.ValueType  # 4
+        LAMBDA: CloudRegion._Cloud.ValueType  # 5
+
+    class Cloud(_Cloud, metaclass=_CloudEnumTypeWrapper): ...
+    UNKOWN_CLOUD: CloudRegion.Cloud.ValueType  # 0
+    SELF_HOSTED: CloudRegion.Cloud.ValueType  # 1
+    """Run on a user's own infrastructure. This has restrictions on who can access resources
+    that are being run by SELF_HOSTED runners. Only those who are part of the user/org where they
+    exist can leverage them.
+    """
+    AWS: CloudRegion.Cloud.ValueType  # 2
+    GCP: CloudRegion.Cloud.ValueType  # 3
+    AZURE: CloudRegion.Cloud.ValueType  # 4
+    LAMBDA: CloudRegion.Cloud.ValueType  # 5
+
+    ID_FIELD_NUMBER: builtins.int
+    CLOUD_FIELD_NUMBER: builtins.int
+    REGION_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    cloud: global___CloudRegion.Cloud.ValueType
+    region: builtins.str
+    """The region. The naming here depends on the cloud choice above and will be validated
+    against which clouds+regions that Clarifai currently supports.
+    """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        cloud: global___CloudRegion.Cloud.ValueType = ...,
+        region: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud", b"cloud", "id", b"id", "region", b"region"]) -> None: ...
+
+global___CloudRegion = CloudRegion
+
+@typing_extensions.final
+class ComputeInfo(google.protobuf.message.Message):
+    """These are the resource needs of a given API object such as a model.
+    This is what they require as a minimum to run and will be used upon scheduling
+    as the request and limit for the k8s pod. If we want to separate limits and requests in the
+    future we can allow setting a limits ComputeInfo and a requests ComputeInfo.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NUM_CPUS_FIELD_NUMBER: builtins.int
+    CPU_MEMORY_FIELD_NUMBER: builtins.int
+    NUM_ACCELERATORS_FIELD_NUMBER: builtins.int
+    ACCELERATOR_MEMORY_FIELD_NUMBER: builtins.int
+    ACCELERATOR_TYPE_FIELD_NUMBER: builtins.int
+    num_cpus: builtins.int
+    """Number of CPUs."""
+    cpu_memory: builtins.str
+    """Amount of CPU memory to use as a minimum."""
+    num_accelerators: builtins.int
+    """Number of accelerators (typically GPUs, TPUs, etc. not CPUs) for this resource."""
+    accelerator_memory: builtins.str
+    """Amount of accelerator/GPU memory to use as a minimum.
+    This is defined per accelerator.
+    This follows the format used by kubernetes like 1Ki, 2Mi, 3Gi, 4Ti.
+    The supported accelerators that the resource can run on. If the resource requires a specific
+    accelerator type then it will only be scheduled on nodes that have that type of accelerator.
+    If there is no hard requirements beyond the number of accelerators and their memory then this
+    field can be left empty.
+    This setting will cause an error if num_accelerators == 0
+    """
+    @property
+    def accelerator_type(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Or should it be removed completely and use the nodepool accelerator type itself.
+        These are the supported accelerators that the model can run on.
+        """
+    def __init__(
+        self,
+        *,
+        num_cpus: builtins.int = ...,
+        cpu_memory: builtins.str = ...,
+        num_accelerators: builtins.int = ...,
+        accelerator_memory: builtins.str = ...,
+        accelerator_type: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_memory", b"accelerator_memory", "accelerator_type", b"accelerator_type", "cpu_memory", b"cpu_memory", "num_accelerators", b"num_accelerators", "num_cpus", b"num_cpus"]) -> None: ...
+
+global___ComputeInfo = ComputeInfo
+
+@typing_extensions.final
+class AutoscaleConfig(google.protobuf.message.Message):
+    """It might be better to do this as runner autoscaling so that resources
+    of a model are very simply what that model needs at minimum.
+    Note that resources for things like modes inside runners are not
+    related to how many replicas of those runners are needed to handle traffic.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
+    MAX_REPLICAS_FIELD_NUMBER: builtins.int
+    TRAFFIC_HISTORY_SECONDS_FIELD_NUMBER: builtins.int
+    SCALE_DOWN_DELAY_SECONDS_FIELD_NUMBER: builtins.int
+    SCALE_UP_DELAY_SECONDS_FIELD_NUMBER: builtins.int
+    ENABLE_PACKING_FIELD_NUMBER: builtins.int
+    min_replicas: builtins.int
+    """The minimum number of replicas for the runner to have.
+    Defaults to 0 which means autoscaling can scale down to zero.
+    If you want a replica always up then set to >= 1.
+    """
+    max_replicas: builtins.int
+    """The maximium number of replicas to scale up the runner to."""
+    traffic_history_seconds: builtins.int
+    """The number of seconds of traffic history to consider when autoscaling."""
+    scale_down_delay_seconds: builtins.int
+    """The time to wait before scaling down after the last request."""
+    scale_up_delay_seconds: builtins.int
+    """The time to wait between scaling up replicas without burst traffic."""
+    enable_packing: builtins.bool
+    """Depending on your plan you may be able to enable packing of resources into a single node
+    for more compute and cost efficiency.
+    """
+    def __init__(
+        self,
+        *,
+        min_replicas: builtins.int = ...,
+        max_replicas: builtins.int = ...,
+        traffic_history_seconds: builtins.int = ...,
+        scale_down_delay_seconds: builtins.int = ...,
+        scale_up_delay_seconds: builtins.int = ...,
+        enable_packing: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["enable_packing", b"enable_packing", "max_replicas", b"max_replicas", "min_replicas", b"min_replicas", "scale_down_delay_seconds", b"scale_down_delay_seconds", "scale_up_delay_seconds", b"scale_up_delay_seconds", "traffic_history_seconds", b"traffic_history_seconds"]) -> None: ...
+
+global___AutoscaleConfig = AutoscaleConfig
+
+@typing_extensions.final
+class Deployment(google.protobuf.message.Message):
+    """A deployment allows you to configure how runners for a particular type of resource will
+    scale up and down. These are unique per user_id, nodepool and model so for differnet nodepools
+    you can scale differently.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _SchedulingChoice:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _SchedulingChoiceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Deployment._SchedulingChoice.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UNKNOWN_SCHEDULING_CHOICE: Deployment._SchedulingChoice.ValueType  # 0
+        FAIL: Deployment._SchedulingChoice.ValueType  # 1
+        """fail if there is any ambiguity."""
+        RANDOM: Deployment._SchedulingChoice.ValueType  # 2
+        """randomly pick amongst the nodepools/nodes to assign."""
+        PRICE: Deployment._SchedulingChoice.ValueType  # 3
+        """choose the compute that is cheaper"""
+        PERFORMANCE: Deployment._SchedulingChoice.ValueType  # 4
+        """schedule to the fastest known iption."""
+        NETWORK: Deployment._SchedulingChoice.ValueType  # 5
+        """optimize based on network latency."""
+        UTILIZATION: Deployment._SchedulingChoice.ValueType  # 6
+        """send to the least used nodepool based on it's capacity."""
+        PREFER_SPOT: Deployment._SchedulingChoice.ValueType  # 7
+        """choose spot instances over on-demand"""
+        PREFER_ONDEMAND: Deployment._SchedulingChoice.ValueType  # 8
+        """choose on-demand instances over spot."""
+
+    class SchedulingChoice(_SchedulingChoice, metaclass=_SchedulingChoiceEnumTypeWrapper):
+        """In some scenarios it may not be obvous how we should schedule a resource to underlying nodes
+        within the nodepool(s) above. The SchedulerChoice allows us to specify how to decide which
+        nodepool to use when there are multiple nodepools and how to decide which type of node
+        within a nodepool if there are multiple types.
+        If here are multiple nondepools then a decision on which to use comes into play
+        if it is not specified in the prediction request.
+        Even with a single nodepool a choice may come up such as when a resource that needs scheduling
+        has not specified the accelerator types it supports and the nodepool has multiple types.
+        """
+
+    UNKNOWN_SCHEDULING_CHOICE: Deployment.SchedulingChoice.ValueType  # 0
+    FAIL: Deployment.SchedulingChoice.ValueType  # 1
+    """fail if there is any ambiguity."""
+    RANDOM: Deployment.SchedulingChoice.ValueType  # 2
+    """randomly pick amongst the nodepools/nodes to assign."""
+    PRICE: Deployment.SchedulingChoice.ValueType  # 3
+    """choose the compute that is cheaper"""
+    PERFORMANCE: Deployment.SchedulingChoice.ValueType  # 4
+    """schedule to the fastest known iption."""
+    NETWORK: Deployment.SchedulingChoice.ValueType  # 5
+    """optimize based on network latency."""
+    UTILIZATION: Deployment.SchedulingChoice.ValueType  # 6
+    """send to the least used nodepool based on it's capacity."""
+    PREFER_SPOT: Deployment.SchedulingChoice.ValueType  # 7
+    """choose spot instances over on-demand"""
+    PREFER_ONDEMAND: Deployment.SchedulingChoice.ValueType  # 8
+    """choose on-demand instances over spot."""
+
+    ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    AUTOSCALE_CONFIG_FIELD_NUMBER: builtins.int
+    NODEPOOLS_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
+    SCHEDULING_CHOICE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """An id for this configured deployment."""
+    user_id: builtins.str
+    """The user who owns the deployment. These live in the user/org account."""
+    @property
+    def autoscale_config(self) -> global___AutoscaleConfig:
+        """How to autoscale the object."""
+    @property
+    def nodepools(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Nodepool]:
+        """You can configure different autoscaling per nodepool(s).
+        These nodepools have to be also owned by the same user_id/org as this deployment.
+        If there is more than one nodepool we use the model's ComputeInfo to match
+        with what the nodepool provides to decide which one can handle it combined with the
+        NodepoolRank below. Note: even within a single nodepool if it is heterogeneous then
+        we need a way to rank scheduling choices when we don't know how to decide (like a model
+        supports
+        """
+    @property
+    def model(self) -> global___Model:
+        """Model"""
+    @property
+    def workflow(self) -> global___Workflow:
+        """Workflow
+        We could also support matching by labels here for future "job" like functionality where
+        the item itself fully defines the work that needs to be done.
+        This would match any resources that have these runner labels defined on them.
+        RunnerLabels runner_labels = 11; // FUTURE
+        """
+    scheduling_choice: global___Deployment.SchedulingChoice.ValueType
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        autoscale_config: global___AutoscaleConfig | None = ...,
+        nodepools: collections.abc.Iterable[global___Nodepool] | None = ...,
+        model: global___Model | None = ...,
+        workflow: global___Workflow | None = ...,
+        scheduling_choice: global___Deployment.SchedulingChoice.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "model", b"model", "object", b"object", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "id", b"id", "model", b"model", "nodepools", b"nodepools", "object", b"object", "scheduling_choice", b"scheduling_choice", "user_id", b"user_id", "workflow", b"workflow"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["object", b"object"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
+
+global___Deployment = Deployment
+
+@typing_extensions.final
+class RunnerSelector(google.protobuf.message.Message):
+    """////////////////////////////////////////
+    Don't need RunnerSelector if we're opening up endpoints for deployments.
+    ////////////////////////////////////////
+    The RunnerSelector is an optional field we can provide during runtime
+    of model/workflow predictions to specify which particular runner we want to process the work.
+    This can optionally be used to select a particular nodepool and then within that nodepool
+    a particular runner.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NODEPOOL_FIELD_NUMBER: builtins.int
+    RUNNER_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_FIELD_NUMBER: builtins.int
+    @property
+    def nodepool(self) -> global___Nodepool:
+        """A particular nodepool for the resource to be run within. This request the id and user_id of
+        the nodepool to be specified. Runners will be scaled according to a deployment for the given
+        resource to be run. There should not be more than one deployment in this nodepool for the
+        particular resource to run. If no deployments then default autoscaling will be used.
+        """
+    @property
+    def runner(self) -> global___Runner:
+        """Optionally a partcular runner within the nodepool."""
+    @property
+    def deployment(self) -> global___Deployment:
+        """Optionally a partcular deployment within the nodepool.
+        In future as we support matching runners based on just labels:
+        RunnerLabels runner_labels = 3; // FUTURE
+        """
+    def __init__(
+        self,
+        *,
+        nodepool: global___Nodepool | None = ...,
+        runner: global___Runner | None = ...,
+        deployment: global___Deployment | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["deployment", b"deployment", "nodepool", b"nodepool", "runner", b"runner"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deployment", b"deployment", "nodepool", b"nodepool", "runner", b"runner"]) -> None: ...
+
+global___RunnerSelector = RunnerSelector

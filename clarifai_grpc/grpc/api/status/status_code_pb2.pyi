@@ -412,6 +412,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Certain task-related scenarios are not implemented."""
     TASK_MISSING: _StatusCode.ValueType  # 54102
     """Task was not found."""
+    TASK_PERMISSION_DENIED: _StatusCode.ValueType  # 54103
+    """Not allowed to perform a task-related action."""
     TASK_ASSIGNMENT_SUCCESS: _StatusCode.ValueType  # 54200
     TASK_ASSIGNMENT_PENDING: _StatusCode.ValueType  # 54201
     TASK_ASSIGNMENT_AWAITING_REVIEW: _StatusCode.ValueType  # 54202
@@ -914,6 +916,8 @@ TASK_NOT_IMPLEMENTED: StatusCode.ValueType  # 54101
 """Certain task-related scenarios are not implemented."""
 TASK_MISSING: StatusCode.ValueType  # 54102
 """Task was not found."""
+TASK_PERMISSION_DENIED: StatusCode.ValueType  # 54103
+"""Not allowed to perform a task-related action."""
 TASK_ASSIGNMENT_SUCCESS: StatusCode.ValueType  # 54200
 TASK_ASSIGNMENT_PENDING: StatusCode.ValueType  # 54201
 TASK_ASSIGNMENT_AWAITING_REVIEW: StatusCode.ValueType  # 54202

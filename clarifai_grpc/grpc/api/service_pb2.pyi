@@ -54,19 +54,103 @@ class _PutTaskAssignmentsRequestActionEnumTypeWrapper(google.protobuf.internal.e
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     PUT_TASK_ASSIGNMENTS_REQUEST_ACTION_NOT_SET: _PutTaskAssignmentsRequestAction.ValueType  # 0
     LABEL_START: _PutTaskAssignmentsRequestAction.ValueType  # 1
+    """Create a list of task assignments for labeler => 10 inputs are assigned to the labeler.
+    This is a fully sync action.
+    If task assignments already exist, then return existing task assignments.
+    """
     LABEL_SUBMIT: _PutTaskAssignmentsRequestAction.ValueType  # 2
+    """Submit task assignments => mark task assignment work as completed.
+    This is a partially sync action.
+    Sync: task assignments are updated as follows:
+    * when review_strategy is NONE, then task assignment status is updated to SUCCESS.
+    * when review strategy is CONSENSUS, then task assignment status is updated to AWAITING_CONSENSUS_REVIEW.
+    * when review strategy is MANUAL, then task assignment status is updated to AWAITING_REVIEW.
+    If task assignments are already submitted, then no update is performed on them.
+    Async: annotations added for the same input as the task assignment are updated as follows:
+    * when review_strategy is NONE, then annotation status is updated to SUCCESS.
+    * when review strategy is CONSENSUS, then annotation status is updated to SUCCESS (if it reaches consensus) or AWAITING_REVIEW (if it does not reach consensus).
+    * when review strategy is MANUAL, then annotation status is updated to AWAITING_REVIEW.
+    """
     REVIEW_START: _PutTaskAssignmentsRequestAction.ValueType  # 10
+    """Return a list of task assignments for reviewer to review => 10 inputs are assigned to the reviewer.
+    This is a fully sync action.
+    NOT idempotent:
+     In the current implementation, we don't actually store the reviewer in the task assignment,
+     as the task assignment still stays assigned to the labeler.
+     Therefore, multiple calls to this endpoint may result in different set of task assignments to review.
+     For now, this action is practically not idempotent.
+     In the future, we could however store the reviewer in the task assignment and
+     return existing task assignments already assigned to the reviewer => this will make this action idempotent.
+    """
     REVIEW_APPROVE: _PutTaskAssignmentsRequestAction.ValueType  # 11
+    """Approve task assignments.
+    There are two types of configurations:
+    * Batch approve: approve a list of task assignment IDs;
+    * Bulk approve: approve all task assignments from a list of workers.
+    This is a partially sync action.
+    Sync: task assignments are updated to SUCCESS
+    Async: annotations added for the same input as the task assignment are updated to SUCCESS
+    """
     REVIEW_REQUEST_CHANGES: _PutTaskAssignmentsRequestAction.ValueType  # 12
+    """Request changes for task assignments.
+    There are two types of configurations:
+    * Batch request changes: request changes for a list of task assignment IDs;
+    * Bulk request changes: request changes for all task assignments from a list of workers.
+    This is a partially sync action.
+    Sync: task assignments are updated to PENDING
+    Async: annotations added for the same input as the task assignment are updated to PENDING
+    """
 
 class PutTaskAssignmentsRequestAction(_PutTaskAssignmentsRequestAction, metaclass=_PutTaskAssignmentsRequestActionEnumTypeWrapper): ...
 
 PUT_TASK_ASSIGNMENTS_REQUEST_ACTION_NOT_SET: PutTaskAssignmentsRequestAction.ValueType  # 0
 LABEL_START: PutTaskAssignmentsRequestAction.ValueType  # 1
+"""Create a list of task assignments for labeler => 10 inputs are assigned to the labeler.
+This is a fully sync action.
+If task assignments already exist, then return existing task assignments.
+"""
 LABEL_SUBMIT: PutTaskAssignmentsRequestAction.ValueType  # 2
+"""Submit task assignments => mark task assignment work as completed.
+This is a partially sync action.
+Sync: task assignments are updated as follows:
+* when review_strategy is NONE, then task assignment status is updated to SUCCESS.
+* when review strategy is CONSENSUS, then task assignment status is updated to AWAITING_CONSENSUS_REVIEW.
+* when review strategy is MANUAL, then task assignment status is updated to AWAITING_REVIEW.
+If task assignments are already submitted, then no update is performed on them.
+Async: annotations added for the same input as the task assignment are updated as follows:
+* when review_strategy is NONE, then annotation status is updated to SUCCESS.
+* when review strategy is CONSENSUS, then annotation status is updated to SUCCESS (if it reaches consensus) or AWAITING_REVIEW (if it does not reach consensus).
+* when review strategy is MANUAL, then annotation status is updated to AWAITING_REVIEW.
+"""
 REVIEW_START: PutTaskAssignmentsRequestAction.ValueType  # 10
+"""Return a list of task assignments for reviewer to review => 10 inputs are assigned to the reviewer.
+This is a fully sync action.
+NOT idempotent:
+ In the current implementation, we don't actually store the reviewer in the task assignment,
+ as the task assignment still stays assigned to the labeler.
+ Therefore, multiple calls to this endpoint may result in different set of task assignments to review.
+ For now, this action is practically not idempotent.
+ In the future, we could however store the reviewer in the task assignment and
+ return existing task assignments already assigned to the reviewer => this will make this action idempotent.
+"""
 REVIEW_APPROVE: PutTaskAssignmentsRequestAction.ValueType  # 11
+"""Approve task assignments.
+There are two types of configurations:
+* Batch approve: approve a list of task assignment IDs;
+* Bulk approve: approve all task assignments from a list of workers.
+This is a partially sync action.
+Sync: task assignments are updated to SUCCESS
+Async: annotations added for the same input as the task assignment are updated to SUCCESS
+"""
 REVIEW_REQUEST_CHANGES: PutTaskAssignmentsRequestAction.ValueType  # 12
+"""Request changes for task assignments.
+There are two types of configurations:
+* Batch request changes: request changes for a list of task assignment IDs;
+* Bulk request changes: request changes for all task assignments from a list of workers.
+This is a partially sync action.
+Sync: task assignments are updated to PENDING
+Async: annotations added for the same input as the task assignment are updated to PENDING
+"""
 global___PutTaskAssignmentsRequestAction = PutTaskAssignmentsRequestAction
 
 @typing_extensions.final
@@ -1079,63 +1163,6 @@ class MultiCollaborationsResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["collaborations", b"collaborations", "status", b"status"]) -> None: ...
 
 global___MultiCollaborationsResponse = MultiCollaborationsResponse
-
-@typing_extensions.final
-class GetResourcePriceRequest(google.protobuf.message.Message):
-    """Get Resource Price - new billing"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    WORKFLOW_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def model(self) -> proto.clarifai.api.resources_pb2.Model:
-        """########## Supported fields ##########
-        - id
-        - model_version.id
-        """
-    @property
-    def workflow(self) -> proto.clarifai.api.resources_pb2.Workflow:
-        """########## Supported fields ##########
-        - id
-        - version.id
-        """
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        model: proto.clarifai.api.resources_pb2.Model | None = ...,
-        workflow: proto.clarifai.api.resources_pb2.Workflow | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "resource", b"resource", "user_app_id", b"user_app_id", "workflow", b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "resource", b"resource", "user_app_id", b"user_app_id", "workflow", b"workflow"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["resource", b"resource"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
-
-global___GetResourcePriceRequest = GetResourcePriceRequest
-
-@typing_extensions.final
-class GetResourcePriceResponse(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    PRICE_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    price: builtins.int
-    """Price is in millicents, i.e. $1/100000"""
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        price: builtins.int = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["price", b"price", "status", b"status"]) -> None: ...
-
-global___GetResourcePriceResponse = GetResourcePriceResponse
 
 @typing_extensions.final
 class GetStatusCodeRequest(google.protobuf.message.Message):
@@ -3148,6 +3175,7 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
     VERSION_ID_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
+    RUNNER_SELECTOR_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -3159,6 +3187,9 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
         """This allows you to specify config options for the model such as
         the language which appear's in the model's output_info.
         """
+    @property
+    def runner_selector(self) -> proto.clarifai.api.resources_pb2.RunnerSelector:
+        """Allow filtering of prediction requests down to specific Nodepools, Deploymetns or Runners"""
     def __init__(
         self,
         *,
@@ -3167,9 +3198,10 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
         version_id: builtins.str = ...,
         inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
         model: proto.clarifai.api.resources_pb2.Model | None = ...,
+        runner_selector: proto.clarifai.api.resources_pb2.RunnerSelector | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model", b"model", "model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "runner_selector", b"runner_selector", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model", b"model", "model_id", b"model_id", "runner_selector", b"runner_selector", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
 
 global___PostModelOutputsRequest = PostModelOutputsRequest
 
@@ -8870,6 +8902,8 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     INPUT_ID_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     LABEL_SUBMIT_CONFIG_FIELD_NUMBER: builtins.int
+    REVIEW_APPROVE_CONFIG_FIELD_NUMBER: builtins.int
+    REVIEW_REQUEST_CHANGES_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     task_id: builtins.str
@@ -8883,6 +8917,10 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     """Action to perform on selected task."""
     @property
     def label_submit_config(self) -> global___LabelSubmitConfig: ...
+    @property
+    def review_approve_config(self) -> global___ReviewApproveConfig: ...
+    @property
+    def review_request_changes_config(self) -> global___ReviewRequestChangesConfig: ...
     def __init__(
         self,
         *,
@@ -8891,10 +8929,12 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
         input_id: builtins.str = ...,
         action: global___PutTaskAssignmentsRequestAction.ValueType = ...,
         label_submit_config: global___LabelSubmitConfig | None = ...,
+        review_approve_config: global___ReviewApproveConfig | None = ...,
+        review_request_changes_config: global___ReviewRequestChangesConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_request_changes_config", b"review_request_changes_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_request_changes_config", b"review_request_changes_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config", "review_approve_config", "review_request_changes_config"] | None: ...
 
 global___PutTaskAssignmentsRequest = PutTaskAssignmentsRequest
 
@@ -8913,6 +8953,46 @@ class LabelSubmitConfig(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments"]) -> None: ...
 
 global___LabelSubmitConfig = LabelSubmitConfig
+
+@typing_extensions.final
+class ReviewApproveConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_ASSIGNMENTS_FIELD_NUMBER: builtins.int
+    WORKERS_FIELD_NUMBER: builtins.int
+    @property
+    def task_assignments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskAssignment]: ...
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Worker]: ...
+    def __init__(
+        self,
+        *,
+        task_assignments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskAssignment] | None = ...,
+        workers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Worker] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments", "workers", b"workers"]) -> None: ...
+
+global___ReviewApproveConfig = ReviewApproveConfig
+
+@typing_extensions.final
+class ReviewRequestChangesConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_ASSIGNMENTS_FIELD_NUMBER: builtins.int
+    WORKERS_FIELD_NUMBER: builtins.int
+    @property
+    def task_assignments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskAssignment]: ...
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Worker]: ...
+    def __init__(
+        self,
+        *,
+        task_assignments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskAssignment] | None = ...,
+        workers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Worker] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments", "workers", b"workers"]) -> None: ...
+
+global___ReviewRequestChangesConfig = ReviewRequestChangesConfig
 
 @typing_extensions.final
 class MultiTaskAssignmentResponse(google.protobuf.message.Message):
