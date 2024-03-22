@@ -769,11 +769,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse),
                 )
-        self.GetResourcePrice = channel.unary_unary(
-                '/clarifai.api.V2/GetResourcePrice',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceResponse),
-                )
         self.ListCollaborators = channel.unary_unary(
                 '/clarifai.api.V2/ListCollaborators',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollaboratorsRequest.SerializeToString,
@@ -1446,7 +1441,23 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListDatasets(self, request, context):
-        """List all the datasets.
+        """// TODO(zeiler): will need to
+        // Single request but streaming resopnses.
+        rpc GeneratePostModelOutputs (PostModelOutputsRequest) returns (stream MultiOutputResponse) {
+        option (google.api.http) = {
+        post: "/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/outputs"
+        body: "*"
+        };
+        option (clarifai.auth.util.cl_auth_type) = KeyAuth;
+        option (clarifai.auth.util.cl_depending_scopes) = Apps_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Concepts_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Models_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Predict;
+        option (clarifai.auth.util.cl_depending_scopes) = Nodepools_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Deployments_Get;
+        }
+
+        List all the datasets.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1718,7 +1729,24 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostWorkflowVersionsUnPublish(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """TODO(zeiler): in future we can add endpoints like this for listing runners for a specific model
+        List all the runners currently handling work for the given model.
+        By default this lists the runners available in your account as well as all the orgs you have
+        access to.
+        Could have RunnerSelector to break it down by Nodepool or Deployment.
+        Addition filters on the request can select specific user/org to list from or nodepool.
+        rpc ListModelVersionRunners (ListModelVersionRunnersRequest) returns (MultiRunnerResponse) {
+        option (google.api.http) = {
+        get: "/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/runners"
+        };
+        option (clarifai.auth.util.cl_auth_type) = KeyAuth;
+        option (clarifai.auth.util.cl_depending_scopes) = Apps_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Concepts_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Models_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Runners_Get;
+        }
+
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2240,12 +2268,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetResourcePrice(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def ListCollaborators(self, request, context):
         """owner list users who the app is shared with
         """
@@ -2630,7 +2652,9 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PutTaskAssignments(self, request, context):
-        """PutTaskAssignments evaluates all the annotations by labeler (authenticated user) for given task (task_id) and input (input_id).
+        """PutTaskAssignments performs an action for the task assignments in given task.
+        All the actions are theoretically idempotent, but practically, in the current implementation,
+        the REVIEW_START action is not idempotent. See PutTaskAssignmentsRequestAction for more details.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2740,21 +2764,22 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetRunner(self, request, context):
-        """Get a specific runner from an app.
+        """Get a specific runner.
+        TODO(zeiler): runner_id is a UUID so can list globally as well.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListRunners(self, request, context):
-        """List all the runners in community, by user or by app.
+        """List all the runners for the user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def PostRunners(self, request, context):
-        """Add a runners to an app.
+        """Add a runners to a user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2769,6 +2794,7 @@ class V2Servicer(object):
 
     def ListRunnerItems(self, request, context):
         """List items for the remote runner to work on.
+        since the runner_id is a UUID we can access it directly too.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2776,6 +2802,7 @@ class V2Servicer(object):
 
     def PostRunnerItemOutputs(self, request, context):
         """Post back outputs from remote runners
+        since the runner_id is a UUID we can access it directly too.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3524,11 +3551,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.GetStatusCode,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.SerializeToString,
-            ),
-            'GetResourcePrice': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetResourcePrice,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceResponse.SerializeToString,
             ),
             'ListCollaborators': grpc.unary_unary_rpc_method_handler(
                     servicer.ListCollaborators,
@@ -6414,23 +6436,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetStatusCode',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetStatusCodeRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleStatusCodeResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetResourcePrice(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetResourcePrice',
-            proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.GetResourcePriceResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
