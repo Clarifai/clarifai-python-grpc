@@ -72,9 +72,9 @@ class ClarifaiChannel:
         if root_certificates_path:
             with open(root_certificates_path, "rb") as f:
                 root_certificates = f.read()
-            credentials = grpc.ssl_channel_credentials(root_certificates)
+            credentials = service_pb2_grpc.grpc.ssl_channel_credentials(root_certificates)
         else:
-            credentials = grpc.ssl_channel_credentials()
+            credentials = service_pb2_grpc.grpc.ssl_channel_credentials()
 
         return service_pb2_grpc.grpc.secure_channel(
             base,
