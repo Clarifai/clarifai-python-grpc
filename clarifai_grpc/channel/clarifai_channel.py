@@ -62,16 +62,23 @@ class ClarifaiChannel:
         return session
 
     @staticmethod
-    def get_grpc_channel(base=None):
+    def get_grpc_channel(base=None, root_certificates_path=None):
         global wrap_response_deserializer
         wrap_response_deserializer = _response_deserializer_for_grpc
 
         if not base:
             base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
 
+        if root_certificates_path:
+            with open(root_certificates_path, "rb") as f:
+                root_certificates = f.read()
+            credentials = service_pb2_grpc.grpc.ssl_channel_credentials(root_certificates)
+        else:
+            credentials = service_pb2_grpc.grpc.ssl_channel_credentials()
+
         return service_pb2_grpc.grpc.secure_channel(
             base,
-            service_pb2_grpc.grpc.ssl_channel_credentials(),
+            credentials,
             options=[
                 ("grpc.service_config", grpc_json_config),
                 ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
