@@ -27,8 +27,18 @@ def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
     base_scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
 
-    opener = build_opener(HTTPHandler)
+    if base_url_port != '':
+        base_url = base_url + ':' + base_url_port
+
     full_url = f"{base_scheme}://{base_url}/v2{url}"
+
+    opener = build_opener(HTTPHandler)
+    if os.environ.get('CLARIFAI_GRPC_NO_VERIFY', 'False').lower() in ('true', '1'):
+        ssl_context = ssl.create_default_context()
+        ssl_context.check_hostname = False
+        ssl_context.verify_mode = ssl.CERT_NONE
+        opener = build_opener(HTTPSHandler(context=ssl_context), HTTPHandler)
+
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
