@@ -56,9 +56,6 @@ def both_channels(func):
 
     def func_wrapper():
         channel = ClarifaiChannel.get_grpc_channel()
-        if os.environ.get('CLARIFAI_GRPC_INSECURE', 'False').lower() in ('true', '1'):
-            base_port = os.environ.get("CLARIFAI_GRPC_BASE_PORT", "443")
-            channel = ClarifaiChannel.get_insecure_grpc_channel(port=int(base_port))
         func(channel)
 
         channel = ClarifaiChannel.get_json_channel()

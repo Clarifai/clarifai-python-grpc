@@ -58,6 +58,7 @@ class ClarifaiChannel:
 
         session = requests.Session()
         session.mount("http://", http_adapter)
+        session.mount("https://", http_adapter)
         return session
 
     @staticmethod

@@ -3,6 +3,7 @@
 import argparse
 import json
 import os
+import ssl
 import sys
 
 
@@ -27,13 +28,16 @@ def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
     base_url_port = os.environ.get("CLARIFAI_GRPC_BASE_PORT", "")
     base_scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
+    ssl_file = os.environ.get("CLARIFAI_GRPC_SSL_CERT_FILE", "")
 
     if base_url_port != '':
         base_url = base_url + ':' + base_url_port
 
     opener = build_opener(HTTPHandler)
     full_url = f"{base_scheme}://{base_url}/v2{url}"
-    request = Request(full_url, data=json.dumps(payload).encode())
+    ssl_context = ssl.create_default_context(cafile=ssl_file)
+
+    request = Request(full_url, data=json.dumps(payload).encode(), context=ssl_context)
     for k in headers.keys():
         request.add_header(k, headers[k])
     request.get_method = lambda: method
