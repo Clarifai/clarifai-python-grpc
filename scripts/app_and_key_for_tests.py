@@ -3,14 +3,15 @@
 import argparse
 import json
 import os
+import ssl
 import sys
 
 
 try:
-    from urllib.request import HTTPHandler, Request, build_opener
+    from urllib.request import HTTPHandler, HTTPSHandler, Request, build_opener
     from urllib.error import HTTPError
 except ImportError:
-    from urllib2 import Request, HTTPError, build_opener, HTTPHandler
+    from urllib2 import Request, HTTPError, build_opener, HTTPHandler, HTTPSHandler
 
 
 EMAIL = os.environ["CLARIFAI_USER_EMAIL"]
