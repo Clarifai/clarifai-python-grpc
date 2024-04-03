@@ -3,15 +3,14 @@
 import argparse
 import json
 import os
-import ssl
 import sys
 
 
 try:
-    from urllib.request import HTTPHandler, HTTPSHandler, Request, build_opener
+    from urllib.request import HTTPHandler, Request, build_opener
     from urllib.error import HTTPError
 except ImportError:
-    from urllib2 import Request, HTTPError, build_opener, HTTPHandler, HTTPSHandler
+    from urllib2 import Request, HTTPError, build_opener, HTTPHandler
 
 
 EMAIL = os.environ["CLARIFAI_USER_EMAIL"]
@@ -26,19 +25,10 @@ def _assert_response_success(response):
 
 def _request(method, url, payload={}, headers={}):
     base_url = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
-    base_url_port = os.environ.get("CLARIFAI_GRPC_BASE_PORT", "")
     base_scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
 
-    if base_url_port != '':
-        base_url = base_url + ':' + base_url_port
-
-    opener = build_opener(HTTPSHandler(context=ctx), HTTPHandler)
+    opener = build_opener(HTTPHandler)
     full_url = f"{base_scheme}://{base_url}/v2{url}"
-
-    ssl_context = ssl.create_default_context()
-    ssl_context.check_hostname = False
-    ssl_context.verify_mode = ssl.CERT_NONE
-
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
         request.add_header(k, headers[k])
