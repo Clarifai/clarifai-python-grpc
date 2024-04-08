@@ -6468,7 +6468,7 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     copy_models: builtins.bool
     """Copy models. Requires that copy_concepts is also set."""
     copy_workflows: builtins.bool
-    """Copy workflows. Requires that copy_models and copy_concepts are also set."""
+    """Copy workflows."""
     copy_installed_module_versions: builtins.bool
     """Copy installed module versions."""
     def __init__(

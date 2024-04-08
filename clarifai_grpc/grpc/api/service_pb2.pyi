@@ -100,6 +100,15 @@ class _PutTaskAssignmentsRequestActionEnumTypeWrapper(google.protobuf.internal.e
     Sync: task assignments are updated to PENDING
     Async: annotations added for the same input as the task assignment are updated to PENDING
     """
+    REVIEW_REJECT: _PutTaskAssignmentsRequestAction.ValueType  # 13
+    """Reject task assignments.
+    There are two types of configurations:
+    * Batch reject: reject a list of task assignment IDs;
+    * Bulk reject: reject all task assignments from a list of workers.
+    This is a partially sync action.
+    Sync: task assignments are updated to REVIEW_DENIED
+    Async: annotations added for the same input as the task assignment are updated to REVIEW_DENIED
+    """
 
 class PutTaskAssignmentsRequestAction(_PutTaskAssignmentsRequestAction, metaclass=_PutTaskAssignmentsRequestActionEnumTypeWrapper): ...
 
@@ -150,6 +159,15 @@ There are two types of configurations:
 This is a partially sync action.
 Sync: task assignments are updated to PENDING
 Async: annotations added for the same input as the task assignment are updated to PENDING
+"""
+REVIEW_REJECT: PutTaskAssignmentsRequestAction.ValueType  # 13
+"""Reject task assignments.
+There are two types of configurations:
+* Batch reject: reject a list of task assignment IDs;
+* Bulk reject: reject all task assignments from a list of workers.
+This is a partially sync action.
+Sync: task assignments are updated to REVIEW_DENIED
+Async: annotations added for the same input as the task assignment are updated to REVIEW_DENIED
 """
 global___PutTaskAssignmentsRequestAction = PutTaskAssignmentsRequestAction
 
@@ -5425,7 +5443,7 @@ class ListScopesRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     key_type: builtins.str
     """If "personal_access_token" include scopes and endpoints available to personal access tokens.
-    If "api_key" include scopes and endpoints available to app-specific keys. (default)
+    If "app_specific_key" include scopes and endpoints available to app-specific keys. (default)
     """
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
@@ -8904,6 +8922,7 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     LABEL_SUBMIT_CONFIG_FIELD_NUMBER: builtins.int
     REVIEW_APPROVE_CONFIG_FIELD_NUMBER: builtins.int
     REVIEW_REQUEST_CHANGES_CONFIG_FIELD_NUMBER: builtins.int
+    REVIEW_REJECT_CONFIG_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     task_id: builtins.str
@@ -8911,7 +8930,7 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     """Deprecated: use action and action_config instead.
     Supported for backwards compatibility: setting this field is equivalent with
     * action = LABEL_SUBMIT
-    * label_submit_config = [{"task_assignments": {"input": {"id": <input-id>}}}]
+    * label_submit_config = [{"task_assignments": {{"id": "<task-assignment-id-for-input-id>"}}]
     """
     action: global___PutTaskAssignmentsRequestAction.ValueType
     """Action to perform on selected task."""
@@ -8921,6 +8940,8 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     def review_approve_config(self) -> global___ReviewApproveConfig: ...
     @property
     def review_request_changes_config(self) -> global___ReviewRequestChangesConfig: ...
+    @property
+    def review_reject_config(self) -> global___ReviewRejectConfig: ...
     def __init__(
         self,
         *,
@@ -8931,10 +8952,11 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
         label_submit_config: global___LabelSubmitConfig | None = ...,
         review_approve_config: global___ReviewApproveConfig | None = ...,
         review_request_changes_config: global___ReviewRequestChangesConfig | None = ...,
+        review_reject_config: global___ReviewRejectConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_request_changes_config", b"review_request_changes_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_request_changes_config", b"review_request_changes_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config", "review_approve_config", "review_request_changes_config"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config", "review_approve_config", "review_request_changes_config", "review_reject_config"] | None: ...
 
 global___PutTaskAssignmentsRequest = PutTaskAssignmentsRequest
 
@@ -8993,6 +9015,26 @@ class ReviewRequestChangesConfig(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments", "workers", b"workers"]) -> None: ...
 
 global___ReviewRequestChangesConfig = ReviewRequestChangesConfig
+
+@typing_extensions.final
+class ReviewRejectConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_ASSIGNMENTS_FIELD_NUMBER: builtins.int
+    WORKERS_FIELD_NUMBER: builtins.int
+    @property
+    def task_assignments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TaskAssignment]: ...
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Worker]: ...
+    def __init__(
+        self,
+        *,
+        task_assignments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TaskAssignment] | None = ...,
+        workers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Worker] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments", "workers", b"workers"]) -> None: ...
+
+global___ReviewRejectConfig = ReviewRejectConfig
 
 @typing_extensions.final
 class MultiTaskAssignmentResponse(google.protobuf.message.Message):

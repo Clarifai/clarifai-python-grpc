@@ -418,6 +418,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     TASK_ASSIGNMENT_PENDING: _StatusCode.ValueType  # 54201
     TASK_ASSIGNMENT_AWAITING_REVIEW: _StatusCode.ValueType  # 54202
     TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: _StatusCode.ValueType  # 54203
+    TASK_ASSIGNMENT_REVIEW_DENIED: _StatusCode.ValueType  # 54204
     LABEL_ORDER_PENDING: _StatusCode.ValueType  # 55001
     """Label Order Related Status Code 55xxx"""
     LABEL_ORDER_IN_PROGRESS: _StatusCode.ValueType  # 55002
@@ -922,6 +923,7 @@ TASK_ASSIGNMENT_SUCCESS: StatusCode.ValueType  # 54200
 TASK_ASSIGNMENT_PENDING: StatusCode.ValueType  # 54201
 TASK_ASSIGNMENT_AWAITING_REVIEW: StatusCode.ValueType  # 54202
 TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: StatusCode.ValueType  # 54203
+TASK_ASSIGNMENT_REVIEW_DENIED: StatusCode.ValueType  # 54204
 LABEL_ORDER_PENDING: StatusCode.ValueType  # 55001
 """Label Order Related Status Code 55xxx"""
 LABEL_ORDER_IN_PROGRESS: StatusCode.ValueType  # 55002
