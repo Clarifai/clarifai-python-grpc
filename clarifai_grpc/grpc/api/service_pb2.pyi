@@ -229,7 +229,6 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
     INPUT_IDS_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
-    WORKFLOW_VERSION_IDS_FIELD_NUMBER: builtins.int
     STATUSES_FIELD_NUMBER: builtins.int
     LIST_ALL_ANNOTATIONS_FIELD_NUMBER: builtins.int
     RETURN_MODEL_OUTPUT_FIELD_NUMBER: builtins.int
@@ -253,25 +252,19 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
     def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Only return the annotations that has one of these user IDs, effectively operating as an
         OR among them to filter down the results.
-        If model_version_ids or workflow_version_ids are also provided, these user_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) annotations in the results of ListAnnotations request.
-        Setting user_ids does also set list_all_annotations=True.
+        If model_version_ids are also provided these user_ids are OR'd with them as well since
+        annotations are either provided by users or model versions and we want the union of any
+        provided user or model version annotations in the results of ListAnnotations request.
+        If no user_ids are provided then annotations from all users are returned.
         """
     @property
     def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Only return the annotations that has one of these model version IDs, effectively operating as an
         OR among them to filter down the results.
-        If user_ids or workflow_version_ids are also provided, these model_version_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) annotations in the results of ListAnnotations request.
-        Setting model_version_ids does also set list_all_annotations=True.
-        """
-    @property
-    def workflow_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Only return the annotations that has one of these workflow version IDs, effectively operating as an
-        OR among them to filter down the results.
-        If user_ids or model_version_ids are also provided, these workflow_version_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) annotations in the results of ListAnnotations request.
-        Setting workflow_version_ids does also set list_all_annotations=True.
+        If user_ids are also provided these model_versions_ids are OR'd with them as well since
+        annotations are either provided by users or model versions and we want the union of any
+        provided user or model version annotations in the results of ListAnnotations request.
+        If no model_version_ids are provided then annotations from all model versions are returned.
         """
     @property
     def statuses(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.status.status_pb2.Status]:
@@ -302,7 +295,6 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
         input_ids: collections.abc.Iterable[builtins.str] | None = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
         model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        workflow_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
         statuses: collections.abc.Iterable[proto.clarifai.api.status.status_pb2.Status] | None = ...,
         list_all_annotations: builtins.bool = ...,
         return_model_output: builtins.bool = ...,
@@ -311,7 +303,7 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
         task_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "input_ids", b"input_ids", "list_all_annotations", b"list_all_annotations", "model_version_ids", b"model_version_ids", "page", b"page", "per_page", b"per_page", "return_model_output", b"return_model_output", "statuses", b"statuses", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids", "workflow_version_ids", b"workflow_version_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "input_ids", b"input_ids", "list_all_annotations", b"list_all_annotations", "model_version_ids", b"model_version_ids", "page", b"page", "per_page", b"per_page", "return_model_output", b"return_model_output", "statuses", b"statuses", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
 
 global___ListAnnotationsRequest = ListAnnotationsRequest
 
@@ -624,7 +616,7 @@ class GetAppRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, counts"""
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     def __init__(
         self,
         *,
@@ -670,7 +662,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     """
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, counts"""
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -2873,7 +2865,6 @@ class ListDatasetVersionsRequest(google.protobuf.message.Message):
     DATASET_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
-    REQUEST_ORIGINS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     dataset_id: builtins.str
@@ -2886,9 +2877,6 @@ class ListDatasetVersionsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
-    @property
-    def request_origins(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[proto.clarifai.api.resources_pb2.DatasetVersionRequestOrigin.ValueType]:
-        """(optional URL parameter) Filter by origin of dataset version"""
     def __init__(
         self,
         *,
@@ -2896,10 +2884,9 @@ class ListDatasetVersionsRequest(google.protobuf.message.Message):
         dataset_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
-        request_origins: collections.abc.Iterable[proto.clarifai.api.resources_pb2.DatasetVersionRequestOrigin.ValueType] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "page", b"page", "per_page", b"per_page", "request_origins", b"request_origins", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListDatasetVersionsRequest = ListDatasetVersionsRequest
 
@@ -7456,7 +7443,7 @@ global___SingleTaskResponse = SingleTaskResponse
 class GetTaskCountRequest(google.protobuf.message.Message):
     """GetTaskCountRequest can be used for fetching -
     1. Task annotation count per user, per status
-    1. Task input count per user (i.e. task assignment count), per status
+    1. Task input (anchor annotations) count per user, per status
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -7464,50 +7451,28 @@ class GetTaskCountRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     TASK_ID_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
-    MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
-    WORKFLOW_VERSION_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     task_id: builtins.str
     """task_id for which count per user per status is needed"""
     @property
     def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Only return counts for these user IDs, effectively operating as an
-        OR among them to filter down the results.
-        If model_version_ids or workflow_version_ids are also provided, these user_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) counts in the results.
-        """
-    @property
-    def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Only return counts for these model version IDs, effectively operating as an
-        OR among them to filter down the results.
-        If user_ids or workflow_version_ids are also provided, these model_version_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) counts in the results.
-        """
-    @property
-    def workflow_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Only return counts for these workflow version IDs, effectively operating as an
-        OR among them to filter down the results.
-        If user_ids or model_version_ids are also provided, these workflow_version_ids are OR'd with them as well because
-        we want the union of all worker (user, model or workflow) counts in the results.
-        """
+        """for given task_id, user_ids to filter on (optional)"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         task_id: builtins.str = ...,
         user_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        workflow_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model_version_ids", b"model_version_ids", "task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids", "workflow_version_ids", b"workflow_version_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["task_id", b"task_id", "user_app_id", b"user_app_id", "user_ids", b"user_ids"]) -> None: ...
 
 global___GetTaskCountRequest = GetTaskCountRequest
 
 @typing_extensions.final
 class SingleTaskCountResponse(google.protobuf.message.Message):
-    """SingleTaskCountResponse represents counts of task annotations or inputs (i.e. task assignments) for labelers in given task"""
+    """SingleTaskCountResponse represent counts of annotations or inputs(anchor annotations) for labelers in given task"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -9738,35 +9703,25 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
-    RUNNER_ITEM_ID_FIELD_NUMBER: builtins.int
+    ITEM_ID_FIELD_NUMBER: builtins.int
     RUNNER_ITEM_OUTPUTS_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     runner_id: builtins.str
-    """The particular runner that processed the work."""
-    runner_item_id: builtins.str
-    """The particular item of work processed."""
+    item_id: builtins.str
     @property
     def runner_item_outputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItemOutput]:
         """This allows you to create one or more runner by posting it to the API."""
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """This request has a status so that it can communicate to the API from runners and
-        communicate status, errors, etc. This is on the request since runners operate
-        in a reverse protocol.
-        """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         runner_id: builtins.str = ...,
-        runner_item_id: builtins.str = ...,
+        item_id: builtins.str = ...,
         runner_item_outputs: collections.abc.Iterable[global___RunnerItemOutput] | None = ...,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["runner_id", b"runner_id", "runner_item_id", b"runner_item_id", "runner_item_outputs", b"runner_item_outputs", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["item_id", b"item_id", "runner_id", b"runner_id", "runner_item_outputs", b"runner_item_outputs", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostRunnerItemOutputsRequest = PostRunnerItemOutputsRequest
 
@@ -9777,56 +9732,48 @@ class MultiRunnerItemResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     STATUS_FIELD_NUMBER: builtins.int
-    RUNNER_ITEMS_FIELD_NUMBER: builtins.int
+    ITEMS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
-    def runner_items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItem]: ...
+    def items(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___RunnerItem]: ...
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        runner_items: collections.abc.Iterable[global___RunnerItem] | None = ...,
+        items: collections.abc.Iterable[global___RunnerItem] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["runner_items", b"runner_items", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["items", b"items", "status", b"status"]) -> None: ...
 
 global___MultiRunnerItemResponse = MultiRunnerItemResponse
 
 @typing_extensions.final
 class RunnerItem(google.protobuf.message.Message):
-    """This is a piece of work for a runner to process."""
-
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
-    PROCESSING_INFO_FIELD_NUMBER: builtins.int
     POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A UUID hash for this work item."""
     description: builtins.str
     """A description of the work to be done in case needed for UIs."""
     @property
-    def processing_info(self) -> proto.clarifai.api.resources_pb2.ProcessingInfo:
-        """Information on how to process the given RunnerItem."""
-    @property
     def post_model_outputs_request(self) -> global___PostModelOutputsRequest:
-        """Model prediction request from a user.
-        Workflow request from a user.  // FUTURE
-        training request next, etc.
+        """TODO(zeiler): make these options a oneof.
+        first work to do would be an inference runner.
+        training request next.
         """
     def __init__(
         self,
         *,
         id: builtins.str = ...,
         description: builtins.str = ...,
-        processing_info: proto.clarifai.api.resources_pb2.ProcessingInfo | None = ...,
         post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["post_model_outputs_request", b"post_model_outputs_request", "processing_info", b"processing_info", "request", b"request"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "id", b"id", "post_model_outputs_request", b"post_model_outputs_request", "processing_info", b"processing_info", "request", b"request"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["request", b"request"]) -> typing_extensions.Literal["post_model_outputs_request"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["post_model_outputs_request", b"post_model_outputs_request"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "id", b"id", "post_model_outputs_request", b"post_model_outputs_request"]) -> None: ...
 
 global___RunnerItem = RunnerItem
 
@@ -9837,18 +9784,16 @@ class RunnerItemOutput(google.protobuf.message.Message):
     MULTI_OUTPUT_RESPONSE_FIELD_NUMBER: builtins.int
     @property
     def multi_output_response(self) -> global___MultiOutputResponse:
-        """The output of a model prediction request.
-        Workflow response. // FUTURE
-        training response ???
+        """The output of the first task type.
+        TODO(zeiler): should the interface be more like pairs of things wiht request/response in one "item"?
         """
     def __init__(
         self,
         *,
         multi_output_response: global___MultiOutputResponse | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response", "response", b"response"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response", "response", b"response"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["response", b"response"]) -> typing_extensions.Literal["multi_output_response"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["multi_output_response", b"multi_output_response"]) -> None: ...
 
 global___RunnerItemOutput = RunnerItemOutput
 
