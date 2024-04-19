@@ -238,6 +238,10 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     RUNNER_INVALID_ARGUMENT: _StatusCode.ValueType  # 25602
     RUNNER_INVALID_REQUEST: _StatusCode.ValueType  # 25603
     RUNNER_NEEDS_RETRY: _StatusCode.ValueType  # 25604
+    RUNNER_STREAM_START: _StatusCode.ValueType  # 25605
+    RUNNER_STREAM_END: _StatusCode.ValueType  # 25606
+    RUNNER_ITEM_CANCELLED: _StatusCode.ValueType  # 25607
+    RUNNER_PROCESSING_FAILED: _StatusCode.ValueType  # 25608
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -743,6 +747,10 @@ RUNNER_PERMISSION_DENIED: StatusCode.ValueType  # 25601
 RUNNER_INVALID_ARGUMENT: StatusCode.ValueType  # 25602
 RUNNER_INVALID_REQUEST: StatusCode.ValueType  # 25603
 RUNNER_NEEDS_RETRY: StatusCode.ValueType  # 25604
+RUNNER_STREAM_START: StatusCode.ValueType  # 25605
+RUNNER_STREAM_END: StatusCode.ValueType  # 25606
+RUNNER_ITEM_CANCELLED: StatusCode.ValueType  # 25607
+RUNNER_PROCESSING_FAILED: StatusCode.ValueType  # 25608
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
