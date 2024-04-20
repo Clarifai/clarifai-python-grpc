@@ -53,6 +53,27 @@ Classifier models that run after a detector model are also used for detection.
 """
 global___WorkflowModelUseCase = WorkflowModelUseCase
 
+class _DatasetVersionRequestOrigin:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _DatasetVersionRequestOriginEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DatasetVersionRequestOrigin.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    DATASET_VERSION_REQUEST_ORIGIN_NOT_SET: _DatasetVersionRequestOrigin.ValueType  # 0
+    MANUAL: _DatasetVersionRequestOrigin.ValueType  # 1
+    TRAINING: _DatasetVersionRequestOrigin.ValueType  # 2
+    EVAL_GROUND_TRUTH: _DatasetVersionRequestOrigin.ValueType  # 3
+    EVAL_PREDICTIONS: _DatasetVersionRequestOrigin.ValueType  # 4
+
+class DatasetVersionRequestOrigin(_DatasetVersionRequestOrigin, metaclass=_DatasetVersionRequestOriginEnumTypeWrapper): ...
+
+DATASET_VERSION_REQUEST_ORIGIN_NOT_SET: DatasetVersionRequestOrigin.ValueType  # 0
+MANUAL: DatasetVersionRequestOrigin.ValueType  # 1
+TRAINING: DatasetVersionRequestOrigin.ValueType  # 2
+EVAL_GROUND_TRUTH: DatasetVersionRequestOrigin.ValueType  # 3
+EVAL_PREDICTIONS: DatasetVersionRequestOrigin.ValueType  # 4
+global___DatasetVersionRequestOrigin = DatasetVersionRequestOrigin
+
 class _DatasetVersionMetricsGroupType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -478,6 +499,35 @@ SUFFIX: InputIDConflictResolution.ValueType  # 2
 """Add a suffix to inputs with conflicting IDs. Attempts numeric suffixes "-1" to "-9" and then a randomized suffix. Identical ID's in the same request are still treated as errors."""
 global___InputIDConflictResolution = InputIDConflictResolution
 
+class _RunnerMethodType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _RunnerMethodTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_RunnerMethodType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    UNKNOWN: _RunnerMethodType.ValueType  # 0
+    UNARY_UNARY: _RunnerMethodType.ValueType  # 1
+    """single request, single response. predict() in code"""
+    UNARY_STREAMING: _RunnerMethodType.ValueType  # 2
+    """single request, streamed response. generate() in code"""
+    STREAMING_UNARY: _RunnerMethodType.ValueType  # 3
+    """stream of requests, single response."""
+    STREAMING_STREAMING: _RunnerMethodType.ValueType  # 4
+    """stream of requests, stream of responses. stream() in code"""
+
+class RunnerMethodType(_RunnerMethodType, metaclass=_RunnerMethodTypeEnumTypeWrapper): ...
+
+UNKNOWN: RunnerMethodType.ValueType  # 0
+UNARY_UNARY: RunnerMethodType.ValueType  # 1
+"""single request, single response. predict() in code"""
+UNARY_STREAMING: RunnerMethodType.ValueType  # 2
+"""single request, streamed response. generate() in code"""
+STREAMING_UNARY: RunnerMethodType.ValueType  # 3
+"""stream of requests, single response."""
+STREAMING_STREAMING: RunnerMethodType.ValueType  # 4
+"""stream of requests, stream of responses. stream() in code"""
+global___RunnerMethodType = RunnerMethodType
+
 @typing_extensions.final
 class Annotation(google.protobuf.message.Message):
     """Annotation of an asset with metadata"""
@@ -728,6 +778,7 @@ class AppExtraInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SEARCH_REVISION_MARKER_FIELD_NUMBER: builtins.int
+    COUNTS_FIELD_NUMBER: builtins.int
     search_revision_marker: builtins.str
     """Revision marker for this application.
     The value of the revision changes when
@@ -737,12 +788,16 @@ class AppExtraInfo(google.protobuf.message.Message):
     For example, this value can be used to detect if client side caches related to searching should be invalidated.
     Field not filled in for list endpoints, use GetApp
     """
+    @property
+    def counts(self) -> global___AppResourceCounts: ...
     def __init__(
         self,
         *,
         search_revision_marker: builtins.str = ...,
+        counts: global___AppResourceCounts | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["search_revision_marker", b"search_revision_marker"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["counts", b"counts"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["counts", b"counts", "search_revision_marker", b"search_revision_marker"]) -> None: ...
 
 global___AppExtraInfo = AppExtraInfo
 
@@ -763,6 +818,33 @@ class AppQuery(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["name", b"name"]) -> None: ...
 
 global___AppQuery = AppQuery
+
+@typing_extensions.final
+class AppResourceCounts(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATASETS_FIELD_NUMBER: builtins.int
+    MODELS_FIELD_NUMBER: builtins.int
+    WORKFLOWS_FIELD_NUMBER: builtins.int
+    MODULES_FIELD_NUMBER: builtins.int
+    INPUTS_FIELD_NUMBER: builtins.int
+    datasets: builtins.int
+    models: builtins.int
+    workflows: builtins.int
+    modules: builtins.int
+    inputs: builtins.int
+    def __init__(
+        self,
+        *,
+        datasets: builtins.int = ...,
+        models: builtins.int = ...,
+        workflows: builtins.int = ...,
+        modules: builtins.int = ...,
+        inputs: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["datasets", b"datasets", "inputs", b"inputs", "models", b"models", "modules", b"modules", "workflows", b"workflows"]) -> None: ...
+
+global___AppResourceCounts = AppResourceCounts
 
 @typing_extensions.final
 class Collaborator(google.protobuf.message.Message):
@@ -2574,6 +2656,7 @@ class DatasetVersion(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     EMBED_MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
+    REQUEST_ORIGIN_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the dataset version"""
     @property
@@ -2631,6 +2714,10 @@ class DatasetVersion(google.protobuf.message.Message):
     @property
     def embed_model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """The embedding models to return embeddings for. If empty, no embeddings are returned."""
+    request_origin: global___DatasetVersionRequestOrigin.ValueType
+    """Read Only. Cannot be Set
+    Origin of request for new dataset version
+    """
     def __init__(
         self,
         *,
@@ -2650,9 +2737,10 @@ class DatasetVersion(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         visibility: global___Visibility | None = ...,
         embed_model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        request_origin: global___DatasetVersionRequestOrigin.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "created_at", b"created_at", "data_config", b"data_config", "export_info", b"export_info", "metadata", b"metadata", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "processing_info", b"processing_info", "status", b"status", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "app_id", b"app_id", "created_at", b"created_at", "data_config", b"data_config", "dataset_id", b"dataset_id", "description", b"description", "embed_model_version_ids", b"embed_model_version_ids", "export_info", b"export_info", "id", b"id", "metadata", b"metadata", "metrics", b"metrics", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "processing_info", b"processing_info", "status", b"status", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["annotation_filter_config", b"annotation_filter_config", "app_id", b"app_id", "created_at", b"created_at", "data_config", b"data_config", "dataset_id", b"dataset_id", "description", b"description", "embed_model_version_ids", b"embed_model_version_ids", "export_info", b"export_info", "id", b"id", "metadata", b"metadata", "metrics", b"metrics", "model_predict_config", b"model_predict_config", "modified_at", b"modified_at", "processing_info", b"processing_info", "request_origin", b"request_origin", "status", b"status", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["data_config", b"data_config"]) -> typing_extensions.Literal["annotation_filter_config", "model_predict_config"] | None: ...
 
 global___DatasetVersion = DatasetVersion
@@ -7097,8 +7185,9 @@ global___TaskAssignment = TaskAssignment
 
 @typing_extensions.final
 class TaskStatusCountPerUser(google.protobuf.message.Message):
-    """TaskStatusCountPerUser can represents count of human created annotations for a user for each valid status,
-    count of inputs (anchor annotation) for a user for each valid status
+    """TaskStatusCountPerUser can represent one of the following:
+    * count of task annotations created by a worker for each valid status,
+    * count of task inputs assigned to a worker  (i.e. task assignments) for each valid status
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -7109,12 +7198,16 @@ class TaskStatusCountPerUser(google.protobuf.message.Message):
     SUCCESS_FIELD_NUMBER: builtins.int
     REVIEW_DENIED_FIELD_NUMBER: builtins.int
     AWAITING_CONSENSUS_REVIEW_FIELD_NUMBER: builtins.int
+    WORKER_FIELD_NUMBER: builtins.int
     user_id: builtins.str
+    """Deprecated: Use worker instead."""
     pending: builtins.int
     awaiting_review: builtins.int
     success: builtins.int
     review_denied: builtins.int
     awaiting_consensus_review: builtins.int
+    @property
+    def worker(self) -> global___Worker: ...
     def __init__(
         self,
         *,
@@ -7124,8 +7217,10 @@ class TaskStatusCountPerUser(google.protobuf.message.Message):
         success: builtins.int = ...,
         review_denied: builtins.int = ...,
         awaiting_consensus_review: builtins.int = ...,
+        worker: global___Worker | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["awaiting_consensus_review", b"awaiting_consensus_review", "awaiting_review", b"awaiting_review", "pending", b"pending", "review_denied", b"review_denied", "success", b"success", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["worker", b"worker"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["awaiting_consensus_review", b"awaiting_consensus_review", "awaiting_review", b"awaiting_review", "pending", b"pending", "review_denied", b"review_denied", "success", b"success", "user_id", b"user_id", "worker", b"worker"]) -> None: ...
 
 global___TaskStatusCountPerUser = TaskStatusCountPerUser
 
@@ -9462,3 +9557,29 @@ class RunnerSelector(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["deployment", b"deployment", "nodepool", b"nodepool", "runner", b"runner"]) -> None: ...
 
 global___RunnerSelector = RunnerSelector
+
+@typing_extensions.final
+class ProcessingInfo(google.protobuf.message.Message):
+    """Processing info tells the runner how to process a RunnerItem"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    RUNNER_METHOD_TYPE_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    runner_method_type: global___RunnerMethodType.ValueType
+    """The type of method witin the runner to call."""
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """A status of the processing. We use this for signalling end of a request stream, a runner
+        item's processing should be cancelled, etc.
+        """
+    def __init__(
+        self,
+        *,
+        runner_method_type: global___RunnerMethodType.ValueType = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner_method_type", b"runner_method_type", "status", b"status"]) -> None: ...
+
+global___ProcessingInfo = ProcessingInfo

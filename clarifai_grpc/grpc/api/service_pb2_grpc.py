@@ -234,6 +234,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse),
                 )
+        self.GenerateModelOutputs = channel.unary_stream(
+                '/clarifai.api.V2/GenerateModelOutputs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse),
+                )
+        self.StreamModelOutputs = channel.stream_stream(
+                '/clarifai.api.V2/StreamModelOutputs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse),
+                )
         self.ListDatasets = channel.unary_unary(
                 '/clarifai.api.V2/ListDatasets',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListDatasetsRequest.SerializeToString,
@@ -1124,6 +1134,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse),
                 )
+        self.ProcessRunnerItems = channel.stream_stream(
+                '/clarifai.api.V2/ProcessRunnerItems',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse),
+                )
         self.PostModelVersionsTrainingTimeEstimate = channel.unary_unary(
                 '/clarifai.api.V2/PostModelVersionsTrainingTimeEstimate',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
@@ -1306,6 +1321,9 @@ class V2Servicer(object):
 
     def PatchAnnotationsStatus(self, request, context):
         """Patch annotations status by worker id and task id.
+        Deprecated: Use PutTaskAssignments to update task annotations.
+        For example, you can use PutTaskAssignments with action REVIEW_APPROVE
+        to approve task assignments and associated annotations in bulk.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1440,24 +1458,23 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ListDatasets(self, request, context):
-        """// TODO(zeiler): will need to
-        // Single request but streaming resopnses.
-        rpc GeneratePostModelOutputs (PostModelOutputsRequest) returns (stream MultiOutputResponse) {
-        option (google.api.http) = {
-        post: "/v2/users/{user_app_id.user_id}/apps/{user_app_id.app_id}/models/{model_id}/versions/{version_id}/outputs"
-        body: "*"
-        };
-        option (clarifai.auth.util.cl_auth_type) = KeyAuth;
-        option (clarifai.auth.util.cl_depending_scopes) = Apps_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Concepts_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Models_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Predict;
-        option (clarifai.auth.util.cl_depending_scopes) = Nodepools_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Deployments_Get;
-        }
+    def GenerateModelOutputs(self, request, context):
+        """TODO(zeiler): will need to
+        Single request but streaming resopnses.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
 
-        List all the datasets.
+    def StreamModelOutputs(self, request_iterator, context):
+        """Stream of requests and stream of responses
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListDatasets(self, request, context):
+        """List all the datasets.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1709,6 +1726,7 @@ class V2Servicer(object):
 
     def ListModelInputs(self, request, context):
         """Deprecated: Unmaintained and ideally replaced with usage of datasets
+        The server may refuse to accept requests to this endpoint.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1822,8 +1840,9 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetModelVersionMetrics(self, request, context):
-        """Deprecated: Use GetEvaluation instead
-        Get the evaluation metrics for a model version.
+        """Get the evaluation metrics for a model version.
+        Deprecated: Use GetEvaluation instead
+        The server may refuse to accept requests to this endpoint.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2172,6 +2191,7 @@ class V2Servicer(object):
         """Execute a new search and optionally save it.
 
         Deprecated: Use PostInputsSearches or PostAnnotationsSearches instead.
+        The server may refuse to accept requests to this endpoint.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2645,7 +2665,11 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListNextTaskAssignments(self, request, context):
-        """List next non-labeled and unassigned inputs from task's dataset
+        """Deprecated: Use PutTaskAssignments with action=LABEL_START.
+        This endpoint has initially been designed as a GET request,
+        but has been re-designed to serve a PUT logic.
+        In order to clearly highlight that this endpoint serves a PUT request,
+        this endpoint has been deprecated and replaced by PutTaskAssignments with action=LABEL_START.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2808,8 +2832,21 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ProcessRunnerItems(self, request_iterator, context):
+        """This maintains a single request for asking the API if there is any work to be done, processing
+        it and streaming back results.
+        To do that first handshake the MultiRunnerItemOutputResponse will have RUNNER_STREAM_START
+        status filled in so that the API knows to respond with a MultiRunnerItemResponse.
+        For now there will only be one of those if the model prediction only has one request.
+        NOTE(zeiler): downside of this is you can't use HTTP REST requests to do runner work.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostModelVersionsTrainingTimeEstimate(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Get the training time estimate based off train request and estimated input count.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -3014,6 +3051,16 @@ def add_V2Servicer_to_server(servicer, server):
             ),
             'PostModelOutputs': grpc.unary_unary_rpc_method_handler(
                     servicer.PostModelOutputs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
+            ),
+            'GenerateModelOutputs': grpc.unary_stream_rpc_method_handler(
+                    servicer.GenerateModelOutputs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
+            ),
+            'StreamModelOutputs': grpc.stream_stream_rpc_method_handler(
+                    servicer.StreamModelOutputs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.SerializeToString,
             ),
@@ -3907,6 +3954,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.SerializeToString,
             ),
+            'ProcessRunnerItems': grpc.stream_stream_rpc_method_handler(
+                    servicer.ProcessRunnerItems,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse.SerializeToString,
+            ),
             'PostModelVersionsTrainingTimeEstimate': grpc.unary_unary_rpc_method_handler(
                     servicer.PostModelVersionsTrainingTimeEstimate,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.FromString,
@@ -4615,6 +4667,40 @@ class V2(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelOutputs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GenerateModelOutputs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/GenerateModelOutputs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StreamModelOutputs(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/clarifai.api.V2/StreamModelOutputs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelOutputsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiOutputResponse.FromString,
             options, channel_credentials,
@@ -7643,6 +7729,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRunnerItemOutputs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemOutputResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ProcessRunnerItems(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/clarifai.api.V2/ProcessRunnerItems',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnerItemOutputsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerItemResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
