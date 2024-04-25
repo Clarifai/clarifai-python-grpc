@@ -10,7 +10,7 @@ from google.protobuf.message import Message  # noqa
 from clarifai_grpc.channel import http_client
 from clarifai_grpc.channel.custom_converters.custom_dict_to_message import dict_to_protobuf
 from clarifai_grpc.channel.custom_converters.custom_message_to_dict import protobuf_to_dict
-from clarifai_grpc.channel.errors import UsageError
+from clarifai_grpc.channel.errors import UsageError, NotImplementedCaller
 from clarifai_grpc.channel.exceptions import ClarifaiException
 from clarifai_grpc.grpc.api.service_pb2 import _V2
 
@@ -116,6 +116,9 @@ class GRPCJSONChannel(object):
             response_deserializer,
         )
 
+    def unary_stream(self, method, request_serializer=None, response_deserializer=None):
+        return NotImplementedCaller()
+
     def stream_stream(self, name, request_serializer, response_deserializer):
         # type: (str, typing.Callable, typing.Callable) -> JSONStreamStream
         """Method to create the callable JSONStreamStream."""
@@ -127,6 +130,9 @@ class GRPCJSONChannel(object):
             request_serializer,
             response_deserializer,
         )
+
+    def stream_unary(self, method, request_serializer=None, response_deserializer=None):
+        return NotImplementedCaller()
 
 
 class JSONUnaryUnary(object):
