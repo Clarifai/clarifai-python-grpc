@@ -83,6 +83,12 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     MODEL_UPLOADING_FAILED: _StatusCode.ValueType  # 21105
     MODEL_TRAINING_FAILED: _StatusCode.ValueType  # 21106
     """generic err msg for any type of model training err."""
+    MODEL_BUILDING: _StatusCode.ValueType  # 21107
+    """For new V3 DockerInternalType models which are built images"""
+    MODEL_BUILDING_FAILED: _StatusCode.ValueType  # 21108
+    """Failed to build image for model."""
+    MODEL_BUILD_UNEXPECTED_ERROR: _StatusCode.ValueType  # 21109
+    """Failed to build image for model."""
     MODEL_TRAINING_NO_DATA: _StatusCode.ValueType  # 21110
     """Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
     MODEL_TRAINING_NO_POSITIVES: _StatusCode.ValueType  # 21111
@@ -242,6 +248,10 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     RUNNER_STREAM_END: _StatusCode.ValueType  # 25606
     RUNNER_ITEM_CANCELLED: _StatusCode.ValueType  # 25607
     RUNNER_PROCESSING_FAILED: _StatusCode.ValueType  # 25608
+    NODEPOOL_DOES_NOT_EXIST: _StatusCode.ValueType  # 25700
+    """Nodepool related codes 257xx"""
+    NODEPOOL_INVALID_ARGUMENT: _StatusCode.ValueType  # 25701
+    NODEPOOL_INVALID_REQUEST: _StatusCode.ValueType  # 25702
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -592,6 +602,12 @@ MODEL_UPLOADING: StatusCode.ValueType  # 21104
 MODEL_UPLOADING_FAILED: StatusCode.ValueType  # 21105
 MODEL_TRAINING_FAILED: StatusCode.ValueType  # 21106
 """generic err msg for any type of model training err."""
+MODEL_BUILDING: StatusCode.ValueType  # 21107
+"""For new V3 DockerInternalType models which are built images"""
+MODEL_BUILDING_FAILED: StatusCode.ValueType  # 21108
+"""Failed to build image for model."""
+MODEL_BUILD_UNEXPECTED_ERROR: StatusCode.ValueType  # 21109
+"""Failed to build image for model."""
 MODEL_TRAINING_NO_DATA: StatusCode.ValueType  # 21110
 """Custom model training had no data.  FIXME(yang): deprecate this. Use the 21106 + errStatusMsg"""
 MODEL_TRAINING_NO_POSITIVES: StatusCode.ValueType  # 21111
@@ -751,6 +767,10 @@ RUNNER_STREAM_START: StatusCode.ValueType  # 25605
 RUNNER_STREAM_END: StatusCode.ValueType  # 25606
 RUNNER_ITEM_CANCELLED: StatusCode.ValueType  # 25607
 RUNNER_PROCESSING_FAILED: StatusCode.ValueType  # 25608
+NODEPOOL_DOES_NOT_EXIST: StatusCode.ValueType  # 25700
+"""Nodepool related codes 257xx"""
+NODEPOOL_INVALID_ARGUMENT: StatusCode.ValueType  # 25701
+NODEPOOL_INVALID_REQUEST: StatusCode.ValueType  # 25702
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
