@@ -8,10 +8,10 @@ import sys
 
 
 try:
-    from urllib.request import HTTPHandler, HTTPSHandler, Request, build_opener
+    from urllib.request import HTTPHandler, Request, build_opener
     from urllib.error import HTTPError
 except ImportError:
-    from urllib2 import Request, HTTPError, build_opener, HTTPHandler, HTTPSHandler
+    from urllib2 import Request, HTTPError, build_opener, HTTPHandler
 
 
 EMAIL = os.environ["CLARIFAI_USER_EMAIL"]
@@ -35,11 +35,6 @@ def _request(method, url, payload={}, headers={}):
     full_url = f"{base_scheme}://{base_url}/v2{url}"
 
     opener = build_opener(HTTPHandler)
-    if os.environ.get('CLARIFAI_GRPC_NO_VERIFY', 'False').lower() in ('true', '1'):
-        ssl_context = ssl.create_default_context()
-        ssl_context.check_hostname = False
-        ssl_context.verify_mode = ssl.CERT_NONE
-        opener = build_opener(HTTPSHandler(context=ssl_context), HTTPHandler)
 
     request = Request(full_url, data=json.dumps(payload).encode())
     for k in headers.keys():
