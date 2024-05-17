@@ -29,7 +29,7 @@ def _request(method, url, payload={}, headers={}):
     base_scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
 
     if base_url_port != '':
-        base_url = base_url + ':' + base_url_port
+        base_url = f"{base_url}:{base_url_port}"
 
     full_url = f"{base_scheme}://{base_url}/v2{url}"
 
