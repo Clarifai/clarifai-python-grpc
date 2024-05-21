@@ -40,6 +40,13 @@ def get_status_message(status: Status):
         return message
 
 
+def headers(pat=False):
+    if pat:
+        return {"authorization": "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")}
+    else:
+        return {"authorization": "Key %s" % os.environ.get("CLARIFAI_API_KEY")}
+
+
 def metadata(pat=False):
     if pat:
         return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
