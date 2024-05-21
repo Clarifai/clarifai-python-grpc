@@ -5,6 +5,7 @@ import uuid
 import zipfile
 
 from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+from tests.client.test_secure_data_hosting import get_secure_hosting_url
 from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
@@ -171,7 +172,10 @@ def _check_export(export, expected_format, expected_mimetype, check_fn):
     assert export.format == expected_format
     assert export.size > 0
 
-    get_export_url_response = requests.get(export.url)
+    headers = None
+    if export.url.startswith(get_secure_hosting_url()):
+        headers = metadata()
+    get_export_url_response = requests.get(export.url, headers=headers)
     assert get_export_url_response.status_code == 200
 
     with zipfile.ZipFile(io.BytesIO(get_export_url_response.content)) as zip_file:
