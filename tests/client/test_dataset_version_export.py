@@ -174,8 +174,8 @@ def _check_export(export, expected_format, expected_mimetype, check_fn):
     assert export.size > 0
 
     get_export_url_response = requests.get(
-        export.url,
-        headers=headers() if export.url.startswith(get_secure_hosting_url()) else None)
+        export.url, headers=headers() if export.url.startswith(get_secure_hosting_url()) else None
+    )
     assert get_export_url_response.status_code == 200
 
     with zipfile.ZipFile(io.BytesIO(get_export_url_response.content)) as zip_file:
