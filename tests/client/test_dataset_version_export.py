@@ -10,6 +10,7 @@ from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
+    headers,
     metadata,
     raise_on_failure,
     wait_for_inputs_delete,
@@ -172,10 +173,9 @@ def _check_export(export, expected_format, expected_mimetype, check_fn):
     assert export.format == expected_format
     assert export.size > 0
 
-    headers = None
-    if export.url.startswith(get_secure_hosting_url()):
-        headers = metadata()
-    get_export_url_response = requests.get(export.url, headers=headers)
+    get_export_url_response = requests.get(
+        export.url, headers=headers() if export.url.startswith(get_secure_hosting_url()) else None
+    )
     assert get_export_url_response.status_code == 200
 
     with zipfile.ZipFile(io.BytesIO(get_export_url_response.content)) as zip_file:
