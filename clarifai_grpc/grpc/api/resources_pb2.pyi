@@ -1496,17 +1496,23 @@ class ConceptQuery(google.protobuf.message.Message):
     LANGUAGE_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     USE_CASES_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the concept to search."""
     language: builtins.str
     """The language of the concept name in a search. Defaults to English."""
     workflow_id: builtins.str
-    """The id of workflow. If no id is provided, then application base workflow is used."""
+    """Deprecated: Use workflow.id instead."""
     @property
     def use_cases(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___WorkflowModelUseCase.ValueType]:
-        """The concepts must belong to workflow models with specified use cases.
+        """The concepts must belong to models with specified use cases.
         Multiple values are joined using an OR condition.
         """
+    @property
+    def model(self) -> global___Model: ...
+    @property
+    def workflow(self) -> global___Workflow: ...
     def __init__(
         self,
         *,
@@ -1514,8 +1520,12 @@ class ConceptQuery(google.protobuf.message.Message):
         language: builtins.str = ...,
         workflow_id: builtins.str = ...,
         use_cases: collections.abc.Iterable[global___WorkflowModelUseCase.ValueType] | None = ...,
+        model: global___Model | None = ...,
+        workflow: global___Workflow | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "name", b"name", "use_cases", b"use_cases", "workflow_id", b"workflow_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["model", b"model", "source", b"source", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "model", b"model", "name", b"name", "source", b"source", "use_cases", b"use_cases", "workflow", b"workflow", "workflow_id", b"workflow_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["source", b"source"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
 
 global___ConceptQuery = ConceptQuery
 
@@ -5700,6 +5710,7 @@ class User(google.protobuf.message.Message):
     JOB_TITLE_FIELD_NUMBER: builtins.int
     JOB_ROLE_FIELD_NUMBER: builtins.int
     INTENTION_FIELD_NUMBER: builtins.int
+    REFERRAL_SOURCE_FIELD_NUMBER: builtins.int
     BILL_TYPE_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     DATE_GDPR_CONSENT_FIELD_NUMBER: builtins.int
@@ -5723,6 +5734,8 @@ class User(google.protobuf.message.Message):
     job_role: builtins.str
     intention: builtins.str
     """This specifies user intent when registering on clarifai"""
+    referral_source: builtins.str
+    """This specifies how one got to know about clarifai"""
     bill_type: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -5780,6 +5793,7 @@ class User(google.protobuf.message.Message):
         job_title: builtins.str = ...,
         job_role: builtins.str = ...,
         intention: builtins.str = ...,
+        referral_source: builtins.str = ...,
         bill_type: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         date_gdpr_consent: google.protobuf.timestamp_pb2.Timestamp | None = ...,
@@ -5796,7 +5810,7 @@ class User(google.protobuf.message.Message):
         user_detail: global___UserDetail | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "metadata", b"metadata", "user_detail", b"user_detail", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "company_name", b"company_name", "created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "first_name", b"first_name", "id", b"id", "intention", b"intention", "is_starred", b"is_starred", "job_role", b"job_role", "job_title", b"job_title", "last_name", b"last_name", "metadata", b"metadata", "primary_email", b"primary_email", "star_count", b"star_count", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled", "user_detail", b"user_detail", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "company_name", b"company_name", "created_at", b"created_at", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "first_name", b"first_name", "id", b"id", "intention", b"intention", "is_starred", b"is_starred", "job_role", b"job_role", "job_title", b"job_title", "last_name", b"last_name", "metadata", b"metadata", "primary_email", b"primary_email", "referral_source", b"referral_source", "star_count", b"star_count", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled", "user_detail", b"user_detail", "visibility", b"visibility"]) -> None: ...
 
 global___User = User
 
@@ -7300,15 +7314,19 @@ class TaskMetrics(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     WORK_FIELD_NUMBER: builtins.int
+    REVIEW_FIELD_NUMBER: builtins.int
     @property
     def work(self) -> global___TaskWorkMetrics: ...
+    @property
+    def review(self) -> global___TaskReviewMetrics: ...
     def __init__(
         self,
         *,
         work: global___TaskWorkMetrics | None = ...,
+        review: global___TaskReviewMetrics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["work", b"work"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["work", b"work"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> None: ...
 
 global___TaskMetrics = TaskMetrics
 
@@ -7333,6 +7351,28 @@ class TaskWorkMetrics(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
 
 global___TaskWorkMetrics = TaskWorkMetrics
+
+@typing_extensions.final
+class TaskReviewMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_COUNT_ESTIMATED_FIELD_NUMBER: builtins.int
+    INPUTS_PERCENT_ESTIMATED_FIELD_NUMBER: builtins.int
+    inputs_count_estimated: builtins.int
+    """Estimated number of reviewed inputs."""
+    inputs_percent_estimated: builtins.int
+    """Estimated percent of inputs that were reviewed. Calculated as count of reviewed inputs / total task inputs
+    This is a value between 0 and 100, where 0 = 0% and 100 = 100%.
+    """
+    def __init__(
+        self,
+        *,
+        inputs_count_estimated: builtins.int = ...,
+        inputs_percent_estimated: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
+
+global___TaskReviewMetrics = TaskReviewMetrics
 
 @typing_extensions.final
 class Collector(google.protobuf.message.Message):
@@ -9081,22 +9121,21 @@ class Runner(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    WORKFLOW_FIELD_NUMBER: builtins.int
+    WORKER_FIELD_NUMBER: builtins.int
     NODEPOOL_FIELD_NUMBER: builtins.int
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """A unique ID for this app module.
+    """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
     """
     description: builtins.str
-    """A short description for this app module to be used in grids of modules."""
+    """short description about the runner."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module was created."""
+        """When the runner was created."""
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module was last modified."""
+        """When the runner was last modified."""
     @property
     def metadata(self) -> google.protobuf.struct_pb2.Struct:
         """To handle arbitrary json metadata you can use a struct field:
@@ -9109,14 +9148,10 @@ class Runner(google.protobuf.message.Message):
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Labels to match in order to find work."""
     @property
-    def model(self) -> global___Model:
-        """Model: match work to only a specific model."""
-    @property
-    def workflow(self) -> global___Workflow:
-        """Workflow: match work to only a specific workflow.
-        We could also support matching by labels here for future "job" like functionality where
-        the item itself fully defines the work that needs to be done.
-        RunnerLabels runner_labels = 11; // FUTURE
+    def worker(self) -> global___Worker:
+        """Instead of just matching on labels we might want to have more explicit matching of what
+        work this runner is looking for.
+        The thing that the autoscaling config applies to for this nodepool.
         """
     @property
     def nodepool(self) -> global___Nodepool:
@@ -9145,14 +9180,12 @@ class Runner(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         user_id: builtins.str = ...,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
-        model: global___Model | None = ...,
-        workflow: global___Workflow | None = ...,
+        worker: global___Worker | None = ...,
         nodepool: global___Nodepool | None = ...,
         compute_info: global___ComputeInfo | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "metadata", b"metadata", "model", b"model", "modified_at", b"modified_at", "nodepool", b"nodepool", "object", b"object", "workflow", b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "model", b"model", "modified_at", b"modified_at", "nodepool", b"nodepool", "object", b"object", "user_id", b"user_id", "workflow", b"workflow"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["object", b"object"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "worker", b"worker"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "user_id", b"user_id", "worker", b"worker"]) -> None: ...
 
 global___Runner = Runner
 
@@ -9165,132 +9198,215 @@ class Nodepool(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    class _CapacityType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
-
-    class _CapacityTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Nodepool._CapacityType.ValueType], builtins.type):  # noqa: F821
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        UKNOWN_CAPACITY_TYPE: Nodepool._CapacityType.ValueType  # 0
-        ONDEMAND_TYPE: Nodepool._CapacityType.ValueType  # 1
-        SPOT_TYPE: Nodepool._CapacityType.ValueType  # 2
-
-    class CapacityType(_CapacityType, metaclass=_CapacityTypeEnumTypeWrapper):
-        """Type of nodes that are ok for instances in this pool.
-        If both spot and on-demand are provided then the runner will be able to run on either
-        with a preference for spot until they are not available.
-        """
-
-    UKNOWN_CAPACITY_TYPE: Nodepool.CapacityType.ValueType  # 0
-    ONDEMAND_TYPE: Nodepool.CapacityType.ValueType  # 1
-    SPOT_TYPE: Nodepool.CapacityType.ValueType  # 2
-
     ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
-    CLOUD_REGION_FIELD_NUMBER: builtins.int
-    CAPACITY_TYPES_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_FIELD_NUMBER: builtins.int
+    NODE_CAPACITY_TYPE_FIELD_NUMBER: builtins.int
     INSTANCE_TYPES_FIELD_NUMBER: builtins.int
     MIN_INSTANCES_FIELD_NUMBER: builtins.int
     MAX_INSTANCES_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The user defined ID of the nodepool."""
+    description: builtins.str
+    """Short description about the nodepool."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the nodepool was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the nodepool was last modified."""
     user_id: builtins.str
     """The user/org that this nodepool belongs to."""
     @property
-    def cloud_region(self) -> global___CloudRegion:
-        """Which cloud region this nodepool is within."""
+    def compute_cluster(self) -> global___ComputeCluster:
+        """Which cluster this nodepool is within."""
     @property
-    def capacity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___Nodepool.CapacityType.ValueType]: ...
+    def node_capacity_type(self) -> global___NodeCapacityType: ...
     @property
-    def instance_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """////////////////////////////////////
-        The instance types that will be available in this pool of nodes.
-        Clarifai offers multiple different choices that combine cpu cores, memory and accelerator.
-        ////////////////////////////////////
-        """
+    def instance_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstanceType]: ...
     min_instances: builtins.int
-    """Minimum number of instances in this nodepool. This allows the nodeool to scale down to this
+    """Minimum number of instances in this nodepool. This allows the nodepool to scale down to this
     amount. A nodepool needs a minimum of 1 instance.
     """
     max_instances: builtins.int
     """An upper limit on the number of instances in this nodepool. This allows the nodepool to scale
     up to this amount.
     """
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this message is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle arbitrary json metadata:
+        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
+        """
     def __init__(
         self,
         *,
         id: builtins.str = ...,
+        description: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         user_id: builtins.str = ...,
-        cloud_region: global___CloudRegion | None = ...,
-        capacity_types: collections.abc.Iterable[global___Nodepool.CapacityType.ValueType] | None = ...,
-        instance_types: collections.abc.Iterable[builtins.str] | None = ...,
+        compute_cluster: global___ComputeCluster | None = ...,
+        node_capacity_type: global___NodeCapacityType | None = ...,
+        instance_types: collections.abc.Iterable[global___InstanceType] | None = ...,
         min_instances: builtins.int = ...,
         max_instances: builtins.int = ...,
+        visibility: global___Visibility | None = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cloud_region", b"cloud_region"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["capacity_types", b"capacity_types", "cloud_region", b"cloud_region", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "min_instances", b"min_instances", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "description", b"description", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "metadata", b"metadata", "min_instances", b"min_instances", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___Nodepool = Nodepool
 
 @typing_extensions.final
-class CloudRegion(google.protobuf.message.Message):
-    """We define a cloud region here to be used in Nodepools and by the cloud agent.
-    There will be one cloud agent per CloudRegion.
-    This allows us to define CloudRegions that are VPCs within one physical cloud and have that
-    managed by one cloud agent which can list all nodepools for that VPC to deploy them and
+class NodeCapacityType(google.protobuf.message.Message):
+    """Type of nodes that are ok for instances in this pool.
+    If both spot and on-demand are provided then the runner will be able to run on either
+    with a preference for spot until they are not available.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _CapacityType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CapacityTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[NodeCapacityType._CapacityType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UKNOWN_CAPACITY_TYPE: NodeCapacityType._CapacityType.ValueType  # 0
+        ON_DEMAND_TYPE: NodeCapacityType._CapacityType.ValueType  # 1
+        SPOT_TYPE: NodeCapacityType._CapacityType.ValueType  # 2
+
+    class CapacityType(_CapacityType, metaclass=_CapacityTypeEnumTypeWrapper): ...
+    UKNOWN_CAPACITY_TYPE: NodeCapacityType.CapacityType.ValueType  # 0
+    ON_DEMAND_TYPE: NodeCapacityType.CapacityType.ValueType  # 1
+    SPOT_TYPE: NodeCapacityType.CapacityType.ValueType  # 2
+
+    CAPACITY_TYPES_FIELD_NUMBER: builtins.int
+    @property
+    def capacity_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___NodeCapacityType.CapacityType.ValueType]: ...
+    def __init__(
+        self,
+        *,
+        capacity_types: collections.abc.Iterable[global___NodeCapacityType.CapacityType.ValueType] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["capacity_types", b"capacity_types"]) -> None: ...
+
+global___NodeCapacityType = NodeCapacityType
+
+@typing_extensions.final
+class InstanceType(google.protobuf.message.Message):
+    """The instance types that will be available in this pool of nodes.
+    Clarifai offers multiple different choices that combine cpu cores, memory and accelerator.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    COMPUTE_INFO_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    description: builtins.str
+    """Short description of instance type."""
+    @property
+    def compute_info(self) -> global___ComputeInfo: ...
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        description: builtins.str = ...,
+        compute_info: global___ComputeInfo | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "description", b"description", "id", b"id"]) -> None: ...
+
+global___InstanceType = InstanceType
+
+@typing_extensions.final
+class CloudProvider(google.protobuf.message.Message):
+    """CloudProvider represents the entity that provides the infrastructure where the Nodepools are deployed.
+    This could be a public cloud provider like AWS, GCP, Azure, etc., or a self-hosted infrastructure.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Unique identifier of the cloud provider."""
+    name: builtins.str
+    """Name of the cloud provider."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        name: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "name", b"name"]) -> None: ...
+
+global___CloudProvider = CloudProvider
+
+@typing_extensions.final
+class ComputeCluster(google.protobuf.message.Message):
+    """We define a cluster here to be used in Nodepools and by the cloud provider.
+    There will be one cloud provider per Cluster.
+    This allows us to define Clusters that are VPCs within one physical cloud and have that
+    managed by one cloud provider which can list all nodepools for that VPC to deploy them and
     orchestrate work within them.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    class _Cloud:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
-
-    class _CloudEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[CloudRegion._Cloud.ValueType], builtins.type):  # noqa: F821
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        UNKOWN_CLOUD: CloudRegion._Cloud.ValueType  # 0
-        SELF_HOSTED: CloudRegion._Cloud.ValueType  # 1
-        """Run on a user's own infrastructure. This has restrictions on who can access resources
-        that are being run by SELF_HOSTED runners. Only those who are part of the user/org where they
-        exist can leverage them.
-        """
-        AWS: CloudRegion._Cloud.ValueType  # 2
-        GCP: CloudRegion._Cloud.ValueType  # 3
-        AZURE: CloudRegion._Cloud.ValueType  # 4
-        LAMBDA: CloudRegion._Cloud.ValueType  # 5
-
-    class Cloud(_Cloud, metaclass=_CloudEnumTypeWrapper): ...
-    UNKOWN_CLOUD: CloudRegion.Cloud.ValueType  # 0
-    SELF_HOSTED: CloudRegion.Cloud.ValueType  # 1
-    """Run on a user's own infrastructure. This has restrictions on who can access resources
-    that are being run by SELF_HOSTED runners. Only those who are part of the user/org where they
-    exist can leverage them.
-    """
-    AWS: CloudRegion.Cloud.ValueType  # 2
-    GCP: CloudRegion.Cloud.ValueType  # 3
-    AZURE: CloudRegion.Cloud.ValueType  # 4
-    LAMBDA: CloudRegion.Cloud.ValueType  # 5
-
     ID_FIELD_NUMBER: builtins.int
-    CLOUD_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CLOUD_PROVIDER_FIELD_NUMBER: builtins.int
     REGION_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
     id: builtins.str
-    cloud: global___CloudRegion.Cloud.ValueType
+    description: builtins.str
+    """Short description of cluster region."""
+    @property
+    def cloud_provider(self) -> global___CloudProvider: ...
     region: builtins.str
-    """The region. The naming here depends on the cloud choice above and will be validated
-    against which clouds+regions that Clarifai currently supports.
+    """The region. The naming here depends on the cluster choice above and will be validated
+    against which clusters+regions that Clarifai currently supports.
     """
+    user_id: builtins.str
+    """The user/org that this compute cluster belongs to."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the compute cluster was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the compute cluster was last modified."""
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        cloud: global___CloudRegion.Cloud.ValueType = ...,
+        description: builtins.str = ...,
+        cloud_provider: global___CloudProvider | None = ...,
         region: builtins.str = ...,
+        user_id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cloud", b"cloud", "id", b"id", "region", b"region"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "description", b"description", "id", b"id", "modified_at", b"modified_at", "region", b"region", "user_id", b"user_id"]) -> None: ...
 
-global___CloudRegion = CloudRegion
+global___ComputeCluster = ComputeCluster
 
 @typing_extensions.final
 class ComputeInfo(google.protobuf.message.Message):
@@ -9457,6 +9573,8 @@ class Deployment(google.protobuf.message.Message):
     MODEL_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
     SCHEDULING_CHOICE_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -9486,6 +9604,17 @@ class Deployment(google.protobuf.message.Message):
         RunnerLabels runner_labels = 11; // FUTURE
         """
     scheduling_choice: global___Deployment.SchedulingChoice.ValueType
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this message is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle arbitrary json metadata:
+        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
+        """
     def __init__(
         self,
         *,
@@ -9496,9 +9625,11 @@ class Deployment(google.protobuf.message.Message):
         model: global___Model | None = ...,
         workflow: global___Workflow | None = ...,
         scheduling_choice: global___Deployment.SchedulingChoice.ValueType = ...,
+        visibility: global___Visibility | None = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "model", b"model", "object", b"object", "workflow", b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "id", b"id", "model", b"model", "nodepools", b"nodepools", "object", b"object", "scheduling_choice", b"scheduling_choice", "user_id", b"user_id", "workflow", b"workflow"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "metadata", b"metadata", "model", b"model", "object", b"object", "visibility", b"visibility", "workflow", b"workflow"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "id", b"id", "metadata", b"metadata", "model", b"model", "nodepools", b"nodepools", "object", b"object", "scheduling_choice", b"scheduling_choice", "user_id", b"user_id", "visibility", b"visibility", "workflow", b"workflow"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["object", b"object"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
 
 global___Deployment = Deployment
