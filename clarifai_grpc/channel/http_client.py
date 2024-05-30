@@ -8,7 +8,7 @@ import requests
 
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = "10.3.5"
+CLIENT_VERSION = "10.4.0"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(
