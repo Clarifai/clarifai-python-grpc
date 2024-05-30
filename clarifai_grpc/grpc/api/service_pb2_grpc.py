@@ -1144,6 +1144,51 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse),
                 )
+        self.GetComputeCluster = channel.unary_unary(
+                '/clarifai.api.V2/GetComputeCluster',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetComputeClusterRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleComputeClusterResponse),
+                )
+        self.ListComputeClusters = channel.unary_unary(
+                '/clarifai.api.V2/ListComputeClusters',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListComputeClustersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse),
+                )
+        self.PostComputeClusters = channel.unary_unary(
+                '/clarifai.api.V2/PostComputeClusters',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputeClustersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse),
+                )
+        self.DeleteComputeClusters = channel.unary_unary(
+                '/clarifai.api.V2/DeleteComputeClusters',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.GetNodepool = channel.unary_unary(
+                '/clarifai.api.V2/GetNodepool',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetNodepoolRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleNodepoolResponse),
+                )
+        self.ListNodepools = channel.unary_unary(
+                '/clarifai.api.V2/ListNodepools',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNodepoolsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse),
+                )
+        self.PostNodepools = channel.unary_unary(
+                '/clarifai.api.V2/PostNodepools',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse),
+                )
+        self.PatchNodepools = channel.unary_unary(
+                '/clarifai.api.V2/PatchNodepools',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchNodepoolsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse),
+                )
+        self.DeleteNodepools = channel.unary_unary(
+                '/clarifai.api.V2/DeleteNodepools',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
 
 
 class V2Servicer(object):
@@ -2851,6 +2896,82 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetComputeCluster(self, request, context):
+        """TODO(zeiler): i mocked these up bu tleft them commented for now because they will build all the
+        handlers and we have to stub those out. Me/Sai will do that in follow up PRs, i just want to
+        check in the protos so we can start using them first work through some of the routing stuff.
+
+        // ListCloudAgentInformation with special auth.
+        rpc ListCloudAgentInformation (ListCloudAgentInformationRequest) returns (MultiCloudAgentInformationResponse) {
+        option (google.api.http) = {
+        get: "/v2/cloud_agent_info"
+        };
+        option (clarifai.auth.util.cl_auth_type) = CloudAgentAuth;
+        option (clarifai.auth.util.cl_depending_scopes) = Apps_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Models_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Runners_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Nodepools_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Deployments_Get;
+        option (clarifai.auth.util.cl_depending_scopes) = Keys_Get;
+        }
+
+        ComputeCluster CRUD
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListComputeClusters(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostComputeClusters(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteComputeClusters(self, request, context):
+        """Delete multiple compute_clusters in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetNodepool(self, request, context):
+        """Nodepools CRUD
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListNodepools(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostNodepools(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchNodepools(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteNodepools(self, request, context):
+        """Delete multiple nodepools in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3963,6 +4084,51 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostModelVersionsTrainingTimeEstimate,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse.SerializeToString,
+            ),
+            'GetComputeCluster': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetComputeCluster,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetComputeClusterRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleComputeClusterResponse.SerializeToString,
+            ),
+            'ListComputeClusters': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListComputeClusters,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListComputeClustersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.SerializeToString,
+            ),
+            'PostComputeClusters': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostComputeClusters,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputeClustersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.SerializeToString,
+            ),
+            'DeleteComputeClusters': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteComputeClusters,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'GetNodepool': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetNodepool,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetNodepoolRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleNodepoolResponse.SerializeToString,
+            ),
+            'ListNodepools': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListNodepools,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListNodepoolsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.SerializeToString,
+            ),
+            'PostNodepools': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostNodepools,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.SerializeToString,
+            ),
+            'PatchNodepools': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchNodepools,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchNodepoolsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.SerializeToString,
+            ),
+            'DeleteNodepools': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteNodepools,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -7763,5 +7929,158 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelVersionsTrainingTimeEstimate',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetComputeCluster(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetComputeCluster',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetComputeClusterRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleComputeClusterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListComputeClusters(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListComputeClusters',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListComputeClustersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostComputeClusters(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostComputeClusters',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostComputeClustersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteComputeClusters(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteComputeClusters',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetNodepool(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetNodepool',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetNodepoolRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleNodepoolResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListNodepools(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListNodepools',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListNodepoolsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostNodepools(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostNodepools',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchNodepools(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchNodepools',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchNodepoolsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiNodepoolResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteNodepools(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteNodepools',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
