@@ -68,9 +68,11 @@ class ClarifaiChannel:
 
         if not base:
             base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
-        if base.startswith("http:") or base.startswith("https:"): 
-            raise ValueError("For secure channels the 'base' passed via arguments or env variable CLARIFAI_GRPC_BASE should not start with http:// or https:// but be a direct api endpoint like 'api.clarifai.com'")
-        
+        if base.startswith("http:") or base.startswith("https:"):
+            raise ValueError(
+                "For secure channels the 'base' passed via arguments or env variable CLARIFAI_GRPC_BASE should not start with http:// or https:// but be a direct api endpoint like 'api.clarifai.com'"
+            )
+
         if root_certificates_path:
             with open(root_certificates_path, "rb") as f:
                 root_certificates = f.read()
