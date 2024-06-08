@@ -114,11 +114,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse),
                 )
-        self.PostConceptMappingJobs = channel.unary_unary(
-                '/clarifai.api.V2/PostConceptMappingJobs',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse),
-                )
         self.GetAnnotation = channel.unary_unary(
                 '/clarifai.api.V2/GetAnnotation',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationRequest.SerializeToString,
@@ -1324,13 +1319,6 @@ class V2Servicer(object):
 
     def PostKnowledgeGraphs(self, request, context):
         """Post domain graphs.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostConceptMappingJobs(self, request, context):
-        """Start concept mapping jobs.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3055,11 +3043,6 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.SerializeToString,
             ),
-            'PostConceptMappingJobs': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostConceptMappingJobs,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.SerializeToString,
-            ),
             'GetAnnotation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAnnotation,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationRequest.FromString,
@@ -4427,23 +4410,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostKnowledgeGraphs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostConceptMappingJobs(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostConceptMappingJobs',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

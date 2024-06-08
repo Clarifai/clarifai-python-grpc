@@ -1770,31 +1770,6 @@ class PostKnowledgeGraphsRequest(google.protobuf.message.Message):
 global___PostKnowledgeGraphsRequest = PostKnowledgeGraphsRequest
 
 @typing_extensions.final
-class PostConceptMappingJobsRequest(google.protobuf.message.Message):
-    """Start concept mapping jobs"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    CONCEPT_MAPPING_JOBS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """The user_id and app_id information."""
-    @property
-    def concept_mapping_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptMappingJob]:
-        """The concept mapping jobs that are being started"""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        concept_mapping_jobs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptMappingJob] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_mapping_jobs", b"concept_mapping_jobs", "user_app_id", b"user_app_id"]) -> None: ...
-
-global___PostConceptMappingJobsRequest = PostConceptMappingJobsRequest
-
-@typing_extensions.final
 class MultiConceptRelationResponse(google.protobuf.message.Message):
     """MultiConceptRelationResponse"""
 
@@ -1843,31 +1818,6 @@ class MultiKnowledgeGraphResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs", b"knowledge_graphs", "status", b"status"]) -> None: ...
 
 global___MultiKnowledgeGraphResponse = MultiKnowledgeGraphResponse
-
-@typing_extensions.final
-class MultiConceptMappingJobResponse(google.protobuf.message.Message):
-    """MultiConceptMappingJobResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """The response status."""
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The ids of the concept mapping jobs underway."""
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "status", b"status"]) -> None: ...
-
-global___MultiConceptMappingJobResponse = MultiConceptMappingJobResponse
 
 @typing_extensions.final
 class GetConceptLanguageRequest(google.protobuf.message.Message):
@@ -7274,6 +7224,7 @@ class GetTaskRequest(google.protobuf.message.Message):
         - all
         - worker.users
         - review.users
+        - metrics.input_source.inputs_count_estimated
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated
@@ -7336,6 +7287,7 @@ class ListTasksRequest(google.protobuf.message.Message):
         - all
         - worker.users
         - review.users
+        - metrics.input_source.inputs_count_estimated
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated

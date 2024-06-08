@@ -1642,29 +1642,6 @@ class KnowledgeGraph(google.protobuf.message.Message):
 global___KnowledgeGraph = KnowledgeGraph
 
 @typing_extensions.final
-class ConceptMappingJob(google.protobuf.message.Message):
-    """ConceptMappingJob"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    KNOWLEDGE_GRAPH_ID_FIELD_NUMBER: builtins.int
-    CONCEPT_IDS_FIELD_NUMBER: builtins.int
-    knowledge_graph_id: builtins.str
-    """The id of the knowledge graph being used for this concept mapping job"""
-    @property
-    def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The ids of the concepts being mapped"""
-    def __init__(
-        self,
-        *,
-        knowledge_graph_id: builtins.str = ...,
-        concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "knowledge_graph_id", b"knowledge_graph_id"]) -> None: ...
-
-global___ConceptMappingJob = ConceptMappingJob
-
-@typing_extensions.final
 class ConceptLanguage(google.protobuf.message.Message):
     """This represents a link to an outside source for the given concept.
     The values from here are sticked into Concept message into the name and definition fields when
@@ -7315,18 +7292,22 @@ class TaskMetrics(google.protobuf.message.Message):
 
     WORK_FIELD_NUMBER: builtins.int
     REVIEW_FIELD_NUMBER: builtins.int
+    INPUT_SOURCE_FIELD_NUMBER: builtins.int
     @property
     def work(self) -> global___TaskWorkMetrics: ...
     @property
     def review(self) -> global___TaskReviewMetrics: ...
+    @property
+    def input_source(self) -> global___TaskInputSourceMetrics: ...
     def __init__(
         self,
         *,
         work: global___TaskWorkMetrics | None = ...,
         review: global___TaskReviewMetrics | None = ...,
+        input_source: global___TaskInputSourceMetrics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input_source", b"input_source", "review", b"review", "work", b"work"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_source", b"input_source", "review", b"review", "work", b"work"]) -> None: ...
 
 global___TaskMetrics = TaskMetrics
 
@@ -7373,6 +7354,22 @@ class TaskReviewMetrics(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
 
 global___TaskReviewMetrics = TaskReviewMetrics
+
+@typing_extensions.final
+class TaskInputSourceMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_COUNT_ESTIMATED_FIELD_NUMBER: builtins.int
+    inputs_count_estimated: builtins.int
+    """Estimated number of inputs that are in the source of data"""
+    def __init__(
+        self,
+        *,
+        inputs_count_estimated: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated"]) -> None: ...
+
+global___TaskInputSourceMetrics = TaskInputSourceMetrics
 
 @typing_extensions.final
 class Collector(google.protobuf.message.Message):
