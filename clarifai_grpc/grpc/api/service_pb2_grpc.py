@@ -114,11 +114,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse),
                 )
-        self.PostConceptMappingJobs = channel.unary_unary(
-                '/clarifai.api.V2/PostConceptMappingJobs',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse),
-                )
         self.GetAnnotation = channel.unary_unary(
                 '/clarifai.api.V2/GetAnnotation',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationRequest.SerializeToString,
@@ -1189,6 +1184,31 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.GetDeployment = channel.unary_unary(
+                '/clarifai.api.V2/GetDeployment',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDeploymentRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleDeploymentResponse),
+                )
+        self.ListDeployments = channel.unary_unary(
+                '/clarifai.api.V2/ListDeployments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListDeploymentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse),
+                )
+        self.PostDeployments = channel.unary_unary(
+                '/clarifai.api.V2/PostDeployments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostDeploymentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse),
+                )
+        self.PatchDeployments = channel.unary_unary(
+                '/clarifai.api.V2/PatchDeployments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDeploymentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse),
+                )
+        self.DeleteDeployments = channel.unary_unary(
+                '/clarifai.api.V2/DeleteDeployments',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDeploymentsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
 
 
 class V2Servicer(object):
@@ -1324,13 +1344,6 @@ class V2Servicer(object):
 
     def PostKnowledgeGraphs(self, request, context):
         """Post domain graphs.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostConceptMappingJobs(self, request, context):
-        """Start concept mapping jobs.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2972,6 +2985,38 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def GetDeployment(self, request, context):
+        """Deployments CRUD
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListDeployments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostDeployments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchDeployments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteDeployments(self, request, context):
+        """Delete multiple deployments in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3054,11 +3099,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostKnowledgeGraphs,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.SerializeToString,
-            ),
-            'PostConceptMappingJobs': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostConceptMappingJobs,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.SerializeToString,
             ),
             'GetAnnotation': grpc.unary_unary_rpc_method_handler(
                     servicer.GetAnnotation,
@@ -4130,6 +4170,31 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'GetDeployment': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetDeployment,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDeploymentRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleDeploymentResponse.SerializeToString,
+            ),
+            'ListDeployments': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListDeployments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListDeploymentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.SerializeToString,
+            ),
+            'PostDeployments': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostDeployments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostDeploymentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.SerializeToString,
+            ),
+            'PatchDeployments': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchDeployments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchDeploymentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.SerializeToString,
+            ),
+            'DeleteDeployments': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteDeployments,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDeploymentsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
             'clarifai.api.V2', rpc_method_handlers)
@@ -4427,23 +4492,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostKnowledgeGraphs',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostKnowledgeGraphsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiKnowledgeGraphResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostConceptMappingJobs(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostConceptMappingJobs',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostConceptMappingJobsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiConceptMappingJobResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -8081,6 +8129,91 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteNodepools',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetDeployment(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetDeployment',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetDeploymentRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleDeploymentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListDeployments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListDeployments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListDeploymentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostDeployments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostDeployments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostDeploymentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchDeployments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchDeployments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchDeploymentsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiDeploymentResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteDeployments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteDeployments',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteDeploymentsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

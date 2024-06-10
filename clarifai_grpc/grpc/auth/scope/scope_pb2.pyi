@@ -224,6 +224,10 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """Cluster of machines in a region of cloud"""
     ComputeClusters_Add: _S.ValueType  # 140
     ComputeClusters_Delete: _S.ValueType  # 141
+    Deployments_Get: _S.ValueType  # 144
+    """How to autoscale resources within nodepools."""
+    Deployments_Add: _S.ValueType  # 145
+    Deployments_Delete: _S.ValueType  # 146
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -453,6 +457,10 @@ ComputeClusters_Get: S.ValueType  # 139
 """Cluster of machines in a region of cloud"""
 ComputeClusters_Add: S.ValueType  # 140
 ComputeClusters_Delete: S.ValueType  # 141
+Deployments_Get: S.ValueType  # 144
+"""How to autoscale resources within nodepools."""
+Deployments_Add: S.ValueType  # 145
+Deployments_Delete: S.ValueType  # 146
 global___S = S
 
 @typing_extensions.final

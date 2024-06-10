@@ -1770,31 +1770,6 @@ class PostKnowledgeGraphsRequest(google.protobuf.message.Message):
 global___PostKnowledgeGraphsRequest = PostKnowledgeGraphsRequest
 
 @typing_extensions.final
-class PostConceptMappingJobsRequest(google.protobuf.message.Message):
-    """Start concept mapping jobs"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    CONCEPT_MAPPING_JOBS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """The user_id and app_id information."""
-    @property
-    def concept_mapping_jobs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ConceptMappingJob]:
-        """The concept mapping jobs that are being started"""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        concept_mapping_jobs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ConceptMappingJob] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_mapping_jobs", b"concept_mapping_jobs", "user_app_id", b"user_app_id"]) -> None: ...
-
-global___PostConceptMappingJobsRequest = PostConceptMappingJobsRequest
-
-@typing_extensions.final
 class MultiConceptRelationResponse(google.protobuf.message.Message):
     """MultiConceptRelationResponse"""
 
@@ -1843,31 +1818,6 @@ class MultiKnowledgeGraphResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["knowledge_graphs", b"knowledge_graphs", "status", b"status"]) -> None: ...
 
 global___MultiKnowledgeGraphResponse = MultiKnowledgeGraphResponse
-
-@typing_extensions.final
-class MultiConceptMappingJobResponse(google.protobuf.message.Message):
-    """MultiConceptMappingJobResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """The response status."""
-    @property
-    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The ids of the concept mapping jobs underway."""
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "status", b"status"]) -> None: ...
-
-global___MultiConceptMappingJobResponse = MultiConceptMappingJobResponse
 
 @typing_extensions.final
 class GetConceptLanguageRequest(google.protobuf.message.Message):
@@ -7274,6 +7224,7 @@ class GetTaskRequest(google.protobuf.message.Message):
         - all
         - worker.users
         - review.users
+        - metrics.input_source.inputs_count_estimated
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated
@@ -7336,6 +7287,7 @@ class ListTasksRequest(google.protobuf.message.Message):
         - all
         - worker.users
         - review.users
+        - metrics.input_source.inputs_count_estimated
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated
@@ -9755,7 +9707,13 @@ global___ListRunnerItemsRequest = ListRunnerItemsRequest
 
 @typing_extensions.final
 class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
-    """PostRunnerItemOutputsRequest"""
+    """PostRunnerItemOutputsRequest
+    This is the message that runners send to the API to communicate.
+    At the end of the request it will have the RunnerItemOutput filled in
+    with results of the workload the runner is processing. Other messages
+    from the runner use this same proto to communicate over to the API
+    and do handshakes.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -9765,6 +9723,7 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
     RUNNER_ITEM_ID_FIELD_NUMBER: builtins.int
     RUNNER_ITEM_OUTPUTS_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
+    RUNNER_REPLICA_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -9780,8 +9739,13 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """This request has a status so that it can communicate to the API from runners and
         communicate status, errors, etc. This is on the request since runners operate
-        in a reverse protocol.
+        in a reverse protocol. This status is also used to initiate the
+        ProcessRunnerItems request with RUNNER_STREAM_START code.
         """
+    runner_replica_id: builtins.str
+    """A unique ID to represent the runner. This may be tied to an underlying compute instance
+    information or just an UUID.
+    """
     def __init__(
         self,
         *,
@@ -9791,9 +9755,10 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
         runner_item_id: builtins.str = ...,
         runner_item_outputs: collections.abc.Iterable[global___RunnerItemOutput] | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        runner_replica_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "runner_item_id", b"runner_item_id", "runner_item_outputs", b"runner_item_outputs", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "runner_item_id", b"runner_item_id", "runner_item_outputs", b"runner_item_outputs", "runner_replica_id", b"runner_replica_id", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostRunnerItemOutputsRequest = PostRunnerItemOutputsRequest
 
@@ -9822,7 +9787,10 @@ global___MultiRunnerItemResponse = MultiRunnerItemResponse
 
 @typing_extensions.final
 class RunnerItem(google.protobuf.message.Message):
-    """This is a piece of work for a runner to process."""
+    """This is a unit of work for a runner to process. This comes from the API
+    in the MultiRunnerItemResponse and contains the user's requests
+    to process.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -9859,6 +9827,11 @@ global___RunnerItem = RunnerItem
 
 @typing_extensions.final
 class RunnerItemOutput(google.protobuf.message.Message):
+    """This contains the response of the user's request once processing is done.
+    The runner should fill in the matching output to the RunnerItem.request
+    oneof field. This is sent to the API within PostRunnerItemOutputsRequest
+    """
+
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     MULTI_OUTPUT_RESPONSE_FIELD_NUMBER: builtins.int
@@ -10277,3 +10250,174 @@ class MultiNodepoolResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["nodepools", b"nodepools", "status", b"status"]) -> None: ...
 
 global___MultiNodepoolResponse = MultiNodepoolResponse
+
+@typing_extensions.final
+class GetDeploymentRequest(google.protobuf.message.Message):
+    """Deployments CRUD requests and responses"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    deployment_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        deployment_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deployment_id", b"deployment_id", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___GetDeploymentRequest = GetDeploymentRequest
+
+@typing_extensions.final
+class ListDeploymentsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    nodepool_id: builtins.str
+    """(optional URL parameter) Nodepool ID. To list all deployed workers in a Nodepool"""
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        nodepool_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___ListDeploymentsRequest = ListDeploymentsRequest
+
+@typing_extensions.final
+class PostDeploymentsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    DEPLOYMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Only the user_id is used from this."""
+    @property
+    def deployments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Deployment]:
+        """This allows you to create one or more deployments by posting it to the API."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        deployments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Deployment] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deployments", b"deployments", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostDeploymentsRequest = PostDeploymentsRequest
+
+@typing_extensions.final
+class DeleteDeploymentsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Only the user_id is used from this."""
+    @property
+    def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of deployment ids to be deleted"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___DeleteDeploymentsRequest = DeleteDeploymentsRequest
+
+@typing_extensions.final
+class PatchDeploymentsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    DEPLOYMENTS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Only the user_id is used from this."""
+    @property
+    def deployments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Deployment]: ...
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now actions 'merge', 'overwrite', and 'remove' are supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        deployments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Deployment] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "deployments", b"deployments", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchDeploymentsRequest = PatchDeploymentsRequest
+
+@typing_extensions.final
+class SingleDeploymentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def deployment(self) -> proto.clarifai.api.resources_pb2.Deployment: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        deployment: proto.clarifai.api.resources_pb2.Deployment | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["deployment", b"deployment", "status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deployment", b"deployment", "status", b"status"]) -> None: ...
+
+global___SingleDeploymentResponse = SingleDeploymentResponse
+
+@typing_extensions.final
+class MultiDeploymentResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    DEPLOYMENTS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def deployments(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Deployment]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        deployments: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Deployment] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["deployments", b"deployments", "status", b"status"]) -> None: ...
+
+global___MultiDeploymentResponse = MultiDeploymentResponse

@@ -1642,29 +1642,6 @@ class KnowledgeGraph(google.protobuf.message.Message):
 global___KnowledgeGraph = KnowledgeGraph
 
 @typing_extensions.final
-class ConceptMappingJob(google.protobuf.message.Message):
-    """ConceptMappingJob"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    KNOWLEDGE_GRAPH_ID_FIELD_NUMBER: builtins.int
-    CONCEPT_IDS_FIELD_NUMBER: builtins.int
-    knowledge_graph_id: builtins.str
-    """The id of the knowledge graph being used for this concept mapping job"""
-    @property
-    def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The ids of the concepts being mapped"""
-    def __init__(
-        self,
-        *,
-        knowledge_graph_id: builtins.str = ...,
-        concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "knowledge_graph_id", b"knowledge_graph_id"]) -> None: ...
-
-global___ConceptMappingJob = ConceptMappingJob
-
-@typing_extensions.final
 class ConceptLanguage(google.protobuf.message.Message):
     """This represents a link to an outside source for the given concept.
     The values from here are sticked into Concept message into the name and definition fields when
@@ -7315,18 +7292,22 @@ class TaskMetrics(google.protobuf.message.Message):
 
     WORK_FIELD_NUMBER: builtins.int
     REVIEW_FIELD_NUMBER: builtins.int
+    INPUT_SOURCE_FIELD_NUMBER: builtins.int
     @property
     def work(self) -> global___TaskWorkMetrics: ...
     @property
     def review(self) -> global___TaskReviewMetrics: ...
+    @property
+    def input_source(self) -> global___TaskInputSourceMetrics: ...
     def __init__(
         self,
         *,
         work: global___TaskWorkMetrics | None = ...,
         review: global___TaskReviewMetrics | None = ...,
+        input_source: global___TaskInputSourceMetrics | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["review", b"review", "work", b"work"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["input_source", b"input_source", "review", b"review", "work", b"work"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_source", b"input_source", "review", b"review", "work", b"work"]) -> None: ...
 
 global___TaskMetrics = TaskMetrics
 
@@ -7373,6 +7354,22 @@ class TaskReviewMetrics(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
 
 global___TaskReviewMetrics = TaskReviewMetrics
+
+@typing_extensions.final
+class TaskInputSourceMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUTS_COUNT_ESTIMATED_FIELD_NUMBER: builtins.int
+    inputs_count_estimated: builtins.int
+    """Estimated number of inputs that are in the source of data"""
+    def __init__(
+        self,
+        *,
+        inputs_count_estimated: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated"]) -> None: ...
+
+global___TaskInputSourceMetrics = TaskInputSourceMetrics
 
 @typing_extensions.final
 class Collector(google.protobuf.message.Message):
@@ -9124,6 +9121,7 @@ class Runner(google.protobuf.message.Message):
     WORKER_FIELD_NUMBER: builtins.int
     NODEPOOL_FIELD_NUMBER: builtins.int
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
+    NUM_REPLICAS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
@@ -9170,6 +9168,10 @@ class Runner(google.protobuf.message.Message):
         requirements on those object, which may be less than what the Runner allocates (as a safety
         margin for the runner to for sure run the resource).
         """
+    num_replicas: builtins.int
+    """Number of replicas that this runner should have up.
+    We keep it separate from ComputeInfo which defines how many resources each replica needs.
+    """
     def __init__(
         self,
         *,
@@ -9183,9 +9185,10 @@ class Runner(google.protobuf.message.Message):
         worker: global___Worker | None = ...,
         nodepool: global___Nodepool | None = ...,
         compute_info: global___ComputeInfo | None = ...,
+        num_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "user_id", b"user_id", "worker", b"worker"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "num_replicas", b"num_replicas", "user_id", b"user_id", "worker", b"worker"]) -> None: ...
 
 global___Runner = Runner
 
@@ -9231,7 +9234,7 @@ class Nodepool(google.protobuf.message.Message):
     def instance_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstanceType]: ...
     min_instances: builtins.int
     """Minimum number of instances in this nodepool. This allows the nodepool to scale down to this
-    amount. A nodepool needs a minimum of 1 instance.
+    amount.
     """
     max_instances: builtins.int
     """An upper limit on the number of instances in this nodepool. This allows the nodepool to scale
@@ -9570,11 +9573,13 @@ class Deployment(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     AUTOSCALE_CONFIG_FIELD_NUMBER: builtins.int
     NODEPOOLS_FIELD_NUMBER: builtins.int
-    MODEL_FIELD_NUMBER: builtins.int
-    WORKFLOW_FIELD_NUMBER: builtins.int
     SCHEDULING_CHOICE_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    WORKER_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -9592,17 +9597,6 @@ class Deployment(google.protobuf.message.Message):
         we need a way to rank scheduling choices when we don't know how to decide (like a model
         supports
         """
-    @property
-    def model(self) -> global___Model:
-        """Model"""
-    @property
-    def workflow(self) -> global___Workflow:
-        """Workflow
-        We could also support matching by labels here for future "job" like functionality where
-        the item itself fully defines the work that needs to be done.
-        This would match any resources that have these runner labels defined on them.
-        RunnerLabels runner_labels = 11; // FUTURE
-        """
     scheduling_choice: global___Deployment.SchedulingChoice.ValueType
     @property
     def visibility(self) -> global___Visibility:
@@ -9615,6 +9609,19 @@ class Deployment(google.protobuf.message.Message):
         """To handle arbitrary json metadata:
         https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
         """
+    description: builtins.str
+    """Short description of deployment."""
+    @property
+    def worker(self) -> global___Worker:
+        """The thing that the autoscaling config applies to for this nodepool.
+        For a given user_id, nodepool_id, and object ID we can only have one deployment as it defines
+        """
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the deployment was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the deployment was last modified."""
     def __init__(
         self,
         *,
@@ -9622,15 +9629,16 @@ class Deployment(google.protobuf.message.Message):
         user_id: builtins.str = ...,
         autoscale_config: global___AutoscaleConfig | None = ...,
         nodepools: collections.abc.Iterable[global___Nodepool] | None = ...,
-        model: global___Model | None = ...,
-        workflow: global___Workflow | None = ...,
         scheduling_choice: global___Deployment.SchedulingChoice.ValueType = ...,
         visibility: global___Visibility | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        description: builtins.str = ...,
+        worker: global___Worker | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "metadata", b"metadata", "model", b"model", "object", b"object", "visibility", b"visibility", "workflow", b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "id", b"id", "metadata", b"metadata", "model", b"model", "nodepools", b"nodepools", "object", b"object", "scheduling_choice", b"scheduling_choice", "user_id", b"user_id", "visibility", b"visibility", "workflow", b"workflow"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["object", b"object"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["autoscale_config", b"autoscale_config", "created_at", b"created_at", "description", b"description", "id", b"id", "metadata", b"metadata", "modified_at", b"modified_at", "nodepools", b"nodepools", "scheduling_choice", b"scheduling_choice", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
 
 global___Deployment = Deployment
 

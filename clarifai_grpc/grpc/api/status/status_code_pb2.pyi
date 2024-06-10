@@ -256,6 +256,10 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """ComputeCluster related codes 258xx"""
     COMPUTE_CLUSTER_INVALID_ARGUMENT: _StatusCode.ValueType  # 25801
     COMPUTE_CLUSTER_INVALID_REQUEST: _StatusCode.ValueType  # 25802
+    DEPLOYMENT_DOES_NOT_EXIST: _StatusCode.ValueType  # 25900
+    """Deployment related codes 259xx"""
+    DEPLOYMENT_INVALID_ARGUMENT: _StatusCode.ValueType  # 25901
+    DEPLOYMENT_INVALID_REQUEST: _StatusCode.ValueType  # 25902
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -779,6 +783,10 @@ COMPUTE_CLUSTER_DOES_NOT_EXIST: StatusCode.ValueType  # 25800
 """ComputeCluster related codes 258xx"""
 COMPUTE_CLUSTER_INVALID_ARGUMENT: StatusCode.ValueType  # 25801
 COMPUTE_CLUSTER_INVALID_REQUEST: StatusCode.ValueType  # 25802
+DEPLOYMENT_DOES_NOT_EXIST: StatusCode.ValueType  # 25900
+"""Deployment related codes 259xx"""
+DEPLOYMENT_INVALID_ARGUMENT: StatusCode.ValueType  # 25901
+DEPLOYMENT_INVALID_REQUEST: StatusCode.ValueType  # 25902
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
