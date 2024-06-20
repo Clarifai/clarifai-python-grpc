@@ -3386,7 +3386,7 @@ class OutputInfo(google.protobuf.message.Message):
     our JSON REST APIs). This allows each ModelType to define the set of fields, their default values
     and description of each field so that we can display those in Portal and make the creation of
     Model's very extensible. The OutputConfig object will eventually go away in favor of
-    infer_params struct.
+    output_info.params struct.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -3402,7 +3402,7 @@ class OutputInfo(google.protobuf.message.Message):
         """List of concepts or other output related data for the model."""
     @property
     def output_config(self) -> global___OutputConfig:
-        """Model configuration...going away in favor of infer_params and train_params over time.
+        """Model configuration...going away in favor of output_info.params and train_params over time.
         TO BE DEPRECATED
         """
     message: builtins.str
@@ -3542,7 +3542,7 @@ global___ImportInfo = ImportInfo
 @typing_extensions.final
 class OutputConfig(google.protobuf.message.Message):
     """OutputConfig is a collection of parameters controlling either inference or training settings for
-    the given Model. This message will be deprecated over time in favor or infer_params and
+    the given Model. This message will be deprecated over time in favor or output_info.params and
     train_params in OutputInfo which are cleaner and more extensible for many ModelTypes.
     """
 
