@@ -25,7 +25,6 @@ logger = logging.getLogger("clarifai")
 
 
 class HttpClient:
-
     def __init__(self, session, auth_string):  # type: (requests.Session, str) -> None
         """
         :param session: The requests session object.
