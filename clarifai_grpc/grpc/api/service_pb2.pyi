@@ -9533,19 +9533,22 @@ class GetRunnerRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
     runner_id: builtins.str
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___GetRunnerRequest = GetRunnerRequest
 
@@ -9559,6 +9562,7 @@ class ListRunnersRequest(google.protobuf.message.Message):
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -9570,6 +9574,7 @@ class ListRunnersRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
@@ -9577,9 +9582,10 @@ class ListRunnersRequest(google.protobuf.message.Message):
         nodepool_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListRunnersRequest = ListRunnersRequest
 
@@ -9592,21 +9598,24 @@ class PostRunnersRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNERS_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
     @property
     def runners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Runner]:
         """This allows you to create one or more runner by posting it to the API."""
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         nodepool_id: builtins.str = ...,
         runners: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Runner] | None = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runners", b"runners", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runners", b"runners", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostRunnersRequest = PostRunnersRequest
 
@@ -9619,20 +9628,23 @@ class DeleteRunnersRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         nodepool_id: builtins.str = ...,
         ids: collections.abc.Iterable[builtins.str] | None = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "nodepool_id", b"nodepool_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "ids", b"ids", "nodepool_id", b"nodepool_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___DeleteRunnersRequest = DeleteRunnersRequest
 
@@ -9689,19 +9701,22 @@ class ListRunnerItemsRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
     runner_id: builtins.str
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListRunnerItemsRequest = ListRunnerItemsRequest
 
@@ -9724,6 +9739,7 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
     RUNNER_ITEM_OUTPUTS_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     RUNNER_REPLICA_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -9746,6 +9762,7 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
     """A unique ID to represent the runner. This may be tied to an underlying compute instance
     information or just an UUID.
     """
+    compute_cluster_id: builtins.str
     def __init__(
         self,
         *,
@@ -9756,9 +9773,10 @@ class PostRunnerItemOutputsRequest(google.protobuf.message.Message):
         runner_item_outputs: collections.abc.Iterable[global___RunnerItemOutput] | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         runner_replica_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "runner_item_id", b"runner_item_id", "runner_item_outputs", b"runner_item_outputs", "runner_replica_id", b"runner_replica_id", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "runner_item_id", b"runner_item_id", "runner_item_outputs", b"runner_item_outputs", "runner_replica_id", b"runner_replica_id", "status", b"status", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostRunnerItemOutputsRequest = PostRunnerItemOutputsRequest
 
