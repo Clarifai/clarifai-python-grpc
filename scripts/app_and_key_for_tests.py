@@ -15,6 +15,7 @@ except ImportError:
 
 EMAIL = os.environ["CLARIFAI_USER_EMAIL"]
 PASSWORD = os.environ["CLARIFAI_USER_PASSWORD"]
+GENERAL_WORKFLOW_EXTERNAL_ID = "General"
 
 
 def _assert_response_success(response):
@@ -58,7 +59,14 @@ def create_app(env_name):
     session_token, user_id = _login()
 
     url = "/users/%s/apps" % user_id
-    payload = {"apps": [{"name": "auto-created-in-%s-ci-test-run" % env_name}]}
+    payload = {
+        "apps": [
+            {
+                "name": "auto-created-in-%s-ci-test-run" % env_name,
+                "default_workflow_id": GENERAL_WORKFLOW_EXTERNAL_ID,
+            }
+        ]
+    }
 
     data = _request(method="POST", url=url, payload=payload, headers=_auth_headers(session_token))
     _assert_response_success(data)
