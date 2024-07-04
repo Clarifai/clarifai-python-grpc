@@ -831,6 +831,36 @@ class PatchAppsRequest(google.protobuf.message.Message):
 global___PatchAppsRequest = PatchAppsRequest
 
 @typing_extensions.final
+class PatchAppsDetailsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    APPS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def apps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.App]: ...
+    action: builtins.str
+    """The action to perform on the patched App objects
+    Supported values: 'overwrite' and 'remove'.
+
+    Note that 'remove' can only be used to remove the app image by setting
+    'image.url' in the request to the current value returned for that app.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        apps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.App] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "apps", b"apps", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchAppsDetailsRequest = PatchAppsDetailsRequest
+
+@typing_extensions.final
 class PatchAppRequest(google.protobuf.message.Message):
     """PatchAppRequest"""
 
@@ -8915,6 +8945,7 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     INPUT_ID_FIELD_NUMBER: builtins.int
     ACTION_FIELD_NUMBER: builtins.int
     LABEL_SUBMIT_CONFIG_FIELD_NUMBER: builtins.int
+    REVIEW_START_CONFIG_FIELD_NUMBER: builtins.int
     REVIEW_APPROVE_CONFIG_FIELD_NUMBER: builtins.int
     REVIEW_REQUEST_CHANGES_CONFIG_FIELD_NUMBER: builtins.int
     REVIEW_REJECT_CONFIG_FIELD_NUMBER: builtins.int
@@ -8930,7 +8961,10 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
     action: global___PutTaskAssignmentsRequestAction.ValueType
     """Action to perform on selected task."""
     @property
-    def label_submit_config(self) -> global___LabelSubmitConfig: ...
+    def label_submit_config(self) -> global___LabelSubmitConfig:
+        """   LabelStartConfig label_start_config = 5; // no config for label start action"""
+    @property
+    def review_start_config(self) -> global___ReviewStartConfig: ...
     @property
     def review_approve_config(self) -> global___ReviewApproveConfig: ...
     @property
@@ -8945,13 +8979,14 @@ class PutTaskAssignmentsRequest(google.protobuf.message.Message):
         input_id: builtins.str = ...,
         action: global___PutTaskAssignmentsRequestAction.ValueType = ...,
         label_submit_config: global___LabelSubmitConfig | None = ...,
+        review_start_config: global___ReviewStartConfig | None = ...,
         review_approve_config: global___ReviewApproveConfig | None = ...,
         review_request_changes_config: global___ReviewRequestChangesConfig | None = ...,
         review_reject_config: global___ReviewRejectConfig | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config", "review_approve_config", "review_request_changes_config", "review_reject_config"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["action_config", b"action_config", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "review_start_config", b"review_start_config", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "action_config", b"action_config", "input_id", b"input_id", "label_submit_config", b"label_submit_config", "review_approve_config", b"review_approve_config", "review_reject_config", b"review_reject_config", "review_request_changes_config", b"review_request_changes_config", "review_start_config", b"review_start_config", "task_id", b"task_id", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["action_config", b"action_config"]) -> typing_extensions.Literal["label_submit_config", "review_start_config", "review_approve_config", "review_request_changes_config", "review_reject_config"] | None: ...
 
 global___PutTaskAssignmentsRequest = PutTaskAssignmentsRequest
 
@@ -8970,6 +9005,25 @@ class LabelSubmitConfig(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["task_assignments", b"task_assignments"]) -> None: ...
 
 global___LabelSubmitConfig = LabelSubmitConfig
+
+@typing_extensions.final
+class ReviewStartConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WORKERS_FIELD_NUMBER: builtins.int
+    @property
+    def workers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Worker]:
+        """Review the work done by these workers.
+        If empty, review the work for all workers.
+        """
+    def __init__(
+        self,
+        *,
+        workers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Worker] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["workers", b"workers"]) -> None: ...
+
+global___ReviewStartConfig = ReviewStartConfig
 
 @typing_extensions.final
 class ReviewApproveConfig(google.protobuf.message.Message):

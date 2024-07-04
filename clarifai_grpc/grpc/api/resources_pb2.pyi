@@ -9116,7 +9116,6 @@ class Runner(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
     LABELS_FIELD_NUMBER: builtins.int
     WORKER_FIELD_NUMBER: builtins.int
     NODEPOOL_FIELD_NUMBER: builtins.int
@@ -9140,8 +9139,6 @@ class Runner(google.protobuf.message.Message):
         https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
         This is an optional arg.
         """
-    user_id: builtins.str
-    """The owner of the runner. Runners belong to a user/org account."""
     @property
     def labels(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Labels to match in order to find work."""
@@ -9180,7 +9177,6 @@ class Runner(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        user_id: builtins.str = ...,
         labels: collections.abc.Iterable[builtins.str] | None = ...,
         worker: global___Worker | None = ...,
         nodepool: global___Nodepool | None = ...,
@@ -9188,7 +9184,7 @@ class Runner(google.protobuf.message.Message):
         num_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "num_replicas", b"num_replicas", "user_id", b"user_id", "worker", b"worker"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "created_at", b"created_at", "description", b"description", "id", b"id", "labels", b"labels", "metadata", b"metadata", "modified_at", b"modified_at", "nodepool", b"nodepool", "num_replicas", b"num_replicas", "worker", b"worker"]) -> None: ...
 
 global___Runner = Runner
 
@@ -9205,7 +9201,6 @@ class Nodepool(google.protobuf.message.Message):
     DESCRIPTION_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_FIELD_NUMBER: builtins.int
     NODE_CAPACITY_TYPE_FIELD_NUMBER: builtins.int
     INSTANCE_TYPES_FIELD_NUMBER: builtins.int
@@ -9223,8 +9218,6 @@ class Nodepool(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the nodepool was last modified."""
-    user_id: builtins.str
-    """The user/org that this nodepool belongs to."""
     @property
     def compute_cluster(self) -> global___ComputeCluster:
         """Which cluster this nodepool is within."""
@@ -9258,7 +9251,6 @@ class Nodepool(google.protobuf.message.Message):
         description: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        user_id: builtins.str = ...,
         compute_cluster: global___ComputeCluster | None = ...,
         node_capacity_type: global___NodeCapacityType | None = ...,
         instance_types: collections.abc.Iterable[global___InstanceType] | None = ...,
@@ -9268,7 +9260,7 @@ class Nodepool(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "description", b"description", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "metadata", b"metadata", "min_instances", b"min_instances", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "description", b"description", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "metadata", b"metadata", "min_instances", b"min_instances", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> None: ...
 
 global___Nodepool = Nodepool
 
@@ -9378,6 +9370,7 @@ class ComputeCluster(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of cluster region."""
@@ -9395,6 +9388,12 @@ class ComputeCluster(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the compute cluster was last modified."""
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this message is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
     def __init__(
         self,
         *,
@@ -9405,9 +9404,10 @@ class ComputeCluster(google.protobuf.message.Message):
         user_id: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        visibility: global___Visibility | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "description", b"description", "id", b"id", "modified_at", b"modified_at", "region", b"region", "user_id", b"user_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "description", b"description", "id", b"id", "modified_at", b"modified_at", "region", b"region", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ComputeCluster = ComputeCluster
 

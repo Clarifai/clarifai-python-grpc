@@ -664,6 +664,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
                 )
+        self.PatchAppsDetails = channel.unary_unary(
+                '/clarifai.api.V2/PatchAppsDetails',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsDetailsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse),
+                )
         self.PatchAppsIds = channel.unary_unary(
                 '/clarifai.api.V2/PatchAppsIds',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsIdsRequest.SerializeToString,
@@ -2189,6 +2194,14 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchAppsDetails(self, request, context):
+        """Allows to Patch only the below fields in one or more apps.
+        Allowed fields are notes, description and image
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PatchAppsIds(self, request, context):
         """Patch apps ids.
         """
@@ -3648,6 +3661,11 @@ def add_V2Servicer_to_server(servicer, server):
             'PatchApps': grpc.unary_unary_rpc_method_handler(
                     servicer.PatchApps,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
+            ),
+            'PatchAppsDetails': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchAppsDetails,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsDetailsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.SerializeToString,
             ),
             'PatchAppsIds': grpc.unary_unary_rpc_method_handler(
@@ -6361,6 +6379,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchApps',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchAppsDetails(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchAppsDetails',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAppsDetailsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiAppResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
