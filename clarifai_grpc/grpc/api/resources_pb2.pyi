@@ -9371,11 +9371,17 @@ class ComputeCluster(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
+    CLUSTER_TYPE_FIELD_NUMBER: builtins.int
+    MANAGED_BY_FIELD_NUMBER: builtins.int
+    KEY_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of cluster region."""
     @property
-    def cloud_provider(self) -> global___CloudProvider: ...
+    def cloud_provider(self) -> global___CloudProvider:
+        """The cloud provider where this cluster is hosted.
+        Some example cloud provider IDs may be aws, gcp, azure, local, kubernetes, etc.
+        """
     region: builtins.str
     """The region. The naming here depends on the cluster choice above and will be validated
     against which clusters+regions that Clarifai currently supports.
@@ -9394,6 +9400,30 @@ class ComputeCluster(google.protobuf.message.Message):
         To be visible to the public the App that contains it AND the User that contains the App must
         also be publicly visible.
         """
+    cluster_type: builtins.str
+    """We offer different types of compute clusters such as:
+    'serverless' which only Clarifai can create.
+    'dedicated' where you're in control of defining the nodepools within the cluster
+    'local-dev' which means you're responsible for starting runners manually which is great for local
+    development but not recommended for production use cases.
+    """
+    managed_by: builtins.str
+    """Managed by represents who is responsible for the cluster.
+    This is currently either "clarifai" where we fully manage the infrastructure.
+    Or, "user" where the user is responsible for the underlying infrastructure.
+    """
+    @property
+    def key(self) -> global___Key:
+        """Key to use within the compute cluster for all requests to the API.
+        You can post with the key.id filled in to set the key for the compute cluster.
+        The responses will intentionaly only return the description of the key for security
+        purposes since you may have other people through orgs/teams having access to this compute
+        cluster who should not view your key.
+        This must be a valid key created before creating the ComputeCluster.
+        Deleting this key will not be prevented, which means all resources in this ComputeCluster
+        will lose connection to the API, so delete keys at your own risk.
+        The user_id who owns the key must match the user_id provided in the ComputeCluster.
+        """
     def __init__(
         self,
         *,
@@ -9405,9 +9435,12 @@ class ComputeCluster(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         visibility: global___Visibility | None = ...,
+        cluster_type: builtins.str = ...,
+        managed_by: builtins.str = ...,
+        key: global___Key | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "description", b"description", "id", b"id", "modified_at", b"modified_at", "region", b"region", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "created_at", b"created_at", "key", b"key", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "cluster_type", b"cluster_type", "created_at", b"created_at", "description", b"description", "id", b"id", "key", b"key", "managed_by", b"managed_by", "modified_at", b"modified_at", "region", b"region", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ComputeCluster = ComputeCluster
 
