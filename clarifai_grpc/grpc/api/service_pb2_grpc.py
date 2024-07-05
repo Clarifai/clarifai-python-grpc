@@ -2923,25 +2923,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetComputeCluster(self, request, context):
-        """TODO(zeiler): i mocked these up bu tleft them commented for now because they will build all the
-        handlers and we have to stub those out. Me/Sai will do that in follow up PRs, i just want to
-        check in the protos so we can start using them first work through some of the routing stuff.
-
-        // ListCloudAgentInformation with special auth.
-        rpc ListCloudAgentInformation (ListCloudAgentInformationRequest) returns (MultiCloudAgentInformationResponse) {
-        option (google.api.http) = {
-        get: "/v2/cloud_agent_info"
-        };
-        option (clarifai.auth.util.cl_auth_type) = CloudAgentAuth;
-        option (clarifai.auth.util.cl_depending_scopes) = Apps_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Models_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Runners_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Nodepools_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Deployments_Get;
-        option (clarifai.auth.util.cl_depending_scopes) = Keys_Get;
-        }
-
-        ComputeCluster CRUD
+        """ComputeCluster CRUD
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
