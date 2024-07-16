@@ -9998,6 +9998,53 @@ class MultiTrainingTimeEstimateResponse(google.protobuf.message.Message):
 global___MultiTrainingTimeEstimateResponse = MultiTrainingTimeEstimateResponse
 
 @typing_extensions.final
+class ListInstanceTypesRequest(google.protobuf.message.Message):
+    """List InstanceTypes"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CLOUD_PROVIDER_FIELD_NUMBER: builtins.int
+    REGION_FIELD_NUMBER: builtins.int
+    @property
+    def cloud_provider(self) -> proto.clarifai.api.resources_pb2.CloudProvider:
+        """The cloud provider to list compute clusters for."""
+    region: builtins.str
+    """The region to list for so when there are multiple regions we get only the clusters
+    that are supposed to be up in that region.
+    """
+    def __init__(
+        self,
+        *,
+        cloud_provider: proto.clarifai.api.resources_pb2.CloudProvider | None = ...,
+        region: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "region", b"region"]) -> None: ...
+
+global___ListInstanceTypesRequest = ListInstanceTypesRequest
+
+@typing_extensions.final
+class MultiInstanceTypeResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    INSTANCE_TYPES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def instance_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.InstanceType]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        instance_types: collections.abc.Iterable[proto.clarifai.api.resources_pb2.InstanceType] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["instance_types", b"instance_types", "status", b"status"]) -> None: ...
+
+global___MultiInstanceTypeResponse = MultiInstanceTypeResponse
+
+@typing_extensions.final
 class GetComputeClusterRequest(google.protobuf.message.Message):
     """ComputeCLuster CRUD requests and responses"""
 

@@ -2205,11 +2205,30 @@ class Image(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
+    class HostedImageInfoEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___ImageInfo: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___ImageInfo | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+
     URL_FIELD_NUMBER: builtins.int
     BASE64_FIELD_NUMBER: builtins.int
     ALLOW_DUPLICATE_URL_FIELD_NUMBER: builtins.int
     HOSTED_FIELD_NUMBER: builtins.int
     IMAGE_INFO_FIELD_NUMBER: builtins.int
+    HOSTED_IMAGE_INFO_FIELD_NUMBER: builtins.int
     url: builtins.str
     """This is a URL to a publicly accessible image file. The platform will download this file server
     side and then process.
@@ -2228,7 +2247,12 @@ class Image(google.protobuf.message.Message):
         """The hosted field lists images in different sizes hosted in Clarifai storage."""
     @property
     def image_info(self) -> global___ImageInfo:
-        """image info"""
+        """image info for original size. for image info for other sizes, use hosted_image_info"""
+    @property
+    def hosted_image_info(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___ImageInfo]:
+        """The map of hosted image info of different sizes (see hosted.sizes), excluding the original image.
+        Note: keys(hosted_image_info) = hosted.sizes - "orig"
+        """
     def __init__(
         self,
         *,
@@ -2237,9 +2261,10 @@ class Image(google.protobuf.message.Message):
         allow_duplicate_url: builtins.bool = ...,
         hosted: global___HostedURL | None = ...,
         image_info: global___ImageInfo | None = ...,
+        hosted_image_info: collections.abc.Mapping[builtins.str, global___ImageInfo] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["hosted", b"hosted", "image_info", b"image_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["allow_duplicate_url", b"allow_duplicate_url", "base64", b"base64", "hosted", b"hosted", "image_info", b"image_info", "url", b"url"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["allow_duplicate_url", b"allow_duplicate_url", "base64", b"base64", "hosted", b"hosted", "hosted_image_info", b"hosted_image_info", "image_info", b"image_info", "url", b"url"]) -> None: ...
 
 global___Image = Image
 
@@ -9454,21 +9479,27 @@ class ComputeInfo(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    NUM_CPUS_FIELD_NUMBER: builtins.int
+    CPU_LIMIT_FIELD_NUMBER: builtins.int
     CPU_MEMORY_FIELD_NUMBER: builtins.int
     NUM_ACCELERATORS_FIELD_NUMBER: builtins.int
     ACCELERATOR_MEMORY_FIELD_NUMBER: builtins.int
     ACCELERATOR_TYPE_FIELD_NUMBER: builtins.int
-    num_cpus: builtins.int
-    """Number of CPUs."""
+    cpu_limit: builtins.str
+    """Amount of CPUs to use. This follows kubernetes notation like: "1", "100m", "4.5", etc.
+    See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+    """
     cpu_memory: builtins.str
-    """Amount of CPU memory to use as a minimum."""
+    """Amount of CPU memory to use as a minimum. This follows kubernetes notation like:
+    1Ki, 1500Mi, 3Gi, 4Ti, etc.
+    See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
+    """
     num_accelerators: builtins.int
-    """Number of accelerators (typically GPUs, TPUs, etc. not CPUs) for this resource."""
+    """Amount of GPU/TPUs to use."""
     accelerator_memory: builtins.str
     """Amount of accelerator/GPU memory to use as a minimum.
     This is defined per accelerator.
     This follows the format used by kubernetes like 1Ki, 2Mi, 3Gi, 4Ti.
+    See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
     The supported accelerators that the resource can run on. If the resource requires a specific
     accelerator type then it will only be scheduled on nodes that have that type of accelerator.
     If there is no hard requirements beyond the number of accelerators and their memory then this
@@ -9483,13 +9514,13 @@ class ComputeInfo(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        num_cpus: builtins.int = ...,
+        cpu_limit: builtins.str = ...,
         cpu_memory: builtins.str = ...,
         num_accelerators: builtins.int = ...,
         accelerator_memory: builtins.str = ...,
         accelerator_type: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["accelerator_memory", b"accelerator_memory", "accelerator_type", b"accelerator_type", "cpu_memory", b"cpu_memory", "num_accelerators", b"num_accelerators", "num_cpus", b"num_cpus"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["accelerator_memory", b"accelerator_memory", "accelerator_type", b"accelerator_type", "cpu_limit", b"cpu_limit", "cpu_memory", b"cpu_memory", "num_accelerators", b"num_accelerators"]) -> None: ...
 
 global___ComputeInfo = ComputeInfo
 
