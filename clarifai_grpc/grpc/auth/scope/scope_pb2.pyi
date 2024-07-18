@@ -228,7 +228,6 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """How to autoscale resources within nodepools."""
     Deployments_Add: _S.ValueType  # 145
     Deployments_Delete: _S.ValueType  # 146
-    InstanceTypes_Get: _S.ValueType  # 148
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -462,7 +461,6 @@ Deployments_Get: S.ValueType  # 144
 """How to autoscale resources within nodepools."""
 Deployments_Add: S.ValueType  # 145
 Deployments_Delete: S.ValueType  # 146
-InstanceTypes_Get: S.ValueType  # 148
 global___S = S
 
 @typing_extensions.final

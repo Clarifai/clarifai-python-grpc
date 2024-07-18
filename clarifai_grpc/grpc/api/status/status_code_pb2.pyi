@@ -260,10 +260,6 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Deployment related codes 259xx"""
     DEPLOYMENT_INVALID_ARGUMENT: _StatusCode.ValueType  # 25901
     DEPLOYMENT_INVALID_REQUEST: _StatusCode.ValueType  # 25902
-    INSTANCE_TYPE_DOES_NOT_EXIST: _StatusCode.ValueType  # 26000
-    """InstanceType related codes 260xx"""
-    INSTANCE_TYPE_INVALID_ARGUMENT: _StatusCode.ValueType  # 26001
-    INSTANCE_TYPE_INVALID_REQUEST: _StatusCode.ValueType  # 26002
     INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
@@ -791,10 +787,6 @@ DEPLOYMENT_DOES_NOT_EXIST: StatusCode.ValueType  # 25900
 """Deployment related codes 259xx"""
 DEPLOYMENT_INVALID_ARGUMENT: StatusCode.ValueType  # 25901
 DEPLOYMENT_INVALID_REQUEST: StatusCode.ValueType  # 25902
-INSTANCE_TYPE_DOES_NOT_EXIST: StatusCode.ValueType  # 26000
-"""InstanceType related codes 260xx"""
-INSTANCE_TYPE_INVALID_ARGUMENT: StatusCode.ValueType  # 26001
-INSTANCE_TYPE_INVALID_REQUEST: StatusCode.ValueType  # 26002
 INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
