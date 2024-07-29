@@ -122,7 +122,9 @@ def wait_for_inputs_delete(stub, input_ids, metadata):
         raise Exception(f"Timeout after {timeout} seconds to delete inputs {remaining_input_ids}")
 
 
-def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_id=None, retry_on_internal_failure=False):
+def wait_for_model_trained(
+    stub, metadata, model_id, model_version_id, user_app_id=None, retry_on_internal_failure=False
+):
     retry_count = 0
     while True:
         response = stub.GetModelVersion(
@@ -132,7 +134,11 @@ def wait_for_model_trained(stub, metadata, model_id, model_version_id, user_app_
             metadata=metadata,
         )
         ## Temp fix for EAGLE-4649 until LT-5281 is implemented.
-        if retry_on_internal_failure and response.status.code == status_code_pb2.INTERNAL_UNCATEGORIZED and retry_count < 3:
+        if (
+            retry_on_internal_failure
+            and response.status.code == status_code_pb2.INTERNAL_UNCATEGORIZED
+            and retry_count < 3
+        ):
             print(f"Retrying: {response.status}")
             retry_count += 1
             continue
