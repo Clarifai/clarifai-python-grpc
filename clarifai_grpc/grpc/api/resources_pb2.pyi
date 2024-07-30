@@ -6855,18 +6855,32 @@ class TaskWorker(google.protobuf.message.Message):
         PARTITIONED: TaskWorker._TaskWorkerStrategy.ValueType  # 2
         """The inputs will be partitioned in several partitions.
         Each worker will label one or more input partitions.
+        All inputs are assigned at task creation.
         """
         FULL: TaskWorker._TaskWorkerStrategy.ValueType  # 3
-        """Each worker will label all inputs from input source."""
+        """Each worker will label all inputs from input source.
+        All inputs are assigned at task creation.
+        """
+        DYNAMIC: TaskWorker._TaskWorkerStrategy.ValueType  # 4
+        """Each worker will dynamically get 10 inputs assigned at a time.
+        No inputs are assigned at task creation.
+        """
 
     class TaskWorkerStrategy(_TaskWorkerStrategy, metaclass=_TaskWorkerStrategyEnumTypeWrapper): ...
     WORKER_STRATEGY_NOT_SET: TaskWorker.TaskWorkerStrategy.ValueType  # 0
     PARTITIONED: TaskWorker.TaskWorkerStrategy.ValueType  # 2
     """The inputs will be partitioned in several partitions.
     Each worker will label one or more input partitions.
+    All inputs are assigned at task creation.
     """
     FULL: TaskWorker.TaskWorkerStrategy.ValueType  # 3
-    """Each worker will label all inputs from input source."""
+    """Each worker will label all inputs from input source.
+    All inputs are assigned at task creation.
+    """
+    DYNAMIC: TaskWorker.TaskWorkerStrategy.ValueType  # 4
+    """Each worker will dynamically get 10 inputs assigned at a time.
+    No inputs are assigned at task creation.
+    """
 
     STRATEGY_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
