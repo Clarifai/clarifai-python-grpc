@@ -1462,7 +1462,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetInputVideoManifest(self, request, context):
-        """Get a video input manifest.
+        """Get a MPEG-DASH manifest for video-type inputs that were added via PostInputs and successfully processed
+        Experimental. Manifest is used by browser and desktop clients that implement an efficient streaming playback
+        This means client can switch between low-resolution and high-resolution video streams
+        Depending on network bandwidth or user's preference
+        This also means that reencoded video streams are reencoded in a uniform way, not relying on original format
+        Alternative to MPEG-dash is to stream original file with byte-range header
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -1476,8 +1481,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostInputs(self, request, context):
-        """Add 1 or more input to an app.
-        The actual inputs processing is asynchronous.
+        """PostInputs adds one or more inputs to the app.
+        Takes a list of image/video/audio/text URLs, image/video/audio bytes or raw text
+        Optionally, include concepts or dataset ids to link them
+        Optionally, include metadata for search
+        Note that inputs processing is asynchronous process
+        See ListInputs, StreamInputs or PostInputSearches to list results
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2782,7 +2791,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostUploads(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """PostUploads is used to upload files. Note that this does not create inputs.
+        returns job with uploadID, job has UPLOAD_IN_PROGRESS status
+        Actual upload content can be done in multiple calls with PutUploadContentParts
+        You can get status of upload with GetUpload or ListUploads endpoints
+        See also PostInputsUploads
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2853,11 +2867,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostInputsUploads(self, request, context):
-        """Start uploading a file archive containing inputs.
-        Will create and return an inputs-add-job for tracking progress.
-
-        Associated inputs-add-job contains an upload id which should be completed through `PutUploadContentParts` endpoint.
+        """Create new upload job with a file archive containing inputs (images, videos, text, audio)
+        Actual file upload happens in next steps by calling `PutUploadContentParts` endpoint
+        and providing the file content in the request body.
+        This endpoint creates and return an inputs-add-job which contains an upload id needed for upload and further status tracking
         Completing the upload will automatically begin unpacking the archive and uploading the contents as inputs.
+        See also GetInputsAddJob and then GetInputsExtractionJob
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
