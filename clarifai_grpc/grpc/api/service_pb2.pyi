@@ -3540,6 +3540,9 @@ class ListModelsRequest(google.protobuf.message.Message):
     NAME_FIELD_NUMBER: builtins.int
     FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
+    LICENSE_TYPE_FIELD_NUMBER: builtins.int
+    SOURCE_FIELD_NUMBER: builtins.int
+    CREATOR_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -3641,6 +3644,12 @@ class ListModelsRequest(google.protobuf.message.Message):
     @property
     def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """Filter by the model version ids. If set, only return the model of these versions."""
+    license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType
+    """Filter by LicenseType"""
+    source: builtins.int
+    """Filter by Source"""
+    creator: builtins.str
+    """Filter by Creator"""
     def __init__(
         self,
         *,
@@ -3671,9 +3680,12 @@ class ListModelsRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         filter_by_user_id: builtins.bool = ...,
         model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType = ...,
+        source: builtins.int = ...,
+        creator: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "model_type_id", b"model_type_id", "model_version_ids", b"model_version_ids", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "creator", b"creator", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "license_type", b"license_type", "model_type_id", b"model_type_id", "model_version_ids", b"model_version_ids", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "source", b"source", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListModelsRequest = ListModelsRequest
@@ -10475,6 +10487,59 @@ class DeleteDeploymentsRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___DeleteDeploymentsRequest = DeleteDeploymentsRequest
+
+@typing_extensions.final
+class PostAuditLogSearchesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    AUDIT_LOG_QUERY_FIELD_NUMBER: builtins.int
+    SORT_ASCENDING_FIELD_NUMBER: builtins.int
+    PAGINATION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Only the user_id is used from this."""
+    @property
+    def audit_log_query(self) -> proto.clarifai.api.resources_pb2.AuditLogQuery: ...
+    sort_ascending: builtins.bool
+    """Sorting options:
+    Whether to sort by timestamp in ascending order. If false, will order in descending order.
+    """
+    @property
+    def pagination(self) -> global___Pagination: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        audit_log_query: proto.clarifai.api.resources_pb2.AuditLogQuery | None = ...,
+        sort_ascending: builtins.bool = ...,
+        pagination: global___Pagination | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["audit_log_query", b"audit_log_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audit_log_query", b"audit_log_query", "pagination", b"pagination", "sort_ascending", b"sort_ascending", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PostAuditLogSearchesRequest = PostAuditLogSearchesRequest
+
+@typing_extensions.final
+class MultiAuditLogSearchResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    ENTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def entries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.AuditLogEntry]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        entries: collections.abc.Iterable[proto.clarifai.api.resources_pb2.AuditLogEntry] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["entries", b"entries", "status", b"status"]) -> None: ...
+
+global___MultiAuditLogSearchResponse = MultiAuditLogSearchResponse
 
 @typing_extensions.final
 class PatchDeploymentsRequest(google.protobuf.message.Message):

@@ -250,6 +250,25 @@ TRAIN: LicenseScope.ValueType  # 2
 SEARCH: LicenseScope.ValueType  # 3
 global___LicenseScope = LicenseScope
 
+class _LicenseType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _LicenseTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LicenseType.ValueType], builtins.type):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    UNKNOWN_LICENSE_TYPE: _LicenseType.ValueType  # 0
+    FIRST_PARTY: _LicenseType.ValueType  # 1
+    OPEN_SOURCE: _LicenseType.ValueType  # 2
+    CLOSED_SOURCE: _LicenseType.ValueType  # 3
+
+class LicenseType(_LicenseType, metaclass=_LicenseTypeEnumTypeWrapper): ...
+
+UNKNOWN_LICENSE_TYPE: LicenseType.ValueType  # 0
+FIRST_PARTY: LicenseType.ValueType  # 1
+OPEN_SOURCE: LicenseType.ValueType  # 2
+CLOSED_SOURCE: LicenseType.ValueType  # 3
+global___LicenseType = LicenseType
+
 class _DataType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -528,22 +547,22 @@ STREAMING_STREAMING: RunnerMethodType.ValueType  # 4
 """stream of requests, stream of responses. stream() in code"""
 global___RunnerMethodType = RunnerMethodType
 
-class _AuditOperationType:
+class _EventType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
 
-class _AuditOperationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_AuditOperationType.ValueType], builtins.type):
+class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EventType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    AUDIT_OPERATION_TYPE_NOT_SET: _AuditOperationType.ValueType  # 0
-    APPLICATION_CREATE: _AuditOperationType.ValueType  # 100
+    EVENT_TYPE_NOT_SET: _EventType.ValueType  # 0
+    APPLICATION_CREATE: _EventType.ValueType  # 100
     """APPLICATION event types : 100 - 199"""
 
-class AuditOperationType(_AuditOperationType, metaclass=_AuditOperationTypeEnumTypeWrapper): ...
+class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
-AUDIT_OPERATION_TYPE_NOT_SET: AuditOperationType.ValueType  # 0
-APPLICATION_CREATE: AuditOperationType.ValueType  # 100
+EVENT_TYPE_NOT_SET: EventType.ValueType  # 0
+APPLICATION_CREATE: EventType.ValueType  # 100
 """APPLICATION event types : 100 - 199"""
-global___AuditOperationType = AuditOperationType
+global___EventType = EventType
 
 @typing_extensions.final
 class Annotation(google.protobuf.message.Message):
@@ -3186,6 +3205,23 @@ class Model(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _Source:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _SourceEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Model._Source.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UNKNOWN_SOURCE: Model._Source.ValueType  # 0
+        HOSTED: Model._Source.ValueType  # 1
+        WRAPPED: Model._Source.ValueType  # 2
+
+    class Source(_Source, metaclass=_SourceEnumTypeWrapper):
+        """Source of Model"""
+
+    UNKNOWN_SOURCE: Model.Source.ValueType  # 0
+    HOSTED: Model.Source.ValueType  # 1
+    WRAPPED: Model.Source.ValueType  # 2
+
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
@@ -3213,6 +3249,9 @@ class Model(google.protobuf.message.Message):
     WORKFLOW_RECOMMENDED_FIELD_NUMBER: builtins.int
     BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
     IMAGE_FIELD_NUMBER: builtins.int
+    LICENSE_TYPE_FIELD_NUMBER: builtins.int
+    SOURCE_FIELD_NUMBER: builtins.int
+    CREATOR_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -3305,6 +3344,11 @@ class Model(google.protobuf.message.Message):
     @property
     def image(self) -> global___Image:
         """Representative image for this model"""
+    license_type: global___LicenseType.ValueType
+    """License Type"""
+    source: global___Model.Source.ValueType
+    creator: builtins.str
+    """Creator of Model"""
     def __init__(
         self,
         *,
@@ -3335,9 +3379,12 @@ class Model(google.protobuf.message.Message):
         workflow_recommended: google.protobuf.wrappers_pb2.BoolValue | None = ...,
         bookmark_origin: global___BookmarkOrigin | None = ...,
         image: global___Image | None = ...,
+        license_type: global___LicenseType.ValueType = ...,
+        source: global___Model.Source.ValueType = ...,
+        creator: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "image", b"image", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
@@ -6673,6 +6720,27 @@ class Task(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _WorkerType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _WorkerTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Task._WorkerType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        WORKER_TYPE_NOT_SET: Task._WorkerType.ValueType  # 0
+        """for backward compatibility when task is not setting any type and only sets workers"""
+        WORKER_HUMAN: Task._WorkerType.ValueType  # 1
+        """only human workers"""
+        WORKER_AUTO: Task._WorkerType.ValueType  # 2
+        """auto-annotation tasks. Task must set worker as model or workflow"""
+
+    class WorkerType(_WorkerType, metaclass=_WorkerTypeEnumTypeWrapper): ...
+    WORKER_TYPE_NOT_SET: Task.WorkerType.ValueType  # 0
+    """for backward compatibility when task is not setting any type and only sets workers"""
+    WORKER_HUMAN: Task.WorkerType.ValueType  # 1
+    """only human workers"""
+    WORKER_AUTO: Task.WorkerType.ValueType  # 2
+    """auto-annotation tasks. Task must set worker as model or workflow"""
+
     class _TaskType:
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
@@ -6702,6 +6770,7 @@ class Task(google.protobuf.message.Message):
     TYPE_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     WORKER_FIELD_NUMBER: builtins.int
+    WORKER_TYPE_FIELD_NUMBER: builtins.int
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
     INPUT_SOURCE_FIELD_NUMBER: builtins.int
     SAMPLE_MS_FIELD_NUMBER: builtins.int
@@ -6738,6 +6807,10 @@ class Task(google.protobuf.message.Message):
     @property
     def worker(self) -> global___TaskWorker:
         """Worker details."""
+    worker_type: global___Task.WorkerType.ValueType
+    """Who is doing annotations - human Worker or auto-annotation via Model/Workflow.
+    If set, worker must have be set accordingly to either human worker or model/workflow worker
+    """
     @property
     def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of concept ids used in the work of this task.
@@ -6792,6 +6865,7 @@ class Task(google.protobuf.message.Message):
         type: global___Task.TaskType.ValueType = ...,
         description: builtins.str = ...,
         worker: global___TaskWorker | None = ...,
+        worker_type: global___Task.WorkerType.ValueType = ...,
         concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
         input_source: global___TaskInputSource | None = ...,
         sample_ms: builtins.int = ...,
@@ -6809,7 +6883,7 @@ class Task(google.protobuf.message.Message):
         metrics: global___TaskMetrics | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "created_at", b"created_at", "input_source", b"input_source", "metrics", b"metrics", "modified_at", b"modified_at", "review", b"review", "status", b"status", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker", "worker_type", b"worker_type"]) -> None: ...
 
 global___Task = Task
 
@@ -9806,3 +9880,135 @@ class ProcessingInfo(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["runner_method_type", b"runner_method_type", "status", b"status"]) -> None: ...
 
 global___ProcessingInfo = ProcessingInfo
+
+@typing_extensions.final
+class AuditLogTarget(google.protobuf.message.Message):
+    """AuditLogTarget is a resource on which an operation recorded in an
+    audit log was performed.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MEMBER_FIELD_NUMBER: builtins.int
+    @property
+    def member(self) -> global___User:
+        """An organization member, only used in org audit logs."""
+    def __init__(
+        self,
+        *,
+        member: global___User | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["member", b"member", "target", b"target"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["member", b"member", "target", b"target"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["member"] | None: ...
+
+global___AuditLogTarget = AuditLogTarget
+
+@typing_extensions.final
+class AuditLogEntry(google.protobuf.message.Message):
+    """AuditLogEntry is a single operation recorded in an audit log."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    USER_FIELD_NUMBER: builtins.int
+    OPERATION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    TARGETS_FIELD_NUMBER: builtins.int
+    DETAILS_FIELD_NUMBER: builtins.int
+    SUCCESS_FIELD_NUMBER: builtins.int
+    REQ_ID_FIELD_NUMBER: builtins.int
+    SOURCE_IP_FIELD_NUMBER: builtins.int
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Time of the operation."""
+    @property
+    def user(self) -> global___User:
+        """User that performed the operation."""
+    operation: global___EventType.ValueType
+    """Type of operation that was performed."""
+    description: builtins.str
+    """A human-readable description of the operation."""
+    @property
+    def targets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AuditLogTarget]:
+        """Targets of the operation. For example,
+        - when creating a new model, the targets would be the application and the model,
+        - when adding a team member, the targets would be the team and the member.
+        """
+    @property
+    def details(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Additional human-readable details of the operation. For example,
+        when patching a resource, these would list what was changed.
+        """
+    success: builtins.bool
+    """Was the operation successful?"""
+    req_id: builtins.str
+    """Request that triggered the operation."""
+    source_ip: builtins.str
+    """IP address where the request originated from."""
+    def __init__(
+        self,
+        *,
+        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        user: global___User | None = ...,
+        operation: global___EventType.ValueType = ...,
+        description: builtins.str = ...,
+        targets: collections.abc.Iterable[global___AuditLogTarget] | None = ...,
+        details: collections.abc.Iterable[builtins.str] | None = ...,
+        success: builtins.bool = ...,
+        req_id: builtins.str = ...,
+        source_ip: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["timestamp", b"timestamp", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "details", b"details", "operation", b"operation", "req_id", b"req_id", "source_ip", b"source_ip", "success", b"success", "targets", b"targets", "timestamp", b"timestamp", "user", b"user"]) -> None: ...
+
+global___AuditLogEntry = AuditLogEntry
+
+@typing_extensions.final
+class AuditLogQuery(google.protobuf.message.Message):
+    """AuditLogQuery is a query for audit log entries."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TIMESTAMP_FROM_FIELD_NUMBER: builtins.int
+    TIMESTAMP_TO_FIELD_NUMBER: builtins.int
+    USER_IDS_FIELD_NUMBER: builtins.int
+    OPERATIONS_FIELD_NUMBER: builtins.int
+    TARGETS_FIELD_NUMBER: builtins.int
+    SUCCESS_FIELD_NUMBER: builtins.int
+    SOURCE_IPS_FIELD_NUMBER: builtins.int
+    @property
+    def timestamp_from(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Query operations within this time range."""
+    @property
+    def timestamp_to(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    @property
+    def user_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Query operations by these users."""
+    @property
+    def operations(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___EventType.ValueType]:
+        """Query these types of operations."""
+    @property
+    def targets(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___AuditLogTarget]:
+        """Query operations with these targets."""
+    @property
+    def success(self) -> google.protobuf.wrappers_pb2.BoolValue:
+        """Query operations by success."""
+    @property
+    def source_ips(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Query operations by source IP address."""
+    def __init__(
+        self,
+        *,
+        timestamp_from: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        timestamp_to: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        user_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        operations: collections.abc.Iterable[global___EventType.ValueType] | None = ...,
+        targets: collections.abc.Iterable[global___AuditLogTarget] | None = ...,
+        success: google.protobuf.wrappers_pb2.BoolValue | None = ...,
+        source_ips: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["success", b"success", "timestamp_from", b"timestamp_from", "timestamp_to", b"timestamp_to"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["operations", b"operations", "source_ips", b"source_ips", "success", b"success", "targets", b"targets", "timestamp_from", b"timestamp_from", "timestamp_to", b"timestamp_to", "user_ids", b"user_ids"]) -> None: ...
+
+global___AuditLogQuery = AuditLogQuery

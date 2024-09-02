@@ -82,6 +82,8 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """To get model version export"""
     ModelExports_Add: _S.ValueType  # 143
     """To create model version export"""
+    Models_Pull: _S.ValueType  # 150
+    """To pull the model version's image"""
     Workflows_Add: _S.ValueType  # 18
     """TODO: No model get metrics scope.
 
@@ -229,6 +231,7 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     Deployments_Add: _S.ValueType  # 145
     Deployments_Delete: _S.ValueType  # 146
     InstanceTypes_Get: _S.ValueType  # 148
+    AuditLogs_Get: _S.ValueType  # 149
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -316,6 +319,8 @@ ModelExports_Get: S.ValueType  # 142
 """To get model version export"""
 ModelExports_Add: S.ValueType  # 143
 """To create model version export"""
+Models_Pull: S.ValueType  # 150
+"""To pull the model version's image"""
 Workflows_Add: S.ValueType  # 18
 """TODO: No model get metrics scope.
 
@@ -463,6 +468,7 @@ Deployments_Get: S.ValueType  # 144
 Deployments_Add: S.ValueType  # 145
 Deployments_Delete: S.ValueType  # 146
 InstanceTypes_Get: S.ValueType  # 148
+AuditLogs_Get: S.ValueType  # 149
 global___S = S
 
 @typing_extensions.final
