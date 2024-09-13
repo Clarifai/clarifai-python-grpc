@@ -55,8 +55,8 @@ def metadata(pat: bool = False) -> tuple[tuple[str, str], tuple[str, str]]:
         key = os.environ.get("CLARIFAI_API_KEY")
 
     return (
-       ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
-       ("authorization", f"Key {key}"),
+        ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
+        ("authorization", f"Key {key}"),
     )
 
 
