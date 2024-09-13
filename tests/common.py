@@ -48,7 +48,7 @@ def headers(pat=False):
         return {"authorization": "Key %s" % os.environ.get("CLARIFAI_API_KEY")}
 
 
-def metadata(pat: bool = False) -> tuple[tuple[str, str], tuple[str, str]]:
+def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     if pat:
         key = os.environ.get("CLARIFAI_PAT_KEY")
     else:
