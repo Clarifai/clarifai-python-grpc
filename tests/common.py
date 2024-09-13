@@ -6,6 +6,7 @@ from typing import List, Tuple
 from grpc._channel import _Rendezvous
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
+from clarifai_grpc.channel.http_client import CLIENT_VERSION
 from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
@@ -47,11 +48,16 @@ def headers(pat=False):
         return {"authorization": "Key %s" % os.environ.get("CLARIFAI_API_KEY")}
 
 
-def metadata(pat=False):
+def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     if pat:
-        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
+        key = os.environ.get("CLARIFAI_PAT_KEY")
     else:
-        return (("authorization", "Key %s" % os.environ.get("CLARIFAI_API_KEY")),)
+        key = os.environ.get("CLARIFAI_API_KEY")
+
+    return (
+        ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
+        ("authorization", f"Key {key}"),
+    )
 
 
 def both_channels(func):
