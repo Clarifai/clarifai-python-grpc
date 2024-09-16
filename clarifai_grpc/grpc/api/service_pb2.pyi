@@ -6866,75 +6866,6 @@ class PostWorkflowResultsResponse(google.protobuf.message.Message):
 global___PostWorkflowResultsResponse = PostWorkflowResultsResponse
 
 @typing_extensions.final
-class PostWorkflowResultsSimilarityRequest(google.protobuf.message.Message):
-    """PostWorkflowResultsSimilarityRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    WORKFLOW_ID_FIELD_NUMBER: builtins.int
-    VERSION_ID_FIELD_NUMBER: builtins.int
-    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
-    PROBE_INPUTS_FIELD_NUMBER: builtins.int
-    POOL_INPUTS_FIELD_NUMBER: builtins.int
-    FAVOR_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    workflow_id: builtins.str
-    version_id: builtins.str
-    """Workflow version ID to retrieve
-    If no ID is specified, latest workflow version is used
-    """
-    model_version_id: builtins.str
-    """The specific model version whose outputs we are comparing"""
-    @property
-    def probe_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]:
-        """Each probe is compared against every pool input"""
-    @property
-    def pool_inputs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Input]:
-        """Each pool input is compared against ever probe input"""
-    favor_clarifai_workflows: builtins.bool
-    """Use this flag to look into clarifai published workflows first for a Workflow ID"""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        workflow_id: builtins.str = ...,
-        version_id: builtins.str = ...,
-        model_version_id: builtins.str = ...,
-        probe_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
-        pool_inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
-        favor_clarifai_workflows: builtins.bool = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows", b"favor_clarifai_workflows", "model_version_id", b"model_version_id", "pool_inputs", b"pool_inputs", "probe_inputs", b"probe_inputs", "user_app_id", b"user_app_id", "version_id", b"version_id", "workflow_id", b"workflow_id"]) -> None: ...
-
-global___PostWorkflowResultsSimilarityRequest = PostWorkflowResultsSimilarityRequest
-
-@typing_extensions.final
-class PostWorkflowResultsSimilarityResponse(google.protobuf.message.Message):
-    """PostWorkflowResultsSimilarityResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    RESULTS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    @property
-    def results(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowResultsSimilarity]: ...
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        results: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowResultsSimilarity] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["results", b"results", "status", b"status"]) -> None: ...
-
-global___PostWorkflowResultsSimilarityResponse = PostWorkflowResultsSimilarityResponse
-
-@typing_extensions.final
 class ListWorkflowVersionsRequest(google.protobuf.message.Message):
     """ListWorkflowVersionsRequest"""
 
@@ -7376,7 +7307,7 @@ class PatchTasksRequest(google.protobuf.message.Message):
     def tasks(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Task]: ...
     action: builtins.str
     """The action to perform on the patched objects
-    For now actions 'merge', 'overwrite', and 'remove' are supported
+    For now, only 'overwrite' action is supported
     """
     def __init__(
         self,
@@ -10493,14 +10424,14 @@ class PostAuditLogSearchesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
-    AUDIT_LOG_QUERY_FIELD_NUMBER: builtins.int
+    QUERY_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     PAGINATION_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """Only the user_id is used from this."""
     @property
-    def audit_log_query(self) -> proto.clarifai.api.resources_pb2.AuditLogQuery: ...
+    def query(self) -> proto.clarifai.api.resources_pb2.AuditLogQuery: ...
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort by timestamp in ascending order. If false, will order in descending order.
@@ -10511,17 +10442,17 @@ class PostAuditLogSearchesRequest(google.protobuf.message.Message):
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        audit_log_query: proto.clarifai.api.resources_pb2.AuditLogQuery | None = ...,
+        query: proto.clarifai.api.resources_pb2.AuditLogQuery | None = ...,
         sort_ascending: builtins.bool = ...,
         pagination: global___Pagination | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["audit_log_query", b"audit_log_query", "pagination", b"pagination", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audit_log_query", b"audit_log_query", "pagination", b"pagination", "sort_ascending", b"sort_ascending", "user_app_id", b"user_app_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "query", b"query", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["pagination", b"pagination", "query", b"query", "sort_ascending", b"sort_ascending", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostAuditLogSearchesRequest = PostAuditLogSearchesRequest
 
 @typing_extensions.final
-class MultiAuditLogSearchResponse(google.protobuf.message.Message):
+class MultiAuditLogEntryResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     STATUS_FIELD_NUMBER: builtins.int
@@ -10539,7 +10470,7 @@ class MultiAuditLogSearchResponse(google.protobuf.message.Message):
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
     def ClearField(self, field_name: typing_extensions.Literal["entries", b"entries", "status", b"status"]) -> None: ...
 
-global___MultiAuditLogSearchResponse = MultiAuditLogSearchResponse
+global___MultiAuditLogEntryResponse = MultiAuditLogEntryResponse
 
 @typing_extensions.final
 class PatchDeploymentsRequest(google.protobuf.message.Message):

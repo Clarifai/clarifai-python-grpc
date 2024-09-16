@@ -564,11 +564,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse),
                 )
-        self.PostWorkflowResultsSimilarity = channel.unary_unary(
-                '/clarifai.api.V2/PostWorkflowResultsSimilarity',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse),
-                )
         self.ListWorkflowVersions = channel.unary_unary(
                 '/clarifai.api.V2/ListWorkflowVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionsRequest.SerializeToString,
@@ -1222,7 +1217,7 @@ class V2Stub(object):
         self.PostAuditLogSearches = channel.unary_unary(
                 '/clarifai.api.V2/PostAuditLogSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogSearchResponse),
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse),
                 )
 
 
@@ -2062,13 +2057,6 @@ class V2Servicer(object):
 
     def PostWorkflowResults(self, request, context):
         """Predict using a workflow.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostWorkflowResultsSimilarity(self, request, context):
-        """Compare embeddings distances using a workflow
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3583,11 +3571,6 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse.SerializeToString,
             ),
-            'PostWorkflowResultsSimilarity': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostWorkflowResultsSimilarity,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse.SerializeToString,
-            ),
             'ListWorkflowVersions': grpc.unary_unary_rpc_method_handler(
                     servicer.ListWorkflowVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionsRequest.FromString,
@@ -4241,7 +4224,7 @@ def add_V2Servicer_to_server(servicer, server):
             'PostAuditLogSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAuditLogSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogSearchResponse.SerializeToString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -6070,23 +6053,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowResults',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostWorkflowResultsSimilarity(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowResultsSimilarity',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowResultsSimilarityResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -8313,6 +8279,6 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuditLogSearches',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogSearchResponse.FromString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
