@@ -12,6 +12,7 @@ DESCRIPTOR: google.protobuf.descriptor.FileDescriptor
 CL_SHOW_IF_EMPTY_FIELD_NUMBER: builtins.int
 CL_MORETAGS_FIELD_NUMBER: builtins.int
 CL_DEFAULT_FLOAT_FIELD_NUMBER: builtins.int
+DESCRIPTION_FIELD_NUMBER: builtins.int
 cl_show_if_empty: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.FieldOptions, builtins.bool]
 """If True then we will return this field with it's zero value even if not set.
 This means in json responses empty lists will appear instead of not being returned (which is
@@ -24,3 +25,5 @@ request and the field is not present in the request. If the field is present in 
 then the value of the field will be used instead. This is ONLY used for json requests as binary
 proto requests are expected to always set the field.
 """
+description: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[google.protobuf.descriptor_pb2.EnumValueOptions, builtins.str]
+"""A description of the enum value."""
