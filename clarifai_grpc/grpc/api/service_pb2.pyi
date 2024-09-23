@@ -3200,7 +3200,7 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
         """
     @property
     def runner_selector(self) -> proto.clarifai.api.resources_pb2.RunnerSelector:
-        """Allow filtering of prediction requests down to specific Nodepools, Deploymetns or Runners"""
+        """Allow filtering of prediction requests down to specific Nodepools, Deployments or Runners"""
     def __init__(
         self,
         *,
@@ -6772,6 +6772,24 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    @typing_extensions.final
+    class NodeRunnerSelectorsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> proto.clarifai.api.resources_pb2.RunnerSelector: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: proto.clarifai.api.resources_pb2.RunnerSelector | None = ...,
+        ) -> None: ...
+        def HasField(self, field_name: typing_extensions.Literal["value", b"value"]) -> builtins.bool: ...
+        def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
+
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     VERSION_ID_FIELD_NUMBER: builtins.int
@@ -6779,6 +6797,7 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
     OUTPUT_CONFIG_FIELD_NUMBER: builtins.int
     FAVOR_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
     WORKFLOW_STATE_FIELD_NUMBER: builtins.int
+    NODE_RUNNER_SELECTORS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     workflow_id: builtins.str
@@ -6809,6 +6828,21 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
         If it is not sent in the initial request with workflow_state.id = "init" then no
         state will be saved or returned in PostWorkflowResultsResponse.
         """
+    @property
+    def node_runner_selectors(self) -> google.protobuf.internal.containers.MessageMap[builtins.str, proto.clarifai.api.resources_pb2.RunnerSelector]:
+        """Specify which compute to use for processing each node of the workflow:
+        The key is the node.id from the loaded workflow.
+        The value is a RunnerSelector in which you can specify the deployment or specific nodepool
+        that you'd like that node to run on.
+        This allows for use cases like some light models could run on a CPU-only nodepool
+        while other models in the workflow require large GPUs.
+
+        If node.id is not in the provided map, it will fall back to searching for
+        an adequate deployment the model owner owns or fall back to
+        the serverless nodepools provided by Clarifai.
+        We recommend you specify these RunnerSelectors so that you have better understanding of where
+        processing occurs.
+        """
     def __init__(
         self,
         *,
@@ -6819,9 +6853,10 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
         output_config: proto.clarifai.api.resources_pb2.OutputConfig | None = ...,
         favor_clarifai_workflows: builtins.bool = ...,
         workflow_state: proto.clarifai.api.resources_pb2.WorkflowState | None = ...,
+        node_runner_selectors: collections.abc.Mapping[builtins.str, proto.clarifai.api.resources_pb2.RunnerSelector] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["output_config", b"output_config", "user_app_id", b"user_app_id", "workflow_state", b"workflow_state"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows", b"favor_clarifai_workflows", "inputs", b"inputs", "output_config", b"output_config", "user_app_id", b"user_app_id", "version_id", b"version_id", "workflow_id", b"workflow_id", "workflow_state", b"workflow_state"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["favor_clarifai_workflows", b"favor_clarifai_workflows", "inputs", b"inputs", "node_runner_selectors", b"node_runner_selectors", "output_config", b"output_config", "user_app_id", b"user_app_id", "version_id", b"version_id", "workflow_id", b"workflow_id", "workflow_state", b"workflow_state"]) -> None: ...
 
 global___PostWorkflowResultsRequest = PostWorkflowResultsRequest
 
