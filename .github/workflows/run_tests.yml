@@ -63,6 +63,7 @@ jobs:
         CLARIFAI_USER_EMAIL_SECURE_HOSTING: ${{ secrets.CLARIFAI_USER_EMAIL_SECURE_HOSTING }}
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
         CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
+      shell: bash
       if: ${{ always() }}
       run: |
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
