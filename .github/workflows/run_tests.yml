@@ -31,7 +31,7 @@ jobs:
         pip install -r tests/requirements.txt
     - name: Run static analysis lint
       run: ./lint.sh check
-    - name: Prepare the API keys & run pytest
+    - name: Prepare the API keys
       env:
         CLARIFAI_USER_EMAIL_SECURE_HOSTING: ${{ secrets.CLARIFAI_USER_EMAIL_SECURE_HOSTING }}
         CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
@@ -39,16 +39,28 @@ jobs:
       shell: bash
       run: |
         export PYTHONPATH=.
-        export CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
-        export CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
-        export CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
+        CLARIFAI_APP_ID="$(python scripts/app_and_key_for_tests.py --create-app python-github)"
+        CLARIFAI_API_KEY="$(python scripts/app_and_key_for_tests.py --create-key ${CLARIFAI_APP_ID})"
+        CLARIFAI_PAT_KEY="$(python scripts/app_and_key_for_tests.py --create-pat)"
         python scripts/app_and_key_for_tests.py --create-workflow ${CLARIFAI_API_KEY}
-        export CLARIFAI_APP_ID_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-app python-github-secure-hosting)"
-        export CLARIFAI_API_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
-        export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
-        export CLARIFAI_SESSION_TOKEN_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-session-token)"
+        CLARIFAI_APP_ID_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-app python-github-secure-hosting)"
+        CLARIFAI_API_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
+        CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
+        CLARIFAI_SESSION_TOKEN_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-session-token)"
+        echo "CLARIFAI_APP_ID=${CLARIFAI_APP_ID}" >> $GITHUB_ENV
+        echo "CLARIFAI_APP_ID_SECURE_HOSTING=${CLARIFAI_APP_ID_SECURE_HOSTING}" >> $GITHUB_ENV
+        echo "CLARIFAI_API_KEY=${CLARIFAI_API_KEY}" >> $GITHUB_ENV
+        echo "CLARIFAI_PAT_KEY=${CLARIFAI_PAT_KEY}" >> $GITHUB_ENV
+        echo "CLARIFAI_API_KEY_SECURE_HOSTING=${CLARIFAI_API_KEY_SECURE_HOSTING}" >> $GITHUB_ENV
+        echo "CLARIFAI_PAT_KEY_SECURE_HOSTING=${CLARIFAI_PAT_KEY_SECURE_HOSTING}" >> $GITHUB_ENV
+        echo "CLARIFAI_SESSION_TOKEN_SECURE_HOSTING=${CLARIFAI_SESSION_TOKEN_SECURE_HOSTING}" >> $GITHUB_ENV
         pip install pytest
-        pytest tests/ -n auto
+    - name: Run tests
+      run: pytest tests/ -n auto
+      continue-on-error: true
+    - name: Cleanup
+      if: ${{ always() }}
+      run: |
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
         python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
     - name: Slack Notify
