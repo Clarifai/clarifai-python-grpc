@@ -59,6 +59,9 @@ jobs:
       run: pytest tests/ -n auto
       continue-on-error: true
     - name: Cleanup
+      env:
+        CLARIFAI_USER_EMAIL: ${{ secrets.INTERNAL_USER_EMAIL }}
+        CLARIFAI_USER_PASSWORD: ${{ secrets.INTERNAL_USER_PASSWORD }}
       if: ${{ always() }}
       run: |
         python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
