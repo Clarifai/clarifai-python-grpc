@@ -72,15 +72,9 @@ class _PutTaskAssignmentsRequestActionEnumTypeWrapper(google.protobuf.internal.e
     * when review strategy is MANUAL, then annotation status is updated to AWAITING_REVIEW.
     """
     REVIEW_START: _PutTaskAssignmentsRequestAction.ValueType  # 10
-    """Return a list of task assignments for reviewer to review => 10 inputs are assigned to the reviewer.
+    """Assign task assignments for reviewer to review => 10 task assignments are assigned to the reviewer.
     This is a fully sync action.
-    NOT idempotent:
-     In the current implementation, we don't actually store the reviewer in the task assignment,
-     as the task assignment still stays assigned to the labeler.
-     Therefore, multiple calls to this endpoint may result in different set of task assignments to review.
-     For now, this action is practically not idempotent.
-     In the future, we could however store the reviewer in the task assignment and
-     return existing task assignments already assigned to the reviewer => this will make this action idempotent.
+    If task assignments are already assigned for review, then return existing task assignments.
     """
     REVIEW_APPROVE: _PutTaskAssignmentsRequestAction.ValueType  # 11
     """Approve task assignments.
@@ -132,15 +126,9 @@ Async: annotations added for the same input as the task assignment are updated a
 * when review strategy is MANUAL, then annotation status is updated to AWAITING_REVIEW.
 """
 REVIEW_START: PutTaskAssignmentsRequestAction.ValueType  # 10
-"""Return a list of task assignments for reviewer to review => 10 inputs are assigned to the reviewer.
+"""Assign task assignments for reviewer to review => 10 task assignments are assigned to the reviewer.
 This is a fully sync action.
-NOT idempotent:
- In the current implementation, we don't actually store the reviewer in the task assignment,
- as the task assignment still stays assigned to the labeler.
- Therefore, multiple calls to this endpoint may result in different set of task assignments to review.
- For now, this action is practically not idempotent.
- In the future, we could however store the reviewer in the task assignment and
- return existing task assignments already assigned to the reviewer => this will make this action idempotent.
+If task assignments are already assigned for review, then return existing task assignments.
 """
 REVIEW_APPROVE: PutTaskAssignmentsRequestAction.ValueType  # 11
 """Approve task assignments.
@@ -10383,6 +10371,8 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -10395,6 +10385,12 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    @property
+    def model_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) ModelVersion IDs. To list all deployments for the model version"""
+    @property
+    def workflow_version_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) WorkflowVersion IDs. To list all deployments for the workflow version"""
     def __init__(
         self,
         *,
@@ -10402,9 +10398,11 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
         nodepool_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        workflow_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model_version_ids", b"model_version_ids", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "workflow_version_ids", b"workflow_version_ids"]) -> None: ...
 
 global___ListDeploymentsRequest = ListDeploymentsRequest
 
@@ -10576,3 +10574,34 @@ class MultiDeploymentResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["deployments", b"deployments", "status", b"status"]) -> None: ...
 
 global___MultiDeploymentResponse = MultiDeploymentResponse
+
+@typing_extensions.final
+class ListWorkflowEvaluationTemplatesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___ListWorkflowEvaluationTemplatesRequest = ListWorkflowEvaluationTemplatesRequest
+
+@typing_extensions.final
+class MultiWorkflowEvaluationTemplateResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_TEMPLATES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def workflow_version_evaluation_templates(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationTemplate]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow_version_evaluation_templates: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationTemplate] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "workflow_version_evaluation_templates", b"workflow_version_evaluation_templates"]) -> None: ...
+
+global___MultiWorkflowEvaluationTemplateResponse = MultiWorkflowEvaluationTemplateResponse

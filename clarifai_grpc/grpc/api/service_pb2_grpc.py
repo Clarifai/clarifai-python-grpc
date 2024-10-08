@@ -1219,6 +1219,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse),
                 )
+        self.ListWorkflowEvaluationTemplates = channel.unary_unary(
+                '/clarifai.api.V2/ListWorkflowEvaluationTemplates',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse),
+                )
 
 
 class V2Servicer(object):
@@ -1448,8 +1453,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetInputSamples(self, request, context):
-        """Get a specific input from an app.
-        """
+        """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -2754,9 +2758,8 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PutTaskAssignments(self, request, context):
-        """PutTaskAssignments performs an action for the task assignments in given task.
-        All the actions are theoretically idempotent, but practically, in the current implementation,
-        the REVIEW_START action is not idempotent. See PutTaskAssignmentsRequestAction for more details.
+        """PutTaskAssignments performs an idempotent action for the task assignments in given task.
+        See PutTaskAssignmentsRequestAction for more details about possible actions.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3033,6 +3036,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostAuditLogSearches(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListWorkflowEvaluationTemplates(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4225,6 +4234,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostAuditLogSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse.SerializeToString,
+            ),
+            'ListWorkflowEvaluationTemplates': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWorkflowEvaluationTemplates,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -8280,5 +8294,22 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAuditLogSearches',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostAuditLogSearchesRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiAuditLogEntryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListWorkflowEvaluationTemplates(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflowEvaluationTemplates',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
