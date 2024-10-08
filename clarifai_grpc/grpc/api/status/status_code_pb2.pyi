@@ -441,10 +441,15 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     TASK_PERMISSION_DENIED: _StatusCode.ValueType  # 54103
     """Not allowed to perform a task-related action."""
     TASK_ASSIGNMENT_SUCCESS: _StatusCode.ValueType  # 54200
+    """Task Assignments 542xx"""
     TASK_ASSIGNMENT_PENDING: _StatusCode.ValueType  # 54201
     TASK_ASSIGNMENT_AWAITING_REVIEW: _StatusCode.ValueType  # 54202
     TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: _StatusCode.ValueType  # 54203
-    TASK_ASSIGNMENT_REVIEW_DENIED: _StatusCode.ValueType  # 54204
+    TASK_ASSIGNMENT_REJECTED: _StatusCode.ValueType  # 54204
+    TASK_ASSIGNMENT_REVIEW_SUCCESS: _StatusCode.ValueType  # 54300
+    """Task Assignment Reviews 543xx"""
+    TASK_ASSIGNMENT_REVIEW_PENDING: _StatusCode.ValueType  # 54301
+    TASK_ASSIGNMENT_REVIEW_DISMISSED: _StatusCode.ValueType  # 54302
     LABEL_ORDER_PENDING: _StatusCode.ValueType  # 55001
     """Label Order Related Status Code 55xxx"""
     LABEL_ORDER_IN_PROGRESS: _StatusCode.ValueType  # 55002
@@ -972,10 +977,15 @@ TASK_MISSING: StatusCode.ValueType  # 54102
 TASK_PERMISSION_DENIED: StatusCode.ValueType  # 54103
 """Not allowed to perform a task-related action."""
 TASK_ASSIGNMENT_SUCCESS: StatusCode.ValueType  # 54200
+"""Task Assignments 542xx"""
 TASK_ASSIGNMENT_PENDING: StatusCode.ValueType  # 54201
 TASK_ASSIGNMENT_AWAITING_REVIEW: StatusCode.ValueType  # 54202
 TASK_ASSIGNMENT_AWAITING_CONSENSUS_REVIEW: StatusCode.ValueType  # 54203
-TASK_ASSIGNMENT_REVIEW_DENIED: StatusCode.ValueType  # 54204
+TASK_ASSIGNMENT_REJECTED: StatusCode.ValueType  # 54204
+TASK_ASSIGNMENT_REVIEW_SUCCESS: StatusCode.ValueType  # 54300
+"""Task Assignment Reviews 543xx"""
+TASK_ASSIGNMENT_REVIEW_PENDING: StatusCode.ValueType  # 54301
+TASK_ASSIGNMENT_REVIEW_DISMISSED: StatusCode.ValueType  # 54302
 LABEL_ORDER_PENDING: StatusCode.ValueType  # 55001
 """Label Order Related Status Code 55xxx"""
 LABEL_ORDER_IN_PROGRESS: StatusCode.ValueType  # 55002

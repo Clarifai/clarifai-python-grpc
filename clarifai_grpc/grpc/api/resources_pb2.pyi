@@ -1304,6 +1304,7 @@ class Concept(google.protobuf.message.Message):
     KEYPOINT_INFO_FIELD_NUMBER: builtins.int
     EXTRA_INFO_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
+    IMAGE_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The concept's unique id."""
     name: builtins.str
@@ -1353,6 +1354,9 @@ class Concept(google.protobuf.message.Message):
         """To handle arbitrary json metadata:
         https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
         """
+    @property
+    def image(self) -> global___Image:
+        """Representative image for the concept"""
     def __init__(
         self,
         *,
@@ -1369,9 +1373,10 @@ class Concept(google.protobuf.message.Message):
         keypoint_info: global___KeypointInfo | None = ...,
         extra_info: global___ConceptExtraInfo | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        image: global___Image | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "extra_info", b"extra_info", "keypoint_info", b"keypoint_info", "metadata", b"metadata", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "definition", b"definition", "extra_info", b"extra_info", "id", b"id", "keypoint_info", b"keypoint_info", "language", b"language", "metadata", b"metadata", "name", b"name", "user_id", b"user_id", "value", b"value", "visibility", b"visibility", "vocab_id", b"vocab_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "extra_info", b"extra_info", "image", b"image", "keypoint_info", b"keypoint_info", "metadata", b"metadata", "visibility", b"visibility"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "definition", b"definition", "extra_info", b"extra_info", "id", b"id", "image", b"image", "keypoint_info", b"keypoint_info", "language", b"language", "metadata", b"metadata", "name", b"name", "user_id", b"user_id", "value", b"value", "visibility", b"visibility", "vocab_id", b"vocab_id"]) -> None: ...
 
 global___Concept = Concept
 
@@ -1736,6 +1741,7 @@ class Data(google.protobuf.message.Message):
     TIME_SEGMENTS_FIELD_NUMBER: builtins.int
     HITS_FIELD_NUMBER: builtins.int
     HEATMAPS_FIELD_NUMBER: builtins.int
+    PARTS_FIELD_NUMBER: builtins.int
     @property
     def image(self) -> global___Image:
         """Input and output images."""
@@ -1786,6 +1792,11 @@ class Data(google.protobuf.message.Message):
     @property
     def heatmaps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Image]:
         """Heatmap as 2d image"""
+    @property
+    def parts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Part]:
+        """For data messages that have multiple parts such as multi-modal
+        requests, we allow you to specify those as a list of Data objects.
+        """
     def __init__(
         self,
         *,
@@ -1805,11 +1816,32 @@ class Data(google.protobuf.message.Message):
         time_segments: collections.abc.Iterable[global___TimeSegment] | None = ...,
         hits: collections.abc.Iterable[global___Hit] | None = ...,
         heatmaps: collections.abc.Iterable[global___Image] | None = ...,
+        parts: collections.abc.Iterable[global___Part] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "geo", b"geo", "image", b"image", "metadata", b"metadata", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "parts", b"parts", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
 
 global___Data = Data
+
+@typing_extensions.final
+class Part(google.protobuf.message.Message):
+    """A part of data used for multi-modal processing."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATA_FIELD_NUMBER: builtins.int
+    @property
+    def data(self) -> global___Data:
+        """The data for this part."""
+    def __init__(
+        self,
+        *,
+        data: global___Data | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["data", b"data"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data"]) -> None: ...
+
+global___Part = Part
 
 @typing_extensions.final
 class Region(google.protobuf.message.Message):
@@ -6700,27 +6732,6 @@ class Task(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    class _WorkerType:
-        ValueType = typing.NewType("ValueType", builtins.int)
-        V: typing_extensions.TypeAlias = ValueType
-
-    class _WorkerTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Task._WorkerType.ValueType], builtins.type):  # noqa: F821
-        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-        WORKER_TYPE_NOT_SET: Task._WorkerType.ValueType  # 0
-        """for backward compatibility when task is not setting any type and only sets workers"""
-        WORKER_HUMAN: Task._WorkerType.ValueType  # 1
-        """only human workers"""
-        WORKER_AUTO: Task._WorkerType.ValueType  # 2
-        """auto-annotation tasks. Task must set worker as model or workflow"""
-
-    class WorkerType(_WorkerType, metaclass=_WorkerTypeEnumTypeWrapper): ...
-    WORKER_TYPE_NOT_SET: Task.WorkerType.ValueType  # 0
-    """for backward compatibility when task is not setting any type and only sets workers"""
-    WORKER_HUMAN: Task.WorkerType.ValueType  # 1
-    """only human workers"""
-    WORKER_AUTO: Task.WorkerType.ValueType  # 2
-    """auto-annotation tasks. Task must set worker as model or workflow"""
-
     class _TaskType:
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
@@ -6767,7 +6778,6 @@ class Task(google.protobuf.message.Message):
     TYPE_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     WORKER_FIELD_NUMBER: builtins.int
-    WORKER_TYPE_FIELD_NUMBER: builtins.int
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
     INPUT_SOURCE_FIELD_NUMBER: builtins.int
     SAMPLE_MS_FIELD_NUMBER: builtins.int
@@ -6805,10 +6815,6 @@ class Task(google.protobuf.message.Message):
     @property
     def worker(self) -> global___TaskWorker:
         """Worker details."""
-    worker_type: global___Task.WorkerType.ValueType
-    """Who is doing annotations - human Worker or auto-annotation via Model/Workflow.
-    If set, worker must have be set accordingly to either human worker or model/workflow worker
-    """
     @property
     def concept_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """List of concept ids used in the work of this task.
@@ -6865,7 +6871,6 @@ class Task(google.protobuf.message.Message):
         type: global___Task.TaskType.ValueType = ...,
         description: builtins.str = ...,
         worker: global___TaskWorker | None = ...,
-        worker_type: global___Task.WorkerType.ValueType = ...,
         concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
         input_source: global___TaskInputSource | None = ...,
         sample_ms: builtins.int = ...,
@@ -6884,7 +6889,7 @@ class Task(google.protobuf.message.Message):
         priority: global___Task.TaskPriority.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "created_at", b"created_at", "input_source", b"input_source", "metrics", b"metrics", "modified_at", b"modified_at", "review", b"review", "status", b"status", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "priority", b"priority", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker", "worker_type", b"worker_type"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "priority", b"priority", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
 
 global___Task = Task
 
@@ -6957,11 +6962,33 @@ class TaskWorker(google.protobuf.message.Message):
     No inputs are assigned at task creation.
     """
 
+    class _WorkerType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _WorkerTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[TaskWorker._WorkerType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        WORKER_TYPE_NOT_SET: TaskWorker._WorkerType.ValueType  # 0
+        """for backward compatibility when task is not setting any type and only sets workers"""
+        WORKER_HUMAN: TaskWorker._WorkerType.ValueType  # 1
+        """only human workers"""
+        WORKER_AUTO: TaskWorker._WorkerType.ValueType  # 2
+        """auto-annotation tasks. Task must set worker as model or workflow"""
+
+    class WorkerType(_WorkerType, metaclass=_WorkerTypeEnumTypeWrapper): ...
+    WORKER_TYPE_NOT_SET: TaskWorker.WorkerType.ValueType  # 0
+    """for backward compatibility when task is not setting any type and only sets workers"""
+    WORKER_HUMAN: TaskWorker.WorkerType.ValueType  # 1
+    """only human workers"""
+    WORKER_AUTO: TaskWorker.WorkerType.ValueType  # 2
+    """auto-annotation tasks. Task must set worker as model or workflow"""
+
     STRATEGY_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
     USERS_FIELD_NUMBER: builtins.int
     PARTITIONED_STRATEGY_INFO_FIELD_NUMBER: builtins.int
     WORKERS_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
     strategy: global___TaskWorker.TaskWorkerStrategy.ValueType
     """Worker strategy."""
     @property
@@ -6989,6 +7016,10 @@ class TaskWorker(google.protobuf.message.Message):
           the workers can only be users;
           no limitation on number of workers.
         """
+    type: global___TaskWorker.WorkerType.ValueType
+    """Who is doing annotations - human Worker or auto-annotation via Model/Workflow.
+    If set, worker must have be set accordingly to either human worker or model/workflow worker
+    """
     def __init__(
         self,
         *,
@@ -6997,9 +7028,10 @@ class TaskWorker(google.protobuf.message.Message):
         users: collections.abc.Iterable[global___User] | None = ...,
         partitioned_strategy_info: global___TaskWorkerPartitionedStrategyInfo | None = ...,
         workers: collections.abc.Iterable[global___Worker] | None = ...,
+        type: global___TaskWorker.WorkerType.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy_info", b"strategy_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "user_ids", b"user_ids", "users", b"users", "workers", b"workers"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["partitioned_strategy_info", b"partitioned_strategy_info", "strategy", b"strategy", "strategy_info", b"strategy_info", "type", b"type", "user_ids", b"user_ids", "users", b"users", "workers", b"workers"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["strategy_info", b"strategy_info"]) -> typing_extensions.Literal["partitioned_strategy_info"] | None: ...
 
 global___TaskWorker = TaskWorker
@@ -7136,20 +7168,28 @@ class TaskReview(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         TASK_REVIEW_STRATEGY_NOT_SET: TaskReview._TaskReviewStrategy.ValueType  # 0
         NONE: TaskReview._TaskReviewStrategy.ValueType  # 1
-        """No review is needed."""
+        """No review is needed.
+        When a labeler labels an input, the annotations are immediately approved.
+        """
         MANUAL: TaskReview._TaskReviewStrategy.ValueType  # 2
-        """Manual review strategy."""
+        """Human reviewers will review the work done by labelers."""
         CONSENSUS: TaskReview._TaskReviewStrategy.ValueType  # 3
-        """Consensus review strategy."""
+        """Automatically approve inputs when labelers reach consensus.
+        If consensus is not reached, then it will fallback to human reviewers.
+        """
 
     class TaskReviewStrategy(_TaskReviewStrategy, metaclass=_TaskReviewStrategyEnumTypeWrapper): ...
     TASK_REVIEW_STRATEGY_NOT_SET: TaskReview.TaskReviewStrategy.ValueType  # 0
     NONE: TaskReview.TaskReviewStrategy.ValueType  # 1
-    """No review is needed."""
+    """No review is needed.
+    When a labeler labels an input, the annotations are immediately approved.
+    """
     MANUAL: TaskReview.TaskReviewStrategy.ValueType  # 2
-    """Manual review strategy."""
+    """Human reviewers will review the work done by labelers."""
     CONSENSUS: TaskReview.TaskReviewStrategy.ValueType  # 3
-    """Consensus review strategy."""
+    """Automatically approve inputs when labelers reach consensus.
+    If consensus is not reached, then it will fallback to human reviewers.
+    """
 
     STRATEGY_FIELD_NUMBER: builtins.int
     USER_IDS_FIELD_NUMBER: builtins.int
@@ -7195,14 +7235,23 @@ class TaskReviewManualStrategyInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     SAMPLE_PERCENTAGE_FIELD_NUMBER: builtins.int
+    APPROVAL_THRESHOLD_FIELD_NUMBER: builtins.int
     sample_percentage: builtins.float
     """This field represents the percentage of inputs that will be reviewed by reviewers. It is a value between 0 and 1."""
+    approval_threshold: builtins.int
+    """The number of reviewers that need to agree in order to approve an input.
+    Currently, the only allowed values are:
+    0  - when not set, it defaults to 1
+    1  - only a single reviewer needs to approve each labeled input
+    -1 - an input will be approved when all reviewers approve it
+    """
     def __init__(
         self,
         *,
         sample_percentage: builtins.float = ...,
+        approval_threshold: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["sample_percentage", b"sample_percentage"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["approval_threshold", b"approval_threshold", "sample_percentage", b"sample_percentage"]) -> None: ...
 
 global___TaskReviewManualStrategyInfo = TaskReviewManualStrategyInfo
 
@@ -9986,3 +10035,106 @@ class AuditLogQuery(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["operations", b"operations", "source_ips", b"source_ips", "success", b"success", "targets", b"targets", "timestamp_from", b"timestamp_from", "timestamp_to", b"timestamp_to", "user_ids", b"user_ids"]) -> None: ...
 
 global___AuditLogQuery = AuditLogQuery
+
+@typing_extensions.final
+class WorkflowVersionEvaluationMetric(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _DataType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _DataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[WorkflowVersionEvaluationMetric._DataType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        DATA_TYPE_NOT_SET: WorkflowVersionEvaluationMetric._DataType.ValueType  # 0
+        FLOAT: WorkflowVersionEvaluationMetric._DataType.ValueType  # 1
+
+    class DataType(_DataType, metaclass=_DataTypeEnumTypeWrapper):
+        """Enum for data types"""
+
+    DATA_TYPE_NOT_SET: WorkflowVersionEvaluationMetric.DataType.ValueType  # 0
+    FLOAT: WorkflowVersionEvaluationMetric.DataType.ValueType  # 1
+
+    class _VisualisationType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _VisualisationTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[WorkflowVersionEvaluationMetric._VisualisationType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        VISUALIZATION_TYPE_NOT_SET: WorkflowVersionEvaluationMetric._VisualisationType.ValueType  # 0
+        CONFUSION_MATRIX: WorkflowVersionEvaluationMetric._VisualisationType.ValueType  # 1
+        PRECISION_RECALL_CURVE: WorkflowVersionEvaluationMetric._VisualisationType.ValueType  # 2
+        ROC_AUC_CURVE: WorkflowVersionEvaluationMetric._VisualisationType.ValueType  # 3
+
+    class VisualisationType(_VisualisationType, metaclass=_VisualisationTypeEnumTypeWrapper):
+        """Enum for visualization types"""
+
+    VISUALIZATION_TYPE_NOT_SET: WorkflowVersionEvaluationMetric.VisualisationType.ValueType  # 0
+    CONFUSION_MATRIX: WorkflowVersionEvaluationMetric.VisualisationType.ValueType  # 1
+    PRECISION_RECALL_CURVE: WorkflowVersionEvaluationMetric.VisualisationType.ValueType  # 2
+    ROC_AUC_CURVE: WorkflowVersionEvaluationMetric.VisualisationType.ValueType  # 3
+
+    ID_FIELD_NUMBER: builtins.int
+    SUMMARY_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    DATA_TYPE_FIELD_NUMBER: builtins.int
+    VISUALISATION_TYPE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    summary: builtins.str
+    description: builtins.str
+    data_type: global___WorkflowVersionEvaluationMetric.DataType.ValueType
+    """Metric data type - string, float, int"""
+    visualisation_type: global___WorkflowVersionEvaluationMetric.VisualisationType.ValueType
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        summary: builtins.str = ...,
+        description: builtins.str = ...,
+        data_type: global___WorkflowVersionEvaluationMetric.DataType.ValueType = ...,
+        visualisation_type: global___WorkflowVersionEvaluationMetric.VisualisationType.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data_type", b"data_type", "description", b"description", "id", b"id", "summary", b"summary", "visualisation_type", b"visualisation_type"]) -> None: ...
+
+global___WorkflowVersionEvaluationMetric = WorkflowVersionEvaluationMetric
+
+@typing_extensions.final
+class WorkflowVersionEvaluationTemplate(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _TaskType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _TaskTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[WorkflowVersionEvaluationTemplate._TaskType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        TASK_TYPE_NOT_SET: WorkflowVersionEvaluationTemplate._TaskType.ValueType  # 0
+        TEXT_CLASSIFICATION: WorkflowVersionEvaluationTemplate._TaskType.ValueType  # 1
+
+    class TaskType(_TaskType, metaclass=_TaskTypeEnumTypeWrapper): ...
+    TASK_TYPE_NOT_SET: WorkflowVersionEvaluationTemplate.TaskType.ValueType  # 0
+    TEXT_CLASSIFICATION: WorkflowVersionEvaluationTemplate.TaskType.ValueType  # 1
+
+    ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    TASK_TYPES_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_METRICS_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    description: builtins.str
+    @property
+    def task_types(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[global___WorkflowVersionEvaluationTemplate.TaskType.ValueType]:
+        """Applicable for the task types like TextClassification, TextGeneration, etc"""
+    @property
+    def workflow_version_evaluation_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___WorkflowVersionEvaluationMetric]:
+        """The Workflow Evaluation template metrics"""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        description: builtins.str = ...,
+        task_types: collections.abc.Iterable[global___WorkflowVersionEvaluationTemplate.TaskType.ValueType] | None = ...,
+        workflow_version_evaluation_metrics: collections.abc.Iterable[global___WorkflowVersionEvaluationMetric] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "id", b"id", "task_types", b"task_types", "workflow_version_evaluation_metrics", b"workflow_version_evaluation_metrics"]) -> None: ...
+
+global___WorkflowVersionEvaluationTemplate = WorkflowVersionEvaluationTemplate
