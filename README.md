@@ -1,4 +1,5 @@
-![Clarifai logo](docs/logo.png)
+![image](https://github.com/user-attachments/assets/e52874e7-9246-4d55-ad9d-18b1f44aee1a)
+
 
 # Clarifai Python gRPC Client
 
