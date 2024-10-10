@@ -1741,7 +1741,6 @@ class Data(google.protobuf.message.Message):
     TIME_SEGMENTS_FIELD_NUMBER: builtins.int
     HITS_FIELD_NUMBER: builtins.int
     HEATMAPS_FIELD_NUMBER: builtins.int
-    PARTS_FIELD_NUMBER: builtins.int
     @property
     def image(self) -> global___Image:
         """Input and output images."""
@@ -1792,11 +1791,6 @@ class Data(google.protobuf.message.Message):
     @property
     def heatmaps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Image]:
         """Heatmap as 2d image"""
-    @property
-    def parts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Part]:
-        """For data messages that have multiple parts such as multi-modal
-        requests, we allow you to specify those as a list of Data objects.
-        """
     def __init__(
         self,
         *,
@@ -1816,32 +1810,11 @@ class Data(google.protobuf.message.Message):
         time_segments: collections.abc.Iterable[global___TimeSegment] | None = ...,
         hits: collections.abc.Iterable[global___Hit] | None = ...,
         heatmaps: collections.abc.Iterable[global___Image] | None = ...,
-        parts: collections.abc.Iterable[global___Part] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "geo", b"geo", "image", b"image", "metadata", b"metadata", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "parts", b"parts", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
 
 global___Data = Data
-
-@typing_extensions.final
-class Part(google.protobuf.message.Message):
-    """A part of data used for multi-modal processing."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    DATA_FIELD_NUMBER: builtins.int
-    @property
-    def data(self) -> global___Data:
-        """The data for this part."""
-    def __init__(
-        self,
-        *,
-        data: global___Data | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["data", b"data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data", b"data"]) -> None: ...
-
-global___Part = Part
 
 @typing_extensions.final
 class Region(google.protobuf.message.Message):
