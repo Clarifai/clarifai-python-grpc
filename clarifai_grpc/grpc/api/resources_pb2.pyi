@@ -1741,6 +1741,8 @@ class Data(google.protobuf.message.Message):
     TIME_SEGMENTS_FIELD_NUMBER: builtins.int
     HITS_FIELD_NUMBER: builtins.int
     HEATMAPS_FIELD_NUMBER: builtins.int
+    PARTS_FIELD_NUMBER: builtins.int
+    NDARRAY_FIELD_NUMBER: builtins.int
     @property
     def image(self) -> global___Image:
         """Input and output images."""
@@ -1791,6 +1793,16 @@ class Data(google.protobuf.message.Message):
     @property
     def heatmaps(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Image]:
         """Heatmap as 2d image"""
+    @property
+    def parts(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Part]:
+        """For data messages that have multiple parts such as multi-modal
+        requests, we allow you to specify those as a list of Data objects.
+        """
+    @property
+    def ndarray(self) -> global___NDArray:
+        """A proto representation for numpy arrays, useful to pass information from python SDK to a
+        python based model implementation.
+        """
     def __init__(
         self,
         *,
@@ -1810,11 +1822,33 @@ class Data(google.protobuf.message.Message):
         time_segments: collections.abc.Iterable[global___TimeSegment] | None = ...,
         hits: collections.abc.Iterable[global___Hit] | None = ...,
         heatmaps: collections.abc.Iterable[global___Image] | None = ...,
+        parts: collections.abc.Iterable[global___Part] | None = ...,
+        ndarray: global___NDArray | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "geo", b"geo", "image", b"image", "metadata", b"metadata", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "geo", b"geo", "image", b"image", "metadata", b"metadata", "ndarray", b"ndarray", "text", b"text", "video", b"video"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "ndarray", b"ndarray", "parts", b"parts", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
 
 global___Data = Data
+
+@typing_extensions.final
+class Part(google.protobuf.message.Message):
+    """A part of data used for multi-modal processing."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DATA_FIELD_NUMBER: builtins.int
+    @property
+    def data(self) -> global___Data:
+        """The data for this part."""
+    def __init__(
+        self,
+        *,
+        data: global___Data | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["data", b"data"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data"]) -> None: ...
+
+global___Part = Part
 
 @typing_extensions.final
 class Region(google.protobuf.message.Message):
@@ -1997,6 +2031,42 @@ class Frame(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "frame_info", b"frame_info", "id", b"id"]) -> None: ...
 
 global___Frame = Frame
+
+@typing_extensions.final
+class NDArray(google.protobuf.message.Message):
+    """A representation of a numpy array as a proto.
+    To convert a numpy array 'ndarray' to this proto do:
+    NDArray(buffer=ndarray.tobytes(), shape=ndarray.shape, dtype=str(ndarray.dtype))
+
+    To convert this proto 'ndarray_proto' to a numpy array:
+    array = np.frombuffer(ndarray_proto.buffer, dtype=ndarray_proto.dtype)
+    array = array.reshape(tuple(ndarray_proto.shape))
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    BUFFER_FIELD_NUMBER: builtins.int
+    SHAPE_FIELD_NUMBER: builtins.int
+    DTYPE_FIELD_NUMBER: builtins.int
+    buffer: builtins.bytes
+    """The bytes of data from the array from array.tobytes()"""
+    @property
+    def shape(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Simply the shape of the numpy array. array.shape."""
+    dtype: builtins.str
+    """Dtype for numpy. You can get it back from this string format using:
+    np.dtype('float32') for example.
+    """
+    def __init__(
+        self,
+        *,
+        buffer: builtins.bytes = ...,
+        shape: collections.abc.Iterable[builtins.int] | None = ...,
+        dtype: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["buffer", b"buffer", "dtype", b"dtype", "shape", b"shape"]) -> None: ...
+
+global___NDArray = NDArray
 
 @typing_extensions.final
 class Mask(google.protobuf.message.Message):
