@@ -529,6 +529,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     UPLOAD_CONFLICT: _StatusCode.ValueType  # 68006
     BILLING_INVALID_INFO: _StatusCode.ValueType  # 69000
     """Billing related issues: 69xxx"""
+    LOG_ENTRIES_INVALID_REQUEST: _StatusCode.ValueType  # 70000
+    """Logs related issues: 70000;"""
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
     INTERNAL_FETCHING_ISSUE: _StatusCode.ValueType  # 98005
@@ -1065,6 +1067,8 @@ UPLOAD_CANCELED: StatusCode.ValueType  # 68005
 UPLOAD_CONFLICT: StatusCode.ValueType  # 68006
 BILLING_INVALID_INFO: StatusCode.ValueType  # 69000
 """Billing related issues: 69xxx"""
+LOG_ENTRIES_INVALID_REQUEST: StatusCode.ValueType  # 70000
+"""Logs related issues: 70000;"""
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 INTERNAL_FETCHING_ISSUE: StatusCode.ValueType  # 98005

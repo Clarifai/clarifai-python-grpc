@@ -232,6 +232,7 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     Deployments_Delete: _S.ValueType  # 146
     InstanceTypes_Get: _S.ValueType  # 148
     AuditLogs_Get: _S.ValueType  # 149
+    LogEntries_Get: _S.ValueType  # 151
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -469,6 +470,7 @@ Deployments_Add: S.ValueType  # 145
 Deployments_Delete: S.ValueType  # 146
 InstanceTypes_Get: S.ValueType  # 148
 AuditLogs_Get: S.ValueType  # 149
+LogEntries_Get: S.ValueType  # 151
 global___S = S
 
 @typing_extensions.final
