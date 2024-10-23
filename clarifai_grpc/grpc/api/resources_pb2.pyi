@@ -7282,12 +7282,7 @@ class TaskReviewManualStrategyInfo(google.protobuf.message.Message):
     sample_percentage: builtins.float
     """This field represents the percentage of inputs that will be reviewed by reviewers. It is a value between 0 and 1."""
     approval_threshold: builtins.int
-    """The number of reviewers that need to agree in order to approve an input.
-    Currently, the only allowed values are:
-    0  - when not set, it defaults to 1
-    1  - only a single reviewer needs to approve each labeled input
-    -1 - an input will be approved when all reviewers approve it
-    """
+    """Deprecated: Use consensus_strategy_info.approval_threshold_reviewers."""
     def __init__(
         self,
         *,
@@ -7305,14 +7300,32 @@ class TaskReviewConsensusStrategyInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     APPROVAL_THRESHOLD_FIELD_NUMBER: builtins.int
+    APPROVAL_THRESHOLD_LABELERS_FIELD_NUMBER: builtins.int
+    APPROVAL_THRESHOLD_REVIEWERS_FIELD_NUMBER: builtins.int
     approval_threshold: builtins.int
-    """The number of labelers that need to agree in order to automatically approve an annotation."""
+    """Deprecated: Use approval_threshold_labelers."""
+    approval_threshold_labelers: builtins.int
+    """The number of labelers that need to agree in order to automatically approve an annotation.
+    When 0, labelers consensus is disabled.
+    When 1, the labels are automatically approved once a single labeler labels the input.
+    When greater than 1, the labels are automatically approved when the specified number of labelers agree.
+    If the number of labelers that agree is less than the specified number, then the input will reviewed by reviewers.
+    """
+    approval_threshold_reviewers: builtins.int
+    """The number of reviewers that need to agree in order to approve an input.
+    Currently, the only allowed values are:
+    0  - when not set, it defaults to 1
+    1  - only a single reviewer needs to approve each labeled input
+    -1 - an input will be approved when all reviewers approve it
+    """
     def __init__(
         self,
         *,
         approval_threshold: builtins.int = ...,
+        approval_threshold_labelers: builtins.int = ...,
+        approval_threshold_reviewers: builtins.int = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["approval_threshold", b"approval_threshold"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["approval_threshold", b"approval_threshold", "approval_threshold_labelers", b"approval_threshold_labelers", "approval_threshold_reviewers", b"approval_threshold_reviewers"]) -> None: ...
 
 global___TaskReviewConsensusStrategyInfo = TaskReviewConsensusStrategyInfo
 

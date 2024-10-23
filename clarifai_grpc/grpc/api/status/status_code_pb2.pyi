@@ -191,7 +191,9 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     ANNOTATION_INVALID_ARGUMENT: _StatusCode.ValueType  # 24155
     ANNOTATION_PERMISSION_DENIED: _StatusCode.ValueType  # 24156
     ANNOTATION_AWAITING_REVIEW: _StatusCode.ValueType  # 24157
+    """Annotation is awaiting review from task REVIEWERS."""
     ANNOTATION_AWAITING_CONSENSUS_REVIEW: _StatusCode.ValueType  # 24159
+    """Annotation is awaiting consensus review from task LABELERS."""
     ANNOTATION_REVIEW_DENIED: _StatusCode.ValueType  # 24158
     ANNOTATION_MODIFY_SUCCESS: _StatusCode.ValueType  # 24250
     ANNOTATION_MODIFY_PENDING: _StatusCode.ValueType  # 24251
@@ -729,7 +731,9 @@ ANNOTATION_UNKNOWN_STATUS: StatusCode.ValueType  # 24154
 ANNOTATION_INVALID_ARGUMENT: StatusCode.ValueType  # 24155
 ANNOTATION_PERMISSION_DENIED: StatusCode.ValueType  # 24156
 ANNOTATION_AWAITING_REVIEW: StatusCode.ValueType  # 24157
+"""Annotation is awaiting review from task REVIEWERS."""
 ANNOTATION_AWAITING_CONSENSUS_REVIEW: StatusCode.ValueType  # 24159
+"""Annotation is awaiting consensus review from task LABELERS."""
 ANNOTATION_REVIEW_DENIED: StatusCode.ValueType  # 24158
 ANNOTATION_MODIFY_SUCCESS: StatusCode.ValueType  # 24250
 ANNOTATION_MODIFY_PENDING: StatusCode.ValueType  # 24251
