@@ -639,6 +639,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    SORT_BY_ID_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     TEMPLATE_ONLY_FIELD_NUMBER: builtins.int
@@ -664,7 +665,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     Whether to sort in ascending order. If false, will order in descending order.
     """
     sort_by_name: builtins.bool
-    """Whether to order by the name"""
+    """Whether to order by the name."""
     sort_by_modified_at: builtins.bool
     """Whether to order by the modified_at time.
     If none of the sort options is set to true, will sort by modified_at.
@@ -673,6 +674,8 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time."""
     sort_by_star_count: builtins.bool
     """Whether to order by the number of users stared the app"""
+    sort_by_id: builtins.bool
+    """Whether to order by the id"""
     featured_only: builtins.bool
     """Filtering options:
     If true, we only return apps that are handpicked by clarifai staff
@@ -721,6 +724,7 @@ class ListAppsRequest(google.protobuf.message.Message):
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
+        sort_by_id: builtins.bool = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         template_only: builtins.bool = ...,
@@ -729,9 +733,9 @@ class ListAppsRequest(google.protobuf.message.Message):
         name: builtins.str = ...,
         id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "template_only", b"template_only", "user_app_id", b"user_app_id"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "featured_only", b"featured_only", "id", b"id", "name", b"name", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_id", b"sort_by_id", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_star_count", b"sort_by_star_count", "starred_only", b"starred_only", "template_only", b"template_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count", "sort_by_id"] | None: ...
 
 global___ListAppsRequest = ListAppsRequest
 
@@ -6827,7 +6831,7 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
 
         If node.id is not in the provided map, it will fall back to searching for
         an adequate deployment the model owner owns or fall back to
-        the serverless nodepools provided by Clarifai.
+        the shared nodepools provided by Clarifai.
         We recommend you specify these RunnerSelectors so that you have better understanding of where
         processing occurs.
         """
@@ -7950,93 +7954,6 @@ class MultiStatValueAggregateResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["stat_value_aggregate_results", b"stat_value_aggregate_results", "status", b"status"]) -> None: ...
 
 global___MultiStatValueAggregateResponse = MultiStatValueAggregateResponse
-
-@typing_extensions.final
-class PostTrendingMetricsViewRequest(google.protobuf.message.Message):
-    """PostTrendingMetricsViewRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    VIEW_TYPE_FIELD_NUMBER: builtins.int
-    OBJECT_ID_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """The user_id and app_id information."""
-    view_type: builtins.str
-    """For now view types 'apps', 'workflows', and 'models' are supported."""
-    object_id: builtins.str
-    """ID of the views object."""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        view_type: builtins.str = ...,
-        object_id: builtins.str = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["object_id", b"object_id", "user_app_id", b"user_app_id", "view_type", b"view_type"]) -> None: ...
-
-global___PostTrendingMetricsViewRequest = PostTrendingMetricsViewRequest
-
-@typing_extensions.final
-class ListTrendingMetricsViewsRequest(google.protobuf.message.Message):
-    """ListTrendingMetricsViewsRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    VIEW_TYPE_FIELD_NUMBER: builtins.int
-    PAGE_FIELD_NUMBER: builtins.int
-    PER_PAGE_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """The user_id and app_id information."""
-    view_type: builtins.str
-    """For now view types 'apps', 'workflows', and 'models' are supported."""
-    page: builtins.int
-    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
-    Defaults to 1.
-    """
-    per_page: builtins.int
-    """(optional URL parameter) The number of results that will be contained in each page. Defaults
-    to 128.
-    """
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        view_type: builtins.str = ...,
-        page: builtins.int = ...,
-        per_page: builtins.int = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id", "view_type", b"view_type"]) -> None: ...
-
-global___ListTrendingMetricsViewsRequest = ListTrendingMetricsViewsRequest
-
-@typing_extensions.final
-class MultiTrendingMetricsViewResponse(google.protobuf.message.Message):
-    """MultiTrendingMetricsViewResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    METRICS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    @property
-    def metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.TrendingMetric]: ...
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.TrendingMetric] | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["metrics", b"metrics", "status", b"status"]) -> None: ...
-
-global___MultiTrendingMetricsViewResponse = MultiTrendingMetricsViewResponse
 
 @typing_extensions.final
 class GetModuleRequest(google.protobuf.message.Message):
@@ -9588,6 +9505,7 @@ class ListRunnersRequest(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -9600,6 +9518,8 @@ class ListRunnersRequest(google.protobuf.message.Message):
     to 128.
     """
     compute_cluster_id: builtins.str
+    min_replicas: builtins.int
+    """Only return runners whose replicas are >= min_replicas."""
     def __init__(
         self,
         *,
@@ -9608,9 +9528,10 @@ class ListRunnersRequest(google.protobuf.message.Message):
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         compute_cluster_id: builtins.str = ...,
+        min_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "min_replicas", b"min_replicas", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListRunnersRequest = ListRunnersRequest
 

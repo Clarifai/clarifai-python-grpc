@@ -554,14 +554,40 @@ class _EventType:
 class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_EventType.ValueType], builtins.type):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     EVENT_TYPE_NOT_SET: _EventType.ValueType  # 0
-    APPLICATION_CREATE: _EventType.ValueType  # 100
-    """APPLICATION event types : 100 - 199"""
+    ORGANIZATION_MEMBER_ADD: _EventType.ValueType  # 100
+    """Event types related to organization memberships and teams: 100 - 199"""
+    ORGANIZATION_MEMBER_CHANGE: _EventType.ValueType  # 101
+    ORGANIZATION_MEMBER_REMOVE: _EventType.ValueType  # 102
+    ORGANIZATION_MEMBER_INVITATION_CREATE: _EventType.ValueType  # 103
+    ORGANIZATION_MEMBER_INVITATION_CANCEL: _EventType.ValueType  # 104
+    ORGANIZATION_MEMBER_INVITATION_ACCEPT: _EventType.ValueType  # 105
+    ORGANIZATION_MEMBER_INVITATION_DECLINE: _EventType.ValueType  # 106
+    ORGANIZATION_TEAM_CREATE: _EventType.ValueType  # 107
+    ORGANIZATION_TEAM_UPDATE: _EventType.ValueType  # 108
+    ORGANIZATION_TEAM_DELETE: _EventType.ValueType  # 109
+    ORGANIZATION_TEAM_MEMBER_ADD: _EventType.ValueType  # 110
+    ORGANIZATION_TEAM_MEMBER_REMOVE: _EventType.ValueType  # 111
+    ORGANIZATION_TEAM_APP_ADD: _EventType.ValueType  # 112
+    ORGANIZATION_TEAM_APP_REMOVE: _EventType.ValueType  # 113
 
 class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
 EVENT_TYPE_NOT_SET: EventType.ValueType  # 0
-APPLICATION_CREATE: EventType.ValueType  # 100
-"""APPLICATION event types : 100 - 199"""
+ORGANIZATION_MEMBER_ADD: EventType.ValueType  # 100
+"""Event types related to organization memberships and teams: 100 - 199"""
+ORGANIZATION_MEMBER_CHANGE: EventType.ValueType  # 101
+ORGANIZATION_MEMBER_REMOVE: EventType.ValueType  # 102
+ORGANIZATION_MEMBER_INVITATION_CREATE: EventType.ValueType  # 103
+ORGANIZATION_MEMBER_INVITATION_CANCEL: EventType.ValueType  # 104
+ORGANIZATION_MEMBER_INVITATION_ACCEPT: EventType.ValueType  # 105
+ORGANIZATION_MEMBER_INVITATION_DECLINE: EventType.ValueType  # 106
+ORGANIZATION_TEAM_CREATE: EventType.ValueType  # 107
+ORGANIZATION_TEAM_UPDATE: EventType.ValueType  # 108
+ORGANIZATION_TEAM_DELETE: EventType.ValueType  # 109
+ORGANIZATION_TEAM_MEMBER_ADD: EventType.ValueType  # 110
+ORGANIZATION_TEAM_MEMBER_REMOVE: EventType.ValueType  # 111
+ORGANIZATION_TEAM_APP_ADD: EventType.ValueType  # 112
+ORGANIZATION_TEAM_APP_REMOVE: EventType.ValueType  # 113
 global___EventType = EventType
 
 @typing_extensions.final
@@ -697,6 +723,21 @@ class App(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _EmbeddingsStorage:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _EmbeddingsStorageEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[App._EmbeddingsStorage.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        EMBEDDING_STORAGE_NOT_SET: App._EmbeddingsStorage.ValueType  # 0
+        POSTGRES: App._EmbeddingsStorage.ValueType  # 1
+        QDRANT: App._EmbeddingsStorage.ValueType  # 2
+
+    class EmbeddingsStorage(_EmbeddingsStorage, metaclass=_EmbeddingsStorageEnumTypeWrapper): ...
+    EMBEDDING_STORAGE_NOT_SET: App.EmbeddingsStorage.ValueType  # 0
+    POSTGRES: App.EmbeddingsStorage.ValueType  # 1
+    QDRANT: App.EmbeddingsStorage.ValueType  # 2
+
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     DEFAULT_LANGUAGE_FIELD_NUMBER: builtins.int
@@ -717,6 +758,7 @@ class App(google.protobuf.message.Message):
     IMAGE_FIELD_NUMBER: builtins.int
     IS_TEMPLATE_FIELD_NUMBER: builtins.int
     EXTRA_INFO_FIELD_NUMBER: builtins.int
+    EMBEDDINGS_STORAGE_FIELD_NUMBER: builtins.int
     id: builtins.str
     name: builtins.str
     default_language: builtins.str
@@ -781,6 +823,10 @@ class App(google.protobuf.message.Message):
         """
     @property
     def extra_info(self) -> global___AppExtraInfo: ...
+    embeddings_storage: global___App.EmbeddingsStorage.ValueType
+    """Where app embeddings are stored
+    postgres (default), qdrant
+    """
     def __init__(
         self,
         *,
@@ -804,9 +850,10 @@ class App(google.protobuf.message.Message):
         image: global___Image | None = ...,
         is_template: google.protobuf.wrappers_pb2.BoolValue | None = ...,
         extra_info: global___AppExtraInfo | None = ...,
+        embeddings_storage: global___App.EmbeddingsStorage.ValueType = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_workflow", b"default_workflow", "extra_info", b"extra_info", "image", b"image", "is_template", b"is_template", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "extra_info", b"extra_info", "id", b"id", "image", b"image", "is_starred", b"is_starred", "is_template", b"is_template", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data_tier_id", b"data_tier_id", "default_language", b"default_language", "default_workflow", b"default_workflow", "default_workflow_id", b"default_workflow_id", "description", b"description", "embeddings_storage", b"embeddings_storage", "extra_info", b"extra_info", "id", b"id", "image", b"image", "is_starred", b"is_starred", "is_template", b"is_template", "legal_consent_status", b"legal_consent_status", "metadata", b"metadata", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "sample_ms", b"sample_ms", "star_count", b"star_count", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___App = App
 
@@ -1546,6 +1593,7 @@ class ConceptQuery(google.protobuf.message.Message):
     USE_CASES_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
+    IGNORE_APP_CONCEPTS_FIELD_NUMBER: builtins.int
     name: builtins.str
     """The name of the concept to search."""
     language: builtins.str
@@ -1561,6 +1609,13 @@ class ConceptQuery(google.protobuf.message.Message):
     def model(self) -> global___Model: ...
     @property
     def workflow(self) -> global___Workflow: ...
+    ignore_app_concepts: builtins.bool
+    """By default, we return app concepts combined with source (model or workflow) concepts.
+    If source is not set, then we only return app concepts.
+    If ignore_app_concepts is true, then we only return source concepts.
+    When use_cases are set, then ignore_app_concepts is always true, because
+    concept use cases can only be determined in relation to a model or a workflow.
+    """
     def __init__(
         self,
         *,
@@ -1570,9 +1625,10 @@ class ConceptQuery(google.protobuf.message.Message):
         use_cases: collections.abc.Iterable[global___WorkflowModelUseCase.ValueType] | None = ...,
         model: global___Model | None = ...,
         workflow: global___Workflow | None = ...,
+        ignore_app_concepts: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["model", b"model", "source", b"source", "workflow", b"workflow"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["language", b"language", "model", b"model", "name", b"name", "source", b"source", "use_cases", b"use_cases", "workflow", b"workflow", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ignore_app_concepts", b"ignore_app_concepts", "language", b"language", "model", b"model", "name", b"name", "source", b"source", "use_cases", b"use_cases", "workflow", b"workflow", "workflow_id", b"workflow_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["source", b"source"]) -> typing_extensions.Literal["model", "workflow"] | None: ...
 
 global___ConceptQuery = ConceptQuery
@@ -5963,6 +6019,7 @@ class UserDetail(google.protobuf.message.Message):
     TEAMS_COUNT_FIELD_NUMBER: builtins.int
     COUNTRY_FIELD_NUMBER: builtins.int
     STATE_FIELD_NUMBER: builtins.int
+    COMMITMENT_VALUE_FIELD_NUMBER: builtins.int
     primary_email: builtins.str
     bill_type: builtins.str
     @property
@@ -5984,6 +6041,8 @@ class UserDetail(google.protobuf.message.Message):
     teams_count: builtins.int
     country: builtins.str
     state: builtins.str
+    @property
+    def commitment_value(self) -> global___CommitmentValue: ...
     def __init__(
         self,
         *,
@@ -5999,9 +6058,10 @@ class UserDetail(google.protobuf.message.Message):
         teams_count: builtins.int = ...,
         country: builtins.str = ...,
         state: builtins.str = ...,
+        commitment_value: global___CommitmentValue | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "metadata", b"metadata"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "country", b"country", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "metadata", b"metadata", "primary_email", b"primary_email", "state", b"state", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["commitment_value", b"commitment_value", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "metadata", b"metadata"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["bill_type", b"bill_type", "commitment_value", b"commitment_value", "country", b"country", "date_gdpr_consent", b"date_gdpr_consent", "date_marketing_consent", b"date_marketing_consent", "date_pii_consent", b"date_pii_consent", "date_tos_consent", b"date_tos_consent", "email_addresses", b"email_addresses", "metadata", b"metadata", "primary_email", b"primary_email", "state", b"state", "teams_count", b"teams_count", "two_factor_auth_enabled", b"two_factor_auth_enabled"]) -> None: ...
 
 global___UserDetail = UserDetail
 
@@ -6115,6 +6175,43 @@ class PasswordViolations(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["exclude_email", b"exclude_email", "exclude_names", b"exclude_names", "lower_case_needed", b"lower_case_needed", "maximum_length", b"maximum_length", "minimum_length", b"minimum_length", "no_common_vocabs", b"no_common_vocabs", "no_confusing_letters", b"no_confusing_letters", "no_overlap_with_old", b"no_overlap_with_old", "no_simple_passwords", b"no_simple_passwords", "non_alphanumeric_needed", b"non_alphanumeric_needed", "numeric_needed", b"numeric_needed", "password_lifespan", b"password_lifespan", "password_reuse", b"password_reuse", "upper_case_needed", b"upper_case_needed"]) -> None: ...
 
 global___PasswordViolations = PasswordViolations
+
+@typing_extensions.final
+class CommitmentValue(google.protobuf.message.Message):
+    """Commitment Value - used to track users' commitment amount and type"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _CommitmentType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _CommitmentTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[CommitmentValue._CommitmentType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        TYPE_NOT_SET: CommitmentValue._CommitmentType.ValueType  # 0
+        MONTHLY: CommitmentValue._CommitmentType.ValueType  # 1
+        ANNUAL: CommitmentValue._CommitmentType.ValueType  # 2
+
+    class CommitmentType(_CommitmentType, metaclass=_CommitmentTypeEnumTypeWrapper): ...
+    TYPE_NOT_SET: CommitmentValue.CommitmentType.ValueType  # 0
+    MONTHLY: CommitmentValue.CommitmentType.ValueType  # 1
+    ANNUAL: CommitmentValue.CommitmentType.ValueType  # 2
+
+    VALUE_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    value: builtins.int
+    """The commitment value, in cents"""
+    type: global___CommitmentValue.CommitmentType.ValueType
+    """The commitment type, can be either 'monthly' or 'annual'"""
+    def __init__(
+        self,
+        *,
+        value: builtins.int = ...,
+        type: global___CommitmentValue.CommitmentType.ValueType = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["type", b"type", "value", b"value"]) -> None: ...
+
+global___CommitmentValue = CommitmentValue
 
 @typing_extensions.final
 class Video(google.protobuf.message.Message):
@@ -7608,6 +7705,103 @@ class TaskInputSourceMetrics(google.protobuf.message.Message):
 global___TaskInputSourceMetrics = TaskInputSourceMetrics
 
 @typing_extensions.final
+class Role(google.protobuf.message.Message):
+    """Role represents a list of permissions"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    SCOPES_FIELD_NUMBER: builtins.int
+    ENDPOINTS_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the role was created.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the role was updated.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    name: builtins.str
+    description: builtins.str
+    @property
+    def scopes(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The low-level scopes this role has"""
+    @property
+    def endpoints(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The endpoint-level scopes this role has"""
+    type: global___RoleType.ValueType
+    """Type of the role 'team' or 'org'"""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        name: builtins.str = ...,
+        description: builtins.str = ...,
+        scopes: collections.abc.Iterable[builtins.str] | None = ...,
+        endpoints: collections.abc.Iterable[builtins.str] | None = ...,
+        type: global___RoleType.ValueType = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "description", b"description", "endpoints", b"endpoints", "id", b"id", "modified_at", b"modified_at", "name", b"name", "scopes", b"scopes", "type", b"type"]) -> None: ...
+
+global___Role = Role
+
+@typing_extensions.final
+class Team(google.protobuf.message.Message):
+    """Represents a group of users."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    DEFAULT_ROLE_ID_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Identify the team (unique)."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the team was created.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the team was updated.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        """
+    name: builtins.str
+    """Name the team."""
+    default_role_id: builtins.str
+    """When a new application is assigned to the team without an explicit role, then the default role will be used"""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        name: builtins.str = ...,
+        default_role_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "default_role_id", b"default_role_id", "id", b"id", "modified_at", b"modified_at", "name", b"name"]) -> None: ...
+
+global___Team = Team
+
+@typing_extensions.final
 class Collector(google.protobuf.message.Message):
     """Collector is a data pathway from a CollectorSource to an app to collect data automatically.
     For example, a CollectorSource
@@ -8043,32 +8237,6 @@ class Visibility(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["gettable", b"gettable"]) -> None: ...
 
 global___Visibility = Visibility
-
-@typing_extensions.final
-class TrendingMetric(google.protobuf.message.Message):
-    """TrendingMetric"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    OBJECT_ID_FIELD_NUMBER: builtins.int
-    VIEW_COUNT_FIELD_NUMBER: builtins.int
-    user_id: builtins.str
-    app_id: builtins.str
-    object_id: builtins.str
-    view_count: builtins.int
-    def __init__(
-        self,
-        *,
-        user_id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        object_id: builtins.str = ...,
-        view_count: builtins.int = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "object_id", b"object_id", "user_id", b"user_id", "view_count", b"view_count"]) -> None: ...
-
-global___TrendingMetric = TrendingMetric
 
 @typing_extensions.final
 class FullTag(google.protobuf.message.Message):
@@ -9611,7 +9779,7 @@ class ComputeCluster(google.protobuf.message.Message):
         """
     cluster_type: builtins.str
     """We offer different types of compute clusters such as:
-    'serverless' which only Clarifai can create.
+    'shared' which only Clarifai can create.
     'dedicated' where you're in control of defining the nodepools within the cluster
     'local-dev' which means you're responsible for starting runners manually which is great for local
     development but not recommended for production use cases.
@@ -9723,7 +9891,7 @@ class AutoscaleConfig(google.protobuf.message.Message):
     TRAFFIC_HISTORY_SECONDS_FIELD_NUMBER: builtins.int
     SCALE_DOWN_DELAY_SECONDS_FIELD_NUMBER: builtins.int
     SCALE_UP_DELAY_SECONDS_FIELD_NUMBER: builtins.int
-    ENABLE_PACKING_FIELD_NUMBER: builtins.int
+    DISABLE_PACKING_FIELD_NUMBER: builtins.int
     min_replicas: builtins.int
     """The minimum number of replicas for the runner to have.
     Defaults to 0 which means autoscaling can scale down to zero.
@@ -9737,7 +9905,7 @@ class AutoscaleConfig(google.protobuf.message.Message):
     """The time to wait before scaling down after the last request."""
     scale_up_delay_seconds: builtins.int
     """The time to wait between scaling up replicas without burst traffic."""
-    enable_packing: builtins.bool
+    disable_packing: builtins.bool
     """Depending on your plan you may be able to enable packing of resources into a single node
     for more compute and cost efficiency.
     """
@@ -9749,9 +9917,9 @@ class AutoscaleConfig(google.protobuf.message.Message):
         traffic_history_seconds: builtins.int = ...,
         scale_down_delay_seconds: builtins.int = ...,
         scale_up_delay_seconds: builtins.int = ...,
-        enable_packing: builtins.bool = ...,
+        disable_packing: builtins.bool = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["enable_packing", b"enable_packing", "max_replicas", b"max_replicas", "min_replicas", b"min_replicas", "scale_down_delay_seconds", b"scale_down_delay_seconds", "scale_up_delay_seconds", b"scale_up_delay_seconds", "traffic_history_seconds", b"traffic_history_seconds"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["disable_packing", b"disable_packing", "max_replicas", b"max_replicas", "min_replicas", b"min_replicas", "scale_down_delay_seconds", b"scale_down_delay_seconds", "scale_up_delay_seconds", b"scale_up_delay_seconds", "traffic_history_seconds", b"traffic_history_seconds"]) -> None: ...
 
 global___AutoscaleConfig = AutoscaleConfig
 
@@ -9968,18 +10136,25 @@ class AuditLogTarget(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    MEMBER_FIELD_NUMBER: builtins.int
+    USER_FIELD_NUMBER: builtins.int
+    ROLE_FIELD_NUMBER: builtins.int
+    TEAM_FIELD_NUMBER: builtins.int
     @property
-    def member(self) -> global___User:
-        """An organization member, only used in org audit logs."""
+    def user(self) -> global___User: ...
+    @property
+    def role(self) -> global___Role: ...
+    @property
+    def team(self) -> global___Team: ...
     def __init__(
         self,
         *,
-        member: global___User | None = ...,
+        user: global___User | None = ...,
+        role: global___Role | None = ...,
+        team: global___Team | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["member", b"member", "target", b"target"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["member", b"member", "target", b"target"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["member"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team"] | None: ...
 
 global___AuditLogTarget = AuditLogTarget
 

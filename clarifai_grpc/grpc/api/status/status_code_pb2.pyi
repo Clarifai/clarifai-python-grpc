@@ -67,6 +67,8 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """when a request method is not allowed"""
     CONN_NO_GDPR_CONSENT: _StatusCode.ValueType  # 11104
     """lack GDPR consent"""
+    CONN_INVALID_RANGE: _StatusCode.ValueType  # 11105
+    """when invalid range of a resource is requested"""
     CONN_AUTH_METHOD_DISABLED: _StatusCode.ValueType  # 11200
     """authentication method is disabled"""
     MODEL_TRAINED: _StatusCode.ValueType  # 21100
@@ -607,6 +609,8 @@ CONN_METHOD_NOT_ALLOWED: StatusCode.ValueType  # 11103
 """when a request method is not allowed"""
 CONN_NO_GDPR_CONSENT: StatusCode.ValueType  # 11104
 """lack GDPR consent"""
+CONN_INVALID_RANGE: StatusCode.ValueType  # 11105
+"""when invalid range of a resource is requested"""
 CONN_AUTH_METHOD_DISABLED: StatusCode.ValueType  # 11200
 """authentication method is disabled"""
 MODEL_TRAINED: StatusCode.ValueType  # 21100

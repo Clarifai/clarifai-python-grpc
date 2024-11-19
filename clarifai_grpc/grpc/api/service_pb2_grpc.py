@@ -909,16 +909,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse),
                 )
-        self.PostTrendingMetricsView = channel.unary_unary(
-                '/clarifai.api.V2/PostTrendingMetricsView',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
-                )
-        self.ListTrendingMetricsViews = channel.unary_unary(
-                '/clarifai.api.V2/ListTrendingMetricsViews',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse),
-                )
         self.GetModule = channel.unary_unary(
                 '/clarifai.api.V2/GetModule',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetModuleRequest.SerializeToString,
@@ -2580,20 +2570,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def PostTrendingMetricsView(self, request, context):
-        """Increase the view metric for a detail view
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListTrendingMetricsViews(self, request, context):
-        """List the view metrics for a detail view
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def GetModule(self, request, context):
         """Get a specific module from an app.
         """
@@ -3924,16 +3900,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostStatValuesAggregate,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.SerializeToString,
-            ),
-            'PostTrendingMetricsView': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostTrendingMetricsView,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-            ),
-            'ListTrendingMetricsViews': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListTrendingMetricsViews,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.SerializeToString,
             ),
             'GetModule': grpc.unary_unary_rpc_method_handler(
                     servicer.GetModule,
@@ -7240,40 +7206,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostStatValuesAggregate',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostTrendingMetricsView(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostTrendingMetricsView',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostTrendingMetricsViewRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ListTrendingMetricsViews(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListTrendingMetricsViews',
-            proto_dot_clarifai_dot_api_dot_service__pb2.ListTrendingMetricsViewsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrendingMetricsViewResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
