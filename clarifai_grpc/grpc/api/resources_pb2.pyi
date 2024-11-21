@@ -6934,6 +6934,7 @@ class Task(google.protobuf.message.Message):
     DELETE_PREVIOUS_ANNOTATIONS_FIELD_NUMBER: builtins.int
     METRICS_FIELD_NUMBER: builtins.int
     PRIORITY_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Unique ID for the task."""
     @property
@@ -7002,6 +7003,11 @@ class Task(google.protobuf.message.Message):
         """Tasks metrics are filled in upon user-request."""
     priority: global___Task.TaskPriority.ValueType
     """Priority of the task"""
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle arbitrary json metadata you can use a struct field:
+        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
+        """
     def __init__(
         self,
         *,
@@ -7027,9 +7033,10 @@ class Task(google.protobuf.message.Message):
         delete_previous_annotations: builtins.bool = ...,
         metrics: global___TaskMetrics | None = ...,
         priority: global___Task.TaskPriority.ValueType = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "created_at", b"created_at", "input_source", b"input_source", "metrics", b"metrics", "modified_at", b"modified_at", "review", b"review", "status", b"status", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "priority", b"priority", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "created_at", b"created_at", "input_source", b"input_source", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "review", b"review", "status", b"status", "visibility", b"visibility", "worker", b"worker"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["ai_assist_params", b"ai_assist_params", "ai_assistant", b"ai_assistant", "app_id", b"app_id", "concept_ids", b"concept_ids", "concepts", b"concepts", "created_at", b"created_at", "delete_previous_annotations", b"delete_previous_annotations", "description", b"description", "id", b"id", "input_source", b"input_source", "label_order_id", b"label_order_id", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "name", b"name", "priority", b"priority", "review", b"review", "sample_ms", b"sample_ms", "status", b"status", "type", b"type", "user_id", b"user_id", "visibility", b"visibility", "worker", b"worker"]) -> None: ...
 
 global___Task = Task
 
