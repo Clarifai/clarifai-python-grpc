@@ -10117,6 +10117,7 @@ class ProcessingInfo(google.protobuf.message.Message):
 
     RUNNER_METHOD_TYPE_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
+    PROCESSING_ID_FIELD_NUMBER: builtins.int
     runner_method_type: global___RunnerMethodType.ValueType
     """The type of method witin the runner to call."""
     @property
@@ -10124,14 +10125,17 @@ class ProcessingInfo(google.protobuf.message.Message):
         """A status of the processing. We use this for signalling end of a request stream, a runner
         item's processing should be cancelled, etc.
         """
+    processing_id: builtins.str
+    """Internal field to track processing. Runners will not have access to this."""
     def __init__(
         self,
         *,
         runner_method_type: global___RunnerMethodType.ValueType = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        processing_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["runner_method_type", b"runner_method_type", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["processing_id", b"processing_id", "runner_method_type", b"runner_method_type", "status", b"status"]) -> None: ...
 
 global___ProcessingInfo = ProcessingInfo
 
