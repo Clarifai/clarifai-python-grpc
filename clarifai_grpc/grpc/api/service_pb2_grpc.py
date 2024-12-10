@@ -1129,6 +1129,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse),
                 )
+        self.ListCloudProviders = channel.unary_unary(
+                '/clarifai.api.V2/ListCloudProviders',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudProvidersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudProviderResponse),
+                )
+        self.ListCloudRegions = channel.unary_unary(
+                '/clarifai.api.V2/ListCloudRegions',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudRegionsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudRegionResponse),
+                )
         self.ListInstanceTypes = channel.unary_unary(
                 '/clarifai.api.V2/ListInstanceTypes',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstanceTypesRequest.SerializeToString,
@@ -1213,6 +1223,11 @@ class V2Stub(object):
                 '/clarifai.api.V2/ListWorkflowEvaluationTemplates',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse),
+                )
+        self.ListLogEntries = channel.unary_unary(
+                '/clarifai.api.V2/ListLogEntries',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse),
                 )
 
 
@@ -2914,6 +2929,20 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListCloudProviders(self, request, context):
+        """List Available Cloud Providers
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListCloudRegions(self, request, context):
+        """List Regions for given Cloud Provider
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListInstanceTypes(self, request, context):
         """Get InstanceTypes given Cloud Provider and Region
         """
@@ -3018,6 +3047,12 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def ListWorkflowEvaluationTemplates(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListLogEntries(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4121,6 +4156,16 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsTrainingTimeEstimateRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiTrainingTimeEstimateResponse.SerializeToString,
             ),
+            'ListCloudProviders': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCloudProviders,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudProvidersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudProviderResponse.SerializeToString,
+            ),
+            'ListCloudRegions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListCloudRegions,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudRegionsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudRegionResponse.SerializeToString,
+            ),
             'ListInstanceTypes': grpc.unary_unary_rpc_method_handler(
                     servicer.ListInstanceTypes,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListInstanceTypesRequest.FromString,
@@ -4205,6 +4250,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.ListWorkflowEvaluationTemplates,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse.SerializeToString,
+            ),
+            'ListLogEntries': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListLogEntries,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -7958,6 +8008,40 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def ListCloudProviders(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListCloudProviders',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudProvidersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudProviderResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListCloudRegions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListCloudRegions',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListCloudRegionsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiCloudRegionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListInstanceTypes(request,
             target,
             options=(),
@@ -8243,5 +8327,22 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflowEvaluationTemplates',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListLogEntries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListLogEntries',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

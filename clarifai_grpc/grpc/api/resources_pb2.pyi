@@ -569,6 +569,13 @@ class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     ORGANIZATION_TEAM_MEMBER_REMOVE: _EventType.ValueType  # 111
     ORGANIZATION_TEAM_APP_ADD: _EventType.ValueType  # 112
     ORGANIZATION_TEAM_APP_REMOVE: _EventType.ValueType  # 113
+    MODULE_CREATE: _EventType.ValueType  # 200
+    """Event types related to modules: 200 - 299"""
+    MODULE_UPDATE: _EventType.ValueType  # 201
+    MODULE_DELETE: _EventType.ValueType  # 202
+    MODULE_VERSION_CREATE: _EventType.ValueType  # 203
+    MODULE_VERSION_UPDATE: _EventType.ValueType  # 204
+    MODULE_VERSION_DELETE: _EventType.ValueType  # 205
 
 class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
@@ -588,6 +595,13 @@ ORGANIZATION_TEAM_MEMBER_ADD: EventType.ValueType  # 110
 ORGANIZATION_TEAM_MEMBER_REMOVE: EventType.ValueType  # 111
 ORGANIZATION_TEAM_APP_ADD: EventType.ValueType  # 112
 ORGANIZATION_TEAM_APP_REMOVE: EventType.ValueType  # 113
+MODULE_CREATE: EventType.ValueType  # 200
+"""Event types related to modules: 200 - 299"""
+MODULE_UPDATE: EventType.ValueType  # 201
+MODULE_DELETE: EventType.ValueType  # 202
+MODULE_VERSION_CREATE: EventType.ValueType  # 203
+MODULE_VERSION_UPDATE: EventType.ValueType  # 204
+MODULE_VERSION_DELETE: EventType.ValueType  # 205
 global___EventType = EventType
 
 @typing_extensions.final
@@ -3366,6 +3380,7 @@ class Model(google.protobuf.message.Message):
     LICENSE_TYPE_FIELD_NUMBER: builtins.int
     SOURCE_FIELD_NUMBER: builtins.int
     CREATOR_FIELD_NUMBER: builtins.int
+    VERSION_COUNT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -3463,6 +3478,7 @@ class Model(google.protobuf.message.Message):
     source: global___Model.Source.ValueType
     creator: builtins.str
     """Creator of Model"""
+    version_count: builtins.int
     def __init__(
         self,
         *,
@@ -3496,9 +3512,10 @@ class Model(google.protobuf.message.Message):
         license_type: global___LicenseType.ValueType = ...,
         source: global___Model.Source.ValueType = ...,
         creator: builtins.str = ...,
+        version_count: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "image", b"image", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "version_count", b"version_count", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
@@ -4329,7 +4346,11 @@ class ModelVersion(google.protobuf.message.Message):
     total_input_count: builtins.int
     """number of inputs in the model version"""
     @property
-    def pretrained_model_config(self) -> global___PretrainedModelConfig: ...
+    def pretrained_model_config(self) -> global___PretrainedModelConfig:
+        """When a model has already been trained externally, you can upload
+        it directly to the platform as a model version directly by
+        setting the PretrainedModelConfig
+        """
     @property
     def completed_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """Detailed training stats.
@@ -4474,6 +4495,7 @@ class PretrainedModelConfig(google.protobuf.message.Message):
     INPUT_FIELDS_MAP_FIELD_NUMBER: builtins.int
     OUTPUT_FIELDS_MAP_FIELD_NUMBER: builtins.int
     MODEL_ZIP_URL_FIELD_NUMBER: builtins.int
+    LOCAL_DEV_FIELD_NUMBER: builtins.int
     @property
     def input_fields_map(self) -> google.protobuf.struct_pb2.Struct:
         """This is the internal id of the pretrained model.
@@ -4486,7 +4508,12 @@ class PretrainedModelConfig(google.protobuf.message.Message):
     """Url to a zipped up model in triton format with the following files and folders at the root:
      config.pbtxt
      version 1 folder that contains model files (onnx graph, torch script, python BE model, and etc.)
-    Whether to overwrite the model for the existing internal id
+    """
+    local_dev: builtins.bool
+    """Whether to overwrite the model for the existing internal id
+    If this is a local dev model that runs external to the platform, set this to true.
+    This helps during development of models before uploading them to the platform.
+    These models MUST run in an associated compute cluster with cluster_type = "local-dev"
     """
     def __init__(
         self,
@@ -4494,9 +4521,10 @@ class PretrainedModelConfig(google.protobuf.message.Message):
         input_fields_map: google.protobuf.struct_pb2.Struct | None = ...,
         output_fields_map: google.protobuf.struct_pb2.Struct | None = ...,
         model_zip_url: builtins.str = ...,
+        local_dev: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["input_fields_map", b"input_fields_map", "output_fields_map", b"output_fields_map"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["input_fields_map", b"input_fields_map", "model_zip_url", b"model_zip_url", "output_fields_map", b"output_fields_map"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["input_fields_map", b"input_fields_map", "local_dev", b"local_dev", "model_zip_url", b"model_zip_url", "output_fields_map", b"output_fields_map"]) -> None: ...
 
 global___PretrainedModelConfig = PretrainedModelConfig
 
@@ -10150,22 +10178,34 @@ class AuditLogTarget(google.protobuf.message.Message):
     USER_FIELD_NUMBER: builtins.int
     ROLE_FIELD_NUMBER: builtins.int
     TEAM_FIELD_NUMBER: builtins.int
+    APP_FIELD_NUMBER: builtins.int
+    MODULE_FIELD_NUMBER: builtins.int
+    MODULE_VERSION_FIELD_NUMBER: builtins.int
     @property
     def user(self) -> global___User: ...
     @property
     def role(self) -> global___Role: ...
     @property
     def team(self) -> global___Team: ...
+    @property
+    def app(self) -> global___App: ...
+    @property
+    def module(self) -> global___Module: ...
+    @property
+    def module_version(self) -> global___ModuleVersion: ...
     def __init__(
         self,
         *,
         user: global___User | None = ...,
         role: global___Role | None = ...,
         team: global___Team | None = ...,
+        app: global___App | None = ...,
+        module: global___Module | None = ...,
+        module_version: global___ModuleVersion | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version"] | None: ...
 
 global___AuditLogTarget = AuditLogTarget
 
@@ -10380,3 +10420,77 @@ class WorkflowVersionEvaluationTemplate(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "id", b"id", "task_types", b"task_types", "workflow_version_evaluation_metrics", b"workflow_version_evaluation_metrics"]) -> None: ...
 
 global___WorkflowVersionEvaluationTemplate = WorkflowVersionEvaluationTemplate
+
+@typing_extensions.final
+class LogEntry(google.protobuf.message.Message):
+    """LogEntry is a single technical log entry (e.g. service log, stack traces, etc)."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    MESSAGE_FIELD_NUMBER: builtins.int
+    LOG_TYPE_FIELD_NUMBER: builtins.int
+    URL_FIELD_NUMBER: builtins.int
+    META_FIELD_NUMBER: builtins.int
+    message: builtins.str
+    """Text of the log entry."""
+    log_type: builtins.str
+    """The type of log entry. Examples: model, agent, build, training."""
+    url: builtins.str
+    """URL to log file or stream."""
+    @property
+    def meta(self) -> global___ComputeSourceMetadata:
+        """Who and where the metrics are from."""
+    def __init__(
+        self,
+        *,
+        message: builtins.str = ...,
+        log_type: builtins.str = ...,
+        url: builtins.str = ...,
+        meta: global___ComputeSourceMetadata | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["meta", b"meta"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["log_type", b"log_type", "message", b"message", "meta", b"meta", "url", b"url"]) -> None: ...
+
+global___LogEntry = LogEntry
+
+@typing_extensions.final
+class ComputeSourceMetadata(google.protobuf.message.Message):
+    """ComputeSourceMetadata describes the source of something computed. The who and where."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> global___UserAppIDSet:
+        """The user app id, if any."""
+    model_id: builtins.str
+    """The Model ID, if any."""
+    model_version_id: builtins.str
+    """The Version ID, if any."""
+    workflow_id: builtins.str
+    """Workflow Id, if any."""
+    compute_cluster_id: builtins.str
+    """Compute Cluster, Nodepool, Runner."""
+    nodepool_id: builtins.str
+    runner_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: global___UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        workflow_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
+        nodepool_id: builtins.str = ...,
+        runner_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
+global___ComputeSourceMetadata = ComputeSourceMetadata

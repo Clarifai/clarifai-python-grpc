@@ -3246,6 +3246,64 @@ class ListModelInputsRequest(google.protobuf.message.Message):
 global___ListModelInputsRequest = ListModelInputsRequest
 
 @typing_extensions.final
+class ListLogEntriesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    LOG_TYPE_FIELD_NUMBER: builtins.int
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    log_type: builtins.str
+    """The type of log entry. Examples: model, agent, build, training."""
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Who the logs are for.
+        The user app id, if a user produced the logs.
+        """
+    model_id: builtins.str
+    """The Model ID, if a model produced the logs."""
+    model_version_id: builtins.str
+    """The Version ID, if a model version produced the logs."""
+    workflow_id: builtins.str
+    """Workflow Id, if a workflow produced the logs."""
+    compute_cluster_id: builtins.str
+    """Where the logs came from."""
+    nodepool_id: builtins.str
+    runner_id: builtins.str
+    def __init__(
+        self,
+        *,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        log_type: builtins.str = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        workflow_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
+        nodepool_id: builtins.str = ...,
+        runner_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
+global___ListLogEntriesRequest = ListLogEntriesRequest
+
+@typing_extensions.final
 class GetKeyRequest(google.protobuf.message.Message):
     """GetKeyRequest"""
 
@@ -3547,7 +3605,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     """
     @property
     def additional_fields(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets"""
+        """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets, counts"""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -5440,6 +5498,28 @@ class MultiOutputResponse(google.protobuf.message.Message):
 global___MultiOutputResponse = MultiOutputResponse
 
 @typing_extensions.final
+class MultiLogEntryResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    LOG_ENTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def log_entries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LogEntry]:
+        """Log entries."""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        log_entries: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LogEntry] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["log_entries", b"log_entries", "status", b"status"]) -> None: ...
+
+global___MultiLogEntryResponse = MultiLogEntryResponse
+
+@typing_extensions.final
 class ListScopesRequest(google.protobuf.message.Message):
     """ListScopesRequest"""
 
@@ -7262,6 +7342,8 @@ class ListTasksRequest(google.protobuf.message.Message):
     INCLUDING_LABEL_ORDER_TASKS_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
     IDS_FIELD_NUMBER: builtins.int
+    INPUT_SOURCE_TYPE_FIELD_NUMBER: builtins.int
+    INPUT_SOURCE_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -7301,6 +7383,11 @@ class ListTasksRequest(google.protobuf.message.Message):
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional) task IDs to filter on"""
+    input_source_type: proto.clarifai.api.resources_pb2.TaskInputSource.TaskInputSourceType.ValueType
+    """(optional) input source type to filter"""
+    @property
+    def input_source_ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional) ids of input source to be filtered"""
     def __init__(
         self,
         *,
@@ -7313,9 +7400,11 @@ class ListTasksRequest(google.protobuf.message.Message):
         including_label_order_tasks: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
         ids: collections.abc.Iterable[builtins.str] | None = ...,
+        input_source_type: proto.clarifai.api.resources_pb2.TaskInputSource.TaskInputSourceType.ValueType = ...,
+        input_source_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "ids", b"ids", "including_label_order_tasks", b"including_label_order_tasks", "label_order_ids", b"label_order_ids", "page", b"page", "per_page", b"per_page", "review_user_ids", b"review_user_ids", "user_app_id", b"user_app_id", "worker_user_ids", b"worker_user_ids"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "ids", b"ids", "including_label_order_tasks", b"including_label_order_tasks", "input_source_ids", b"input_source_ids", "input_source_type", b"input_source_type", "label_order_ids", b"label_order_ids", "page", b"page", "per_page", b"per_page", "review_user_ids", b"review_user_ids", "user_app_id", b"user_app_id", "worker_user_ids", b"worker_user_ids"]) -> None: ...
 
 global___ListTasksRequest = ListTasksRequest
 
@@ -9888,6 +9977,80 @@ class MultiTrainingTimeEstimateResponse(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["status", b"status", "training_time_estimates", b"training_time_estimates"]) -> None: ...
 
 global___MultiTrainingTimeEstimateResponse = MultiTrainingTimeEstimateResponse
+
+@typing_extensions.final
+class ListCloudProvidersRequest(google.protobuf.message.Message):
+    """List Cloud Providers"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    def __init__(
+        self,
+    ) -> None: ...
+
+global___ListCloudProvidersRequest = ListCloudProvidersRequest
+
+@typing_extensions.final
+class MultiCloudProviderResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    CLOUD_PROVIDERS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def cloud_providers(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.CloudProvider]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        cloud_providers: collections.abc.Iterable[proto.clarifai.api.resources_pb2.CloudProvider] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_providers", b"cloud_providers", "status", b"status"]) -> None: ...
+
+global___MultiCloudProviderResponse = MultiCloudProviderResponse
+
+@typing_extensions.final
+class ListCloudRegionsRequest(google.protobuf.message.Message):
+    """List CloudProvider Regions"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    CLOUD_PROVIDER_FIELD_NUMBER: builtins.int
+    @property
+    def cloud_provider(self) -> proto.clarifai.api.resources_pb2.CloudProvider:
+        """The cloud provider to list compute clusters for."""
+    def __init__(
+        self,
+        *,
+        cloud_provider: proto.clarifai.api.resources_pb2.CloudProvider | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider"]) -> None: ...
+
+global___ListCloudRegionsRequest = ListCloudRegionsRequest
+
+@typing_extensions.final
+class MultiCloudRegionResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    REGIONS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def regions(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        regions: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["regions", b"regions", "status", b"status"]) -> None: ...
+
+global___MultiCloudRegionResponse = MultiCloudRegionResponse
 
 @typing_extensions.final
 class ListInstanceTypesRequest(google.protobuf.message.Message):
