@@ -549,6 +549,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     INTERNAL_REDIS_UNCATEGORIZED: _StatusCode.ValueType  # 98015
     INTERNAL_AWS_UNCATEGORIZED: _StatusCode.ValueType  # 98016
     INTERNAL_AZURE_UNCATEGORIZED: _StatusCode.ValueType  # 98017
+    INTERNAL_VECTORDB_UNCATEGORIZED: _StatusCode.ValueType  # 98018
     CONN_UNCATEGORIZED: _StatusCode.ValueType  # 99001
     """Uncategorized: 99xxx: move off as soon as known"""
     MODEL_UNCATEGORIZED: _StatusCode.ValueType  # 99002
@@ -1091,6 +1092,7 @@ INTERNAL_RESOURCE_EXHAUSTED: StatusCode.ValueType  # 98014
 INTERNAL_REDIS_UNCATEGORIZED: StatusCode.ValueType  # 98015
 INTERNAL_AWS_UNCATEGORIZED: StatusCode.ValueType  # 98016
 INTERNAL_AZURE_UNCATEGORIZED: StatusCode.ValueType  # 98017
+INTERNAL_VECTORDB_UNCATEGORIZED: StatusCode.ValueType  # 98018
 CONN_UNCATEGORIZED: StatusCode.ValueType  # 99001
 """Uncategorized: 99xxx: move off as soon as known"""
 MODEL_UNCATEGORIZED: StatusCode.ValueType  # 99002

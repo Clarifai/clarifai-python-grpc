@@ -576,6 +576,17 @@ class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     MODULE_VERSION_CREATE: _EventType.ValueType  # 203
     MODULE_VERSION_UPDATE: _EventType.ValueType  # 204
     MODULE_VERSION_DELETE: _EventType.ValueType  # 205
+    WORKFLOW_CREATE: _EventType.ValueType  # 400
+    """Event types related to workflows: 400 - 499"""
+    WORKFLOW_UPDATE: _EventType.ValueType  # 401
+    WORKFLOW_DELETE: _EventType.ValueType  # 402
+    WORKFLOW_VERSION_CREATE: _EventType.ValueType  # 403
+    WORKFLOW_VERSION_UPDATE: _EventType.ValueType  # 404
+    WORKFLOW_VERSION_DELETE: _EventType.ValueType  # 405
+    COLLABORATOR_ADD: _EventType.ValueType  # 700
+    """Event types related to collaborators: 700 - 799"""
+    COLLABORATOR_UPDATE: _EventType.ValueType  # 701
+    COLLABORATOR_REMOVE: _EventType.ValueType  # 702
 
 class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
@@ -602,6 +613,17 @@ MODULE_DELETE: EventType.ValueType  # 202
 MODULE_VERSION_CREATE: EventType.ValueType  # 203
 MODULE_VERSION_UPDATE: EventType.ValueType  # 204
 MODULE_VERSION_DELETE: EventType.ValueType  # 205
+WORKFLOW_CREATE: EventType.ValueType  # 400
+"""Event types related to workflows: 400 - 499"""
+WORKFLOW_UPDATE: EventType.ValueType  # 401
+WORKFLOW_DELETE: EventType.ValueType  # 402
+WORKFLOW_VERSION_CREATE: EventType.ValueType  # 403
+WORKFLOW_VERSION_UPDATE: EventType.ValueType  # 404
+WORKFLOW_VERSION_DELETE: EventType.ValueType  # 405
+COLLABORATOR_ADD: EventType.ValueType  # 700
+"""Event types related to collaborators: 700 - 799"""
+COLLABORATOR_UPDATE: EventType.ValueType  # 701
+COLLABORATOR_REMOVE: EventType.ValueType  # 702
 global___EventType = EventType
 
 @typing_extensions.final
@@ -10181,6 +10203,8 @@ class AuditLogTarget(google.protobuf.message.Message):
     APP_FIELD_NUMBER: builtins.int
     MODULE_FIELD_NUMBER: builtins.int
     MODULE_VERSION_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
     @property
     def user(self) -> global___User: ...
     @property
@@ -10193,6 +10217,10 @@ class AuditLogTarget(google.protobuf.message.Message):
     def module(self) -> global___Module: ...
     @property
     def module_version(self) -> global___ModuleVersion: ...
+    @property
+    def workflow(self) -> global___Workflow: ...
+    @property
+    def workflow_version(self) -> global___WorkflowVersion: ...
     def __init__(
         self,
         *,
@@ -10202,10 +10230,12 @@ class AuditLogTarget(google.protobuf.message.Message):
         app: global___App | None = ...,
         module: global___Module | None = ...,
         module_version: global___ModuleVersion | None = ...,
+        workflow: global___Workflow | None = ...,
+        workflow_version: global___WorkflowVersion | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version", "workflow", "workflow_version"] | None: ...
 
 global___AuditLogTarget = AuditLogTarget
 
