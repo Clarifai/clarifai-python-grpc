@@ -19,9 +19,9 @@ grpc_json_config = json.dumps(
                 "name": [{"service": "clarifai.api.V2"}],
                 "retryPolicy": {
                     "maxAttempts": 5,
-                    "initialBackoff": "1s",
+                    "initialBackoff": "0.01s",
                     "maxBackoff": "5s",
-                    "backoffMultiplier": 1.5,
+                    "backoffMultiplier": 2,
                     "retryableStatusCodes": ["UNAVAILABLE"],
                 },
             }
