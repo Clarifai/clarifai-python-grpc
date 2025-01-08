@@ -149,6 +149,9 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Used when training is completed"""
     MODEL_NOT_DEPLOYED: _StatusCode.ValueType  # 21353
     """Used when model spire deployment is manually taken down or due to inactivity"""
+    MODEL_BUSY_PLEASE_RETRY: _StatusCode.ValueType  # 21354
+    MODEL_LOADING: _StatusCode.ValueType  # 21355
+    """Used when the model pod is running, but not yet ready to serve requests."""
     MODEL_REFERENCE_INVALID_ARGUMENT: _StatusCode.ValueType  # 21400
     """Used when a model reference field is not set properly"""
     MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: _StatusCode.ValueType  # 21420
@@ -268,12 +271,19 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """InstanceType related codes 260xx"""
     INSTANCE_TYPE_INVALID_ARGUMENT: _StatusCode.ValueType  # 26001
     INSTANCE_TYPE_INVALID_REQUEST: _StatusCode.ValueType  # 26002
-    INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
+    INPUT_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
-    INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
+    INPUT_PENDING: _StatusCode.ValueType  # 30001
     """when things are async, this is the default status."""
-    INPUT_DOWNLOAD_FAILED: _StatusCode.ValueType  # 30002
+    INPUT_FAILED: _StatusCode.ValueType  # 30002
     """any type of error downloading and processing"""
+    INPUT_IN_PROGRESS: _StatusCode.ValueType  # 30003
+    INPUT_DOWNLOAD_SUCCESS: _StatusCode.ValueType  # 30000
+    """use INPUT_SUCCESS, INPUT_PENDING, INPUT_FAILED, INPUT_IN_PROGRESS instead
+    DOWNLOAD is no longer correct, but keep old statuses for backward compatibility
+    """
+    INPUT_DOWNLOAD_PENDING: _StatusCode.ValueType  # 30001
+    INPUT_DOWNLOAD_FAILED: _StatusCode.ValueType  # 30002
     INPUT_DOWNLOAD_IN_PROGRESS: _StatusCode.ValueType  # 30003
     INPUT_STATUS_UPDATE_FAILED: _StatusCode.ValueType  # 30004
     INPUT_DELETE_FAILED: _StatusCode.ValueType  # 30005
@@ -692,6 +702,9 @@ MODEL_QUEUED_FOR_DEPLOYMENT: StatusCode.ValueType  # 21352
 """Used when training is completed"""
 MODEL_NOT_DEPLOYED: StatusCode.ValueType  # 21353
 """Used when model spire deployment is manually taken down or due to inactivity"""
+MODEL_BUSY_PLEASE_RETRY: StatusCode.ValueType  # 21354
+MODEL_LOADING: StatusCode.ValueType  # 21355
+"""Used when the model pod is running, but not yet ready to serve requests."""
 MODEL_REFERENCE_INVALID_ARGUMENT: StatusCode.ValueType  # 21400
 """Used when a model reference field is not set properly"""
 MODEL_EXAMPLE_INPUT_INVALID_ARGUMENT: StatusCode.ValueType  # 21420
@@ -811,12 +824,19 @@ INSTANCE_TYPE_DOES_NOT_EXIST: StatusCode.ValueType  # 26000
 """InstanceType related codes 260xx"""
 INSTANCE_TYPE_INVALID_ARGUMENT: StatusCode.ValueType  # 26001
 INSTANCE_TYPE_INVALID_REQUEST: StatusCode.ValueType  # 26002
-INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
+INPUT_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
-INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
+INPUT_PENDING: StatusCode.ValueType  # 30001
 """when things are async, this is the default status."""
-INPUT_DOWNLOAD_FAILED: StatusCode.ValueType  # 30002
+INPUT_FAILED: StatusCode.ValueType  # 30002
 """any type of error downloading and processing"""
+INPUT_IN_PROGRESS: StatusCode.ValueType  # 30003
+INPUT_DOWNLOAD_SUCCESS: StatusCode.ValueType  # 30000
+"""use INPUT_SUCCESS, INPUT_PENDING, INPUT_FAILED, INPUT_IN_PROGRESS instead
+DOWNLOAD is no longer correct, but keep old statuses for backward compatibility
+"""
+INPUT_DOWNLOAD_PENDING: StatusCode.ValueType  # 30001
+INPUT_DOWNLOAD_FAILED: StatusCode.ValueType  # 30002
 INPUT_DOWNLOAD_IN_PROGRESS: StatusCode.ValueType  # 30003
 INPUT_STATUS_UPDATE_FAILED: StatusCode.ValueType  # 30004
 INPUT_DELETE_FAILED: StatusCode.ValueType  # 30005

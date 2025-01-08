@@ -3261,11 +3261,11 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     RUNNER_ID_FIELD_NUMBER: builtins.int
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
-    Defaults to 1.
+    Defaults to last page.
     """
     per_page: builtins.int
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
-    to 128.
+    to 32.
     """
     log_type: builtins.str
     """The type of log entry. Examples: model, agent, build, training."""
@@ -5503,19 +5503,27 @@ class MultiLogEntryResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     LOG_ENTRIES_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def log_entries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LogEntry]:
         """Log entries."""
+    page: builtins.int
+    """The page the log entries are from. If the request's page was omitted or greater than the total pages, then this is set to the last page."""
+    per_page: builtins.int
+    """The number of results contained in each page."""
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         log_entries: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LogEntry] | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["log_entries", b"log_entries", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["log_entries", b"log_entries", "page", b"page", "per_page", b"per_page", "status", b"status"]) -> None: ...
 
 global___MultiLogEntryResponse = MultiLogEntryResponse
 
@@ -7313,6 +7321,7 @@ class GetTaskRequest(google.protobuf.message.Message):
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated
+        - metrics.review.inputs_count_estimated_per_reviewer
         - metrics.review.inputs_percent_estimated
         """
     def __init__(
@@ -7378,6 +7387,7 @@ class ListTasksRequest(google.protobuf.message.Message):
         - metrics.work.inputs_count_estimated
         - metrics.work.inputs_percent_estimated
         - metrics.review.inputs_count_estimated
+        - metrics.review.inputs_count_estimated_per_reviewer
         - metrics.review.inputs_percent_estimated
         """
     @property
