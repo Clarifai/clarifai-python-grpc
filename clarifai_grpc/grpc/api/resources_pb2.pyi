@@ -576,6 +576,13 @@ class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     MODULE_VERSION_CREATE: _EventType.ValueType  # 203
     MODULE_VERSION_UPDATE: _EventType.ValueType  # 204
     MODULE_VERSION_DELETE: _EventType.ValueType  # 205
+    MODEL_CREATE: _EventType.ValueType  # 300
+    """Event types related to models: 300 - 399"""
+    MODEL_UPDATE: _EventType.ValueType  # 301
+    MODEL_DELETE: _EventType.ValueType  # 302
+    MODEL_VERSION_CREATE: _EventType.ValueType  # 303
+    MODEL_VERSION_UPDATE: _EventType.ValueType  # 304
+    MODEL_VERSION_DELETE: _EventType.ValueType  # 305
     WORKFLOW_CREATE: _EventType.ValueType  # 400
     """Event types related to workflows: 400 - 499"""
     WORKFLOW_UPDATE: _EventType.ValueType  # 401
@@ -584,13 +591,18 @@ class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     WORKFLOW_VERSION_UPDATE: _EventType.ValueType  # 404
     WORKFLOW_VERSION_DELETE: _EventType.ValueType  # 405
     APPLICATION_CREATE: _EventType.ValueType  # 600
-    """Event types related to applications: 600 - 699"""
+    """Event types related to datasets: 500 - 599
+
+    Event types related to applications: 600 - 699
+    """
     APPLICATION_UPDATE: _EventType.ValueType  # 601
     APPLICATION_DELETE: _EventType.ValueType  # 602
     COLLABORATOR_ADD: _EventType.ValueType  # 700
     """Event types related to collaborators: 700 - 799"""
     COLLABORATOR_UPDATE: _EventType.ValueType  # 701
     COLLABORATOR_REMOVE: _EventType.ValueType  # 702
+    USER_UPDATE: _EventType.ValueType  # 800
+    """Event types related to users: 800 - 899"""
 
 class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
@@ -617,6 +629,13 @@ MODULE_DELETE: EventType.ValueType  # 202
 MODULE_VERSION_CREATE: EventType.ValueType  # 203
 MODULE_VERSION_UPDATE: EventType.ValueType  # 204
 MODULE_VERSION_DELETE: EventType.ValueType  # 205
+MODEL_CREATE: EventType.ValueType  # 300
+"""Event types related to models: 300 - 399"""
+MODEL_UPDATE: EventType.ValueType  # 301
+MODEL_DELETE: EventType.ValueType  # 302
+MODEL_VERSION_CREATE: EventType.ValueType  # 303
+MODEL_VERSION_UPDATE: EventType.ValueType  # 304
+MODEL_VERSION_DELETE: EventType.ValueType  # 305
 WORKFLOW_CREATE: EventType.ValueType  # 400
 """Event types related to workflows: 400 - 499"""
 WORKFLOW_UPDATE: EventType.ValueType  # 401
@@ -625,13 +644,18 @@ WORKFLOW_VERSION_CREATE: EventType.ValueType  # 403
 WORKFLOW_VERSION_UPDATE: EventType.ValueType  # 404
 WORKFLOW_VERSION_DELETE: EventType.ValueType  # 405
 APPLICATION_CREATE: EventType.ValueType  # 600
-"""Event types related to applications: 600 - 699"""
+"""Event types related to datasets: 500 - 599
+
+Event types related to applications: 600 - 699
+"""
 APPLICATION_UPDATE: EventType.ValueType  # 601
 APPLICATION_DELETE: EventType.ValueType  # 602
 COLLABORATOR_ADD: EventType.ValueType  # 700
 """Event types related to collaborators: 700 - 799"""
 COLLABORATOR_UPDATE: EventType.ValueType  # 701
 COLLABORATOR_REMOVE: EventType.ValueType  # 702
+USER_UPDATE: EventType.ValueType  # 800
+"""Event types related to users: 800 - 899"""
 global___EventType = EventType
 
 @typing_extensions.final
@@ -10264,6 +10288,8 @@ class AuditLogTarget(google.protobuf.message.Message):
     MODULE_VERSION_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
+    MODEL_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_FIELD_NUMBER: builtins.int
     @property
     def user(self) -> global___User: ...
     @property
@@ -10280,6 +10306,10 @@ class AuditLogTarget(google.protobuf.message.Message):
     def workflow(self) -> global___Workflow: ...
     @property
     def workflow_version(self) -> global___WorkflowVersion: ...
+    @property
+    def model(self) -> global___Model: ...
+    @property
+    def model_version(self) -> global___ModelVersion: ...
     def __init__(
         self,
         *,
@@ -10291,10 +10321,12 @@ class AuditLogTarget(google.protobuf.message.Message):
         module_version: global___ModuleVersion | None = ...,
         workflow: global___Workflow | None = ...,
         workflow_version: global___WorkflowVersion | None = ...,
+        model: global___Model | None = ...,
+        model_version: global___ModelVersion | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version", "workflow", "workflow_version"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version", "workflow", "workflow_version", "model", "model_version"] | None: ...
 
 global___AuditLogTarget = AuditLogTarget
 
@@ -10583,251 +10615,3 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___ComputeSourceMetadata = ComputeSourceMetadata
-
-@typing_extensions.final
-class ArgoOrchestrationSpec(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    API_VERSION_FIELD_NUMBER: builtins.int
-    SPEC_JSON_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    api_version: builtins.str
-    """The API version of the orchestration specification.
-    Example: "argoproj.io/v1alpha1", "argoproj.io/v1beta1"
-    """
-    spec_json: builtins.str
-    """The JSON representation of the Argo orchestration specification."""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        api_version: builtins.str = ...,
-        spec_json: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["api_version", b"api_version", "id", b"id", "spec_json", b"spec_json"]) -> None: ...
-
-global___ArgoOrchestrationSpec = ArgoOrchestrationSpec
-
-@typing_extensions.final
-class OrchestrationSpec(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ARGO_ORCHESTRATION_SPEC_FIELD_NUMBER: builtins.int
-    @property
-    def argo_orchestration_spec(self) -> global___ArgoOrchestrationSpec:
-        """Argo orchestration specification"""
-    def __init__(
-        self,
-        *,
-        argo_orchestration_spec: global___ArgoOrchestrationSpec | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["argo_orchestration_spec", b"argo_orchestration_spec", "orchestration", b"orchestration"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["argo_orchestration_spec", b"argo_orchestration_spec", "orchestration", b"orchestration"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["orchestration", b"orchestration"]) -> typing_extensions.Literal["argo_orchestration_spec"] | None: ...
-
-global___OrchestrationSpec = OrchestrationSpec
-
-@typing_extensions.final
-class Pipeline(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    ORCHESTRATION_SPEC_FIELD_NUMBER: builtins.int
-    PIPELINE_VERSION_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    NOTES_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    user_id: builtins.str
-    """The user the pipeline belongs to"""
-    app_id: builtins.str
-    """The app the pipeline belongs to"""
-    @property
-    def orchestration_spec(self) -> global___OrchestrationSpec:
-        """Orchestration Specification using oneof"""
-    @property
-    def pipeline_version(self) -> global___PipelineVersion:
-        """Latest Pipeline Version"""
-    description: builtins.str
-    """Short description about this pipeline"""
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        """
-    notes: builtins.str
-    """Notes for the Pipeline. This field should be used for in-depth notes and supports up to 64Kbs."""
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """To handle arbitrary json metadata, use a struct field
-        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
-        """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the pipeline was created"""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the pipeline was last modified"""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        orchestration_spec: global___OrchestrationSpec | None = ...,
-        pipeline_version: global___PipelineVersion | None = ...,
-        description: builtins.str = ...,
-        visibility: global___Visibility | None = ...,
-        notes: builtins.str = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "orchestration_spec", b"orchestration_spec", "pipeline_version", b"pipeline_version", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "metadata", b"metadata", "modified_at", b"modified_at", "notes", b"notes", "orchestration_spec", b"orchestration_spec", "pipeline_version", b"pipeline_version", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
-
-global___Pipeline = Pipeline
-
-@typing_extensions.final
-class PipelineVersion(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    ORCHESTRATION_SPEC_FIELD_NUMBER: builtins.int
-    PIPELINE_ID_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    app_id: builtins.str
-    """The app the pipeline version belongs to."""
-    user_id: builtins.str
-    """The user the pipeline version belongs to."""
-    @property
-    def orchestration_spec(self) -> global___OrchestrationSpec:
-        """Orchestration Specification using oneof"""
-    pipeline_id: builtins.str
-    """Pipeline's Id"""
-    description: builtins.str
-    """Short description about this pipeline version"""
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        """
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """To handle arbitrary json metadata, use a struct field
-        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
-        """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the pipeline was created"""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the pipeline was last modified"""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        orchestration_spec: global___OrchestrationSpec | None = ...,
-        pipeline_id: builtins.str = ...,
-        description: builtins.str = ...,
-        visibility: global___Visibility | None = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "orchestration_spec", b"orchestration_spec", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "metadata", b"metadata", "modified_at", b"modified_at", "orchestration_spec", b"orchestration_spec", "pipeline_id", b"pipeline_id", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
-
-global___PipelineVersion = PipelineVersion
-
-@typing_extensions.final
-class OrchestrationStatus(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ARGO_STATUS_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    @property
-    def argo_status(self) -> global___ArgoOrchestrationStatus:
-        """Status for Argo Workflow"""
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """This will help us with filtering the PipelineRuns based on status"""
-    def __init__(
-        self,
-        *,
-        argo_status: global___ArgoOrchestrationStatus | None = ...,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["argo_status", b"argo_status", "status", b"status", "status_details", b"status_details"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["argo_status", b"argo_status", "status", b"status", "status_details", b"status_details"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["status_details", b"status_details"]) -> typing_extensions.Literal["argo_status"] | None: ...
-
-global___OrchestrationStatus = OrchestrationStatus
-
-@typing_extensions.final
-class ArgoOrchestrationStatus(google.protobuf.message.Message):
-    """Argo Workflow Status message"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    status: builtins.bytes
-    """Try for Proto serialisation else this could be the YAML or JSON spec of an Argo Workflow Status
-    Refer https://pkg.go.dev/github.com/argoproj/argo-workflows/v3/pkg/apis/workflow/v1alpha1#WorkflowStatus
-    """
-    def __init__(
-        self,
-        *,
-        status: builtins.bytes = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["status", b"status"]) -> None: ...
-
-global___ArgoOrchestrationStatus = ArgoOrchestrationStatus
-
-@typing_extensions.final
-class PipelineRun(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    PIPELINE_VERSION_FIELD_NUMBER: builtins.int
-    NODEPOOLS_FIELD_NUMBER: builtins.int
-    ORCHESTRATION_STATUS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    @property
-    def pipeline_version(self) -> global___PipelineVersion:
-        """Pipeline Version associated with this run"""
-    @property
-    def nodepools(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Nodepool]:
-        """Nodepool(s) used for the Pipeline Run"""
-    @property
-    def orchestration_status(self) -> global___OrchestrationStatus:
-        """Orchestration Status for this run, supporting multiple orchestration systems"""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        pipeline_version: global___PipelineVersion | None = ...,
-        nodepools: collections.abc.Iterable[global___Nodepool] | None = ...,
-        orchestration_status: global___OrchestrationStatus | None = ...,
-    ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["orchestration_status", b"orchestration_status", "pipeline_version", b"pipeline_version"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["id", b"id", "nodepools", b"nodepools", "orchestration_status", b"orchestration_status", "pipeline_version", b"pipeline_version"]) -> None: ...
-
-global___PipelineRun = PipelineRun
