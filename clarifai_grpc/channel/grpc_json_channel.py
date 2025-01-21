@@ -3,7 +3,6 @@ import logging
 import re
 import typing  # noqa
 
-import requests  # noqa
 from google.protobuf.descriptor import Descriptor  # noqa
 from google.protobuf.message import Message  # noqa
 
@@ -43,7 +42,7 @@ class GRPCJSONChannel(object):
 
     def __init__(
         self,
-        session: requests.Session,
+        session,  # type: requests.Session,
         base_url: str = BASE_URL,
         service_descriptor: typing.Any = _V2,
     ) -> None:

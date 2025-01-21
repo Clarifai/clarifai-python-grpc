@@ -1,8 +1,6 @@
 import json
 import os
 
-import requests
-
 from clarifai_grpc.channel.grpc_json_channel import GRPCJSONChannel
 from clarifai_grpc.grpc.api import service_pb2_grpc
 
@@ -52,6 +50,8 @@ class ClarifaiChannel:
 
     @staticmethod
     def _make_requests_session():
+        import requests  # noqa
+
         http_adapter = requests.adapters.HTTPAdapter(
             max_retries=RETRIES, pool_connections=CONNECTIONS, pool_maxsize=CONNECTIONS
         )
