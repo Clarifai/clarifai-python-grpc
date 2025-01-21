@@ -4525,6 +4525,7 @@ class PostModelVersionsUploadConfig(google.protobuf.message.Message):
     MODEL_VERSION_FIELD_NUMBER: builtins.int
     TOTAL_SIZE_FIELD_NUMBER: builtins.int
     IS_V3_FIELD_NUMBER: builtins.int
+    STORAGE_REQUEST_SIZE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -4536,6 +4537,8 @@ class PostModelVersionsUploadConfig(google.protobuf.message.Message):
     """Number of bytes in the model files to be uploaded"""
     is_v3: builtins.bool
     """Whether the uploaded package will be a .tar.gz which contains a Dockerfile or the standard .zip"""
+    storage_request_size: builtins.int
+    """Number of bytes requested for the build process."""
     def __init__(
         self,
         *,
@@ -4544,9 +4547,10 @@ class PostModelVersionsUploadConfig(google.protobuf.message.Message):
         model_version: proto.clarifai.api.resources_pb2.ModelVersion | None = ...,
         total_size: builtins.int = ...,
         is_v3: builtins.bool = ...,
+        storage_request_size: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["model_version", b"model_version", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["is_v3", b"is_v3", "model_id", b"model_id", "model_version", b"model_version", "total_size", b"total_size", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["is_v3", b"is_v3", "model_id", b"model_id", "model_version", b"model_version", "storage_request_size", b"storage_request_size", "total_size", b"total_size", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostModelVersionsUploadConfig = PostModelVersionsUploadConfig
 

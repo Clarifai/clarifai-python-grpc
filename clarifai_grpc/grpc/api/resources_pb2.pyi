@@ -5247,6 +5247,8 @@ class Output(google.protobuf.message.Message):
     MODEL_FIELD_NUMBER: builtins.int
     INPUT_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
+    PROMPT_TOKENS_FIELD_NUMBER: builtins.int
+    COMPLETION_TOKENS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """One of these outputs per Input"""
     @property
@@ -5272,6 +5274,10 @@ class Output(google.protobuf.message.Message):
         """The output data for this Output. For example if we have a concept model then the predicted
         concepts will appear here.
         """
+    prompt_tokens: builtins.int
+    """Number of prompt tokens as reported by the model or third-party API."""
+    completion_tokens: builtins.int
+    """Number of completion tokens as reported by the model or third-party API."""
     def __init__(
         self,
         *,
@@ -5281,9 +5287,11 @@ class Output(google.protobuf.message.Message):
         model: global___Model | None = ...,
         input: global___Input | None = ...,
         data: global___Data | None = ...,
+        prompt_tokens: builtins.int = ...,
+        completion_tokens: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data", b"data", "input", b"input", "model", b"model", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "data", b"data", "id", b"id", "input", b"input", "model", b"model", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["completion_tokens", b"completion_tokens", "created_at", b"created_at", "data", b"data", "id", b"id", "input", b"input", "model", b"model", "prompt_tokens", b"prompt_tokens", "status", b"status"]) -> None: ...
 
 global___Output = Output
 
@@ -5717,6 +5725,8 @@ class Filter(google.protobuf.message.Message):
                                                    - in order to enable this, you need to set the field to an empty object, i.e. `{"data": {"regions": [{"region_info": {"polygon":{}}}]}}`
          - data.regions[].region_info.span         - filter only span annotations
                                                    - in order to enable this, you need to set the field to an empty object, i.e. `{"data": {"regions": [{"region_info": {"span":{}}}]}}`
+         - data.regions[].track_id                 - filter annotations by track_id
+                                                   - in order to enable this, you need to provide "track_id_value" i.e. `{"data": {"regions": [{"track_id" : "track_id_value"}]}}`
          - data.time_segments[].time_info          - filter only time-segment annotations
                                                    - in order to enable this, you need to set the field to an empty object, i.e. `{"data": {"time_segments": [{"time_info": {}}]}}`
 
