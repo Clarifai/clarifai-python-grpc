@@ -51,6 +51,7 @@ class ClarifaiChannel:
     @staticmethod
     def _make_requests_session():
         import requests  # noqa
+
         http_adapter = requests.adapters.HTTPAdapter(
             max_retries=RETRIES, pool_connections=CONNECTIONS, pool_maxsize=CONNECTIONS
         )

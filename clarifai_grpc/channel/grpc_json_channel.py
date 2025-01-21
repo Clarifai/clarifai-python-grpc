@@ -42,7 +42,7 @@ class GRPCJSONChannel(object):
 
     def __init__(
         self,
-        session # type: requests.Session,
+        session,  # type: requests.Session,
         base_url: str = BASE_URL,
         service_descriptor: typing.Any = _V2,
     ) -> None:
