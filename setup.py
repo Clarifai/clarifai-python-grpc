@@ -7,7 +7,7 @@ packages = setuptools.find_packages(include=["clarifai_grpc*"])
 
 setuptools.setup(
     name="clarifai-grpc",
-    version="11.0.3",
+    version="11.0.4",
     author="Clarifai",
     author_email="support@clarifai.com",
     description="Clarifai gRPC API Client",
@@ -28,7 +28,6 @@ setuptools.setup(
         "grpcio>=1.68.0 ; python_version >= '3.13'",
         "protobuf>=3.20.3",
         "googleapis-common-protos>=1.57.0",
-        "requests>=2.28.1",
     ],
     package_data={p: ["*.pyi"]
                   for p in packages},
