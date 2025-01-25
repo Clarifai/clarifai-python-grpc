@@ -4,11 +4,9 @@ import logging
 import os
 import typing  # noqa
 
-import requests
-
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = "11.0.3"
+CLIENT_VERSION = "11.0.5"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(
@@ -50,6 +48,9 @@ class HttpClient:
             json.dumps(headers, indent=2),
             json.dumps(succinct_payload, indent=2),
         )
+        # Avoid import at the top so we don't depend on requests in requirements.txt
+        import requests  # noqa
+
         try:
             if method == "GET":
                 res = self._session.get(
