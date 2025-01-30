@@ -9838,20 +9838,23 @@ class InstanceType(google.protobuf.message.Message):
     ID_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
+    PRICE_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
     @property
     def compute_info(self) -> global___ComputeInfo: ...
+    price: builtins.str
     def __init__(
         self,
         *,
         id: builtins.str = ...,
         description: builtins.str = ...,
         compute_info: global___ComputeInfo | None = ...,
+        price: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "description", b"description", "id", b"id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "description", b"description", "id", b"id", "price", b"price"]) -> None: ...
 
 global___InstanceType = InstanceType
 

@@ -3179,6 +3179,7 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
     INPUTS_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     RUNNER_SELECTOR_FIELD_NUMBER: builtins.int
+    USE_PREDICT_CACHE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -3193,6 +3194,8 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
     @property
     def runner_selector(self) -> proto.clarifai.api.resources_pb2.RunnerSelector:
         """Allow filtering of prediction requests down to specific Nodepools, Deployments or Runners"""
+    use_predict_cache: builtins.bool
+    """Configure the prediction cache to avoid expensive compute for predict requests"""
     def __init__(
         self,
         *,
@@ -3202,9 +3205,10 @@ class PostModelOutputsRequest(google.protobuf.message.Message):
         inputs: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Input] | None = ...,
         model: proto.clarifai.api.resources_pb2.Model | None = ...,
         runner_selector: proto.clarifai.api.resources_pb2.RunnerSelector | None = ...,
+        use_predict_cache: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["model", b"model", "runner_selector", b"runner_selector", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model", b"model", "model_id", b"model_id", "runner_selector", b"runner_selector", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs", b"inputs", "model", b"model", "model_id", b"model_id", "runner_selector", b"runner_selector", "use_predict_cache", b"use_predict_cache", "user_app_id", b"user_app_id", "version_id", b"version_id"]) -> None: ...
 
 global___PostModelOutputsRequest = PostModelOutputsRequest
 
