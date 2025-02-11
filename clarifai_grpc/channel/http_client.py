@@ -6,7 +6,7 @@ import typing  # noqa
 
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = "11.1.0"
+CLIENT_VERSION = "11.1.1"
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(

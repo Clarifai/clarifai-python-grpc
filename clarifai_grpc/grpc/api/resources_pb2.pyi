@@ -10556,6 +10556,108 @@ class WorkflowVersionEvaluationTemplate(google.protobuf.message.Message):
 global___WorkflowVersionEvaluationTemplate = WorkflowVersionEvaluationTemplate
 
 @typing_extensions.final
+class ComputePlaneMetrics(google.protobuf.message.Message):
+    """ComputePlaneMetrics captures the compute plane metrics to send back to the control plane.
+    Each message should have the meta filled and one or more of the other fields.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    META_FIELD_NUMBER: builtins.int
+    CLOUD_FIELD_NUMBER: builtins.int
+    REGION_FIELD_NUMBER: builtins.int
+    INSTANCE_TYPE_FIELD_NUMBER: builtins.int
+    RESERVATION_TYPE_FIELD_NUMBER: builtins.int
+    RESERVATION_PRICE_FIELD_NUMBER: builtins.int
+    RUNTIME_S_FIELD_NUMBER: builtins.int
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    EVENT_TYPE_FIELD_NUMBER: builtins.int
+    GPU_METRICS_FIELD_NUMBER: builtins.int
+    HOSTNAME_FIELD_NUMBER: builtins.int
+    @property
+    def meta(self) -> global___ComputeSourceMetadata:
+        """Who and where the metrics are from.
+        required.
+        """
+    cloud: builtins.str
+    """e.g. aws, azure, on-prem."""
+    region: builtins.str
+    """e.g. us-east, us-west."""
+    instance_type: builtins.str
+    """e.g. t3a.medium, g5.xlarge."""
+    reservation_type: builtins.str
+    """e.g. spot, on-demand."""
+    reservation_price: builtins.float
+    """Metrics billing
+    cost of the reservation. Spot prices may change over time.
+    """
+    runtime_s: builtins.int
+    """Runtime in seconds."""
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Metrics for latency.
+        Time of the event.
+        """
+    event_type: builtins.str
+    """e.g. NodeProvisioned, NodeTerminated, ModelDeployed, ModelScheduled, ModelReady."""
+    @property
+    def gpu_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___GpuMetrics]:
+        """GPU metrics."""
+    hostname: builtins.str
+    """Hostname of the node."""
+    def __init__(
+        self,
+        *,
+        meta: global___ComputeSourceMetadata | None = ...,
+        cloud: builtins.str = ...,
+        region: builtins.str = ...,
+        instance_type: builtins.str = ...,
+        reservation_type: builtins.str = ...,
+        reservation_price: builtins.float = ...,
+        runtime_s: builtins.int = ...,
+        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        event_type: builtins.str = ...,
+        gpu_metrics: collections.abc.Iterable[global___GpuMetrics] | None = ...,
+        hostname: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["meta", b"meta", "timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud", b"cloud", "event_type", b"event_type", "gpu_metrics", b"gpu_metrics", "hostname", b"hostname", "instance_type", b"instance_type", "meta", b"meta", "region", b"region", "reservation_price", b"reservation_price", "reservation_type", b"reservation_type", "runtime_s", b"runtime_s", "timestamp", b"timestamp"]) -> None: ...
+
+global___ComputePlaneMetrics = ComputePlaneMetrics
+
+@typing_extensions.final
+class GpuMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    UUID_FIELD_NUMBER: builtins.int
+    MODEL_NAME_FIELD_NUMBER: builtins.int
+    UTILIZATION_PCT_FIELD_NUMBER: builtins.int
+    TENSOR_UTILIZATION_PCT_FIELD_NUMBER: builtins.int
+    MEMORY_UTILIZATION_PCT_FIELD_NUMBER: builtins.int
+    uuid: builtins.str
+    """GPU UUID."""
+    model_name: builtins.str
+    """GPU model name. e.g. NVIDIA_A10G"""
+    utilization_pct: builtins.float
+    """GPU utilization. e.g. DCGM_FI_DEV_GPU_UTIL"""
+    tensor_utilization_pct: builtins.float
+    """Tensor utilization. e.g. DCGM_FI_PROF_PIPE_TENSOR_ACTIVE"""
+    memory_utilization_pct: builtins.float
+    """Memory utilization. e.g. DCGM_FI_PROF_DRAM_ACTIVE"""
+    def __init__(
+        self,
+        *,
+        uuid: builtins.str = ...,
+        model_name: builtins.str = ...,
+        utilization_pct: builtins.float = ...,
+        tensor_utilization_pct: builtins.float = ...,
+        memory_utilization_pct: builtins.float = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["memory_utilization_pct", b"memory_utilization_pct", "model_name", b"model_name", "tensor_utilization_pct", b"tensor_utilization_pct", "utilization_pct", b"utilization_pct", "uuid", b"uuid"]) -> None: ...
+
+global___GpuMetrics = GpuMetrics
+
+@typing_extensions.final
 class LogEntry(google.protobuf.message.Message):
     """LogEntry is a single technical log entry (e.g. service log, stack traces, etc)."""
 

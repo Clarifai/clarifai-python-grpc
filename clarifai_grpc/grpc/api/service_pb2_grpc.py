@@ -1224,10 +1224,25 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse),
                 )
+        self.PostLogEntries = channel.unary_unary(
+                '/clarifai.api.V2/PostLogEntries',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLogEntriesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.ListLogEntries = channel.unary_unary(
                 '/clarifai.api.V2/ListLogEntries',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse),
+                )
+        self.StreamLogEntries = channel.unary_stream(
+                '/clarifai.api.V2/StreamLogEntries',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamLogEntriesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse),
+                )
+        self.PostComputePlaneMetrics = channel.unary_unary(
+                '/clarifai.api.V2/PostComputePlaneMetrics',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
 
 
@@ -3052,7 +3067,25 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostLogEntries(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def ListLogEntries(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StreamLogEntries(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostComputePlaneMetrics(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4251,10 +4284,25 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowEvaluationTemplatesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowEvaluationTemplateResponse.SerializeToString,
             ),
+            'PostLogEntries': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostLogEntries,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostLogEntriesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'ListLogEntries': grpc.unary_unary_rpc_method_handler(
                     servicer.ListLogEntries,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.SerializeToString,
+            ),
+            'StreamLogEntries': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamLogEntries,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamLogEntriesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.SerializeToString,
+            ),
+            'PostComputePlaneMetrics': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostComputePlaneMetrics,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -8331,6 +8379,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostLogEntries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostLogEntries',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostLogEntriesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def ListLogEntries(request,
             target,
             options=(),
@@ -8344,5 +8409,39 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListLogEntries',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListLogEntriesRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StreamLogEntries(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/StreamLogEntries',
+            proto_dot_clarifai_dot_api_dot_service__pb2.StreamLogEntriesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiLogEntryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostComputePlaneMetrics(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostComputePlaneMetrics',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

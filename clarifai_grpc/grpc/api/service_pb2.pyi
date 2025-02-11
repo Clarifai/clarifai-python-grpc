@@ -3250,6 +3250,40 @@ class ListModelInputsRequest(google.protobuf.message.Message):
 global___ListModelInputsRequest = ListModelInputsRequest
 
 @typing_extensions.final
+class PostComputePlaneMetricsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    COMPUTE_PLANE_METRICS_FIELD_NUMBER: builtins.int
+    @property
+    def compute_plane_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.ComputePlaneMetrics]:
+        """List of ComputePlaneMetrics."""
+    def __init__(
+        self,
+        *,
+        compute_plane_metrics: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ComputePlaneMetrics] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_plane_metrics", b"compute_plane_metrics"]) -> None: ...
+
+global___PostComputePlaneMetricsRequest = PostComputePlaneMetricsRequest
+
+@typing_extensions.final
+class PostLogEntriesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LOG_ENTRIES_FIELD_NUMBER: builtins.int
+    @property
+    def log_entries(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.LogEntry]:
+        """List of log entries to be stored."""
+    def __init__(
+        self,
+        *,
+        log_entries: collections.abc.Iterable[proto.clarifai.api.resources_pb2.LogEntry] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["log_entries", b"log_entries"]) -> None: ...
+
+global___PostLogEntriesRequest = PostLogEntriesRequest
+
+@typing_extensions.final
 class ListLogEntriesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -3306,6 +3340,52 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___ListLogEntriesRequest = ListLogEntriesRequest
+
+@typing_extensions.final
+class StreamLogEntriesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    LOG_TYPE_FIELD_NUMBER: builtins.int
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    RUNNER_ID_FIELD_NUMBER: builtins.int
+    log_type: builtins.str
+    """The type of log entry. Examples: model, agent, build, training."""
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Who the logs are for.
+        The user app id, if a user produced the logs.
+        """
+    model_id: builtins.str
+    """The Model ID, if a model produced the logs."""
+    model_version_id: builtins.str
+    """The Version ID, if a model version produced the logs."""
+    workflow_id: builtins.str
+    """Workflow Id, if a workflow produced the logs."""
+    compute_cluster_id: builtins.str
+    """Where the logs came from."""
+    nodepool_id: builtins.str
+    runner_id: builtins.str
+    def __init__(
+        self,
+        *,
+        log_type: builtins.str = ...,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        workflow_id: builtins.str = ...,
+        compute_cluster_id: builtins.str = ...,
+        nodepool_id: builtins.str = ...,
+        runner_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+
+global___StreamLogEntriesRequest = StreamLogEntriesRequest
 
 @typing_extensions.final
 class GetKeyRequest(google.protobuf.message.Message):
