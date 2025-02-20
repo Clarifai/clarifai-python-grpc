@@ -1867,6 +1867,11 @@ class Data(google.protobuf.message.Message):
     HEATMAPS_FIELD_NUMBER: builtins.int
     PARTS_FIELD_NUMBER: builtins.int
     NDARRAY_FIELD_NUMBER: builtins.int
+    INT_VALUE_FIELD_NUMBER: builtins.int
+    FLOAT_VALUE_FIELD_NUMBER: builtins.int
+    BYTES_VALUE_FIELD_NUMBER: builtins.int
+    BOOL_VALUE_FIELD_NUMBER: builtins.int
+    STRING_VALUE_FIELD_NUMBER: builtins.int
     @property
     def image(self) -> global___Image:
         """Input and output images."""
@@ -1927,6 +1932,16 @@ class Data(google.protobuf.message.Message):
         """A proto representation for numpy arrays, useful to pass information from python SDK to a
         python based model implementation.
         """
+    int_value: builtins.int
+    """Input and output integer number"""
+    float_value: builtins.float
+    """Input and output floating number"""
+    bytes_value: builtins.bytes
+    """Input and output bytes data"""
+    bool_value: builtins.bool
+    """Input and output bool data"""
+    string_value: builtins.str
+    """Input and output string data"""
     def __init__(
         self,
         *,
@@ -1948,9 +1963,14 @@ class Data(google.protobuf.message.Message):
         heatmaps: collections.abc.Iterable[global___Image] | None = ...,
         parts: collections.abc.Iterable[global___Part] | None = ...,
         ndarray: global___NDArray | None = ...,
+        int_value: builtins.int = ...,
+        float_value: builtins.float = ...,
+        bytes_value: builtins.bytes = ...,
+        bool_value: builtins.bool = ...,
+        string_value: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["audio", b"audio", "geo", b"geo", "image", b"image", "metadata", b"metadata", "ndarray", b"ndarray", "text", b"text", "video", b"video"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "metadata", b"metadata", "ndarray", b"ndarray", "parts", b"parts", "regions", b"regions", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["audio", b"audio", "bool_value", b"bool_value", "bytes_value", b"bytes_value", "clusters", b"clusters", "colors", b"colors", "concepts", b"concepts", "embeddings", b"embeddings", "float_value", b"float_value", "frames", b"frames", "geo", b"geo", "heatmaps", b"heatmaps", "hits", b"hits", "image", b"image", "int_value", b"int_value", "metadata", b"metadata", "ndarray", b"ndarray", "parts", b"parts", "regions", b"regions", "string_value", b"string_value", "text", b"text", "time_segments", b"time_segments", "tracks", b"tracks", "video", b"video"]) -> None: ...
 
 global___Data = Data
 
@@ -1961,16 +1981,20 @@ class Part(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     DATA_FIELD_NUMBER: builtins.int
+    ID_FIELD_NUMBER: builtins.int
     @property
     def data(self) -> global___Data:
         """The data for this part."""
+    id: builtins.str
+    """A unique id for the part."""
     def __init__(
         self,
         *,
         data: global___Data | None = ...,
+        id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["data", b"data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data", b"data"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "id", b"id"]) -> None: ...
 
 global___Part = Part
 
@@ -3443,6 +3467,7 @@ class Model(google.protobuf.message.Message):
     SOURCE_FIELD_NUMBER: builtins.int
     CREATOR_FIELD_NUMBER: builtins.int
     VERSION_COUNT_FIELD_NUMBER: builtins.int
+    USES_TOKENS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -3541,6 +3566,7 @@ class Model(google.protobuf.message.Message):
     creator: builtins.str
     """Creator of Model"""
     version_count: builtins.int
+    uses_tokens: builtins.bool
     def __init__(
         self,
         *,
@@ -3575,9 +3601,10 @@ class Model(google.protobuf.message.Message):
         source: global___Model.Source.ValueType = ...,
         creator: builtins.str = ...,
         version_count: builtins.int = ...,
+        uses_tokens: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "image", b"image", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "version_count", b"version_count", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "uses_tokens", b"uses_tokens", "version_count", b"version_count", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
