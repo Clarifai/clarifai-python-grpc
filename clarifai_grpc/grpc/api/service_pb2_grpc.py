@@ -459,6 +459,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse),
                 )
+        self.PostModelMigration = channel.unary_unary(
+                '/clarifai.api.V2/PostModelMigration',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse),
+                )
         self.PutModelVersionExports = channel.unary_unary(
                 '/clarifai.api.V2/PutModelVersionExports',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutModelVersionExportsRequest.SerializeToString,
@@ -1244,6 +1249,26 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.PostWorkflowVersionEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/PostWorkflowVersionEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
+                )
+        self.GetWorkflowVersionEvaluation = channel.unary_unary(
+                '/clarifai.api.V2/GetWorkflowVersionEvaluation',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowVersionEvaluationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowVersionEvaluationResponse),
+                )
+        self.ListWorkflowVersionEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/ListWorkflowVersionEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
+                )
+        self.PatchWorkflowVersionEvaluations = channel.unary_unary(
+                '/clarifai.api.V2/PatchWorkflowVersionEvaluations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
+                )
 
 
 class V2Servicer(object):
@@ -1919,6 +1944,13 @@ class V2Servicer(object):
         Once the config has been sent, the server will respond with a confirmation containing the model_version_id.
         This is so that if your upload is interrupted, you can resume the upload by sending the config again with the model_version_id specified for your model_version.
         The actual upload will be done via a multipart upload, the latest successful part_id will be sent from the server in the response to the model_bytes.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostModelMigration(self, request, context):
+        """Kicks off conversion from the old Triton model format to the new Docker model format.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3091,6 +3123,30 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostWorkflowVersionEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetWorkflowVersionEvaluation(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListWorkflowVersionEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchWorkflowVersionEvaluations(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -3518,6 +3574,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostModelVersionsUpload,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse.SerializeToString,
+            ),
+            'PostModelMigration': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostModelMigration,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
             ),
             'PutModelVersionExports': grpc.unary_unary_rpc_method_handler(
                     servicer.PutModelVersionExports,
@@ -4303,6 +4364,26 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostComputePlaneMetrics,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PostWorkflowVersionEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostWorkflowVersionEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
+            ),
+            'GetWorkflowVersionEvaluation': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetWorkflowVersionEvaluation,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowVersionEvaluationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowVersionEvaluationResponse.SerializeToString,
+            ),
+            'ListWorkflowVersionEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWorkflowVersionEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
+            ),
+            'PatchWorkflowVersionEvaluations': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchWorkflowVersionEvaluations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -5774,6 +5855,23 @@ class V2(object):
         return grpc.experimental.stream_stream(request_iterator, target, '/clarifai.api.V2/PostModelVersionsUpload',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelVersionsUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostModelMigration(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelMigration',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -8443,5 +8541,73 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostComputePlaneMetrics',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostComputePlaneMetricsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostWorkflowVersionEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowVersionEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetWorkflowVersionEvaluation(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetWorkflowVersionEvaluation',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetWorkflowVersionEvaluationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleWorkflowVersionEvaluationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListWorkflowVersionEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflowVersionEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchWorkflowVersionEvaluations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowVersionEvaluations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

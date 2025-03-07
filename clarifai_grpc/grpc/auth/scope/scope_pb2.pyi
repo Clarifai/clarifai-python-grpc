@@ -166,8 +166,6 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     """Write to label orders table"""
     LabelOrders_Delete: _S.ValueType  # 69
     """To delete label orders we need read/write"""
-    UserFeatureConfigs_Get: _S.ValueType  # 71
-    """Read from user_feature_configs table"""
     FindDuplicateAnnotationsJobs_Add: _S.ValueType  # 102
     """CRUD on FindDuplicateAnnotationsJobs table"""
     FindDuplicateAnnotationsJobs_Get: _S.ValueType  # 103
@@ -233,6 +231,8 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     InstanceTypes_Get: _S.ValueType  # 148
     AuditLogs_Get: _S.ValueType  # 149
     LogEntries_Get: _S.ValueType  # 151
+    WorkflowVersionEvaluations_Get: _S.ValueType  # 152
+    WorkflowVersionEvaluations_Add: _S.ValueType  # 153
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -404,8 +404,6 @@ LabelOrders_Add: S.ValueType  # 68
 """Write to label orders table"""
 LabelOrders_Delete: S.ValueType  # 69
 """To delete label orders we need read/write"""
-UserFeatureConfigs_Get: S.ValueType  # 71
-"""Read from user_feature_configs table"""
 FindDuplicateAnnotationsJobs_Add: S.ValueType  # 102
 """CRUD on FindDuplicateAnnotationsJobs table"""
 FindDuplicateAnnotationsJobs_Get: S.ValueType  # 103
@@ -471,6 +469,8 @@ Deployments_Delete: S.ValueType  # 146
 InstanceTypes_Get: S.ValueType  # 148
 AuditLogs_Get: S.ValueType  # 149
 LogEntries_Get: S.ValueType  # 151
+WorkflowVersionEvaluations_Get: S.ValueType  # 152
+WorkflowVersionEvaluations_Add: S.ValueType  # 153
 global___S = S
 
 @typing_extensions.final
