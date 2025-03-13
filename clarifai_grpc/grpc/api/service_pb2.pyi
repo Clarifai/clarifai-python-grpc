@@ -3297,6 +3297,9 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to last page.
@@ -3322,6 +3325,10 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     """Where the logs came from."""
     nodepool_id: builtins.str
     runner_id: builtins.str
+    pipeline_id: builtins.str
+    """Pipelines that produced the logs."""
+    pipeline_version_id: builtins.str
+    pipeline_version_run_id: builtins.str
     def __init__(
         self,
         *,
@@ -3335,9 +3342,12 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
         compute_cluster_id: builtins.str = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "page", b"page", "per_page", b"per_page", "pipeline_id", b"pipeline_id", "pipeline_version_id", b"pipeline_version_id", "pipeline_version_run_id", b"pipeline_version_run_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___ListLogEntriesRequest = ListLogEntriesRequest
 
@@ -3353,6 +3363,9 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
     log_type: builtins.str
     """The type of log entry. Examples: model, agent, build, training."""
     @property
@@ -3370,6 +3383,10 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
     """Where the logs came from."""
     nodepool_id: builtins.str
     runner_id: builtins.str
+    pipeline_id: builtins.str
+    """Pipelines that produced the logs."""
+    pipeline_version_id: builtins.str
+    pipeline_version_run_id: builtins.str
     def __init__(
         self,
         *,
@@ -3381,9 +3398,12 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
         compute_cluster_id: builtins.str = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "log_type", b"log_type", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "pipeline_id", b"pipeline_id", "pipeline_version_id", b"pipeline_version_id", "pipeline_version_run_id", b"pipeline_version_run_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___StreamLogEntriesRequest = StreamLogEntriesRequest
 
@@ -7415,6 +7435,8 @@ class GetTaskRequest(google.protobuf.message.Message):
         - metrics.review.inputs_count_estimated
         - metrics.review.inputs_count_estimated_per_reviewer
         - metrics.review.inputs_percent_estimated
+        - metrics.review.inputs_percent_estimated_per_reviewer
+        - metrics.review.inputs_reviewable_count_estimated_per_reviewer
         """
     def __init__(
         self,
@@ -7481,6 +7503,8 @@ class ListTasksRequest(google.protobuf.message.Message):
         - metrics.review.inputs_count_estimated
         - metrics.review.inputs_count_estimated_per_reviewer
         - metrics.review.inputs_percent_estimated
+        - metrics.review.inputs_percent_estimated_per_reviewer
+        - metrics.review.inputs_reviewable_count_estimated_per_reviewer
         """
     @property
     def ids(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
@@ -9755,6 +9779,42 @@ class PostRunnersRequest(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runners", b"runners", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___PostRunnersRequest = PostRunnersRequest
+
+@typing_extensions.final
+class PatchRunnersRequest(google.protobuf.message.Message):
+    """PatchRunnersRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    RUNNERS_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    nodepool_id: builtins.str
+    @property
+    def runners(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.Runner]:
+        """This allows you to create one or more runner by posting it to the API."""
+    compute_cluster_id: builtins.str
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now actions 'merge', 'overwrite', and 'remove' are supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        nodepool_id: builtins.str = ...,
+        runners: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Runner] | None = ...,
+        compute_cluster_id: builtins.str = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["action", b"action", "compute_cluster_id", b"compute_cluster_id", "nodepool_id", b"nodepool_id", "runners", b"runners", "user_app_id", b"user_app_id"]) -> None: ...
+
+global___PatchRunnersRequest = PatchRunnersRequest
 
 @typing_extensions.final
 class DeleteRunnersRequest(google.protobuf.message.Message):

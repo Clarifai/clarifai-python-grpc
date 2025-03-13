@@ -7820,37 +7820,64 @@ class TaskReviewMetrics(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     INPUTS_COUNT_ESTIMATED_FIELD_NUMBER: builtins.int
-    INPUTS_COUNT_ESTIMATED_PER_REVIEWER_FIELD_NUMBER: builtins.int
     INPUTS_PERCENT_ESTIMATED_FIELD_NUMBER: builtins.int
+    INPUTS_COUNT_ESTIMATED_PER_REVIEWER_FIELD_NUMBER: builtins.int
+    INPUTS_REVIEWABLE_COUNT_ESTIMATED_PER_REVIEWER_FIELD_NUMBER: builtins.int
+    INPUTS_PERCENT_ESTIMATED_PER_REVIEWER_FIELD_NUMBER: builtins.int
     inputs_count_estimated: builtins.int
-    """Estimated number of reviewed inputs by at least one reviewer."""
+    """Estimated number of fully reviewed inputs.
+    An input is considered fully reviewed if it has been reviewed by all necessary reviewers.
+    Example: if task has no review, then an input is considered fully reviewed right after it's labeled (as review is skipped).
+    Example: if task has manual review with single-reviewer per input, then an input is considered fully reviewed when 1 reviewer has approved/rejected it.
+    Example: if task has consensus review with 3 reviewers per input, then an input is considered fully reviewed when 3 reviewers have approved it or 1 reviewer has rejected it.
+    """
+    inputs_percent_estimated: builtins.int
+    """Estimated percent of review work that was finished.
+    This is a value between 0 and 100, where 0 = 0% and 100 = 100%.
+    Calculated as inputs_count_estimated/task.metrics.input_source.inputs_count_estimated.
+    As the counts are estimated, the percentage is also estimated.
+    However, additional checks are made to ensure that 100% percentage is only returned when all inputs are reviewed - giving a guarantee that the 100% percentage is always accurate.
+    """
     @property
     def inputs_count_estimated_per_reviewer(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
         """Estimated number of reviewed inputs per reviewer index.
         The reviewer indexes are based on task.review.users.
         An input is considered reviewed by a reviewer if:
         * the reviewer approved the input
-        * ANY reviewer rejected the input (as rejection is final)
-        Note that when a reviewer requests changes for an input, the input is sent to back to work again.
+        * the reviewer rejected the input
+        Note that when a reviewer requests changes for an input, the input is sent to back to work again, so the whole work & review process is restarted.
         The reviewer will have to review the input again after work has been completed.
         As such, the review that requests changes for an input is immediately dis-regarded and not counted in this metric.
         """
-    inputs_percent_estimated: builtins.int
-    """Estimated percent of review work that was finished.
-    This is a value between 0 and 100, where 0 = 0% and 100 = 100%.
-    Calculated as sum(inputs_count_estimated_per_reviewer) / (total inputs to review * number of reviewers per input).
-    The total inputs to review is stored in task.metrics.input_source.inputs_count_estimated.
-    The number of reviewers per input is based on task review strategy. For example, for consensus review strategy,
-    the number of reviewers per input is stored in task.review.consensus_strategy_info.approval_threshold_reviewers.
-    """
+    @property
+    def inputs_reviewable_count_estimated_per_reviewer(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """The number of inputs actually available for review for each reviewer.
+        Most times, this equals task.metrics.input_source.inputs_count_estimated.
+        Several situations may result in different values:
+        * When task has no review, then this is 0 for each reviewer.
+        * When task has auto-annotation, then this number equals the inputs that have been auto-annotated with AWAITING_REVIEW status. All other inputs are considered completed by the auto-annotation process.
+        * When task has consensus review with approval_threshold_labelers > 0, then it's possible that labelers will approve inputs through consensus, which skips review. In this case, the number of inputs available for review is less than task.metrics.input_source.inputs_count_estimated.
+        * When task has consensus review with approval_threshold_reviewers = 1, then all inputs are assigned only to one reviewer, so each reviewer will get only a part of the inputs to review. It's expected that the sum(inputs_reviewable_count_estimated) = task.metrics.input_source.inputs_count_estimated.
+        * When task has consensus review with approval_threshold_reviewers = -1, then all inputs are assigned to all reviewers. However, if an input is rejected, then rejection is final and all other reviewers will not review it. In this case, the number of inputs available for review for other reviewers will be less than task.metrics.input_source.inputs_count_estimated.
+        """
+    @property
+    def inputs_percent_estimated_per_reviewer(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """Estimated percent of review work that was finished per reviewer.
+        This is a value between 0 and 100, where 0 = 0% and 100 = 100%.
+        Calculated as inputs_count_estimated_per_reviewer/inputs_reviewable_count_estimated_per_reviewer.
+        As the counts are estimated, the percentage is also estimated.
+        However, additional checks are made to ensure that 100% percentage is only returned when all inputs are reviewed - giving a guarantee that the 100% percentage is always accurate.
+        """
     def __init__(
         self,
         *,
         inputs_count_estimated: builtins.int = ...,
-        inputs_count_estimated_per_reviewer: collections.abc.Iterable[builtins.int] | None = ...,
         inputs_percent_estimated: builtins.int = ...,
+        inputs_count_estimated_per_reviewer: collections.abc.Iterable[builtins.int] | None = ...,
+        inputs_reviewable_count_estimated_per_reviewer: collections.abc.Iterable[builtins.int] | None = ...,
+        inputs_percent_estimated_per_reviewer: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_count_estimated_per_reviewer", b"inputs_count_estimated_per_reviewer", "inputs_percent_estimated", b"inputs_percent_estimated"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["inputs_count_estimated", b"inputs_count_estimated", "inputs_count_estimated_per_reviewer", b"inputs_count_estimated_per_reviewer", "inputs_percent_estimated", b"inputs_percent_estimated", "inputs_percent_estimated_per_reviewer", b"inputs_percent_estimated_per_reviewer", "inputs_reviewable_count_estimated_per_reviewer", b"inputs_reviewable_count_estimated_per_reviewer"]) -> None: ...
 
 global___TaskReviewMetrics = TaskReviewMetrics
 
@@ -10620,6 +10647,7 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
     EVENT_TYPE_FIELD_NUMBER: builtins.int
     GPU_METRICS_FIELD_NUMBER: builtins.int
     HOSTNAME_FIELD_NUMBER: builtins.int
+    CPU_METRICS_FIELD_NUMBER: builtins.int
     @property
     def meta(self) -> global___ComputeSourceMetadata:
         """Who and where the metrics are from.
@@ -10651,6 +10679,9 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
         """GPU metrics."""
     hostname: builtins.str
     """Hostname of the node."""
+    @property
+    def cpu_metrics(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CpuMetrics]:
+        """CPU metrics."""
     def __init__(
         self,
         *,
@@ -10665,9 +10696,10 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
         event_type: builtins.str = ...,
         gpu_metrics: collections.abc.Iterable[global___GpuMetrics] | None = ...,
         hostname: builtins.str = ...,
+        cpu_metrics: collections.abc.Iterable[global___CpuMetrics] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["meta", b"meta", "timestamp", b"timestamp"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["cloud", b"cloud", "event_type", b"event_type", "gpu_metrics", b"gpu_metrics", "hostname", b"hostname", "instance_type", b"instance_type", "meta", b"meta", "region", b"region", "reservation_price", b"reservation_price", "reservation_type", b"reservation_type", "runtime_s", b"runtime_s", "timestamp", b"timestamp"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud", b"cloud", "cpu_metrics", b"cpu_metrics", "event_type", b"event_type", "gpu_metrics", b"gpu_metrics", "hostname", b"hostname", "instance_type", b"instance_type", "meta", b"meta", "region", b"region", "reservation_price", b"reservation_price", "reservation_type", b"reservation_type", "runtime_s", b"runtime_s", "timestamp", b"timestamp"]) -> None: ...
 
 global___ComputePlaneMetrics = ComputePlaneMetrics
 
@@ -10702,6 +10734,40 @@ class GpuMetrics(google.protobuf.message.Message):
     def ClearField(self, field_name: typing_extensions.Literal["memory_utilization_pct", b"memory_utilization_pct", "model_name", b"model_name", "tensor_utilization_pct", b"tensor_utilization_pct", "utilization_pct", b"utilization_pct", "uuid", b"uuid"]) -> None: ...
 
 global___GpuMetrics = GpuMetrics
+
+@typing_extensions.final
+class CpuMetrics(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TIMESTAMP_FIELD_NUMBER: builtins.int
+    CPU_UTILIZATION_PCT_FIELD_NUMBER: builtins.int
+    MEMORY_UTILIZATION_PCT_FIELD_NUMBER: builtins.int
+    MILLICORES_FIELD_NUMBER: builtins.int
+    MEMORY_BYTES_FIELD_NUMBER: builtins.int
+    @property
+    def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Time of the event."""
+    cpu_utilization_pct: builtins.float
+    """CPU utilization."""
+    memory_utilization_pct: builtins.float
+    """Memory utilization."""
+    millicores: builtins.int
+    """CPU millicores."""
+    memory_bytes: builtins.int
+    """Memory bytes."""
+    def __init__(
+        self,
+        *,
+        timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        cpu_utilization_pct: builtins.float = ...,
+        memory_utilization_pct: builtins.float = ...,
+        millicores: builtins.int = ...,
+        memory_bytes: builtins.int = ...,
+    ) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["timestamp", b"timestamp"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cpu_utilization_pct", b"cpu_utilization_pct", "memory_bytes", b"memory_bytes", "memory_utilization_pct", b"memory_utilization_pct", "millicores", b"millicores", "timestamp", b"timestamp"]) -> None: ...
+
+global___CpuMetrics = CpuMetrics
 
 @typing_extensions.final
 class LogEntry(google.protobuf.message.Message):
@@ -10748,6 +10814,9 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> global___UserAppIDSet:
         """The user app id, if any."""
@@ -10761,6 +10830,10 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     """Compute Cluster, Nodepool, Runner."""
     nodepool_id: builtins.str
     runner_id: builtins.str
+    pipeline_id: builtins.str
+    """Pipeline related data, if any"""
+    pipeline_version_id: builtins.str
+    pipeline_version_run_id: builtins.str
     def __init__(
         self,
         *,
@@ -10771,9 +10844,12 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
         compute_cluster_id: builtins.str = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "model_id", b"model_id", "model_version_id", b"model_version_id", "nodepool_id", b"nodepool_id", "pipeline_id", b"pipeline_id", "pipeline_version_id", b"pipeline_version_id", "pipeline_version_run_id", b"pipeline_version_run_id", "runner_id", b"runner_id", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___ComputeSourceMetadata = ComputeSourceMetadata
 

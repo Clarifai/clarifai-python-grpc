@@ -1109,6 +1109,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse),
                 )
+        self.PatchRunners = channel.unary_unary(
+                '/clarifai.api.V2/PatchRunners',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchRunnersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse),
+                )
         self.DeleteRunners = channel.unary_unary(
                 '/clarifai.api.V2/DeleteRunners',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteRunnersRequest.SerializeToString,
@@ -2934,6 +2939,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchRunners(self, request, context):
+        """Patch runners of a user.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def DeleteRunners(self, request, context):
         """Delete multiple runners in one request.
         """
@@ -4223,6 +4235,11 @@ def add_V2Servicer_to_server(servicer, server):
             'PostRunners': grpc.unary_unary_rpc_method_handler(
                     servicer.PostRunners,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.SerializeToString,
+            ),
+            'PatchRunners': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchRunners,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchRunnersRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.SerializeToString,
             ),
             'DeleteRunners': grpc.unary_unary_rpc_method_handler(
@@ -8064,6 +8081,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostRunners',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostRunnersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchRunners(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchRunners',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchRunnersRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiRunnerResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
