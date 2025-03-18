@@ -3743,7 +3743,11 @@ class OutputInfo(google.protobuf.message.Message):
         to the model predictor to alter predictions from this Model.
         """
     @property
-    def params_specs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]: ...
+    def params_specs(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]:
+        """These allow you to specifcy addition fields that a specific model supports beyond those defined
+        in it's ModelType. This field is to be deprecated and will be replaced by MethodSignature
+        proto.
+        """
     def __init__(
         self,
         *,
@@ -3978,6 +3982,7 @@ class ModelType(google.protobuf.message.Message):
     EXPECTED_INPUT_LAYERS_FIELD_NUMBER: builtins.int
     EXPECTED_OUTPUT_LAYERS_FIELD_NUMBER: builtins.int
     EVALUATION_TYPE_FIELD_NUMBER: builtins.int
+    METHOD_SIGNATURES_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique identifier for this model type."""
     title: builtins.str
@@ -4022,6 +4027,12 @@ class ModelType(google.protobuf.message.Message):
         """Expected output layers of an uploaded model"""
     evaluation_type: global___EvaluationType.ValueType
     """What type of evaluation is supported for this model type."""
+    @property
+    def method_signatures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MethodSignature]:
+        """method signature for this model type
+        This will be used in the future to replace input_fields, output_fields, and model_type_fields
+        as it can define any python function call.
+        """
     def __init__(
         self,
         *,
@@ -4038,8 +4049,9 @@ class ModelType(google.protobuf.message.Message):
         expected_input_layers: collections.abc.Iterable[global___ModelLayerInfo] | None = ...,
         expected_output_layers: collections.abc.Iterable[global___ModelLayerInfo] | None = ...,
         evaluation_type: global___EvaluationType.ValueType = ...,
+        method_signatures: collections.abc.Iterable[global___MethodSignature] | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["creatable", b"creatable", "description", b"description", "evaluation_type", b"evaluation_type", "expected_input_layers", b"expected_input_layers", "expected_output_layers", b"expected_output_layers", "id", b"id", "input_fields", b"input_fields", "internal_only", b"internal_only", "model_type_fields", b"model_type_fields", "output_fields", b"output_fields", "requires_sequential_frames", b"requires_sequential_frames", "title", b"title", "trainable", b"trainable"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["creatable", b"creatable", "description", b"description", "evaluation_type", b"evaluation_type", "expected_input_layers", b"expected_input_layers", "expected_output_layers", b"expected_output_layers", "id", b"id", "input_fields", b"input_fields", "internal_only", b"internal_only", "method_signatures", b"method_signatures", "model_type_fields", b"model_type_fields", "output_fields", b"output_fields", "requires_sequential_frames", b"requires_sequential_frames", "title", b"title", "trainable", b"trainable"]) -> None: ...
 
 global___ModelType = ModelType
 
@@ -4227,6 +4239,91 @@ class ModelTypeField(google.protobuf.message.Message):
     CHECKPOINT_MODEL: ModelTypeField.ModelTypeFieldType.ValueType  # 22
     """For selecting a model version of the same model type to resume training from."""
 
+    class _DataType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _DataTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[ModelTypeField._DataType.ValueType], builtins.type):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        NOT_SET: ModelTypeField._DataType.ValueType  # 0
+        STR: ModelTypeField._DataType.ValueType  # 1
+        """A string value."""
+        BYTES: ModelTypeField._DataType.ValueType  # 2
+        """A byte string. This is used for binary data."""
+        INT: ModelTypeField._DataType.ValueType  # 3
+        """An integer value."""
+        FLOAT: ModelTypeField._DataType.ValueType  # 4
+        """A float value."""
+        BOOL: ModelTypeField._DataType.ValueType  # 5
+        """A boolean value."""
+        NDARRAY: ModelTypeField._DataType.ValueType  # 6
+        """A proto representation for numpy arrays."""
+        JSON_DATA: ModelTypeField._DataType.ValueType  # 7
+        """For arbitrary json object: "{...}" """
+        TEXT: ModelTypeField._DataType.ValueType  # 8
+        """For text data"""
+        IMAGE: ModelTypeField._DataType.ValueType  # 9
+        """A image is a image proto for url or bytes."""
+        CONCEPT: ModelTypeField._DataType.ValueType  # 10
+        """A concept is a concept proto that represents a concept in the app."""
+        REGION: ModelTypeField._DataType.ValueType  # 11
+        """A region is a bounding box in an image or video frame."""
+        FRAME: ModelTypeField._DataType.ValueType  # 12
+        """A frame is a single image in a video stream"""
+        AUDIO: ModelTypeField._DataType.ValueType  # 13
+        """A audio is a audio proto for url or bytes."""
+        VIDEO: ModelTypeField._DataType.ValueType  # 14
+        """A video is a video proto for url or bytes."""
+        NAMED_FIELDS: ModelTypeField._DataType.ValueType  # 20
+        """this can be used to store named fields with values similar to Dict"""
+        TUPLE: ModelTypeField._DataType.ValueType  # 21
+        """An arg that is a tuple."""
+        LIST: ModelTypeField._DataType.ValueType  # 22
+        """An arg that is a list."""
+
+    class DataType(_DataType, metaclass=_DataTypeEnumTypeWrapper):
+        """DataType is used in MethodSignature to define all the possible types that a python function
+        may have that we want to support. These include built-ins like int, float, str, bool, and
+        more complex types like JSON, numpy arrays, List, Tuple, Dict (as Named Fields), as well as Clarifai provided
+        unstructured types like Image, Video, Text, etc.
+        """
+
+    NOT_SET: ModelTypeField.DataType.ValueType  # 0
+    STR: ModelTypeField.DataType.ValueType  # 1
+    """A string value."""
+    BYTES: ModelTypeField.DataType.ValueType  # 2
+    """A byte string. This is used for binary data."""
+    INT: ModelTypeField.DataType.ValueType  # 3
+    """An integer value."""
+    FLOAT: ModelTypeField.DataType.ValueType  # 4
+    """A float value."""
+    BOOL: ModelTypeField.DataType.ValueType  # 5
+    """A boolean value."""
+    NDARRAY: ModelTypeField.DataType.ValueType  # 6
+    """A proto representation for numpy arrays."""
+    JSON_DATA: ModelTypeField.DataType.ValueType  # 7
+    """For arbitrary json object: "{...}" """
+    TEXT: ModelTypeField.DataType.ValueType  # 8
+    """For text data"""
+    IMAGE: ModelTypeField.DataType.ValueType  # 9
+    """A image is a image proto for url or bytes."""
+    CONCEPT: ModelTypeField.DataType.ValueType  # 10
+    """A concept is a concept proto that represents a concept in the app."""
+    REGION: ModelTypeField.DataType.ValueType  # 11
+    """A region is a bounding box in an image or video frame."""
+    FRAME: ModelTypeField.DataType.ValueType  # 12
+    """A frame is a single image in a video stream"""
+    AUDIO: ModelTypeField.DataType.ValueType  # 13
+    """A audio is a audio proto for url or bytes."""
+    VIDEO: ModelTypeField.DataType.ValueType  # 14
+    """A video is a video proto for url or bytes."""
+    NAMED_FIELDS: ModelTypeField.DataType.ValueType  # 20
+    """this can be used to store named fields with values similar to Dict"""
+    TUPLE: ModelTypeField.DataType.ValueType  # 21
+    """An arg that is a tuple."""
+    LIST: ModelTypeField.DataType.ValueType  # 22
+    """An arg that is a list."""
+
     PATH_FIELD_NUMBER: builtins.int
     FIELD_TYPE_FIELD_NUMBER: builtins.int
     DEFAULT_VALUE_FIELD_NUMBER: builtins.int
@@ -4236,6 +4333,11 @@ class ModelTypeField(google.protobuf.message.Message):
     INTERNAL_ONLY_FIELD_NUMBER: builtins.int
     REQUIRED_FIELD_NUMBER: builtins.int
     MODEL_TYPE_RANGE_INFO_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    TYPE_ARGS_FIELD_NUMBER: builtins.int
+    ITERATOR_FIELD_NUMBER: builtins.int
+    DEFAULT_FIELD_NUMBER: builtins.int
     path: builtins.str
     """The path where the value of the field will be stored in the model version object.
     Example:
@@ -4247,7 +4349,9 @@ class ModelTypeField(google.protobuf.message.Message):
     and so on.
     """
     field_type: global___ModelTypeField.ModelTypeFieldType.ValueType
-    """The field for this field."""
+    """The field for this field. This is often used for displaying the field in the UI whereas
+    the DataType enum below defines the specific type of datain the Python function.
+    """
     @property
     def default_value(self) -> google.protobuf.struct_pb2.Value:
         """A default value. We use the Value field because we want to have structured data (just like
@@ -4270,6 +4374,32 @@ class ModelTypeField(google.protobuf.message.Message):
     @property
     def model_type_range_info(self) -> global___ModelTypeRangeInfo:
         """If the field_type is RANGE, this must be filled in."""
+    name: builtins.str
+    """///////////////////////////////////
+    New fields for MethodSignature
+    ///////////////////////////////////
+    The fields below were added when we introduced ability to call an arbitrary python function
+    from the client side. This is used to define the method signature of the python function
+    that we want to call. The above fields are still relevant to decide what a UI should display.
+    Some of the above fields above will be relevant like definition, required, etc.
+
+    name of method signature argument
+    """
+    type: global___ModelTypeField.DataType.ValueType
+    """The type of the argument."""
+    @property
+    def type_args(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]:
+        """type enum, and recursively set type_args with
+        the inner type argumets in complex objects (e.g. List[Tuple[int, str]])
+        """
+    iterator: builtins.bool
+    """this will be use to define whether the method argument supports streaming as an iterator."""
+    default: builtins.str
+    """This specify the default value of the method argument. We define this as a string
+    because the default value can be a string, int, float, bool, or a complex object like a JSON
+    The default_value field above should not also be used.
+    ///////////////////////////////////
+    """
     def __init__(
         self,
         *,
@@ -4282,9 +4412,14 @@ class ModelTypeField(google.protobuf.message.Message):
         internal_only: builtins.bool = ...,
         required: builtins.bool = ...,
         model_type_range_info: global___ModelTypeRangeInfo | None = ...,
+        name: builtins.str = ...,
+        type: global___ModelTypeField.DataType.ValueType = ...,
+        type_args: collections.abc.Iterable[global___ModelTypeField] | None = ...,
+        iterator: builtins.bool = ...,
+        default: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["default_value", b"default_value", "model_type_range_info", b"model_type_range_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["default_value", b"default_value", "description", b"description", "field_type", b"field_type", "internal_only", b"internal_only", "model_type_enum_options", b"model_type_enum_options", "model_type_range_info", b"model_type_range_info", "path", b"path", "placeholder", b"placeholder", "required", b"required"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["default", b"default", "default_value", b"default_value", "description", b"description", "field_type", b"field_type", "internal_only", b"internal_only", "iterator", b"iterator", "model_type_enum_options", b"model_type_enum_options", "model_type_range_info", b"model_type_range_info", "name", b"name", "path", b"path", "placeholder", b"placeholder", "required", b"required", "type", b"type", "type_args", b"type_args"]) -> None: ...
 
 global___ModelTypeField = ModelTypeField
 
@@ -4437,6 +4572,7 @@ class ModelVersion(google.protobuf.message.Message):
     TRAIN_LOG_FIELD_NUMBER: builtins.int
     INFERENCE_COMPUTE_INFO_FIELD_NUMBER: builtins.int
     BUILD_INFO_FIELD_NUMBER: builtins.int
+    METHOD_SIGNATURE_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -4507,6 +4643,9 @@ class ModelVersion(google.protobuf.message.Message):
     @property
     def build_info(self) -> global___BuildInfo:
         """Build information for the model version"""
+    @property
+    def method_signature(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MethodSignature]:
+        """Model signature information for the model version"""
     def __init__(
         self,
         *,
@@ -4532,11 +4671,51 @@ class ModelVersion(google.protobuf.message.Message):
         train_log: builtins.str = ...,
         inference_compute_info: global___ComputeInfo | None = ...,
         build_info: global___BuildInfo | None = ...,
+        method_signature: collections.abc.Iterable[global___MethodSignature] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "method_signature", b"method_signature", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ModelVersion = ModelVersion
+
+@typing_extensions.final
+class MethodSignature(google.protobuf.message.Message):
+    """MethodSignature is a definition of a method that a model can have.
+    This is used to communicate between a python method definition of any arbitrary function
+    to the client or UI on how to call that function from the client side.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    METHOD_TYPE_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    INPUT_FIELDS_FIELD_NUMBER: builtins.int
+    OUTPUT_FIELDS_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """The name of the method on the server."""
+    method_type: global___RunnerMethodType.ValueType
+    """whether the method is for predict(unary-unary), generate(unary-stream), stream(stream-stream)"""
+    description: builtins.str
+    """description from the docstring of the method on the server."""
+    @property
+    def input_fields(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]:
+        """input fields and signature of every method arguments"""
+    @property
+    def output_fields(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___ModelTypeField]:
+        """output signature of method"""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        method_type: global___RunnerMethodType.ValueType = ...,
+        description: builtins.str = ...,
+        input_fields: collections.abc.Iterable[global___ModelTypeField] | None = ...,
+        output_fields: collections.abc.Iterable[global___ModelTypeField] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["description", b"description", "input_fields", b"input_fields", "method_type", b"method_type", "name", b"name", "output_fields", b"output_fields"]) -> None: ...
+
+global___MethodSignature = MethodSignature
 
 @typing_extensions.final
 class BuildInfo(google.protobuf.message.Message):
