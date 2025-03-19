@@ -4572,7 +4572,7 @@ class ModelVersion(google.protobuf.message.Message):
     TRAIN_LOG_FIELD_NUMBER: builtins.int
     INFERENCE_COMPUTE_INFO_FIELD_NUMBER: builtins.int
     BUILD_INFO_FIELD_NUMBER: builtins.int
-    METHOD_SIGNATURE_FIELD_NUMBER: builtins.int
+    METHOD_SIGNATURES_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -4644,7 +4644,7 @@ class ModelVersion(google.protobuf.message.Message):
     def build_info(self) -> global___BuildInfo:
         """Build information for the model version"""
     @property
-    def method_signature(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MethodSignature]:
+    def method_signatures(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___MethodSignature]:
         """Model signature information for the model version"""
     def __init__(
         self,
@@ -4671,10 +4671,10 @@ class ModelVersion(google.protobuf.message.Message):
         train_log: builtins.str = ...,
         inference_compute_info: global___ComputeInfo | None = ...,
         build_info: global___BuildInfo | None = ...,
-        method_signature: collections.abc.Iterable[global___MethodSignature] | None = ...,
+        method_signatures: collections.abc.Iterable[global___MethodSignature] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "metadata", b"metadata", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "train_info", b"train_info", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "method_signature", b"method_signature", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_concept_count", b"active_concept_count", "app_id", b"app_id", "build_info", b"build_info", "completed_at", b"completed_at", "created_at", b"created_at", "description", b"description", "id", b"id", "import_info", b"import_info", "inference_compute_info", b"inference_compute_info", "input_info", b"input_info", "license", b"license", "metadata", b"metadata", "method_signatures", b"method_signatures", "metrics", b"metrics", "modified_at", b"modified_at", "output_info", b"output_info", "pretrained_model_config", b"pretrained_model_config", "status", b"status", "total_input_count", b"total_input_count", "train_info", b"train_info", "train_log", b"train_log", "user_id", b"user_id", "visibility", b"visibility"]) -> None: ...
 
 global___ModelVersion = ModelVersion
 

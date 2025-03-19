@@ -488,6 +488,7 @@ class _StatusCodeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enu
     """Feature flags status code"""
     FEATUREFLAG_INVALID_ARGUMENT: _StatusCode.ValueType  # 62001
     FEATUREFLAG_BLOCKED: _StatusCode.ValueType  # 62002
+    FEATUREFLAG_NOT_FOUND: _StatusCode.ValueType  # 62003
     MAINTENANCE_SUCCESS: _StatusCode.ValueType  # 63000
     """Maintenance status code"""
     MAINTENANCE_FAILED: _StatusCode.ValueType  # 63001
@@ -1043,6 +1044,7 @@ FEATUREFLAG_CONFIG_NOT_FOUND: StatusCode.ValueType  # 62000
 """Feature flags status code"""
 FEATUREFLAG_INVALID_ARGUMENT: StatusCode.ValueType  # 62001
 FEATUREFLAG_BLOCKED: StatusCode.ValueType  # 62002
+FEATUREFLAG_NOT_FOUND: StatusCode.ValueType  # 62003
 MAINTENANCE_SUCCESS: StatusCode.ValueType  # 63000
 """Maintenance status code"""
 MAINTENANCE_FAILED: StatusCode.ValueType  # 63001
