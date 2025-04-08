@@ -9524,7 +9524,9 @@ class PostInputsDataSourcesRequest(google.protobuf.message.Message):
     call_back_url: builtins.str
     """If call back url is set, we will send a Post request to this endpoint with job status."""
     app_pat: builtins.str
-    """Personal Access Token to the application to which inputs are added"""
+    """Personal Access Token to the application to which inputs are added
+    Deprecated: No need to send app_pat, it will be generated internally if not present
+    """
     def __init__(
         self,
         *,
@@ -10910,6 +10912,7 @@ class PostWorkflowVersionEvaluationsRequest(google.protobuf.message.Message):
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_EVALUATIONS_FIELD_NUMBER: builtins.int
+    RUNNER_SELECTORS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     workflow_id: builtins.str
@@ -10921,7 +10924,10 @@ class PostWorkflowVersionEvaluationsRequest(google.protobuf.message.Message):
         - ground_truth_dataset_id
         - ground_truth_dataset_version_id
         - id
+        - target_node_id
         """
+    @property
+    def runner_selectors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.RunnerSelector]: ...
     def __init__(
         self,
         *,
@@ -10929,9 +10935,10 @@ class PostWorkflowVersionEvaluationsRequest(google.protobuf.message.Message):
         workflow_id: builtins.str = ...,
         workflow_version_id: builtins.str = ...,
         workflow_version_evaluations: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkflowVersionEvaluation] | None = ...,
+        runner_selectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.RunnerSelector] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "workflow_id", b"workflow_id", "workflow_version_evaluations", b"workflow_version_evaluations", "workflow_version_id", b"workflow_version_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["runner_selectors", b"runner_selectors", "user_app_id", b"user_app_id", "workflow_id", b"workflow_id", "workflow_version_evaluations", b"workflow_version_evaluations", "workflow_version_id", b"workflow_version_id"]) -> None: ...
 
 global___PostWorkflowVersionEvaluationsRequest = PostWorkflowVersionEvaluationsRequest
 

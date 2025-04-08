@@ -233,6 +233,11 @@ class _SEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrap
     LogEntries_Get: _S.ValueType  # 151
     WorkflowVersionEvaluations_Get: _S.ValueType  # 152
     WorkflowVersionEvaluations_Add: _S.ValueType  # 153
+    Pipeline_Get: _S.ValueType  # 154
+    """Pipelines feature is in development, this shouldn't be exposed yet.
+    TODO: Expose this scope when the feature is ready.
+    """
+    Pipeline_Add: _S.ValueType  # 155
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -471,6 +476,11 @@ AuditLogs_Get: S.ValueType  # 149
 LogEntries_Get: S.ValueType  # 151
 WorkflowVersionEvaluations_Get: S.ValueType  # 152
 WorkflowVersionEvaluations_Add: S.ValueType  # 153
+Pipeline_Get: S.ValueType  # 154
+"""Pipelines feature is in development, this shouldn't be exposed yet.
+TODO: Expose this scope when the feature is ready.
+"""
+Pipeline_Add: S.ValueType  # 155
 global___S = S
 
 @typing_extensions.final

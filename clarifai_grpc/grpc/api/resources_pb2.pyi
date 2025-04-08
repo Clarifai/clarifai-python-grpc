@@ -9803,7 +9803,9 @@ class InputsUpload(google.protobuf.message.Message):
     * If job ID is non-empty, then a new job will be created with given ID.
     """
     app_pat: builtins.str
-    """Personal Access Token to the application to which inputs are added"""
+    """Personal Access Token to the application to which inputs are added
+    Deprecated: No need to send app_pat, it will be generated internally if not present
+    """
     @property
     def upload(self) -> global___Upload: ...
     input_id_conflict_resolution: global___InputIDConflictResolution.ValueType
@@ -9981,6 +9983,8 @@ class Nodepool(google.protobuf.message.Message):
     INSTANCE_TYPES_FIELD_NUMBER: builtins.int
     MIN_INSTANCES_FIELD_NUMBER: builtins.int
     MAX_INSTANCES_FIELD_NUMBER: builtins.int
+    ENFORCED_MIN_INSTANCES_FIELD_NUMBER: builtins.int
+    ENFORCED_MAX_INSTANCES_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     id: builtins.str
@@ -10002,12 +10006,16 @@ class Nodepool(google.protobuf.message.Message):
     def instance_types(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___InstanceType]: ...
     min_instances: builtins.int
     """Minimum number of instances in this nodepool. This allows the nodepool to scale down to this
-    amount.
+    amount. This is the user desired minimum.
     """
     max_instances: builtins.int
     """An upper limit on the number of instances in this nodepool. This allows the nodepool to scale
-    up to this amount.
+    up to this amount. This is the user desired maximum.
     """
+    enforced_min_instances: builtins.int
+    """The actual minimum number of instances. Enforced by the user's plan limits."""
+    enforced_max_instances: builtins.int
+    """The actual maximum number of instances. Enforced by the user's plan limits."""
     @property
     def visibility(self) -> global___Visibility:
         """The visibility field represents whether this message is privately/publicly visible.
@@ -10031,11 +10039,13 @@ class Nodepool(google.protobuf.message.Message):
         instance_types: collections.abc.Iterable[global___InstanceType] | None = ...,
         min_instances: builtins.int = ...,
         max_instances: builtins.int = ...,
+        enforced_min_instances: builtins.int = ...,
+        enforced_max_instances: builtins.int = ...,
         visibility: global___Visibility | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "description", b"description", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "metadata", b"metadata", "min_instances", b"min_instances", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster", b"compute_cluster", "created_at", b"created_at", "description", b"description", "enforced_max_instances", b"enforced_max_instances", "enforced_min_instances", b"enforced_min_instances", "id", b"id", "instance_types", b"instance_types", "max_instances", b"max_instances", "metadata", b"metadata", "min_instances", b"min_instances", "modified_at", b"modified_at", "node_capacity_type", b"node_capacity_type", "visibility", b"visibility"]) -> None: ...
 
 global___Nodepool = Nodepool
 
@@ -11048,6 +11058,7 @@ class WorkflowVersionEvaluation(google.protobuf.message.Message):
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    TARGET_NODE_ID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Customer-Facing / External ID of the workflow version evaluation."""
     workflow_id: builtins.str
@@ -11076,6 +11087,8 @@ class WorkflowVersionEvaluation(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the workflow version evaluation was modified."""
+    target_node_id: builtins.str
+    """The ID of the node that is being evaluated."""
     def __init__(
         self,
         *,
@@ -11091,9 +11104,10 @@ class WorkflowVersionEvaluation(google.protobuf.message.Message):
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        target_node_id: builtins.str = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "status", b"status", "workflow_evaluation_result", b"workflow_evaluation_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "evaluation_template_id", b"evaluation_template_id", "ground_truth_dataset_id", b"ground_truth_dataset_id", "ground_truth_dataset_version_id", b"ground_truth_dataset_version_id", "id", b"id", "modified_at", b"modified_at", "predictions_dataset_id", b"predictions_dataset_id", "predictions_dataset_version_id", b"predictions_dataset_version_id", "status", b"status", "workflow_evaluation_result", b"workflow_evaluation_result", "workflow_id", b"workflow_id", "workflow_version_id", b"workflow_version_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "evaluation_template_id", b"evaluation_template_id", "ground_truth_dataset_id", b"ground_truth_dataset_id", "ground_truth_dataset_version_id", b"ground_truth_dataset_version_id", "id", b"id", "modified_at", b"modified_at", "predictions_dataset_id", b"predictions_dataset_id", "predictions_dataset_version_id", b"predictions_dataset_version_id", "status", b"status", "target_node_id", b"target_node_id", "workflow_evaluation_result", b"workflow_evaluation_result", "workflow_id", b"workflow_id", "workflow_version_id", b"workflow_version_id"]) -> None: ...
 
 global___WorkflowVersionEvaluation = WorkflowVersionEvaluation
 
