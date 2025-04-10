@@ -10489,6 +10489,7 @@ class ListNodepoolsRequest(google.protobuf.message.Message):
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
+    ACTIVE_USAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     compute_cluster_id: builtins.str
@@ -10500,6 +10501,10 @@ class ListNodepoolsRequest(google.protobuf.message.Message):
     """(optional URL parameter) The number of results that will be contained in each page. Defaults
     to 128.
     """
+    active_usage: builtins.bool
+    """Only return nodepools that are actively being used (having runners with
+    replicas >= threshold and pipeline versions scheduled to run)
+    """
     def __init__(
         self,
         *,
@@ -10507,9 +10512,10 @@ class ListNodepoolsRequest(google.protobuf.message.Message):
         compute_cluster_id: builtins.str = ...,
         page: builtins.int = ...,
         per_page: builtins.int = ...,
+        active_usage: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_cluster_id", b"compute_cluster_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["active_usage", b"active_usage", "compute_cluster_id", b"compute_cluster_id", "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"]) -> None: ...
 
 global___ListNodepoolsRequest = ListNodepoolsRequest
 
