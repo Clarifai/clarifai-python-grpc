@@ -3483,6 +3483,7 @@ class Model(google.protobuf.message.Message):
     CREATOR_FIELD_NUMBER: builtins.int
     VERSION_COUNT_FIELD_NUMBER: builtins.int
     BILLING_TYPE_FIELD_NUMBER: builtins.int
+    FEATURED_ORDER_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -3582,6 +3583,12 @@ class Model(google.protobuf.message.Message):
     """Creator of Model"""
     version_count: builtins.int
     billing_type: global___Model.BillingType.ValueType
+    @property
+    def featured_order(self) -> google.protobuf.wrappers_pb2.Int32Value:
+        """Whether the model should be featured, and if so, the order in which it should be featured.
+        The order is relative to other models that are also featured.
+        Models with a higher order will be featured first.
+        """
     def __init__(
         self,
         *,
@@ -3617,9 +3624,10 @@ class Model(google.protobuf.message.Message):
         creator: builtins.str = ...,
         version_count: builtins.int = ...,
         billing_type: global___Model.BillingType.ValueType = ...,
+        featured_order: google.protobuf.wrappers_pb2.Int32Value | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "image", b"image", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "billing_type", b"billing_type", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "version_count", b"version_count", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["bookmark_origin", b"bookmark_origin", "created_at", b"created_at", "default_eval_info", b"default_eval_info", "featured_order", b"featured_order", "image", b"image", "metadata", b"metadata", "model_version", b"model_version", "modified_at", b"modified_at", "output_info", b"output_info", "presets", b"presets", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "billing_type", b"billing_type", "bookmark_origin", b"bookmark_origin", "check_consents", b"check_consents", "created_at", b"created_at", "creator", b"creator", "default_eval_info", b"default_eval_info", "description", b"description", "display_name", b"display_name", "featured_order", b"featured_order", "id", b"id", "image", b"image", "is_starred", b"is_starred", "languages", b"languages", "languages_full", b"languages_full", "license_type", b"license_type", "metadata", b"metadata", "model_type_id", b"model_type_id", "model_version", b"model_version", "modified_at", b"modified_at", "name", b"name", "notes", b"notes", "output_info", b"output_info", "presets", b"presets", "source", b"source", "star_count", b"star_count", "task", b"task", "toolkits", b"toolkits", "use_cases", b"use_cases", "user_id", b"user_id", "version_count", b"version_count", "visibility", b"visibility", "workflow_recommended", b"workflow_recommended"]) -> None: ...
 
 global___Model = Model
 
