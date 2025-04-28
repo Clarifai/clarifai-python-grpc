@@ -3697,6 +3697,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     LICENSE_TYPE_FIELD_NUMBER: builtins.int
     SOURCE_FIELD_NUMBER: builtins.int
     CREATOR_FIELD_NUMBER: builtins.int
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -3804,6 +3805,8 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Filter by Source"""
     creator: builtins.str
     """Filter by Creator"""
+    min_replicas: builtins.int
+    """Filter by model versions runners with replicas >= min_replicas."""
     def __init__(
         self,
         *,
@@ -3837,9 +3840,10 @@ class ListModelsRequest(google.protobuf.message.Message):
         license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType = ...,
         source: builtins.int = ...,
         creator: builtins.str = ...,
+        min_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "creator", b"creator", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "license_type", b"license_type", "model_type_id", b"model_type_id", "model_version_ids", b"model_version_ids", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "source", b"source", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["additional_fields", b"additional_fields", "bookmark", b"bookmark", "creator", b"creator", "dont_fetch_from_main", b"dont_fetch_from_main", "featured_only", b"featured_only", "filter_by_user_id", b"filter_by_user_id", "input_fields", b"input_fields", "languages", b"languages", "license", b"license", "license_type", b"license_type", "min_replicas", b"min_replicas", "model_type_id", b"model_type_id", "model_version_ids", b"model_version_ids", "name", b"name", "output_fields", b"output_fields", "page", b"page", "per_page", b"per_page", "query", b"query", "search", b"search", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_modified_at", b"sort_by_modified_at", "sort_by_name", b"sort_by_name", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_star_count", b"sort_by_star_count", "source", b"source", "starred_only", b"starred_only", "toolkits", b"toolkits", "trained_only", b"trained_only", "use_cases", b"use_cases", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_name", "sort_by_num_inputs", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"] | None: ...
 
 global___ListModelsRequest = ListModelsRequest
@@ -4301,18 +4305,21 @@ class SingleModelResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
+    WORKFLOW_COUNT_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def model(self) -> proto.clarifai.api.resources_pb2.Model: ...
+    workflow_count: builtins.int
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         model: proto.clarifai.api.resources_pb2.Model | None = ...,
+        workflow_count: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["model", b"model", "status", b"status"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "status", b"status"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["model", b"model", "status", b"status", "workflow_count", b"workflow_count"]) -> None: ...
 
 global___SingleModelResponse = SingleModelResponse
 
@@ -4413,6 +4420,7 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
     SORT_BY_DESCRIPTION_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -4445,6 +4453,8 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time
     If neither sort option is set to true, will sort by created_at.
     """
+    min_replicas: builtins.int
+    """Filter by model versions runners with replicas >= min_replicas."""
     def __init__(
         self,
         *,
@@ -4459,9 +4469,10 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_description: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
+        min_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_description", b"sort_by_description", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_status_code", b"sort_by_status_code", "user_app_id", b"user_app_id"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "model_id", b"model_id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_description", b"sort_by_description", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_status_code", b"sort_by_status_code", "trained_only", b"trained_only", "user_app_id", b"user_app_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["concept_ids", b"concept_ids", "min_replicas", b"min_replicas", "model_id", b"model_id", "page", b"page", "per_page", b"per_page", "sort_ascending", b"sort_ascending", "sort_by", b"sort_by", "sort_by_created_at", b"sort_by_created_at", "sort_by_description", b"sort_by_description", "sort_by_num_inputs", b"sort_by_num_inputs", "sort_by_status_code", b"sort_by_status_code", "trained_only", b"trained_only", "user_app_id", b"user_app_id"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]) -> typing_extensions.Literal["sort_by_status_code", "sort_by_num_inputs", "sort_by_description", "sort_by_created_at"] | None: ...
 
 global___ListModelVersionsRequest = ListModelVersionsRequest
@@ -10926,11 +10937,12 @@ class PostWorkflowVersionEvaluationsRequest(google.protobuf.message.Message):
     @property
     def workflow_version_evaluations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowVersionEvaluation]:
         """########## Supported fields ##########
-        - evaluation_template_id
-        - ground_truth_dataset_id
-        - ground_truth_dataset_version_id
+        - ground_truth_dataset_version.app_id
+        - ground_truth_dataset_version.dataset_id
+        - ground_truth_dataset_version.id
         - id
         - target_node_id
+        - workflow_version_evaluation_template.id
         """
     @property
     def runner_selectors(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.RunnerSelector]: ...
@@ -10965,8 +10977,8 @@ class PatchWorkflowVersionEvaluationsRequest(google.protobuf.message.Message):
     def workflow_version_evaluations(self) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[proto.clarifai.api.resources_pb2.WorkflowVersionEvaluation]:
         """########## Supported fields ##########
         - id
-        - predictions_dataset_id
-        - predictions_dataset_version_id
+        - predictions_dataset_version.dataset_id
+        - predictions_dataset_version.id
         - status.code
         - status.details
         - workflow_evaluation_result.summary.evaluation_metric_values[].evaluation_metric_id
