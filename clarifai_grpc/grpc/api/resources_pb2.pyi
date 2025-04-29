@@ -603,6 +603,17 @@ class _EventTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._Enum
     COLLABORATOR_REMOVE: _EventType.ValueType  # 702
     USER_UPDATE: _EventType.ValueType  # 800
     """Event types related to users: 800 - 899"""
+    COMPUTE_CLUSTER_CREATE: _EventType.ValueType  # 900
+    """Event types related to compute clusters: 900-999"""
+    COMPUTE_CLUSTER_DELETE: _EventType.ValueType  # 901
+    NODEPOOL_CREATE: _EventType.ValueType  # 1000
+    """Event types related to nodepools: 1000-1099"""
+    NODEPOOL_UPDATE: _EventType.ValueType  # 1001
+    NODEPOOL_DELETE: _EventType.ValueType  # 1002
+    DEPLOYMENT_CREATE: _EventType.ValueType  # 1100
+    """Event types related to deployments: 1100-1199"""
+    DEPLOYMENT_UPDATE: _EventType.ValueType  # 1101
+    DEPLOYMENT_DELETE: _EventType.ValueType  # 1102
 
 class EventType(_EventType, metaclass=_EventTypeEnumTypeWrapper): ...
 
@@ -656,6 +667,17 @@ COLLABORATOR_UPDATE: EventType.ValueType  # 701
 COLLABORATOR_REMOVE: EventType.ValueType  # 702
 USER_UPDATE: EventType.ValueType  # 800
 """Event types related to users: 800 - 899"""
+COMPUTE_CLUSTER_CREATE: EventType.ValueType  # 900
+"""Event types related to compute clusters: 900-999"""
+COMPUTE_CLUSTER_DELETE: EventType.ValueType  # 901
+NODEPOOL_CREATE: EventType.ValueType  # 1000
+"""Event types related to nodepools: 1000-1099"""
+NODEPOOL_UPDATE: EventType.ValueType  # 1001
+NODEPOOL_DELETE: EventType.ValueType  # 1002
+DEPLOYMENT_CREATE: EventType.ValueType  # 1100
+"""Event types related to deployments: 1100-1199"""
+DEPLOYMENT_UPDATE: EventType.ValueType  # 1101
+DEPLOYMENT_DELETE: EventType.ValueType  # 1102
 global___EventType = EventType
 
 @typing_extensions.final
@@ -4282,11 +4304,11 @@ class ModelTypeField(google.protobuf.message.Message):
         """A audio is a audio proto for url or bytes."""
         VIDEO: ModelTypeField._DataType.ValueType  # 14
         """A video is a video proto for url or bytes."""
-        NAMED_FIELDS: ModelTypeField._DataType.ValueType  # 20
+        NAMED_FIELDS: ModelTypeField._DataType.ValueType  # 15
         """this can be used to store named fields with values similar to Dict"""
-        TUPLE: ModelTypeField._DataType.ValueType  # 21
+        TUPLE: ModelTypeField._DataType.ValueType  # 16
         """An arg that is a tuple."""
-        LIST: ModelTypeField._DataType.ValueType  # 22
+        LIST: ModelTypeField._DataType.ValueType  # 17
         """An arg that is a list."""
 
     class DataType(_DataType, metaclass=_DataTypeEnumTypeWrapper):
@@ -4325,11 +4347,11 @@ class ModelTypeField(google.protobuf.message.Message):
     """A audio is a audio proto for url or bytes."""
     VIDEO: ModelTypeField.DataType.ValueType  # 14
     """A video is a video proto for url or bytes."""
-    NAMED_FIELDS: ModelTypeField.DataType.ValueType  # 20
+    NAMED_FIELDS: ModelTypeField.DataType.ValueType  # 15
     """this can be used to store named fields with values similar to Dict"""
-    TUPLE: ModelTypeField.DataType.ValueType  # 21
+    TUPLE: ModelTypeField.DataType.ValueType  # 16
     """An arg that is a tuple."""
-    LIST: ModelTypeField.DataType.ValueType  # 22
+    LIST: ModelTypeField.DataType.ValueType  # 17
     """An arg that is a list."""
 
     PATH_FIELD_NUMBER: builtins.int
@@ -4346,6 +4368,7 @@ class ModelTypeField(google.protobuf.message.Message):
     TYPE_ARGS_FIELD_NUMBER: builtins.int
     ITERATOR_FIELD_NUMBER: builtins.int
     DEFAULT_FIELD_NUMBER: builtins.int
+    IS_PARAM_FIELD_NUMBER: builtins.int
     path: builtins.str
     """The path where the value of the field will be stored in the model version object.
     Example:
@@ -4403,11 +4426,14 @@ class ModelTypeField(google.protobuf.message.Message):
     iterator: builtins.bool
     """this will be use to define whether the method argument supports streaming as an iterator."""
     default: builtins.str
-    """This specify the default value of the method argument. We define this as a string
+    """This specify the default value of the method argument 
+    If this argument is not passed, the input is required. If it is explicitly set to None, the input is optional
+    We define this as a string
     because the default value can be a string, int, float, bool, or a complex object like a JSON
     The default_value field above should not also be used.
-    ///////////////////////////////////
     """
+    is_param: builtins.bool
+    """wheather it's a inference param or a modeltype field"""
     def __init__(
         self,
         *,
@@ -4425,9 +4451,10 @@ class ModelTypeField(google.protobuf.message.Message):
         type_args: collections.abc.Iterable[global___ModelTypeField] | None = ...,
         iterator: builtins.bool = ...,
         default: builtins.str = ...,
+        is_param: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["default_value", b"default_value", "model_type_range_info", b"model_type_range_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["default", b"default", "default_value", b"default_value", "description", b"description", "field_type", b"field_type", "internal_only", b"internal_only", "iterator", b"iterator", "model_type_enum_options", b"model_type_enum_options", "model_type_range_info", b"model_type_range_info", "name", b"name", "path", b"path", "placeholder", b"placeholder", "required", b"required", "type", b"type", "type_args", b"type_args"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["default", b"default", "default_value", b"default_value", "description", b"description", "field_type", b"field_type", "internal_only", b"internal_only", "is_param", b"is_param", "iterator", b"iterator", "model_type_enum_options", b"model_type_enum_options", "model_type_range_info", b"model_type_range_info", "name", b"name", "path", b"path", "placeholder", b"placeholder", "required", b"required", "type", b"type", "type_args", b"type_args"]) -> None: ...
 
 global___ModelTypeField = ModelTypeField
 
@@ -6772,6 +6799,7 @@ class WorkflowVersion(google.protobuf.message.Message):
     USER_ID_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     LICENSE_FIELD_NUMBER: builtins.int
+    IS_DEPRECATED_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Id of this version."""
     workflow_id: builtins.str
@@ -6812,6 +6840,10 @@ class WorkflowVersion(google.protobuf.message.Message):
     """Short description about this workflow version"""
     license: builtins.str
     """License associated to this workflow version"""
+    is_deprecated: builtins.bool
+    """If a model version associated with the workflow version is deleted, the workflow version
+    will be marked as deprecated.
+    """
     def __init__(
         self,
         *,
@@ -6826,9 +6858,10 @@ class WorkflowVersion(google.protobuf.message.Message):
         user_id: builtins.str = ...,
         description: builtins.str = ...,
         license: builtins.str = ...,
+        is_deprecated: builtins.bool = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "metadata", b"metadata", "modified_at", b"modified_at", "visibility", b"visibility"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "license", b"license", "metadata", b"metadata", "modified_at", b"modified_at", "nodes", b"nodes", "user_id", b"user_id", "visibility", b"visibility", "workflow_id", b"workflow_id"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "description", b"description", "id", b"id", "is_deprecated", b"is_deprecated", "license", b"license", "metadata", b"metadata", "modified_at", b"modified_at", "nodes", b"nodes", "user_id", b"user_id", "visibility", b"visibility", "workflow_id", b"workflow_id"]) -> None: ...
 
 global___WorkflowVersion = WorkflowVersion
 
@@ -10105,12 +10138,19 @@ class InstanceType(google.protobuf.message.Message):
     DESCRIPTION_FIELD_NUMBER: builtins.int
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
     PRICE_FIELD_NUMBER: builtins.int
+    CLOUD_PROVIDER_FIELD_NUMBER: builtins.int
+    REGION_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
     @property
     def compute_info(self) -> global___ComputeInfo: ...
     price: builtins.str
+    @property
+    def cloud_provider(self) -> global___CloudProvider:
+        """The cloud provider where this instance type is available, if any."""
+    region: builtins.str
+    """The region where this instance type is available, if any."""
     def __init__(
         self,
         *,
@@ -10118,9 +10158,11 @@ class InstanceType(google.protobuf.message.Message):
         description: builtins.str = ...,
         compute_info: global___ComputeInfo | None = ...,
         price: builtins.str = ...,
+        cloud_provider: global___CloudProvider | None = ...,
+        region: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["compute_info", b"compute_info", "description", b"description", "id", b"id", "price", b"price"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "compute_info", b"compute_info"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["cloud_provider", b"cloud_provider", "compute_info", b"compute_info", "description", b"description", "id", b"id", "price", b"price", "region", b"region"]) -> None: ...
 
 global___InstanceType = InstanceType
 
@@ -10573,6 +10615,9 @@ class AuditLogTarget(google.protobuf.message.Message):
     WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
     MODEL_VERSION_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_FIELD_NUMBER: builtins.int
+    NODEPOOL_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_FIELD_NUMBER: builtins.int
     @property
     def user(self) -> global___User: ...
     @property
@@ -10593,6 +10638,12 @@ class AuditLogTarget(google.protobuf.message.Message):
     def model(self) -> global___Model: ...
     @property
     def model_version(self) -> global___ModelVersion: ...
+    @property
+    def compute_cluster(self) -> global___ComputeCluster: ...
+    @property
+    def nodepool(self) -> global___Nodepool: ...
+    @property
+    def deployment(self) -> global___Deployment: ...
     def __init__(
         self,
         *,
@@ -10606,10 +10657,13 @@ class AuditLogTarget(google.protobuf.message.Message):
         workflow_version: global___WorkflowVersion | None = ...,
         model: global___Model | None = ...,
         model_version: global___ModelVersion | None = ...,
+        compute_cluster: global___ComputeCluster | None = ...,
+        nodepool: global___Nodepool | None = ...,
+        deployment: global___Deployment | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version", "workflow", "workflow_version", "model", "model_version"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["app", b"app", "compute_cluster", b"compute_cluster", "deployment", b"deployment", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "nodepool", b"nodepool", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app", b"app", "compute_cluster", b"compute_cluster", "deployment", b"deployment", "model", b"model", "model_version", b"model_version", "module", b"module", "module_version", b"module_version", "nodepool", b"nodepool", "role", b"role", "target", b"target", "team", b"team", "user", b"user", "workflow", b"workflow", "workflow_version", b"workflow_version"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["target", b"target"]) -> typing_extensions.Literal["user", "role", "team", "app", "module", "module_version", "workflow", "workflow_version", "model", "model_version", "compute_cluster", "nodepool", "deployment"] | None: ...
 
 global___AuditLogTarget = AuditLogTarget
 
@@ -11055,37 +11109,40 @@ class WorkflowVersionEvaluation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    WORKFLOW_ID_FIELD_NUMBER: builtins.int
-    WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
-    GROUND_TRUTH_DATASET_ID_FIELD_NUMBER: builtins.int
-    GROUND_TRUTH_DATASET_VERSION_ID_FIELD_NUMBER: builtins.int
-    PREDICTIONS_DATASET_ID_FIELD_NUMBER: builtins.int
-    PREDICTIONS_DATASET_VERSION_ID_FIELD_NUMBER: builtins.int
-    EVALUATION_TEMPLATE_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
+    TARGET_NODE_ID_FIELD_NUMBER: builtins.int
+    GROUND_TRUTH_DATASET_VERSION_FIELD_NUMBER: builtins.int
+    PREDICTIONS_DATASET_VERSION_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_TEMPLATE_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_EVALUATION_RESULT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
-    TARGET_NODE_ID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Customer-Facing / External ID of the workflow version evaluation."""
-    workflow_id: builtins.str
-    """The ID of the workflow that is used for evaluation."""
-    workflow_version_id: builtins.str
-    """The version of the workflow that is used for evaluation."""
-    ground_truth_dataset_id: builtins.str
-    """The ID of the ground-truth dataset that is used for evaluation."""
-    ground_truth_dataset_version_id: builtins.str
-    """The version ID of the ground-truth dataset that is used for evaluation."""
-    predictions_dataset_id: builtins.str
-    """The ID of the prediction dataset that is used for evaluation."""
-    predictions_dataset_version_id: builtins.str
-    """The version ID of the prediction dataset that is used for evaluation."""
-    evaluation_template_id: builtins.str
-    """Evaluation Template ID"""
+    @property
+    def workflow_version(self) -> global___WorkflowVersion:
+        """Workflow version that is being evaluated."""
+    target_node_id: builtins.str
+    """The target node id that is being evaluated."""
+    @property
+    def ground_truth_dataset_version(self) -> global___DatasetVersion:
+        """The dataset version that contains the ground-truth and is used for evaluation."""
+    @property
+    def predictions_dataset_version(self) -> global___DatasetVersion:
+        """The dataset version that contains the predictions and is used for evaluation."""
+    @property
+    def workflow_version_evaluation_template(self) -> global___WorkflowVersionEvaluationTemplate:
+        """Evaluation template that is used for evaluation."""
+    user_id: builtins.str
+    """The user the workflow version evaluation belongs to."""
+    app_id: builtins.str
+    """The app the workflow version evaluation belongs to."""
     @property
     def workflow_evaluation_result(self) -> global___WorkflowEvaluationResult:
-        """The evaluation results"""
+        """Results of the evaluation."""
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """Status of the evaluation"""
@@ -11095,27 +11152,24 @@ class WorkflowVersionEvaluation(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the workflow version evaluation was modified."""
-    target_node_id: builtins.str
-    """The ID of the node that is being evaluated."""
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        workflow_id: builtins.str = ...,
-        workflow_version_id: builtins.str = ...,
-        ground_truth_dataset_id: builtins.str = ...,
-        ground_truth_dataset_version_id: builtins.str = ...,
-        predictions_dataset_id: builtins.str = ...,
-        predictions_dataset_version_id: builtins.str = ...,
-        evaluation_template_id: builtins.str = ...,
+        workflow_version: global___WorkflowVersion | None = ...,
+        target_node_id: builtins.str = ...,
+        ground_truth_dataset_version: global___DatasetVersion | None = ...,
+        predictions_dataset_version: global___DatasetVersion | None = ...,
+        workflow_version_evaluation_template: global___WorkflowVersionEvaluationTemplate | None = ...,
+        user_id: builtins.str = ...,
+        app_id: builtins.str = ...,
         workflow_evaluation_result: global___WorkflowEvaluationResult | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        target_node_id: builtins.str = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "modified_at", b"modified_at", "status", b"status", "workflow_evaluation_result", b"workflow_evaluation_result"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "evaluation_template_id", b"evaluation_template_id", "ground_truth_dataset_id", b"ground_truth_dataset_id", "ground_truth_dataset_version_id", b"ground_truth_dataset_version_id", "id", b"id", "modified_at", b"modified_at", "predictions_dataset_id", b"predictions_dataset_id", "predictions_dataset_version_id", b"predictions_dataset_version_id", "status", b"status", "target_node_id", b"target_node_id", "workflow_evaluation_result", b"workflow_evaluation_result", "workflow_id", b"workflow_id", "workflow_version_id", b"workflow_version_id"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["created_at", b"created_at", "ground_truth_dataset_version", b"ground_truth_dataset_version", "modified_at", b"modified_at", "predictions_dataset_version", b"predictions_dataset_version", "status", b"status", "workflow_evaluation_result", b"workflow_evaluation_result", "workflow_version", b"workflow_version", "workflow_version_evaluation_template", b"workflow_version_evaluation_template"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["app_id", b"app_id", "created_at", b"created_at", "ground_truth_dataset_version", b"ground_truth_dataset_version", "id", b"id", "modified_at", b"modified_at", "predictions_dataset_version", b"predictions_dataset_version", "status", b"status", "target_node_id", b"target_node_id", "user_id", b"user_id", "workflow_evaluation_result", b"workflow_evaluation_result", "workflow_version", b"workflow_version", "workflow_version_evaluation_template", b"workflow_version_evaluation_template"]) -> None: ...
 
 global___WorkflowVersionEvaluation = WorkflowVersionEvaluation
 
