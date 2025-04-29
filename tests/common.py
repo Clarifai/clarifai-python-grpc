@@ -3,14 +3,12 @@ import time
 from datetime import datetime
 from typing import List, Tuple
 
-from grpc._channel import _Rendezvous
-
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.channel.http_client import CLIENT_VERSION
 from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
-
+from grpc._channel import _Rendezvous
 
 MAX_PREDICT_ATTEMPTS = 6  # PostModelOutputs unsuccessful predict retry limit
 MAX_RETRY_ATTEMPTS = 15  # gRPC exceeded deadlines/timeout retry limit.
@@ -43,16 +41,22 @@ def get_status_message(status: Status):
 
 def headers(pat=False):
     if pat:
-        return {"authorization": "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")}
+        return {
+            "authorization": "Key %s"
+            % os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
+        }
     else:
-        return {"authorization": "Key %s" % os.environ.get("CLARIFAI_API_KEY")}
+        return {
+            "authorization": "Key %s"
+            % os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_PAT"))
+        }
 
 
 def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     if pat:
-        key = os.environ.get("CLARIFAI_PAT_KEY")
+        key = os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
     else:
-        key = os.environ.get("CLARIFAI_API_KEY")
+        key = os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_PAT"))
 
     return (
         ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
@@ -75,6 +79,22 @@ def both_channels(func):
 
         channel = ClarifaiChannel.get_json_channel()
         func(channel)
+
+    return func_wrapper
+
+
+def asyncio_channel(func):
+    """
+    A decorator that runs the test using the asyncio gRPC channel.
+    :param func: The test function.
+    :return: A function wrapper.
+    """
+
+    async def func_wrapper():
+        channel = ClarifaiChannel.get_aio_grpc_channel()
+        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
+            channel = ClarifaiChannel.get_aio_insecure_grpc_channel(port=443)
+        await func(channel)
 
     return func_wrapper
 
@@ -285,6 +305,18 @@ def raise_on_failure(response, custom_message=""):
         )
 
 
+async def async_raise_on_failure(response, custom_message=""):
+    if response.status.code != status_code_pb2.SUCCESS:
+        error_message = get_status_message(response.status)
+        if custom_message:
+            if not str.isspace(custom_message[-1]):
+                custom_message += " "
+        raise Exception(
+            custom_message
+            + f"Received failure response `{error_message}`. Whole response object: {response}"
+        )
+
+
 def post_model_outputs_and_maybe_allow_retries(
     stub: service_pb2_grpc.V2Stub,
     request: service_pb2.PostModelOutputsRequest,
@@ -302,11 +334,40 @@ def post_model_outputs_and_maybe_allow_retries(
     return response
 
 
+async def async_post_model_outputs_and_maybe_allow_retries(
+    stub: service_pb2_grpc.V2Stub,
+    request: service_pb2.PostModelOutputsRequest,
+    metadata: Tuple,
+):
+    # first make sure we don't run into GRPC timeout issues and that the API can be reached.
+    response = await _async_retry_on_504_on_non_prod(
+        stub.PostModelOutputs, request=request, metadata=metadata
+    )
+    # retry when status of response is FAILURE
+    response = await _async_retry_on_unsuccessful_predicts_on_non_prod(
+        stub.PostModelOutputs,
+        request=request,
+        metadata=metadata,
+        response=response,
+    )
+    return response
+
+
 def _retry_on_unsuccessful_predicts_on_non_prod(stub_call, request, metadata, response):
     for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
         if response.status.code not in [status_code_pb2.MODEL_DEPLOYING, status_code_pb2.FAILURE]:
             return response  # don't retry on non-FAILURE codes
         response = stub_call(request=request, metadata=metadata)
+    return response
+
+
+async def _async_retry_on_unsuccessful_predicts_on_non_prod(
+    stub_call, request, metadata, response
+):
+    for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
+        if response.status.code not in [status_code_pb2.MODEL_DEPLOYING, status_code_pb2.FAILURE]:
+            return response  # don't retry on non-FAILURE codes
+        response = await stub_call(request=request, metadata=metadata)
     return response
 
 
@@ -318,6 +379,35 @@ def _retry_on_504_on_non_prod(stub_call, request, metadata):
     for i in range(1, MAX_RETRY_ATTEMPTS + 1):
         try:
             response = stub_call(request=request, metadata=metadata)
+            if (
+                len(response.outputs) > 0
+                and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
+            ):  # will want to retry
+                break
+        except _Rendezvous as e:
+            grpc_base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+            if grpc_base == "api.clarifai.com":
+                raise e
+
+            if "status: 504" not in e._state.details and "10020 Failure" not in e._state.details:
+                raise e
+
+            if i == MAX_RETRY_ATTEMPTS:
+                raise e
+
+            print(f"Received 504, doing retry #{i}")
+            time.sleep(1)
+    return response
+
+
+async def _async_retry_on_504_on_non_prod(stub_call, request, metadata):
+    """
+    On non-prod, it's possible that PostModelOutputs will return a temporary 504 response.
+    We don't care about those as long as, after a few seconds, the response is a success.
+    """
+    for i in range(1, MAX_RETRY_ATTEMPTS + 1):
+        try:
+            response = await stub_call(request=request, metadata=metadata)
             if (
                 len(response.outputs) > 0
                 and response.outputs[0].status.code != status_code_pb2.RPC_REQUEST_TIMEOUT
