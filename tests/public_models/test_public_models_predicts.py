@@ -1,11 +1,15 @@
 import pytest
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+
 from tests.common import (
     BEER_VIDEO_URL,
     DOG_IMAGE_URL,
     GENERAL_MODEL_ID,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
+    async_post_model_outputs_and_maybe_allow_retries,
+    async_raise_on_failure,
+    asyncio_channel,
     both_channels,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
@@ -41,7 +45,33 @@ def test_audio_predict_on_public_models(channel):
         response = post_model_outputs_and_maybe_allow_retries(
             stub, request, metadata=metadata(pat=True)
         )
+
         raise_on_failure(
+            response,
+            custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+# write an asyncio version of the test for audio above:
+@asyncio_channel
+async def test_audio_predict_on_public_models_async(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in AUDIO_MODEL_TITLE_IDS_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
+                )
+            ],
+        )
+        response = await async_post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+
+        await async_raise_on_failure(
             response,
             custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
         )
@@ -70,6 +100,34 @@ def test_text_predict_on_public_models(channel):
             stub, request, metadata=metadata(pat=True)
         )
         raise_on_failure(
+            response,
+            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+@asyncio_channel
+async def test_text_predict_on_public_models_async(channel):
+    """Test non translation text/nlp models.
+    All these models can take the same test text input.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
+                    )
+                )
+            ],
+        )
+        response = await async_post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+        await async_raise_on_failure(
             response,
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
@@ -151,6 +209,29 @@ def test_image_predict_on_public_models(channel):
         )
 
 
+@asyncio_channel
+async def test_image_predict_on_public_models_async(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                )
+            ],
+        )
+        response = await async_post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata(pat=True)
+        )
+        await async_raise_on_failure(
+            response,
+            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
 @both_channels
 def test_image_detection_predict_on_public_models(channel):
     """Test object detection models using clarifai platform user
@@ -172,6 +253,32 @@ def test_image_detection_predict_on_public_models(channel):
             stub, request, metadata=metadata(pat=True)
         )
         raise_on_failure(
+            response,
+            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+        )
+
+
+@asyncio_channel
+async def test_image_detection_predict_on_public_models_async(channel):
+    """Test object detection models using clarifai platform user
+    and app id access credentials.
+    """
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+                )
+            ],
+        )
+        response = await async_post_model_outputs_and_maybe_allow_retries(
+            stub, request, metadata=metadata(pat=True)
+        )
+        await async_raise_on_failure(
             response,
             custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
         )

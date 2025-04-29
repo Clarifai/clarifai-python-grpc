@@ -1,8 +1,9 @@
 import json
 import os
 
+import grpc
+
 from clarifai_grpc.channel.grpc_json_channel import GRPCJSONChannel
-from clarifai_grpc.grpc.api import service_pb2_grpc
 
 RETRIES = 2  # if connections fail retry a couple times.
 CONNECTIONS = 20  # number of connections to maintain in pool.
@@ -76,11 +77,11 @@ class ClarifaiChannel:
         if root_certificates_path:
             with open(root_certificates_path, "rb") as f:
                 root_certificates = f.read()
-            credentials = service_pb2_grpc.grpc.ssl_channel_credentials(root_certificates)
+            credentials = grpc.ssl_channel_credentials(root_certificates)
         else:
-            credentials = service_pb2_grpc.grpc.ssl_channel_credentials()
+            credentials = grpc.ssl_channel_credentials()
 
-        return service_pb2_grpc.grpc.secure_channel(
+        return grpc.secure_channel(
             base,
             credentials,
             options=[
@@ -102,7 +103,56 @@ class ClarifaiChannel:
 
         channel_address = "{}:{}".format(base, port)
 
-        return service_pb2_grpc.grpc.insecure_channel(
+        return grpc.insecure_channel(
+            channel_address,
+            options=[
+                ("grpc.service_config", grpc_json_config),
+                ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+            ],
+        )
+
+    @staticmethod
+    def get_aio_grpc_channel(base=None, root_certificates_path=None):
+        global wrap_response_deserializer
+        wrap_response_deserializer = _response_deserializer_for_grpc
+
+        if not base:
+            base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+        if base.startswith("http:") or base.startswith("https:"):
+            raise ValueError(
+                "For secure channels the 'base' passed via arguments or env variable CLARIFAI_GRPC_BASE should not start with http:// or https:// but be a direct api endpoint like 'api.clarifai.com'"
+            )
+
+        if root_certificates_path:
+            with open(root_certificates_path, "rb") as f:
+                root_certificates = f.read()
+            credentials = grpc.ssl_channel_credentials(root_certificates)
+        else:
+            credentials = grpc.ssl_channel_credentials()
+
+        return grpc.aio.secure_channel(
+            base,
+            credentials,
+            options=[
+                ("grpc.service_config", grpc_json_config),
+                ("grpc.max_receive_message_length", MAX_MESSAGE_LENGTH),
+            ],
+        )
+
+    @staticmethod
+    def get_aio_insecure_grpc_channel(base=None, port=18080):
+        global wrap_response_deserializer
+        wrap_response_deserializer = _response_deserializer_for_grpc
+
+        if not base:
+            base = os.environ.get("CLARIFAI_GRPC_BASE", None)
+
+        if not base:
+            raise ValueError("Please set 'base' via arguments or env variable CLARIFAI_GRPC_BASE")
+
+        channel_address = "{}:{}".format(base, port)
+
+        return grpc.aio.insecure_channel(
             channel_address,
             options=[
                 ("grpc.service_config", grpc_json_config),
