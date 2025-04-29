@@ -77,8 +77,8 @@ def both_channels(func):
             channel = ClarifaiChannel.get_insecure_grpc_channel(port=443)
         func(channel)
 
-        # channel = ClarifaiChannel.get_json_channel()
-        # func(channel)
+        channel = ClarifaiChannel.get_json_channel()
+        func(channel)
 
     return func_wrapper
 
