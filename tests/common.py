@@ -423,5 +423,5 @@ async def _async_retry_on_504_on_non_prod(stub_call, request, metadata):
         raise e
 
       print(f"Received 504, doing retry #{i}")
-      time.sleep(1)
+      await asyncio.sleep(1)
   return response
