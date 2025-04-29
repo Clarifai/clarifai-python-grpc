@@ -4,9 +4,10 @@ import logging
 import os
 import typing  # noqa
 
+from clarifai_grpc import __version__
 from clarifai_grpc.channel.errors import ApiError
 
-CLIENT_VERSION = "11.3.3"
+CLIENT_VERSION = __version__
 OS_VER = os.sys.platform
 PYTHON_VERSION = ".".join(
     map(

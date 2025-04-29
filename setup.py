@@ -1,3 +1,5 @@
+import re
+
 import setuptools
 
 with open("README.md", "r") as fh:
@@ -6,8 +8,11 @@ with open("README.md", "r") as fh:
 packages = setuptools.find_packages(include=["clarifai_grpc*"])
 
 # Load the version
-with open("VERSION") as f:
-  version = f.read().strip()
+with open("./clarifai_grpc/__init__.py") as f:
+  content = f.read()
+_search_version = re.search(r'__version__\s*=\s*[\'"]([^\'"]*)[\'"]', content)
+assert _search_version
+version = _search_version.group(1)
 
 setuptools.setup(
   name="clarifai-grpc",
