@@ -16,17 +16,17 @@ CL_MORETAGS_FIELD_NUMBER: builtins.int
 CL_DEFAULT_FLOAT_FIELD_NUMBER: builtins.int
 DESCRIPTION_FIELD_NUMBER: builtins.int
 cl_show_if_empty: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[
-  google.protobuf.descriptor_pb2.FieldOptions, builtins.bool
+    google.protobuf.descriptor_pb2.FieldOptions, builtins.bool
 ]
 """If True then we will return this field with it's zero value even if not set.
 This means in json responses empty lists will appear instead of not being returned (which is
 the default convention for proto3). For int's we will show 0, for floats 0.0, etc.
 """
 cl_moretags: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[
-  google.protobuf.descriptor_pb2.FieldOptions, builtins.str
+    google.protobuf.descriptor_pb2.FieldOptions, builtins.str
 ]
 cl_default_float: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[
-  google.protobuf.descriptor_pb2.FieldOptions, builtins.float
+    google.protobuf.descriptor_pb2.FieldOptions, builtins.float
 ]
 """For float fields where this is set, this value will be used by the server when parsing the
 request and the field is not present in the request. If the field is present in the request,
@@ -34,6 +34,6 @@ then the value of the field will be used instead. This is ONLY used for json req
 proto requests are expected to always set the field.
 """
 description: google.protobuf.internal.extension_dict._ExtensionFieldDescriptor[
-  google.protobuf.descriptor_pb2.EnumValueOptions, builtins.str
+    google.protobuf.descriptor_pb2.EnumValueOptions, builtins.str
 ]
 """A description of the enum value."""

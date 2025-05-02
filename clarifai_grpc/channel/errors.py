@@ -1,11 +1,11 @@
 class ApiError(Exception):
-  pass
+    pass
 
 
 class NotImplementedCaller:
-  def __call__(self, *args, **kwargs):
-    raise NotImplementedError()
+    def __call__(self, *args, **kwargs):
+        raise NotImplementedError()
 
 
 class UsageError(Exception):
-  pass
+    pass
