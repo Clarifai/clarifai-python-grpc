@@ -35,60 +35,60 @@ TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 
 
 TRANSLATION_TEST_DATA = {
-    "ROMANCE": "No me apetece nada estudiar esta noche",
-    "EN": "I dont feel like studying tonight but I must study",
-    "SPANISH": "No me apetece nada estudiar esta noche",
-    "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
-    "CHINESE": "我今晚不想學習",
-    "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
-    "WELSH": "Dydw i ddim yn teimlo fel astudio heno",
-    "FRENCH": "Je n'ai pas envie d'étudier ce soir",
-    "RUSSIAN": "Я не хочу учиться сегодня вечером",
-    "TURKISH": "bu gece ders çalışmak istemiyorum",
-    "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
-    "PORTUGESE": "Eu não sinto vontade de estudar esta noite",
-    "CZECH": "Dnes večer se mi nechce učit",
-    "JAPANESE": "今夜は勉強したくない",
-    "DANISH": "Jeg har ikke lyst til at studere i aften",
+  "ROMANCE": "No me apetece nada estudiar esta noche",
+  "EN": "I dont feel like studying tonight but I must study",
+  "SPANISH": "No me apetece nada estudiar esta noche",
+  "GERMAN": "Ich habe heute Abend keine Lust zu lernen",
+  "CHINESE": "我今晚不想學習",
+  "ARABIC": "لا أشعر بالرغبة في الدراسة الليلة",
+  "WELSH": "Dydw i ddim yn teimlo fel astudio heno",
+  "FRENCH": "Je n'ai pas envie d'étudier ce soir",
+  "RUSSIAN": "Я не хочу учиться сегодня вечером",
+  "TURKISH": "bu gece ders çalışmak istemiyorum",
+  "INDONESIAN": "Saya tidak merasa ingin belajar malam ini",
+  "PORTUGESE": "Eu não sinto vontade de estudar esta noite",
+  "CZECH": "Dnes večer se mi nechce učit",
+  "JAPANESE": "今夜は勉強したくない",
+  "DANISH": "Jeg har ikke lyst til at studere i aften",
 }
 
 # general visual detection models (yolo, detic)
 # Data Structure: {MODEL_NAME: [title, model, app, user]}
 OBJECT_DETECTION_MODELS = {
-    "BLAZE_FACE_DETECTOR": [
-        "general-image-detector-blazeface_ssh-widerface",
-        "general-image-detector-blazeface_ssh-widerface",
-        "face",
-        "paddlepaddle",
-    ],
-    "DETIC_CLIP_R50": [
-        "general-image-detector-detic_clipR50Caption-coco",
-        "detic-clip-r50-1x_caption-CPU",
-        "detic",
-        "facebook",
-    ],
-    "DETIC_C2_SWINB_LVIS": [
-        "general-image-detector-detic_C2_SwinB_896_lvis",
-        "general-image-detector-detic_C2_SwinB_896_lvis",
-        "detic",
-        "facebook",
-    ],
-    "DETIC_C2_SWINB_COCO": [
-        "general-image-detector-detic_C2_SwinB-21K_COCO",
-        "general-image-detector-detic_C2_SwinB-21K_COCO",
-        "detic",
-        "facebook",
-    ],
-    "DETIC_C2_IN_L_SWINB_LVIS": [
-        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
-        "general-image-detector-detic_C2_IN_L_SwinB_lvis",
-        "detic",
-        "facebook",
-    ],
+  "BLAZE_FACE_DETECTOR": [
+    "general-image-detector-blazeface_ssh-widerface",
+    "general-image-detector-blazeface_ssh-widerface",
+    "face",
+    "paddlepaddle",
+  ],
+  "DETIC_CLIP_R50": [
+    "general-image-detector-detic_clipR50Caption-coco",
+    "detic-clip-r50-1x_caption-CPU",
+    "detic",
+    "facebook",
+  ],
+  "DETIC_C2_SWINB_LVIS": [
+    "general-image-detector-detic_C2_SwinB_896_lvis",
+    "general-image-detector-detic_C2_SwinB_896_lvis",
+    "detic",
+    "facebook",
+  ],
+  "DETIC_C2_SWINB_COCO": [
+    "general-image-detector-detic_C2_SwinB-21K_COCO",
+    "general-image-detector-detic_C2_SwinB-21K_COCO",
+    "detic",
+    "facebook",
+  ],
+  "DETIC_C2_IN_L_SWINB_LVIS": [
+    "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+    "general-image-detector-detic_C2_IN_L_SwinB_lvis",
+    "detic",
+    "facebook",
+  ],
 }
 SHORT_OBJECT_DETECTION_MODEL_KEYS = ["DETIC_CLIP_R50"]
 OBJECT_DETECTION_MODELS_SHORT = {
-    k: OBJECT_DETECTION_MODELS[k] for k in SHORT_OBJECT_DETECTION_MODEL_KEYS
+  k: OBJECT_DETECTION_MODELS[k] for k in SHORT_OBJECT_DETECTION_MODEL_KEYS
 }
 
 ## LANGUAGE TRANSLATION
@@ -98,120 +98,120 @@ OBJECT_DETECTION_MODELS_SHORT = {
 ### Dictionary Structure: {MODEL_NAME: [<clarifai-id>, <clarifai-name>]}
 
 HELSINKINLP_TRANSLATION_MODELS = {
-    "ROMANCE_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-ROMANCE-en",
-        "text-translation-romance-lang-english",
-    ],
-    "EN_SPANISH_MODEL": [
-        "Helsinki-NLP/opus-mt-en-es",
-        "text-translation-english-spanish",
-    ],
-    "GERMAN_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-de-en",
-        "text-translation-german-english",
-    ],
-    "CHINESE_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-zh-en",
-        "text-translation-chinese-english",
-    ],
-    "ARABIC_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-ar-en",
-        "text-translation-arabic-english",
-    ],
-    "JAPANESE_EN_MODEL": [
-        "Helsinki-NLP/opus-mt-jap-en",
-        "text-translation-japanese-english",
-    ],
+  "ROMANCE_EN_MODEL": [
+    "Helsinki-NLP/opus-mt-ROMANCE-en",
+    "text-translation-romance-lang-english",
+  ],
+  "EN_SPANISH_MODEL": [
+    "Helsinki-NLP/opus-mt-en-es",
+    "text-translation-english-spanish",
+  ],
+  "GERMAN_EN_MODEL": [
+    "Helsinki-NLP/opus-mt-de-en",
+    "text-translation-german-english",
+  ],
+  "CHINESE_EN_MODEL": [
+    "Helsinki-NLP/opus-mt-zh-en",
+    "text-translation-chinese-english",
+  ],
+  "ARABIC_EN_MODEL": [
+    "Helsinki-NLP/opus-mt-ar-en",
+    "text-translation-arabic-english",
+  ],
+  "JAPANESE_EN_MODEL": [
+    "Helsinki-NLP/opus-mt-jap-en",
+    "text-translation-japanese-english",
+  ],
 }
 
 FACEBOOK_TRANSLATION_MODELS = {
-    "SPANISH_EN_FB_MODEL": [
-        "translation-spanish-to-english-text",
-        "translation-spanish-to-english-text",
-    ],
-    "CHINESE_EN_FB_MODEL": [
-        "translation-chinese-to-english-text",
-        "translation-chinese-to-english-text",
-    ],
-    "EN_CHINESE_FB_MODEL": [
-        "translation-english-to-chinese-text",
-        "translation-english-to-chinese-text",
-    ],
-    "RUSSIAN_EN_MODEL": [
-        "translation-russian-to-english-text",
-        "translation-russian-to-english-text",
-    ],
-    "EN_RUSSIAN_MODEL": [
-        "translation-english-to-russian-text",
-        "translation-english-to-russian-text",
-    ],
-    "FRENCH_EN_MODEL": [
-        "translation-french-to-english-text",
-        "translation-french-to-english-text",
-    ],
-    "EN_FRENCH_MODEL": [
-        "translation-english-to-french-text",
-        "translation-english-to-french-text",
-    ],
-    "ARABIC_EN_FB_MODEL": [
-        "translation-arabic-to-english-text",
-        "translation-arabic-to-english-text",
-    ],
-    "EN_ARABIC_FB_MODEL": [
-        "translation-english-to-arabic-text",
-        "translation-english-to-arabic-text",
-    ],
+  "SPANISH_EN_FB_MODEL": [
+    "translation-spanish-to-english-text",
+    "translation-spanish-to-english-text",
+  ],
+  "CHINESE_EN_FB_MODEL": [
+    "translation-chinese-to-english-text",
+    "translation-chinese-to-english-text",
+  ],
+  "EN_CHINESE_FB_MODEL": [
+    "translation-english-to-chinese-text",
+    "translation-english-to-chinese-text",
+  ],
+  "RUSSIAN_EN_MODEL": [
+    "translation-russian-to-english-text",
+    "translation-russian-to-english-text",
+  ],
+  "EN_RUSSIAN_MODEL": [
+    "translation-english-to-russian-text",
+    "translation-english-to-russian-text",
+  ],
+  "FRENCH_EN_MODEL": [
+    "translation-french-to-english-text",
+    "translation-french-to-english-text",
+  ],
+  "EN_FRENCH_MODEL": [
+    "translation-english-to-french-text",
+    "translation-english-to-french-text",
+  ],
+  "ARABIC_EN_FB_MODEL": [
+    "translation-arabic-to-english-text",
+    "translation-arabic-to-english-text",
+  ],
+  "EN_ARABIC_FB_MODEL": [
+    "translation-english-to-arabic-text",
+    "translation-english-to-arabic-text",
+  ],
 }
 
 
 MODEL_TITLE_AND_ID_PAIRS = [
-    ("apparel", APPAREL_MODEL_ID),
-    ("color", COLOR_MODEL_ID),
-    ("food", FOOD_MODEL_ID),
-    ("general embedding", GENERAL_EMBEDDING_MODEL_ID),
-    ("general", GENERAL_MODEL_ID),
-    ("landscape quality", LANDSCAPE_QUALITY_MODEL_ID),
-    ("logo", LOGO_MODEL_ID),
-    ("moderation", MODERATION_MODEL_ID),
-    ("nsfw", NSFW_MODEL_ID),
-    ("portrait quality", PORTRAIT_QUALITY_MODEL_ID),
-    ("textures and patterns", TEXTURES_AND_PATTERNS_MODEL_ID),
-    ("travel", TRAVEL_MODEL_ID),
-    ("wedding", WEDDING_MODEL_ID),
-    ("logo v2", LOGO_V2_MODEL_ID),
-    ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
-    ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
-    ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
+  ("apparel", APPAREL_MODEL_ID),
+  ("color", COLOR_MODEL_ID),
+  ("food", FOOD_MODEL_ID),
+  ("general embedding", GENERAL_EMBEDDING_MODEL_ID),
+  ("general", GENERAL_MODEL_ID),
+  ("landscape quality", LANDSCAPE_QUALITY_MODEL_ID),
+  ("logo", LOGO_MODEL_ID),
+  ("moderation", MODERATION_MODEL_ID),
+  ("nsfw", NSFW_MODEL_ID),
+  ("portrait quality", PORTRAIT_QUALITY_MODEL_ID),
+  ("textures and patterns", TEXTURES_AND_PATTERNS_MODEL_ID),
+  ("travel", TRAVEL_MODEL_ID),
+  ("wedding", WEDDING_MODEL_ID),
+  ("logo v2", LOGO_V2_MODEL_ID),
+  ("caption", GENERAL_ENGLISH_IMAGE_CAPTION_CLIP_MODEL_ID),
+  ("subject segmenter", IMAGE_SUBJECT_SEGMENTATION_MODEL_ID),
+  ("paddleocr english chinese", PADDLEOCR_ENG_CHINESE_MODEL_ID),
 ]
 
 # title, model, app, user
 DETECTION_MODEL_TITLE_AND_IDS = []
 
 MULTIMODAL_MODEL_TITLE_AND_IDS = [
-    ("multimodal clip embed", MULTIMODAL_CLIP_EMBED_MODEL_ID),
+  ("multimodal clip embed", MULTIMODAL_CLIP_EMBED_MODEL_ID),
 ]
 
 # Add models in object_detection_models dict to model_id_pairs list
 # older image tests use different model-ids not from the platform
 for _, values in OBJECT_DETECTION_MODELS_SHORT.items():
-    DETECTION_MODEL_TITLE_AND_IDS.append(tuple(values))
+  DETECTION_MODEL_TITLE_AND_IDS.append(tuple(values))
 
 TEXT_MODEL_TITLE_IDS_TUPLE = [
-    ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
-    ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "textgen"),
-    ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "nlptownres"),
-    (
-        "text multilingual moderation",
-        TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
-    (
-        "ner english",
-        NER_ENGLISH_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
-    ),
+  ("text summarization", TEXT_SUM_MODEL_ID, "summarization", "hcs"),
+  ("text generation", TEXT_GEN_MODEL_ID, "text-generation", "textgen"),
+  ("text sentiment", TEXT_SENTIMENT_MODEL_ID, "text-classification", "nlptownres"),
+  (
+    "text multilingual moderation",
+    TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
+    os.environ.get("CLARIFAI_APP_ID"),
+    os.environ.get("CLARIFAI_USER_ID"),
+  ),
+  (
+    "ner english",
+    NER_ENGLISH_MODEL_ID,
+    os.environ.get("CLARIFAI_APP_ID"),
+    os.environ.get("CLARIFAI_USER_ID"),
+  ),
 ]
 
 # title, model_id, text, app, user
@@ -223,33 +223,33 @@ TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE = []
 # the text_translation_model_title_id_data list of tuples
 
 for key, values in FACEBOOK_TRANSLATION_MODELS.items():
-    language = key.split("_")[0]
-    values.append(TRANSLATION_TEST_DATA[language])
-    app_credentials = [
-        "translation",
-        "facebook",
-    ]
-    values += app_credentials
-    TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
+  language = key.split("_")[0]
+  values.append(TRANSLATION_TEST_DATA[language])
+  app_credentials = [
+    "translation",
+    "facebook",
+  ]
+  values += app_credentials
+  TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
 
 
 for key, values in HELSINKINLP_TRANSLATION_MODELS.items():
-    language = key.split("_")[0]
-    values.append(TRANSLATION_TEST_DATA[language])
-    app_credentials = [
-        "translation",
-        "helsinkinlp",
-    ]
-    values += app_credentials
-    TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
+  language = key.split("_")[0]
+  values.append(TRANSLATION_TEST_DATA[language])
+  app_credentials = [
+    "translation",
+    "helsinkinlp",
+  ]
+  values += app_credentials
+  TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE.append(tuple(values))
 
 AUDIO_MODEL_TITLE_IDS_TUPLE = [
-    ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook"),
-    # TODO: Will be added later
-    # (
-    #     "general-asr-nemo_jasper",
-    #     GENERAL_ASR_NEMO_JASPER_MODEL_ID,
-    #     "asr",
-    #     "nvidia",
-    # ),
+  ("english audio transcription", ENGLISH_ASR_MODEL_ID, "asr", "facebook"),
+  # TODO: Will be added later
+  # (
+  #     "general-asr-nemo_jasper",
+  #     GENERAL_ASR_NEMO_JASPER_MODEL_ID,
+  #     "asr",
+  #     "nvidia",
+  # ),
 ]
