@@ -1,12 +1,12 @@
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.resources_pb2 import Search
 from tests.common import (
-    raise_on_failure,
-    wait_for_inputs_upload,
-    metadata,
+    TRAVEL_IMAGE_URL,
     both_channels,
     cleanup_inputs,
-    TRAVEL_IMAGE_URL,
+    metadata,
+    raise_on_failure,
+    wait_for_inputs_upload,
 )
 
 

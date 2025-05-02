@@ -1,10 +1,11 @@
 import io
 import json
-import requests
 import uuid
 import zipfile
 
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+import requests
+
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.client.test_secure_data_hosting import get_secure_hosting_url
 from tests.common import (
     DOG_IMAGE_URL,
@@ -13,10 +14,10 @@ from tests.common import (
     headers,
     metadata,
     raise_on_failure,
+    wait_for_dataset_version_export_success,
+    wait_for_dataset_version_ready,
     wait_for_inputs_delete,
     wait_for_inputs_upload,
-    wait_for_dataset_version_ready,
-    wait_for_dataset_version_export_success,
 )
 
 

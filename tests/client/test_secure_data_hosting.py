@@ -1,19 +1,19 @@
 import hashlib
 import os
-import requests
 import time
 
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+import requests
+
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
-    TRUCK_IMAGE_URL,
-    TRAVEL_IMAGE_URL,
     BEER_VIDEO_URL,
+    TRAVEL_IMAGE_URL,
+    TRUCK_IMAGE_URL,
     both_channels,
     cleanup_inputs,
     raise_on_failure,
     wait_for_inputs_upload,
 )
-
 
 req_session = requests.Session()
 
@@ -96,42 +96,42 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
 def verify_url_with_all_auths(expected_input_url, verify_func=None):
     for header_type, header in HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
-        assert (
-            r.status_code == 200
-        ), f"Non-200 response obtained for URL {expected_input_url}; header type: {header_type}"
-        assert len(
-            r.raw.data
-        ), f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
+        assert r.status_code == 200, (
+            f"Non-200 response obtained for URL {expected_input_url}; header type: {header_type}"
+        )
+        assert len(r.raw.data), (
+            f"No data was fetched from URL {expected_input_url}; header type: {header_type}"
+        )
         if verify_func:
-            assert verify_func(
-                r.raw.data
-            ), f"Data fetched for header type {header_type}, didn't match expected hash"
+            assert verify_func(r.raw.data), (
+                f"Data fetched for header type {header_type}, didn't match expected hash"
+            )
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
-        assert (
-            r.status_code == 200
-        ), f"Non-200 response obtained for URL {expected_input_url}; cookie type: {cookie_type}"
-        assert len(
-            r.raw.data
-        ), f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+        assert r.status_code == 200, (
+            f"Non-200 response obtained for URL {expected_input_url}; cookie type: {cookie_type}"
+        )
+        assert len(r.raw.data), (
+            f"No data was fetched from URL {expected_input_url}; cookie type: {cookie_type}"
+        )
         if verify_func:
-            assert verify_func(
-                r.raw.data
-            ), f"Data fetched for cookie type {cookie_type}, didn't match expected hash"
+            assert verify_func(r.raw.data), (
+                f"Data fetched for cookie type {cookie_type}, didn't match expected hash"
+            )
 
 
 def verify_url_with_bad_auth(expected_input_url):
     for header_type, header in BAD_HTTP_AUTH_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, headers=header)
-        assert (
-            r.status_code == 401
-        ), f"Expected Code: 401, Actual: {r.status_code} header type: {header_type}"
+        assert r.status_code == 401, (
+            f"Expected Code: 401, Actual: {r.status_code} header type: {header_type}"
+        )
 
     for cookie_type, cookie in BAD_HTTP_COOKIE_HEADERS.items():
         r = req_session.get(expected_input_url, stream=True, cookies=cookie)
-        assert (
-            r.status_code == 401
-        ), f"Expected Code: 401, Actual: {r.status_code} cookie type: {cookie_type}"
+        assert r.status_code == 401, (
+            f"Expected Code: 401, Actual: {r.status_code} cookie type: {cookie_type}"
+        )
 
     # No header/cookie results should result in NOT FOUND (404)
     r = req_session.get(expected_input_url, stream=True)
@@ -223,12 +223,12 @@ def test_adding_inputs(channel):
                 input_url_from_get = build_rehost_url_from_api_input(
                     get_input_response.input, s, input_type
                 )
-                assert (
-                    input_url_from_list == input_url_from_get
-                ), "URL from Get and List calls didn't match."
-                assert (
-                    get_secure_hosting_url() in input_url_from_get
-                ), f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
+                assert input_url_from_list == input_url_from_get, (
+                    "URL from Get and List calls didn't match."
+                )
+                assert get_secure_hosting_url() in input_url_from_get, (
+                    f"'{input_url_from_get}' doesn't contain expected SDH server host URL: '{get_secure_hosting_url()}'"
+                )
                 fn = (
                     (lambda byts: hashlib.md5(byts).hexdigest() == bytes_hash_by_id[cfid])
                     if s == "orig"

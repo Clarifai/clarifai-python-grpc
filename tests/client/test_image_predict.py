@@ -3,14 +3,14 @@ from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import (
     DOG_IMAGE_URL,
     GENERAL_MODEL_ID,
-    NON_EXISTING_IMAGE_URL,
-    RED_TRUCK_IMAGE_FILE_PATH,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
+    NON_EXISTING_IMAGE_URL,
+    RED_TRUCK_IMAGE_FILE_PATH,
     both_channels,
     metadata,
-    raise_on_failure,
     post_model_outputs_and_maybe_allow_retries,
+    raise_on_failure,
 )
 
 

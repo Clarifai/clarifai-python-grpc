@@ -1,12 +1,12 @@
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
-    both_channels,
     DOG_IMAGE_URL,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
+    RED_TRUCK_IMAGE_FILE_PATH,
+    both_channels,
     metadata,
     raise_on_failure,
-    RED_TRUCK_IMAGE_FILE_PATH,
 )
 
 

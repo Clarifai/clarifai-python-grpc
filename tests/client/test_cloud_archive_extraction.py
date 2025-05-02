@@ -1,12 +1,13 @@
 import os
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     ARCHIVE_CLOUD_URL,
     CLOUD_URL,
-    raise_on_failure,
-    wait_for_extraction_job_completed,
     both_channels,
     metadata,
+    raise_on_failure,
+    wait_for_extraction_job_completed,
 )
 
 

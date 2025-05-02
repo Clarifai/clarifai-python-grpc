@@ -3,12 +3,13 @@ import time
 from datetime import datetime
 from typing import List, Tuple
 
+from grpc._channel import _Rendezvous
+
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.channel.http_client import CLIENT_VERSION
 from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
-from grpc._channel import _Rendezvous
 
 MAX_PREDICT_ATTEMPTS = 6  # PostModelOutputs unsuccessful predict retry limit
 MAX_RETRY_ATTEMPTS = 15  # gRPC exceeded deadlines/timeout retry limit.

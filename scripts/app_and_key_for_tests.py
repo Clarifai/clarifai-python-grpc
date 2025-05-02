@@ -5,12 +5,11 @@ import json
 import os
 import sys
 
-
 try:
-    from urllib.request import HTTPHandler, Request, build_opener
     from urllib.error import HTTPError
+    from urllib.request import HTTPHandler, Request, build_opener
 except ImportError:
-    from urllib2 import Request, HTTPError, build_opener, HTTPHandler
+    from urllib2 import HTTPError, HTTPHandler, Request, build_opener
 
 
 EMAIL = os.environ["CLARIFAI_USER_EMAIL"]
@@ -235,7 +234,7 @@ def run(arguments):
         print(
             f"No relevant arguments specified. Run {sys.argv[0]} --help to see available options"
         )
-        exit(1)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

@@ -5,13 +5,13 @@ import uuid
 from google.protobuf import struct_pb2, timestamp_pb2
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
+from tests.client.test_inputs_searches import SetupImage
 from tests.common import (
     DOG_IMAGE_URL,
     both_channels,
     metadata,
     raise_on_failure,
 )
-from tests.client.test_inputs_searches import SetupImage
 
 
 @both_channels

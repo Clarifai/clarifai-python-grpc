@@ -3,24 +3,24 @@ import uuid
 
 from google.protobuf import struct_pb2
 
-from clarifai_grpc.grpc.api import service_pb2_grpc, service_pb2, resources_pb2
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.resources_pb2 import (
-    Search,
-    Query,
-    Rank,
     Annotation,
-    Data,
     Concept,
+    Data,
     Filter,
     Image,
+    Query,
+    Rank,
+    Search,
 )
 from clarifai_grpc.grpc.api.service_pb2 import PostInputsSearchesRequest
 from tests.common import (
+    DOG_IMAGE_URL,
     both_channels,
     cleanup_inputs,
     metadata,
     raise_on_failure,
-    DOG_IMAGE_URL,
     wait_for_inputs_upload,
 )
 

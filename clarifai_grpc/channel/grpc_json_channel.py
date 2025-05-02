@@ -9,7 +9,7 @@ from google.protobuf.message import Message  # noqa
 from clarifai_grpc.channel import http_client
 from clarifai_grpc.channel.custom_converters.custom_dict_to_message import dict_to_protobuf
 from clarifai_grpc.channel.custom_converters.custom_message_to_dict import protobuf_to_dict
-from clarifai_grpc.channel.errors import UsageError, NotImplementedCaller
+from clarifai_grpc.channel.errors import NotImplementedCaller, UsageError
 from clarifai_grpc.channel.exceptions import ClarifaiException
 from clarifai_grpc.grpc.api.service_pb2 import _V2
 
@@ -416,8 +416,7 @@ def _pick_proper_endpoint(
 
     if not best_match_url:
         raise Exception(
-            "You must set one case of the following fields in your request proto: "
-            "%s" % all_fields
+            "You must set one case of the following fields in your request proto: %s" % all_fields
         )
 
     return best_match_url, best_match_method, best_match_url_fields

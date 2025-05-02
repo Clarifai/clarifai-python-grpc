@@ -1,15 +1,15 @@
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
+    BEER_VIDEO_URL,
     CONAN_GIF_VIDEO_URL,
     GENERAL_MODEL_ID,
-    TOY_VIDEO_FILE_PATH,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
+    TOY_VIDEO_FILE_PATH,
     both_channels,
     metadata,
-    raise_on_failure,
-    BEER_VIDEO_URL,
     post_model_outputs_and_maybe_allow_retries,
+    raise_on_failure,
 )
 
 

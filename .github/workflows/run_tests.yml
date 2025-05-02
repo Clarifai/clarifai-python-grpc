@@ -27,10 +27,12 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
-        pip install -r tests/requirements.txt
+        pip install uv
+        uv venv
+        uv pip install -r requirements.txt
+        uv pip install -r tests/requirements.txt
     - name: Run static analysis lint
-      run: ./lint.sh check
+      uses: pre-commit/action@v3.0.0
     - name: Prepare the API keys & run pytest
       env:
         CLARIFAI_USER_EMAIL_SECURE_HOSTING: ${{ secrets.CLARIFAI_USER_EMAIL_SECURE_HOSTING }}
@@ -47,10 +49,9 @@ jobs:
         export CLARIFAI_API_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-key ${CLARIFAI_APP_ID_SECURE_HOSTING})"
         export CLARIFAI_PAT_KEY_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-pat)"
         export CLARIFAI_SESSION_TOKEN_SECURE_HOSTING="$(python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --create-session-token)"
-        pip install pytest
-        pytest tests/ -n auto
-        python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
-        python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
+        uv run pytest tests/ -n auto
+        uv run python scripts/app_and_key_for_tests.py --delete-app ${CLARIFAI_APP_ID}
+        uv run python scripts/app_and_key_for_tests.py --user-email ${CLARIFAI_USER_EMAIL_SECURE_HOSTING} --delete-app ${CLARIFAI_APP_ID_SECURE_HOSTING}
     - name: Slack Notify
       if: ${{ failure() }}
       uses: rtCamp/action-slack-notify@v2

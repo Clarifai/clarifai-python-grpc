@@ -5,15 +5,15 @@ from google.protobuf import struct_pb2
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
+    DOG_IMAGE_URL,
+    TRUCK_IMAGE_URL,
     both_channels,
     cleanup_inputs,
     metadata,
     raise_on_failure,
+    wait_for_inputs_upload,
     wait_for_model_evaluated,
     wait_for_model_trained,
-    wait_for_inputs_upload,
-    TRUCK_IMAGE_URL,
-    DOG_IMAGE_URL,
 )
 
 
