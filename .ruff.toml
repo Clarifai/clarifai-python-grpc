@@ -55,7 +55,6 @@ ignore = [
 # Ignore autogenerate proto quirks
 "proto/**.py" = ["F401","E712","F403","I001"]
 "*_pb2*.py" = ["F401","E712","F821","E501","I001"]
-"*_pb2*.pyi" = ["F401","E712","F821","E501","I001"]
 "*.ipynb" = ["F401","F821","I001"]
 # we do lots of type checking in here
 "utils/argspec.py" = ["E721"]
@@ -71,7 +70,6 @@ indent-style = "space"
 
 exclude = [
   "*pb2*.py",  # Exclude generated protos
-  "*pb2*.pyi",  # Exclude generated protos
    "proto/**.py", # Exclude generated protos
    "*.ipynb", # Skip notebooks.
 ]
