@@ -1591,7 +1591,7 @@ class V2Servicer(object):
 
     def GenerateModelOutputs(self, request, context):
         """TODO(zeiler): will need to
-        Single request but streaming resopnses.
+        Single request but streaming responses.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
