@@ -1274,16 +1274,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
                 )
-        self.GetMCP = channel.unary_unary(
-                '/clarifai.api.V2/GetMCP',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse),
-                )
-        self.PostMCP = channel.unary_unary(
-                '/clarifai.api.V2/PostMCP',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse),
-                )
 
 
 class V2Servicer(object):
@@ -3169,22 +3159,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def GetMCP(self, request, context):
-        """The GET request to start an MCP session.
-        Currently not supported in our API.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostMCP(self, request, context):
-        """The POST request for interacting with MCP tools.
-        This is the simplest form of MCP tool calls with stateless execution for now.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -4427,16 +4401,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PatchWorkflowVersionEvaluations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
-            ),
-            'GetMCP': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetMCP,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse.SerializeToString,
-            ),
-            'PostMCP': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostMCP,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -8679,39 +8643,5 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowVersionEvaluations',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetMCP(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetMCP',
-            proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostMCP(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostMCP',
-            proto_dot_clarifai_dot_api_dot_service__pb2.MCPRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleMCPResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
