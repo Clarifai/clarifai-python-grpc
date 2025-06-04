@@ -1274,6 +1274,36 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
                 )
+        self.PostPipelineSteps = channel.unary_unary(
+                '/clarifai.api.V2/PostPipelineSteps',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse),
+                )
+        self.GetPipelineStep = channel.unary_unary(
+                '/clarifai.api.V2/GetPipelineStep',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepResponse),
+                )
+        self.ListPipelineSteps = channel.unary_unary(
+                '/clarifai.api.V2/ListPipelineSteps',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse),
+                )
+        self.PostPipelineStepVersionsUpload = channel.stream_stream(
+                '/clarifai.api.V2/PostPipelineStepVersionsUpload',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadResponse),
+                )
+        self.ListPipelineStepVersions = channel.unary_unary(
+                '/clarifai.api.V2/ListPipelineStepVersions',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepVersionsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepVersionResponse),
+                )
+        self.GetPipelineStepVersion = channel.unary_unary(
+                '/clarifai.api.V2/GetPipelineStepVersion',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse),
+                )
 
 
 class V2Servicer(object):
@@ -3159,6 +3189,47 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostPipelineSteps(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPipelineStep(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPipelineSteps(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostPipelineStepVersionsUpload(self, request_iterator, context):
+        """This is a streaming endpoint, the request has a field, upload_data, which can either be the config for the upload or the actual data to upload.
+        The config must be sent first before the pipeline_step_bytes can be uploaded.
+        Once the config has been sent, the server will respond with a confirmation containing the pipeline_step_version_id.
+        This is so that if your upload is interrupted, you can resume the upload by sending the config again with the pipeline_step_version_id specified for your pipeline_step_version.
+        The actual upload will be done via a multipart upload, the latest successful part_id will be sent from the server in the response to the pipeline_step_bytes.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPipelineStepVersions(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetPipelineStepVersion(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -4401,6 +4472,36 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PatchWorkflowVersionEvaluations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
+            ),
+            'PostPipelineSteps': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostPipelineSteps,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse.SerializeToString,
+            ),
+            'GetPipelineStep': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPipelineStep,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepResponse.SerializeToString,
+            ),
+            'ListPipelineSteps': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPipelineSteps,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse.SerializeToString,
+            ),
+            'PostPipelineStepVersionsUpload': grpc.stream_stream_rpc_method_handler(
+                    servicer.PostPipelineStepVersionsUpload,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadResponse.SerializeToString,
+            ),
+            'ListPipelineStepVersions': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPipelineStepVersions,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepVersionsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepVersionResponse.SerializeToString,
+            ),
+            'GetPipelineStepVersion': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetPipelineStepVersion,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -8643,5 +8744,107 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowVersionEvaluations',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostPipelineSteps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostPipelineSteps',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetPipelineStep(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetPipelineStep',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPipelineSteps(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPipelineSteps',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostPipelineStepVersionsUpload(request_iterator,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.stream_stream(request_iterator, target, '/clarifai.api.V2/PostPipelineStepVersionsUpload',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepVersionsUploadResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPipelineStepVersions(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPipelineStepVersions',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineStepVersionsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineStepVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetPipelineStepVersion(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetPipelineStepVersion',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

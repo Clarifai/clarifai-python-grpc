@@ -16045,3 +16045,472 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PostModelMigrationRequest = PostModelMigrationRequest
+
+@typing_extensions.final
+class PostPipelineStepsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEPS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def pipeline_steps(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineStep
+    ]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_steps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.PipelineStep]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_steps", b"pipeline_steps", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___PostPipelineStepsRequest = PostPipelineStepsRequest
+
+@typing_extensions.final
+class MultiPipelineStepResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_STEPS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_steps(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineStep
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_steps: collections.abc.Iterable[proto.clarifai.api.resources_pb2.PipelineStep]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_steps", b"pipeline_steps", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MultiPipelineStepResponse = MultiPipelineStepResponse
+
+@typing_extensions.final
+class ListPipelineStepsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___ListPipelineStepsRequest = ListPipelineStepsRequest
+
+@typing_extensions.final
+class ListPipelineStepVersionsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    STATUS_CODES_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_step_id: builtins.str
+    """List versions for the pipeline step identified by this id"""
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    @property
+    def status_codes(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[
+        proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+    ]:
+        """Filter based on status"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_step_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        status_codes: collections.abc.Iterable[
+            proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page",
+            b"page",
+            "per_page",
+            b"per_page",
+            "pipeline_step_id",
+            b"pipeline_step_id",
+            "status_codes",
+            b"status_codes",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___ListPipelineStepVersionsRequest = ListPipelineStepVersionsRequest
+
+@typing_extensions.final
+class MultiPipelineStepVersionResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """The status of the request"""
+    @property
+    def pipeline_step_versions(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineStepVersion
+    ]:
+        """The pipeline step versions that were requested"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_step_versions: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineStepVersion
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_versions", b"pipeline_step_versions", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MultiPipelineStepVersionResponse = MultiPipelineStepVersionResponse
+
+@typing_extensions.final
+class PostPipelineStepVersionsUploadRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    UPLOAD_CONFIG_FIELD_NUMBER: builtins.int
+    CONTENT_PART_FIELD_NUMBER: builtins.int
+    @property
+    def upload_config(self) -> global___PostPipelineStepVersionsUploadConfig:
+        """Upload a new pipeline step version."""
+    @property
+    def content_part(self) -> proto.clarifai.api.resources_pb2.UploadContentPart:
+        """Upload a part of a multipart upload."""
+    def __init__(
+        self,
+        *,
+        upload_config: global___PostPipelineStepVersionsUploadConfig | None = ...,
+        content_part: proto.clarifai.api.resources_pb2.UploadContentPart | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "content_part",
+            b"content_part",
+            "upload_config",
+            b"upload_config",
+            "upload_data",
+            b"upload_data",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "content_part",
+            b"content_part",
+            "upload_config",
+            b"upload_config",
+            "upload_data",
+            b"upload_data",
+        ],
+    ) -> None: ...
+    def WhichOneof(
+        self, oneof_group: typing_extensions.Literal["upload_data", b"upload_data"]
+    ) -> typing_extensions.Literal["upload_config", "content_part"] | None: ...
+
+global___PostPipelineStepVersionsUploadRequest = PostPipelineStepVersionsUploadRequest
+
+@typing_extensions.final
+class PostPipelineStepVersionsUploadResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    BYTES_REMAINING_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """Status of the upload"""
+    bytes_remaining: builtins.int
+    """Bytes remaining to be uploaded - This is total_size - bytes_uploaded"""
+    pipeline_step_version_id: builtins.str
+    """ID of the pipeline step version being uploaded"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        bytes_remaining: builtins.int = ...,
+        pipeline_step_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "bytes_remaining",
+            b"bytes_remaining",
+            "pipeline_step_version_id",
+            b"pipeline_step_version_id",
+            "status",
+            b"status",
+        ],
+    ) -> None: ...
+
+global___PostPipelineStepVersionsUploadResponse = PostPipelineStepVersionsUploadResponse
+
+@typing_extensions.final
+class PostPipelineStepVersionsUploadConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_FIELD_NUMBER: builtins.int
+    TOTAL_SIZE_FIELD_NUMBER: builtins.int
+    STORAGE_REQUEST_SIZE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """User ID and App ID of the user uploading the pipeline step"""
+    pipeline_step_id: builtins.str
+    """Pipeline Step to create version for"""
+    @property
+    def pipeline_step_version(self) -> proto.clarifai.api.resources_pb2.PipelineStepVersion:
+        """Specification for the pipeline step version to be uploaded"""
+    total_size: builtins.int
+    """Number of bytes in the pipeline step files to be uploaded"""
+    storage_request_size: builtins.int
+    """Number of bytes requested for the build process."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_step_id: builtins.str = ...,
+        pipeline_step_version: proto.clarifai.api.resources_pb2.PipelineStepVersion | None = ...,
+        total_size: builtins.int = ...,
+        storage_request_size: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_version", b"pipeline_step_version", "user_app_id", b"user_app_id"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_id",
+            b"pipeline_step_id",
+            "pipeline_step_version",
+            b"pipeline_step_version",
+            "storage_request_size",
+            b"storage_request_size",
+            "total_size",
+            b"total_size",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___PostPipelineStepVersionsUploadConfig = PostPipelineStepVersionsUploadConfig
+
+@typing_extensions.final
+class GetPipelineStepRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_step_id: builtins.str
+    """The id of the pipeline step that has the requested version."""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_step_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_id", b"pipeline_step_id", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___GetPipelineStepRequest = GetPipelineStepRequest
+
+@typing_extensions.final
+class SinglePipelineStepResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """The status of the request"""
+    @property
+    def pipeline_step(self) -> proto.clarifai.api.resources_pb2.PipelineStep:
+        """The pipeline step that was requested"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_step: proto.clarifai.api.resources_pb2.PipelineStep | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step", b"pipeline_step", "status", b"status"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step", b"pipeline_step", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___SinglePipelineStepResponse = SinglePipelineStepResponse
+
+@typing_extensions.final
+class GetPipelineStepVersionRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_step_id: builtins.str
+    """The id of the pipeline step that has the requested version."""
+    pipeline_step_version_id: builtins.str
+    """Get the identified by this id"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_step_id: builtins.str = ...,
+        pipeline_step_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_id",
+            b"pipeline_step_id",
+            "pipeline_step_version_id",
+            b"pipeline_step_version_id",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___GetPipelineStepVersionRequest = GetPipelineStepVersionRequest
+
+@typing_extensions.final
+class SinglePipelineStepVersionResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """The status of the request"""
+    @property
+    def pipeline_step_version(self) -> proto.clarifai.api.resources_pb2.PipelineStepVersion:
+        """The pipeline step version that was requested"""
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_step_version: proto.clarifai.api.resources_pb2.PipelineStepVersion | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_version", b"pipeline_step_version", "status", b"status"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_step_version", b"pipeline_step_version", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___SinglePipelineStepVersionResponse = SinglePipelineStepVersionResponse
