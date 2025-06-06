@@ -1000,7 +1000,9 @@ class App(google.protobuf.message.Message):
     name: builtins.str
     default_language: builtins.str
     default_workflow_id: builtins.str
-    """Default workflow id deprecated in favor of default_workflow"""
+    """Deprecated, use default_workflow instead.
+    @exclude TODO (EAGLE-4506): Remove this field and associated code
+    """
     @property
     def default_workflow(self) -> global___Workflow: ...
     user_id: builtins.str
@@ -2162,7 +2164,9 @@ class ConceptQuery(google.protobuf.message.Message):
     language: builtins.str
     """The language of the concept name in a search. Defaults to English."""
     workflow_id: builtins.str
-    """Deprecated: Use workflow.id instead."""
+    """Deprecated: Use workflow.id instead.
+    @exclude TODO (EAGLE-4506): Remove this field and associated code
+    """
     @property
     def use_cases(
         self,
@@ -10875,18 +10879,28 @@ class TaskAIAssistant(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_FIELD_NUMBER: builtins.int
     workflow_id: builtins.str
     """The worker is helped by an AI assistant.
     This field is the workflow id which is used to assist the worker with predictions.
     If empty, then AI assistant is disabled.
     """
+    @property
+    def workflow(self) -> global___Workflow: ...
     def __init__(
         self,
         *,
         workflow_id: builtins.str = ...,
+        workflow: global___Workflow | None = ...,
     ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["workflow", b"workflow"]
+    ) -> builtins.bool: ...
     def ClearField(
-        self, field_name: typing_extensions.Literal["workflow_id", b"workflow_id"]
+        self,
+        field_name: typing_extensions.Literal[
+            "workflow", b"workflow", "workflow_id", b"workflow_id"
+        ],
     ) -> None: ...
 
 global___TaskAIAssistant = TaskAIAssistant
@@ -16382,6 +16396,106 @@ class PipelineStepVersion(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PipelineStepVersion = PipelineStepVersion
+
+@typing_extensions.final
+class Pipeline(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
+    NOTES_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    user_id: builtins.str
+    """The user the pipeline belongs to"""
+    app_id: builtins.str
+    """The app the pipeline belongs to"""
+    @property
+    def pipeline_version(self) -> global___PipelineVersion:
+        """Latest Pipeline Version"""
+    description: builtins.str
+    """Short description about this pipeline"""
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this message is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
+    notes: builtins.str
+    """Notes for the Pipeline. This field should be used for in-depth notes and supports up to 64Kbs."""
+    @property
+    def metadata(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle arbitrary json metadata, use a struct field
+        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
+        """
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline was created"""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline was last modified"""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        pipeline_version: global___PipelineVersion | None = ...,
+        description: builtins.str = ...,
+        visibility: global___Visibility | None = ...,
+        notes: builtins.str = ...,
+        metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "created_at",
+            b"created_at",
+            "metadata",
+            b"metadata",
+            "modified_at",
+            b"modified_at",
+            "pipeline_version",
+            b"pipeline_version",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "app_id",
+            b"app_id",
+            "created_at",
+            b"created_at",
+            "description",
+            b"description",
+            "id",
+            b"id",
+            "metadata",
+            b"metadata",
+            "modified_at",
+            b"modified_at",
+            "notes",
+            b"notes",
+            "pipeline_version",
+            b"pipeline_version",
+            "user_id",
+            b"user_id",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> None: ...
+
+global___Pipeline = Pipeline
 
 @typing_extensions.final
 class PipelineVersion(google.protobuf.message.Message):

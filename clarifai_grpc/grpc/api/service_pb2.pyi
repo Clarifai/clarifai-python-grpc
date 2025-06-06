@@ -5301,6 +5301,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     dont_fetch_from_main: builtins.bool
     """Old API behavior resulted in returning clarifai main models when calling ListModels while scoped to an app. While we transition
     away from that, we can use this flag to not always fetch clarifai main models, unless that is the app we are explicitly listing for.
+    @exclude TODO (EAGLE-4447): Remove this field
     """
     bookmark: builtins.bool
     """Filter models by bookmark. If set, only return bookmarked models. Otherwise none bookmarked models only.
@@ -9564,9 +9565,7 @@ class GetWorkflowRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
-    FAVOR_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
-    EXCLUDE_CLARIFAI_WORKFLOWS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     workflow_id: builtins.str
@@ -9574,23 +9573,17 @@ class GetWorkflowRequest(google.protobuf.message.Message):
     If no ID is specified we return default workflow of the application
     If an ID is specified by default we first looks into Clarifai workflows for a Workflow ID
     """
-    favor_clarifai_workflows: builtins.bool
-    """Use this flag to look into clarifai published workflows first for a Workflow ID"""
     @property
     def additional_fields(
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars"""
-    exclude_clarifai_workflows: builtins.bool
-    """if true will not expand search to clarifai workflows"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         workflow_id: builtins.str = ...,
-        favor_clarifai_workflows: builtins.bool = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
-        exclude_clarifai_workflows: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -9600,10 +9593,6 @@ class GetWorkflowRequest(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "additional_fields",
             b"additional_fields",
-            "exclude_clarifai_workflows",
-            b"exclude_clarifai_workflows",
-            "favor_clarifai_workflows",
-            b"favor_clarifai_workflows",
             "user_app_id",
             b"user_app_id",
             "workflow_id",
@@ -10093,7 +10082,9 @@ class PostWorkflowResultsRequest(google.protobuf.message.Message):
         and then it's more consistent we just don't support the OutputConfig on workflows.
         """
     favor_clarifai_workflows: builtins.bool
-    """Use this flag to look into clarifai published workflows first for a Workflow ID"""
+    """Use this flag to look into clarifai published workflows first for a Workflow ID
+    @exclude TODO (EAGLE-4447): Remove unused fields
+    """
     @property
     def workflow_state(self) -> proto.clarifai.api.resources_pb2.WorkflowState:
         """A workflow state to be maintained across PostWorkflowResults requests/responses.
@@ -16045,6 +16036,780 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PostModelMigrationRequest = PostModelMigrationRequest
+
+@typing_extensions.final
+class GetPipelineRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_id", b"pipeline_id", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___GetPipelineRequest = GetPipelineRequest
+
+@typing_extensions.final
+class ListPipelinesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___ListPipelinesRequest = ListPipelinesRequest
+
+@typing_extensions.final
+class PostPipelinesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINES_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def pipelines(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Pipeline
+    ]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipelines: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Pipeline]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipelines", b"pipelines", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___PostPipelinesRequest = PostPipelinesRequest
+
+@typing_extensions.final
+class PatchPipelinesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINES_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def pipelines(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Pipeline
+    ]: ...
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now actions 'overwrite' are supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipelines: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Pipeline]
+        | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "action", b"action", "pipelines", b"pipelines", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___PatchPipelinesRequest = PatchPipelinesRequest
+
+@typing_extensions.final
+class DeletePipelinesRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def pipeline_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_ids", b"pipeline_ids", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___DeletePipelinesRequest = DeletePipelinesRequest
+
+@typing_extensions.final
+class SinglePipelineResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline(self) -> proto.clarifai.api.resources_pb2.Pipeline: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline: proto.clarifai.api.resources_pb2.Pipeline | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["pipeline", b"pipeline", "status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["pipeline", b"pipeline", "status", b"status"]
+    ) -> None: ...
+
+global___SinglePipelineResponse = SinglePipelineResponse
+
+@typing_extensions.final
+class MultiPipelineResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINES_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipelines(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Pipeline
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipelines: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Pipeline]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["pipelines", b"pipelines", "status", b"status"]
+    ) -> None: ...
+
+global___MultiPipelineResponse = MultiPipelineResponse
+
+@typing_extensions.final
+class GetPipelineVersionRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The id of the pipeline that has the requested version."""
+    pipeline_version_id: builtins.str
+    """Get the identified by this id"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___GetPipelineVersionRequest = GetPipelineVersionRequest
+
+@typing_extensions.final
+class ListPipelineVersionsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """List versions for the pipeline identified by this id"""
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page",
+            b"page",
+            "per_page",
+            b"per_page",
+            "pipeline_id",
+            b"pipeline_id",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___ListPipelineVersionsRequest = ListPipelineVersionsRequest
+
+@typing_extensions.final
+class PatchPipelineVersionsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSIONS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The id of the Pipeline that has the requested versions to patch."""
+    @property
+    def pipeline_versions(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersion
+    ]:
+        """Patch these versions"""
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now actions 'merge', 'overwrite', and 'remove' are supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_versions: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersion
+        ]
+        | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "action",
+            b"action",
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_versions",
+            b"pipeline_versions",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___PatchPipelineVersionsRequest = PatchPipelineVersionsRequest
+
+@typing_extensions.final
+class DeletePipelineVersionsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The id of the Pipeline for which versions are being deleted"""
+    @property
+    def pipeline_version_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_ids",
+            b"pipeline_version_ids",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___DeletePipelineVersionsRequest = DeletePipelineVersionsRequest
+
+@typing_extensions.final
+class SinglePipelineVersionResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_version(self) -> proto.clarifai.api.resources_pb2.PipelineVersion: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_version: proto.clarifai.api.resources_pb2.PipelineVersion | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version", b"pipeline_version", "status", b"status"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version", b"pipeline_version", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___SinglePipelineVersionResponse = SinglePipelineVersionResponse
+
+@typing_extensions.final
+class MultiPipelineVersionResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSIONS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_versions(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersion
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_versions: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersion
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_versions", b"pipeline_versions", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MultiPipelineVersionResponse = MultiPipelineVersionResponse
+
+@typing_extensions.final
+class GetPipelineVersionRunRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """the ID of the pipeline"""
+    pipeline_version_id: builtins.str
+    """The ID of the pipeline version"""
+    pipeline_version_run_id: builtins.str
+    """the ID of the pipeline version run"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "pipeline_version_run_id",
+            b"pipeline_version_run_id",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___GetPipelineVersionRunRequest = GetPipelineVersionRunRequest
+
+@typing_extensions.final
+class ListPipelineVersionRunsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    STATUS_CODES_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The ID of the pipeline"""
+    pipeline_version_id: builtins.str
+    """The ID of the pipeline version"""
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    @property
+    def status_codes(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[
+        proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+    ]:
+        """Filter based on status"""
+    compute_cluster_id: builtins.str
+    """compute cluster id"""
+    nodepool_id: builtins.str
+    """nodepool id"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+        status_codes: collections.abc.Iterable[
+            proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+        ]
+        | None = ...,
+        compute_cluster_id: builtins.str = ...,
+        nodepool_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "compute_cluster_id",
+            b"compute_cluster_id",
+            "nodepool_id",
+            b"nodepool_id",
+            "page",
+            b"page",
+            "per_page",
+            b"per_page",
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "status_codes",
+            b"status_codes",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___ListPipelineVersionRunsRequest = ListPipelineVersionRunsRequest
+
+@typing_extensions.final
+class PostPipelineVersionRunsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUNS_FIELD_NUMBER: builtins.int
+    RUNNER_SELECTOR_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The ID of the pipeline"""
+    pipeline_version_id: builtins.str
+    """The ID of the pipeline-version"""
+    @property
+    def pipeline_version_runs(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersionRun
+    ]: ...
+    @property
+    def runner_selector(self) -> proto.clarifai.api.resources_pb2.RunnerSelector:
+        """Allows using specific Nodepools for pipeline version runs"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_runs: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersionRun
+        ]
+        | None = ...,
+        runner_selector: proto.clarifai.api.resources_pb2.RunnerSelector | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "runner_selector", b"runner_selector", "user_app_id", b"user_app_id"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "pipeline_version_runs",
+            b"pipeline_version_runs",
+            "runner_selector",
+            b"runner_selector",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___PostPipelineVersionRunsRequest = PostPipelineVersionRunsRequest
+
+@typing_extensions.final
+class PatchPipelineVersionRunsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUNS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    pipeline_id: builtins.str
+    """The ID of the pipeline"""
+    pipeline_version_id: builtins.str
+    """The ID of the pipeline-version"""
+    @property
+    def pipeline_version_runs(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersionRun
+    ]:
+        """########## Supported fields ##########
+        - app_id
+        - id
+        - orchestration_status
+        - pipeline_version.id
+        - pipeline_version.pipeline_id
+        - user_id
+        """
+    action: builtins.str
+    """Supported action: 'overwrite' -> allows to overwrite WorkflowStatus of PipelineVersionRun"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_runs: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersionRun
+        ]
+        | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "action",
+            b"action",
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "pipeline_version_runs",
+            b"pipeline_version_runs",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___PatchPipelineVersionRunsRequest = PatchPipelineVersionRunsRequest
+
+@typing_extensions.final
+class SinglePipelineVersionRunResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_version_run(self) -> proto.clarifai.api.resources_pb2.PipelineVersionRun: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_version_run: proto.clarifai.api.resources_pb2.PipelineVersionRun | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version_run", b"pipeline_version_run", "status", b"status"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version_run", b"pipeline_version_run", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___SinglePipelineVersionRunResponse = SinglePipelineVersionRunResponse
+
+@typing_extensions.final
+class MultiPipelineVersionRunResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUNS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_version_runs(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersionRun
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_version_runs: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersionRun
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version_runs", b"pipeline_version_runs", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MultiPipelineVersionRunResponse = MultiPipelineVersionRunResponse
 
 @typing_extensions.final
 class PostPipelineStepsRequest(google.protobuf.message.Message):

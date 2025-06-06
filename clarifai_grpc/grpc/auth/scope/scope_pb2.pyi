@@ -239,6 +239,7 @@ class _SEnumTypeWrapper(
     WorkflowVersionEvaluations_Add: _S.ValueType  # 153
     Pipelines_Get: _S.ValueType  # 154
     Pipelines_Add: _S.ValueType  # 155
+    Pipelines_Delete: _S.ValueType  # 156
     PipelineSteps_Get: _S.ValueType  # 157
     PipelineSteps_Add: _S.ValueType  # 158
     PipelineSteps_Pull: _S.ValueType  # 159
@@ -483,6 +484,7 @@ WorkflowVersionEvaluations_Get: S.ValueType  # 152
 WorkflowVersionEvaluations_Add: S.ValueType  # 153
 Pipelines_Get: S.ValueType  # 154
 Pipelines_Add: S.ValueType  # 155
+Pipelines_Delete: S.ValueType  # 156
 PipelineSteps_Get: S.ValueType  # 157
 PipelineSteps_Add: S.ValueType  # 158
 PipelineSteps_Pull: S.ValueType  # 159
