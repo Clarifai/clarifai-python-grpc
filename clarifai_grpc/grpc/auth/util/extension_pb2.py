@@ -11,8 +11,8 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from clarifai_grpc.grpc.auth.scope import scope_pb2 as proto_dot_clarifai_dot_auth_dot_scope_dot_scope__pb2
-from clarifai_grpc.grpc.auth.types import types_pb2 as proto_dot_clarifai_dot_auth_dot_types_dot_types__pb2
+from proto.clarifai.auth.scope import scope_pb2 as proto_dot_clarifai_dot_auth_dot_scope_dot_scope__pb2
+from proto.clarifai.auth.types import types_pb2 as proto_dot_clarifai_dot_auth_dot_types_dot_types__pb2
 from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor__pb2
 
 

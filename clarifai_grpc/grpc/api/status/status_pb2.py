@@ -11,8 +11,8 @@ from google.protobuf import symbol_database as _symbol_database
 _sym_db = _symbol_database.Default()
 
 
-from clarifai_grpc.grpc.auth.util import extension_pb2 as proto_dot_clarifai_dot_auth_dot_util_dot_extension__pb2
-from clarifai_grpc.grpc.api.status import status_code_pb2 as proto_dot_clarifai_dot_api_dot_status_dot_status__code__pb2
+from proto.clarifai.auth.util import extension_pb2 as proto_dot_clarifai_dot_auth_dot_util_dot_extension__pb2
+from proto.clarifai.api.status import status_code_pb2 as proto_dot_clarifai_dot_api_dot_status_dot_status__code__pb2
 
 
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n&proto/clarifai/api/status/status.proto\x12\x13\x63larifai.api.status\x1a(proto/clarifai/auth/util/extension.proto\x1a+proto/clarifai/api/status/status_code.proto\"\xb4\x02\n\x06Status\x12-\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1f.clarifai.api.status.StatusCode\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12\x0f\n\x07\x64\x65tails\x18\x03 \x01(\t\x12\x19\n\x0bstack_trace\x18\x04 \x03(\tB\x04\x80\x9c\'\x01\x12\x19\n\x11percent_completed\x18\x05 \x01(\r\x12\x16\n\x0etime_remaining\x18\x06 \x01(\r\x12\x0e\n\x06req_id\x18\x07 \x01(\t\x12\x1e\n\x10internal_details\x18\x08 \x01(\tB\x04\x80\x9c\'\x01\x12>\n\rredirect_info\x18\t \x01(\x0b\x32!.clarifai.api.status.RedirectInfoB\x04\x80\x9c\'\x01\x12\x17\n\x0f\x64\x65veloper_notes\x18\n \x01(\t\"d\n\x0cRedirectInfo\x12\x0b\n\x03url\x18\x01 \x01(\t\x12\x15\n\rresource_type\x18\x02 \x01(\t\x12\x17\n\x0fold_resource_id\x18\x03 \x01(\t\x12\x17\n\x0fnew_resource_id\x18\x04 \x01(\t\";\n\x0c\x42\x61seResponse\x12+\n\x06status\x18\x01 \x01(\x0b\x32\x1b.clarifai.api.status.StatusBg\n\x1c\x63om.clarifai.grpc.api.statusP\x01Z>github.com/Clarifai/clarifai-go-grpc/proto/clarifai/api/status\xa2\x02\x04\x43\x41IPb\x06proto3')
