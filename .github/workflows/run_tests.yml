@@ -31,10 +31,16 @@ jobs:
         uv venv
         uv pip install -r requirements.txt
         uv pip install -r tests/requirements.txt
-    - name: Sync version from VERSION file
+    - name: Sync version from VERSION file (Linux)
+      if: runner.os == 'Linux'
       run: |
         VERSION_CONTENT=$(cat VERSION)
         sed -i "s/__version__ = \"[0-9.]*\"/__version__ = \"$VERSION_CONTENT\"/" clarifai_grpc/__init__.py
+    - name: Sync version from VERSION file (Windows)
+      if: runner.os == 'Windows'
+      run: |
+        $VERSION_CONTENT = (Get-Content VERSION).Trim()
+        (Get-Content clarifai_grpc/__init__.py) -replace '__version__ = \"[0-9.]*\"', ("__version__ = `"" + $VERSION_CONTENT + "`"") | Set-Content clarifai_grpc/__init__.py
     - name: Run static analysis lint
       uses: pre-commit/action@v3.0.0
     - name: Prepare the API keys & run pytest
