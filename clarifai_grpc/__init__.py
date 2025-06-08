@@ -1,2 +1,1 @@
-with open("../VERSION", "r") as f:
-    __version__ = f.read().strip()
+__version__ = "11.5.2"
