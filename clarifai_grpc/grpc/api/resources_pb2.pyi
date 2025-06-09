@@ -15680,6 +15680,7 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     pipeline_version_id: builtins.str
     pipeline_version_run_id: builtins.str
     pipeline_step_id: builtins.str
+    """Pipeline step related data for pipeline step builds."""
     pipeline_step_version_id: builtins.str
     def __init__(
         self,
@@ -15968,6 +15969,76 @@ class EvaluationMetricValue(google.protobuf.message.Message):
 global___EvaluationMetricValue = EvaluationMetricValue
 
 @typing_extensions.final
+class InputEvaluationMetricValue(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class PerRegionValuesEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___MetricValue: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___MetricValue | None = ...,
+        ) -> None: ...
+        def HasField(
+            self, field_name: typing_extensions.Literal["value", b"value"]
+        ) -> builtins.bool: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]
+        ) -> None: ...
+
+    EVALUATION_METRIC_ID_FIELD_NUMBER: builtins.int
+    METRIC_VALUE_FIELD_NUMBER: builtins.int
+    EXPLANATION_FIELD_NUMBER: builtins.int
+    PER_REGION_VALUES_FIELD_NUMBER: builtins.int
+    evaluation_metric_id: builtins.str
+    """The metric values"""
+    @property
+    def metric_value(self) -> global___MetricValue:
+        """Aggregated metric value"""
+    explanation: builtins.str
+    """explanation for the value"""
+    @property
+    def per_region_values(
+        self,
+    ) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___MetricValue]:
+        """Metric values for each region"""
+    def __init__(
+        self,
+        *,
+        evaluation_metric_id: builtins.str = ...,
+        metric_value: global___MetricValue | None = ...,
+        explanation: builtins.str = ...,
+        per_region_values: collections.abc.Mapping[builtins.str, global___MetricValue]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["metric_value", b"metric_value"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "evaluation_metric_id",
+            b"evaluation_metric_id",
+            "explanation",
+            b"explanation",
+            "metric_value",
+            b"metric_value",
+            "per_region_values",
+            b"per_region_values",
+        ],
+    ) -> None: ...
+
+global___InputEvaluationMetricValue = InputEvaluationMetricValue
+
+@typing_extensions.final
 class MetricValue(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -16015,6 +16086,95 @@ class MetricValue(google.protobuf.message.Message):
     ) -> typing_extensions.Literal["string_value", "float_value", "int_value"] | None: ...
 
 global___MetricValue = MetricValue
+
+@typing_extensions.final
+class WorkflowEvaluationInputResult(google.protobuf.message.Message):
+    """The evaluation result at the input/sample level"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    INPUT_EVALUATION_METRIC_VALUES_FIELD_NUMBER: builtins.int
+    @property
+    def input_evaluation_metric_values(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___InputEvaluationMetricValue
+    ]: ...
+    def __init__(
+        self,
+        *,
+        input_evaluation_metric_values: collections.abc.Iterable[
+            global___InputEvaluationMetricValue
+        ]
+        | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "input_evaluation_metric_values", b"input_evaluation_metric_values"
+        ],
+    ) -> None: ...
+
+global___WorkflowEvaluationInputResult = WorkflowEvaluationInputResult
+
+@typing_extensions.final
+class WorkflowVersionEvaluationData(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    INPUT_FIELD_NUMBER: builtins.int
+    GROUND_TRUTHS_FIELD_NUMBER: builtins.int
+    PREDICTIONS_FIELD_NUMBER: builtins.int
+    WORKFLOW_EVALUATION_SAMPLE_RESULT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """the data example id"""
+    @property
+    def input(self) -> global___Input: ...
+    @property
+    def ground_truths(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Data]: ...
+    @property
+    def predictions(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Data]: ...
+    @property
+    def workflow_evaluation_sample_result(self) -> global___WorkflowEvaluationInputResult: ...
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        input: global___Input | None = ...,
+        ground_truths: collections.abc.Iterable[global___Data] | None = ...,
+        predictions: collections.abc.Iterable[global___Data] | None = ...,
+        workflow_evaluation_sample_result: global___WorkflowEvaluationInputResult | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "input",
+            b"input",
+            "workflow_evaluation_sample_result",
+            b"workflow_evaluation_sample_result",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "ground_truths",
+            b"ground_truths",
+            "id",
+            b"id",
+            "input",
+            b"input",
+            "predictions",
+            b"predictions",
+            "workflow_evaluation_sample_result",
+            b"workflow_evaluation_sample_result",
+        ],
+    ) -> None: ...
+
+global___WorkflowVersionEvaluationData = WorkflowVersionEvaluationData
 
 @typing_extensions.final
 class ArgoOrchestrationSpec(google.protobuf.message.Message):
@@ -16661,6 +16821,8 @@ class PipelineVersionRun(google.protobuf.message.Message):
     ORCHESTRATION_STATUS_FIELD_NUMBER: builtins.int
     USER_ID_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def pipeline_version(self) -> global___PipelineVersion:
@@ -16677,6 +16839,12 @@ class PipelineVersionRun(google.protobuf.message.Message):
     """The user the pipeline belongs to"""
     app_id: builtins.str
     """The app the pipeline belongs to"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline was created"""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline was last modified"""
     def __init__(
         self,
         *,
@@ -16686,10 +16854,16 @@ class PipelineVersionRun(google.protobuf.message.Message):
         orchestration_status: global___OrchestrationStatus | None = ...,
         user_id: builtins.str = ...,
         app_id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
+            "created_at",
+            b"created_at",
+            "modified_at",
+            b"modified_at",
             "orchestration_status",
             b"orchestration_status",
             "pipeline_version",
@@ -16701,8 +16875,12 @@ class PipelineVersionRun(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "app_id",
             b"app_id",
+            "created_at",
+            b"created_at",
             "id",
             b"id",
+            "modified_at",
+            b"modified_at",
             "nodepools",
             b"nodepools",
             "orchestration_status",

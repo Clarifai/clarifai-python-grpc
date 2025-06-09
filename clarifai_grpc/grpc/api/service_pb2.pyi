@@ -4666,6 +4666,8 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     PIPELINE_ID_FIELD_NUMBER: builtins.int
     PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
     PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_ID_FIELD_NUMBER: builtins.int
     page: builtins.int
     """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
     Defaults to last page.
@@ -4692,9 +4694,14 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     nodepool_id: builtins.str
     runner_id: builtins.str
     pipeline_id: builtins.str
-    """Pipelines that produced the logs."""
+    """Pipelines that produced the logs for a given pipeline run with log_type: pipeline.version.run
+    Must include user_app_id with user_id and app_id as well.
+    """
     pipeline_version_id: builtins.str
     pipeline_version_run_id: builtins.str
+    pipeline_step_id: builtins.str
+    """During pipeline step build provide these IDs."""
+    pipeline_step_version_id: builtins.str
     def __init__(
         self,
         *,
@@ -4711,6 +4718,8 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
         pipeline_id: builtins.str = ...,
         pipeline_version_id: builtins.str = ...,
         pipeline_version_run_id: builtins.str = ...,
+        pipeline_step_id: builtins.str = ...,
+        pipeline_step_version_id: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -4734,6 +4743,10 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
             b"per_page",
             "pipeline_id",
             b"pipeline_id",
+            "pipeline_step_id",
+            b"pipeline_step_id",
+            "pipeline_step_version_id",
+            b"pipeline_step_version_id",
             "pipeline_version_id",
             b"pipeline_version_id",
             "pipeline_version_run_id",
@@ -4764,6 +4777,8 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
     PIPELINE_ID_FIELD_NUMBER: builtins.int
     PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
     PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_STEP_VERSION_ID_FIELD_NUMBER: builtins.int
     log_type: builtins.str
     """The type of log entry. Examples: model, agent, build, training."""
     @property
@@ -4772,7 +4787,9 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
         The user app id, if a user produced the logs.
         """
     model_id: builtins.str
-    """The Model ID, if a model produced the logs."""
+    """For models if you set log_type to "builder" then you get the model build logs.
+    The Model ID, if a model produced the logs.
+    """
     model_version_id: builtins.str
     """The Version ID, if a model version produced the logs."""
     workflow_id: builtins.str
@@ -4782,9 +4799,16 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
     nodepool_id: builtins.str
     runner_id: builtins.str
     pipeline_id: builtins.str
-    """Pipelines that produced the logs."""
+    """Pipelines that produced the logs with log_type: pipeline.version.run
+    Must include user_app_id with user_id and app_id as well.
+    """
     pipeline_version_id: builtins.str
     pipeline_version_run_id: builtins.str
+    pipeline_step_id: builtins.str
+    """During pipeline step build provide these IDs with log_type: builder
+    Must include user_app_id with user_id and app_id as well.
+    """
+    pipeline_step_version_id: builtins.str
     def __init__(
         self,
         *,
@@ -4799,6 +4823,8 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
         pipeline_id: builtins.str = ...,
         pipeline_version_id: builtins.str = ...,
         pipeline_version_run_id: builtins.str = ...,
+        pipeline_step_id: builtins.str = ...,
+        pipeline_step_version_id: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -4818,6 +4844,10 @@ class StreamLogEntriesRequest(google.protobuf.message.Message):
             b"nodepool_id",
             "pipeline_id",
             b"pipeline_id",
+            "pipeline_step_id",
+            b"pipeline_step_id",
+            "pipeline_step_version_id",
+            b"pipeline_step_version_id",
             "pipeline_version_id",
             b"pipeline_version_id",
             "pipeline_version_run_id",
@@ -16036,6 +16066,102 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PostModelMigrationRequest = PostModelMigrationRequest
+
+@typing_extensions.final
+class ListWorkflowVersionEvaluationDataRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    workflow_id: builtins.str
+    workflow_version_id: builtins.str
+    workflow_version_evaluation_id: builtins.str
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        workflow_version_id: builtins.str = ...,
+        workflow_version_evaluation_id: builtins.str = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page",
+            b"page",
+            "per_page",
+            b"per_page",
+            "user_app_id",
+            b"user_app_id",
+            "workflow_id",
+            b"workflow_id",
+            "workflow_version_evaluation_id",
+            b"workflow_version_evaluation_id",
+            "workflow_version_id",
+            b"workflow_version_id",
+        ],
+    ) -> None: ...
+
+global___ListWorkflowVersionEvaluationDataRequest = ListWorkflowVersionEvaluationDataRequest
+
+@typing_extensions.final
+class MultiListWorkflowVersionEvaluationDataResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_DATA_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def workflow_version_evaluation_data(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationData
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        workflow_version_evaluation_data: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationData
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "status",
+            b"status",
+            "workflow_version_evaluation_data",
+            b"workflow_version_evaluation_data",
+        ],
+    ) -> None: ...
+
+global___MultiListWorkflowVersionEvaluationDataResponse = (
+    MultiListWorkflowVersionEvaluationDataResponse
+)
 
 @typing_extensions.final
 class GetPipelineRequest(google.protobuf.message.Message):

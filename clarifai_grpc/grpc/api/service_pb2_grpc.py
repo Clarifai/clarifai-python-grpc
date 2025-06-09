@@ -1279,6 +1279,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse),
                 )
+        self.ListWorkflowVersionEvaluationData = channel.unary_unary(
+                '/clarifai.api.V2/ListWorkflowVersionEvaluationData',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationDataRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse),
+                )
         self.PostPipelines = channel.unary_unary(
                 '/clarifai.api.V2/PostPipelines',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelinesRequest.SerializeToString,
@@ -3261,6 +3266,12 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListWorkflowVersionEvaluationData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostPipelines(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3322,7 +3333,9 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostPipelineVersionRuns(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """TODO ListPipelineVersionRuns for listing all the runs of a given pipeline version.
+
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -4621,6 +4634,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PatchWorkflowVersionEvaluations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.SerializeToString,
+            ),
+            'ListWorkflowVersionEvaluationData': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListWorkflowVersionEvaluationData,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationDataRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse.SerializeToString,
             ),
             'PostPipelines': grpc.unary_unary_rpc_method_handler(
                     servicer.PostPipelines,
@@ -8970,6 +8988,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchWorkflowVersionEvaluations',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchWorkflowVersionEvaluationsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiWorkflowVersionEvaluationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListWorkflowVersionEvaluationData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListWorkflowVersionEvaluationData',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationDataRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

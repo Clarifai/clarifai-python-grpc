@@ -584,6 +584,7 @@ class _StatusCodeEnumTypeWrapper(
     INTERNAL_VECTORDB_UNCATEGORIZED: _StatusCode.ValueType  # 98018
     INTERNAL_ORACLE_UNCATEGORIZED: _StatusCode.ValueType  # 98019
     INTERNAL_VULTR_UNCATEGORIZED: _StatusCode.ValueType  # 98020
+    INTERNAL_GCP_UNCATEGORIZED: _StatusCode.ValueType  # 98021
     CONN_UNCATEGORIZED: _StatusCode.ValueType  # 99001
     """Uncategorized: 99xxx: move off as soon as known"""
     MODEL_UNCATEGORIZED: _StatusCode.ValueType  # 99002
@@ -1156,6 +1157,7 @@ INTERNAL_AZURE_UNCATEGORIZED: StatusCode.ValueType  # 98017
 INTERNAL_VECTORDB_UNCATEGORIZED: StatusCode.ValueType  # 98018
 INTERNAL_ORACLE_UNCATEGORIZED: StatusCode.ValueType  # 98019
 INTERNAL_VULTR_UNCATEGORIZED: StatusCode.ValueType  # 98020
+INTERNAL_GCP_UNCATEGORIZED: StatusCode.ValueType  # 98021
 CONN_UNCATEGORIZED: StatusCode.ValueType  # 99001
 """Uncategorized: 99xxx: move off as soon as known"""
 MODEL_UNCATEGORIZED: StatusCode.ValueType  # 99002
