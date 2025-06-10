@@ -1,5 +1,3 @@
-import os
-
 from tests.common import GENERAL_MODEL_ID
 
 APPAREL_MODEL_ID = "e0be3b9d6a454f0493ac3a30784001ff"
@@ -203,14 +201,14 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
     (
         "text multilingual moderation",
         TEXT_MULTILINGUAL_MODERATION_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
+        "main",
+        "clarifai",
     ),
     (
         "ner english",
         NER_ENGLISH_MODEL_ID,
-        os.environ.get("CLARIFAI_APP_ID"),
-        os.environ.get("CLARIFAI_USER_ID"),
+        "main",
+        "clarifai",
     ),
 ]
 
