@@ -34,7 +34,7 @@ from tests.public_models.public_test_helper import (
 )
 
 # New constant for the OpenAI compatible endpoint test
-API_KEY = os.getenv("CLARIFAI_PAT", "")
+API_KEY = os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
 
 
 @both_channels
