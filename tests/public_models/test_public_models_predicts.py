@@ -376,18 +376,22 @@ def _call_openai_model(model_id):
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": "Who are you?"},
                 ],
-                extra_body={'max_completion_tokens': 50}
+                extra_body={'max_completion_tokens': 100},
             )
             if hasattr(response, 'choices') and response.choices:
                 return response, None  # Success
             else:
-                last_err_chat = ValueError(f"Chat completions returned no choices. Response: {response}")
+                last_err_chat = ValueError(
+                    f"Chat completions returned no choices. Response: {response}"
+                )
                 break
         except (APIConnectionError, APITimeoutError, RateLimitError) as e:
             last_err_chat = e
             if attempt == MAX_RETRY_ATTEMPTS - 1:
                 break
-            print(f"Retrying chat predict for '{model_id}' after error: {e}. Attempt #{attempt + 1}")
+            print(
+                f"Retrying chat predict for '{model_id}' after error: {e}. Attempt #{attempt + 1}"
+            )
             time.sleep(attempt + 1)
         except Exception as e:
             last_err_chat = e
@@ -403,13 +407,17 @@ def _call_openai_model(model_id):
             if hasattr(response, 'data') and response.data:
                 return response, None  # Success
             else:
-                last_err_image = ValueError(f"Image generation returned no data. Response: {response}")
+                last_err_image = ValueError(
+                    f"Image generation returned no data. Response: {response}"
+                )
                 break
         except (APIConnectionError, APITimeoutError, RateLimitError) as e:
             last_err_image = e
             if attempt == MAX_RETRY_ATTEMPTS - 1:
                 break
-            print(f"Retrying image predict for '{model_id}' after error: {e}. Attempt #{attempt + 1}")
+            print(
+                f"Retrying image predict for '{model_id}' after error: {e}. Attempt #{attempt + 1}"
+            )
             time.sleep(attempt + 1)
         except Exception as e:
             last_err_image = e
