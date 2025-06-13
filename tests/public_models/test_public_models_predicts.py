@@ -376,7 +376,7 @@ def _call_openai_model(model_id):
                     {"role": "system", "content": "You are a helpful assistant."},
                     {"role": "user", "content": "Who are you?"},
                 ],
-                extra_body={'max_completion_tokens': 100},
+                extra_body={'max_completion_tokens': 256},
             )
             if hasattr(response, 'choices') and response.choices:
                 return response, None  # Success
