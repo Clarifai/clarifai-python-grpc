@@ -40,7 +40,7 @@ from tests.public_models.public_test_helper import (
 )
 
 # New constant for the OpenAI compatible endpoint test
-API_KEY = os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
+API_KEY = os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_API"))
 MAX_RETRY_ATTEMPTS = 3
 
 
@@ -476,7 +476,7 @@ async def _call_openai_model_async(model_identifier, session):
 async def test_openai_compatible_endpoint_on_featured_models_async():
     """Tests the OpenAI compatible endpoint concurrently with featured models."""
     if not API_KEY:
-        pytest.skip("Skipping test: CLARIFAI_PAT environment variable not set.")
+        pytest.skip("Skipping test: CLARIFAI_API_KEY environment variable not set.")
 
     featured_models = _list_featured_models()
     tasks = []
