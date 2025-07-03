@@ -244,6 +244,9 @@ class _SEnumTypeWrapper(
     PipelineSteps_Add: _S.ValueType  # 158
     PipelineSteps_Pull: _S.ValueType  # 159
     """To pull the pipeline step version's image"""
+    Secrets_Get: _S.ValueType  # 160
+    Secrets_Add: _S.ValueType  # 161
+    Secrets_Delete: _S.ValueType  # 162
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -489,6 +492,9 @@ PipelineSteps_Get: S.ValueType  # 157
 PipelineSteps_Add: S.ValueType  # 158
 PipelineSteps_Pull: S.ValueType  # 159
 """To pull the pipeline step version's image"""
+Secrets_Get: S.ValueType  # 160
+Secrets_Add: S.ValueType  # 161
+Secrets_Delete: S.ValueType  # 162
 global___S = S
 
 @typing_extensions.final

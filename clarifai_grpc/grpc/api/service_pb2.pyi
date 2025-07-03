@@ -5255,6 +5255,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     SOURCE_FIELD_NUMBER: builtins.int
     CREATOR_FIELD_NUMBER: builtins.int
     MIN_REPLICAS_FIELD_NUMBER: builtins.int
+    SHOW_REPLICAS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -5379,6 +5380,8 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Filter by Creator"""
     min_replicas: builtins.int
     """Filter by model versions runners with replicas >= min_replicas."""
+    show_replicas: builtins.bool
+    """If true, show replica counts for models."""
     def __init__(
         self,
         *,
@@ -5413,6 +5416,7 @@ class ListModelsRequest(google.protobuf.message.Message):
         source: builtins.int = ...,
         creator: builtins.str = ...,
         min_replicas: builtins.int = ...,
+        show_replicas: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -5474,6 +5478,8 @@ class ListModelsRequest(google.protobuf.message.Message):
             b"query",
             "search",
             b"search",
+            "show_replicas",
+            b"show_replicas",
             "sort_ascending",
             b"sort_ascending",
             "sort_by",
@@ -13988,6 +13994,7 @@ class ListRunnersRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     MIN_REPLICAS_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -14002,6 +14009,11 @@ class ListRunnersRequest(google.protobuf.message.Message):
     compute_cluster_id: builtins.str
     min_replicas: builtins.int
     """Only return runners whose replicas are >= min_replicas."""
+    @property
+    def model_version_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(optional URL parameter) ModelVersion IDs. To list all runners for the model version"""
     def __init__(
         self,
         *,
@@ -14011,6 +14023,7 @@ class ListRunnersRequest(google.protobuf.message.Message):
         per_page: builtins.int = ...,
         compute_cluster_id: builtins.str = ...,
         min_replicas: builtins.int = ...,
+        model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -14022,6 +14035,8 @@ class ListRunnersRequest(google.protobuf.message.Message):
             b"compute_cluster_id",
             "min_replicas",
             b"min_replicas",
+            "model_version_ids",
+            b"model_version_ids",
             "nodepool_id",
             b"nodepool_id",
             "page",
@@ -16124,6 +16139,63 @@ class ListWorkflowVersionEvaluationDataRequest(google.protobuf.message.Message):
 global___ListWorkflowVersionEvaluationDataRequest = ListWorkflowVersionEvaluationDataRequest
 
 @typing_extensions.final
+class PostWorkflowVersionEvaluationDataRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_EVALUATION_DATA_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    workflow_id: builtins.str
+    workflow_version_id: builtins.str
+    workflow_version_evaluation_id: builtins.str
+    @property
+    def workflow_version_evaluation_data(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationData
+    ]:
+        """########## Supported fields ##########
+        - id
+        - workflow_evaluation_sample_result
+        """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        workflow_id: builtins.str = ...,
+        workflow_version_id: builtins.str = ...,
+        workflow_version_evaluation_id: builtins.str = ...,
+        workflow_version_evaluation_data: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.WorkflowVersionEvaluationData
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "user_app_id",
+            b"user_app_id",
+            "workflow_id",
+            b"workflow_id",
+            "workflow_version_evaluation_data",
+            b"workflow_version_evaluation_data",
+            "workflow_version_evaluation_id",
+            b"workflow_version_evaluation_id",
+            "workflow_version_id",
+            b"workflow_version_id",
+        ],
+    ) -> None: ...
+
+global___PostWorkflowVersionEvaluationDataRequest = PostWorkflowVersionEvaluationDataRequest
+
+@typing_extensions.final
 class MultiListWorkflowVersionEvaluationDataResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -17405,3 +17477,221 @@ class SinglePipelineStepVersionResponse(google.protobuf.message.Message):
     ) -> None: ...
 
 global___SinglePipelineStepVersionResponse = SinglePipelineStepVersionResponse
+
+@typing_extensions.final
+class GetSecretRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    SECRET_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    secret_id: builtins.str
+    """The id of the secret to get"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        secret_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "secret_id", b"secret_id", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___GetSecretRequest = GetSecretRequest
+
+@typing_extensions.final
+class ListSecretsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
+    Defaults to 1.
+    """
+    per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults
+    to 128.
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___ListSecretsRequest = ListSecretsRequest
+
+@typing_extensions.final
+class PostSecretsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    SECRETS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def secrets(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Secret
+    ]:
+        """The secrets to create"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        secrets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Secret] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "secrets", b"secrets", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___PostSecretsRequest = PostSecretsRequest
+
+@typing_extensions.final
+class PatchSecretsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    SECRETS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def secrets(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Secret
+    ]:
+        """The secrets to patch"""
+    action: builtins.str
+    """For now actions 'merge', 'overwrite', and 'remove' are supported
+    The action to perform on the patched objects
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        secrets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Secret] | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "action", b"action", "secrets", b"secrets", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___PatchSecretsRequest = PatchSecretsRequest
+
+@typing_extensions.final
+class DeleteSecretsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """List of secret ids to be deleted"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]
+    ) -> None: ...
+
+global___DeleteSecretsRequest = DeleteSecretsRequest
+
+@typing_extensions.final
+class SingleSecretResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    SECRET_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def secret(self) -> proto.clarifai.api.resources_pb2.Secret: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        secret: proto.clarifai.api.resources_pb2.Secret | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["secret", b"secret", "status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["secret", b"secret", "status", b"status"]
+    ) -> None: ...
+
+global___SingleSecretResponse = SingleSecretResponse
+
+@typing_extensions.final
+class MultiSecretResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    SECRETS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def secrets(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.Secret
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        secrets: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Secret] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["secrets", b"secrets", "status", b"status"]
+    ) -> None: ...
+
+global___MultiSecretResponse = MultiSecretResponse

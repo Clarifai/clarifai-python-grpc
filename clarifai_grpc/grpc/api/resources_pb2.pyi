@@ -306,6 +306,36 @@ OPEN_SOURCE: LicenseType.ValueType  # 2
 CLOSED_SOURCE: LicenseType.ValueType  # 3
 global___LicenseType = LicenseType
 
+class _DeployRestriction:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _DeployRestrictionEnumTypeWrapper(
+    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_DeployRestriction.ValueType],
+    builtins.type,
+):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    USAGE_RESTRICTION_NOT_SET: _DeployRestriction.ValueType  # 0
+    """Default uninitialized state."""
+    NO_LIMITS: _DeployRestriction.ValueType  # 1
+    """No restrictions on usage."""
+    SHARED_COMPUTE_ONLY: _DeployRestriction.ValueType  # 2
+    """Model can only be used on shared compute resources."""
+    DEDICATED_COMPUTE_ONLY: _DeployRestriction.ValueType  # 3
+    """Model can only be used on dedicated compute resources."""
+
+class DeployRestriction(_DeployRestriction, metaclass=_DeployRestrictionEnumTypeWrapper): ...
+
+USAGE_RESTRICTION_NOT_SET: DeployRestriction.ValueType  # 0
+"""Default uninitialized state."""
+NO_LIMITS: DeployRestriction.ValueType  # 1
+"""No restrictions on usage."""
+SHARED_COMPUTE_ONLY: DeployRestriction.ValueType  # 2
+"""Model can only be used on shared compute resources."""
+DEDICATED_COMPUTE_ONLY: DeployRestriction.ValueType  # 3
+"""Model can only be used on dedicated compute resources."""
+global___DeployRestriction = DeployRestriction
+
 class _DataType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -4747,6 +4777,8 @@ class Model(google.protobuf.message.Message):
     VERSION_COUNT_FIELD_NUMBER: builtins.int
     BILLING_TYPE_FIELD_NUMBER: builtins.int
     FEATURED_ORDER_FIELD_NUMBER: builtins.int
+    DEPLOY_RESTRICTION_FIELD_NUMBER: builtins.int
+    REPLICA_COUNT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -4862,6 +4894,12 @@ class Model(google.protobuf.message.Message):
         The order is relative to other models that are also featured.
         Models with a higher order will be featured first.
         """
+    deploy_restriction: global___DeployRestriction.ValueType
+    """Deploy restriction for the model."""
+    replica_count: builtins.int
+    """replica_count indicates the number of deployed model replicas.
+    This field is populated when `show_replicas` is true in ListModelsRequest.
+    """
     def __init__(
         self,
         *,
@@ -4898,6 +4936,8 @@ class Model(google.protobuf.message.Message):
         version_count: builtins.int = ...,
         billing_type: global___Model.BillingType.ValueType = ...,
         featured_order: google.protobuf.wrappers_pb2.Int32Value | None = ...,
+        deploy_restriction: global___DeployRestriction.ValueType = ...,
+        replica_count: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -4945,6 +4985,8 @@ class Model(google.protobuf.message.Message):
             b"creator",
             "default_eval_info",
             b"default_eval_info",
+            "deploy_restriction",
+            b"deploy_restriction",
             "description",
             b"description",
             "display_name",
@@ -4979,6 +5021,8 @@ class Model(google.protobuf.message.Message):
             b"output_info",
             "presets",
             b"presets",
+            "replica_count",
+            b"replica_count",
             "source",
             b"source",
             "star_count",
@@ -16893,3 +16937,99 @@ class PipelineVersionRun(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PipelineVersionRun = PipelineVersionRun
+
+@typing_extensions.final
+class Secret(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    VERSION_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
+    EXPIRES_AT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """The ID of the secret."""
+    app_id: builtins.str
+    """The app the secret belongs to."""
+    name: builtins.str
+    """The name of the secret, corresponds to secret_name in model_version.output_info.params.secrets"""
+    value: builtins.str
+    """The value of the secret."""
+    version: builtins.int
+    """The version of the secret."""
+    description: builtins.str
+    """The description of the secret."""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the secret was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the secret was last modified."""
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this message is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
+    @property
+    def expires_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the secret will expire."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        name: builtins.str = ...,
+        value: builtins.str = ...,
+        version: builtins.int = ...,
+        description: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        visibility: global___Visibility | None = ...,
+        expires_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "created_at",
+            b"created_at",
+            "expires_at",
+            b"expires_at",
+            "modified_at",
+            b"modified_at",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "app_id",
+            b"app_id",
+            "created_at",
+            b"created_at",
+            "description",
+            b"description",
+            "expires_at",
+            b"expires_at",
+            "id",
+            b"id",
+            "modified_at",
+            b"modified_at",
+            "name",
+            b"name",
+            "value",
+            b"value",
+            "version",
+            b"version",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> None: ...
+
+global___Secret = Secret

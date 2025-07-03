@@ -1284,6 +1284,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationDataRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse),
                 )
+        self.PostWorkflowVersionEvaluationData = channel.unary_unary(
+                '/clarifai.api.V2/PostWorkflowVersionEvaluationData',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationDataRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse),
+                )
         self.PostPipelines = channel.unary_unary(
                 '/clarifai.api.V2/PostPipelines',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelinesRequest.SerializeToString,
@@ -1373,6 +1378,31 @@ class V2Stub(object):
                 '/clarifai.api.V2/GetPipelineStepVersion',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse),
+                )
+        self.GetSecret = channel.unary_unary(
+                '/clarifai.api.V2/GetSecret',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSecretRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleSecretResponse),
+                )
+        self.ListSecrets = channel.unary_unary(
+                '/clarifai.api.V2/ListSecrets',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSecretsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse),
+                )
+        self.PostSecrets = channel.unary_unary(
+                '/clarifai.api.V2/PostSecrets',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSecretsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse),
+                )
+        self.PatchSecrets = channel.unary_unary(
+                '/clarifai.api.V2/PatchSecrets',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchSecretsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse),
+                )
+        self.DeleteSecrets = channel.unary_unary(
+                '/clarifai.api.V2/DeleteSecrets',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse),
                 )
 
 
@@ -3272,6 +3302,12 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostWorkflowVersionEvaluationData(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostPipelines(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -3382,6 +3418,36 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def GetPipelineStepVersion(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSecret(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListSecrets(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostSecrets(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchSecrets(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteSecrets(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4640,6 +4706,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListWorkflowVersionEvaluationDataRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse.SerializeToString,
             ),
+            'PostWorkflowVersionEvaluationData': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostWorkflowVersionEvaluationData,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationDataRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse.SerializeToString,
+            ),
             'PostPipelines': grpc.unary_unary_rpc_method_handler(
                     servicer.PostPipelines,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelinesRequest.FromString,
@@ -4729,6 +4800,31 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.GetPipelineStepVersion,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse.SerializeToString,
+            ),
+            'GetSecret': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSecret,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetSecretRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleSecretResponse.SerializeToString,
+            ),
+            'ListSecrets': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListSecrets,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListSecretsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.SerializeToString,
+            ),
+            'PostSecrets': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostSecrets,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSecretsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.SerializeToString,
+            ),
+            'PatchSecrets': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchSecrets,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchSecretsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.SerializeToString,
+            ),
+            'DeleteSecrets': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteSecrets,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -9009,6 +9105,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostWorkflowVersionEvaluationData(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostWorkflowVersionEvaluationData',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostWorkflowVersionEvaluationDataRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiListWorkflowVersionEvaluationDataResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def PostPipelines(request,
             target,
             options=(),
@@ -9311,5 +9424,90 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetPipelineStepVersion',
             proto_dot_clarifai_dot_api_dot_service__pb2.GetPipelineStepVersionRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SinglePipelineStepVersionResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSecret(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetSecret',
+            proto_dot_clarifai_dot_api_dot_service__pb2.GetSecretRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleSecretResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListSecrets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListSecrets',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListSecretsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostSecrets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostSecrets',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostSecretsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchSecrets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchSecrets',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchSecretsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteSecrets(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteSecrets',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
