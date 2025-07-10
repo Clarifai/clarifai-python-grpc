@@ -35,7 +35,7 @@ setuptools.setup(
     install_requires=[
         "grpcio>=1.53.2 ; python_version < '3.13'",
         "grpcio>=1.68.0 ; python_version >= '3.13'",
-        "protobuf>=3.20.3",
+        "protobuf>=4.25.8",
         "googleapis-common-protos>=1.57.0",
     ],
     package_data={p: ["*.pyi"] for p in packages},
