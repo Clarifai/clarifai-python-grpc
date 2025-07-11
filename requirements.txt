@@ -1,4 +1,4 @@
 googleapis-common-protos>=1.57.0
 grpcio>=1.53.2 ; python_version<'3.13'
 grpcio>=1.68.0 ; python_version>='3.13'
-protobuf>=6.31.1
+protobuf>=5.29.5
