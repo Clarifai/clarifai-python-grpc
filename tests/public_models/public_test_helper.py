@@ -31,6 +31,7 @@ TEXT_GEN_MODEL_ID = "distilgpt2"
 TEXT_SENTIMENT_MODEL_ID = "multilingual-uncased-sentiment"  # bert-based
 TEXT_MULTILINGUAL_MODERATION_MODEL_ID = "bdcedc0f8da58c396b7df12f634ef923"
 
+TEXT_MINI_CPM_MODEL_ID = "MiniCPM-o-2_6-language"
 
 TRANSLATION_TEST_DATA = {
     "ROMANCE": "No me apetece nada estudiar esta noche",
@@ -210,6 +211,10 @@ TEXT_MODEL_TITLE_IDS_TUPLE = [
         "main",
         "clarifai",
     ),
+]
+
+TEXT_LLM_MODEL_TITLE_IDS_TUPLE = [
+    ("multimodal large language model", TEXT_MINI_CPM_MODEL_ID, "miniCPM", "openbmb")
 ]
 
 # title, model_id, text, app, user

@@ -19,10 +19,12 @@ from tests.common import (
     GENERAL_MODEL_ID,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
+    _generate_model_outputs,
     async_post_model_outputs_and_maybe_allow_retries,
     async_raise_on_failure,
     asyncio_channel,
     both_channels,
+    grpc_channel,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
@@ -35,6 +37,7 @@ from tests.public_models.public_test_helper import (
     MULTIMODAL_MODEL_TITLE_AND_IDS,
     TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
+    TEXT_LLM_MODEL_TITLE_IDS_TUPLE,
     TEXT_MODEL_TITLE_IDS_TUPLE,
     TRANSLATION_TEST_DATA,
 )
@@ -118,6 +121,60 @@ def test_text_predict_on_public_models(channel):
             response,
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
+
+
+@grpc_channel
+def test_text_predict_on_public_llm_models(channel):
+    stub = service_pb2_grpc.V2Stub(channel)
+
+    for title, model_id, app_id, user_id in TEXT_LLM_MODEL_TITLE_IDS_TUPLE:
+        request = service_pb2.PostModelOutputsRequest(
+            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+            model_id=model_id,
+            inputs=[
+                resources_pb2.Input(
+                    data=resources_pb2.Data(
+                        parts=[
+                            resources_pb2.Part(
+                                id="prompt",
+                                data=resources_pb2.Data(
+                                    string_value=TRANSLATION_TEST_DATA["EN"],
+                                ),
+                            ),
+                            resources_pb2.Part(
+                                id="max_tokens",
+                                data=resources_pb2.Data(
+                                    int_value=10,
+                                ),
+                            ),
+                            resources_pb2.Part(
+                                id="temperature",
+                                data=resources_pb2.Data(
+                                    float_value=0.7,
+                                ),
+                            ),
+                            resources_pb2.Part(
+                                id="top_p",
+                                data=resources_pb2.Data(
+                                    float_value=0.95,
+                                ),
+                            ),
+                        ]
+                    )
+                )
+            ],
+        )
+        response_iterator = _generate_model_outputs(stub, request, metadata(pat=True))
+
+        responses_count = 0
+        for response in response_iterator:
+            responses_count += 1
+            raise_on_failure(
+                response,
+                custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+            )
+
+        assert responses_count > 0
 
 
 @asyncio_channel

@@ -65,6 +65,23 @@ def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     )
 
 
+def grpc_channel(func):
+    """
+    A decorator that runs the test using the gRPC channel.
+    :param func: The test function.
+    :return: A function wrapper.
+    """
+
+    def func_wrapper():
+        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
+            channel = ClarifaiChannel.get_insecure_grpc_channel(port=443)
+        else:
+            channel = ClarifaiChannel.get_grpc_channel()
+        func(channel)
+
+    return func_wrapper
+
+
 def both_channels(func):
     """
     A decorator that runs the test first using the gRPC channel and then using the JSON channel.
@@ -73,9 +90,10 @@ def both_channels(func):
     """
 
     def func_wrapper():
-        channel = ClarifaiChannel.get_grpc_channel()
         if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
             channel = ClarifaiChannel.get_insecure_grpc_channel(port=443)
+        else:
+            channel = ClarifaiChannel.get_grpc_channel()
         func(channel)
 
         channel = ClarifaiChannel.get_json_channel()
@@ -333,6 +351,25 @@ def post_model_outputs_and_maybe_allow_retries(
         response=response,
     )
     return response
+
+
+def _generate_model_outputs(
+    stub: service_pb2_grpc.V2Stub,
+    request: service_pb2.PostModelOutputsRequest,
+    metadata: Tuple,
+):
+    is_model_loaded = False
+    for i in range(1, MAX_PREDICT_ATTEMPTS + 1):
+        response_iterator = stub.GenerateModelOutputs(request, metadata=metadata)
+        for response in response_iterator:
+            if not is_model_loaded and response.status.code == status_code_pb2.MODEL_LOADING:
+                print(f"Model {request.model_id} is still loading...")
+                time.sleep(15)
+                break
+            is_model_loaded = True
+            yield response
+        if is_model_loaded:
+            break
 
 
 async def async_post_model_outputs_and_maybe_allow_retries(
