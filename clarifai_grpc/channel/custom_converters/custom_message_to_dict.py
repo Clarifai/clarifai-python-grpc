@@ -24,15 +24,16 @@ def protobuf_to_dict(object_protobuf, use_integers_for_enums=True, ignore_show_e
 class _CustomPrinter(_Printer):
     def __init__(
         self,
+        *,
         including_default_value_fields,
         preserving_proto_field_name,
         use_integers_for_enums,
         ignore_show_empty,
     ):
         super(_CustomPrinter, self).__init__(
-            including_default_value_fields,
-            preserving_proto_field_name,
-            use_integers_for_enums,
+            always_print_fields_with_no_presence=including_default_value_fields,
+            preserving_proto_field_name=preserving_proto_field_name,
+            use_integers_for_enums=use_integers_for_enums,
         )
         self._ignore_show_empty = ignore_show_empty
 
