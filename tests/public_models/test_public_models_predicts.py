@@ -19,7 +19,7 @@ from tests.common import (
     GENERAL_MODEL_ID,
     MAIN_APP_ID,
     MAIN_APP_USER_ID,
-   _generate_model_outputs,
+    _generate_model_outputs,
     async_post_model_outputs_and_maybe_allow_retries,
     async_raise_on_failure,
     asyncio_channel,
@@ -122,6 +122,7 @@ def test_text_predict_on_public_models(channel):
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
 
+
 @grpc_channel
 def test_text_predict_on_public_llm_models(channel):
     stub = service_pb2_grpc.V2Stub(channel)
@@ -138,25 +139,25 @@ def test_text_predict_on_public_llm_models(channel):
                                 id="prompt",
                                 data=resources_pb2.Data(
                                     string_value=TRANSLATION_TEST_DATA["EN"],
-                                )
+                                ),
                             ),
                             resources_pb2.Part(
                                 id="max_tokens",
                                 data=resources_pb2.Data(
                                     int_value=10,
-                                )
+                                ),
                             ),
                             resources_pb2.Part(
                                 id="temperature",
                                 data=resources_pb2.Data(
                                     float_value=0.7,
-                                )
+                                ),
                             ),
                             resources_pb2.Part(
                                 id="top_p",
                                 data=resources_pb2.Data(
                                     float_value=0.95,
-                                )
+                                ),
                             ),
                         ]
                     )
@@ -174,6 +175,7 @@ def test_text_predict_on_public_llm_models(channel):
             )
 
         assert responses_count > 0
+
 
 @asyncio_channel
 async def test_text_predict_on_public_models_async(channel):

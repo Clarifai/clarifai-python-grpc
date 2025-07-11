@@ -81,6 +81,7 @@ def grpc_channel(func):
 
     return func_wrapper
 
+
 def both_channels(func):
     """
     A decorator that runs the test first using the gRPC channel and then using the JSON channel.
