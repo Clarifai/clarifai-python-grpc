@@ -81,6 +81,21 @@ def run_tests_using_channels(func, channel_keys):
     return func_wrapper
 
 
+def run_tests_using_channels_async(func, channel_keys):
+    """
+    A decorator that runs the test using given channels.
+    :param func: The test function.
+    :param channel_keys: A list of channel keys to use for the test. A subtest is created for each channel.
+    :return: A function wrapper.
+    """
+
+    @pytest.mark.parametrize('channel_key', channel_keys)
+    async def func_wrapper(channel_key):
+        return await func(get_channel(channel_key))
+
+    return func_wrapper
+
+
 def get_channel(channel_key):
     if channel_key == "grpc":
         if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
@@ -91,7 +106,7 @@ def get_channel(channel_key):
     if channel_key == "json":
         return ClarifaiChannel.get_json_channel()
 
-    if channel_key == "asyncio":
+    if channel_key == "aio_grpc":
         if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
             return ClarifaiChannel.get_aio_insecure_grpc_channel(port=443)
         else:
@@ -127,7 +142,7 @@ def asyncio_channel(func):
     :return: A function wrapper.
     """
 
-    return run_tests_using_channels(func, ["asyncio"])
+    return run_tests_using_channels_async(func, ["aio_grpc"])
 
 
 def wait_for_inputs_upload(stub, metadata, input_ids):
