@@ -1,9 +1,9 @@
 import os
-import pytest
 import time
 from datetime import datetime
 from typing import List, Tuple
 
+import pytest
 from grpc._channel import _Rendezvous
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
