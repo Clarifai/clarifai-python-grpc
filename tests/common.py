@@ -1,4 +1,5 @@
 import os
+import pytest
 import time
 from datetime import datetime
 from typing import List, Tuple
@@ -65,6 +66,40 @@ def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     )
 
 
+def run_tests_using_channels(func, channel_keys):
+    """
+    A decorator that runs the test using given channels.
+    :param func: The test function.
+    :param channel_keys: A list of channel keys to use for the test. A subtest is created for each channel.
+    :return: A function wrapper.
+    """
+
+    @pytest.mark.parametrize('channel_key', channel_keys)
+    def func_wrapper(channel_key):
+        return func(get_channel(channel_key))
+
+    return func_wrapper
+
+
+def get_channel(channel_key):
+    if channel_key == "grpc":
+        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
+            return ClarifaiChannel.get_insecure_grpc_channel(port=443)
+        else:
+            return ClarifaiChannel.get_grpc_channel()
+
+    if channel_key == "json":
+        return ClarifaiChannel.get_json_channel()
+
+    if channel_key == "asyncio":
+        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
+            return ClarifaiChannel.get_aio_insecure_grpc_channel(port=443)
+        else:
+            return ClarifaiChannel.get_aio_grpc_channel()
+
+    raise ValueError(f"Unknown channel {channel_key}")
+
+
 def grpc_channel(func):
     """
     A decorator that runs the test using the gRPC channel.
@@ -72,14 +107,7 @@ def grpc_channel(func):
     :return: A function wrapper.
     """
 
-    def func_wrapper():
-        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
-            channel = ClarifaiChannel.get_insecure_grpc_channel(port=443)
-        else:
-            channel = ClarifaiChannel.get_grpc_channel()
-        func(channel)
-
-    return func_wrapper
+    return run_tests_using_channels(func, ["grpc"])
 
 
 def both_channels(func):
@@ -89,17 +117,7 @@ def both_channels(func):
     :return: A function wrapper.
     """
 
-    def func_wrapper():
-        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
-            channel = ClarifaiChannel.get_insecure_grpc_channel(port=443)
-        else:
-            channel = ClarifaiChannel.get_grpc_channel()
-        func(channel)
-
-        channel = ClarifaiChannel.get_json_channel()
-        func(channel)
-
-    return func_wrapper
+    return run_tests_using_channels(func, ["grpc", "json"])
 
 
 def asyncio_channel(func):
@@ -109,13 +127,7 @@ def asyncio_channel(func):
     :return: A function wrapper.
     """
 
-    async def func_wrapper():
-        channel = ClarifaiChannel.get_aio_grpc_channel()
-        if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
-            channel = ClarifaiChannel.get_aio_insecure_grpc_channel(port=443)
-        await func(channel)
-
-    return func_wrapper
+    return run_tests_using_channels(func, ["asyncio"])
 
 
 def wait_for_inputs_upload(stub, metadata, input_ids):
