@@ -65,19 +65,21 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     # Add some inputs with the concepts that we'll need in the model.
+    concept_id_1 = "concept-id-" + uuid.uuid4().hex[:15]
+    concept_id_2 = "concept-id-" + uuid.uuid4().hex[:15]
     post_inputs_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
                         image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True),
-                        concepts=[resources_pb2.Concept(id="some-initial-concept")],
+                        concepts=[resources_pb2.Concept(id=concept_id_1)],
                     )
                 ),
                 resources_pb2.Input(
                     data=resources_pb2.Data(
                         image=resources_pb2.Image(url=DOG_IMAGE_URL, allow_duplicate_url=True),
-                        concepts=[resources_pb2.Concept(id="some-new-concept")],
+                        concepts=[resources_pb2.Concept(id=concept_id_2)],
                     )
                 ),
             ]
@@ -126,7 +128,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
                     resources_pb2.ModelVersion(
                         output_info=resources_pb2.OutputInfo(
                             data=resources_pb2.Data(
-                                concepts=[resources_pb2.Concept(id="some-new-concept")],
+                                concepts=[resources_pb2.Concept(id=concept_id_2)],
                             ),
                         )
                     )
@@ -150,12 +152,9 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
             or len(get_response.model.output_info.data.concepts) == 1
         )
         if len(get_response.model.model_version.output_info.data.concepts) == 1:
-            assert (
-                get_response.model.model_version.output_info.data.concepts[0].id
-                == "some-new-concept"
-            )
+            assert get_response.model.model_version.output_info.data.concepts[0].id == concept_id_2
         else:
-            get_response.model.output_info.data.concepts[0].id == "some-new-concept"
+            get_response.model.output_info.data.concepts[0].id == concept_id_2
 
         post_model_version_metrics_response = stub.PostModelVersionMetrics(
             service_pb2.PostModelVersionMetricsRequest(
@@ -181,7 +180,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
         raise_on_failure(post_model_outputs_response)
         assert len(post_model_outputs_response.outputs) == 1
         assert len(post_model_outputs_response.outputs[0].data.concepts) == 1
-        assert post_model_outputs_response.outputs[0].data.concepts[0].id == "some-new-concept"
+        assert post_model_outputs_response.outputs[0].data.concepts[0].id == concept_id_2
     finally:
         delete_response = stub.DeleteModel(
             service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
