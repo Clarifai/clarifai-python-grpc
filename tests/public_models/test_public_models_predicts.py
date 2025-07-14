@@ -123,10 +123,11 @@ def test_text_predict_on_public_models(channel_key, title, model_id, app_id, use
 @grpc_channel()
 @pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_LLM_MODEL_TITLE_IDS_TUPLE)
 def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id, user_id):
-    if os.environ.get('CLARIFAI_GRPC_BASE') != "api.clarifai.com":
-        pytest.skip(f"Model not available in {os.environ.get('CLARIFAI_GRPC_BASE')}")
+    channel = get_channel(channel_key)
+    if channel._target != "api.clarifai.com":
+        pytest.skip(f"Model not available in {channel._target }")
 
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+    stub = service_pb2_grpc.V2Stub(channel)
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
