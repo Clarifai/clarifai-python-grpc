@@ -1,12 +1,12 @@
 import os
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from tests.common import both_channels, raise_on_failure
+from tests.common import both_channels, get_channel, raise_on_failure
 
 
-@both_channels
-def test_list_collaborators_with_pat(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_list_collaborators_with_pat(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     metadata = (("authorization", "Key %s" % os.environ.get("CLARIFAI_PAT_KEY")),)
 
     list_apps_response = stub.ListApps(

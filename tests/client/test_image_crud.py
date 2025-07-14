@@ -8,15 +8,16 @@ from tests.common import (
     TRUCK_IMAGE_URL,
     both_channels,
     cleanup_inputs,
+    get_channel,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
 )
 
 
-@both_channels
-def test_post_list_patch_get_delete_image(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_list_patch_get_delete_image(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
@@ -75,9 +76,9 @@ def test_post_list_patch_get_delete_image(channel):
         cleanup_inputs(stub, [input_id], metadata=metadata())
 
 
-@both_channels
-def test_post_delete_batch_images(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_delete_batch_images(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
@@ -105,9 +106,9 @@ def test_post_delete_batch_images(channel):
     cleanup_inputs(stub, [input_id1, input_id2], metadata=metadata())
 
 
-@both_channels
-def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     input_id = uuid.uuid4().hex[:15]
 
@@ -197,9 +198,9 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel):
     cleanup_inputs(stub, [input_id], metadata=metadata())
 
 
-@both_channels
-def test_image_with_bytes(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_image_with_bytes(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     with open(RED_TRUCK_IMAGE_FILE_PATH, "rb") as f:
         file_bytes = f.read()

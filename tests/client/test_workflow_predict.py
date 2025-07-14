@@ -5,14 +5,15 @@ from tests.common import (
     MAIN_APP_USER_ID,
     RED_TRUCK_IMAGE_FILE_PATH,
     both_channels,
+    get_channel,
     metadata,
     raise_on_failure,
 )
 
 
-@both_channels
-def test_workflow_predict_image_url(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_workflow_predict_image_url(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     post_workflows_response = stub.PostWorkflowResults(
         service_pb2.PostWorkflowResultsRequest(
@@ -32,9 +33,9 @@ def test_workflow_predict_image_url(channel):
     assert len(post_workflows_response.results[0].outputs[0].data.concepts) == 3
 
 
-@both_channels
-def test_workflow_predict_image_bytes(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_workflow_predict_image_bytes(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     with open(RED_TRUCK_IMAGE_FILE_PATH, "rb") as f:
         file_bytes = f.read()

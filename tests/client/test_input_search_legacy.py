@@ -9,15 +9,15 @@ from tests.client.test_inputs_searches import SetupImage
 from tests.common import (
     DOG_IMAGE_URL,
     both_channels,
+    get_channel,
     metadata,
     raise_on_failure,
 )
 
 
-@both_channels
-def test_search_by_annotated_concept_id(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_annotated_concept_id(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         my_concept_id = input_.data.concepts[0].id
         response = stub.PostSearches(
@@ -41,10 +41,9 @@ def test_search_by_annotated_concept_id(channel):
         assert response.hits[0].input.id == input_.id
 
 
-@both_channels
-def test_search_by_annotated_concept_name(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_annotated_concept_name(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         my_concept_name = input_.data.concepts[0].name
         response = stub.PostSearches(
@@ -68,10 +67,9 @@ def test_search_by_annotated_concept_name(channel):
         assert response.hits[0].input.id == input_.id
 
 
-@both_channels
-def test_search_by_predicted_concept_id(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_predicted_concept_id(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -96,10 +94,9 @@ def test_search_by_predicted_concept_id(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_predicted_concept_name(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_predicted_concept_name(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -123,10 +120,9 @@ def test_search_by_predicted_concept_name(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_predicted_concept_name_in_chinese(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_predicted_concept_name_in_chinese(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -151,10 +147,9 @@ def test_search_by_predicted_concept_name_in_chinese(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_predicted_concept_name_in_japanese(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_predicted_concept_name_in_japanese(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -179,10 +174,9 @@ def test_search_by_predicted_concept_name_in_japanese(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_image_url(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_image_url(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -208,10 +202,9 @@ def test_search_by_image_url(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_image_bytes(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_image_bytes(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         http_response = urllib.request.urlopen(DOG_IMAGE_URL)
         url_bytes = http_response.read()
@@ -239,10 +232,9 @@ def test_search_by_image_bytes(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_metadata(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_metadata(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         search_metadata = struct_pb2.Struct()
         search_metadata.update({"another-key": {"inner-key": "inner-value"}})
@@ -266,10 +258,9 @@ def test_search_by_metadata(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_geo_point_and_limit(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_geo_point_and_limit(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -300,10 +291,9 @@ def test_search_by_geo_point_and_limit(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_geo_box(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_geo_box(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -340,10 +330,9 @@ def test_search_by_geo_box(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_image_url_and_geo_box(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_image_url_and_geo_box(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
@@ -389,10 +378,9 @@ def test_search_by_image_url_and_geo_box(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
+@both_channels()
+def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:
         my_concept_name = input_.data.concepts[0].name
         response = stub.PostSearches(
@@ -444,9 +432,9 @@ def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel):
         assert input_.id in [hit.input.id for hit in response.hits]
 
 
-@both_channels
-def test_save_and_execute_search_by_id(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_save_and_execute_search_by_id(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     search_id = "my-search-id-" + uuid.uuid4().hex[:15]
 
@@ -489,9 +477,9 @@ def test_save_and_execute_search_by_id(channel):
         assert post_search_by_id_response.hits[0].input.id == input_.id
 
 
-@both_channels
-def test_save_and_execute_annotations_search_by_id(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_save_and_execute_annotations_search_by_id(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     my_search_id = "my-search-id-" + uuid.uuid4().hex[:15]
     my_concept_id = "my-anno-conc-" + uuid.uuid4().hex[:15]

@@ -1,12 +1,12 @@
 import uuid
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from tests.common import both_channels, metadata, raise_on_failure
+from tests.common import both_channels, get_channel, metadata, raise_on_failure
 
 
-@both_channels
-def test_post_patch_get_delete_workflow(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_patch_get_delete_workflow(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     # Max workflow ID is capped at 32 chars.
     workflow_id = "food-and-general-" + uuid.uuid4().hex[:15]

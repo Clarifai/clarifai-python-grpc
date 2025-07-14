@@ -2,12 +2,12 @@ import uuid
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import both_channels, metadata, raise_on_failure
+from tests.common import both_channels, get_channel, metadata, raise_on_failure
 
 
-@both_channels
-def test_concept_post_get_patch(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_concept_post_get_patch(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     random_string = uuid.uuid4().hex[:15]
     random_concept_id = "concept-id-" + random_string
@@ -64,9 +64,9 @@ def test_concept_post_get_patch(channel):
     raise_on_failure(patch_concepts_response)
 
 
-@both_channels
-def test_patching_public_concept_fails(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_patching_public_concept_fails(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     patch_concepts_searches_response = stub.PatchConcepts(
         service_pb2.PatchConceptsRequest(

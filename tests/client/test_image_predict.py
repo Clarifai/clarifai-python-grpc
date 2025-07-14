@@ -8,15 +8,16 @@ from tests.common import (
     NON_EXISTING_IMAGE_URL,
     RED_TRUCK_IMAGE_FILE_PATH,
     both_channels,
+    get_channel,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
 )
 
 
-@both_channels
-def test_predict_image_url(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_image_url(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -35,9 +36,9 @@ def test_predict_image_url(channel):
     assert len(response.outputs[0].data.concepts) > 0
 
 
-@both_channels
-def test_predict_image_url_with_max_concepts(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_image_url_with_max_concepts(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -65,9 +66,9 @@ def test_predict_image_url_with_max_concepts(channel):
     assert len(response.outputs[0].data.concepts) == 3
 
 
-@both_channels
-def test_predict_image_url_with_min_value(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_image_url_with_min_value(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -97,9 +98,9 @@ def test_predict_image_url_with_min_value(channel):
         assert c.value >= 0.98
 
 
-@both_channels
-def test_predict_image_url_with_selected_concepts(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_image_url_with_selected_concepts(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -136,9 +137,9 @@ def test_predict_image_url_with_selected_concepts(channel):
     assert dog_concept.value > cat_concept.value
 
 
-@both_channels
-def test_predict_image_bytes(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_image_bytes(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     with open(RED_TRUCK_IMAGE_FILE_PATH, "rb") as f:
         file_bytes = f.read()
@@ -161,9 +162,9 @@ def test_predict_image_bytes(channel):
     assert len(response.outputs[0].data.concepts) > 0
 
 
-@both_channels
-def test_failed_predict(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_failed_predict(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
@@ -192,9 +193,9 @@ def test_failed_predict(channel):
     # )
 
 
-@both_channels
-def test_mixed_success_predict(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_mixed_success_predict(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
         model_id=GENERAL_MODEL_ID,
