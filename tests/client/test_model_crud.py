@@ -65,8 +65,8 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     # Add some inputs with the concepts that we'll need in the model.
-    concept_id_1 = "model-id-" + uuid.uuid4().hex[:15]
-    concept_id_2 = "model-id-" + uuid.uuid4().hex[:15]
+    concept_id_1 = "concept-id-" + uuid.uuid4().hex[:15]
+    concept_id_2 = "concept-id-" + uuid.uuid4().hex[:15]
     post_inputs_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
             inputs=[
