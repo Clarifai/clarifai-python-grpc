@@ -205,7 +205,11 @@ def test_adding_inputs(channel_key):
 
         # list input
         list_inputs_response = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=10), metadata=API_CLIENT_AUTH
+            service_pb2.ListInputsRequest(
+                ids=bytes_hash_by_id.keys(),
+                per_page=10,
+            ),
+            metadata=API_CLIENT_AUTH,
         )
         raise_on_failure(list_inputs_response)
         assert len(list_inputs_response.inputs) == len(bytes_hash_by_id.keys())
