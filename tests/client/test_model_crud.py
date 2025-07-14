@@ -1,4 +1,5 @@
 import uuid
+
 import pytest
 from google.protobuf import struct_pb2
 
@@ -7,8 +8,8 @@ from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
-    get_channel,
     cleanup_inputs,
+    get_channel,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,

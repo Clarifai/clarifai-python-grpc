@@ -1,4 +1,5 @@
 import uuid
+
 from google.protobuf.struct_pb2 import Struct
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -6,8 +7,8 @@ from tests.common import (
     RED_TRUCK_IMAGE_FILE_PATH,
     TRUCK_IMAGE_URL,
     both_channels,
-    get_channel,
     cleanup_inputs,
+    get_channel,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,

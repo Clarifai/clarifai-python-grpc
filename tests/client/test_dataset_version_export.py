@@ -2,6 +2,7 @@ import io
 import json
 import uuid
 import zipfile
+
 import requests
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc

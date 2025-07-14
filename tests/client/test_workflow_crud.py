@@ -1,4 +1,5 @@
 import uuid
+
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import both_channels, get_channel, metadata, raise_on_failure
 

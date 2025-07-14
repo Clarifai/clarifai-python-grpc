@@ -24,8 +24,8 @@ from tests.common import (
     async_raise_on_failure,
     asyncio_channel,
     both_channels,
-    grpc_channel,
     get_channel,
+    grpc_channel,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
@@ -50,7 +50,7 @@ MAX_RETRY_ATTEMPTS = 3
 
 @both_channels()
 @pytest.mark.parametrize("title, model_id, app_id, user_id ", AUDIO_MODEL_TITLE_IDS_TUPLE)
-def test_audio_predict_on_public_models(channel_key, title, model_id, app_id, user_id ):
+def test_audio_predict_on_public_models(channel_key, title, model_id, app_id, user_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
@@ -74,7 +74,7 @@ def test_audio_predict_on_public_models(channel_key, title, model_id, app_id, us
 
 @asyncio_channel()
 @pytest.mark.parametrize("title, model_id, app_id, user_id ", AUDIO_MODEL_TITLE_IDS_TUPLE)
-async def test_audio_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id ):
+async def test_audio_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
@@ -109,9 +109,7 @@ def test_text_predict_on_public_models(channel_key, title, model_id, app_id, use
         model_id=model_id,
         inputs=[
             resources_pb2.Input(
-                data=resources_pb2.Data(
-                    text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
-                )
+                data=resources_pb2.Data(text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"]))
             )
         ],
     )
@@ -191,9 +189,7 @@ async def test_text_predict_on_public_models_async(channel_key, title, model_id,
         model_id=model_id,
         inputs=[
             resources_pb2.Input(
-                data=resources_pb2.Data(
-                    text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
-                )
+                data=resources_pb2.Data(text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"]))
             )
         ],
     )
@@ -208,8 +204,12 @@ async def test_text_predict_on_public_models_async(channel_key, title, model_id,
 
 @pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels()
-@pytest.mark.parametrize("title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE)
-def test_text_fb_translation_predict_on_public_models(channel_key, title, model_id, text, app_id, user_id ):
+@pytest.mark.parametrize(
+    "title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE
+)
+def test_text_fb_translation_predict_on_public_models(
+    channel_key, title, model_id, text, app_id, user_id
+):
     """Test language translation models.
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
@@ -218,9 +218,7 @@ def test_text_fb_translation_predict_on_public_models(channel_key, title, model_
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
         model_id=model_id,
-        inputs=[
-            resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
-        ],
+        inputs=[resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))],
     )
     response = post_model_outputs_and_maybe_allow_retries(
         stub, request, metadata=metadata(pat=True)
@@ -232,8 +230,12 @@ def test_text_fb_translation_predict_on_public_models(channel_key, title, model_
 
 
 @both_channels()
-@pytest.mark.parametrize("title, model_id, text, app_id, user_id", TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE)
-def test_text_helsinki_translation_predict_on_public_models(channel_key, title, model_id, text, app_id, user_id):
+@pytest.mark.parametrize(
+    "title, model_id, text, app_id, user_id", TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE
+)
+def test_text_helsinki_translation_predict_on_public_models(
+    channel_key, title, model_id, text, app_id, user_id
+):
     """Test language translation models.
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
@@ -242,9 +244,7 @@ def test_text_helsinki_translation_predict_on_public_models(channel_key, title, 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
         model_id=model_id,
-        inputs=[
-            resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
-        ],
+        inputs=[resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))],
     )
     response = post_model_outputs_and_maybe_allow_retries(
         stub, request, metadata=metadata(pat=True)
