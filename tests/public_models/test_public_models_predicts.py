@@ -415,9 +415,10 @@ def _call_openai_model(model_id):
     Attempts to call a model using OpenAI's chat completions and image generation APIs,
     with an integrated retry mechanism and corrected parameters.
     """
+    channel = ClarifaiChannel.get_grpc_channel()
     client = OpenAI(
         api_key=os.environ.get('CLARIFAI_PAT_KEY'),
-        base_url="https://api.clarifai.com/v2/ext/openai/v1",
+        base_url=f"https://{channel._target}/v2/ext/openai/v1",
     )
     last_err_chat = None
     last_err_image = None
