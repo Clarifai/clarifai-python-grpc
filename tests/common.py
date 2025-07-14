@@ -93,7 +93,7 @@ def both_channels():
     return pytest.mark.parametrize('channel_key', ["grpc", "json"])
 
 
-def asyncio_channel():
+def aio_grpc_channel():
     return pytest.mark.parametrize('channel_key', ["aio_grpc"])
 
 

@@ -22,7 +22,7 @@ from tests.common import (
     _generate_model_outputs,
     async_post_model_outputs_and_maybe_allow_retries,
     async_raise_on_failure,
-    asyncio_channel,
+    aio_grpc_channel,
     both_channels,
     get_channel,
     grpc_channel,
@@ -72,7 +72,7 @@ def test_audio_predict_on_public_models(channel_key, title, model_id, app_id, us
     )
 
 
-@asyncio_channel()
+@aio_grpc_channel()
 @pytest.mark.parametrize("title, model_id, app_id, user_id ", AUDIO_MODEL_TITLE_IDS_TUPLE)
 async def test_audio_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
@@ -176,7 +176,7 @@ def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id,
     assert responses_count > 0
 
 
-@asyncio_channel()
+@aio_grpc_channel()
 @pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_MODEL_TITLE_IDS_TUPLE)
 async def test_text_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id):
     """Test non translation text/nlp models.
@@ -276,7 +276,7 @@ def test_image_predict_on_public_models(channel_key):
         )
 
 
-@asyncio_channel()
+@aio_grpc_channel()
 async def test_image_predict_on_public_models_async(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
@@ -325,7 +325,7 @@ def test_image_detection_predict_on_public_models(channel_key):
         )
 
 
-@asyncio_channel()
+@aio_grpc_channel()
 async def test_image_detection_predict_on_public_models_async(channel_key):
     """Test object detection models using clarifai platform user
     and app id access credentials.
