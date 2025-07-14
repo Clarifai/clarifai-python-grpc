@@ -543,7 +543,9 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
 
     tasks = []
     # TODO: Re-enable anthropic tests
-    model_identifiers = [m for m in _list_openai_featured_models() if not m.startswith("anthropic")]
+    model_identifiers = [
+        m for m in _list_openai_featured_models() if not m.startswith("anthropic")
+    ]
 
     for model_identifier in model_identifiers:
         tasks.append(_call_openai_model_async(model_identifier, None))
