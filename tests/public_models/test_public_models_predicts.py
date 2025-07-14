@@ -258,107 +258,107 @@ def test_text_helsinki_translation_predict_on_public_models(
 
 
 @both_channels()
-def test_image_predict_on_public_models(channel_key):
+@pytest.mark.parametrize("title, model_id", MODEL_TITLE_AND_ID_PAIRS)
+def test_image_predict_on_public_models(channel_key, title, model_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
-                )
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata(pat=True))
-        raise_on_failure(
-            response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
-        )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+            )
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(stub, request, metadata(pat=True))
+    raise_on_failure(
+        response,
+        custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 @aio_grpc_channel()
-async def test_image_predict_on_public_models_async(channel_key):
+@pytest.mark.parametrize("title, model_id", MODEL_TITLE_AND_ID_PAIRS)
+async def test_image_predict_on_public_models_async(channel_key, title, model_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
-                )
-            ],
-        )
-        response = await async_post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata(pat=True)
-        )
-        await async_raise_on_failure(
-            response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
-        )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+            )
+        ],
+    )
+    response = await async_post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata(pat=True)
+    )
+    await async_raise_on_failure(
+        response,
+        custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 @both_channels()
-def test_image_detection_predict_on_public_models(channel_key):
+@pytest.mark.parametrize("title, model_id, app_id, user_id", DETECTION_MODEL_TITLE_AND_IDS)
+def test_image_detection_predict_on_public_models(channel_key, title, model_id, app_id, user_id):
     """Test object detection models using clarifai platform user
     and app id access credentials.
     """
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
-                )
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        raise_on_failure(
-            response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
-        )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+            )
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    raise_on_failure(
+        response,
+        custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 @aio_grpc_channel()
-async def test_image_detection_predict_on_public_models_async(channel_key):
+@pytest.mark.parametrize("title, model_id, app_id, user_id", DETECTION_MODEL_TITLE_AND_IDS)
+async def test_image_detection_predict_on_public_models_async(
+    channel_key, title, model_id, app_id, user_id
+):
     """Test object detection models using clarifai platform user
     and app id access credentials.
     """
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
-                )
-            ],
-        )
-        response = await async_post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        await async_raise_on_failure(
-            response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
-        )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+            )
+        ],
+    )
+    response = await async_post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    await async_raise_on_failure(
+        response,
+        custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 @both_channels()
-def test_video_predict_on_public_models(channel_key):
+@pytest.mark.parametrize("title, model_id", [("general", GENERAL_MODEL_ID)])
+def test_video_predict_on_public_models(channel_key, title, model_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-
-    title = "general"
-    model_id = GENERAL_MODEL_ID
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -379,34 +379,32 @@ def test_video_predict_on_public_models(channel_key):
 
 
 @both_channels()
-def test_multimodal_predict_on_public_models(channel_key):
+@pytest.mark.parametrize("title, model_id", MULTIMODAL_MODEL_TITLE_AND_IDS)
+def test_multimodal_predict_on_public_models(channel_key, title, model_id):
     """Test multimodal models.
     Currently supporting only text and image inputs.
     """
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id in MULTIMODAL_MODEL_TITLE_AND_IDS:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
-                ),
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
-                    )
-                ),
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        raise_on_failure(
-            response,
-            custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
-        )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(image=resources_pb2.Image(url=DOG_IMAGE_URL))
+            ),
+            resources_pb2.Input(
+                data=resources_pb2.Data(text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"]))
+            ),
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    raise_on_failure(
+        response,
+        custom_message=f"Image predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 # Helper functions for the new OpenAI compatible endpoint test
