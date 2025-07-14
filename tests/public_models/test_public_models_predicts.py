@@ -542,9 +542,9 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
         pytest.skip("Skipping test: CLARIFAI_PAT_KEY environment variable not set.")
 
     tasks = []
-    model_identifiers = []
+    model_identifiers = _list_openai_featured_models()
 
-    for model_identifier in _list_openai_featured_models():
+    for model_identifier in model_identifiers:
         if model_identifier.startswith("anthropic"):
             # TODO: Re-enable anthropic tests
             continue
