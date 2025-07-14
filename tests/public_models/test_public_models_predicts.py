@@ -415,9 +415,10 @@ def _call_openai_model(model_id):
     Attempts to call a model using OpenAI's chat completions and image generation APIs,
     with an integrated retry mechanism and corrected parameters.
     """
+    channel = ClarifaiChannel.get_grpc_channel()
     client = OpenAI(
         api_key=os.environ.get('CLARIFAI_PAT_KEY'),
-        base_url="https://api.clarifai.com/v2/ext/openai/v1",
+        base_url=f"https://{channel._target}/v2/ext/openai/v1",
     )
     last_err_chat = None
     last_err_image = None
@@ -488,9 +489,8 @@ def _list_featured_models(per_page=50):
     # This function remains unchanged
     channel = ClarifaiChannel.get_grpc_channel()
     stub = service_pb2_grpc.V2Stub(channel)
-    auth_metadata = (("authorization", f"Key {os.environ.get('CLARIFAI_PAT_KEY')}"),)
     request = service_pb2.ListModelsRequest(per_page=per_page, featured_only=True)
-    response = stub.ListModels(request, metadata=auth_metadata)
+    response = stub.ListModels(request, metadata=metadata(pat=True))
     if response.status.code != status_code_pb2.SUCCESS:
         raise Exception(f"ListModels failed: {response.status.description}")
     return response.models
@@ -521,8 +521,8 @@ def test_openai_compatible_endpoint_on_featured_models(model_identifier):
         pytest.skip("Skipping test: CLARIFAI_PAT_KEY environment variable not set.")
 
     if model_identifier.startswith("anthropic"):
-        # TODO: Fix anthropic
-        pytest.skip("TODO: Fix anthropic")
+        # TODO: Re-enable anthropic tests
+        pytest.skip("Anthropic models are currently disabled")
 
     _, error = _call_openai_model(model_identifier)
     assert not error
@@ -542,12 +542,12 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
         pytest.skip("Skipping test: CLARIFAI_PAT_KEY environment variable not set.")
 
     tasks = []
-    model_identifiers = []
+    # TODO: Re-enable anthropic tests
+    model_identifiers = [
+        m for m in _list_openai_featured_models() if not m.startswith("anthropic")
+    ]
 
-    for model_identifier in _list_openai_featured_models():
-        if model_identifier.startswith("anthropic"):
-            # TODO: Fix anthropic
-            continue
+    for model_identifier in model_identifiers:
         tasks.append(_call_openai_model_async(model_identifier, None))
 
     results = await asyncio.gather(*tasks)
