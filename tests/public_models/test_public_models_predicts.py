@@ -489,9 +489,8 @@ def _list_featured_models(per_page=50):
     # This function remains unchanged
     channel = ClarifaiChannel.get_grpc_channel()
     stub = service_pb2_grpc.V2Stub(channel)
-    auth_metadata = (("authorization", f"Key {os.environ.get('CLARIFAI_PAT_KEY')}"),)
     request = service_pb2.ListModelsRequest(per_page=per_page, featured_only=True)
-    response = stub.ListModels(request, metadata=auth_metadata)
+    response = stub.ListModels(request, metadata=metadata(pat=True))
     if response.status.code != status_code_pb2.SUCCESS:
         raise Exception(f"ListModels failed: {response.status.description}")
     return response.models
