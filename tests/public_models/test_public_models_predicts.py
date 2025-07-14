@@ -125,7 +125,7 @@ def test_text_predict_on_public_models(channel_key, title, model_id, app_id, use
 def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id, user_id):
     channel = get_channel(channel_key)
     if channel._target != "api.clarifai.com":
-        pytest.skip(f"Model not available in {channel._target }")
+        pytest.skip(f"Model not available in {channel._target}")
 
     stub = service_pb2_grpc.V2Stub(channel)
 
