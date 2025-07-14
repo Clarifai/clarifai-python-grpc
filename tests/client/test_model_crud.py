@@ -1,5 +1,4 @@
 import uuid
-
 import pytest
 from google.protobuf import struct_pb2
 
@@ -8,6 +7,7 @@ from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
+    get_channel,
     cleanup_inputs,
     metadata,
     raise_on_failure,
@@ -17,9 +17,9 @@ from tests.common import (
 )
 
 
-@both_channels
-def test_list_models(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_list_models(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     list_response = stub.ListModels(
         service_pb2.ListModelsRequest(
@@ -34,9 +34,9 @@ def test_list_models(channel):
     assert len(list_response.models) > 0
 
 
-@both_channels
-def test_list_models_with_pagination(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_list_models_with_pagination(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     response = stub.ListModels(
         service_pb2.ListModelsRequest(
@@ -59,9 +59,9 @@ def test_list_models_with_pagination(channel):
     assert len(response.models) == 0
 
 
-@both_channels
-def test_post_patch_get_train_evaluate_predict_delete_model(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     # Add some inputs with the concepts that we'll need in the model.
     post_inputs_response = stub.PostInputs(
@@ -190,9 +190,9 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel):
         cleanup_inputs(stub, [input_id_1, input_id_2], metadata=metadata())
 
 
-@both_channels
-def test_post_model_with_hyper_params(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_model_with_hyper_params(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     model_id = uuid.uuid4().hex[:30]
 
@@ -252,11 +252,11 @@ def test_post_model_with_hyper_params(channel):
 @pytest.mark.skip(
     reason="On Github Actions there's 'Model training had no data' error for some reason"
 )
-@both_channels
-def test_model_creation_training_and_evaluation(channel):
+@both_channels()
+def test_model_creation_training_and_evaluation(channel_key):
     model_id = str(uuid.uuid4()[:30])
 
-    stub = service_pb2_grpc.V2Stub(channel)
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     raise_on_failure(
         stub.PostModels(

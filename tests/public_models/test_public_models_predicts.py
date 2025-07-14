@@ -25,6 +25,7 @@ from tests.common import (
     asyncio_channel,
     both_channels,
     grpc_channel,
+    get_channel,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
@@ -47,222 +48,216 @@ API_KEY = os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_API"))
 MAX_RETRY_ATTEMPTS = 3
 
 
-@both_channels
-def test_audio_predict_on_public_models(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+@pytest.mark.parametrize("title, model_id, app_id, user_id ", AUDIO_MODEL_TITLE_IDS_TUPLE)
+def test_audio_predict_on_public_models(channel_key, title, model_id, app_id, user_id ):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id, app_id, user_id in AUDIO_MODEL_TITLE_IDS_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
-                )
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-
-        raise_on_failure(
-            response,
-            custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
-        )
-
-
-@asyncio_channel
-async def test_audio_predict_on_public_models_async(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
-    for title, model_id, app_id, user_id in AUDIO_MODEL_TITLE_IDS_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
-                )
-            ],
-        )
-        response = await async_post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-
-        await async_raise_on_failure(
-            response,
-            custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
-        )
-
-
-@both_channels
-def test_text_predict_on_public_models(channel):
-    """Test non translation text/nlp models.
-    All these models can take the same test text input.
-    """
-    stub = service_pb2_grpc.V2Stub(channel)
-
-    for title, model_id, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
-                    )
-                )
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        raise_on_failure(
-            response,
-            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
-        )
-
-
-@grpc_channel
-def test_text_predict_on_public_llm_models(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
-
-    for title, model_id, app_id, user_id in TEXT_LLM_MODEL_TITLE_IDS_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        parts=[
-                            resources_pb2.Part(
-                                id="prompt",
-                                data=resources_pb2.Data(
-                                    string_value=TRANSLATION_TEST_DATA["EN"],
-                                ),
-                            ),
-                            resources_pb2.Part(
-                                id="max_tokens",
-                                data=resources_pb2.Data(
-                                    int_value=10,
-                                ),
-                            ),
-                            resources_pb2.Part(
-                                id="temperature",
-                                data=resources_pb2.Data(
-                                    float_value=0.7,
-                                ),
-                            ),
-                            resources_pb2.Part(
-                                id="top_p",
-                                data=resources_pb2.Data(
-                                    float_value=0.95,
-                                ),
-                            ),
-                        ]
-                    )
-                )
-            ],
-        )
-        response_iterator = _generate_model_outputs(stub, request, metadata(pat=True))
-
-        responses_count = 0
-        for response in response_iterator:
-            responses_count += 1
-            raise_on_failure(
-                response,
-                custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
             )
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
 
-        assert responses_count > 0
+    raise_on_failure(
+        response,
+        custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
-@asyncio_channel
-async def test_text_predict_on_public_models_async(channel):
+@asyncio_channel()
+@pytest.mark.parametrize("title, model_id, app_id, user_id ", AUDIO_MODEL_TITLE_IDS_TUPLE)
+async def test_audio_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id ):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(audio=resources_pb2.Audio(url=ENGLISH_AUDIO_URL))
+            )
+        ],
+    )
+    response = await async_post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+
+    await async_raise_on_failure(
+        response,
+        custom_message=f"Audio predict failed for the {title} model (ID: {model_id}).",
+    )
+
+
+@both_channels()
+@pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_MODEL_TITLE_IDS_TUPLE)
+def test_text_predict_on_public_models(channel_key, title, model_id, app_id, user_id):
     """Test non translation text/nlp models.
     All these models can take the same test text input.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    for title, model_id, app_id, user_id in TEXT_MODEL_TITLE_IDS_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
-                    )
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(
+                    text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
                 )
-            ],
-        )
-        response = await async_post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        await async_raise_on_failure(
+            )
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    raise_on_failure(
+        response,
+        custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+    )
+
+
+@grpc_channel()
+@pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_LLM_MODEL_TITLE_IDS_TUPLE)
+def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id, user_id):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(
+                    parts=[
+                        resources_pb2.Part(
+                            id="prompt",
+                            data=resources_pb2.Data(
+                                string_value=TRANSLATION_TEST_DATA["EN"],
+                            ),
+                        ),
+                        resources_pb2.Part(
+                            id="max_tokens",
+                            data=resources_pb2.Data(
+                                int_value=10,
+                            ),
+                        ),
+                        resources_pb2.Part(
+                            id="temperature",
+                            data=resources_pb2.Data(
+                                float_value=0.7,
+                            ),
+                        ),
+                        resources_pb2.Part(
+                            id="top_p",
+                            data=resources_pb2.Data(
+                                float_value=0.95,
+                            ),
+                        ),
+                    ]
+                )
+            )
+        ],
+    )
+    response_iterator = _generate_model_outputs(stub, request, metadata(pat=True))
+
+    responses_count = 0
+    for response in response_iterator:
+        responses_count += 1
+        raise_on_failure(
             response,
             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
         )
+
+    assert responses_count > 0
+
+
+@asyncio_channel()
+@pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_MODEL_TITLE_IDS_TUPLE)
+async def test_text_predict_on_public_models_async(channel_key, title, model_id, app_id, user_id):
+    """Test non translation text/nlp models.
+    All these models can take the same test text input.
+    """
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(
+                data=resources_pb2.Data(
+                    text=resources_pb2.Text(raw=TRANSLATION_TEST_DATA["EN"])
+                )
+            )
+        ],
+    )
+    response = await async_post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    await async_raise_on_failure(
+        response,
+        custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
 @pytest.mark.skip(reason="This test is ready, but will be added in time")
-@both_channels
-def test_text_fb_translation_predict_on_public_models(channel):
+@both_channels()
+@pytest.mark.parametrize("title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE)
+def test_text_fb_translation_predict_on_public_models(channel_key, title, model_id, text, app_id, user_id ):
     """Test language translation models.
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
-    for title, model_id, text, app_id, user_id in TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        raise_on_failure(
-            response,
-            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
-        )
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    raise_on_failure(
+        response,
+        custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
-@both_channels
-def test_text_helsinki_translation_predict_on_public_models(channel):
+@both_channels()
+@pytest.mark.parametrize("title, model_id, text, app_id, user_id", TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE)
+def test_text_helsinki_translation_predict_on_public_models(channel_key, title, model_id, text, app_id, user_id):
     """Test language translation models.
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
-    for (
-        title,
-        model_id,
-        text,
-        app_id,
-        user_id,
-    ) in TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE:
-        request = service_pb2.PostModelOutputsRequest(
-            user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-            model_id=model_id,
-            inputs=[
-                resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
-            ],
-        )
-        response = post_model_outputs_and_maybe_allow_retries(
-            stub, request, metadata=metadata(pat=True)
-        )
-        raise_on_failure(
-            response,
-            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
-        )
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+    request = service_pb2.PostModelOutputsRequest(
+        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+        model_id=model_id,
+        inputs=[
+            resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))
+        ],
+    )
+    response = post_model_outputs_and_maybe_allow_retries(
+        stub, request, metadata=metadata(pat=True)
+    )
+    raise_on_failure(
+        response,
+        custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+    )
 
 
-@both_channels
-def test_image_predict_on_public_models(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_image_predict_on_public_models(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
         request = service_pb2.PostModelOutputsRequest(
@@ -281,9 +276,9 @@ def test_image_predict_on_public_models(channel):
         )
 
 
-@asyncio_channel
-async def test_image_predict_on_public_models_async(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@asyncio_channel()
+async def test_image_predict_on_public_models_async(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     for title, model_id in MODEL_TITLE_AND_ID_PAIRS:
         request = service_pb2.PostModelOutputsRequest(
@@ -304,12 +299,12 @@ async def test_image_predict_on_public_models_async(channel):
         )
 
 
-@both_channels
-def test_image_detection_predict_on_public_models(channel):
+@both_channels()
+def test_image_detection_predict_on_public_models(channel_key):
     """Test object detection models using clarifai platform user
     and app id access credentials.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
         request = service_pb2.PostModelOutputsRequest(
@@ -330,12 +325,12 @@ def test_image_detection_predict_on_public_models(channel):
         )
 
 
-@asyncio_channel
-async def test_image_detection_predict_on_public_models_async(channel):
+@asyncio_channel()
+async def test_image_detection_predict_on_public_models_async(channel_key):
     """Test object detection models using clarifai platform user
     and app id access credentials.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     for title, model_id, app_id, user_id in DETECTION_MODEL_TITLE_AND_IDS:
         request = service_pb2.PostModelOutputsRequest(
@@ -356,9 +351,9 @@ async def test_image_detection_predict_on_public_models_async(channel):
         )
 
 
-@both_channels
-def test_video_predict_on_public_models(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_video_predict_on_public_models(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     title = "general"
     model_id = GENERAL_MODEL_ID
@@ -381,12 +376,12 @@ def test_video_predict_on_public_models(channel):
     )
 
 
-@both_channels
-def test_multimodal_predict_on_public_models(channel):
+@both_channels()
+def test_multimodal_predict_on_public_models(channel_key):
     """Test multimodal models.
     Currently supporting only text and image inputs.
     """
-    stub = service_pb2_grpc.V2Stub(channel)
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     for title, model_id in MULTIMODAL_MODEL_TITLE_AND_IDS:
         request = service_pb2.PostModelOutputsRequest(

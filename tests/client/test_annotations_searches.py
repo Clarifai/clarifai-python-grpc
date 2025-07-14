@@ -4,15 +4,16 @@ from tests.common import (
     TRAVEL_IMAGE_URL,
     both_channels,
     cleanup_inputs,
+    get_channel,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
 )
 
 
-@both_channels
-def test_post_annotations_searches(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_post_annotations_searches(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     palm_search_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(

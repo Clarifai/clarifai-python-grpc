@@ -2,7 +2,6 @@ import io
 import json
 import uuid
 import zipfile
-
 import requests
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -11,6 +10,7 @@ from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
+    get_channel,
     headers,
     metadata,
     raise_on_failure,
@@ -21,9 +21,9 @@ from tests.common import (
 )
 
 
-@both_channels
-def test_export_dataset_version(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_export_dataset_version(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     dataset_id = "export-" + uuid.uuid4().hex[:25]
     post_datasets_response = stub.PostDatasets(

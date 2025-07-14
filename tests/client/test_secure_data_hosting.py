@@ -1,7 +1,6 @@
 import hashlib
 import os
 import time
-
 import requests
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -10,6 +9,7 @@ from tests.common import (
     TRAVEL_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
+    get_channel,
     cleanup_inputs,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -138,9 +138,9 @@ def verify_url_with_bad_auth(expected_input_url):
     assert r.status_code == 404, f"Expected Code: 404, Actual: {r.status_code}"
 
 
-@both_channels
-def test_adding_inputs(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_adding_inputs(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     input_img1 = "truck-img-" + str(time.time()).replace(".", "-")
     input_img2 = "travel-img-" + str(time.time()).replace(".", "-")

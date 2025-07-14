@@ -66,36 +66,6 @@ def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     )
 
 
-def run_tests_using_channels(func, channel_keys):
-    """
-    A decorator that runs the test using given channels.
-    :param func: The test function.
-    :param channel_keys: A list of channel keys to use for the test. A subtest is created for each channel.
-    :return: A function wrapper.
-    """
-
-    @pytest.mark.parametrize('channel_key', channel_keys)
-    def func_wrapper(channel_key):
-        return func(get_channel(channel_key))
-
-    return func_wrapper
-
-
-def run_tests_using_channels_async(func, channel_keys):
-    """
-    A decorator that runs the test using given channels.
-    :param func: The test function.
-    :param channel_keys: A list of channel keys to use for the test. A subtest is created for each channel.
-    :return: A function wrapper.
-    """
-
-    @pytest.mark.parametrize('channel_key', channel_keys)
-    async def func_wrapper(channel_key):
-        return await func(get_channel(channel_key))
-
-    return func_wrapper
-
-
 def get_channel(channel_key):
     if channel_key == "grpc":
         if os.getenv("CLARIFAI_GRPC_INSECURE", "False").lower() in ("true", "1", "t"):
@@ -115,34 +85,16 @@ def get_channel(channel_key):
     raise ValueError(f"Unknown channel {channel_key}")
 
 
-def grpc_channel(func):
-    """
-    A decorator that runs the test using the gRPC channel.
-    :param func: The test function.
-    :return: A function wrapper.
-    """
-
-    return run_tests_using_channels(func, ["grpc"])
+def grpc_channel():
+    return pytest.mark.parametrize('channel_key', ["grpc"])
 
 
-def both_channels(func):
-    """
-    A decorator that runs the test first using the gRPC channel and then using the JSON channel.
-    :param func: The test function.
-    :return: A function wrapper.
-    """
-
-    return run_tests_using_channels(func, ["grpc", "json"])
+def both_channels():
+    return pytest.mark.parametrize('channel_key', ["grpc", "json"])
 
 
-def asyncio_channel(func):
-    """
-    A decorator that runs the test using the asyncio gRPC channel.
-    :param func: The test function.
-    :return: A function wrapper.
-    """
-
-    return run_tests_using_channels_async(func, ["aio_grpc"])
+def asyncio_channel():
+    return pytest.mark.parametrize('channel_key', ["aio_grpc"])
 
 
 def wait_for_inputs_upload(stub, metadata, input_ids):

@@ -7,15 +7,16 @@ from tests.common import (
     MAIN_APP_USER_ID,
     TOY_VIDEO_FILE_PATH,
     both_channels,
+    get_channel,
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
 )
 
 
-@both_channels
-def test_predict_video_url(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_video_url(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -36,9 +37,9 @@ def test_predict_video_url(channel):
         assert len(frame.data.concepts) > 0
 
 
-@both_channels
-def test_predict_video_url_with_min_value(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_video_url_with_min_value(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -66,9 +67,9 @@ def test_predict_video_url_with_min_value(channel):
             assert concept.value >= 0.95
 
 
-@both_channels
-def test_predict_video_url_with_max_concepts(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_video_url_with_max_concepts(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -94,9 +95,9 @@ def test_predict_video_url_with_max_concepts(channel):
         assert len(frame.data.concepts) == 3
 
 
-@both_channels
-def test_predict_video_url_with_custom_sample_ms(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_video_url_with_custom_sample_ms(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=MAIN_APP_USER_ID, app_id=MAIN_APP_ID),
@@ -127,9 +128,9 @@ def test_predict_video_url_with_custom_sample_ms(channel):
         expected_time += 2000
 
 
-@both_channels
-def test_predict_video_bytes(channel):
-    stub = service_pb2_grpc.V2Stub(channel)
+@both_channels()
+def test_predict_video_bytes(channel_key):
+    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
     with open(TOY_VIDEO_FILE_PATH, "rb") as f:
         file_bytes = f.read()
