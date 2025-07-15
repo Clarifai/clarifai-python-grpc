@@ -11,6 +11,7 @@ from openai import (
 )
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
+from clarifai_grpc.channel.http_client import CLIENT_VERSION
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import (
@@ -417,6 +418,7 @@ def _call_openai_model(model_id):
     client = OpenAI(
         api_key=os.environ.get('CLARIFAI_PAT_KEY'),
         base_url=f"https://{channel._target}/v2/ext/openai/v1",
+        default_headers={"X-Clarifai-Request-Id-Prefix": f"python-{CLIENT_VERSION}"},
     )
     last_err_chat = None
     last_err_image = None
