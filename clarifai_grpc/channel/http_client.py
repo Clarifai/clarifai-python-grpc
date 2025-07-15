@@ -38,7 +38,7 @@ class HttpClient:
             "Content-Type": "application/json",
             "X-Clarifai-gRPC-Client": "python:%s" % CLIENT_VERSION,
             "Python-Client": "%s:%s" % (OS_VER, PYTHON_VERSION),
-            "X-Clarifai-Request-ID-Prefix": f"python-{CLIENT_VERSION}",
+            "X-Clarifai-Request-ID-Prefix": f"python-json-{CLIENT_VERSION}",
             "Authorization": "Key %s" % self._auth_string,
         }
         logger.debug("=" * 100)
