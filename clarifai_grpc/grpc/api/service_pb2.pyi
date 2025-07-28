@@ -859,6 +859,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     TEMPLATE_ONLY_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
@@ -902,6 +903,9 @@ class ListAppsRequest(google.protobuf.message.Message):
     """If true, we only return apps that are starred by the requesting user"""
     template_only: builtins.bool
     """If true, we only return apps that are marked as a template by the app owner."""
+    @property
+    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
+        """Filter by visibility of the app. If set, only return apps with the specified visibility."""
     search: builtins.str
     """Searching options:
     Specify a search parameter in order to perform keyword search on the
@@ -946,6 +950,7 @@ class ListAppsRequest(google.protobuf.message.Message):
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         template_only: builtins.bool = ...,
+        visibility: proto.clarifai.api.resources_pb2.Visibility | None = ...,
         search: builtins.str = ...,
         query: builtins.str = ...,
         name: builtins.str = ...,
@@ -968,6 +973,8 @@ class ListAppsRequest(google.protobuf.message.Message):
             b"sort_by_star_count",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> builtins.bool: ...
     def ClearField(
@@ -1009,6 +1016,8 @@ class ListAppsRequest(google.protobuf.message.Message):
             b"template_only",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> None: ...
     def WhichOneof(
@@ -5256,6 +5265,7 @@ class ListModelsRequest(google.protobuf.message.Message):
     CREATOR_FIELD_NUMBER: builtins.int
     MIN_REPLICAS_FIELD_NUMBER: builtins.int
     SHOW_REPLICAS_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -5382,6 +5392,9 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Filter by model versions runners with replicas >= min_replicas."""
     show_replicas: builtins.bool
     """If true, show replica counts for models."""
+    @property
+    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
+        """Filter by visibility of the model. If set, only return models with the specified visibility."""
     def __init__(
         self,
         *,
@@ -5417,6 +5430,7 @@ class ListModelsRequest(google.protobuf.message.Message):
         creator: builtins.str = ...,
         min_replicas: builtins.int = ...,
         show_replicas: builtins.bool = ...,
+        visibility: proto.clarifai.api.resources_pb2.Visibility | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -5435,6 +5449,8 @@ class ListModelsRequest(google.protobuf.message.Message):
             b"sort_by_star_count",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> builtins.bool: ...
     def ClearField(
@@ -5506,6 +5522,8 @@ class ListModelsRequest(google.protobuf.message.Message):
             b"use_cases",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> None: ...
     def WhichOneof(
@@ -9656,6 +9674,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
     QUERY_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
@@ -9697,6 +9716,9 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """If true, we only return workflows that are starred by the requesting user"""
     bookmark: builtins.bool
     """Filter workflows by bookmark. If set, only return bookmarked workflows. Otherwise none bookmarked workflows only."""
+    @property
+    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
+        """Filter by visibility of the workflow. If set, only return workflows with the specified visibility."""
     search: builtins.str
     """Searching options:
     Specify a search parameter in order to perform keyword search on the
@@ -9739,6 +9761,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
+        visibility: proto.clarifai.api.resources_pb2.Visibility | None = ...,
         search: builtins.str = ...,
         query: builtins.str = ...,
         id: builtins.str = ...,
@@ -9759,6 +9782,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
             b"sort_by_star_count",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> builtins.bool: ...
     def ClearField(
@@ -9798,6 +9823,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
             b"starred_only",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> None: ...
     def WhichOneof(
@@ -11833,6 +11860,7 @@ class ListModulesRequest(google.protobuf.message.Message):
     SEARCH_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
     FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -11885,6 +11913,9 @@ class ListModulesRequest(google.protobuf.message.Message):
     """Filter by the application owner whose this module belongs to
     Deprecated: use search instead of name.
     """
+    @property
+    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
+        """Filter by visibility of the modules. If set, only return modules with the specified visibility."""
     def __init__(
         self,
         *,
@@ -11902,6 +11933,7 @@ class ListModulesRequest(google.protobuf.message.Message):
         search: builtins.str = ...,
         name: builtins.str = ...,
         filter_by_user_id: builtins.bool = ...,
+        visibility: proto.clarifai.api.resources_pb2.Visibility | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -11918,6 +11950,8 @@ class ListModulesRequest(google.protobuf.message.Message):
             b"sort_by_star_count",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> builtins.bool: ...
     def ClearField(
@@ -11953,6 +11987,8 @@ class ListModulesRequest(google.protobuf.message.Message):
             b"starred_only",
             "user_app_id",
             b"user_app_id",
+            "visibility",
+            b"visibility",
         ],
     ) -> None: ...
     def WhichOneof(
