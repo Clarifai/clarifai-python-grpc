@@ -788,6 +788,52 @@ DEPLOYMENT_UPDATE: EventType.ValueType  # 1101
 DEPLOYMENT_DELETE: EventType.ValueType  # 1102
 global___EventType = EventType
 
+class _MetricType:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _MetricTypeEnumTypeWrapper(
+    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MetricType.ValueType],
+    builtins.type,
+):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    METRIC_TYPE_NOT_SET: _MetricType.ValueType  # 0
+    MODEL_REQUEST_COUNT: _MetricType.ValueType  # 1
+    MODEL_LATENCY: _MetricType.ValueType  # 2
+
+class MetricType(_MetricType, metaclass=_MetricTypeEnumTypeWrapper): ...
+
+METRIC_TYPE_NOT_SET: MetricType.ValueType  # 0
+MODEL_REQUEST_COUNT: MetricType.ValueType  # 1
+MODEL_LATENCY: MetricType.ValueType  # 2
+global___MetricType = MetricType
+
+class _MetricLabel:
+    ValueType = typing.NewType("ValueType", builtins.int)
+    V: typing_extensions.TypeAlias = ValueType
+
+class _MetricLabelEnumTypeWrapper(
+    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_MetricLabel.ValueType],
+    builtins.type,
+):
+    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+    METRIC_LABEL_NOT_SET: _MetricLabel.ValueType  # 0
+    APP_ID: _MetricLabel.ValueType  # 1
+    MODEL_ID: _MetricLabel.ValueType  # 2
+    MODEL_VERSION_ID: _MetricLabel.ValueType  # 3
+    CALLER_USER_ID: _MetricLabel.ValueType  # 4
+    WORKFLOW_ID: _MetricLabel.ValueType  # 5
+
+class MetricLabel(_MetricLabel, metaclass=_MetricLabelEnumTypeWrapper): ...
+
+METRIC_LABEL_NOT_SET: MetricLabel.ValueType  # 0
+APP_ID: MetricLabel.ValueType  # 1
+MODEL_ID: MetricLabel.ValueType  # 2
+MODEL_VERSION_ID: MetricLabel.ValueType  # 3
+CALLER_USER_ID: MetricLabel.ValueType  # 4
+WORKFLOW_ID: MetricLabel.ValueType  # 5
+global___MetricLabel = MetricLabel
+
 @typing_extensions.final
 class Annotation(google.protobuf.message.Message):
     """Annotation of an asset with metadata"""
@@ -931,6 +977,111 @@ class Annotation(google.protobuf.message.Message):
     ) -> None: ...
 
 global___Annotation = Annotation
+
+@typing_extensions.final
+class AnnotationTrack(google.protobuf.message.Message):
+    """AnnotationTrack of an asset with metadata"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    INPUT_ID_FIELD_NUMBER: builtins.int
+    CONCEPT_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    START_FRAME_FIELD_NUMBER: builtins.int
+    END_FRAME_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    FRAME_RATE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """The ID for the annotation track"""
+    app_id: builtins.str
+    """ID of the application this annotation track is tied to"""
+    input_id: builtins.str
+    """ID of the asset this annotation track is tied to"""
+    @property
+    def concept(self) -> global___Concept:
+        """Concept this annotation track"""
+    user_id: builtins.str
+    """The user the track belongs to (app owner)"""
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """AnnotationTrack Status"""
+    start_frame: builtins.int
+    """Start frame of the annotation track"""
+    end_frame: builtins.int
+    """End frame of the annotation track"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the annotation track was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the annotation track was modified."""
+    frame_rate: builtins.int
+    """Frame rate of the video track.
+    1 means it matches the original video FPS.
+    2 means every second frame, etc.
+    So if you have 30fps original video and frame_rate=3, your annotations in a track are stored at 30fps/3frame_rate=10 frames per second
+    """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        input_id: builtins.str = ...,
+        concept: global___Concept | None = ...,
+        user_id: builtins.str = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        start_frame: builtins.int = ...,
+        end_frame: builtins.int = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        frame_rate: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "concept",
+            b"concept",
+            "created_at",
+            b"created_at",
+            "modified_at",
+            b"modified_at",
+            "status",
+            b"status",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "app_id",
+            b"app_id",
+            "concept",
+            b"concept",
+            "created_at",
+            b"created_at",
+            "end_frame",
+            b"end_frame",
+            "frame_rate",
+            b"frame_rate",
+            "id",
+            b"id",
+            "input_id",
+            b"input_id",
+            "modified_at",
+            b"modified_at",
+            "start_frame",
+            b"start_frame",
+            "status",
+            b"status",
+            "user_id",
+            b"user_id",
+        ],
+    ) -> None: ...
+
+global___AnnotationTrack = AnnotationTrack
 
 @typing_extensions.final
 class Worker(google.protobuf.message.Message):
@@ -5846,6 +5997,8 @@ class ModelTypeField(google.protobuf.message.Message):
         """To pass a string downstream, that is encrypted in the DB and API."""
         CHECKPOINT_MODEL: ModelTypeField._ModelTypeFieldType.ValueType  # 22
         """For selecting a model version of the same model type to resume training from."""
+        ARRAY_OF_SECRETS: ModelTypeField._ModelTypeFieldType.ValueType  # 23
+        """For model secrets"""
 
     class ModelTypeFieldType(_ModelTypeFieldType, metaclass=_ModelTypeFieldTypeEnumTypeWrapper):
         """These are various types of fields that we have UIs for."""
@@ -5894,6 +6047,8 @@ class ModelTypeField(google.protobuf.message.Message):
     """To pass a string downstream, that is encrypted in the DB and API."""
     CHECKPOINT_MODEL: ModelTypeField.ModelTypeFieldType.ValueType  # 22
     """For selecting a model version of the same model type to resume training from."""
+    ARRAY_OF_SECRETS: ModelTypeField.ModelTypeFieldType.ValueType  # 23
+    """For model secrets"""
 
     class _DataType:
         ValueType = typing.NewType("ValueType", builtins.int)
@@ -15698,6 +15853,7 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     MODEL_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
     WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_USER_ID_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
     RUNNER_ID_FIELD_NUMBER: builtins.int
@@ -15715,8 +15871,9 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
     """The Version ID, if any."""
     workflow_id: builtins.str
     """Workflow Id, if any."""
-    compute_cluster_id: builtins.str
+    compute_cluster_user_id: builtins.str
     """Compute Cluster, Nodepool, Runner."""
+    compute_cluster_id: builtins.str
     nodepool_id: builtins.str
     runner_id: builtins.str
     pipeline_id: builtins.str
@@ -15733,6 +15890,7 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
         model_id: builtins.str = ...,
         model_version_id: builtins.str = ...,
         workflow_id: builtins.str = ...,
+        compute_cluster_user_id: builtins.str = ...,
         compute_cluster_id: builtins.str = ...,
         nodepool_id: builtins.str = ...,
         runner_id: builtins.str = ...,
@@ -15750,6 +15908,8 @@ class ComputeSourceMetadata(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "compute_cluster_id",
             b"compute_cluster_id",
+            "compute_cluster_user_id",
+            b"compute_cluster_user_id",
             "model_id",
             b"model_id",
             "model_version_id",
@@ -16943,21 +17103,17 @@ class Secret(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
     VALUE_FIELD_NUMBER: builtins.int
     VERSION_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
     EXPIRES_AT_FIELD_NUMBER: builtins.int
     id: builtins.str
-    """The ID of the secret."""
-    app_id: builtins.str
-    """The app the secret belongs to."""
-    name: builtins.str
-    """The name of the secret, corresponds to secret_name in model_version.output_info.params.secrets"""
+    """The name of the secret, corresponds to id in model_version.output_info.params.secrets"""
+    user_id: builtins.str
+    """The user the secret belongs to."""
     value: builtins.str
     """The value of the secret."""
     version: builtins.int
@@ -16971,46 +17127,29 @@ class Secret(google.protobuf.message.Message):
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the secret was last modified."""
     @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        """
-    @property
     def expires_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the secret will expire."""
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        name: builtins.str = ...,
+        user_id: builtins.str = ...,
         value: builtins.str = ...,
         version: builtins.int = ...,
         description: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        visibility: global___Visibility | None = ...,
         expires_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
-            "created_at",
-            b"created_at",
-            "expires_at",
-            b"expires_at",
-            "modified_at",
-            b"modified_at",
-            "visibility",
-            b"visibility",
+            "created_at", b"created_at", "expires_at", b"expires_at", "modified_at", b"modified_at"
         ],
     ) -> builtins.bool: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "app_id",
-            b"app_id",
             "created_at",
             b"created_at",
             "description",
@@ -17021,15 +17160,292 @@ class Secret(google.protobuf.message.Message):
             b"id",
             "modified_at",
             b"modified_at",
-            "name",
-            b"name",
+            "user_id",
+            b"user_id",
             "value",
             b"value",
             "version",
             b"version",
-            "visibility",
-            b"visibility",
         ],
     ) -> None: ...
 
 global___Secret = Secret
+
+@typing_extensions.final
+class MetricData(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class Label(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        NAME_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        name: global___MetricLabel.ValueType
+        value: builtins.str
+        def __init__(
+            self,
+            *,
+            name: global___MetricLabel.ValueType = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["name", b"name", "value", b"value"]
+        ) -> None: ...
+
+    @typing_extensions.final
+    class MetricSample(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        TIMESTAMP_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        @property
+        def timestamp(self) -> google.protobuf.timestamp_pb2.Timestamp:
+            """The format is https://www.ietf.org/rfc/rfc3339.txt.
+            Example: "2006-01-02T15:04:05.999999Z".
+            """
+        value: builtins.float
+        def __init__(
+            self,
+            *,
+            timestamp: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+            value: builtins.float = ...,
+        ) -> None: ...
+        def HasField(
+            self, field_name: typing_extensions.Literal["timestamp", b"timestamp"]
+        ) -> builtins.bool: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal["timestamp", b"timestamp", "value", b"value"],
+        ) -> None: ...
+
+    @typing_extensions.final
+    class MatrixData(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
+        class TimeSeries(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            LABELS_FIELD_NUMBER: builtins.int
+            VALUE_FIELD_NUMBER: builtins.int
+            @property
+            def labels(
+                self,
+            ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+                global___MetricData.Label
+            ]: ...
+            @property
+            def value(
+                self,
+            ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+                global___MetricData.MetricSample
+            ]: ...
+            def __init__(
+                self,
+                *,
+                labels: collections.abc.Iterable[global___MetricData.Label] | None = ...,
+                value: collections.abc.Iterable[global___MetricData.MetricSample] | None = ...,
+            ) -> None: ...
+            def ClearField(
+                self, field_name: typing_extensions.Literal["labels", b"labels", "value", b"value"]
+            ) -> None: ...
+
+        SERIES_FIELD_NUMBER: builtins.int
+        @property
+        def series(
+            self,
+        ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+            global___MetricData.MatrixData.TimeSeries
+        ]: ...
+        def __init__(
+            self,
+            *,
+            series: collections.abc.Iterable[global___MetricData.MatrixData.TimeSeries]
+            | None = ...,
+        ) -> None: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["series", b"series"]
+        ) -> None: ...
+
+    MATRIX_DATA_FIELD_NUMBER: builtins.int
+    @property
+    def matrix_data(self) -> global___MetricData.MatrixData: ...
+    def __init__(
+        self,
+        *,
+        matrix_data: global___MetricData.MatrixData | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["data", b"data", "matrix_data", b"matrix_data"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["data", b"data", "matrix_data", b"matrix_data"]
+    ) -> None: ...
+    def WhichOneof(
+        self, oneof_group: typing_extensions.Literal["data", b"data"]
+    ) -> typing_extensions.Literal["matrix_data"] | None: ...
+
+global___MetricData = MetricData
+
+@typing_extensions.final
+class MetricAggregate(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Operator:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _OperatorEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            MetricAggregate._Operator.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        OPERATOR_NOT_SET: MetricAggregate._Operator.ValueType  # 0
+        AVG: MetricAggregate._Operator.ValueType  # 1
+        SUM: MetricAggregate._Operator.ValueType  # 2
+        MAX: MetricAggregate._Operator.ValueType  # 3
+        MIN: MetricAggregate._Operator.ValueType  # 4
+        P95: MetricAggregate._Operator.ValueType  # 5
+        P99: MetricAggregate._Operator.ValueType  # 6
+        P50: MetricAggregate._Operator.ValueType  # 7
+        COUNT: MetricAggregate._Operator.ValueType  # 8
+
+    class Operator(_Operator, metaclass=_OperatorEnumTypeWrapper): ...
+    OPERATOR_NOT_SET: MetricAggregate.Operator.ValueType  # 0
+    AVG: MetricAggregate.Operator.ValueType  # 1
+    SUM: MetricAggregate.Operator.ValueType  # 2
+    MAX: MetricAggregate.Operator.ValueType  # 3
+    MIN: MetricAggregate.Operator.ValueType  # 4
+    P95: MetricAggregate.Operator.ValueType  # 5
+    P99: MetricAggregate.Operator.ValueType  # 6
+    P50: MetricAggregate.Operator.ValueType  # 7
+    COUNT: MetricAggregate.Operator.ValueType  # 8
+
+    OPERATOR_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
+    operator: global___MetricAggregate.Operator.ValueType
+    @property
+    def labels(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[
+        global___MetricLabel.ValueType
+    ]: ...
+    def __init__(
+        self,
+        *,
+        operator: global___MetricAggregate.Operator.ValueType = ...,
+        labels: collections.abc.Iterable[global___MetricLabel.ValueType] | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["labels", b"labels", "operator", b"operator"]
+    ) -> None: ...
+
+global___MetricAggregate = MetricAggregate
+
+@typing_extensions.final
+class MetricFilter(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class MultiValues(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        IN_FIELD_NUMBER: builtins.int
+        def __init__(
+            self,
+        ) -> None: ...
+        def ClearField(self, field_name: typing_extensions.Literal["in", b"in"]) -> None: ...
+
+    LABEL_FIELD_NUMBER: builtins.int
+    EQUALS_FIELD_NUMBER: builtins.int
+    IN_FIELD_NUMBER: builtins.int
+    label: global___MetricLabel.ValueType
+    equals: builtins.str
+    def __init__(
+        self,
+        *,
+        label: global___MetricLabel.ValueType = ...,
+        equals: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal["equals", b"equals", "in", b"in", "value", b"value"],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "equals", b"equals", "in", b"in", "label", b"label", "value", b"value"
+        ],
+    ) -> None: ...
+    def WhichOneof(
+        self, oneof_group: typing_extensions.Literal["value", b"value"]
+    ) -> typing_extensions.Literal["equals", "in"] | None: ...
+
+global___MetricFilter = MetricFilter
+
+@typing_extensions.final
+class MetricSearchQuery(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    METRIC_TYPE_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    RESOLUTION_FIELD_NUMBER: builtins.int
+    FILTERS_FIELD_NUMBER: builtins.int
+    AGGREGATE_FIELD_NUMBER: builtins.int
+    metric_type: global___MetricType.ValueType
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """start time of the search window"""
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """end time of the search window"""
+    resolution: builtins.str
+    """duration string https://pkg.go.dev/time#ParseDuration"""
+    @property
+    def filters(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___MetricFilter
+    ]:
+        """ANDed"""
+    @property
+    def aggregate(self) -> global___MetricAggregate: ...
+    def __init__(
+        self,
+        *,
+        metric_type: global___MetricType.ValueType = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        resolution: builtins.str = ...,
+        filters: collections.abc.Iterable[global___MetricFilter] | None = ...,
+        aggregate: global___MetricAggregate | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "aggregate", b"aggregate", "end_time", b"end_time", "start_time", b"start_time"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "aggregate",
+            b"aggregate",
+            "end_time",
+            b"end_time",
+            "filters",
+            b"filters",
+            "metric_type",
+            b"metric_type",
+            "resolution",
+            b"resolution",
+            "start_time",
+            b"start_time",
+        ],
+    ) -> None: ...
+
+global___MetricSearchQuery = MetricSearchQuery

@@ -210,6 +210,16 @@ class _StatusCodeEnumTypeWrapper(
     ANNOTATION_MODIFY_SUCCESS: _StatusCode.ValueType  # 24250
     ANNOTATION_MODIFY_PENDING: _StatusCode.ValueType  # 24251
     ANNOTATION_MODIFY_FAILED: _StatusCode.ValueType  # 24252
+    ANNOTATION_TRACK_IDLE: _StatusCode.ValueType  # 24300
+    """Annotation (video) tracks are groups of annotations per frame
+    IDLE -> PROCESSING --> PENDING --> APPROVED --> (DELETED)
+    PROCESSING --> FAILED --> (DELETED)
+    PROCESSING --> (DELETED)
+    """
+    ANNOTATION_TRACK_IN_PROGRESS: _StatusCode.ValueType  # 24301
+    ANNOTATION_TRACK_PENDING: _StatusCode.ValueType  # 24302
+    ANNOTATION_TRACK_APPROVED: _StatusCode.ValueType  # 24303
+    ANNOTATION_TRACK_FAILED: _StatusCode.ValueType  # 24304
     METADATA_INVALID_PATCH_ARGUMENTS: _StatusCode.ValueType  # 24900
     """Metadata related 249xx"""
     METADATA_PARSING_ISSUE: _StatusCode.ValueType  # 24901
@@ -291,6 +301,10 @@ class _StatusCodeEnumTypeWrapper(
     PIPELINE_STEP_BUILD_UNEXPECTED_ERROR: _StatusCode.ValueType  # 26207
     PIPELINE_STEP_READY: _StatusCode.ValueType  # 26208
     PIPELINE_STEP_NOT_READY: _StatusCode.ValueType  # 26209
+    PIPELINE_DOES_NOT_EXIST: _StatusCode.ValueType  # 26300
+    """Pipeline related codes 263xx"""
+    PIPELINE_INVALID_ARGUMENT: _StatusCode.ValueType  # 26301
+    PIPELINE_INVALID_REQUEST: _StatusCode.ValueType  # 26302
     INPUT_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_PENDING: _StatusCode.ValueType  # 30001
@@ -783,6 +797,16 @@ ANNOTATION_REVIEW_DENIED: StatusCode.ValueType  # 24158
 ANNOTATION_MODIFY_SUCCESS: StatusCode.ValueType  # 24250
 ANNOTATION_MODIFY_PENDING: StatusCode.ValueType  # 24251
 ANNOTATION_MODIFY_FAILED: StatusCode.ValueType  # 24252
+ANNOTATION_TRACK_IDLE: StatusCode.ValueType  # 24300
+"""Annotation (video) tracks are groups of annotations per frame
+IDLE -> PROCESSING --> PENDING --> APPROVED --> (DELETED)
+PROCESSING --> FAILED --> (DELETED)
+PROCESSING --> (DELETED)
+"""
+ANNOTATION_TRACK_IN_PROGRESS: StatusCode.ValueType  # 24301
+ANNOTATION_TRACK_PENDING: StatusCode.ValueType  # 24302
+ANNOTATION_TRACK_APPROVED: StatusCode.ValueType  # 24303
+ANNOTATION_TRACK_FAILED: StatusCode.ValueType  # 24304
 METADATA_INVALID_PATCH_ARGUMENTS: StatusCode.ValueType  # 24900
 """Metadata related 249xx"""
 METADATA_PARSING_ISSUE: StatusCode.ValueType  # 24901
@@ -864,6 +888,10 @@ PIPELINE_STEP_BUILDING_FAILED: StatusCode.ValueType  # 26206
 PIPELINE_STEP_BUILD_UNEXPECTED_ERROR: StatusCode.ValueType  # 26207
 PIPELINE_STEP_READY: StatusCode.ValueType  # 26208
 PIPELINE_STEP_NOT_READY: StatusCode.ValueType  # 26209
+PIPELINE_DOES_NOT_EXIST: StatusCode.ValueType  # 26300
+"""Pipeline related codes 263xx"""
+PIPELINE_INVALID_ARGUMENT: StatusCode.ValueType  # 26301
+PIPELINE_INVALID_REQUEST: StatusCode.ValueType  # 26302
 INPUT_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_PENDING: StatusCode.ValueType  # 30001

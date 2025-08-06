@@ -149,6 +149,26 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.ListAnnotationTracks = channel.unary_unary(
+                '/clarifai.api.V2/ListAnnotationTracks',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationTracksRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse),
+                )
+        self.PostAnnotationTracks = channel.unary_unary(
+                '/clarifai.api.V2/PostAnnotationTracks',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationTracksRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse),
+                )
+        self.PatchAnnotationTracks = channel.unary_unary(
+                '/clarifai.api.V2/PatchAnnotationTracks',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationTracksRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse),
+                )
+        self.DeleteAnnotationTracks = channel.unary_unary(
+                '/clarifai.api.V2/DeleteAnnotationTracks',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationTracksRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.PatchAnnotationsSearches = channel.unary_unary(
                 '/clarifai.api.V2/PatchAnnotationsSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsSearchesRequest.SerializeToString,
@@ -1591,6 +1611,34 @@ class V2Servicer(object):
 
     def DeleteAnnotations(self, request, context):
         """Delete multiple annotations in one request.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListAnnotationTracks(self, request, context):
+        """List all the annotation tracks.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostAnnotationTracks(self, request, context):
+        """Post annotation tracks.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PatchAnnotationTracks(self, request, context):
+        """Patch one or more annotation tracks.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteAnnotationTracks(self, request, context):
+        """Delete multiple annotation tracks in one request.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3571,6 +3619,26 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'ListAnnotationTracks': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListAnnotationTracks,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationTracksRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.SerializeToString,
+            ),
+            'PostAnnotationTracks': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostAnnotationTracks,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationTracksRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.SerializeToString,
+            ),
+            'PatchAnnotationTracks': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchAnnotationTracks,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationTracksRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.SerializeToString,
+            ),
+            'DeleteAnnotationTracks': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteAnnotationTracks,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationTracksRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'PatchAnnotationsSearches': grpc.unary_unary_rpc_method_handler(
                     servicer.PatchAnnotationsSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationsSearchesRequest.FromString,
@@ -5241,6 +5309,74 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteAnnotations',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListAnnotationTracks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAnnotationTracks',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationTracksRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostAnnotationTracks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAnnotationTracks',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationTracksRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchAnnotationTracks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchAnnotationTracks',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchAnnotationTracksRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationTrackResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteAnnotationTracks(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteAnnotationTracks',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationTracksRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
