@@ -4930,6 +4930,7 @@ class Model(google.protobuf.message.Message):
     FEATURED_ORDER_FIELD_NUMBER: builtins.int
     DEPLOY_RESTRICTION_FIELD_NUMBER: builtins.int
     REPLICA_COUNT_FIELD_NUMBER: builtins.int
+    OPEN_ROUTER_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The model's ID. Must be unique within a particular app and URL-friendly."""
     name: builtins.str
@@ -5051,6 +5052,9 @@ class Model(google.protobuf.message.Message):
     """replica_count indicates the number of deployed model replicas.
     This field is populated when `show_replicas` is true in ListModelsRequest.
     """
+    @property
+    def open_router_info(self) -> global___OpenRouterInfo:
+        """OpenRouter Info for the model"""
     def __init__(
         self,
         *,
@@ -5089,6 +5093,7 @@ class Model(google.protobuf.message.Message):
         featured_order: google.protobuf.wrappers_pb2.Int32Value | None = ...,
         deploy_restriction: global___DeployRestriction.ValueType = ...,
         replica_count: builtins.int = ...,
+        open_router_info: global___OpenRouterInfo | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -5109,6 +5114,8 @@ class Model(google.protobuf.message.Message):
             b"model_version",
             "modified_at",
             b"modified_at",
+            "open_router_info",
+            b"open_router_info",
             "output_info",
             b"output_info",
             "presets",
@@ -5168,6 +5175,8 @@ class Model(google.protobuf.message.Message):
             b"name",
             "notes",
             b"notes",
+            "open_router_info",
+            b"open_router_info",
             "output_info",
             b"output_info",
             "presets",
@@ -5196,6 +5205,25 @@ class Model(google.protobuf.message.Message):
     ) -> None: ...
 
 global___Model = Model
+
+@typing_extensions.final
+class OpenRouterInfo(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARAMS_FIELD_NUMBER: builtins.int
+    @property
+    def params(self) -> google.protobuf.struct_pb2.Struct: ...
+    def __init__(
+        self,
+        *,
+        params: google.protobuf.struct_pb2.Struct | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["params", b"params"]
+    ) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["params", b"params"]) -> None: ...
+
+global___OpenRouterInfo = OpenRouterInfo
 
 @typing_extensions.final
 class ModelReference(google.protobuf.message.Message):

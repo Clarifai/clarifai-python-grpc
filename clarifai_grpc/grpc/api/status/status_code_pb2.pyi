@@ -431,6 +431,7 @@ class _StatusCodeEnumTypeWrapper(
     EVALUATION_MIXED: _StatusCode.ValueType  # 43109
     STRIPE_EVENT_ERROR: _StatusCode.ValueType  # 44001
     """Stripe 44xxx"""
+    STRIPE_UNEXPECTED_ERROR: _StatusCode.ValueType  # 44002
     CACHE_MISS: _StatusCode.ValueType  # 45001
     """Redis/Cache 45xxx"""
     REDIS_SCRIPT_EXITED_WITH_FAILURE: _StatusCode.ValueType  # 45002
@@ -441,6 +442,8 @@ class _StatusCodeEnumTypeWrapper(
     """Sift Science 46xxx"""
     SIGNUP_FLAGGED: _StatusCode.ValueType  # 46002
     FILETYPE_UNSUPPORTED: _StatusCode.ValueType  # 46003
+    LOGIN_EVENT_ERROR: _StatusCode.ValueType  # 46004
+    SIFT_UNCATEGORIZED_ERROR: _StatusCode.ValueType  # 46005
     APP_COUNT_INVALID_MESSAGE: _StatusCode.ValueType  # 47001
     """Application counts related errors 470xx"""
     APP_COUNT_UPDATE_INCREMENT_FAILED: _StatusCode.ValueType  # 47002
@@ -1018,6 +1021,7 @@ EVALUATION_UNEXPECTED_ERROR: StatusCode.ValueType  # 43108
 EVALUATION_MIXED: StatusCode.ValueType  # 43109
 STRIPE_EVENT_ERROR: StatusCode.ValueType  # 44001
 """Stripe 44xxx"""
+STRIPE_UNEXPECTED_ERROR: StatusCode.ValueType  # 44002
 CACHE_MISS: StatusCode.ValueType  # 45001
 """Redis/Cache 45xxx"""
 REDIS_SCRIPT_EXITED_WITH_FAILURE: StatusCode.ValueType  # 45002
@@ -1028,6 +1032,8 @@ SIGNUP_EVENT_ERROR: StatusCode.ValueType  # 46001
 """Sift Science 46xxx"""
 SIGNUP_FLAGGED: StatusCode.ValueType  # 46002
 FILETYPE_UNSUPPORTED: StatusCode.ValueType  # 46003
+LOGIN_EVENT_ERROR: StatusCode.ValueType  # 46004
+SIFT_UNCATEGORIZED_ERROR: StatusCode.ValueType  # 46005
 APP_COUNT_INVALID_MESSAGE: StatusCode.ValueType  # 47001
 """Application counts related errors 470xx"""
 APP_COUNT_UPDATE_INCREMENT_FAILED: StatusCode.ValueType  # 47002

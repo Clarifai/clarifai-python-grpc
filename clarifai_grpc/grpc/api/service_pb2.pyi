@@ -16649,27 +16649,24 @@ class DeletePipelinesRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
-    PIPELINE_IDS_FIELD_NUMBER: builtins.int
+    IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     @property
-    def pipeline_ids(
+    def ids(
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        pipeline_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        ids: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
     ) -> builtins.bool: ...
     def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "pipeline_ids", b"pipeline_ids", "user_app_id", b"user_app_id"
-        ],
+        self, field_name: typing_extensions.Literal["ids", b"ids", "user_app_id", b"user_app_id"]
     ) -> None: ...
 
 global___DeletePipelinesRequest = DeletePipelinesRequest

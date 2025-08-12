@@ -1332,7 +1332,7 @@ class V2Stub(object):
         self.DeletePipelines = channel.unary_unary(
                 '/clarifai.api.V2/DeletePipelines',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelinesRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineResponse),
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.GetPipelineVersion = channel.unary_unary(
                 '/clarifai.api.V2/GetPipelineVersion',
@@ -1352,7 +1352,7 @@ class V2Stub(object):
         self.DeletePipelineVersions = channel.unary_unary(
                 '/clarifai.api.V2/DeletePipelineVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineVersionsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionResponse),
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
         self.GetPipelineVersionRun = channel.unary_unary(
                 '/clarifai.api.V2/GetPipelineVersionRun',
@@ -4802,7 +4802,7 @@ def add_V2Servicer_to_server(servicer, server):
             'DeletePipelines': grpc.unary_unary_rpc_method_handler(
                     servicer.DeletePipelines,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelinesRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineResponse.SerializeToString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'GetPipelineVersion': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPipelineVersion,
@@ -4822,7 +4822,7 @@ def add_V2Servicer_to_server(servicer, server):
             'DeletePipelineVersions': grpc.unary_unary_rpc_method_handler(
                     servicer.DeletePipelineVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineVersionsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionResponse.SerializeToString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'GetPipelineVersionRun': grpc.unary_unary_rpc_method_handler(
                     servicer.GetPipelineVersionRun,
@@ -9338,7 +9338,7 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeletePipelines',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelinesRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineResponse.FromString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -9406,7 +9406,7 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeletePipelineVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineVersionsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionResponse.FromString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
