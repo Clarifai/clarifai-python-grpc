@@ -4905,7 +4905,7 @@ class ListLogEntriesRequest(google.protobuf.message.Message):
     to 32.
     """
     log_type: builtins.str
-    """The type of log entry. Examples: model, agent, build, training."""
+    """The type of log entry. Choose from [agent, builder, builder.events, runner, runner.events, pipeline.version.run]"""
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
         """Who the logs are for.

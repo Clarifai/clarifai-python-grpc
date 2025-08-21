@@ -985,60 +985,66 @@ class AnnotationTrack(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
     CONCEPT_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
-    START_FRAME_FIELD_NUMBER: builtins.int
-    END_FRAME_FIELD_NUMBER: builtins.int
+    START_FRAME_NR_FIELD_NUMBER: builtins.int
+    END_FRAME_NR_FIELD_NUMBER: builtins.int
+    START_FRAME_MS_FIELD_NUMBER: builtins.int
+    END_FRAME_MS_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
-    FRAME_RATE_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_MS_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_FRAME_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the annotation track"""
-    app_id: builtins.str
-    """ID of the application this annotation track is tied to"""
     input_id: builtins.str
     """ID of the asset this annotation track is tied to"""
     @property
     def concept(self) -> global___Concept:
         """Concept this annotation track"""
-    user_id: builtins.str
-    """The user the track belongs to (app owner)"""
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """AnnotationTrack Status"""
-    start_frame: builtins.int
-    """Start frame of the annotation track"""
-    end_frame: builtins.int
-    """End frame of the annotation track"""
+    start_frame_nr: builtins.int
+    """Start frame number (in original video) of the annotation track, inclusive."""
+    end_frame_nr: builtins.int
+    """End frame number (in original video) of the annotation track, inclusive."""
+    start_frame_ms: builtins.int
+    """Start time (in milliseconds of original video) of the annotation track, inclusive."""
+    end_frame_ms: builtins.int
+    """End time (in milliseconds of original video) of the annotation track, inclusive."""
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the annotation track was created."""
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the annotation track was modified."""
-    frame_rate: builtins.int
-    """Frame rate of the video track.
-    1 means it matches the original video FPS.
-    2 means every second frame, etc.
+    sample_rate_ms: builtins.int
+    """Sampling rate of the annotation track in milliseconds."""
+    sample_rate_frame: builtins.int
+    """Sampling frame rate of the video track in frame number increments
+    increment of 1 means it matches the original video FPS
+    increment of 2 means every second frame is sampled, etc.
     So if you have 30fps original video and frame_rate=3, your annotations in a track are stored at 30fps/3frame_rate=10 frames per second
+    Useful if client relies on simple frame access.
+    Useful if video has variable frame rate (VFR), then annotations are also sampled with VFR in mind
     """
     def __init__(
         self,
         *,
         id: builtins.str = ...,
-        app_id: builtins.str = ...,
         input_id: builtins.str = ...,
         concept: global___Concept | None = ...,
-        user_id: builtins.str = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        start_frame: builtins.int = ...,
-        end_frame: builtins.int = ...,
+        start_frame_nr: builtins.int = ...,
+        end_frame_nr: builtins.int = ...,
+        start_frame_ms: builtins.int = ...,
+        end_frame_ms: builtins.int = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        frame_rate: builtins.int = ...,
+        sample_rate_ms: builtins.int = ...,
+        sample_rate_frame: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -1056,28 +1062,30 @@ class AnnotationTrack(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "app_id",
-            b"app_id",
             "concept",
             b"concept",
             "created_at",
             b"created_at",
-            "end_frame",
-            b"end_frame",
-            "frame_rate",
-            b"frame_rate",
+            "end_frame_ms",
+            b"end_frame_ms",
+            "end_frame_nr",
+            b"end_frame_nr",
             "id",
             b"id",
             "input_id",
             b"input_id",
             "modified_at",
             b"modified_at",
-            "start_frame",
-            b"start_frame",
+            "sample_rate_frame",
+            b"sample_rate_frame",
+            "sample_rate_ms",
+            b"sample_rate_ms",
+            "start_frame_ms",
+            b"start_frame_ms",
+            "start_frame_nr",
+            b"start_frame_nr",
             "status",
             b"status",
-            "user_id",
-            b"user_id",
         ],
     ) -> None: ...
 
