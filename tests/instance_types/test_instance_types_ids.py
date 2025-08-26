@@ -212,7 +212,7 @@ def test_instance_types_exist_and_not_deprecated(channel_key):
     5. Raises errors for missing or deprecated instance types
     """
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-    metadata_tuple = metadata()
+    metadata_tuple = metadata(pat=True)
 
     # Collect all instance types from the API
     api_instance_types = collect_all_instance_types(stub, metadata_tuple)
