@@ -1,8 +1,8 @@
-import pytest
 import subprocess
-import os
 from pathlib import Path
 from typing import Dict, List
+
+import pytest
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
@@ -73,7 +73,9 @@ def fetch_skypilot_instance_types(cloud_providers=None):
     if not all_instance_types:
         raise FileNotFoundError("No vms.csv files found for any cloud provider")
 
-    print(f"Successfully fetched {len(all_instance_types)} total instance types from skypilot-catalog")
+    print(
+        f"Successfully fetched {len(all_instance_types)} total instance types from skypilot-catalog"
+    )
     return all_instance_types
 
 
@@ -91,7 +93,7 @@ def fetch_skypilot_instance_types_by_provider(cloud_provider_id):
             'aws': 'aws',
             'gcp': 'gcp',
             'azure': 'azure',
-            'local': 'local'  # if local is supported
+            'local': 'local',  # if local is supported
         }
 
         provider_lower = provider_mapping.get(cloud_provider_id.lower(), cloud_provider_id.lower())
@@ -115,8 +117,7 @@ def get_cloud_providers(stub, metadata_tuple) -> List[resources_pb2.CloudProvide
     """Get all available cloud providers."""
     try:
         response = stub.ListCloudProviders(
-            service_pb2.ListCloudProvidersRequest(),
-            metadata=metadata_tuple
+            service_pb2.ListCloudProvidersRequest(), metadata=metadata_tuple
         )
 
         if response.status.code != status_code_pb2.StatusCode.SUCCESS:
@@ -127,7 +128,9 @@ def get_cloud_providers(stub, metadata_tuple) -> List[resources_pb2.CloudProvide
         pytest.fail(f"Error listing cloud providers: {e}")
 
 
-def get_cloud_regions(stub, metadata_tuple, cloud_provider: resources_pb2.CloudProvider) -> List[str]:
+def get_cloud_regions(
+    stub, metadata_tuple, cloud_provider: resources_pb2.CloudProvider
+) -> List[str]:
     """Get all regions for a specific cloud provider."""
     try:
         request = service_pb2.ListCloudRegionsRequest(
@@ -136,7 +139,9 @@ def get_cloud_regions(stub, metadata_tuple, cloud_provider: resources_pb2.CloudP
         response = stub.ListCloudRegions(request, metadata=metadata_tuple)
 
         if response.status.code != status_code_pb2.StatusCode.SUCCESS:
-            pytest.fail(f"Failed to list regions for {cloud_provider.id}: {response.status.description}")
+            pytest.fail(
+                f"Failed to list regions for {cloud_provider.id}: {response.status.description}"
+            )
 
         # API returns regions as a list of region id strings
         return list(response.regions)
@@ -144,17 +149,20 @@ def get_cloud_regions(stub, metadata_tuple, cloud_provider: resources_pb2.CloudP
         pytest.fail(f"Error listing regions for {cloud_provider.id}: {e}")
 
 
-def get_instance_types(stub, metadata_tuple, cloud_provider: resources_pb2.CloudProvider, region: str) -> List[str]:
+def get_instance_types(
+    stub, metadata_tuple, cloud_provider: resources_pb2.CloudProvider, region: str
+) -> List[str]:
     """Get all instance types for a specific cloud provider and region."""
     try:
         request = service_pb2.ListInstanceTypesRequest(
-            cloud_provider=resources_pb2.CloudProvider(id=cloud_provider.id),
-            region=region
+            cloud_provider=resources_pb2.CloudProvider(id=cloud_provider.id), region=region
         )
         response = stub.ListInstanceTypes(request, metadata=metadata_tuple)
 
         if response.status.code != status_code_pb2.StatusCode.SUCCESS:
-            pytest.fail(f"Failed to list instance types for {cloud_provider.id}/{region}: {response.status.description}")
+            pytest.fail(
+                f"Failed to list instance types for {cloud_provider.id}/{region}: {response.status.description}"
+            )
 
         return [instance_type.id for instance_type in response.instance_types]
     except Exception as e:
@@ -240,17 +248,23 @@ def test_instance_types_exist_and_not_deprecated(channel_key):
         )
 
     # Log summary for debugging
-    print(f"\nInstance Types Summary:")
+    print("\nInstance Types Summary:")
     print(f"Total API instance types (supported providers): {len(all_api_instance_types)}")
-    print(f"Cloud providers checked: {[p for p in api_instance_types.keys() if is_provider_supported(p)]}")
+    print(
+        f"Cloud providers checked: {[p for p in api_instance_types.keys() if is_provider_supported(p)]}"
+    )
 
     for cloud_provider_id, regions in api_instance_types.items():
         total_for_provider = sum(len(instance_types) for instance_types in regions.values())
         if is_provider_supported(cloud_provider_id):
             expected_for_provider = len(provider_expected_types.get(cloud_provider_id, set()))
-            print(f"  {cloud_provider_id}: {total_for_provider} instance types across {len(regions)} regions (expected: {expected_for_provider})")
+            print(
+                f"  {cloud_provider_id}: {total_for_provider} instance types across {len(regions)} regions (expected: {expected_for_provider})"
+            )
         else:
             print(f"  {cloud_provider_id}: skipped (unsupported by skypilot-catalog)")
 
     # Assert that we have a reasonable number of instance types among supported providers
-    assert len(all_api_instance_types) > 0, "No instance types found in API for supported providers"
+    assert len(all_api_instance_types) > 0, (
+        "No instance types found in API for supported providers"
+    )
