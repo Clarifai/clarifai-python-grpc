@@ -6,7 +6,9 @@ import grpc
 from clarifai_grpc.channel.grpc_json_channel import GRPCJSONChannel
 
 RETRIES = 2  # if connections fail retry a couple times.
-CONNECTIONS = 20  # number of connections to maintain in pool, only usd for json channel, not direct GRPC.
+CONNECTIONS = (
+    20  # number of connections to maintain in pool, only usd for json channel, not direct GRPC.
+)
 MAX_MESSAGE_LENGTH = 1024 * 1024 * 1024  # 1GB
 
 wrap_response_deserializer = None
