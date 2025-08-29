@@ -205,7 +205,6 @@ async def test_text_predict_on_public_models_async(channel_key, title, model_id,
     )
 
 
-@pytest.mark.skip(reason="This test is ready, but will be added in time")
 @both_channels()
 @pytest.mark.parametrize(
     "title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE
@@ -217,6 +216,7 @@ def test_text_fb_translation_predict_on_public_models(
     Each language-english translation has its own text input while
     all en-language translations use the same english text.
     """
+    pytest.skip("Skipping test: FB models are currently disabled")
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     request = service_pb2.PostModelOutputsRequest(
         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
