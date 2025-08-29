@@ -249,6 +249,7 @@ def test_post_model_with_hyper_params(channel_key):
     raise_on_failure(delete_response)
 
 
+@pytest.mark.no_parallel
 @pytest.mark.skip(
     reason="On Github Actions there's 'Model training had no data' error for some reason"
 )
