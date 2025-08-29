@@ -249,11 +249,9 @@ def test_post_model_with_hyper_params(channel_key):
     raise_on_failure(delete_response)
 
 
-@pytest.mark.skip(
-    reason="On Github Actions there's 'Model training had no data' error for some reason"
-)
 @both_channels()
 def test_model_creation_training_and_evaluation(channel_key):
+    pytest.skip("On Github Actions there's 'Model training had no data' error for some reason")
     model_id = str(uuid.uuid4()[:30])
 
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
