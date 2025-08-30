@@ -1,6 +1,5 @@
 import uuid
 
-import pytest
 from google.protobuf import struct_pb2
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
@@ -249,109 +248,109 @@ def test_post_model_with_hyper_params(channel_key):
     raise_on_failure(delete_response)
 
 
-@both_channels()
-def test_model_creation_training_and_evaluation(channel_key):
-    pytest.skip("On Github Actions there's 'Model training had no data' error for some reason")
-    model_id = str(uuid.uuid4()[:30])
+# @both_channels()
+# def test_model_creation_training_and_evaluation(channel_key):
+#     pytest.skip("On Github Actions there's 'Model training had no data' error for some reason")
+#     model_id = str(uuid.uuid4()[:30])
 
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+#     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
-    raise_on_failure(
-        stub.PostModels(
-            service_pb2.PostModelsRequest(
-                models=[
-                    resources_pb2.Model(
-                        id=model_id,
-                    )
-                ]
-            ),
-            metadata=metadata(),
-        )
-    )
+#     raise_on_failure(
+#         stub.PostModels(
+#             service_pb2.PostModelsRequest(
+#                 models=[
+#                     resources_pb2.Model(
+#                         id=model_id,
+#                     )
+#                 ]
+#             ),
+#             metadata=metadata(),
+#         )
+#     )
 
-    post_inputs_response = stub.PostInputs(
-        service_pb2.PostInputsRequest(
-            inputs=[
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        image=resources_pb2.Image(
-                            url="https://samples.clarifai.com/dog2.jpeg",
-                            allow_duplicate_url=True,
-                        ),
-                        concepts=[resources_pb2.Concept(id="dog")],
-                    )
-                ),
-                resources_pb2.Input(
-                    data=resources_pb2.Data(
-                        image=resources_pb2.Image(
-                            url="https://samples.clarifai.com/toddler-flowers.jpeg",
-                            allow_duplicate_url=True,
-                        ),
-                        concepts=[resources_pb2.Concept(id="toddler")],
-                    )
-                ),
-            ]
-        ),
-        metadata=metadata(),
-    )
-    raise_on_failure(post_inputs_response)
+#     post_inputs_response = stub.PostInputs(
+#         service_pb2.PostInputsRequest(
+#             inputs=[
+#                 resources_pb2.Input(
+#                     data=resources_pb2.Data(
+#                         image=resources_pb2.Image(
+#                             url="https://samples.clarifai.com/dog2.jpeg",
+#                             allow_duplicate_url=True,
+#                         ),
+#                         concepts=[resources_pb2.Concept(id="dog")],
+#                     )
+#                 ),
+#                 resources_pb2.Input(
+#                     data=resources_pb2.Data(
+#                         image=resources_pb2.Image(
+#                             url="https://samples.clarifai.com/toddler-flowers.jpeg",
+#                             allow_duplicate_url=True,
+#                         ),
+#                         concepts=[resources_pb2.Concept(id="toddler")],
+#                     )
+#                 ),
+#             ]
+#         ),
+#         metadata=metadata(),
+#     )
+#     raise_on_failure(post_inputs_response)
 
-    input_ids = [i.id for i in post_inputs_response.inputs]
-    wait_for_inputs_upload(stub, metadata, input_ids)
+#     input_ids = [i.id for i in post_inputs_response.inputs]
+#     wait_for_inputs_upload(stub, metadata, input_ids)
 
-    response = stub.PostModelVersions(
-        service_pb2.PostModelVersionsRequest(
-            model_id=model_id,
-            model_versions=[
-                resources_pb2.ModelVersion(
-                    output_info=resources_pb2.OutputInfo(
-                        data=resources_pb2.Data(
-                            concepts=[
-                                resources_pb2.Concept(id="dog"),
-                                resources_pb2.Concept(id="toddler"),
-                            ]
-                        )
-                    ),
-                ),
-            ],
-        ),
-        metadata=metadata(),
-    )
-    raise_on_failure(response)
+#     response = stub.PostModelVersions(
+#         service_pb2.PostModelVersionsRequest(
+#             model_id=model_id,
+#             model_versions=[
+#                 resources_pb2.ModelVersion(
+#                     output_info=resources_pb2.OutputInfo(
+#                         data=resources_pb2.Data(
+#                             concepts=[
+#                                 resources_pb2.Concept(id="dog"),
+#                                 resources_pb2.Concept(id="toddler"),
+#                             ]
+#                         )
+#                     ),
+#                 ),
+#             ],
+#         ),
+#         metadata=metadata(),
+#     )
+#     raise_on_failure(response)
 
-    model_version_id = response.model.model_version.id
-    wait_for_model_trained(stub, metadata, model_id, model_version_id)
+#     model_version_id = response.model.model_version.id
+#     wait_for_model_trained(stub, metadata, model_id, model_version_id)
 
-    raise_on_failure(
-        stub.PostModelVersionMetrics(
-            service_pb2.PostModelVersionMetricsRequest(
-                model_id=model_id,
-                version_id=model_version_id,
-            ),
-            metadata=metadata(),
-        )
-    )
+#     raise_on_failure(
+#         stub.PostModelVersionMetrics(
+#             service_pb2.PostModelVersionMetricsRequest(
+#                 model_id=model_id,
+#                 version_id=model_version_id,
+#             ),
+#             metadata=metadata(),
+#         )
+#     )
 
-    wait_for_model_evaluated(stub, metadata, model_id, model_version_id)
+#     wait_for_model_evaluated(stub, metadata, model_id, model_version_id)
 
-    response = stub.GetModelVersionMetrics(
-        service_pb2.GetModelVersionMetricsRequest(
-            model_id=model_id,
-            version_id=model_version_id,
-            fields=resources_pb2.FieldsValue(
-                confusion_matrix=True,
-                cooccurrence_matrix=True,
-                label_counts=True,
-                binary_metrics=True,
-                test_set=True,
-            ),
-        ),
-        metadata=metadata(),
-    )
-    raise_on_failure(response)
+#     response = stub.GetModelVersionMetrics(
+#         service_pb2.GetModelVersionMetricsRequest(
+#             model_id=model_id,
+#             version_id=model_version_id,
+#             fields=resources_pb2.FieldsValue(
+#                 confusion_matrix=True,
+#                 cooccurrence_matrix=True,
+#                 label_counts=True,
+#                 binary_metrics=True,
+#                 test_set=True,
+#             ),
+#         ),
+#         metadata=metadata(),
+#     )
+#     raise_on_failure(response)
 
-    raise_on_failure(
-        stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
-    )
+#     raise_on_failure(
+#         stub.DeleteModel(service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata())
+#     )
 
-    cleanup_inputs(stub, input_ids, metadata=metadata())
+#     cleanup_inputs(stub, input_ids, metadata=metadata())
