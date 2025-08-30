@@ -37,7 +37,6 @@ from tests.public_models.public_test_helper import (
     ENGLISH_AUDIO_URL,
     MODEL_TITLE_AND_ID_PAIRS,
     MULTIMODAL_MODEL_TITLE_AND_IDS,
-    TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_HELSINKI_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE,
     TEXT_LLM_MODEL_TITLE_IDS_TUPLE,
     TEXT_MODEL_TITLE_IDS_TUPLE,
@@ -205,31 +204,31 @@ async def test_text_predict_on_public_models_async(channel_key, title, model_id,
     )
 
 
-@both_channels()
-@pytest.mark.parametrize(
-    "title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE
-)
-def test_text_fb_translation_predict_on_public_models(
-    channel_key, title, model_id, text, app_id, user_id
-):
-    """Test language translation models.
-    Each language-english translation has its own text input while
-    all en-language translations use the same english text.
-    """
-    pytest.skip("Skipping test: FB models are currently disabled")
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-    request = service_pb2.PostModelOutputsRequest(
-        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-        model_id=model_id,
-        inputs=[resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))],
-    )
-    response = post_model_outputs_and_maybe_allow_retries(
-        stub, request, metadata=metadata(pat=True)
-    )
-    raise_on_failure(
-        response,
-        custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
-    )
+# @both_channels()
+# @pytest.mark.parametrize(
+#     "title, model_id, text, app_id, user_id ", TEXT_FB_TRANSLATION_MODEL_TITLE_ID_DATA_TUPLE
+# )
+# def test_text_fb_translation_predict_on_public_models(
+#     channel_key, title, model_id, text, app_id, user_id
+# ):
+#     """Test language translation models.
+#     Each language-english translation has its own text input while
+#     all en-language translations use the same english text.
+#     """
+#     pytest.skip("Skipping test: FB models are currently disabled")
+#     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
+#     request = service_pb2.PostModelOutputsRequest(
+#         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+#         model_id=model_id,
+#         inputs=[resources_pb2.Input(data=resources_pb2.Data(text=resources_pb2.Text(raw=text)))],
+#     )
+#     response = post_model_outputs_and_maybe_allow_retries(
+#         stub, request, metadata=metadata(pat=True)
+#     )
+#     raise_on_failure(
+#         response,
+#         custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+#     )
 
 
 @both_channels()
