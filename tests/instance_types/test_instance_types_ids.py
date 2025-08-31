@@ -1,57 +1,61 @@
-import subprocess
-from pathlib import Path
 from typing import Dict, List
 
 import pytest
+import requests
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import get_channel, grpc_channel, metadata
 
 
-def clone_and_setup():
-    """Clone the skypilot-catalog repository if it doesn't exist."""
-    repo_url = "https://github.com/skypilot-org/skypilot-catalog.git"
-    repo_name = "skypilot-catalog"
+def fetch_csv_from_github(cloud_provider: str, catalog_version: str = "v7") -> str:
+    """
+    Fetch CSV content directly from GitHub raw URLs instead of cloning the repository.
 
-    if not Path(repo_name).exists():
-        print(f"Cloning {repo_url}...")
-        subprocess.run(["git", "clone", repo_url], check=True)
-    else:
-        print(f"Repository {repo_name} already exists")
+    Args:
+        cloud_provider: Cloud provider name (aws, gcp, azure, etc.)
+        catalog_version: Catalog version (default: v7)
 
-    return Path(repo_name)
+    Returns:
+        CSV content as string
+
+    Raises:
+        requests.RequestException: If the HTTP request fails
+    """
+    base_url = "https://raw.githubusercontent.com/skypilot-org/skypilot-catalog/master"
+    csv_url = f"{base_url}/catalogs/{catalog_version}/{cloud_provider.lower()}/vms.csv"
+
+    print(f"Fetching CSV from: {csv_url}")
+    response = requests.get(csv_url, timeout=30)
+    response.raise_for_status()
+
+    return response.text
 
 
-def get_instance_types_simple(csv_path):
-    """Simple version - just return the list of instance types"""
+def get_instance_types_simple(csv_content: str) -> List[str]:
+    """Parse CSV content and extract instance types from the first column."""
     instance_types = set()
 
-    with open(csv_path, 'r') as file:
-        # Skip header
-        next(file)
+    # Split content into lines and skip header
+    lines = csv_content.strip().split('\n')[1:]
 
-        # Read each line and extract first column (InstanceType)
-        for line in file:
-            if line.strip():
-                instance_type = line.split(',')[0]
-                if instance_type:
-                    instance_types.add(instance_type)
+    for line in lines:
+        if line.strip():
+            instance_type = line.split(',')[0]
+            if instance_type:
+                instance_types.add(instance_type)
 
     return sorted(list(instance_types))
 
 
 def fetch_skypilot_instance_types(cloud_providers=None):
     """
-    Fetch instance types from skypilot-catalog repository.
+    Fetch instance types from skypilot-catalog repository via direct HTTP requests.
     This function:
-    1. Clones the skypilot-catalog repository
-    2. Reads vms.csv files from the appropriate cloud provider directories
+    1. Makes direct HTTP requests to GitHub raw URLs for vms.csv files
+    2. Parses the CSV content to extract instance type IDs
     3. Returns a set of expected instance type IDs
     """
-    # Clone the repository
-    repo_path = clone_and_setup()
-
     # If no cloud providers specified, use default ones
     if cloud_providers is None:
         cloud_providers = ['aws', 'gcp', 'azure']
@@ -60,18 +64,19 @@ def fetch_skypilot_instance_types(cloud_providers=None):
 
     for provider in cloud_providers:
         provider_lower = provider.lower()
-        csv_path = repo_path / "catalogs" / "v7" / provider_lower / "vms.csv"
 
-        if csv_path.exists():
-            print(f"Reading instance types from {csv_path}")
-            provider_instance_types = get_instance_types_simple(csv_path)
+        try:
+            csv_content = fetch_csv_from_github(provider_lower)
+            provider_instance_types = get_instance_types_simple(csv_content)
             all_instance_types.update(provider_instance_types)
             print(f"  Found {len(provider_instance_types)} instance types for {provider_lower}")
-        else:
-            print(f"Warning: CSV file not found for {provider_lower}: {csv_path}")
+        except requests.RequestException as e:
+            print(f"Warning: Could not fetch CSV for {provider_lower}: {e}")
+        except Exception as e:
+            print(f"Warning: Error processing CSV for {provider_lower}: {e}")
 
     if not all_instance_types:
-        raise FileNotFoundError("No vms.csv files found for any cloud provider")
+        raise RuntimeError("No vms.csv files could be fetched for any cloud provider")
 
     print(
         f"Successfully fetched {len(all_instance_types)} total instance types from skypilot-catalog"
@@ -85,9 +90,6 @@ def fetch_skypilot_instance_types_by_provider(cloud_provider_id):
     Maps Clarifai cloud provider IDs to skypilot-catalog directory names.
     """
     try:
-        # Clone the repository
-        repo_path = clone_and_setup()
-
         # Map Clarifai cloud provider IDs to skypilot-catalog directory names
         provider_mapping = {
             'aws': 'aws',
@@ -97,19 +99,17 @@ def fetch_skypilot_instance_types_by_provider(cloud_provider_id):
         }
 
         provider_lower = provider_mapping.get(cloud_provider_id.lower(), cloud_provider_id.lower())
-        csv_path = repo_path / "catalogs" / "v7" / provider_lower / "vms.csv"
 
-        if csv_path.exists():
-            print(f"Reading instance types for {cloud_provider_id} from {csv_path}")
-            instance_types = get_instance_types_simple(csv_path)
-            print(f"  Found {len(instance_types)} instance types for {cloud_provider_id}")
-            return set(instance_types)
-        else:
-            print(f"Warning: CSV file not found for {cloud_provider_id}: {csv_path}")
-            return set()
+        csv_content = fetch_csv_from_github(provider_lower)
+        instance_types = get_instance_types_simple(csv_content)
+        print(f"  Found {len(instance_types)} instance types for {cloud_provider_id}")
+        return set(instance_types)
 
+    except requests.RequestException as e:
+        print(f"Warning: Could not fetch CSV for {cloud_provider_id}: {e}")
+        return set()
     except Exception as e:
-        print(f"Warning: Could not fetch instance types for {cloud_provider_id}: {e}")
+        print(f"Warning: Error processing CSV for {cloud_provider_id}: {e}")
         return set()
 
 
