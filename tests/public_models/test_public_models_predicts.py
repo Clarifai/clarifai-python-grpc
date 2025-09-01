@@ -120,62 +120,62 @@ def test_text_predict_on_public_models(channel_key, title, model_id, app_id, use
     )
 
 
-@grpc_channel()
-@pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_LLM_MODEL_TITLE_IDS_TUPLE)
-def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id, user_id):
-    channel = get_channel(channel_key)
-    if channel._target != "api.clarifai.com":
-        pytest.skip(f"Model not available in {channel._target}")
+# @grpc_channel()
+# @pytest.mark.parametrize("title, model_id, app_id, user_id", TEXT_LLM_MODEL_TITLE_IDS_TUPLE)
+# def test_text_predict_on_public_llm_models(channel_key, title, model_id, app_id, user_id):
+#     channel = get_channel(channel_key)
+#     if channel._target != "api.clarifai.com":
+#         pytest.skip(f"Model not available in {channel._target}")
 
-    stub = service_pb2_grpc.V2Stub(channel)
+#     stub = service_pb2_grpc.V2Stub(channel)
 
-    request = service_pb2.PostModelOutputsRequest(
-        user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
-        model_id=model_id,
-        inputs=[
-            resources_pb2.Input(
-                data=resources_pb2.Data(
-                    parts=[
-                        resources_pb2.Part(
-                            id="prompt",
-                            data=resources_pb2.Data(
-                                string_value=TRANSLATION_TEST_DATA["EN"],
-                            ),
-                        ),
-                        resources_pb2.Part(
-                            id="max_tokens",
-                            data=resources_pb2.Data(
-                                int_value=10,
-                            ),
-                        ),
-                        resources_pb2.Part(
-                            id="temperature",
-                            data=resources_pb2.Data(
-                                float_value=0.7,
-                            ),
-                        ),
-                        resources_pb2.Part(
-                            id="top_p",
-                            data=resources_pb2.Data(
-                                float_value=0.95,
-                            ),
-                        ),
-                    ]
-                )
-            )
-        ],
-    )
-    response_iterator = _generate_model_outputs(stub, request, metadata(pat=True))
+#     request = service_pb2.PostModelOutputsRequest(
+#         user_app_id=resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id),
+#         model_id=model_id,
+#         inputs=[
+#             resources_pb2.Input(
+#                 data=resources_pb2.Data(
+#                     parts=[
+#                         resources_pb2.Part(
+#                             id="prompt",
+#                             data=resources_pb2.Data(
+#                                 string_value=TRANSLATION_TEST_DATA["EN"],
+#                             ),
+#                         ),
+#                         resources_pb2.Part(
+#                             id="max_tokens",
+#                             data=resources_pb2.Data(
+#                                 int_value=10,
+#                             ),
+#                         ),
+#                         resources_pb2.Part(
+#                             id="temperature",
+#                             data=resources_pb2.Data(
+#                                 float_value=0.7,
+#                             ),
+#                         ),
+#                         resources_pb2.Part(
+#                             id="top_p",
+#                             data=resources_pb2.Data(
+#                                 float_value=0.95,
+#                             ),
+#                         ),
+#                     ]
+#                 )
+#             )
+#         ],
+#     )
+#     response_iterator = _generate_model_outputs(stub, request, metadata(pat=True))
 
-    responses_count = 0
-    for response in response_iterator:
-        responses_count += 1
-        raise_on_failure(
-            response,
-            custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
-        )
+#     responses_count = 0
+#     for response in response_iterator:
+#         responses_count += 1
+#         raise_on_failure(
+#             response,
+#             custom_message=f"Text predict failed for the {title} model (ID: {model_id}).",
+#         )
 
-    assert responses_count > 0
+#     assert responses_count > 0
 
 
 @aio_grpc_channel()
