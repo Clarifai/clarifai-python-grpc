@@ -17959,3 +17959,131 @@ class MultiSecretResponse(google.protobuf.message.Message):
     ) -> None: ...
 
 global___MultiSecretResponse = MultiSecretResponse
+
+@typing_extensions.final
+class PostMetricsQueryRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    QUERY_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def query(self) -> proto.clarifai.api.resources_pb2.MetricSearchQuery: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        query: proto.clarifai.api.resources_pb2.MetricSearchQuery | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal["query", b"query", "user_app_id", b"user_app_id"],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["query", b"query", "user_app_id", b"user_app_id"],
+    ) -> None: ...
+
+global___PostMetricsQueryRequest = PostMetricsQueryRequest
+
+@typing_extensions.final
+class MetricsQueryResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    DATA_FIELD_NUMBER: builtins.int
+    RESOLUTION_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def data(self) -> proto.clarifai.api.resources_pb2.MetricData: ...
+    resolution: builtins.str
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        data: proto.clarifai.api.resources_pb2.MetricData | None = ...,
+        resolution: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["data", b"data", "status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "data", b"data", "resolution", b"resolution", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MetricsQueryResponse = MetricsQueryResponse
+
+@typing_extensions.final
+class ListMetricLabelsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    METRIC_TYPES_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    @property
+    def metric_types(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[
+        proto.clarifai.api.resources_pb2.MetricType.ValueType
+    ]: ...
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        metric_types: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.MetricType.ValueType
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "metric_types", b"metric_types", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___ListMetricLabelsRequest = ListMetricLabelsRequest
+
+@typing_extensions.final
+class MultiMetricLabelsResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    METRIC_TYPE_LABELS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def metric_type_labels(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.MetricTypeLabels
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        metric_type_labels: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.MetricTypeLabels
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "metric_type_labels", b"metric_type_labels", "status", b"status"
+        ],
+    ) -> None: ...
+
+global___MultiMetricLabelsResponse = MultiMetricLabelsResponse

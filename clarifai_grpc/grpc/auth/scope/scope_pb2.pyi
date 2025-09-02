@@ -247,6 +247,7 @@ class _SEnumTypeWrapper(
     Secrets_Get: _S.ValueType  # 160
     Secrets_Add: _S.ValueType  # 161
     Secrets_Delete: _S.ValueType  # 162
+    UserMetrics_Get: _S.ValueType  # 163
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -495,6 +496,7 @@ PipelineSteps_Pull: S.ValueType  # 159
 Secrets_Get: S.ValueType  # 160
 Secrets_Add: S.ValueType  # 161
 Secrets_Delete: S.ValueType  # 162
+UserMetrics_Get: S.ValueType  # 163
 global___S = S
 
 @typing_extensions.final

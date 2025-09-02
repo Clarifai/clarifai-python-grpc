@@ -1424,6 +1424,16 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse),
                 )
+        self.PostMetricsQuery = channel.unary_unary(
+                '/clarifai.api.V2/PostMetricsQuery',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostMetricsQueryRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MetricsQueryResponse),
+                )
+        self.ListMetricLabels = channel.unary_unary(
+                '/clarifai.api.V2/ListMetricLabels',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListMetricLabelsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiMetricLabelsResponse),
+                )
 
 
 class V2Servicer(object):
@@ -3501,6 +3511,18 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostMetricsQuery(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListMetricLabels(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_V2Servicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -4893,6 +4915,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteSecrets,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.SerializeToString,
+            ),
+            'PostMetricsQuery': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostMetricsQuery,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostMetricsQueryRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MetricsQueryResponse.SerializeToString,
+            ),
+            'ListMetricLabels': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListMetricLabels,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListMetricLabelsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiMetricLabelsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -9645,5 +9677,39 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteSecrets',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSecretsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiSecretResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostMetricsQuery(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostMetricsQuery',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostMetricsQueryRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MetricsQueryResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListMetricLabels(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListMetricLabels',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListMetricLabelsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiMetricLabelsResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -14477,6 +14477,7 @@ class InstanceType(google.protobuf.message.Message):
     CLOUD_PROVIDER_FIELD_NUMBER: builtins.int
     REGION_FIELD_NUMBER: builtins.int
     ALLOWED_CAPACITY_TYPES_FIELD_NUMBER: builtins.int
+    FEATURE_FLAG_GROUP_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
@@ -14491,6 +14492,8 @@ class InstanceType(google.protobuf.message.Message):
     @property
     def allowed_capacity_types(self) -> global___NodeCapacityType:
         """The capacity types allowed for this instance type. If empty - all capacity types are allowed."""
+    feature_flag_group: builtins.str
+    """The feature flag group associated with this instance type."""
     def __init__(
         self,
         *,
@@ -14501,6 +14504,7 @@ class InstanceType(google.protobuf.message.Message):
         cloud_provider: global___CloudProvider | None = ...,
         region: builtins.str = ...,
         allowed_capacity_types: global___NodeCapacityType | None = ...,
+        feature_flag_group: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14524,6 +14528,8 @@ class InstanceType(google.protobuf.message.Message):
             b"compute_info",
             "description",
             b"description",
+            "feature_flag_group",
+            b"feature_flag_group",
             "id",
             b"id",
             "price",
@@ -14710,6 +14716,7 @@ class ComputeInfo(google.protobuf.message.Message):
     NUM_ACCELERATORS_FIELD_NUMBER: builtins.int
     ACCELERATOR_MEMORY_FIELD_NUMBER: builtins.int
     ACCELERATOR_TYPE_FIELD_NUMBER: builtins.int
+    ACCELERATOR_TOPOLOGY_FIELD_NUMBER: builtins.int
     cpu_limit: builtins.str
     """Amount of CPUs to use as a limit. This follows kubernetes notation like: "1", "100m", "4.5", etc.
     See https://kubernetes.io/docs/reference/kubernetes-api/common-definitions/quantity/
@@ -14755,6 +14762,19 @@ class ComputeInfo(google.protobuf.message.Message):
         """Or should it be removed completely and use the nodepool accelerator type itself.
         These are the supported accelerators that the model can run on.
         """
+    @property
+    def accelerator_topology(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """The number of nodes of this type needed to serve this resource.
+        Since 0 is not valid, this will default to 1 if 0 is provided.
+        uint32 num_nodes = 6; // FUTURE
+
+        For multi-host accelerators (i.e., TPU Slices), this defines the slice topology.
+        Corresponds to the tpu.googleapis.com/topology annotation.
+        Example: "2x2x1" for a 16-chip slice using v4 TPUs.
+        Leave empty for single-host accelerators like GPUs or non-slice TPUs.
+        """
     def __init__(
         self,
         *,
@@ -14765,12 +14785,15 @@ class ComputeInfo(google.protobuf.message.Message):
         num_accelerators: builtins.int = ...,
         accelerator_memory: builtins.str = ...,
         accelerator_type: collections.abc.Iterable[builtins.str] | None = ...,
+        accelerator_topology: collections.abc.Iterable[builtins.str] | None = ...,
     ) -> None: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
             "accelerator_memory",
             b"accelerator_memory",
+            "accelerator_topology",
+            b"accelerator_topology",
             "accelerator_type",
             b"accelerator_type",
             "cpu_limit",
@@ -17485,3 +17508,51 @@ class MetricSearchQuery(google.protobuf.message.Message):
     ) -> None: ...
 
 global___MetricSearchQuery = MetricSearchQuery
+
+@typing_extensions.final
+class MetricTypeLabels(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class LabelWithValues(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        LABEL_FIELD_NUMBER: builtins.int
+        VALUES_FIELD_NUMBER: builtins.int
+        label: global___MetricLabel.ValueType
+        @property
+        def values(
+            self,
+        ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+            """sample values for this label"""
+        def __init__(
+            self,
+            *,
+            label: global___MetricLabel.ValueType = ...,
+            values: collections.abc.Iterable[builtins.str] | None = ...,
+        ) -> None: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["label", b"label", "values", b"values"]
+        ) -> None: ...
+
+    METRIC_TYPE_FIELD_NUMBER: builtins.int
+    LABELS_FIELD_NUMBER: builtins.int
+    metric_type: global___MetricType.ValueType
+    @property
+    def labels(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___MetricTypeLabels.LabelWithValues
+    ]: ...
+    def __init__(
+        self,
+        *,
+        metric_type: global___MetricType.ValueType = ...,
+        labels: collections.abc.Iterable[global___MetricTypeLabels.LabelWithValues] | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["labels", b"labels", "metric_type", b"metric_type"],
+    ) -> None: ...
+
+global___MetricTypeLabels = MetricTypeLabels
