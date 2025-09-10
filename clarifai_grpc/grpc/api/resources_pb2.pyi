@@ -4764,6 +4764,7 @@ class Key(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     EXPIRES_AT_FIELD_NUMBER: builtins.int
     AUTHORIZED_IDP_IDS_FIELD_NUMBER: builtins.int
+    ORGANIZATION_ID_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The id of this key, it is used for authorization."""
     type: builtins.str
@@ -4803,6 +4804,8 @@ class Key(google.protobuf.message.Message):
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """list of idp ids at which key is currently authorized"""
+    organization_id: builtins.str
+    """The organization associated with the key, if any. This is applicable only for PAT keys."""
     def __init__(
         self,
         *,
@@ -4815,6 +4818,7 @@ class Key(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         expires_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         authorized_idp_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        organization_id: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -4839,6 +4843,8 @@ class Key(google.protobuf.message.Message):
             b"expires_at",
             "id",
             b"id",
+            "organization_id",
+            b"organization_id",
             "scopes",
             b"scopes",
             "type",
