@@ -272,6 +272,7 @@ class _StatusCodeEnumTypeWrapper(
     RUNNER_STREAM_END: _StatusCode.ValueType  # 25606
     RUNNER_ITEM_CANCELLED: _StatusCode.ValueType  # 25607
     RUNNER_PROCESSING_FAILED: _StatusCode.ValueType  # 25608
+    RUNNER_SPECIAL_HANDLING_NOT_COMPLETE: _StatusCode.ValueType  # 25609
     NODEPOOL_DOES_NOT_EXIST: _StatusCode.ValueType  # 25700
     """Nodepool related codes 257xx"""
     NODEPOOL_INVALID_ARGUMENT: _StatusCode.ValueType  # 25701
@@ -862,6 +863,7 @@ RUNNER_STREAM_START: StatusCode.ValueType  # 25605
 RUNNER_STREAM_END: StatusCode.ValueType  # 25606
 RUNNER_ITEM_CANCELLED: StatusCode.ValueType  # 25607
 RUNNER_PROCESSING_FAILED: StatusCode.ValueType  # 25608
+RUNNER_SPECIAL_HANDLING_NOT_COMPLETE: StatusCode.ValueType  # 25609
 NODEPOOL_DOES_NOT_EXIST: StatusCode.ValueType  # 25700
 """Nodepool related codes 257xx"""
 NODEPOOL_INVALID_ARGUMENT: StatusCode.ValueType  # 25701

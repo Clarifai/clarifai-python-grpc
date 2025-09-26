@@ -5221,6 +5221,51 @@ class Model(google.protobuf.message.Message):
 global___Model = Model
 
 @typing_extensions.final
+class SpecialHandling(google.protobuf.message.Message):
+    """Tracks special handling reason and whether it's been done."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Reason:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _ReasonEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            SpecialHandling._Reason.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        REASON_NOT_SET: SpecialHandling._Reason.ValueType  # 0
+        CONTACT_SALES: SpecialHandling._Reason.ValueType  # 1
+
+    class Reason(_Reason, metaclass=_ReasonEnumTypeWrapper): ...
+    REASON_NOT_SET: SpecialHandling.Reason.ValueType  # 0
+    CONTACT_SALES: SpecialHandling.Reason.ValueType  # 1
+
+    ID_FIELD_NUMBER: builtins.int
+    REASON_FIELD_NUMBER: builtins.int
+    DONE_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    reason: global___SpecialHandling.Reason.ValueType
+    done: builtins.bool
+    """Whether special handling is done."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        reason: global___SpecialHandling.Reason.ValueType = ...,
+        done: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["done", b"done", "id", b"id", "reason", b"reason"],
+    ) -> None: ...
+
+global___SpecialHandling = SpecialHandling
+
+@typing_extensions.final
 class OpenRouterInfo(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -6518,6 +6563,7 @@ class ModelVersion(google.protobuf.message.Message):
     INFERENCE_COMPUTE_INFO_FIELD_NUMBER: builtins.int
     BUILD_INFO_FIELD_NUMBER: builtins.int
     METHOD_SIGNATURES_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -6597,6 +6643,13 @@ class ModelVersion(google.protobuf.message.Message):
         global___MethodSignature
     ]:
         """Model signature information for the model version"""
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this model version."""
     def __init__(
         self,
         *,
@@ -6623,6 +6676,7 @@ class ModelVersion(google.protobuf.message.Message):
         inference_compute_info: global___ComputeInfo | None = ...,
         build_info: global___BuildInfo | None = ...,
         method_signatures: collections.abc.Iterable[global___MethodSignature] | None = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -6694,6 +6748,8 @@ class ModelVersion(google.protobuf.message.Message):
             b"output_info",
             "pretrained_model_config",
             b"pretrained_model_config",
+            "special_handling",
+            b"special_handling",
             "status",
             b"status",
             "total_input_count",
@@ -14177,6 +14233,7 @@ class Runner(google.protobuf.message.Message):
     NODEPOOL_FIELD_NUMBER: builtins.int
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
     NUM_REPLICAS_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
@@ -14227,6 +14284,13 @@ class Runner(google.protobuf.message.Message):
     """Number of replicas that this runner should have up.
     We keep it separate from ComputeInfo which defines how many resources each replica needs.
     """
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this runner."""
     def __init__(
         self,
         *,
@@ -14240,6 +14304,7 @@ class Runner(google.protobuf.message.Message):
         nodepool: global___Nodepool | None = ...,
         compute_info: global___ComputeInfo | None = ...,
         num_replicas: builtins.int = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14279,6 +14344,8 @@ class Runner(google.protobuf.message.Message):
             b"nodepool",
             "num_replicas",
             b"num_replicas",
+            "special_handling",
+            b"special_handling",
             "worker",
             b"worker",
         ],
@@ -14308,6 +14375,7 @@ class Nodepool(google.protobuf.message.Message):
     ENFORCED_MAX_INSTANCES_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The user defined ID of the nodepool."""
     description: builtins.str
@@ -14352,6 +14420,13 @@ class Nodepool(google.protobuf.message.Message):
         """To handle arbitrary json metadata:
         https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
         """
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this nodepool."""
     def __init__(
         self,
         *,
@@ -14368,6 +14443,7 @@ class Nodepool(google.protobuf.message.Message):
         enforced_max_instances: builtins.int = ...,
         visibility: global___Visibility | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14413,6 +14489,8 @@ class Nodepool(google.protobuf.message.Message):
             b"modified_at",
             "node_capacity_type",
             b"node_capacity_type",
+            "special_handling",
+            b"special_handling",
             "visibility",
             b"visibility",
         ],
@@ -14484,6 +14562,7 @@ class InstanceType(google.protobuf.message.Message):
     REGION_FIELD_NUMBER: builtins.int
     ALLOWED_CAPACITY_TYPES_FIELD_NUMBER: builtins.int
     FEATURE_FLAG_GROUP_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
@@ -14500,6 +14579,13 @@ class InstanceType(google.protobuf.message.Message):
         """The capacity types allowed for this instance type. If empty - all capacity types are allowed."""
     feature_flag_group: builtins.str
     """The feature flag group associated with this instance type."""
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this instance type."""
     def __init__(
         self,
         *,
@@ -14511,6 +14597,7 @@ class InstanceType(google.protobuf.message.Message):
         region: builtins.str = ...,
         allowed_capacity_types: global___NodeCapacityType | None = ...,
         feature_flag_group: builtins.str = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14542,6 +14629,8 @@ class InstanceType(google.protobuf.message.Message):
             b"price",
             "region",
             b"region",
+            "special_handling",
+            b"special_handling",
         ],
     ) -> None: ...
 
@@ -14965,6 +15054,7 @@ class Deployment(google.protobuf.message.Message):
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     DEPLOY_LATEST_VERSION_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -15011,6 +15101,13 @@ class Deployment(google.protobuf.message.Message):
         """When the deployment was last modified."""
     deploy_latest_version: builtins.bool
     """When to always deploy latest model version"""
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this deployment."""
     def __init__(
         self,
         *,
@@ -15026,6 +15123,7 @@ class Deployment(google.protobuf.message.Message):
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         deploy_latest_version: builtins.bool = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -15065,6 +15163,8 @@ class Deployment(google.protobuf.message.Message):
             b"nodepools",
             "scheduling_choice",
             b"scheduling_choice",
+            "special_handling",
+            b"special_handling",
             "user_id",
             b"user_id",
             "visibility",
