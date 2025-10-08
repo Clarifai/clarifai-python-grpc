@@ -445,6 +445,7 @@ class _StatusCodeEnumTypeWrapper(
     FILETYPE_UNSUPPORTED: _StatusCode.ValueType  # 46003
     LOGIN_EVENT_ERROR: _StatusCode.ValueType  # 46004
     SIFT_UNCATEGORIZED_ERROR: _StatusCode.ValueType  # 46005
+    USER_FLAGGED: _StatusCode.ValueType  # 46006
     APP_COUNT_INVALID_MESSAGE: _StatusCode.ValueType  # 47001
     """Application counts related errors 470xx"""
     APP_COUNT_UPDATE_INCREMENT_FAILED: _StatusCode.ValueType  # 47002
@@ -1036,6 +1037,7 @@ SIGNUP_FLAGGED: StatusCode.ValueType  # 46002
 FILETYPE_UNSUPPORTED: StatusCode.ValueType  # 46003
 LOGIN_EVENT_ERROR: StatusCode.ValueType  # 46004
 SIFT_UNCATEGORIZED_ERROR: StatusCode.ValueType  # 46005
+USER_FLAGGED: StatusCode.ValueType  # 46006
 APP_COUNT_INVALID_MESSAGE: StatusCode.ValueType  # 47001
 """Application counts related errors 470xx"""
 APP_COUNT_UPDATE_INCREMENT_FAILED: StatusCode.ValueType  # 47002

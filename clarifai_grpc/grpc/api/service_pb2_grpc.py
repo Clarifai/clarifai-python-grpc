@@ -124,6 +124,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
                 )
+        self.PostTrackAnnotationsSearches = channel.unary_unary(
+                '/clarifai.api.V2/PostTrackAnnotationsSearches',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrackAnnotationsSearchesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
+                )
         self.PostAnnotations = channel.unary_unary(
                 '/clarifai.api.V2/PostAnnotations',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsRequest.SerializeToString,
@@ -1583,6 +1588,13 @@ class V2Servicer(object):
 
     def ListAnnotations(self, request, context):
         """List all the annotation.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostTrackAnnotationsSearches(self, request, context):
+        """List video track annotations for a specific input.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3616,6 +3628,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
             ),
+            'PostTrackAnnotationsSearches': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostTrackAnnotationsSearches,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrackAnnotationsSearchesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
+            ),
             'PostAnnotations': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAnnotations,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationsRequest.FromString,
@@ -5256,6 +5273,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAnnotations',
             proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostTrackAnnotationsSearches(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostTrackAnnotationsSearches',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostTrackAnnotationsSearchesRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

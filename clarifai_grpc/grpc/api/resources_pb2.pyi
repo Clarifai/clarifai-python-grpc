@@ -3049,6 +3049,7 @@ class FrameInfo(google.protobuf.message.Message):
 
     INDEX_FIELD_NUMBER: builtins.int
     TIME_FIELD_NUMBER: builtins.int
+    NUMBER_FIELD_NUMBER: builtins.int
     index: builtins.int
     """Deprecated. Use Time instead.
     The index of the frame, informational and optional.
@@ -3059,14 +3060,22 @@ class FrameInfo(google.protobuf.message.Message):
     """time in the video in milliseconds. This is independent of the sampling rates used during
     processing.
     """
+    number: builtins.int
+    """The absolute number of the frame in the (original) video
+    Different from index. Index is just the order in which frames were processed for search (and can be 0 for manual annotations)
+    """
     def __init__(
         self,
         *,
         index: builtins.int = ...,
         time: builtins.int = ...,
+        number: builtins.int = ...,
     ) -> None: ...
     def ClearField(
-        self, field_name: typing_extensions.Literal["index", b"index", "time", b"time"]
+        self,
+        field_name: typing_extensions.Literal[
+            "index", b"index", "number", b"number", "time", b"time"
+        ],
     ) -> None: ...
 
 global___FrameInfo = FrameInfo
@@ -14210,14 +14219,41 @@ class BookmarkOrigin(google.protobuf.message.Message):
 global___BookmarkOrigin = BookmarkOrigin
 
 @typing_extensions.final
-class Runner(google.protobuf.message.Message):
+class RunnerMetrics(google.protobuf.message.Message):
     """Moving the runner label matching into it's own object so that it can be used
     next to other resource types that a Runner might match work on.
     message RunnerLabels { // FUTURE
       repeated string labels = 1;
     }
 
-    A worker for compute within a nodepool of instances.
+    RunnerMetrics captures metrics and status for a Runner's underlying k8s deployment.
+    This allows tracking of deployment health, replica counts, and other relevant metrics.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PODS_TOTAL_FIELD_NUMBER: builtins.int
+    PODS_RUNNING_FIELD_NUMBER: builtins.int
+    pods_total: builtins.int
+    pods_running: builtins.int
+    def __init__(
+        self,
+        *,
+        pods_total: builtins.int = ...,
+        pods_running: builtins.int = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pods_running", b"pods_running", "pods_total", b"pods_total"
+        ],
+    ) -> None: ...
+
+global___RunnerMetrics = RunnerMetrics
+
+@typing_extensions.final
+class Runner(google.protobuf.message.Message):
+    """A worker for compute within a nodepool of instances.
     This asks the API for work
     """
 
@@ -14234,6 +14270,7 @@ class Runner(google.protobuf.message.Message):
     COMPUTE_INFO_FIELD_NUMBER: builtins.int
     NUM_REPLICAS_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    RUNNER_METRICS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
@@ -14291,6 +14328,11 @@ class Runner(google.protobuf.message.Message):
         global___SpecialHandling
     ]:
         """List of special handling instructions for this runner."""
+    @property
+    def runner_metrics(self) -> global___RunnerMetrics:
+        """Metrics and status for the underlying k8s deployment.
+        Each Runner is 1:1 with a k8s deployment, so this field tracks deployment health and metrics.
+        """
     def __init__(
         self,
         *,
@@ -14305,6 +14347,7 @@ class Runner(google.protobuf.message.Message):
         compute_info: global___ComputeInfo | None = ...,
         num_replicas: builtins.int = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+        runner_metrics: global___RunnerMetrics | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14319,6 +14362,8 @@ class Runner(google.protobuf.message.Message):
             b"modified_at",
             "nodepool",
             b"nodepool",
+            "runner_metrics",
+            b"runner_metrics",
             "worker",
             b"worker",
         ],
@@ -14344,6 +14389,8 @@ class Runner(google.protobuf.message.Message):
             b"nodepool",
             "num_replicas",
             b"num_replicas",
+            "runner_metrics",
+            b"runner_metrics",
             "special_handling",
             b"special_handling",
             "worker",

@@ -379,6 +379,86 @@ class ListAnnotationsRequest(google.protobuf.message.Message):
 global___ListAnnotationsRequest = ListAnnotationsRequest
 
 @typing_extensions.final
+class PostTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
+    """ListVideoTrackAnnotationsRequest"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INPUT_ID_FIELD_NUMBER: builtins.int
+    TRACK_ID_FIELD_NUMBER: builtins.int
+    FRAME_NUMBER_START_FIELD_NUMBER: builtins.int
+    FRAME_TIME_START_FIELD_NUMBER: builtins.int
+    ANNOTATION_TYPE_FIELD_NUMBER: builtins.int
+    MAX_FRAMES_FIELD_NUMBER: builtins.int
+    MAX_DURATION_FIELD_NUMBER: builtins.int
+    WORKER_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    input_id: builtins.str
+    """The input ID containing the video track annotations to list"""
+    track_id: builtins.str
+    """Filter annotations by track_id"""
+    frame_number_start: builtins.int
+    """Filter annotations starting from this frame number (inclusive)"""
+    frame_time_start: builtins.int
+    """Filter annotations starting from this time in milliseconds (inclusive)"""
+    annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType
+    """Filter by annotation type (e.g., "bounding_box", "point", "mask")"""
+    max_frames: builtins.int
+    """Maximum number of frames to return (default and max: 60)"""
+    max_duration: builtins.int
+    """Maximum duration in milliseconds to return (default and max: 3000)"""
+    @property
+    def worker(self) -> proto.clarifai.api.resources_pb2.Worker:
+        """Filtering by model version ID within a worker (optional).
+        Point annotations don't need filtering by worker.
+        For non-point types, a model version ID must be provided.
+        """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+        track_id: builtins.str = ...,
+        frame_number_start: builtins.int = ...,
+        frame_time_start: builtins.int = ...,
+        annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType = ...,
+        max_frames: builtins.int = ...,
+        max_duration: builtins.int = ...,
+        worker: proto.clarifai.api.resources_pb2.Worker | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal["user_app_id", b"user_app_id", "worker", b"worker"],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "annotation_type",
+            b"annotation_type",
+            "frame_number_start",
+            b"frame_number_start",
+            "frame_time_start",
+            b"frame_time_start",
+            "input_id",
+            b"input_id",
+            "max_duration",
+            b"max_duration",
+            "max_frames",
+            b"max_frames",
+            "track_id",
+            b"track_id",
+            "user_app_id",
+            b"user_app_id",
+            "worker",
+            b"worker",
+        ],
+    ) -> None: ...
+
+global___PostTrackAnnotationsSearchesRequest = PostTrackAnnotationsSearchesRequest
+
+@typing_extensions.final
 class PostAnnotationsRequest(google.protobuf.message.Message):
     """PostAnnotationsRequest"""
 
@@ -1074,6 +1154,7 @@ class ListAppsRequest(google.protobuf.message.Message):
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_RELEVANCE_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     TEMPLATE_ONLY_FIELD_NUMBER: builtins.int
@@ -1113,6 +1194,8 @@ class ListAppsRequest(google.protobuf.message.Message):
     """Whether to order by the number of users stared the app"""
     sort_by_id: builtins.bool
     """Whether to order by the id"""
+    sort_by_relevance: builtins.bool
+    """Whether to order by search query relevance. Can only be used if search is not empty."""
     featured_only: builtins.bool
     """Filtering options:
     If true, we only return apps that are handpicked by clarifai staff
@@ -1165,6 +1248,7 @@ class ListAppsRequest(google.protobuf.message.Message):
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
+        sort_by_relevance: builtins.bool = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         template_only: builtins.bool = ...,
@@ -1187,6 +1271,8 @@ class ListAppsRequest(google.protobuf.message.Message):
             b"sort_by_modified_at",
             "sort_by_name",
             b"sort_by_name",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "user_app_id",
@@ -1226,6 +1312,8 @@ class ListAppsRequest(google.protobuf.message.Message):
             b"sort_by_modified_at",
             "sort_by_name",
             b"sort_by_name",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "starred_only",
@@ -1247,6 +1335,7 @@ class ListAppsRequest(google.protobuf.message.Message):
             "sort_by_created_at",
             "sort_by_star_count",
             "sort_by_id",
+            "sort_by_relevance",
         ]
         | None
     ): ...
@@ -3579,6 +3668,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_RELEVANCE_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
@@ -3609,6 +3699,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
     """If neither sort option is set to true, will sort by modified_at."""
     sort_by_id: builtins.bool
     """Whether to order by the external id"""
+    sort_by_relevance: builtins.bool
+    """Whether to order by search query relevance. Can only be used if search is not empty."""
     starred_only: builtins.bool
     """Filtering options:"""
     bookmark: builtins.bool
@@ -3644,6 +3736,7 @@ class ListDatasetsRequest(google.protobuf.message.Message):
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
+        sort_by_relevance: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
         search: builtins.str = ...,
@@ -3660,6 +3753,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "user_app_id",
@@ -3691,6 +3786,8 @@ class ListDatasetsRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "starred_only",
@@ -3703,7 +3800,11 @@ class ListDatasetsRequest(google.protobuf.message.Message):
         self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]
     ) -> (
         typing_extensions.Literal[
-            "sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"
+            "sort_by_created_at",
+            "sort_by_star_count",
+            "sort_by_modified_at",
+            "sort_by_id",
+            "sort_by_relevance",
         ]
         | None
     ): ...
@@ -5465,12 +5566,14 @@ class ListModelsRequest(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     ADDITIONAL_FIELDS_FIELD_NUMBER: builtins.int
+    SHOW_REPLICAS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_NAME_FIELD_NUMBER: builtins.int
     SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    SORT_BY_RELEVANCE_FIELD_NUMBER: builtins.int
     MODEL_TYPE_ID_FIELD_NUMBER: builtins.int
     TRAINED_ONLY_FIELD_NUMBER: builtins.int
     INPUT_FIELDS_FIELD_NUMBER: builtins.int
@@ -5483,17 +5586,16 @@ class ListModelsRequest(google.protobuf.message.Message):
     LANGUAGES_FIELD_NUMBER: builtins.int
     DONT_FETCH_FROM_MAIN_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
-    SEARCH_FIELD_NUMBER: builtins.int
-    QUERY_FIELD_NUMBER: builtins.int
-    NAME_FIELD_NUMBER: builtins.int
-    FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
     LICENSE_TYPE_FIELD_NUMBER: builtins.int
     SOURCE_FIELD_NUMBER: builtins.int
     CREATOR_FIELD_NUMBER: builtins.int
     MIN_REPLICAS_FIELD_NUMBER: builtins.int
-    SHOW_REPLICAS_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
+    SEARCH_FIELD_NUMBER: builtins.int
+    QUERY_FIELD_NUMBER: builtins.int
+    NAME_FIELD_NUMBER: builtins.int
+    FILTER_BY_USER_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -5509,6 +5611,8 @@ class ListModelsRequest(google.protobuf.message.Message):
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional URL parameter) List of additional fields to be included in the response. Currently supported: all, stars, outputs, presets, counts"""
+    show_replicas: builtins.bool
+    """If true, show replica counts for models."""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -5525,6 +5629,8 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at"""
     sort_by_star_count: builtins.bool
     """Whether to order by count of stars"""
+    sort_by_relevance: builtins.bool
+    """Whether to order by search query relevance. Can only be used if search is not empty."""
     model_type_id: builtins.str
     """Filtering options:
     Filter models by the specific model_type_id. See ListModelTypes for the list of ModelType.Id's
@@ -5577,6 +5683,22 @@ class ListModelsRequest(google.protobuf.message.Message):
     Note: you can not filter `trained_only` and bookmark at the same time.
     When filter by bookmark, we will return trained and untrained models.
     """
+    @property
+    def model_version_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter by the model version ids. If set, only return the model of these versions."""
+    license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType
+    """Filter by LicenseType"""
+    source: builtins.int
+    """Filter by Source"""
+    creator: builtins.str
+    """Filter by Creator"""
+    min_replicas: builtins.int
+    """Filter by model versions runners with replicas >= min_replicas."""
+    @property
+    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
+        """Filter by visibility of the model. If set, only return models with the specified visibility."""
     search: builtins.str
     """Searching options:
     Specify a search parameter in order to perform keyword search on the
@@ -5605,24 +5727,6 @@ class ListModelsRequest(google.protobuf.message.Message):
     """Extends the name filter to include the user_id of the application owner that the model belongs to.
     Deprecated: use search instead of name.
     """
-    @property
-    def model_version_ids(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Filter by the model version ids. If set, only return the model of these versions."""
-    license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType
-    """Filter by LicenseType"""
-    source: builtins.int
-    """Filter by Source"""
-    creator: builtins.str
-    """Filter by Creator"""
-    min_replicas: builtins.int
-    """Filter by model versions runners with replicas >= min_replicas."""
-    show_replicas: builtins.bool
-    """If true, show replica counts for models."""
-    @property
-    def visibility(self) -> proto.clarifai.api.resources_pb2.Visibility:
-        """Filter by visibility of the model. If set, only return models with the specified visibility."""
     def __init__(
         self,
         *,
@@ -5630,12 +5734,14 @@ class ListModelsRequest(google.protobuf.message.Message):
         page: builtins.int = ...,
         per_page: builtins.int = ...,
         additional_fields: collections.abc.Iterable[builtins.str] | None = ...,
+        show_replicas: builtins.bool = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_name: builtins.bool = ...,
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
+        sort_by_relevance: builtins.bool = ...,
         model_type_id: builtins.str = ...,
         trained_only: builtins.bool = ...,
         input_fields: collections.abc.Iterable[builtins.str] | None = ...,
@@ -5648,17 +5754,16 @@ class ListModelsRequest(google.protobuf.message.Message):
         languages: collections.abc.Iterable[builtins.str] | None = ...,
         dont_fetch_from_main: builtins.bool = ...,
         bookmark: builtins.bool = ...,
-        search: builtins.str = ...,
-        query: builtins.str = ...,
-        name: builtins.str = ...,
-        filter_by_user_id: builtins.bool = ...,
         model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
         license_type: proto.clarifai.api.resources_pb2.LicenseType.ValueType = ...,
         source: builtins.int = ...,
         creator: builtins.str = ...,
         min_replicas: builtins.int = ...,
-        show_replicas: builtins.bool = ...,
         visibility: proto.clarifai.api.resources_pb2.Visibility | None = ...,
+        search: builtins.str = ...,
+        query: builtins.str = ...,
+        name: builtins.str = ...,
+        filter_by_user_id: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -5673,6 +5778,8 @@ class ListModelsRequest(google.protobuf.message.Message):
             b"sort_by_name",
             "sort_by_num_inputs",
             b"sort_by_num_inputs",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "user_app_id",
@@ -5736,6 +5843,8 @@ class ListModelsRequest(google.protobuf.message.Message):
             b"sort_by_name",
             "sort_by_num_inputs",
             b"sort_by_num_inputs",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "source",
@@ -5763,6 +5872,7 @@ class ListModelsRequest(google.protobuf.message.Message):
             "sort_by_modified_at",
             "sort_by_created_at",
             "sort_by_star_count",
+            "sort_by_relevance",
         ]
         | None
     ): ...
@@ -6562,12 +6672,12 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     PER_PAGE_FIELD_NUMBER: builtins.int
     CONCEPT_IDS_FIELD_NUMBER: builtins.int
     TRAINED_ONLY_FIELD_NUMBER: builtins.int
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     SORT_ASCENDING_FIELD_NUMBER: builtins.int
     SORT_BY_STATUS_CODE_FIELD_NUMBER: builtins.int
     SORT_BY_NUM_INPUTS_FIELD_NUMBER: builtins.int
     SORT_BY_DESCRIPTION_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
-    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
@@ -6588,6 +6698,8 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
         """
     trained_only: builtins.bool
     """To list only the model versions that have been trained."""
+    min_replicas: builtins.int
+    """Filter by model versions runners with replicas >= min_replicas."""
     sort_ascending: builtins.bool
     """Sorting options:
     Whether to sort in ascending order. If false, will order in descending order.
@@ -6602,8 +6714,6 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time
     If neither sort option is set to true, will sort by created_at.
     """
-    min_replicas: builtins.int
-    """Filter by model versions runners with replicas >= min_replicas."""
     def __init__(
         self,
         *,
@@ -6613,12 +6723,12 @@ class ListModelVersionsRequest(google.protobuf.message.Message):
         per_page: builtins.int = ...,
         concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
         trained_only: builtins.bool = ...,
+        min_replicas: builtins.int = ...,
         sort_ascending: builtins.bool = ...,
         sort_by_status_code: builtins.bool = ...,
         sort_by_num_inputs: builtins.bool = ...,
         sort_by_description: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
-        min_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -9899,6 +10009,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_CREATED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
+    SORT_BY_RELEVANCE_FIELD_NUMBER: builtins.int
     FEATURED_ONLY_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
@@ -9936,6 +10047,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
     """Whether to order by the created_at time."""
     sort_by_star_count: builtins.bool
     """Whether to order by the number of users stared the workflow"""
+    sort_by_relevance: builtins.bool
+    """Whether to order by search query relevance. Can only be used if search is not empty."""
     featured_only: builtins.bool
     """Filtering options:
     If true, we only return workflows that are handpicked by clarifai staff
@@ -9986,6 +10099,7 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         sort_by_modified_at: builtins.bool = ...,
         sort_by_created_at: builtins.bool = ...,
         sort_by_star_count: builtins.bool = ...,
+        sort_by_relevance: builtins.bool = ...,
         featured_only: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
@@ -10006,6 +10120,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "user_app_id",
@@ -10045,6 +10161,8 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "starred_only",
@@ -10059,7 +10177,11 @@ class ListWorkflowsRequest(google.protobuf.message.Message):
         self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]
     ) -> (
         typing_extensions.Literal[
-            "sort_by_id", "sort_by_modified_at", "sort_by_created_at", "sort_by_star_count"
+            "sort_by_id",
+            "sort_by_modified_at",
+            "sort_by_created_at",
+            "sort_by_star_count",
+            "sort_by_relevance",
         ]
         | None
     ): ...
@@ -12083,6 +12205,7 @@ class ListModulesRequest(google.protobuf.message.Message):
     SORT_BY_STAR_COUNT_FIELD_NUMBER: builtins.int
     SORT_BY_MODIFIED_AT_FIELD_NUMBER: builtins.int
     SORT_BY_ID_FIELD_NUMBER: builtins.int
+    SORT_BY_RELEVANCE_FIELD_NUMBER: builtins.int
     STARRED_ONLY_FIELD_NUMBER: builtins.int
     BOOKMARK_FIELD_NUMBER: builtins.int
     SEARCH_FIELD_NUMBER: builtins.int
@@ -12115,6 +12238,8 @@ class ListModulesRequest(google.protobuf.message.Message):
     """If neither sort option is set to true, will sort by modified_at."""
     sort_by_id: builtins.bool
     """Whether to order by the external id"""
+    sort_by_relevance: builtins.bool
+    """Whether to order by search query relevance. Can only be used if search is not empty."""
     starred_only: builtins.bool
     """Filtering options:"""
     bookmark: builtins.bool
@@ -12156,6 +12281,7 @@ class ListModulesRequest(google.protobuf.message.Message):
         sort_by_star_count: builtins.bool = ...,
         sort_by_modified_at: builtins.bool = ...,
         sort_by_id: builtins.bool = ...,
+        sort_by_relevance: builtins.bool = ...,
         starred_only: builtins.bool = ...,
         bookmark: builtins.bool = ...,
         search: builtins.str = ...,
@@ -12174,6 +12300,8 @@ class ListModulesRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "user_app_id",
@@ -12209,6 +12337,8 @@ class ListModulesRequest(google.protobuf.message.Message):
             b"sort_by_id",
             "sort_by_modified_at",
             b"sort_by_modified_at",
+            "sort_by_relevance",
+            b"sort_by_relevance",
             "sort_by_star_count",
             b"sort_by_star_count",
             "starred_only",
@@ -12223,7 +12353,11 @@ class ListModulesRequest(google.protobuf.message.Message):
         self, oneof_group: typing_extensions.Literal["sort_by", b"sort_by"]
     ) -> (
         typing_extensions.Literal[
-            "sort_by_created_at", "sort_by_star_count", "sort_by_modified_at", "sort_by_id"
+            "sort_by_created_at",
+            "sort_by_star_count",
+            "sort_by_modified_at",
+            "sort_by_id",
+            "sort_by_relevance",
         ]
         | None
     ): ...
