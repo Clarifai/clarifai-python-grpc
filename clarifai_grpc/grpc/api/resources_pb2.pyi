@@ -3671,6 +3671,7 @@ class Input(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     STATUS_FIELD_NUMBER: builtins.int
     DATASET_IDS_FIELD_NUMBER: builtins.int
+    SETTINGS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The ID for the input"""
     @property
@@ -3702,6 +3703,9 @@ class Input(google.protobuf.message.Message):
         * to add inputs to dataset(s) in `PostInputs` endpoint.
         Note that this field is ignored for other endpoints, e.g. `GetInput`, `ListInputs` and `PatchInputs`.
         """
+    @property
+    def settings(self) -> global___InputSettings:
+        """Global settings for annotation tracks."""
     def __init__(
         self,
         *,
@@ -3711,6 +3715,7 @@ class Input(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         dataset_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        settings: global___InputSettings | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -3721,6 +3726,8 @@ class Input(google.protobuf.message.Message):
             b"data",
             "modified_at",
             b"modified_at",
+            "settings",
+            b"settings",
             "status",
             b"status",
         ],
@@ -3738,12 +3745,63 @@ class Input(google.protobuf.message.Message):
             b"id",
             "modified_at",
             b"modified_at",
+            "settings",
+            b"settings",
             "status",
             b"status",
         ],
     ) -> None: ...
 
 global___Input = Input
+
+@typing_extensions.final
+class InputSettings(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    WORKER_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_MS_FIELD_NUMBER: builtins.int
+    SAMPLE_RATE_FRAME_FIELD_NUMBER: builtins.int
+    PINNED_CONCEPT_IDS_FIELD_NUMBER: builtins.int
+    @property
+    def worker(self) -> global___Worker:
+        """Default model used for annotation generation (SAM2, etc.)
+        Make sure to set correct model version id, app id and user id etc.
+        Workflow is not supported here yet
+        """
+    sample_rate_ms: builtins.int
+    """Sampling settings used"""
+    sample_rate_frame: builtins.int
+    @property
+    def pinned_concept_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Pinned concept ids"""
+    def __init__(
+        self,
+        *,
+        worker: global___Worker | None = ...,
+        sample_rate_ms: builtins.int = ...,
+        sample_rate_frame: builtins.int = ...,
+        pinned_concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["worker", b"worker"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pinned_concept_ids",
+            b"pinned_concept_ids",
+            "sample_rate_frame",
+            b"sample_rate_frame",
+            "sample_rate_ms",
+            b"sample_rate_ms",
+            "worker",
+            b"worker",
+        ],
+    ) -> None: ...
+
+global___InputSettings = InputSettings
 
 @typing_extensions.final
 class InputBatch(google.protobuf.message.Message):
