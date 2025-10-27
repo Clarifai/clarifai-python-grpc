@@ -3761,7 +3761,7 @@ class InputSettings(google.protobuf.message.Message):
     WORKER_FIELD_NUMBER: builtins.int
     SAMPLE_RATE_MS_FIELD_NUMBER: builtins.int
     SAMPLE_RATE_FRAME_FIELD_NUMBER: builtins.int
-    PINNED_CONCEPT_IDS_FIELD_NUMBER: builtins.int
+    PINNED_CONCEPTS_FIELD_NUMBER: builtins.int
     @property
     def worker(self) -> global___Worker:
         """Default model used for annotation generation (SAM2, etc.)
@@ -3772,9 +3772,9 @@ class InputSettings(google.protobuf.message.Message):
     """Sampling settings used"""
     sample_rate_frame: builtins.int
     @property
-    def pinned_concept_ids(
+    def pinned_concepts(
         self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Concept]:
         """Pinned concept ids"""
     def __init__(
         self,
@@ -3782,7 +3782,7 @@ class InputSettings(google.protobuf.message.Message):
         worker: global___Worker | None = ...,
         sample_rate_ms: builtins.int = ...,
         sample_rate_frame: builtins.int = ...,
-        pinned_concept_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        pinned_concepts: collections.abc.Iterable[global___Concept] | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["worker", b"worker"]
@@ -3790,8 +3790,8 @@ class InputSettings(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "pinned_concept_ids",
-            b"pinned_concept_ids",
+            "pinned_concepts",
+            b"pinned_concepts",
             "sample_rate_frame",
             b"sample_rate_frame",
             "sample_rate_ms",
@@ -5677,7 +5677,7 @@ global___EvalInfo = EvalInfo
 
 @typing_extensions.final
 class ImportInfo(google.protobuf.message.Message):
-    """DEPRECATED: no longer support importing models from third party toolkits"""
+    """DEPRECATED: no longer support importing models from third-party toolkits"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -17132,6 +17132,92 @@ class Pipeline(google.protobuf.message.Message):
 global___Pipeline = Pipeline
 
 @typing_extensions.final
+class PipelineVersionConfig(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class StepVersionSecretsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        @property
+        def value(self) -> global___StepSecretConfig: ...
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: global___StepSecretConfig | None = ...,
+        ) -> None: ...
+        def HasField(
+            self, field_name: typing_extensions.Literal["value", b"value"]
+        ) -> builtins.bool: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]
+        ) -> None: ...
+
+    STEP_VERSION_SECRETS_FIELD_NUMBER: builtins.int
+    @property
+    def step_version_secrets(
+        self,
+    ) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___StepSecretConfig]:
+        """StepVersionSecrets maps step version references to their secret configurations
+        The outer map key is the step version reference (e.g. "step1" or the step version ID)
+        The inner map key is the secret name (e.g. "EMAIL_PROVIDER_API_KEY")
+        The inner map value is the secret reference (e.g. "users/1/secrets/secret-1")
+        """
+    def __init__(
+        self,
+        *,
+        step_version_secrets: collections.abc.Mapping[builtins.str, global___StepSecretConfig]
+        | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal["step_version_secrets", b"step_version_secrets"],
+    ) -> None: ...
+
+global___PipelineVersionConfig = PipelineVersionConfig
+
+@typing_extensions.final
+class StepSecretConfig(google.protobuf.message.Message):
+    """StepSecretConfig defines secrets for a specific step version"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class SecretsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]
+        ) -> None: ...
+
+    SECRETS_FIELD_NUMBER: builtins.int
+    @property
+    def secrets(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+        """Map of secret name to secret reference"""
+    def __init__(
+        self,
+        *,
+        secrets: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+    ) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["secrets", b"secrets"]) -> None: ...
+
+global___StepSecretConfig = StepSecretConfig
+
+@typing_extensions.final
 class PipelineVersion(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -17145,6 +17231,7 @@ class PipelineVersion(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    CONFIG_FIELD_NUMBER: builtins.int
     id: builtins.str
     app_id: builtins.str
     """The app the pipeline version belongs to."""
@@ -17174,6 +17261,9 @@ class PipelineVersion(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the pipeline was last modified"""
+    @property
+    def config(self) -> global___PipelineVersionConfig:
+        """Pipeline version configuration including step secrets"""
     def __init__(
         self,
         *,
@@ -17187,10 +17277,13 @@ class PipelineVersion(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        config: global___PipelineVersionConfig | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
+            "config",
+            b"config",
             "created_at",
             b"created_at",
             "metadata",
@@ -17208,6 +17301,8 @@ class PipelineVersion(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "app_id",
             b"app_id",
+            "config",
+            b"config",
             "created_at",
             b"created_at",
             "description",
