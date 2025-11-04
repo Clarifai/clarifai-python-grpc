@@ -16651,6 +16651,80 @@ class WorkflowVersionEvaluationData(google.protobuf.message.Message):
 global___WorkflowVersionEvaluationData = WorkflowVersionEvaluationData
 
 @typing_extensions.final
+class ArgoParameterOverride(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    NAME_FIELD_NUMBER: builtins.int
+    VALUE_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    value: builtins.str
+    """Argo parameters are always strings"""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        value: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["name", b"name", "value", b"value"]
+    ) -> None: ...
+
+global___ArgoParameterOverride = ArgoParameterOverride
+
+@typing_extensions.final
+class ArgoArgsOverride(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    PARAMETERS_FIELD_NUMBER: builtins.int
+    @property
+    def parameters(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___ArgoParameterOverride
+    ]: ...
+    def __init__(
+        self,
+        *,
+        parameters: collections.abc.Iterable[global___ArgoParameterOverride] | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self, field_name: typing_extensions.Literal["parameters", b"parameters"]
+    ) -> None: ...
+
+global___ArgoArgsOverride = ArgoArgsOverride
+
+@typing_extensions.final
+class OrchestrationArgsOverride(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ARGO_ARGS_OVERRIDE_FIELD_NUMBER: builtins.int
+    @property
+    def argo_args_override(self) -> global___ArgoArgsOverride:
+        """Future: KubeFlowArgsOverride, AirflowArgsOverride, etc."""
+    def __init__(
+        self,
+        *,
+        argo_args_override: global___ArgoArgsOverride | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "argo_args_override", b"argo_args_override", "override", b"override"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "argo_args_override", b"argo_args_override", "override", b"override"
+        ],
+    ) -> None: ...
+    def WhichOneof(
+        self, oneof_group: typing_extensions.Literal["override", b"override"]
+    ) -> typing_extensions.Literal["argo_args_override"] | None: ...
+
+global___OrchestrationArgsOverride = OrchestrationArgsOverride
+
+@typing_extensions.final
 class ArgoOrchestrationSpec(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -17392,6 +17466,8 @@ class PipelineVersionRun(google.protobuf.message.Message):
     APP_ID_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
+    INPUT_ARGS_OVERRIDE_FIELD_NUMBER: builtins.int
+    ORCHESTRATION_SPEC_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def pipeline_version(self) -> global___PipelineVersion:
@@ -17414,6 +17490,12 @@ class PipelineVersionRun(google.protobuf.message.Message):
     @property
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the pipeline was last modified"""
+    @property
+    def input_args_override(self) -> global___OrchestrationArgsOverride:
+        """Optional: Overrides to input arguments for the orchestration system."""
+    @property
+    def orchestration_spec(self) -> global___OrchestrationSpec:
+        """Final merged orchestration spec snapshot submitted to backend."""
     def __init__(
         self,
         *,
@@ -17425,14 +17507,20 @@ class PipelineVersionRun(google.protobuf.message.Message):
         app_id: builtins.str = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        input_args_override: global___OrchestrationArgsOverride | None = ...,
+        orchestration_spec: global___OrchestrationSpec | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
             "created_at",
             b"created_at",
+            "input_args_override",
+            b"input_args_override",
             "modified_at",
             b"modified_at",
+            "orchestration_spec",
+            b"orchestration_spec",
             "orchestration_status",
             b"orchestration_status",
             "pipeline_version",
@@ -17448,10 +17536,14 @@ class PipelineVersionRun(google.protobuf.message.Message):
             b"created_at",
             "id",
             b"id",
+            "input_args_override",
+            b"input_args_override",
             "modified_at",
             b"modified_at",
             "nodepools",
             b"nodepools",
+            "orchestration_spec",
+            b"orchestration_spec",
             "orchestration_status",
             b"orchestration_status",
             "pipeline_version",
