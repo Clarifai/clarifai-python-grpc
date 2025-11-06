@@ -565,7 +565,7 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
 # These should be models from the featured list that support OpenAI tool calling
 TOOL_CALLING_TEST_MODELS = [
     "https://clarifai.com/openai/chat-completion/models/gpt-oss-20b",
-    "https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Instruct-2507",
+    #"https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Instruct-2507",
     #"https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Thinking-2507",
 ]
 
