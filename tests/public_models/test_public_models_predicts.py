@@ -1,4 +1,5 @@
 import asyncio
+import json
 import os
 import time
 
@@ -564,7 +565,8 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
 # These should be models from the featured list that support OpenAI tool calling
 TOOL_CALLING_TEST_MODELS = [
     "https://clarifai.com/openai/chat-completion/models/gpt-oss-20b",
-    "https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Thinking-2507",
+    "https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Instruct-2507",
+    #"https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Thinking-2507",
 ]
 
 # Parameter combinations to test
@@ -659,46 +661,83 @@ def _call_openai_tool_calling(model_url, config):
         return None, str(e)
 
 
-def _validate_tool_calling_response(response, config):
-    """
-    Validate the response from tool calling matches expected criteria.
-
-    Args:
-        response: The response from OpenAI API (can be list of chunks or single response)
-        config: The configuration used for the request
-
-    Returns:
-        bool: True if validation passes, False otherwise
-    """
-    # TODO: Replace this placeholder with actual validation logic
-    # For now, just check that we got a response
-    if response is None:
+def _is_valid_tool_arguments(arguments):
+    """Check if arguments string is valid JSON with required fields."""
+    try:
+        args = json.loads(arguments)
+        return isinstance(args, dict) and "location" in args and "unit" in args
+    except (json.JSONDecodeError, TypeError):
         return False
 
+
+def _validate_tool_calling_response(response, config):
+    """
+    Validate tool calling response with clear assertion messages.
+
+    Validation criteria:
+    - Streaming: finish_reason='tool_calls', usage info, exactly one tool call with valid JSON
+    - Non-streaming: tool_calls present with valid JSON arguments
+    """
+    assert response is not None, "Response is None"
+
     if config["stream"]:
-        # For streaming responses, check we got at least one chunk
-        if not isinstance(response, list) or len(response) == 0:
-            return False
-        # TODO: Add assertions specific to streaming responses:
-        # - Check for tool_calls in delta
-        # - Validate usage statistics in final chunk
-        # - Ensure proper tool invocation structure
+        assert isinstance(response, list) and response, f"Invalid streaming response: {type(response)}"
+
+        # Check finish_reason and usage
+        has_finish_reason = any(
+            chunk.choices and chunk.choices[0].finish_reason == 'tool_calls' for chunk in response
+        )
+        has_usage = any(hasattr(chunk, 'usage') and chunk.usage for chunk in response)
+
+        assert has_usage, "Missing usage info in streaming response"
+
+        if config["tool_choice"] == "required":
+            assert has_finish_reason, "Missing finish_reason='tool_calls'"
+
+            # Find chunks that contain tool calls
+            chunks_with_tool_calls = [
+                chunk for chunk in response if chunk.choices and chunk.choices[0].delta.tool_calls
+            ]
+
+            # Validate exactly ONE chunk contains tool calls
+            assert (
+                len(chunks_with_tool_calls) == 1
+            ), f"Expected exactly 1 chunk with tool calls, got {len(chunks_with_tool_calls)}"
+
+            # Get the single chunk's tool calls
+            tool_calls = chunks_with_tool_calls[0].choices[0].delta.tool_calls
+
+            # Validate exactly one tool call
+            assert len(tool_calls) == 1, f"Expected exactly 1 tool call, got {len(tool_calls)}"
+
+            tool_call = tool_calls[0]
+
+            # Validate has function name
+            assert (
+                tool_call.function and tool_call.function.name
+            ), "Tool call missing function or name"
+
+            # Validate has complete valid JSON arguments
+            assert (
+                tool_call.function.arguments
+                and _is_valid_tool_arguments(tool_call.function.arguments)
+            ), f"Invalid or missing arguments: {tool_call.function.arguments if tool_call.function else 'N/A'}"
+
     else:
-        # For non-streaming responses, check basic structure
-        if not hasattr(response, 'choices') or len(response.choices) == 0:
-            return False
-        # TODO: Add assertions specific to non-streaming responses:
-        # - Check response.choices[0].message.tool_calls exists
-        # - Validate tool call structure (function name, arguments)
-        # - Check that tool_choice was respected
+        # Non-streaming
+        assert hasattr(response, 'choices') and response.choices, "Response missing choices"
 
-    # TODO: Add config-specific validations:
-    # if config["tool_choice"] == "required":
-    #     # Assert that tool was actually called
-    # if config["strict"]:
-    #     # Assert that response adheres to strict schema
+        message = response.choices[0].message
 
-    return True
+        if config["tool_choice"] == "required":
+            assert hasattr(message, 'tool_calls') and message.tool_calls, "Message missing tool_calls"
+
+            tool_call = message.tool_calls[0]
+            assert tool_call.function and tool_call.function.name, "Tool call missing function or name"
+
+            assert _is_valid_tool_arguments(
+                tool_call.function.arguments
+            ), f"Invalid arguments: {tool_call.function.arguments}"
 
 
 def _get_tool_calling_models():
@@ -753,7 +792,5 @@ def test_openai_tool_calling_with_parameter_combinations(model_url, config, test
     # Assert no error occurred
     assert not error, f"Tool calling failed for {model_url} with config {config}: {error}"
 
-    # Validate the response matches expected criteria
-    assert _validate_tool_calling_response(
-        response, config
-    ), f"Response validation failed for {model_url} with config {config}"
+    # Validate response (raises AssertionError with clear message if validation fails)
+    _validate_tool_calling_response(response, config)
