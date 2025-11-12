@@ -1,5 +1,4 @@
 import asyncio
-import json
 import os
 import time
 
@@ -31,6 +30,11 @@ from tests.common import (
     metadata,
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
+)
+from tests.public_models.openai_tool_calling_helper import (
+    call_openai_tool_calling,
+    generate_tool_calling_test_params,
+    validate_tool_calling_response,
 )
 from tests.public_models.public_test_helper import (
     AUDIO_MODEL_TITLE_IDS_TUPLE,
@@ -559,238 +563,21 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
     assert not failed_models, f"The following OpenAI compatible models failed: {failed_models}"
 
 
-# Tool calling test suite
-
-# Hardcoded list of models to test for tool calling support
-# These should be models from the featured list that support OpenAI tool calling
-TOOL_CALLING_TEST_MODELS = [
-    "https://clarifai.com/openai/chat-completion/models/gpt-oss-20b",
-    #"https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Instruct-2507",
-    #"https://clarifai.com/qwen/qwenLM/models/Qwen3-30B-A3B-Thinking-2507",
-]
-
-# Parameter combinations to test
-TOOL_CALLING_CONFIGS = [
-    {"stream": True, "tool_choice": "required", "strict": True},
-    {"stream": True, "tool_choice": "required", "strict": False},
-    {"stream": True, "tool_choice": "auto", "strict": True},
-    {"stream": True, "tool_choice": "auto", "strict": False},
-    {"stream": False, "tool_choice": "required", "strict": True},
-    {"stream": False, "tool_choice": "required", "strict": False},
-    {"stream": False, "tool_choice": "auto", "strict": True},
-    {"stream": False, "tool_choice": "auto", "strict": False},
-]
-
-# Tool definition for weather query
-WEATHER_TOOL = {
-    "type": "function",
-    "function": {
-        "name": "get_current_weather",
-        "description": "Get the current weather in a given location",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "description": "The city and state, e.g. San Francisco, CA",
-                },
-                "unit": {"type": "string", "enum": ["celsius", "fahrenheit"]},
-            },
-            "additionalProperties": False,
-            "required": ["location", "unit"],
-        },
-    },
-}
-
-
-def _call_openai_tool_calling(model_url, config):
-    """
-    Call OpenAI-compatible endpoint with tool calling using the specified configuration.
-
-    Args:
-        model_url: Full URL to the Clarifai model
-        config: Dictionary with stream, tool_choice, and strict parameters
-
-    Returns:
-        tuple: (response, error) where error is None on success
-    """
-    channel = ClarifaiChannel.get_grpc_channel()
-    client = OpenAI(
-        api_key=os.environ.get('CLARIFAI_PAT_KEY'),
-        base_url=f"https://{channel._target}/v2/ext/openai/v1",
-        default_headers={"X-Clarifai-Request-Id-Prefix": f"python-openai-{CLIENT_VERSION}"},
-    )
-
-    # Build tool definition with strict parameter
-    tool = WEATHER_TOOL.copy()
-    tool["function"]["strict"] = config["strict"]
-
-    try:
-        # Build request parameters
-        request_params = {
-            "model": model_url,
-            "messages": [
-                {"role": "user", "content": "What is the weather like in Boston in fahrenheit?"}
-            ],
-            "temperature": 1,
-            "top_p": 1,
-            "max_tokens": 32768,
-            "stream": config["stream"],
-            "tool_choice": config["tool_choice"],
-            "tools": [tool],
-        }
-
-        # Add stream_options only if streaming is enabled
-        if config["stream"]:
-            request_params["stream_options"] = {"include_usage": True}
-
-        response = client.chat.completions.create(**request_params)
-
-        # Handle streaming vs non-streaming responses differently
-        if config["stream"]:
-            # For streaming, we need to consume the iterator
-            chunks = []
-            for chunk in response:
-                chunks.append(chunk)
-            return chunks, None
-        else:
-            # For non-streaming, return the response directly
-            return response, None
-
-    except Exception as e:
-        return None, str(e)
-
-
-def _is_valid_tool_arguments(arguments):
-    """Check if arguments string is valid JSON with required fields."""
-    try:
-        args = json.loads(arguments)
-        return isinstance(args, dict) and "location" in args and "unit" in args
-    except (json.JSONDecodeError, TypeError):
-        return False
-
-
-def _validate_tool_calling_response(response, config):
-    """
-    Validate tool calling response with clear assertion messages.
-
-    Validation criteria:
-    - Streaming: finish_reason='tool_calls', usage info, exactly one tool call with valid JSON
-    - Non-streaming: tool_calls present with valid JSON arguments
-    """
-    assert response is not None, "Response is None"
-
-    if config["stream"]:
-        assert isinstance(response, list) and response, f"Invalid streaming response: {type(response)}"
-
-        # Check finish_reason and usage
-        has_finish_reason = any(
-            chunk.choices and chunk.choices[0].finish_reason == 'tool_calls' for chunk in response
-        )
-        has_usage = any(hasattr(chunk, 'usage') and chunk.usage for chunk in response)
-
-        assert has_usage, "Missing usage info in streaming response"
-
-        if config["tool_choice"] == "required":
-            assert has_finish_reason, "Missing finish_reason='tool_calls'"
-
-            # Find chunks that contain tool calls
-            chunks_with_tool_calls = [
-                chunk for chunk in response if chunk.choices and chunk.choices[0].delta.tool_calls
-            ]
-
-            # Validate exactly ONE chunk contains tool calls
-            assert (
-                len(chunks_with_tool_calls) == 1
-            ), f"Expected exactly 1 chunk with tool calls, got {len(chunks_with_tool_calls)}"
-
-            # Get the single chunk's tool calls
-            tool_calls = chunks_with_tool_calls[0].choices[0].delta.tool_calls
-
-            # Validate exactly one tool call
-            assert len(tool_calls) == 1, f"Expected exactly 1 tool call, got {len(tool_calls)}"
-
-            tool_call = tool_calls[0]
-
-            # Validate has function name
-            assert (
-                tool_call.function and tool_call.function.name
-            ), "Tool call missing function or name"
-
-            # Validate has complete valid JSON arguments
-            assert (
-                tool_call.function.arguments
-                and _is_valid_tool_arguments(tool_call.function.arguments)
-            ), f"Invalid or missing arguments: {tool_call.function.arguments if tool_call.function else 'N/A'}"
-
-    else:
-        # Non-streaming
-        assert hasattr(response, 'choices') and response.choices, "Response missing choices"
-
-        message = response.choices[0].message
-
-        if config["tool_choice"] == "required":
-            assert hasattr(message, 'tool_calls') and message.tool_calls, "Message missing tool_calls"
-
-            tool_call = message.tool_calls[0]
-            assert tool_call.function and tool_call.function.name, "Tool call missing function or name"
-
-            assert _is_valid_tool_arguments(
-                tool_call.function.arguments
-            ), f"Invalid arguments: {tool_call.function.arguments}"
-
-
-def _get_tool_calling_models():
-    """
-    Get the list of models to test for tool calling.
-    Filters the hardcoded list against featured models.
-
-    Returns:
-        list: List of model URLs that support tool calling
-    """
-    if not os.environ.get('CLARIFAI_PAT_KEY'):
-        return ["Missing API KEY"]
-
-    # For now, just return the hardcoded list
-    # TODO: Optionally filter against _list_openai_featured_models() to ensure models exist
-    return TOOL_CALLING_TEST_MODELS
-
-
-# Generate test parameters: cartesian product of models and configs
-def _generate_tool_calling_test_params():
-    """Generate all combinations of models and configurations for testing."""
-    models = _get_tool_calling_models()
-    params = []
-    for model in models:
-        for config in TOOL_CALLING_CONFIGS:
-            # Create a readable test ID
-            test_id = f"{model.split('/')[-1]}-stream_{config['stream']}-choice_{config['tool_choice']}-strict_{config['strict']}"
-            params.append((model, config, test_id))
-    return params
-
-
 @pytest.mark.parametrize(
-    "model_url,config,test_id",
-    [pytest.param(m, c, tid, id=tid) for m, c, tid in _generate_tool_calling_test_params()],
+    "model_url,config",
+    [pytest.param(m, c, id=tid) for m, c, tid in generate_tool_calling_test_params()],
 )
-def test_openai_tool_calling_with_parameter_combinations(model_url, config, test_id):
+def test_openai_tool_calling_with_parameter_combinations(model_url, config):
     """
     Test OpenAI-compatible tool calling with various parameter combinations.
-
-    This test verifies that models support tool calling with different combinations of:
-    - stream: True/False (streaming vs non-streaming responses)
-    - tool_choice: "required"/"auto" (force tool use vs let model decide)
-    - strict: True/False (strict schema validation)
-
-    Each combination is tested and validated against expected behavior.
     """
     if not os.environ.get('CLARIFAI_PAT_KEY'):
         pytest.skip("Skipping test: CLARIFAI_PAT_KEY environment variable not set.")
 
-    response, error = _call_openai_tool_calling(model_url, config)
+    response, error = call_openai_tool_calling(model_url, config)
 
     # Assert no error occurred
     assert not error, f"Tool calling failed for {model_url} with config {config}: {error}"
 
     # Validate response (raises AssertionError with clear message if validation fails)
-    _validate_tool_calling_response(response, config)
+    validate_tool_calling_response(response, config)
