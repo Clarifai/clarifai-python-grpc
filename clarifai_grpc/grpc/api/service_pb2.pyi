@@ -15406,6 +15406,52 @@ class PostComputeClustersRequest(google.protobuf.message.Message):
 global___PostComputeClustersRequest = PostComputeClustersRequest
 
 @typing_extensions.final
+class PatchComputeClustersRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTERS_FIELD_NUMBER: builtins.int
+    ACTION_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """Only the user_id is used from this."""
+    @property
+    def compute_clusters(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.ComputeCluster
+    ]:
+        """This allows you to patch one or more compute_clusters"""
+    action: builtins.str
+    """The action to perform on the patched objects
+    For now 'overwrite' is supported
+    """
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        compute_clusters: collections.abc.Iterable[proto.clarifai.api.resources_pb2.ComputeCluster]
+        | None = ...,
+        action: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "action",
+            b"action",
+            "compute_clusters",
+            b"compute_clusters",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___PatchComputeClustersRequest = PatchComputeClustersRequest
+
+@typing_extensions.final
 class DeleteComputeClustersRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 

@@ -17217,12 +17217,12 @@ class PipelineVersionConfig(google.protobuf.message.Message):
         VALUE_FIELD_NUMBER: builtins.int
         key: builtins.str
         @property
-        def value(self) -> global___StepSecretConfig: ...
+        def value(self) -> google.protobuf.struct_pb2.Struct: ...
         def __init__(
             self,
             *,
             key: builtins.str = ...,
-            value: global___StepSecretConfig | None = ...,
+            value: google.protobuf.struct_pb2.Struct | None = ...,
         ) -> None: ...
         def HasField(
             self, field_name: typing_extensions.Literal["value", b"value"]
@@ -17235,16 +17235,20 @@ class PipelineVersionConfig(google.protobuf.message.Message):
     @property
     def step_version_secrets(
         self,
-    ) -> google.protobuf.internal.containers.MessageMap[builtins.str, global___StepSecretConfig]:
-        """StepVersionSecrets maps step version references to their secret configurations
-        The outer map key is the step version reference (e.g. "step1" or the step version ID)
-        The inner map key is the secret name (e.g. "EMAIL_PROVIDER_API_KEY")
-        The inner map value is the secret reference (e.g. "users/1/secrets/secret-1")
+    ) -> google.protobuf.internal.containers.MessageMap[
+        builtins.str, google.protobuf.struct_pb2.Struct
+    ]:
+        """StepVersionSecrets maps step names to their secret configurations
+        Using google.protobuf.Struct to create the desired flat JSON structure
+        This produces: {stepName: {secretName: "users/user-name/secrets/key"}}
+        example: {"step-0": {"API_KEY": "users/user-name/secrets/key"}}
         """
     def __init__(
         self,
         *,
-        step_version_secrets: collections.abc.Mapping[builtins.str, global___StepSecretConfig]
+        step_version_secrets: collections.abc.Mapping[
+            builtins.str, google.protobuf.struct_pb2.Struct
+        ]
         | None = ...,
     ) -> None: ...
     def ClearField(
@@ -17253,43 +17257,6 @@ class PipelineVersionConfig(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PipelineVersionConfig = PipelineVersionConfig
-
-@typing_extensions.final
-class StepSecretConfig(google.protobuf.message.Message):
-    """StepSecretConfig defines secrets for a specific step version"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing_extensions.final
-    class SecretsEntry(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        KEY_FIELD_NUMBER: builtins.int
-        VALUE_FIELD_NUMBER: builtins.int
-        key: builtins.str
-        value: builtins.str
-        def __init__(
-            self,
-            *,
-            key: builtins.str = ...,
-            value: builtins.str = ...,
-        ) -> None: ...
-        def ClearField(
-            self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]
-        ) -> None: ...
-
-    SECRETS_FIELD_NUMBER: builtins.int
-    @property
-    def secrets(self) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
-        """Map of secret name to secret reference"""
-    def __init__(
-        self,
-        *,
-        secrets: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
-    ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["secrets", b"secrets"]) -> None: ...
-
-global___StepSecretConfig = StepSecretConfig
 
 @typing_extensions.final
 class PipelineVersion(google.protobuf.message.Message):
@@ -17495,7 +17462,9 @@ class PipelineVersionRun(google.protobuf.message.Message):
         """Optional: Overrides to input arguments for the orchestration system."""
     @property
     def orchestration_spec(self) -> global___OrchestrationSpec:
-        """Final merged orchestration spec snapshot submitted to backend."""
+        """Final merged orchestration spec snapshot submitted to backend.
+        This field is read-only and cannot be set during creation.
+        """
     def __init__(
         self,
         *,

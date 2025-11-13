@@ -1204,6 +1204,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.PatchComputeClusters = channel.unary_unary(
+                '/clarifai.api.V2/PatchComputeClusters',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchComputeClustersRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse),
+                )
         self.GetNodepool = channel.unary_unary(
                 '/clarifai.api.V2/GetNodepool',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetNodepoolRequest.SerializeToString,
@@ -3242,6 +3247,12 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PatchComputeClusters(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetNodepool(self, request, context):
         """Nodepools CRUD
         """
@@ -4707,6 +4718,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteComputeClusters,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'PatchComputeClusters': grpc.unary_unary_rpc_method_handler(
+                    servicer.PatchComputeClusters,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchComputeClustersRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.SerializeToString,
             ),
             'GetNodepool': grpc.unary_unary_rpc_method_handler(
                     servicer.GetNodepool,
@@ -8946,6 +8962,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteComputeClusters',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteComputeClustersRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PatchComputeClusters(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchComputeClusters',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PatchComputeClustersRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiComputeClusterResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
