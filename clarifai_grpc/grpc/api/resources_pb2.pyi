@@ -238,52 +238,6 @@ See https://cocodataset.org/#format-data.
 """
 global___DatasetVersionExportFormat = DatasetVersionExportFormat
 
-class _ExpirationAction:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _ExpirationActionEnumTypeWrapper(
-    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_ExpirationAction.ValueType],
-    builtins.type,
-):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    EXPIRATION_ACTION_NOT_SET: _ExpirationAction.ValueType  # 0
-    DELAY: _ExpirationAction.ValueType  # 1
-    """Progressively delay the execution of operations"""
-    EXPIRY: _ExpirationAction.ValueType  # 2
-    """Cease functioning"""
-
-class ExpirationAction(_ExpirationAction, metaclass=_ExpirationActionEnumTypeWrapper): ...
-
-EXPIRATION_ACTION_NOT_SET: ExpirationAction.ValueType  # 0
-DELAY: ExpirationAction.ValueType  # 1
-"""Progressively delay the execution of operations"""
-EXPIRY: ExpirationAction.ValueType  # 2
-"""Cease functioning"""
-global___ExpirationAction = ExpirationAction
-
-class _LicenseScope:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _LicenseScopeEnumTypeWrapper(
-    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_LicenseScope.ValueType],
-    builtins.type,
-):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    LICENSE_SCOPE_NOT_SET: _LicenseScope.ValueType  # 0
-    PREDICT: _LicenseScope.ValueType  # 1
-    TRAIN: _LicenseScope.ValueType  # 2
-    SEARCH: _LicenseScope.ValueType  # 3
-
-class LicenseScope(_LicenseScope, metaclass=_LicenseScopeEnumTypeWrapper): ...
-
-LICENSE_SCOPE_NOT_SET: LicenseScope.ValueType  # 0
-PREDICT: LicenseScope.ValueType  # 1
-TRAIN: LicenseScope.ValueType  # 2
-SEARCH: LicenseScope.ValueType  # 3
-global___LicenseScope = LicenseScope
-
 class _LicenseType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -2636,6 +2590,7 @@ class Data(google.protobuf.message.Message):
     BYTES_VALUE_FIELD_NUMBER: builtins.int
     BOOL_VALUE_FIELD_NUMBER: builtins.int
     STRING_VALUE_FIELD_NUMBER: builtins.int
+    STRUCT_VALUE_FIELD_NUMBER: builtins.int
     @property
     def image(self) -> global___Image:
         """Input and output images."""
@@ -2728,6 +2683,9 @@ class Data(google.protobuf.message.Message):
     """Input and output bool data"""
     string_value: builtins.str
     """Input and output string data"""
+    @property
+    def struct_value(self) -> google.protobuf.struct_pb2.Struct:
+        """To handle Input and output json"""
     def __init__(
         self,
         *,
@@ -2754,6 +2712,7 @@ class Data(google.protobuf.message.Message):
         bytes_value: builtins.bytes = ...,
         bool_value: builtins.bool = ...,
         string_value: builtins.str = ...,
+        struct_value: google.protobuf.struct_pb2.Struct | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -2768,6 +2727,8 @@ class Data(google.protobuf.message.Message):
             b"metadata",
             "ndarray",
             b"ndarray",
+            "struct_value",
+            b"struct_value",
             "text",
             b"text",
             "video",
@@ -2815,6 +2776,8 @@ class Data(google.protobuf.message.Message):
             b"regions",
             "string_value",
             b"string_value",
+            "struct_value",
+            b"struct_value",
             "text",
             b"text",
             "time_segments",

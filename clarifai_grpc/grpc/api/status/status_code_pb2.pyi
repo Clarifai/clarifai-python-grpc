@@ -509,7 +509,9 @@ class _StatusCodeEnumTypeWrapper(
     LABEL_ORDER_SUCCESS: _StatusCode.ValueType  # 55003
     LABEL_ORDER_CANCELED: _StatusCode.ValueType  # 55004
     LICENSE_ACTIVE: _StatusCode.ValueType  # 60000
-    """License Related Status Code 600xx"""
+    """License Related Status Code 600xx
+    DEPRECATED: License feature is fully deprecated now.
+    """
     LICENSE_DOES_NOT_EXIST: _StatusCode.ValueType  # 60001
     LICENSE_NEED_UPDATE: _StatusCode.ValueType  # 60002
     LICENSE_EXPIRED: _StatusCode.ValueType  # 60003
@@ -1101,7 +1103,9 @@ LABEL_ORDER_IN_PROGRESS: StatusCode.ValueType  # 55002
 LABEL_ORDER_SUCCESS: StatusCode.ValueType  # 55003
 LABEL_ORDER_CANCELED: StatusCode.ValueType  # 55004
 LICENSE_ACTIVE: StatusCode.ValueType  # 60000
-"""License Related Status Code 600xx"""
+"""License Related Status Code 600xx
+DEPRECATED: License feature is fully deprecated now.
+"""
 LICENSE_DOES_NOT_EXIST: StatusCode.ValueType  # 60001
 LICENSE_NEED_UPDATE: StatusCode.ValueType  # 60002
 LICENSE_EXPIRED: StatusCode.ValueType  # 60003
