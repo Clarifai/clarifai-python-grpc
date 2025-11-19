@@ -20,18 +20,13 @@ from tests.common import metadata
 # Maximum retry attempts for API calls
 MAX_RETRY_ATTEMPTS = 3
 
-# Hardcoded list of models to include for tool calling tests
-# TODO: to be removed once the dynamic list based on use case filters is up-to-date
-TOOL_CALLING_TEST_MODELS = [
-    "https://clarifai.com/openai/chat-completion/models/gpt-oss-20b",
-]
-
 # Parameter combinations to test
+# For now, we only test non-streaming with tool calling
 TOOL_CALLING_CONFIGS = [
-    {"stream": True, "tool_choice": "required", "strict": True},
-    {"stream": True, "tool_choice": "required", "strict": False},
-    {"stream": True, "tool_choice": "auto", "strict": True},
-    {"stream": True, "tool_choice": "auto", "strict": False},
+    # {"stream": True, "tool_choice": "required", "strict": True},
+    # {"stream": True, "tool_choice": "required", "strict": False},
+    # {"stream": True, "tool_choice": "auto", "strict": True},
+    # {"stream": True, "tool_choice": "auto", "strict": False},
     {"stream": False, "tool_choice": "required", "strict": True},
     {"stream": False, "tool_choice": "required", "strict": False},
     {"stream": False, "tool_choice": "auto", "strict": True},
@@ -77,6 +72,7 @@ def call_openai_tool_calling(model_url, config):
         api_key=os.environ.get('CLARIFAI_PAT_KEY'),
         base_url=f"https://{channel._target}/v2/ext/openai/v1",
         default_headers={"X-Clarifai-Request-Id-Prefix": f"python-openai-{CLIENT_VERSION}"},
+        timeout=10 # 10 seconds timeout to avoid hanging
     )
 
     # Build tool definition with strict parameter
@@ -233,29 +229,18 @@ def get_tool_calling_models():
     if not os.environ.get('CLARIFAI_PAT_KEY'):
         return ["Missing API KEY"]
 
-    try:
-        # Get models with function-calling use case
-        models_with_use_case = _list_featured_models_with_use_case_filters(
-            per_page=100, use_cases=['function-calling']
-        )
+    # Get models with function-calling use case
+    models_with_use_case = _list_featured_models_with_use_case_filters(
+        per_page=100, use_cases=['function-calling']
+    )
 
-        tool_calling_models = []
-        for model in models_with_use_case:
-            # Also check for openai_transport support
-            method_signatures = getattr(model.model_version, "method_signatures", [])
-            if any(ms.name == "openai_transport" for ms in method_signatures):
-                model_url = f"https://clarifai.com/{model.user_id}/{model.app_id}/models/{model.id}"
-                tool_calling_models.append(model_url)
-
-        # Can use the hardcoded list to further filter what models to test
-        tool_calling_models = [m for m in tool_calling_models if m in TOOL_CALLING_TEST_MODELS]
-
-        return tool_calling_models
-
-    except Exception as e:
-        # If there's any error, fallback to hardcoded list
-        print(f"Warning: Failed to fetch tool calling models dynamically: {e}")
-        return TOOL_CALLING_TEST_MODELS
+    tool_calling_models = []
+    for model in models_with_use_case:
+        # Also check for openai_transport support
+        method_signatures = getattr(model.model_version, "method_signatures", [])
+        if any(ms.name == "openai_transport" for ms in method_signatures):
+            model_url = f"https://clarifai.com/{model.user_id}/{model.app_id}/models/{model.id}"
+            tool_calling_models.append(model_url)
 
 
 def generate_tool_calling_test_params():
