@@ -7566,81 +7566,6 @@ class EvalTestSetEntry(google.protobuf.message.Message):
 global___EvalTestSetEntry = EvalTestSetEntry
 
 @typing_extensions.final
-class LOPQEvalResult(google.protobuf.message.Message):
-    """LOPQEvalResult"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    K_FIELD_NUMBER: builtins.int
-    RECALL_VS_BRUTE_FORCE_FIELD_NUMBER: builtins.int
-    KENDALL_TAU_VS_BRUTE_FORCE_FIELD_NUMBER: builtins.int
-    MOST_FREQUENT_CODE_PERCENT_FIELD_NUMBER: builtins.int
-    LOPQ_NDCG_FIELD_NUMBER: builtins.int
-    BRUTE_FORCE_NDCG_FIELD_NUMBER: builtins.int
-    k: builtins.int
-    """Rank k for which all metrics are reported."""
-    recall_vs_brute_force: builtins.float
-    """Recall @ k assuming the brute force search is the ground truth."""
-    kendall_tau_vs_brute_force: builtins.float
-    """Kendall's tau correlation @ k assuming the brute force search is the ground truth."""
-    most_frequent_code_percent: builtins.float
-    """The percentage of the most frequent code in the indexed part of evaluation data."""
-    lopq_ndcg: builtins.float
-    """Normalized Discounted Cumulative Gain (NDCG) @ k with a ground truth inferred from annotations
-    and/or prediction for this evaluation LOPQ model.
-    NDCG uses individual relevance scores of each returned image to evaluate the usefulness, or
-    gain, of a document based on its position in the result list. The premise of DCG is that
-    highly relevant documents appearing lower in a search result list should be penalized as the
-    graded relevance value is reduced logarithmically proportional to the position of the result.
-    See: https://en.wikipedia.org/wiki/Information_retrieval#Discounted_cumulative_gain
-
-    To compute the relevance score between two images we consider two cases:
-    1) Only one label for each image
-    An image is relevant to an image query iff they are labeled the same (score 1), and
-    not relevant otherwise (score 0)
-    2) Multiple labels for each image
-    Here an image relevancy with respect to a single image query is measured by f-beta score
-    assuming the query image list of labels as ground truth and comparing them with that of
-    the search result. These labels can come from image annotations or if substitute_annotation_misses
-    is set, predictions of base classifier where any prediction with prob < prob_threshold are
-    discarded. To quantify the relevancy score of a single search result we opt to compute precision
-    and recall @ k for simplicity, and combine them with f-beta score to obtain a single number.
-    """
-    brute_force_ndcg: builtins.float
-    """Brute force NDCG which gives a baseline to compare to and is a measure of how good
-    the embeddings are.
-    """
-    def __init__(
-        self,
-        *,
-        k: builtins.int = ...,
-        recall_vs_brute_force: builtins.float = ...,
-        kendall_tau_vs_brute_force: builtins.float = ...,
-        most_frequent_code_percent: builtins.float = ...,
-        lopq_ndcg: builtins.float = ...,
-        brute_force_ndcg: builtins.float = ...,
-    ) -> None: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "brute_force_ndcg",
-            b"brute_force_ndcg",
-            "k",
-            b"k",
-            "kendall_tau_vs_brute_force",
-            b"kendall_tau_vs_brute_force",
-            "lopq_ndcg",
-            b"lopq_ndcg",
-            "most_frequent_code_percent",
-            b"most_frequent_code_percent",
-            "recall_vs_brute_force",
-            b"recall_vs_brute_force",
-        ],
-    ) -> None: ...
-
-global___LOPQEvalResult = LOPQEvalResult
-
-@typing_extensions.final
 class MetricsSummary(google.protobuf.message.Message):
     """MetricsSummary"""
 
@@ -7656,7 +7581,6 @@ class MetricsSummary(google.protobuf.message.Message):
     MACRO_AVG_RECALL_FIELD_NUMBER: builtins.int
     MEAN_AVG_PRECISION_IOU_50_FIELD_NUMBER: builtins.int
     MEAN_AVG_PRECISION_IOU_RANGE_FIELD_NUMBER: builtins.int
-    LOPQ_METRICS_FIELD_NUMBER: builtins.int
     top1_accuracy: builtins.float
     top5_accuracy: builtins.float
     macro_avg_roc_auc: builtins.float
@@ -7667,12 +7591,6 @@ class MetricsSummary(google.protobuf.message.Message):
     macro_avg_recall: builtins.float
     mean_avg_precision_iou_50: builtins.float
     mean_avg_precision_iou_range: builtins.float
-    @property
-    def lopq_metrics(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        global___LOPQEvalResult
-    ]: ...
     def __init__(
         self,
         *,
@@ -7686,13 +7604,10 @@ class MetricsSummary(google.protobuf.message.Message):
         macro_avg_recall: builtins.float = ...,
         mean_avg_precision_iou_50: builtins.float = ...,
         mean_avg_precision_iou_range: builtins.float = ...,
-        lopq_metrics: collections.abc.Iterable[global___LOPQEvalResult] | None = ...,
     ) -> None: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "lopq_metrics",
-            b"lopq_metrics",
             "macro_avg_f1_score",
             b"macro_avg_f1_score",
             "macro_avg_precision",
@@ -8782,83 +8697,6 @@ class Rank(google.protobuf.message.Message):
     ) -> None: ...
 
 global___Rank = Rank
-
-@typing_extensions.final
-class AnnotationSearchMetrics(google.protobuf.message.Message):
-    """AnnotationSearchMetrics"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    GROUND_TRUTH_FIELD_NUMBER: builtins.int
-    SEARCH_TO_EVAL_FIELD_NUMBER: builtins.int
-    METRICS_FIELD_NUMBER: builtins.int
-    DATA_FIELD_NUMBER: builtins.int
-    ACTIVE_CONCEPT_COUNT_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    @property
-    def ground_truth(self) -> global___Search:
-        """The ground truth we are evaluating against"""
-    @property
-    def search_to_eval(self) -> global___Search:
-        """The set we are evaluating"""
-    @property
-    def metrics(self) -> global___EvalMetrics:
-        """The metric result"""
-    @property
-    def data(self) -> global___Data:
-        """data is filled out with the concepts used for this evaluation"""
-    active_concept_count: builtins.int
-    """active_concept_count is the number of concepts for this evaluation"""
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        """
-    def __init__(
-        self,
-        *,
-        ground_truth: global___Search | None = ...,
-        search_to_eval: global___Search | None = ...,
-        metrics: global___EvalMetrics | None = ...,
-        data: global___Data | None = ...,
-        active_concept_count: builtins.int = ...,
-        visibility: global___Visibility | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "data",
-            b"data",
-            "ground_truth",
-            b"ground_truth",
-            "metrics",
-            b"metrics",
-            "search_to_eval",
-            b"search_to_eval",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "active_concept_count",
-            b"active_concept_count",
-            "data",
-            b"data",
-            "ground_truth",
-            b"ground_truth",
-            "metrics",
-            b"metrics",
-            "search_to_eval",
-            b"search_to_eval",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> None: ...
-
-global___AnnotationSearchMetrics = AnnotationSearchMetrics
 
 @typing_extensions.final
 class Text(google.protobuf.message.Message):

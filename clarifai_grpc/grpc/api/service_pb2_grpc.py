@@ -744,26 +744,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesByIDRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse),
                 )
-        self.PostAnnotationSearchMetrics = channel.unary_unary(
-                '/clarifai.api.V2/PostAnnotationSearchMetrics',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationSearchMetricsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
-                )
-        self.GetAnnotationSearchMetrics = channel.unary_unary(
-                '/clarifai.api.V2/GetAnnotationSearchMetrics',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationSearchMetricsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
-                )
-        self.ListAnnotationSearchMetrics = channel.unary_unary(
-                '/clarifai.api.V2/ListAnnotationSearchMetrics',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse),
-                )
-        self.DeleteAnnotationSearchMetrics = channel.unary_unary(
-                '/clarifai.api.V2/DeleteAnnotationSearchMetrics',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationSearchMetricsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
-                )
         self.DeleteSearch = channel.unary_unary(
                 '/clarifai.api.V2/DeleteSearch',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteSearchRequest.SerializeToString,
@@ -2548,34 +2528,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def PostAnnotationSearchMetrics(self, request, context):
-        """Evaluate the results of two search requests
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetAnnotationSearchMetrics(self, request, context):
-        """Get the evaluation results between two search requests
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListAnnotationSearchMetrics(self, request, context):
-        """List the evaluation results between two search requests
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DeleteAnnotationSearchMetrics(self, request, context):
-        """DeleteAnnotationSearchMetrics
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def DeleteSearch(self, request, context):
         """Delete a saved search.
         """
@@ -4258,26 +4210,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PostSearchesByID,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesByIDRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.SerializeToString,
-            ),
-            'PostAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostAnnotationSearchMetrics,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationSearchMetricsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
-            ),
-            'GetAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetAnnotationSearchMetrics,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationSearchMetricsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
-            ),
-            'ListAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListAnnotationSearchMetrics,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.SerializeToString,
-            ),
-            'DeleteAnnotationSearchMetrics': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteAnnotationSearchMetrics,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationSearchMetricsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'DeleteSearch': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteSearch,
@@ -7398,74 +7330,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostSearchesByID',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostSearchesByIDRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiSearchResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostAnnotationSearchMetrics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostAnnotationSearchMetrics',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostAnnotationSearchMetricsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetAnnotationSearchMetrics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetAnnotationSearchMetrics',
-            proto_dot_clarifai_dot_api_dot_service__pb2.GetAnnotationSearchMetricsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ListAnnotationSearchMetrics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListAnnotationSearchMetrics',
-            proto_dot_clarifai_dot_api_dot_service__pb2.ListAnnotationSearchMetricsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationSearchMetricsResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def DeleteAnnotationSearchMetrics(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteAnnotationSearchMetrics',
-            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteAnnotationSearchMetricsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
