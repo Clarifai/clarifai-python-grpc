@@ -23,10 +23,6 @@ MAX_RETRY_ATTEMPTS = 3
 # Parameter combinations to test
 # For now, we only test non-streaming with tool calling
 TOOL_CALLING_CONFIGS = [
-    # {"stream": True, "tool_choice": "required", "strict": True},
-    # {"stream": True, "tool_choice": "required", "strict": False},
-    # {"stream": True, "tool_choice": "auto", "strict": True},
-    # {"stream": True, "tool_choice": "auto", "strict": False},
     {"stream": False, "tool_choice": "required", "strict": True},
     {"stream": False, "tool_choice": "required", "strict": False},
     {"stream": False, "tool_choice": "auto", "strict": True},
@@ -241,6 +237,8 @@ def get_tool_calling_models():
         if any(ms.name == "openai_transport" for ms in method_signatures):
             model_url = f"https://clarifai.com/{model.user_id}/{model.app_id}/models/{model.id}"
             tool_calling_models.append(model_url)
+
+    return tool_calling_models
 
 
 def generate_tool_calling_test_params():
