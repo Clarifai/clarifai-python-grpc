@@ -31,6 +31,11 @@ from tests.common import (
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
 )
+from tests.public_models.openai_tool_calling_helper import (
+    call_openai_tool_calling,
+    generate_tool_calling_test_params,
+    validate_tool_calling_response,
+)
 from tests.public_models.public_test_helper import (
     AUDIO_MODEL_TITLE_IDS_TUPLE,
     DETECTION_MODEL_TITLE_AND_IDS,
@@ -556,3 +561,23 @@ async def test_openai_compatible_endpoint_on_featured_models_async():
             failed_models.append({model_identifiers[i]: error})
 
     assert not failed_models, f"The following OpenAI compatible models failed: {failed_models}"
+
+
+@pytest.mark.parametrize(
+    "model_url,config",
+    [pytest.param(m, c, id=tid) for m, c, tid in generate_tool_calling_test_params()],
+)
+def test_openai_tool_calling_with_parameter_combinations(model_url, config):
+    """
+    Test OpenAI-compatible tool calling with various parameter combinations.
+    """
+    if not os.environ.get('CLARIFAI_PAT_KEY'):
+        pytest.skip("Skipping test: CLARIFAI_PAT_KEY environment variable not set.")
+
+    response, error = call_openai_tool_calling(model_url, config)
+
+    # Assert no error occurred
+    assert not error, f"Tool calling failed for {model_url} with config {config}: {error}"
+
+    # Validate response (raises AssertionError with clear message if validation fails)
+    validate_tool_calling_response(response, config)
