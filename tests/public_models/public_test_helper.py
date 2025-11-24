@@ -15,7 +15,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
 
 # Constants needed for test imports (not used by deprecated models)
 TRANSLATION_TEST_DATA = {
-    "EN": "I dont feel like studying tonight but I must study",
+    "EN": "I don't feel like studying tonight but I must study",
 }
 ENGLISH_AUDIO_URL = "https://samples.clarifai.com/english_audio_sample.mp3"
 
