@@ -68,7 +68,7 @@ def call_openai_tool_calling(model_url, config):
         api_key=os.environ.get('CLARIFAI_PAT_KEY'),
         base_url=f"https://{channel._target}/v2/ext/openai/v1",
         default_headers={"X-Clarifai-Request-Id-Prefix": f"python-openai-{CLIENT_VERSION}"},
-        timeout=10 # 10 seconds timeout to avoid hanging
+        timeout=10,  # 10 seconds timeout to avoid hanging
     )
 
     # Build tool definition with strict parameter
@@ -116,8 +116,7 @@ def call_openai_tool_calling(model_url, config):
             if attempt == MAX_RETRY_ATTEMPTS - 1:
                 break
             print(
-                f"Retrying tool calling for '{model_url}' after error: {e}. "
-                f"Attempt #{attempt + 1}"
+                f"Retrying tool calling for '{model_url}' after error: {e}. Attempt #{attempt + 1}"
             )
             time.sleep(attempt + 1)
         except Exception as e:
@@ -147,9 +146,9 @@ def validate_tool_calling_response(response, config):
     assert response is not None, "Response is None"
 
     if config["stream"]:
-        assert isinstance(
-            response, list
-        ) and response, f"Invalid streaming response: {type(response)}"
+        assert isinstance(response, list) and response, (
+            f"Invalid streaming response: {type(response)}"
+        )
 
         # Check finish_reason and usage
         has_finish_reason = any(
@@ -168,9 +167,9 @@ def validate_tool_calling_response(response, config):
             ]
 
             # Validate exactly ONE chunk contains tool calls
-            assert (
-                len(chunks_with_tool_calls) == 1
-            ), f"Expected exactly 1 chunk with tool calls, got {len(chunks_with_tool_calls)}"
+            assert len(chunks_with_tool_calls) == 1, (
+                f"Expected exactly 1 chunk with tool calls, got {len(chunks_with_tool_calls)}"
+            )
 
             # Get the single chunk's tool calls
             tool_calls = chunks_with_tool_calls[0].choices[0].delta.tool_calls
@@ -181,14 +180,16 @@ def validate_tool_calling_response(response, config):
             tool_call = tool_calls[0]
 
             # Validate has function name
-            assert (
-                tool_call.function and tool_call.function.name
-            ), "Tool call missing function or name"
+            assert tool_call.function and tool_call.function.name, (
+                "Tool call missing function or name"
+            )
 
             # Validate has complete valid JSON arguments
-            assert (
-                tool_call.function.arguments and is_valid_tool_arguments(tool_call.function.arguments)
-            ), f"Invalid or missing arguments: {tool_call.function.arguments if tool_call.function else 'N/A'}"
+            assert tool_call.function.arguments and is_valid_tool_arguments(
+                tool_call.function.arguments
+            ), (
+                f"Invalid or missing arguments: {tool_call.function.arguments if tool_call.function else 'N/A'}"
+            )
 
     else:
         # Non-streaming
@@ -197,21 +198,27 @@ def validate_tool_calling_response(response, config):
         message = response.choices[0].message
 
         if config["tool_choice"] == "required":
-            assert hasattr(message, 'tool_calls') and message.tool_calls, "Message missing tool_calls"
+            assert hasattr(message, 'tool_calls') and message.tool_calls, (
+                "Message missing tool_calls"
+            )
 
             tool_call = message.tool_calls[0]
-            assert tool_call.function and tool_call.function.name, "Tool call missing function or name"
+            assert tool_call.function and tool_call.function.name, (
+                "Tool call missing function or name"
+            )
 
-            assert is_valid_tool_arguments(
-                tool_call.function.arguments
-            ), f"Invalid arguments: {tool_call.function.arguments}"
+            assert is_valid_tool_arguments(tool_call.function.arguments), (
+                f"Invalid arguments: {tool_call.function.arguments}"
+            )
 
 
 def _list_featured_models_with_use_case_filters(per_page=50, use_cases=None):
     """Lists featured models from the Clarifai platform."""
     channel = ClarifaiChannel.get_grpc_channel()
     stub = service_pb2_grpc.V2Stub(channel)
-    request = service_pb2.ListModelsRequest(per_page=per_page, featured_only=True, use_cases=use_cases)
+    request = service_pb2.ListModelsRequest(
+        per_page=per_page, featured_only=True, use_cases=use_cases
+    )
     response = stub.ListModels(request, metadata=metadata(pat=True))
     if response.status.code != status_code_pb2.SUCCESS:
         raise Exception(f"ListModels failed: {response.status.description}")
