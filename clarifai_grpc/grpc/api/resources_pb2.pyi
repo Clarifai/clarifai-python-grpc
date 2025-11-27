@@ -6865,18 +6865,22 @@ class BuildInfo(google.protobuf.message.Message):
     DOCKER_IMAGE_NAME_FIELD_NUMBER: builtins.int
     DOCKER_IMAGE_TAG_FIELD_NUMBER: builtins.int
     DOCKER_IMAGE_DIGEST_FIELD_NUMBER: builtins.int
+    PLATFORM_FIELD_NUMBER: builtins.int
     docker_image_name: builtins.str
     """Docker image name"""
     docker_image_tag: builtins.str
     """Docker image tag"""
     docker_image_digest: builtins.str
     """Docker image digest"""
+    platform: builtins.str
+    """Platform(s) the model was built for (e.g., "linux/amd64,linux/arm64")"""
     def __init__(
         self,
         *,
         docker_image_name: builtins.str = ...,
         docker_image_tag: builtins.str = ...,
         docker_image_digest: builtins.str = ...,
+        platform: builtins.str = ...,
     ) -> None: ...
     def ClearField(
         self,
@@ -6887,6 +6891,8 @@ class BuildInfo(google.protobuf.message.Message):
             b"docker_image_name",
             "docker_image_tag",
             b"docker_image_tag",
+            "platform",
+            b"platform",
         ],
     ) -> None: ...
 
@@ -14469,6 +14475,7 @@ class InstanceType(google.protobuf.message.Message):
     ALLOWED_CAPACITY_TYPES_FIELD_NUMBER: builtins.int
     FEATURE_FLAG_GROUP_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    ARCHITECTURE_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
@@ -14492,6 +14499,8 @@ class InstanceType(google.protobuf.message.Message):
         global___SpecialHandling
     ]:
         """List of special handling instructions for this instance type."""
+    architecture: builtins.str
+    """Hardware architecture of the instance type (e.g., "linux/amd64", "linux/arm64")."""
     def __init__(
         self,
         *,
@@ -14504,6 +14513,7 @@ class InstanceType(google.protobuf.message.Message):
         allowed_capacity_types: global___NodeCapacityType | None = ...,
         feature_flag_group: builtins.str = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+        architecture: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14521,6 +14531,8 @@ class InstanceType(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "allowed_capacity_types",
             b"allowed_capacity_types",
+            "architecture",
+            b"architecture",
             "cloud_provider",
             b"cloud_provider",
             "compute_info",
@@ -17724,3 +17736,188 @@ class MetricTypeLabels(google.protobuf.message.Message):
     ) -> None: ...
 
 global___MetricTypeLabels = MetricTypeLabels
+
+@typing_extensions.final
+class Artifact(google.protobuf.message.Message):
+    """Artifact is a resource that represents a file stored in Clarifai's storage system.
+    It should have a reference to upload resource which contains the actual file location and metadata.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    USER_ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    ARTIFACT_VERSION_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    DELETED_AT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """ID of artifact"""
+    user_id: builtins.str
+    """User ID that this Artifact belongs to"""
+    app_id: builtins.str
+    """Application ID that this Artifact belongs to"""
+    @property
+    def artifact_version(self) -> global___ArtifactVersion:
+        """Reference to the artifact version resource that represents a specific version of the artifact"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the artifact was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the artifact was updated."""
+    @property
+    def deleted_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the artifact was deleted."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        user_id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        artifact_version: global___ArtifactVersion | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        deleted_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "artifact_version",
+            b"artifact_version",
+            "created_at",
+            b"created_at",
+            "deleted_at",
+            b"deleted_at",
+            "modified_at",
+            b"modified_at",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "app_id",
+            b"app_id",
+            "artifact_version",
+            b"artifact_version",
+            "created_at",
+            b"created_at",
+            "deleted_at",
+            b"deleted_at",
+            "id",
+            b"id",
+            "modified_at",
+            b"modified_at",
+            "user_id",
+            b"user_id",
+        ],
+    ) -> None: ...
+
+global___Artifact = Artifact
+
+@typing_extensions.final
+class ArtifactVersion(google.protobuf.message.Message):
+    """ArtifactVersion represents a specific version of the artifact."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    ARTIFACT_FIELD_NUMBER: builtins.int
+    UPLOAD_FIELD_NUMBER: builtins.int
+    VISIBILITY_FIELD_NUMBER: builtins.int
+    EXPIRES_AT_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    MODIFIED_AT_FIELD_NUMBER: builtins.int
+    DELETED_AT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """ID of artifact version"""
+    description: builtins.str
+    """Description of the artifact version"""
+    @property
+    def artifact(self) -> global___Artifact:
+        """Reference to the artifact resource"""
+    @property
+    def upload(self) -> global___Upload:
+        """Reference to the upload resource which contains the actual file location and metadata"""
+    @property
+    def visibility(self) -> global___Visibility:
+        """The visibility field represents whether this is privately/publicly visible.
+        To be visible to the public the App that contains it AND the User that contains the App must
+        also be publicly visible.
+        """
+    @property
+    def expires_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the artifact version will expire and be deleted.
+        The format is https://www.ietf.org/rfc/rfc3339.txt.
+        Example: "2006-01-02T15:04:05.999999Z".
+        If not set, the artifact version will be retained indefinitely
+        and will not be automatically deleted by lifecycle policies.
+        """
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the artifact version was created."""
+    @property
+    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Most recent time when the artifact version was updated."""
+    @property
+    def deleted_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the artifact version was deleted."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        description: builtins.str = ...,
+        artifact: global___Artifact | None = ...,
+        upload: global___Upload | None = ...,
+        visibility: global___Visibility | None = ...,
+        expires_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        deleted_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "artifact",
+            b"artifact",
+            "created_at",
+            b"created_at",
+            "deleted_at",
+            b"deleted_at",
+            "expires_at",
+            b"expires_at",
+            "modified_at",
+            b"modified_at",
+            "upload",
+            b"upload",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "artifact",
+            b"artifact",
+            "created_at",
+            b"created_at",
+            "deleted_at",
+            b"deleted_at",
+            "description",
+            b"description",
+            "expires_at",
+            b"expires_at",
+            "id",
+            b"id",
+            "modified_at",
+            b"modified_at",
+            "upload",
+            b"upload",
+            "visibility",
+            b"visibility",
+        ],
+    ) -> None: ...
+
+global___ArtifactVersion = ArtifactVersion

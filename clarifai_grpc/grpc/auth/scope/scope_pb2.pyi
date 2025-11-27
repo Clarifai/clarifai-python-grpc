@@ -254,6 +254,10 @@ class _SEnumTypeWrapper(
     AnnotationTracks_Get: _S.ValueType  # 166
     AnnotationTracks_Add: _S.ValueType  # 167
     AnnotationTracks_Delete: _S.ValueType  # 168
+    PipelineSteps_Delete: _S.ValueType  # 169
+    Artifacts_Get: _S.ValueType  # 170
+    Artifacts_Add: _S.ValueType  # 171
+    Artifacts_Delete: _S.ValueType  # 172
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -509,6 +513,10 @@ UserMetrics_Get: S.ValueType  # 163
 AnnotationTracks_Get: S.ValueType  # 166
 AnnotationTracks_Add: S.ValueType  # 167
 AnnotationTracks_Delete: S.ValueType  # 168
+PipelineSteps_Delete: S.ValueType  # 169
+Artifacts_Get: S.ValueType  # 170
+Artifacts_Add: S.ValueType  # 171
+Artifacts_Delete: S.ValueType  # 172
 global___S = S
 
 @typing_extensions.final

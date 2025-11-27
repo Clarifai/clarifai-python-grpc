@@ -306,6 +306,13 @@ class _StatusCodeEnumTypeWrapper(
     """Pipeline related codes 263xx"""
     PIPELINE_INVALID_ARGUMENT: _StatusCode.ValueType  # 26301
     PIPELINE_INVALID_REQUEST: _StatusCode.ValueType  # 26302
+    ARTIFACT_DOES_NOT_EXIST: _StatusCode.ValueType  # 26400
+    """Artifact related codes 264xx"""
+    ARTIFACT_INVALID_ARGUMENT: _StatusCode.ValueType  # 26401
+    ARTIFACT_INVALID_REQUEST: _StatusCode.ValueType  # 26402
+    ARTIFACT_VERSION_DOES_NOT_EXIST: _StatusCode.ValueType  # 26403
+    ARTIFACT_VERSION_INVALID_ARGUMENT: _StatusCode.ValueType  # 26404
+    ARTIFACT_VERSION_INVALID_REQUEST: _StatusCode.ValueType  # 26405
     INPUT_SUCCESS: _StatusCode.ValueType  # 30000
     """Input:Image related 30xxx"""
     INPUT_PENDING: _StatusCode.ValueType  # 30001
@@ -900,6 +907,13 @@ PIPELINE_DOES_NOT_EXIST: StatusCode.ValueType  # 26300
 """Pipeline related codes 263xx"""
 PIPELINE_INVALID_ARGUMENT: StatusCode.ValueType  # 26301
 PIPELINE_INVALID_REQUEST: StatusCode.ValueType  # 26302
+ARTIFACT_DOES_NOT_EXIST: StatusCode.ValueType  # 26400
+"""Artifact related codes 264xx"""
+ARTIFACT_INVALID_ARGUMENT: StatusCode.ValueType  # 26401
+ARTIFACT_INVALID_REQUEST: StatusCode.ValueType  # 26402
+ARTIFACT_VERSION_DOES_NOT_EXIST: StatusCode.ValueType  # 26403
+ARTIFACT_VERSION_INVALID_ARGUMENT: StatusCode.ValueType  # 26404
+ARTIFACT_VERSION_INVALID_REQUEST: StatusCode.ValueType  # 26405
 INPUT_SUCCESS: StatusCode.ValueType  # 30000
 """Input:Image related 30xxx"""
 INPUT_PENDING: StatusCode.ValueType  # 30001
