@@ -595,6 +595,13 @@ class _StatusCodeEnumTypeWrapper(
     BILLING_MISSING_TOKENS: _StatusCode.ValueType  # 69001
     LOG_ENTRIES_INVALID_REQUEST: _StatusCode.ValueType  # 70000
     """Logs related issues: 70000;"""
+    TWILIO_UNCATEGORIZED_ERROR: _StatusCode.ValueType  # 71001
+    """Twilio related issues: 71xxx"""
+    TWILIO_INVALID_ARGUMENT: _StatusCode.ValueType  # 71002
+    TWILIO_MAX_VERIFICATION_BEGIN_EXCEEDED: _StatusCode.ValueType  # 71003
+    TWILIO_MAX_VERIFICATION_CHECK_EXCEEDED: _StatusCode.ValueType  # 71004
+    TWILIO_RESOURCE_NOT_FOUND: _StatusCode.ValueType  # 71005
+    TWILIO_CLIENT_NOT_INITIALIZED: _StatusCode.ValueType  # 71006
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
     INTERNAL_FETCHING_ISSUE: _StatusCode.ValueType  # 98005
@@ -1196,6 +1203,13 @@ BILLING_INVALID_INFO: StatusCode.ValueType  # 69000
 BILLING_MISSING_TOKENS: StatusCode.ValueType  # 69001
 LOG_ENTRIES_INVALID_REQUEST: StatusCode.ValueType  # 70000
 """Logs related issues: 70000;"""
+TWILIO_UNCATEGORIZED_ERROR: StatusCode.ValueType  # 71001
+"""Twilio related issues: 71xxx"""
+TWILIO_INVALID_ARGUMENT: StatusCode.ValueType  # 71002
+TWILIO_MAX_VERIFICATION_BEGIN_EXCEEDED: StatusCode.ValueType  # 71003
+TWILIO_MAX_VERIFICATION_CHECK_EXCEEDED: StatusCode.ValueType  # 71004
+TWILIO_RESOURCE_NOT_FOUND: StatusCode.ValueType  # 71005
+TWILIO_CLIENT_NOT_INITIALIZED: StatusCode.ValueType  # 71006
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 INTERNAL_FETCHING_ISSUE: StatusCode.ValueType  # 98005

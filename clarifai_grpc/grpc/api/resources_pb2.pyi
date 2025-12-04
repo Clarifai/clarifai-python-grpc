@@ -277,6 +277,8 @@ class _DeployRestrictionEnumTypeWrapper(
     """Model can only be used on shared compute resources."""
     DEDICATED_COMPUTE_ONLY: _DeployRestriction.ValueType  # 3
     """Model can only be used on dedicated compute resources."""
+    MODEL_OWNER_DEDICATED_COMPUTE_ONLY: _DeployRestriction.ValueType  # 4
+    """Model can only be used on dedicated compute resources owned by the model owner."""
 
 class DeployRestriction(_DeployRestriction, metaclass=_DeployRestrictionEnumTypeWrapper): ...
 
@@ -288,6 +290,8 @@ SHARED_COMPUTE_ONLY: DeployRestriction.ValueType  # 2
 """Model can only be used on shared compute resources."""
 DEDICATED_COMPUTE_ONLY: DeployRestriction.ValueType  # 3
 """Model can only be used on dedicated compute resources."""
+MODEL_OWNER_DEDICATED_COMPUTE_ONLY: DeployRestriction.ValueType  # 4
+"""Model can only be used on dedicated compute resources owned by the model owner."""
 global___DeployRestriction = DeployRestriction
 
 class _DataType:

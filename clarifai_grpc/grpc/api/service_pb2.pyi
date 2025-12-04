@@ -184,9 +184,7 @@ class Pagination(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     page: builtins.int
-    """(optional URL parameter) The page number. Pagination is used to split the results into chunks. Defaults to 1."""
     per_page: builtins.int
-    """(optional URL parameter) The number of results that will be contained in each page. Defaults to 128."""
     def __init__(
         self,
         *,
