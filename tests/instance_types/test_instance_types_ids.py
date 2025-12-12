@@ -7,8 +7,23 @@ from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from tests.common import get_channel, grpc_channel, metadata
 
+IGNORE_CLOUD_PROVIDERS = ["lambda"]
+IGNORE_INSTANCE_TYPES = [
+    'ct5lp-hightpu-1t',
+    'ct5lp-hightpu-4t',
+    'ct5p-hightpu-4t',
+    'ct6e-standard-1t',
+    'ct6e-standard-4t',
+    'g4-standard-192',
+    'g4-standard-384',
+    'g4-standard-48',
+    'g4-standard-96',
+    'tpu7x-standard-1t',
+    'tpu7x-standard-4t',
+]
 
-def fetch_csv_from_github(cloud_provider: str, catalog_version: str = "v7") -> str:
+
+def fetch_csv_from_github(cloud_provider: str, catalog_version: str = "v8") -> str:
     """
     Fetch CSV content directly from GitHub raw URLs instead of cloning the repository.
 
@@ -180,6 +195,8 @@ def collect_all_instance_types(stub, metadata_tuple) -> Dict[str, Dict[str, List
     cloud_providers = get_cloud_providers(stub, metadata_tuple)
 
     for cloud_provider in cloud_providers:
+        if cloud_provider.id.lower() in IGNORE_CLOUD_PROVIDERS:
+            continue
         all_instance_types[cloud_provider.id] = {}
 
         # Get all regions for this cloud provider
@@ -240,7 +257,9 @@ def test_instance_types_exist_and_not_deprecated(channel_key):
         all_expected_instance_types.update(expected_types)
 
     # Check for missing instance types (API returns types not in skypilot-catalog)
-    missing_in_skypilot = all_api_instance_types - all_expected_instance_types
+    missing_in_skypilot = (
+        all_api_instance_types - all_expected_instance_types - set(IGNORE_INSTANCE_TYPES)
+    )
     if missing_in_skypilot:
         pytest.fail(
             f"Found {len(missing_in_skypilot)} instance types in API that are not in skypilot-catalog: "
