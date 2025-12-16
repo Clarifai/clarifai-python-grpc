@@ -184,7 +184,9 @@ class Pagination(google.protobuf.message.Message):
     PAGE_FIELD_NUMBER: builtins.int
     PER_PAGE_FIELD_NUMBER: builtins.int
     page: builtins.int
+    """(optional URL parameter) The page number. Pagination is used to split the results into chunks. Defaults to 1."""
     per_page: builtins.int
+    """(optional URL parameter) The number of results that will be contained in each page. Defaults to 128."""
     def __init__(
         self,
         *,
@@ -15106,23 +15108,35 @@ class MultiCloudRegionResponse(google.protobuf.message.Message):
 
     STATUS_FIELD_NUMBER: builtins.int
     REGIONS_FIELD_NUMBER: builtins.int
+    CLOUD_REGIONS_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     @property
     def regions(
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
+    @property
+    def cloud_regions(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.CloudRegion
+    ]: ...
     def __init__(
         self,
         *,
         status: proto.clarifai.api.status.status_pb2.Status | None = ...,
         regions: collections.abc.Iterable[builtins.str] | None = ...,
+        cloud_regions: collections.abc.Iterable[proto.clarifai.api.resources_pb2.CloudRegion]
+        | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["status", b"status"]
     ) -> builtins.bool: ...
     def ClearField(
-        self, field_name: typing_extensions.Literal["regions", b"regions", "status", b"status"]
+        self,
+        field_name: typing_extensions.Literal[
+            "cloud_regions", b"cloud_regions", "regions", b"regions", "status", b"status"
+        ],
     ) -> None: ...
 
 global___MultiCloudRegionResponse = MultiCloudRegionResponse

@@ -5273,10 +5273,12 @@ class SpecialHandling(google.protobuf.message.Message):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         REASON_NOT_SET: SpecialHandling._Reason.ValueType  # 0
         CONTACT_SALES: SpecialHandling._Reason.ValueType  # 1
+        INTERNAL_ONLY: SpecialHandling._Reason.ValueType  # 2
 
     class Reason(_Reason, metaclass=_ReasonEnumTypeWrapper): ...
     REASON_NOT_SET: SpecialHandling.Reason.ValueType  # 0
     CONTACT_SALES: SpecialHandling.Reason.ValueType  # 1
+    INTERNAL_ONLY: SpecialHandling.Reason.ValueType  # 2
 
     ID_FIELD_NUMBER: builtins.int
     REASON_FIELD_NUMBER: builtins.int
@@ -9009,6 +9011,7 @@ class UserDetail(google.protobuf.message.Message):
     COUNTRY_FIELD_NUMBER: builtins.int
     STATE_FIELD_NUMBER: builtins.int
     COMMITMENT_VALUE_FIELD_NUMBER: builtins.int
+    PHONE_VERIFIED_FIELD_NUMBER: builtins.int
     primary_email: builtins.str
     bill_type: builtins.str
     @property
@@ -9036,6 +9039,8 @@ class UserDetail(google.protobuf.message.Message):
     state: builtins.str
     @property
     def commitment_value(self) -> global___CommitmentValue: ...
+    phone_verified: builtins.bool
+    """For phone number verification, true if the phone number has been verified"""
     def __init__(
         self,
         *,
@@ -9052,6 +9057,7 @@ class UserDetail(google.protobuf.message.Message):
         country: builtins.str = ...,
         state: builtins.str = ...,
         commitment_value: global___CommitmentValue | None = ...,
+        phone_verified: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -9091,6 +9097,8 @@ class UserDetail(google.protobuf.message.Message):
             b"email_addresses",
             "metadata",
             b"metadata",
+            "phone_verified",
+            b"phone_verified",
             "primary_email",
             b"primary_email",
             "state",
@@ -14480,6 +14488,7 @@ class InstanceType(google.protobuf.message.Message):
     FEATURE_FLAG_GROUP_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     ARCHITECTURE_FIELD_NUMBER: builtins.int
+    AVAILABLE_COMPUTE_INFO_FIELD_NUMBER: builtins.int
     id: builtins.str
     description: builtins.str
     """Short description of instance type."""
@@ -14505,6 +14514,11 @@ class InstanceType(google.protobuf.message.Message):
         """List of special handling instructions for this instance type."""
     architecture: builtins.str
     """Hardware architecture of the instance type (e.g., "linux/amd64", "linux/arm64")."""
+    @property
+    def available_compute_info(self) -> global___ComputeInfo:
+        """Available compute info after accounting for system overhead (daemonsets, kubelet, etc.).
+        This represents the actual resources available for user workloads.
+        """
     def __init__(
         self,
         *,
@@ -14518,12 +14532,15 @@ class InstanceType(google.protobuf.message.Message):
         feature_flag_group: builtins.str = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
         architecture: builtins.str = ...,
+        available_compute_info: global___ComputeInfo | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
             "allowed_capacity_types",
             b"allowed_capacity_types",
+            "available_compute_info",
+            b"available_compute_info",
             "cloud_provider",
             b"cloud_provider",
             "compute_info",
@@ -14537,6 +14554,8 @@ class InstanceType(google.protobuf.message.Message):
             b"allowed_capacity_types",
             "architecture",
             b"architecture",
+            "available_compute_info",
+            b"available_compute_info",
             "cloud_provider",
             b"cloud_provider",
             "compute_info",
@@ -14568,21 +14587,65 @@ class CloudProvider(google.protobuf.message.Message):
 
     ID_FIELD_NUMBER: builtins.int
     NAME_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     id: builtins.str
     """Unique identifier of the cloud provider."""
     name: builtins.str
     """Name of the cloud provider."""
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this cloud provider."""
     def __init__(
         self,
         *,
         id: builtins.str = ...,
         name: builtins.str = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
     ) -> None: ...
     def ClearField(
-        self, field_name: typing_extensions.Literal["id", b"id", "name", b"name"]
+        self,
+        field_name: typing_extensions.Literal[
+            "id", b"id", "name", b"name", "special_handling", b"special_handling"
+        ],
     ) -> None: ...
 
 global___CloudProvider = CloudProvider
+
+@typing_extensions.final
+class CloudRegion(google.protobuf.message.Message):
+    """CloudRegion represents a region where compute resources can be deployed."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Unique identifier of the region."""
+    @property
+    def special_handling(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___SpecialHandling
+    ]:
+        """List of special handling instructions for this region."""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "id", b"id", "special_handling", b"special_handling"
+        ],
+    ) -> None: ...
+
+global___CloudRegion = CloudRegion
 
 @typing_extensions.final
 class ComputeCluster(google.protobuf.message.Message):
@@ -14973,6 +15036,7 @@ class Deployment(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     WORKER_FIELD_NUMBER: builtins.int
+    DESIRED_WORKER_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     DEPLOY_LATEST_VERSION_FIELD_NUMBER: builtins.int
@@ -15016,6 +15080,8 @@ class Deployment(google.protobuf.message.Message):
         For a given user_id, nodepool_id, and object ID we can only have one deployment as it defines
         """
     @property
+    def desired_worker(self) -> global___Worker: ...
+    @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the deployment was created."""
     @property
@@ -15042,6 +15108,7 @@ class Deployment(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         description: builtins.str = ...,
         worker: global___Worker | None = ...,
+        desired_worker: global___Worker | None = ...,
         created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         deploy_latest_version: builtins.bool = ...,
@@ -15054,6 +15121,8 @@ class Deployment(google.protobuf.message.Message):
             b"autoscale_config",
             "created_at",
             b"created_at",
+            "desired_worker",
+            b"desired_worker",
             "metadata",
             b"metadata",
             "modified_at",
@@ -15075,6 +15144,8 @@ class Deployment(google.protobuf.message.Message):
             b"deploy_latest_version",
             "description",
             b"description",
+            "desired_worker",
+            b"desired_worker",
             "id",
             b"id",
             "metadata",
