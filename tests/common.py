@@ -31,6 +31,7 @@ CLOUD_URL = "s3://samples.clarifai.com/storage/"
 MAIN_APP_ID = "main"
 MAIN_APP_USER_ID = "clarifai"
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
+MODERATION_MODEL_ID = "d16f390eb32cad478c7ae150069bd2c6"
 
 
 def get_status_message(status: Status):
