@@ -29,7 +29,7 @@ MODEL_TITLE_AND_ID_PAIRS = [
     # ("textures and patterns", TEXTURES_AND_PATTERNS_MODEL_ID),
     # ("travel", TRAVEL_MODEL_ID),
     # ("wedding", WEDDING_MODEL_ID),
-    # ("logo v2", LOGO_V2_MODEL_ID),
+    ("logo v2", LOGO_V2_MODEL_ID),  # keeping just for a detector to test
 ]
 
 # Constants needed for test imports (not used by deprecated models)
