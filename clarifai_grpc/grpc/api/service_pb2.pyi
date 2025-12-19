@@ -466,7 +466,7 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
-    TRACK_ID_FIELD_NUMBER: builtins.int
+    TRACK_IDS_FIELD_NUMBER: builtins.int
     FRAME_NUMBER_START_FIELD_NUMBER: builtins.int
     FRAME_TIME_START_FIELD_NUMBER: builtins.int
     ANNOTATION_TYPE_FIELD_NUMBER: builtins.int
@@ -477,8 +477,11 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     input_id: builtins.str
     """The input ID containing the video track annotations to stream"""
-    track_id: builtins.str
-    """Filter annotations by track_id"""
+    @property
+    def track_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """Filter annotations by track_ids"""
     frame_number_start: builtins.int
     """Filter annotations starting from this frame number (inclusive)"""
     frame_time_start: builtins.int
@@ -486,7 +489,14 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
     annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType
     """Filter by annotation type (e.g., "bounding_box", "point", "mask")"""
     max_frames: builtins.int
+    """Maximum number of frames to return. Returns annotations from frames in range [frame_number_start, frame_number_start + max_frames - 1] (inclusive on both ends).
+    For example: frame_number_start=5, max_frames=3 returns frames 5, 6, and 7.
+    Default and max: 10800 frames (3 minutes at 60 FPS)
+    """
     max_duration: builtins.int
+    """Maximum duration in milliseconds to return. Returns annotations from time range [frame_time_start, frame_time_start + max_duration - 1] (inclusive on both ends).
+    Default and max: 180000 ms (3 minutes)
+    """
     @property
     def worker(self) -> proto.clarifai.api.resources_pb2.Worker:
         """Filtering by model version ID within a worker (optional).
@@ -498,7 +508,7 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         input_id: builtins.str = ...,
-        track_id: builtins.str = ...,
+        track_ids: collections.abc.Iterable[builtins.str] | None = ...,
         frame_number_start: builtins.int = ...,
         frame_time_start: builtins.int = ...,
         annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType = ...,
@@ -525,8 +535,8 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
             b"max_duration",
             "max_frames",
             b"max_frames",
-            "track_id",
-            b"track_id",
+            "track_ids",
+            b"track_ids",
             "user_app_id",
             b"user_app_id",
             "worker",
@@ -1058,6 +1068,48 @@ class SingleAnnotationResponse(google.protobuf.message.Message):
     ) -> None: ...
 
 global___SingleAnnotationResponse = SingleAnnotationResponse
+
+@typing_extensions.final
+class SingleStreamTrackAnnotationResponse(google.protobuf.message.Message):
+    """SingleStreamTrackAnnotationResponse similar to SingleAnnotationResponse but with an extra field"""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    ANNOTATION_FIELD_NUMBER: builtins.int
+    FRAME_FULLY_PROCESSED_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def annotation(self) -> proto.clarifai.api.resources_pb2.Annotation: ...
+    frame_fully_processed: builtins.bool
+    """Indicates if this frame has been fully processed
+    Needed in case client needs to decide whether to stop and wait for more data or continue playback
+    """
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        annotation: proto.clarifai.api.resources_pb2.Annotation | None = ...,
+        frame_fully_processed: builtins.bool = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal["annotation", b"annotation", "status", b"status"],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "annotation",
+            b"annotation",
+            "frame_fully_processed",
+            b"frame_fully_processed",
+            "status",
+            b"status",
+        ],
+    ) -> None: ...
+
+global___SingleStreamTrackAnnotationResponse = SingleStreamTrackAnnotationResponse
 
 @typing_extensions.final
 class MultiAnnotationResponse(google.protobuf.message.Message):
@@ -5992,6 +6044,7 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
     WORKFLOWS_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
+    PIPELINES_FIELD_NUMBER: builtins.int
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
     datasets: builtins.int
@@ -5999,6 +6052,7 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
     workflows: builtins.int
     modules: builtins.int
     inputs: builtins.int
+    pipelines: builtins.int
     def __init__(
         self,
         *,
@@ -6008,6 +6062,7 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
         workflows: builtins.int = ...,
         modules: builtins.int = ...,
         inputs: builtins.int = ...,
+        pipelines: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["status", b"status"]
@@ -6023,6 +6078,8 @@ class GetResourceCountsResponse(google.protobuf.message.Message):
             b"models",
             "modules",
             b"modules",
+            "pipelines",
+            b"pipelines",
             "status",
             b"status",
             "workflows",

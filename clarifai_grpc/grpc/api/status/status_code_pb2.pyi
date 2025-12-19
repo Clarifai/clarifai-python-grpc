@@ -491,7 +491,11 @@ class _StatusCodeEnumTypeWrapper(
     TASK_FAILED: _StatusCode.ValueType  # 54005
     """An error occurred during add-task-annotations or add-auto-annotations pipeline."""
     TASK_IDLE: _StatusCode.ValueType  # 54006
-    """When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets."""
+    """Task is waiting for user action.
+    Examples:
+    - When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets.
+    - When an Auto Annotation task job for a video livestream input is waiting for user to create a task deployment.
+    """
     TASK_CONFLICT: _StatusCode.ValueType  # 54100
     """The task operation is in conflict with the current state of the server."""
     TASK_NOT_IMPLEMENTED: _StatusCode.ValueType  # 54101
@@ -576,6 +580,7 @@ class _StatusCodeEnumTypeWrapper(
     JOB_CANCELLED: _StatusCode.ValueType  # 64004
     JOB_UNEXPECTED_ERROR: _StatusCode.ValueType  # 64006
     JOB_CONFLICT: _StatusCode.ValueType  # 64007
+    JOB_PAUSED: _StatusCode.ValueType  # 64008
     AUTH_MISSING_IDP_ASSOC: _StatusCode.ValueType  # 65000
     """auth issues
     TODO: Knowledge graph related 80xxx
@@ -1099,7 +1104,11 @@ TASK_WONT_DO: StatusCode.ValueType  # 54003
 TASK_FAILED: StatusCode.ValueType  # 54005
 """An error occurred during add-task-annotations or add-auto-annotations pipeline."""
 TASK_IDLE: StatusCode.ValueType  # 54006
-"""When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets."""
+"""Task is waiting for user action.
+Examples:
+- When an Auto Annotation task job has finished processing its last batch and is waiting for more dataset assets.
+- When an Auto Annotation task job for a video livestream input is waiting for user to create a task deployment.
+"""
 TASK_CONFLICT: StatusCode.ValueType  # 54100
 """The task operation is in conflict with the current state of the server."""
 TASK_NOT_IMPLEMENTED: StatusCode.ValueType  # 54101
@@ -1184,6 +1193,7 @@ JOB_FAILED: StatusCode.ValueType  # 64003
 JOB_CANCELLED: StatusCode.ValueType  # 64004
 JOB_UNEXPECTED_ERROR: StatusCode.ValueType  # 64006
 JOB_CONFLICT: StatusCode.ValueType  # 64007
+JOB_PAUSED: StatusCode.ValueType  # 64008
 AUTH_MISSING_IDP_ASSOC: StatusCode.ValueType  # 65000
 """auth issues
 TODO: Knowledge graph related 80xxx
