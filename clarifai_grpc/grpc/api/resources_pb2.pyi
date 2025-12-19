@@ -1371,11 +1371,13 @@ class AppResourceCounts(google.protobuf.message.Message):
     WORKFLOWS_FIELD_NUMBER: builtins.int
     MODULES_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
+    PIPELINES_FIELD_NUMBER: builtins.int
     datasets: builtins.int
     models: builtins.int
     workflows: builtins.int
     modules: builtins.int
     inputs: builtins.int
+    pipelines: builtins.int
     def __init__(
         self,
         *,
@@ -1384,6 +1386,7 @@ class AppResourceCounts(google.protobuf.message.Message):
         workflows: builtins.int = ...,
         modules: builtins.int = ...,
         inputs: builtins.int = ...,
+        pipelines: builtins.int = ...,
     ) -> None: ...
     def ClearField(
         self,
@@ -1396,6 +1399,8 @@ class AppResourceCounts(google.protobuf.message.Message):
             b"models",
             "modules",
             b"modules",
+            "pipelines",
+            b"pipelines",
             "workflows",
             b"workflows",
         ],
@@ -10839,6 +10844,8 @@ class TaskInputSource(google.protobuf.message.Message):
         """Use the inputs from a saved search."""
         DATASET: TaskInputSource._TaskInputSourceType.ValueType  # 3
         """Inputs from a dataset."""
+        INPUT: TaskInputSource._TaskInputSourceType.ValueType  # 4
+        """Single input (e.g. video livestream input)"""
 
     class TaskInputSourceType(
         _TaskInputSourceType, metaclass=_TaskInputSourceTypeEnumTypeWrapper
@@ -10850,6 +10857,8 @@ class TaskInputSource(google.protobuf.message.Message):
     """Use the inputs from a saved search."""
     DATASET: TaskInputSource.TaskInputSourceType.ValueType  # 3
     """Inputs from a dataset."""
+    INPUT: TaskInputSource.TaskInputSourceType.ValueType  # 4
+    """Single input (e.g. video livestream input)"""
 
     TYPE_FIELD_NUMBER: builtins.int
     ID_FIELD_NUMBER: builtins.int
@@ -10991,7 +11000,9 @@ class TaskReviewManualStrategyInfo(google.protobuf.message.Message):
     SAMPLE_PERCENTAGE_FIELD_NUMBER: builtins.int
     APPROVAL_THRESHOLD_FIELD_NUMBER: builtins.int
     sample_percentage: builtins.float
-    """This field represents the percentage of inputs that will be reviewed by reviewers. It is a value between 0 and 1."""
+    """This field represents the percentage of inputs that will be reviewed by reviewers. It is a value between 0 and 1.
+    Deprecated: Not used.
+    """
     approval_threshold: builtins.int
     """Deprecated: Use consensus_strategy_info.approval_threshold_reviewers."""
     def __init__(
