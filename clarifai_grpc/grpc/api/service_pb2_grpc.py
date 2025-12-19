@@ -132,7 +132,7 @@ class V2Stub(object):
         self.StreamTrackAnnotationsSearches = channel.unary_stream(
                 '/clarifai.api.V2/StreamTrackAnnotationsSearches',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleAnnotationResponse),
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse),
                 )
         self.PostAnnotations = channel.unary_unary(
                 '/clarifai.api.V2/PostAnnotations',
@@ -3726,7 +3726,7 @@ def add_V2Servicer_to_server(servicer, server):
             'StreamTrackAnnotationsSearches': grpc.unary_stream_rpc_method_handler(
                     servicer.StreamTrackAnnotationsSearches,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleAnnotationResponse.SerializeToString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse.SerializeToString,
             ),
             'PostAnnotations': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAnnotations,
@@ -5437,7 +5437,7 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/StreamTrackAnnotationsSearches',
             proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleAnnotationResponse.FromString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
