@@ -258,6 +258,8 @@ class _SEnumTypeWrapper(
     Artifacts_Get: _S.ValueType  # 170
     Artifacts_Add: _S.ValueType  # 171
     Artifacts_Delete: _S.ValueType  # 172
+    PipelineVersionRunStatusLogs_Get: _S.ValueType  # 173
+    """Pipeline version run status logs (audit trail)"""
 
 class S(_S, metaclass=_SEnumTypeWrapper):
     """Next index: 41
@@ -517,6 +519,8 @@ PipelineSteps_Delete: S.ValueType  # 169
 Artifacts_Get: S.ValueType  # 170
 Artifacts_Add: S.ValueType  # 171
 Artifacts_Delete: S.ValueType  # 172
+PipelineVersionRunStatusLogs_Get: S.ValueType  # 173
+"""Pipeline version run status logs (audit trail)"""
 global___S = S
 
 @typing_extensions.final
