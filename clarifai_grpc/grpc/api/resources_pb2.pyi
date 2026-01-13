@@ -9,6 +9,7 @@ import sys
 import typing
 
 import google.protobuf.descriptor
+import google.protobuf.duration_pb2
 import google.protobuf.internal.containers
 import google.protobuf.internal.enum_type_wrapper
 import google.protobuf.message
@@ -10648,6 +10649,7 @@ class TaskWorker(google.protobuf.message.Message):
     PARTITIONED_STRATEGY_INFO_FIELD_NUMBER: builtins.int
     WORKERS_FIELD_NUMBER: builtins.int
     TYPE_FIELD_NUMBER: builtins.int
+    RUNNER_SELECTORS_FIELD_NUMBER: builtins.int
     strategy: global___TaskWorker.TaskWorkerStrategy.ValueType
     """Worker strategy."""
     @property
@@ -10685,6 +10687,16 @@ class TaskWorker(google.protobuf.message.Message):
     """Who is doing annotations - human Worker or auto-annotation via Model/Workflow.
     If set, worker must have be set accordingly to either human worker or model/workflow worker
     """
+    @property
+    def runner_selectors(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___RunnerSelector
+    ]:
+        """Runner selectors is used to select specific runners for the workers of this task.
+        The index of runner_selectors corresponds to the index of workers.
+        In other words: runner_selectors[i] is the runner selector for workers[i].
+        """
     def __init__(
         self,
         *,
@@ -10694,6 +10706,7 @@ class TaskWorker(google.protobuf.message.Message):
         partitioned_strategy_info: global___TaskWorkerPartitionedStrategyInfo | None = ...,
         workers: collections.abc.Iterable[global___Worker] | None = ...,
         type: global___TaskWorker.WorkerType.ValueType = ...,
+        runner_selectors: collections.abc.Iterable[global___RunnerSelector] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -10709,6 +10722,8 @@ class TaskWorker(google.protobuf.message.Message):
         field_name: typing_extensions.Literal[
             "partitioned_strategy_info",
             b"partitioned_strategy_info",
+            "runner_selectors",
+            b"runner_selectors",
             "strategy",
             b"strategy",
             "strategy_info",
@@ -15205,10 +15220,10 @@ class RunnerSelector(google.protobuf.message.Message):
         """
     @property
     def runner(self) -> global___Runner:
-        """Optionally a partcular runner within the nodepool."""
+        """Optionally a particular runner within the nodepool."""
     @property
     def deployment(self) -> global___Deployment:
-        """Optionally a partcular deployment within the nodepool.
+        """Optionally a particular deployment within the nodepool.
         In future as we support matching runners based on just labels:
         RunnerLabels runner_labels = 3; // FUTURE
         """
@@ -17334,6 +17349,9 @@ class PipelineVersionRun(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     INPUT_ARGS_OVERRIDE_FIELD_NUMBER: builtins.int
     ORCHESTRATION_SPEC_FIELD_NUMBER: builtins.int
+    STARTED_AT_FIELD_NUMBER: builtins.int
+    ENDED_AT_FIELD_NUMBER: builtins.int
+    TOTAL_RUN_DURATION_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def pipeline_version(self) -> global___PipelineVersion:
@@ -17364,6 +17382,15 @@ class PipelineVersionRun(google.protobuf.message.Message):
         """Final merged orchestration spec snapshot submitted to backend.
         This field is read-only and cannot be set during creation.
         """
+    @property
+    def started_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline run started executing (first JOB_RUNNING status)"""
+    @property
+    def ended_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When the pipeline run finished executing (terminal status)"""
+    @property
+    def total_run_duration(self) -> google.protobuf.duration_pb2.Duration:
+        """Total cumulative run duration excluding pause time"""
     def __init__(
         self,
         *,
@@ -17377,12 +17404,17 @@ class PipelineVersionRun(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         input_args_override: global___OrchestrationArgsOverride | None = ...,
         orchestration_spec: global___OrchestrationSpec | None = ...,
+        started_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        ended_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        total_run_duration: google.protobuf.duration_pb2.Duration | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
             "created_at",
             b"created_at",
+            "ended_at",
+            b"ended_at",
             "input_args_override",
             b"input_args_override",
             "modified_at",
@@ -17393,6 +17425,10 @@ class PipelineVersionRun(google.protobuf.message.Message):
             b"orchestration_status",
             "pipeline_version",
             b"pipeline_version",
+            "started_at",
+            b"started_at",
+            "total_run_duration",
+            b"total_run_duration",
         ],
     ) -> builtins.bool: ...
     def ClearField(
@@ -17402,6 +17438,8 @@ class PipelineVersionRun(google.protobuf.message.Message):
             b"app_id",
             "created_at",
             b"created_at",
+            "ended_at",
+            b"ended_at",
             "id",
             b"id",
             "input_args_override",
@@ -17416,12 +17454,74 @@ class PipelineVersionRun(google.protobuf.message.Message):
             b"orchestration_status",
             "pipeline_version",
             b"pipeline_version",
+            "started_at",
+            b"started_at",
+            "total_run_duration",
+            b"total_run_duration",
             "user_id",
             b"user_id",
         ],
     ) -> None: ...
 
 global___PipelineVersionRun = PipelineVersionRun
+
+@typing_extensions.final
+class PipelineVersionRunStatusLog(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    MESSAGE_FIELD_NUMBER: builtins.int
+    TRIGGERED_BY_USER_ID_FIELD_NUMBER: builtins.int
+    CREATED_AT_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Unique ID for this status record"""
+    pipeline_version_run_id: builtins.str
+    """The PipelineVersionRun this log entry belongs to"""
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
+        """Clarifai status object representing the current status"""
+    message: builtins.str
+    """Optional human-readable reason or message (e.g. "Paused due to resource limit")"""
+    triggered_by_user_id: builtins.str
+    """Who triggered this status change"""
+    @property
+    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """When this status was recorded"""
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        message: builtins.str = ...,
+        triggered_by_user_id: builtins.str = ...,
+        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal["created_at", b"created_at", "status", b"status"],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "created_at",
+            b"created_at",
+            "id",
+            b"id",
+            "message",
+            b"message",
+            "pipeline_version_run_id",
+            b"pipeline_version_run_id",
+            "status",
+            b"status",
+            "triggered_by_user_id",
+            b"triggered_by_user_id",
+        ],
+    ) -> None: ...
+
+global___PipelineVersionRunStatusLog = PipelineVersionRunStatusLog
 
 @typing_extensions.final
 class Secret(google.protobuf.message.Message):

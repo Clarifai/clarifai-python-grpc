@@ -1364,6 +1364,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchPipelineVersionRunsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunResponse),
                 )
+        self.ListPipelineVersionRunStatusLogs = channel.unary_unary(
+                '/clarifai.api.V2/ListPipelineVersionRunStatusLogs',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineVersionRunStatusLogsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunStatusLogResponse),
+                )
         self.PostPipelineSteps = channel.unary_unary(
                 '/clarifai.api.V2/PostPipelineSteps',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineStepsRequest.SerializeToString,
@@ -3477,6 +3482,12 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def ListPipelineVersionRunStatusLogs(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def PostPipelineSteps(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -4957,6 +4968,11 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.PatchPipelineVersionRuns,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchPipelineVersionRunsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunResponse.SerializeToString,
+            ),
+            'ListPipelineVersionRunStatusLogs': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPipelineVersionRunStatusLogs,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineVersionRunStatusLogsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunStatusLogResponse.SerializeToString,
             ),
             'PostPipelineSteps': grpc.unary_unary_rpc_method_handler(
                     servicer.PostPipelineSteps,
@@ -9620,6 +9636,23 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchPipelineVersionRuns',
             proto_dot_clarifai_dot_api_dot_service__pb2.PatchPipelineVersionRunsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPipelineVersionRunStatusLogs(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPipelineVersionRunStatusLogs',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineVersionRunStatusLogsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineVersionRunStatusLogResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

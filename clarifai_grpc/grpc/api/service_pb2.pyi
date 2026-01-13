@@ -17422,6 +17422,113 @@ class MultiPipelineVersionRunResponse(google.protobuf.message.Message):
 global___MultiPipelineVersionRunResponse = MultiPipelineVersionRunResponse
 
 @typing_extensions.final
+class ListPipelineVersionRunStatusLogsRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_ID_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_ID_FIELD_NUMBER: builtins.int
+    STATUS_CODES_FIELD_NUMBER: builtins.int
+    PAGE_FIELD_NUMBER: builtins.int
+    PER_PAGE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
+        """User App ID"""
+    pipeline_id: builtins.str
+    """Pipeline ID"""
+    pipeline_version_id: builtins.str
+    """Pipeline Version ID"""
+    pipeline_version_run_id: builtins.str
+    """Pipeline Version Run ID"""
+    @property
+    def status_codes(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[
+        proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+    ]:
+        """Status codes to filter by (optional)"""
+    page: builtins.int
+    """Pagination"""
+    per_page: builtins.int
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        pipeline_id: builtins.str = ...,
+        pipeline_version_id: builtins.str = ...,
+        pipeline_version_run_id: builtins.str = ...,
+        status_codes: collections.abc.Iterable[
+            proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
+        ]
+        | None = ...,
+        page: builtins.int = ...,
+        per_page: builtins.int = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "page",
+            b"page",
+            "per_page",
+            b"per_page",
+            "pipeline_id",
+            b"pipeline_id",
+            "pipeline_version_id",
+            b"pipeline_version_id",
+            "pipeline_version_run_id",
+            b"pipeline_version_run_id",
+            "status_codes",
+            b"status_codes",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___ListPipelineVersionRunStatusLogsRequest = ListPipelineVersionRunStatusLogsRequest
+
+@typing_extensions.final
+class MultiPipelineVersionRunStatusLogResponse(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    STATUS_FIELD_NUMBER: builtins.int
+    PIPELINE_VERSION_RUN_STATUS_LOGS_FIELD_NUMBER: builtins.int
+    @property
+    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
+    @property
+    def pipeline_version_run_status_logs(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.PipelineVersionRunStatusLog
+    ]: ...
+    def __init__(
+        self,
+        *,
+        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
+        pipeline_version_run_status_logs: collections.abc.Iterable[
+            proto.clarifai.api.resources_pb2.PipelineVersionRunStatusLog
+        ]
+        | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["status", b"status"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "pipeline_version_run_status_logs",
+            b"pipeline_version_run_status_logs",
+            "status",
+            b"status",
+        ],
+    ) -> None: ...
+
+global___MultiPipelineVersionRunStatusLogResponse = MultiPipelineVersionRunStatusLogResponse
+
+@typing_extensions.final
 class PostPipelineStepsRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
