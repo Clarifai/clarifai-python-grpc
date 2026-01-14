@@ -459,8 +459,8 @@ class PostTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
 global___PostTrackAnnotationsSearchesRequest = PostTrackAnnotationsSearchesRequest
 
 @typing_extensions.final
-class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
-    """StreamTrackAnnotationsSearchesRequest"""
+class StreamAnnotationsRequest(google.protobuf.message.Message):
+    """StreamAnnotationsRequest"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -476,12 +476,14 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     input_id: builtins.str
-    """The input ID containing the video track annotations to stream"""
+    """The input ID containing the annotations to stream"""
     @property
     def track_ids(
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Filter annotations by track_ids"""
+        """Filter annotations by track_ids (optional - omit to stream all tracks for the input).
+        This is useful for historical playback where you want to stream all annotations in a time range.
+        """
     frame_number_start: builtins.int
     """Filter annotations starting from this frame number (inclusive)"""
     frame_time_start: builtins.int
@@ -491,11 +493,11 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
     max_frames: builtins.int
     """Maximum number of frames to return. Returns annotations from frames in range [frame_number_start, frame_number_start + max_frames - 1] (inclusive on both ends).
     For example: frame_number_start=5, max_frames=3 returns frames 5, 6, and 7.
-    Default and max: 10800 frames (3 minutes at 60 FPS)
+    Default and max: 216000 frames (60 minutes at 60 FPS)
     """
     max_duration: builtins.int
     """Maximum duration in milliseconds to return. Returns annotations from time range [frame_time_start, frame_time_start + max_duration - 1] (inclusive on both ends).
-    Default and max: 180000 ms (3 minutes)
+    Default and max: 3600000 ms (60 minutes)
     """
     @property
     def worker(self) -> proto.clarifai.api.resources_pb2.Worker:
@@ -544,7 +546,63 @@ class StreamTrackAnnotationsSearchesRequest(google.protobuf.message.Message):
         ],
     ) -> None: ...
 
-global___StreamTrackAnnotationsSearchesRequest = StreamTrackAnnotationsSearchesRequest
+global___StreamAnnotationsRequest = StreamAnnotationsRequest
+
+@typing_extensions.final
+class StreamLivestreamAnnotationsRequest(google.protobuf.message.Message):
+    """StreamLivestreamAnnotationsRequest
+    Streams live annotations from Redis as they are being created by the runner
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    INPUT_ID_FIELD_NUMBER: builtins.int
+    TASK_ID_FIELD_NUMBER: builtins.int
+    TRACK_IDS_FIELD_NUMBER: builtins.int
+    ANNOTATION_TYPE_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    input_id: builtins.str
+    """The input ID containing the video being processed"""
+    task_id: builtins.str
+    """(Optional) Filter by specific task ID if known"""
+    @property
+    def track_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+        """(Optional) Filter annotations by track_ids"""
+    annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType
+    """(Optional) Filter by annotation type (e.g., "bounding_box", "point", "mask")"""
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        input_id: builtins.str = ...,
+        task_id: builtins.str = ...,
+        track_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "annotation_type",
+            b"annotation_type",
+            "input_id",
+            b"input_id",
+            "task_id",
+            b"task_id",
+            "track_ids",
+            b"track_ids",
+            "user_app_id",
+            b"user_app_id",
+        ],
+    ) -> None: ...
+
+global___StreamLivestreamAnnotationsRequest = StreamLivestreamAnnotationsRequest
 
 @typing_extensions.final
 class PostAnnotationsRequest(google.protobuf.message.Message):
@@ -1070,8 +1128,8 @@ class SingleAnnotationResponse(google.protobuf.message.Message):
 global___SingleAnnotationResponse = SingleAnnotationResponse
 
 @typing_extensions.final
-class SingleStreamTrackAnnotationResponse(google.protobuf.message.Message):
-    """SingleStreamTrackAnnotationResponse similar to SingleAnnotationResponse but with an extra field"""
+class SingleStreamAnnotationResponse(google.protobuf.message.Message):
+    """SingleStreamAnnotationResponse similar to SingleAnnotationResponse but with an extra field"""
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -1109,7 +1167,7 @@ class SingleStreamTrackAnnotationResponse(google.protobuf.message.Message):
         ],
     ) -> None: ...
 
-global___SingleStreamTrackAnnotationResponse = SingleStreamTrackAnnotationResponse
+global___SingleStreamAnnotationResponse = SingleStreamAnnotationResponse
 
 @typing_extensions.final
 class MultiAnnotationResponse(google.protobuf.message.Message):
@@ -14873,6 +14931,7 @@ class RunnerItem(google.protobuf.message.Message):
     PROCESSING_INFO_FIELD_NUMBER: builtins.int
     POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
     SYNC_STATE_REQUEST_FIELD_NUMBER: builtins.int
+    AUTO_ANNOTATION_REQUEST_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A UUID hash for this work item."""
     description: builtins.str
@@ -14885,7 +14944,10 @@ class RunnerItem(google.protobuf.message.Message):
         """Model prediction request from a user."""
     @property
     def sync_state_request(self) -> global___SyncStateRequest:
-        """Agent sync request from control plane.
+        """Agent sync request from control plane."""
+    @property
+    def auto_annotation_request(self) -> global___AutoAnnotationRequest:
+        """Auto annotation request from a user.
         Workflow request from a user.  // FUTURE
         training request next, etc.
         """
@@ -14897,10 +14959,13 @@ class RunnerItem(google.protobuf.message.Message):
         processing_info: proto.clarifai.api.resources_pb2.ProcessingInfo | None = ...,
         post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
         sync_state_request: global___SyncStateRequest | None = ...,
+        auto_annotation_request: global___AutoAnnotationRequest | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
+            "auto_annotation_request",
+            b"auto_annotation_request",
             "post_model_outputs_request",
             b"post_model_outputs_request",
             "processing_info",
@@ -14914,6 +14979,8 @@ class RunnerItem(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
+            "auto_annotation_request",
+            b"auto_annotation_request",
             "description",
             b"description",
             "id",
@@ -14930,9 +14997,87 @@ class RunnerItem(google.protobuf.message.Message):
     ) -> None: ...
     def WhichOneof(
         self, oneof_group: typing_extensions.Literal["request", b"request"]
-    ) -> typing_extensions.Literal["post_model_outputs_request", "sync_state_request"] | None: ...
+    ) -> (
+        typing_extensions.Literal[
+            "post_model_outputs_request", "sync_state_request", "auto_annotation_request"
+        ]
+        | None
+    ): ...
 
 global___RunnerItem = RunnerItem
+
+@typing_extensions.final
+class AutoAnnotationRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    @typing_extensions.final
+    class PostAnnotationsInfo(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        USER_APP_ID_FIELD_NUMBER: builtins.int
+        AUTHORIZATION_VALUE_FIELD_NUMBER: builtins.int
+        TASK_ID_FIELD_NUMBER: builtins.int
+        @property
+        def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+        authorization_value: builtins.str
+        """Authorization value to be used when calling PostAnnotations endpoint."""
+        task_id: builtins.str
+        """Task ID linked to the annotations being created."""
+        def __init__(
+            self,
+            *,
+            user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+            authorization_value: builtins.str = ...,
+            task_id: builtins.str = ...,
+        ) -> None: ...
+        def HasField(
+            self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+        ) -> builtins.bool: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal[
+                "authorization_value",
+                b"authorization_value",
+                "task_id",
+                b"task_id",
+                "user_app_id",
+                b"user_app_id",
+            ],
+        ) -> None: ...
+
+    POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
+    POST_ANNOTATIONS_INFO_FIELD_NUMBER: builtins.int
+    @property
+    def post_model_outputs_request(self) -> global___PostModelOutputsRequest:
+        """Perform prediction request and call PostAnnotations endpoint using post_annotations_info and prediction results."""
+    @property
+    def post_annotations_info(self) -> global___AutoAnnotationRequest.PostAnnotationsInfo: ...
+    def __init__(
+        self,
+        *,
+        post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
+        post_annotations_info: global___AutoAnnotationRequest.PostAnnotationsInfo | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "post_annotations_info",
+            b"post_annotations_info",
+            "post_model_outputs_request",
+            b"post_model_outputs_request",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "post_annotations_info",
+            b"post_annotations_info",
+            "post_model_outputs_request",
+            b"post_model_outputs_request",
+        ],
+    ) -> None: ...
+
+global___AutoAnnotationRequest = AutoAnnotationRequest
 
 @typing_extensions.final
 class RunnerItemOutput(google.protobuf.message.Message):

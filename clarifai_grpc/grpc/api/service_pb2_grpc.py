@@ -129,10 +129,15 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrackAnnotationsSearchesRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse),
                 )
-        self.StreamTrackAnnotationsSearches = channel.unary_stream(
-                '/clarifai.api.V2/StreamTrackAnnotationsSearches',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse),
+        self.StreamAnnotations = channel.unary_stream(
+                '/clarifai.api.V2/StreamAnnotations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamAnnotationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse),
+                )
+        self.StreamLivestreamAnnotations = channel.unary_stream(
+                '/clarifai.api.V2/StreamLivestreamAnnotations',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamLivestreamAnnotationsRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse),
                 )
         self.PostAnnotations = channel.unary_unary(
                 '/clarifai.api.V2/PostAnnotations',
@@ -1645,8 +1650,16 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def StreamTrackAnnotationsSearches(self, request, context):
-        """Stream video track annotations for a specific input one-by-one.
+    def StreamAnnotations(self, request, context):
+        """Stream annotations for a specific input one-by-one.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def StreamLivestreamAnnotations(self, request, context):
+        """Stream live video annotations as they are being created by the runner.
+        This endpoint reads from Redis instead of the database for real-time streaming.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3734,10 +3747,15 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostTrackAnnotationsSearchesRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiAnnotationResponse.SerializeToString,
             ),
-            'StreamTrackAnnotationsSearches': grpc.unary_stream_rpc_method_handler(
-                    servicer.StreamTrackAnnotationsSearches,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse.SerializeToString,
+            'StreamAnnotations': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamAnnotations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamAnnotationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse.SerializeToString,
+            ),
+            'StreamLivestreamAnnotations': grpc.unary_stream_rpc_method_handler(
+                    servicer.StreamLivestreamAnnotations,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.StreamLivestreamAnnotationsRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse.SerializeToString,
             ),
             'PostAnnotations': grpc.unary_unary_rpc_method_handler(
                     servicer.PostAnnotations,
@@ -5441,7 +5459,7 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def StreamTrackAnnotationsSearches(request,
+    def StreamAnnotations(request,
             target,
             options=(),
             channel_credentials=None,
@@ -5451,9 +5469,26 @@ class V2(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/StreamTrackAnnotationsSearches',
-            proto_dot_clarifai_dot_api_dot_service__pb2.StreamTrackAnnotationsSearchesRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamTrackAnnotationResponse.FromString,
+        return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/StreamAnnotations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.StreamAnnotationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def StreamLivestreamAnnotations(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/clarifai.api.V2/StreamLivestreamAnnotations',
+            proto_dot_clarifai_dot_api_dot_service__pb2.StreamLivestreamAnnotationsRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleStreamAnnotationResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
