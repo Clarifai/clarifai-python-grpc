@@ -11300,8 +11300,11 @@ class PatchTasksRequest(google.protobuf.message.Message):
         proto.clarifai.api.resources_pb2.Task
     ]: ...
     action: builtins.str
-    """The action to perform on the patched objects
-    For now, only 'overwrite' action is supported
+    """The action to perform on the patched tasks
+    Supported operations:
+    * 'overwrite' - overwrite the task with the fields provided in the request
+    * 'merge' - update only the fields provided in the request, leave other fields unchanged
+    For now, the 'merge' operation only supports updating task status.
     """
     def __init__(
         self,
@@ -11651,7 +11654,7 @@ class PatchLabelOrdersRequest(google.protobuf.message.Message):
     ]: ...
     action: builtins.str
     """The action to perform on the patched objects
-    For now actions 'merge', 'overwrite', and 'remove' are supported
+    For now, only 'overwrite' option is supported
     """
     def __init__(
         self,
@@ -15010,70 +15013,39 @@ global___RunnerItem = RunnerItem
 class AutoAnnotationRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
-    @typing_extensions.final
-    class PostAnnotationsInfo(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        USER_APP_ID_FIELD_NUMBER: builtins.int
-        AUTHORIZATION_VALUE_FIELD_NUMBER: builtins.int
-        TASK_ID_FIELD_NUMBER: builtins.int
-        @property
-        def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-        authorization_value: builtins.str
-        """Authorization value to be used when calling PostAnnotations endpoint."""
-        task_id: builtins.str
-        """Task ID linked to the annotations being created."""
-        def __init__(
-            self,
-            *,
-            user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-            authorization_value: builtins.str = ...,
-            task_id: builtins.str = ...,
-        ) -> None: ...
-        def HasField(
-            self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-        ) -> builtins.bool: ...
-        def ClearField(
-            self,
-            field_name: typing_extensions.Literal[
-                "authorization_value",
-                b"authorization_value",
-                "task_id",
-                b"task_id",
-                "user_app_id",
-                b"user_app_id",
-            ],
-        ) -> None: ...
-
     POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
-    POST_ANNOTATIONS_INFO_FIELD_NUMBER: builtins.int
+    TASK_FIELD_NUMBER: builtins.int
+    AUTHORIZATION_VALUE_FIELD_NUMBER: builtins.int
     @property
     def post_model_outputs_request(self) -> global___PostModelOutputsRequest:
-        """Perform prediction request and call PostAnnotations endpoint using post_annotations_info and prediction results."""
+        """Perform prediction request and call PostAnnotations endpoint using prediction results."""
     @property
-    def post_annotations_info(self) -> global___AutoAnnotationRequest.PostAnnotationsInfo: ...
+    def task(self) -> proto.clarifai.api.resources_pb2.Task:
+        """Task used to create annotations ."""
+    authorization_value: builtins.str
+    """Authorization value to be used when calling PostAnnotations endpoint."""
     def __init__(
         self,
         *,
         post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
-        post_annotations_info: global___AutoAnnotationRequest.PostAnnotationsInfo | None = ...,
+        task: proto.clarifai.api.resources_pb2.Task | None = ...,
+        authorization_value: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
-            "post_annotations_info",
-            b"post_annotations_info",
-            "post_model_outputs_request",
-            b"post_model_outputs_request",
+            "post_model_outputs_request", b"post_model_outputs_request", "task", b"task"
         ],
     ) -> builtins.bool: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "post_annotations_info",
-            b"post_annotations_info",
+            "authorization_value",
+            b"authorization_value",
             "post_model_outputs_request",
             b"post_model_outputs_request",
+            "task",
+            b"task",
         ],
     ) -> None: ...
 
