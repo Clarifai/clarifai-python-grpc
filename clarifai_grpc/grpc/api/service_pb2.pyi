@@ -558,30 +558,15 @@ class StreamLivestreamAnnotationsRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
-    TASK_ID_FIELD_NUMBER: builtins.int
-    TRACK_IDS_FIELD_NUMBER: builtins.int
-    ANNOTATION_TYPE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     input_id: builtins.str
     """The input ID containing the video being processed"""
-    task_id: builtins.str
-    """(Optional) Filter by specific task ID if known"""
-    @property
-    def track_ids(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """(Optional) Filter annotations by track_ids"""
-    annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType
-    """(Optional) Filter by annotation type (e.g., "bounding_box", "point", "mask")"""
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         input_id: builtins.str = ...,
-        task_id: builtins.str = ...,
-        track_ids: collections.abc.Iterable[builtins.str] | None = ...,
-        annotation_type: proto.clarifai.api.resources_pb2.AnnotationDataType.ValueType = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -589,16 +574,7 @@ class StreamLivestreamAnnotationsRequest(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "annotation_type",
-            b"annotation_type",
-            "input_id",
-            b"input_id",
-            "task_id",
-            b"task_id",
-            "track_ids",
-            b"track_ids",
-            "user_app_id",
-            b"user_app_id",
+            "input_id", b"input_id", "user_app_id", b"user_app_id"
         ],
     ) -> None: ...
 

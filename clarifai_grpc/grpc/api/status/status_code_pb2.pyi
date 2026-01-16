@@ -446,6 +446,7 @@ class _StatusCodeEnumTypeWrapper(
     REDIS_STREAM_ERR: _StatusCode.ValueType  # 45003
     REDIS_NO_CONSUMERS: _StatusCode.ValueType  # 45004
     REDIS_STREAM_BACKOFF: _StatusCode.ValueType  # 45005
+    REDIS_CHANNEL_ERR: _StatusCode.ValueType  # 45006
     SIGNUP_EVENT_ERROR: _StatusCode.ValueType  # 46001
     """Sift Science 46xxx"""
     SIGNUP_FLAGGED: _StatusCode.ValueType  # 46002
@@ -1055,6 +1056,7 @@ REDIS_SCRIPT_EXITED_WITH_FAILURE: StatusCode.ValueType  # 45002
 REDIS_STREAM_ERR: StatusCode.ValueType  # 45003
 REDIS_NO_CONSUMERS: StatusCode.ValueType  # 45004
 REDIS_STREAM_BACKOFF: StatusCode.ValueType  # 45005
+REDIS_CHANNEL_ERR: StatusCode.ValueType  # 45006
 SIGNUP_EVENT_ERROR: StatusCode.ValueType  # 46001
 """Sift Science 46xxx"""
 SIGNUP_FLAGGED: StatusCode.ValueType  # 46002
