@@ -11149,6 +11149,7 @@ class ListTasksRequest(google.protobuf.message.Message):
     IDS_FIELD_NUMBER: builtins.int
     INPUT_SOURCE_TYPE_FIELD_NUMBER: builtins.int
     INPUT_SOURCE_IDS_FIELD_NUMBER: builtins.int
+    WORKER_IDS_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     page: builtins.int
@@ -11163,7 +11164,9 @@ class ListTasksRequest(google.protobuf.message.Message):
     def worker_user_ids(
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """Get tasks that have ANY user from this list assigned as worker."""
+        """Get tasks that have ANY user from this list assigned as worker.
+        Deprecated: Use worker_ids.
+        """
     @property
     def review_user_ids(
         self,
@@ -11210,6 +11213,12 @@ class ListTasksRequest(google.protobuf.message.Message):
         self,
     ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
         """(optional) ids of input source to be filtered"""
+    @property
+    def worker_ids(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        proto.clarifai.api.resources_pb2.WorkerIDSet
+    ]: ...
     def __init__(
         self,
         *,
@@ -11224,6 +11233,8 @@ class ListTasksRequest(google.protobuf.message.Message):
         ids: collections.abc.Iterable[builtins.str] | None = ...,
         input_source_type: proto.clarifai.api.resources_pb2.TaskInputSource.TaskInputSourceType.ValueType = ...,
         input_source_ids: collections.abc.Iterable[builtins.str] | None = ...,
+        worker_ids: collections.abc.Iterable[proto.clarifai.api.resources_pb2.WorkerIDSet]
+        | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -11251,6 +11262,8 @@ class ListTasksRequest(google.protobuf.message.Message):
             b"review_user_ids",
             "user_app_id",
             b"user_app_id",
+            "worker_ids",
+            b"worker_ids",
             "worker_user_ids",
             b"worker_user_ids",
         ],

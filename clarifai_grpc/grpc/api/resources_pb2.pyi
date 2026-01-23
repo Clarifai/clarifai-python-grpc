@@ -1842,6 +1842,60 @@ class UserAppIDSet(google.protobuf.message.Message):
 global___UserAppIDSet = UserAppIDSet
 
 @typing_extensions.final
+class WorkerIDSet(google.protobuf.message.Message):
+    """WorkerIDSet helps to identify different types of workers.
+    To identify a user, set user_id field.
+    To identify a model from current application, set model_id and model_version_id fields.
+    To identify a model from another application, set user_id, app_id, model_id and model_version_id fields.
+    To identify a workflow from current application, set workflow_id and workflow_version_id fields.
+    To identify a workflow from another application, set user_id, app_id, workflow_id and workflow_version_id fields.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_ID_FIELD_NUMBER: builtins.int
+    APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_ID_FIELD_NUMBER: builtins.int
+    WORKFLOW_VERSION_ID_FIELD_NUMBER: builtins.int
+    user_id: builtins.str
+    app_id: builtins.str
+    model_id: builtins.str
+    model_version_id: builtins.str
+    workflow_id: builtins.str
+    workflow_version_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_id: builtins.str = ...,
+        app_id: builtins.str = ...,
+        model_id: builtins.str = ...,
+        model_version_id: builtins.str = ...,
+        workflow_id: builtins.str = ...,
+        workflow_version_id: builtins.str = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "app_id",
+            b"app_id",
+            "model_id",
+            b"model_id",
+            "model_version_id",
+            b"model_version_id",
+            "user_id",
+            b"user_id",
+            "workflow_id",
+            b"workflow_id",
+            "workflow_version_id",
+            b"workflow_version_id",
+        ],
+    ) -> None: ...
+
+global___WorkerIDSet = WorkerIDSet
+
+@typing_extensions.final
 class PatchAction(google.protobuf.message.Message):
     """PatchAction"""
 
