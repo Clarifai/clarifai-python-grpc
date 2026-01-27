@@ -1,3 +1,5 @@
+import pytest
+
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from tests.common import (
     BEER_VIDEO_URL,
@@ -12,6 +14,9 @@ from tests.common import (
     post_model_outputs_and_maybe_allow_retries,
     raise_on_failure,
 )
+
+# Skip all video tests - video decoding not implemented in V3 runners
+pytestmark = pytest.mark.skip(reason="Video decoding not implemented in V3 runners")
 
 
 @both_channels()
