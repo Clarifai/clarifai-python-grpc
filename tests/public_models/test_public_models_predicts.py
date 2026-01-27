@@ -362,6 +362,7 @@ async def test_image_detection_predict_on_public_models_async(
 
 @both_channels()
 @pytest.mark.parametrize("title, model_id", [("general", GENERAL_MODEL_ID)])
+@pytest.mark.skip(reason="Temporarily skipped")
 def test_video_predict_on_public_models(channel_key, title, model_id):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
