@@ -3085,7 +3085,7 @@ class FrameInfo(google.protobuf.message.Message):
     """
     time: builtins.int
     """time in the video in milliseconds. This is independent of the sampling rates used during
-    processing.
+    processing. Changed from uint32 to uint64 to support video livestreams longer than 49.7 days.
     """
     number: builtins.int
     """The absolute number of the frame in the (original) video
@@ -6660,6 +6660,7 @@ class ModelVersion(google.protobuf.message.Message):
     BUILD_INFO_FIELD_NUMBER: builtins.int
     METHOD_SIGNATURES_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    NUM_THREADS_FIELD_NUMBER: builtins.int
     id: builtins.str
     @property
     def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
@@ -6746,6 +6747,8 @@ class ModelVersion(google.protobuf.message.Message):
         global___SpecialHandling
     ]:
         """List of special handling instructions for this model version."""
+    num_threads: builtins.int
+    """The number of threads to use for this model version."""
     def __init__(
         self,
         *,
@@ -6773,6 +6776,7 @@ class ModelVersion(google.protobuf.message.Message):
         build_info: global___BuildInfo | None = ...,
         method_signatures: collections.abc.Iterable[global___MethodSignature] | None = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+        num_threads: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -6840,6 +6844,8 @@ class ModelVersion(google.protobuf.message.Message):
             b"metrics",
             "modified_at",
             b"modified_at",
+            "num_threads",
+            b"num_threads",
             "output_info",
             b"output_info",
             "pretrained_model_config",
