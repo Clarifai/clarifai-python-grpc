@@ -499,6 +499,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse),
                 )
+        self.DeleteModelMigration = channel.unary_unary(
+                '/clarifai.api.V2/DeleteModelMigration',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelMigrationRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse),
+                )
         self.PutModelVersionExports = channel.unary_unary(
                 '/clarifai.api.V2/PutModelVersionExports',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PutModelVersionExportsRequest.SerializeToString,
@@ -2221,6 +2226,13 @@ class V2Servicer(object):
 
     def PostModelMigration(self, request, context):
         """Kicks off conversion from the old Triton model format to the new Docker model format.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def DeleteModelMigration(self, request, context):
+        """Reverts a model migration from Docker format back to Triton format.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -4115,6 +4127,11 @@ def add_V2Servicer_to_server(servicer, server):
             'PostModelMigration': grpc.unary_unary_rpc_method_handler(
                     servicer.PostModelMigration,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
+            ),
+            'DeleteModelMigration': grpc.unary_unary_rpc_method_handler(
+                    servicer.DeleteModelMigration,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelMigrationRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.SerializeToString,
             ),
             'PutModelVersionExports': grpc.unary_unary_rpc_method_handler(
@@ -6712,6 +6729,23 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostModelMigration',
             proto_dot_clarifai_dot_api_dot_service__pb2.PostModelMigrationRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DeleteModelMigration(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteModelMigration',
+            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteModelMigrationRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_service__pb2.SingleModelResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

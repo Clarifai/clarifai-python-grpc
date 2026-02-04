@@ -16604,6 +16604,33 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
 global___PostModelMigrationRequest = PostModelMigrationRequest
 
 @typing_extensions.final
+class DeleteModelMigrationRequest(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_APP_ID_FIELD_NUMBER: builtins.int
+    MODEL_ID_FIELD_NUMBER: builtins.int
+    @property
+    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
+    model_id: builtins.str
+    def __init__(
+        self,
+        *,
+        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
+        model_id: builtins.str = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "model_id", b"model_id", "user_app_id", b"user_app_id"
+        ],
+    ) -> None: ...
+
+global___DeleteModelMigrationRequest = DeleteModelMigrationRequest
+
+@typing_extensions.final
 class ListWorkflowVersionEvaluationDataRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
