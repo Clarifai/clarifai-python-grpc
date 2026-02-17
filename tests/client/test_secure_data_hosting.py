@@ -52,6 +52,7 @@ BAD_HTTP_COOKIE_HEADERS = {
 
 SECURE_DATA_HOSTING_PUBLIC_URL = "https://data.clarifai.com"
 
+
 def get_secure_hosting_url():
     default_secure_data_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
     env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
