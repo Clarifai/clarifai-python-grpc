@@ -16582,14 +16582,17 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     MODEL_ID_FIELD_NUMBER: builtins.int
+    VERSION_ID_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     model_id: builtins.str
+    version_id: builtins.str
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         model_id: builtins.str = ...,
+        version_id: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -16597,7 +16600,7 @@ class PostModelMigrationRequest(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "model_id", b"model_id", "user_app_id", b"user_app_id"
+            "model_id", b"model_id", "user_app_id", b"user_app_id", "version_id", b"version_id"
         ],
     ) -> None: ...
 
