@@ -9,6 +9,8 @@ from tests.common import get_channel, grpc_channel, metadata
 
 IGNORE_CLOUD_PROVIDERS = ["lambda"]
 IGNORE_INSTANCE_TYPES = [
+    'Standard_L2aos_v4',
+    'Standard_ND96isr_MI300X_v5',
     'ct5lp-hightpu-1t',
     'ct5lp-hightpu-4t',
     'ct5p-hightpu-4t',
