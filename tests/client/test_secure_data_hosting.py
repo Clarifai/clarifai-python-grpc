@@ -50,15 +50,27 @@ BAD_HTTP_COOKIE_HEADERS = {
     "pat_cookie": {"x-clarifai-api-key": DUMMY_KEY},
 }
 
+SECURE_DATA_HOSTING_PUBLIC_URL = "https://data.clarifai.com"
+
 
 def get_secure_hosting_url():
-    default_secure_data_hosting_url = "https://data.clarifai.com"
+    default_secure_data_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
     env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
     if env_subdomain == "api-dev-internal":
         default_secure_data_hosting_url = "https://data-dev-internal.clarifai.com"
     elif env_subdomain == "api-staging":
         default_secure_data_hosting_url = "https://data-staging.clarifai.com"
     url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
+    return url
+
+
+def use_secure_hosting_url(url):
+    secure_hosting_url = get_secure_hosting_url()
+    # Replace the public URL with the internal one if we are running in an internal environment.
+    # This is needed because the runners in dev don't have public IPs anymore.
+    orig_secure_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
+    if secure_hosting_url != orig_secure_hosting_url and url.startswith(orig_secure_hosting_url):
+        return url.replace(orig_secure_hosting_url, secure_hosting_url)
     return url
 
 
@@ -76,8 +88,9 @@ def get_rehost_sizes(input_type):
 
 
 def build_rehost_url_from_api_input(api_input, size, input_type):
+    url = ""
     if input_type == "image":
-        return "/".join(
+        url = "/".join(
             [
                 api_input.data.image.hosted.prefix,
                 size,
@@ -85,13 +98,14 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
             ]
         )
     elif input_type == "video":
-        return "/".join(
+        url = "/".join(
             [
                 api_input.data.video.hosted.prefix,
                 size,
                 api_input.data.video.hosted.suffix,
             ]
         )
+    return use_secure_hosting_url(url)
 
 
 def verify_url_with_all_auths(expected_input_url, verify_func=None):
