@@ -50,6 +50,7 @@ BAD_HTTP_COOKIE_HEADERS = {
     "pat_cookie": {"x-clarifai-api-key": DUMMY_KEY},
 }
 
+
 def get_bytes_hash_from_url(url):
     r = requests.get(url, stream=True)
     return hashlib.md5(r.raw.data).hexdigest()
