@@ -12,11 +12,11 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_secure_hosting_url,
     raise_on_failure,
+    use_secure_hosting_url,
     wait_for_inputs_upload,
 )
-
-req_session = requests.Session()
 
 DUMMY_KEY = "0" * 32
 PAT = os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")
@@ -50,32 +50,8 @@ BAD_HTTP_COOKIE_HEADERS = {
     "pat_cookie": {"x-clarifai-api-key": DUMMY_KEY},
 }
 
-SECURE_DATA_HOSTING_PUBLIC_URL = "https://data.clarifai.com"
-
-
-def get_secure_hosting_url():
-    default_secure_data_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
-    env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
-    if env_subdomain == "api-dev-internal":
-        default_secure_data_hosting_url = "https://data-dev-internal.clarifai.com"
-    elif env_subdomain == "api-staging":
-        default_secure_data_hosting_url = "https://data-staging.clarifai.com"
-    url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
-    return url
-
-
-def use_secure_hosting_url(url):
-    secure_hosting_url = get_secure_hosting_url()
-    # Replace the public URL with the internal one if we are running in an internal environment.
-    # This is needed because the runners in dev don't have public IPs anymore.
-    orig_secure_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
-    if secure_hosting_url != orig_secure_hosting_url and url.startswith(orig_secure_hosting_url):
-        return url.replace(orig_secure_hosting_url, secure_hosting_url)
-    return url
-
-
 def get_bytes_hash_from_url(url):
-    r = req_session.get(url, stream=True)
+    r = requests.get(url, stream=True)
     return hashlib.md5(r.raw.data).hexdigest()
 
 
@@ -110,7 +86,7 @@ def build_rehost_url_from_api_input(api_input, size, input_type):
 
 def verify_url_with_all_auths(expected_input_url, verify_func=None):
     for header_type, header in HTTP_AUTH_HEADERS.items():
-        r = req_session.get(expected_input_url, stream=True, headers=header)
+        r = requests.get(expected_input_url, stream=True, headers=header)
         assert r.status_code == 200, (
             f"Non-200 response obtained for URL {expected_input_url}; header type: {header_type}"
         )
@@ -122,7 +98,7 @@ def verify_url_with_all_auths(expected_input_url, verify_func=None):
                 f"Data fetched for header type {header_type}, didn't match expected hash"
             )
     for cookie_type, cookie in HTTP_COOKIE_HEADERS.items():
-        r = req_session.get(expected_input_url, stream=True, cookies=cookie)
+        r = requests.get(expected_input_url, stream=True, cookies=cookie)
         assert r.status_code == 200, (
             f"Non-200 response obtained for URL {expected_input_url}; cookie type: {cookie_type}"
         )
@@ -137,19 +113,19 @@ def verify_url_with_all_auths(expected_input_url, verify_func=None):
 
 def verify_url_with_bad_auth(expected_input_url):
     for header_type, header in BAD_HTTP_AUTH_HEADERS.items():
-        r = req_session.get(expected_input_url, stream=True, headers=header)
+        r = requests.get(expected_input_url, stream=True, headers=header)
         assert r.status_code == 401, (
             f"Expected Code: 401, Actual: {r.status_code} header type: {header_type}"
         )
 
     for cookie_type, cookie in BAD_HTTP_COOKIE_HEADERS.items():
-        r = req_session.get(expected_input_url, stream=True, cookies=cookie)
+        r = requests.get(expected_input_url, stream=True, cookies=cookie)
         assert r.status_code == 401, (
             f"Expected Code: 401, Actual: {r.status_code} cookie type: {cookie_type}"
         )
 
     # No header/cookie results should result in NOT FOUND (404)
-    r = req_session.get(expected_input_url, stream=True)
+    r = requests.get(expected_input_url, stream=True)
     assert r.status_code == 404, f"Expected Code: 404, Actual: {r.status_code}"
 
 
