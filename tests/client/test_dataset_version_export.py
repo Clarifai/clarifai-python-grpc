@@ -6,18 +6,16 @@ import zipfile
 import requests
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
-from tests.client.test_secure_data_hosting import (
-    get_secure_hosting_url,
-    use_secure_hosting_url,
-)
 from tests.common import (
     DOG_IMAGE_URL,
     TRUCK_IMAGE_URL,
     both_channels,
     get_channel,
+    get_secure_hosting_url,
     headers,
     metadata,
     raise_on_failure,
+    use_secure_hosting_url,
     wait_for_dataset_version_export_success,
     wait_for_dataset_version_ready,
     wait_for_inputs_delete,

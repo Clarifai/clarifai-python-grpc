@@ -28,6 +28,8 @@ TOY_VIDEO_FILE_PATH = os.path.dirname(__file__) + "/assets/toy.mp4"
 ARCHIVE_CLOUD_URL = "s3://samples.clarifai.com/Archive.zip"
 CLOUD_URL = "s3://samples.clarifai.com/storage/"
 
+SECURE_DATA_HOSTING_PUBLIC_URL = "https://data.clarifai.com"
+
 MAIN_APP_ID = "main"
 MAIN_APP_USER_ID = "clarifai"
 GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
@@ -53,6 +55,27 @@ def headers(pat=False):
             "authorization": "Key %s"
             % os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_PAT"))
         }
+
+
+def get_secure_hosting_url():
+    default_secure_data_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
+    env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
+    if env_subdomain == "api-dev-internal":
+        default_secure_data_hosting_url = "https://data-dev-internal.clarifai.com"
+    elif env_subdomain == "api-staging":
+        default_secure_data_hosting_url = "https://data-staging.clarifai.com"
+    url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
+    return url
+
+
+def use_secure_hosting_url(url):
+    secure_hosting_url = get_secure_hosting_url()
+    # Replace the public URL with the internal one if we are running in an internal environment.
+    # This is needed because the runners in dev don't have public IPs anymore.
+    orig_secure_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
+    if secure_hosting_url != orig_secure_hosting_url and url.startswith(orig_secure_hosting_url):
+        return url.replace(orig_secure_hosting_url, secure_hosting_url)
+    return url
 
 
 def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
