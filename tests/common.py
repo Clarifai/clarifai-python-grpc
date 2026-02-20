@@ -73,6 +73,9 @@ def use_secure_hosting_url(url):
     # Replace the public URL with the internal one if we are running in an internal environment.
     # This is needed because the runners in dev don't have public IPs anymore.
     orig_secure_hosting_url = SECURE_DATA_HOSTING_PUBLIC_URL
+    if secure_hosting_url == "https://data-dev-internal.clarifai.com":
+        if url.startswith("https://data-dev.clarifai.com"):
+            return url.replace("https://data-dev.clarifai.com", secure_hosting_url)
     if secure_hosting_url != orig_secure_hosting_url and url.startswith(orig_secure_hosting_url):
         return url.replace(orig_secure_hosting_url, secure_hosting_url)
     return url
