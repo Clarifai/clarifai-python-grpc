@@ -636,13 +636,6 @@ class _EventTypeEnumTypeWrapper(
     ORGANIZATION_TEAM_MEMBER_REMOVE: _EventType.ValueType  # 111
     ORGANIZATION_TEAM_APP_ADD: _EventType.ValueType  # 112
     ORGANIZATION_TEAM_APP_REMOVE: _EventType.ValueType  # 113
-    MODULE_CREATE: _EventType.ValueType  # 200
-    """Event types related to modules: 200 - 299"""
-    MODULE_UPDATE: _EventType.ValueType  # 201
-    MODULE_DELETE: _EventType.ValueType  # 202
-    MODULE_VERSION_CREATE: _EventType.ValueType  # 203
-    MODULE_VERSION_UPDATE: _EventType.ValueType  # 204
-    MODULE_VERSION_DELETE: _EventType.ValueType  # 205
     MODEL_CREATE: _EventType.ValueType  # 300
     """Event types related to models: 300 - 399"""
     MODEL_UPDATE: _EventType.ValueType  # 301
@@ -700,13 +693,6 @@ ORGANIZATION_TEAM_MEMBER_ADD: EventType.ValueType  # 110
 ORGANIZATION_TEAM_MEMBER_REMOVE: EventType.ValueType  # 111
 ORGANIZATION_TEAM_APP_ADD: EventType.ValueType  # 112
 ORGANIZATION_TEAM_APP_REMOVE: EventType.ValueType  # 113
-MODULE_CREATE: EventType.ValueType  # 200
-"""Event types related to modules: 200 - 299"""
-MODULE_UPDATE: EventType.ValueType  # 201
-MODULE_DELETE: EventType.ValueType  # 202
-MODULE_VERSION_CREATE: EventType.ValueType  # 203
-MODULE_VERSION_UPDATE: EventType.ValueType  # 204
-MODULE_VERSION_DELETE: EventType.ValueType  # 205
 MODEL_CREATE: EventType.ValueType  # 300
 """Event types related to models: 300 - 399"""
 MODEL_UPDATE: EventType.ValueType  # 301
@@ -1370,13 +1356,11 @@ class AppResourceCounts(google.protobuf.message.Message):
     DATASETS_FIELD_NUMBER: builtins.int
     MODELS_FIELD_NUMBER: builtins.int
     WORKFLOWS_FIELD_NUMBER: builtins.int
-    MODULES_FIELD_NUMBER: builtins.int
     INPUTS_FIELD_NUMBER: builtins.int
     PIPELINES_FIELD_NUMBER: builtins.int
     datasets: builtins.int
     models: builtins.int
     workflows: builtins.int
-    modules: builtins.int
     inputs: builtins.int
     pipelines: builtins.int
     def __init__(
@@ -1385,7 +1369,6 @@ class AppResourceCounts(google.protobuf.message.Message):
         datasets: builtins.int = ...,
         models: builtins.int = ...,
         workflows: builtins.int = ...,
-        modules: builtins.int = ...,
         inputs: builtins.int = ...,
         pipelines: builtins.int = ...,
     ) -> None: ...
@@ -1398,8 +1381,6 @@ class AppResourceCounts(google.protobuf.message.Message):
             b"inputs",
             "models",
             b"models",
-            "modules",
-            b"modules",
             "pipelines",
             b"pipelines",
             "workflows",
@@ -10082,7 +10063,6 @@ class AppDuplication(google.protobuf.message.Message):
         - annotations
         - models
         - workflows
-        - installed_module_versions
         """
     def __init__(
         self,
@@ -10172,7 +10152,6 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     COPY_ANNOTATIONS_FIELD_NUMBER: builtins.int
     COPY_MODELS_FIELD_NUMBER: builtins.int
     COPY_WORKFLOWS_FIELD_NUMBER: builtins.int
-    COPY_INSTALLED_MODULE_VERSIONS_FIELD_NUMBER: builtins.int
     copy_inputs: builtins.bool
     """Copy inputs. Requires that copy_concepts is also set.
     Note that this will still copy input-level annotations even if copy_annotations is not set.
@@ -10185,8 +10164,6 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     """Copy models. Requires that copy_concepts is also set."""
     copy_workflows: builtins.bool
     """Copy workflows."""
-    copy_installed_module_versions: builtins.bool
-    """Copy installed module versions."""
     def __init__(
         self,
         *,
@@ -10195,7 +10172,6 @@ class AppDuplicationFilters(google.protobuf.message.Message):
         copy_annotations: builtins.bool = ...,
         copy_models: builtins.bool = ...,
         copy_workflows: builtins.bool = ...,
-        copy_installed_module_versions: builtins.bool = ...,
     ) -> None: ...
     def ClearField(
         self,
@@ -10206,8 +10182,6 @@ class AppDuplicationFilters(google.protobuf.message.Message):
             b"copy_concepts",
             "copy_inputs",
             b"copy_inputs",
-            "copy_installed_module_versions",
-            b"copy_installed_module_versions",
             "copy_models",
             b"copy_models",
             "copy_workflows",
@@ -12416,500 +12390,6 @@ class TimeInfo(google.protobuf.message.Message):
 global___TimeInfo = TimeInfo
 
 @typing_extensions.final
-class DatasetStar(google.protobuf.message.Message):
-    """DatasetStar"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    DATASET_ID_FIELD_NUMBER: builtins.int
-    dataset_id: builtins.str
-    def __init__(
-        self,
-        *,
-        dataset_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(
-        self, field_name: typing_extensions.Literal["dataset_id", b"dataset_id"]
-    ) -> None: ...
-
-global___DatasetStar = DatasetStar
-
-@typing_extensions.final
-class ModuleStar(google.protobuf.message.Message):
-    """ModuleStar"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    MODULE_ID_FIELD_NUMBER: builtins.int
-    module_id: builtins.str
-    """Module id of the star"""
-    def __init__(
-        self,
-        *,
-        module_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(
-        self, field_name: typing_extensions.Literal["module_id", b"module_id"]
-    ) -> None: ...
-
-global___ModuleStar = ModuleStar
-
-@typing_extensions.final
-class Module(google.protobuf.message.Message):
-    """An app module that a user created in our app module marketplace."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    MODULE_VERSION_FIELD_NUMBER: builtins.int
-    IS_STARRED_FIELD_NUMBER: builtins.int
-    STAR_COUNT_FIELD_NUMBER: builtins.int
-    BOOKMARK_ORIGIN_FIELD_NUMBER: builtins.int
-    IMAGE_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """A unique ID for this app module."""
-    description: builtins.str
-    """A short description for this app module to be used in grids of modules."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module was created."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module was last modified."""
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        Defaults to PRIVATE if not provided.
-        """
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """To handle arbitrary json metadata you can use a struct field:
-        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
-        This is an optional arg.
-        """
-    user_id: builtins.str
-    """The creator of the app module."""
-    app_id: builtins.str
-    """The app_id this module was created in."""
-    @property
-    def module_version(self) -> global___ModuleVersion:
-        """A ModuleVersion which is used when listing modules to include the latest module version
-        in the response.
-        """
-    is_starred: builtins.bool
-    """Is starred by the requesting user (only showed on get/list requests)
-    Please use PostModuleStars/DeleteModuleStars endpoints to star/unstar a module
-    """
-    star_count: builtins.int
-    """How many users have starred the module (only showed on get/list requests)
-    Computed value, not editable
-    """
-    @property
-    def bookmark_origin(self) -> global___BookmarkOrigin:
-        """bookmark info. When set, this module is a bookmarked module of this app.
-        Info in this field will allow you to find/access original module.
-        """
-    @property
-    def image(self) -> global___Image:
-        """Representative image for this module"""
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        description: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        visibility: global___Visibility | None = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-        user_id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        module_version: global___ModuleVersion | None = ...,
-        is_starred: builtins.bool = ...,
-        star_count: builtins.int = ...,
-        bookmark_origin: global___BookmarkOrigin | None = ...,
-        image: global___Image | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "bookmark_origin",
-            b"bookmark_origin",
-            "created_at",
-            b"created_at",
-            "image",
-            b"image",
-            "metadata",
-            b"metadata",
-            "modified_at",
-            b"modified_at",
-            "module_version",
-            b"module_version",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "app_id",
-            b"app_id",
-            "bookmark_origin",
-            b"bookmark_origin",
-            "created_at",
-            b"created_at",
-            "description",
-            b"description",
-            "id",
-            b"id",
-            "image",
-            b"image",
-            "is_starred",
-            b"is_starred",
-            "metadata",
-            b"metadata",
-            "modified_at",
-            b"modified_at",
-            "module_version",
-            b"module_version",
-            "star_count",
-            b"star_count",
-            "user_id",
-            b"user_id",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> None: ...
-
-global___Module = Module
-
-@typing_extensions.final
-class ModuleVersion(google.protobuf.message.Message):
-    """A specific version of an app module that is available for assigning to apps."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    @typing_extensions.final
-    class ModuleSubNav(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        TITLE_FIELD_NUMBER: builtins.int
-        QUERY_KEY_FIELD_NUMBER: builtins.int
-        QUERY_VALUE_FIELD_NUMBER: builtins.int
-        title: builtins.str
-        """This is the display title for a navbar element to link to a specific page.
-        The name for this subnav element to show in the sidebar.
-        """
-        query_key: builtins.str
-        """The query param name"""
-        query_value: builtins.str
-        """The query param value"""
-        def __init__(
-            self,
-            *,
-            title: builtins.str = ...,
-            query_key: builtins.str = ...,
-            query_value: builtins.str = ...,
-        ) -> None: ...
-        def ClearField(
-            self,
-            field_name: typing_extensions.Literal[
-                "query_key", b"query_key", "query_value", b"query_value", "title", b"title"
-            ],
-        ) -> None: ...
-
-    @typing_extensions.final
-    class ModuleNav(google.protobuf.message.Message):
-        DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-        TITLE_FIELD_NUMBER: builtins.int
-        MODULE_SUB_NAVS_FIELD_NUMBER: builtins.int
-        title: builtins.str
-        """This is the left side title for this module and for browser tab title of the module.
-        We have this in the version so that users can change those settings
-        when releasing a new version of their module.
-        """
-        @property
-        def module_sub_navs(
-            self,
-        ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-            global___ModuleVersion.ModuleSubNav
-        ]:
-            """A list of subnav elements to put under the module title."""
-        def __init__(
-            self,
-            *,
-            title: builtins.str = ...,
-            module_sub_navs: collections.abc.Iterable[global___ModuleVersion.ModuleSubNav]
-            | None = ...,
-        ) -> None: ...
-        def ClearField(
-            self,
-            field_name: typing_extensions.Literal[
-                "module_sub_navs", b"module_sub_navs", "title", b"title"
-            ],
-        ) -> None: ...
-
-    ID_FIELD_NUMBER: builtins.int
-    MODULE_ID_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    NOTES_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    GIT_COMMIT_URL_FIELD_NUMBER: builtins.int
-    MODULE_NAV_FIELD_NUMBER: builtins.int
-    APPROVED_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    METADATA_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """A name for this version like 1_0, 1_1_0, etc."""
-    module_id: builtins.str
-    """The module this version belongs to."""
-    app_id: builtins.str
-    """The app_id this module version belongs to."""
-    user_id: builtins.str
-    """The user_id this module version belongs to."""
-    description: builtins.str
-    """A short description for this version."""
-    notes: builtins.str
-    """A markdown formatted string to detailed description of the app module.
-    This is within each version so that it can be change version to version.
-    """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module version was created."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the app module version was last modified."""
-    git_commit_url: builtins.str
-    """The code repo of the streamlit app.
-    If you are still developing your Module you should create a ModuleVersion
-    with an empty git_commit_url and then create an InstalledModuleVersion
-    with a pre-deployed deploy_url (such as localhost or streamlit cloud).
-    Once you are ready to create a production, create a new ModuleVersion with
-    the ready git url to a specific commit that you would like to be reviewed by the
-    Clarifai team for approval within our community. You cannot publish a ModuleVersion
-    is reviewed and approved. Please only provide the git_commit_url when you're
-    ready for a review. This url needs to include a specific commit, for example:
-    https://github.com/user/repo/commit/767ff9c08ba3429c8e7b8825da148555
-    """
-    @property
-    def module_nav(self) -> global___ModuleVersion.ModuleNav: ...
-    approved: builtins.bool
-    """A boolean to mark if Clarifai has approved this app version.
-    This cannot be set in the request to True.
-    """
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible.
-        Defaults to PRIVATE if not provided.
-        """
-    @property
-    def metadata(self) -> google.protobuf.struct_pb2.Struct:
-        """To handle arbitrary json metadata you can use a struct field:
-        https://github.com/google/protobuf/blob/master/src/google/protobuf/struct.proto
-        This is an optional arg.
-        """
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        module_id: builtins.str = ...,
-        app_id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        description: builtins.str = ...,
-        notes: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        git_commit_url: builtins.str = ...,
-        module_nav: global___ModuleVersion.ModuleNav | None = ...,
-        approved: builtins.bool = ...,
-        visibility: global___Visibility | None = ...,
-        metadata: google.protobuf.struct_pb2.Struct | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "created_at",
-            b"created_at",
-            "metadata",
-            b"metadata",
-            "modified_at",
-            b"modified_at",
-            "module_nav",
-            b"module_nav",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "app_id",
-            b"app_id",
-            "approved",
-            b"approved",
-            "created_at",
-            b"created_at",
-            "description",
-            b"description",
-            "git_commit_url",
-            b"git_commit_url",
-            "id",
-            b"id",
-            "metadata",
-            b"metadata",
-            "modified_at",
-            b"modified_at",
-            "module_id",
-            b"module_id",
-            "module_nav",
-            b"module_nav",
-            "notes",
-            b"notes",
-            "user_id",
-            b"user_id",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> None: ...
-
-global___ModuleVersion = ModuleVersion
-
-@typing_extensions.final
-class InstalledModuleVersion(google.protobuf.message.Message):
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    MODULE_VERSION_FIELD_NUMBER: builtins.int
-    APP_ID_FIELD_NUMBER: builtins.int
-    USER_ID_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    MODIFIED_AT_FIELD_NUMBER: builtins.int
-    DEPLOY_URL_FIELD_NUMBER: builtins.int
-    VISIBILITY_FIELD_NUMBER: builtins.int
-    KEY_ID_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """A unique id for this install. This will be used in the browser url."""
-    @property
-    def module_version(self) -> global___ModuleVersion:
-        """The installed module version provided here so that we users don't need to do an additional
-        fetch. When creating a new InstalledModuleVersion you should provide the:
-        module_version.user_id
-        module_version.app_id
-        module_version.module_id
-        module_version.id
-        in order to uniquely define which module version.
-        """
-    app_id: builtins.str
-    """The app_id the ModuleVersion is installed into (not necessary where the ModuleVersion was
-    created). This doesn't have to be provided in requests to install, but will be returned in
-    responses.
-    """
-    user_id: builtins.str
-    """The user that the app belongs to where the ModuleVersion is installed into (not necessary where
-    the ModuleVersion was created). This doesn't have to be provided in requests to install, but
-    will be returned in responses.
-    """
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the install was created."""
-    @property
-    def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the install was last modified."""
-    deploy_url: builtins.str
-    """The URL of where this app module version is deployed.
-    If you provide this deploy_url when creating the install then it will
-    be treated as a pre-deployed module. You can only use a pre-deployed module
-    in when installing to an app_id that you own as the creator of the module.
-    If you want to install someone elses module or to rely on Clarifai deploying
-    your module for you, leave deploy_url empty when creating the install.
-    If it is left empty, then deployment will occur when this module version is
-    installed into an app using the git_commit_url of the ModuleVersion.
-    """
-    @property
-    def visibility(self) -> global___Visibility:
-        """The visibility field represents whether this message is privately/publicly visible.
-        To be visible to the public the App that contains it AND the User that contains the App must
-        also be publicly visible. For the InstalledModuleVersion this allows the app owner who
-        installed the module version to decide if they want other users of their app to have
-        the added functionality that the modules version provides to their app.
-        Defaults to PRIVATE if not provided.
-        """
-    key_id: builtins.str
-    """The key ID to use for making requests to the API for this module.
-    This key is associated to this installed module version by PostInstalledModuleVersionsKey
-    request. The key is associated with the CALLER not the App Owner where this module is installed
-    nor the author of the module. This allows the module to act on behalf of the caller at all
-    times so we get proper permissions the caller has (such as if they are stranger, teammate or
-    collaborator). This key should be a personal access token to enable modules to work across apps
-    and have necessary abilities beyond what app-specific keys offer.
-    """
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        module_version: global___ModuleVersion | None = ...,
-        app_id: builtins.str = ...,
-        user_id: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        deploy_url: builtins.str = ...,
-        visibility: global___Visibility | None = ...,
-        key_id: builtins.str = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "created_at",
-            b"created_at",
-            "modified_at",
-            b"modified_at",
-            "module_version",
-            b"module_version",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "app_id",
-            b"app_id",
-            "created_at",
-            b"created_at",
-            "deploy_url",
-            b"deploy_url",
-            "id",
-            b"id",
-            "key_id",
-            b"key_id",
-            "modified_at",
-            b"modified_at",
-            "module_version",
-            b"module_version",
-            "user_id",
-            b"user_id",
-            "visibility",
-            b"visibility",
-        ],
-    ) -> None: ...
-
-global___InstalledModuleVersion = InstalledModuleVersion
-
-@typing_extensions.final
 class BulkOperation(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -14136,14 +13616,12 @@ class BookmarkOrigin(google.protobuf.message.Message):
         model: BookmarkOrigin._BookmarkType.ValueType  # 1
         workflow: BookmarkOrigin._BookmarkType.ValueType  # 2
         dataset: BookmarkOrigin._BookmarkType.ValueType  # 3
-        module: BookmarkOrigin._BookmarkType.ValueType  # 4
 
     class BookmarkType(_BookmarkType, metaclass=_BookmarkTypeEnumTypeWrapper): ...
     unknown: BookmarkOrigin.BookmarkType.ValueType  # 0
     model: BookmarkOrigin.BookmarkType.ValueType  # 1
     workflow: BookmarkOrigin.BookmarkType.ValueType  # 2
     dataset: BookmarkOrigin.BookmarkType.ValueType  # 3
-    module: BookmarkOrigin.BookmarkType.ValueType  # 4
 
     ID_FIELD_NUMBER: builtins.int
     APP_ID_FIELD_NUMBER: builtins.int
@@ -14197,18 +13675,29 @@ class RunnerMetrics(google.protobuf.message.Message):
 
     PODS_TOTAL_FIELD_NUMBER: builtins.int
     PODS_RUNNING_FIELD_NUMBER: builtins.int
+    TOTAL_PODS_RUNNING_TIME_S_FIELD_NUMBER: builtins.int
     pods_total: builtins.int
     pods_running: builtins.int
+    total_pods_running_time_s: builtins.int
+    """Cumulative total time (in seconds) that pods have been running for this runner.
+    This accumulates across scale-up/down cycles and is reported by the agent.
+    """
     def __init__(
         self,
         *,
         pods_total: builtins.int = ...,
         pods_running: builtins.int = ...,
+        total_pods_running_time_s: builtins.int = ...,
     ) -> None: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "pods_running", b"pods_running", "pods_total", b"pods_total"
+            "pods_running",
+            b"pods_running",
+            "pods_total",
+            b"pods_total",
+            "total_pods_running_time_s",
+            b"total_pods_running_time_s",
         ],
     ) -> None: ...
 
@@ -14386,6 +13875,7 @@ class Nodepool(google.protobuf.message.Message):
     VISIBILITY_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    NODE_COUNT_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The user defined ID of the nodepool."""
     description: builtins.str
@@ -14437,6 +13927,10 @@ class Nodepool(google.protobuf.message.Message):
         global___SpecialHandling
     ]:
         """List of special handling instructions for this nodepool."""
+    node_count: builtins.int
+    """The current number of nodes in this nodepool. This value is queried from Prometheus metrics
+    and represents the most recent node count reported by the compute plane.
+    """
     def __init__(
         self,
         *,
@@ -14454,6 +13948,7 @@ class Nodepool(google.protobuf.message.Message):
         visibility: global___Visibility | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+        node_count: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14499,6 +13994,8 @@ class Nodepool(google.protobuf.message.Message):
             b"modified_at",
             "node_capacity_type",
             b"node_capacity_type",
+            "node_count",
+            b"node_count",
             "special_handling",
             b"special_handling",
             "visibility",
@@ -15127,6 +14624,8 @@ class Deployment(google.protobuf.message.Message):
     MODIFIED_AT_FIELD_NUMBER: builtins.int
     DEPLOY_LATEST_VERSION_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
+    EMAIL_REMINDER_AFTER_FIELD_NUMBER: builtins.int
+    GRACEFUL_DEPLOY_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -15174,7 +14673,7 @@ class Deployment(google.protobuf.message.Message):
     def modified_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
         """When the deployment was last modified."""
     deploy_latest_version: builtins.bool
-    """When to always deploy latest model version"""
+    """Whether to always deploy latest model version"""
     @property
     def special_handling(
         self,
@@ -15182,6 +14681,14 @@ class Deployment(google.protobuf.message.Message):
         global___SpecialHandling
     ]:
         """List of special handling instructions for this deployment."""
+    @property
+    def email_reminder_after(self) -> google.protobuf.duration_pb2.Duration:
+        """Duration after which to send a reminder email if pods are still running.
+        If set, users will receive a one-time email notification when any runner
+        under this deployment has been running longer than this duration.
+        """
+    graceful_deploy: builtins.bool
+    """Whether to gracefully deploy a new worker"""
     def __init__(
         self,
         *,
@@ -15199,6 +14706,8 @@ class Deployment(google.protobuf.message.Message):
         modified_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
         deploy_latest_version: builtins.bool = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
+        email_reminder_after: google.protobuf.duration_pb2.Duration | None = ...,
+        graceful_deploy: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -15209,6 +14718,8 @@ class Deployment(google.protobuf.message.Message):
             b"created_at",
             "desired_worker",
             b"desired_worker",
+            "email_reminder_after",
+            b"email_reminder_after",
             "metadata",
             b"metadata",
             "modified_at",
@@ -15232,6 +14743,10 @@ class Deployment(google.protobuf.message.Message):
             b"description",
             "desired_worker",
             b"desired_worker",
+            "email_reminder_after",
+            b"email_reminder_after",
+            "graceful_deploy",
+            b"graceful_deploy",
             "id",
             b"id",
             "metadata",
@@ -15363,8 +14878,6 @@ class AuditLogTarget(google.protobuf.message.Message):
     ROLE_FIELD_NUMBER: builtins.int
     TEAM_FIELD_NUMBER: builtins.int
     APP_FIELD_NUMBER: builtins.int
-    MODULE_FIELD_NUMBER: builtins.int
-    MODULE_VERSION_FIELD_NUMBER: builtins.int
     WORKFLOW_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_FIELD_NUMBER: builtins.int
     MODEL_FIELD_NUMBER: builtins.int
@@ -15380,10 +14893,6 @@ class AuditLogTarget(google.protobuf.message.Message):
     def team(self) -> global___Team: ...
     @property
     def app(self) -> global___App: ...
-    @property
-    def module(self) -> global___Module: ...
-    @property
-    def module_version(self) -> global___ModuleVersion: ...
     @property
     def workflow(self) -> global___Workflow: ...
     @property
@@ -15405,8 +14914,6 @@ class AuditLogTarget(google.protobuf.message.Message):
         role: global___Role | None = ...,
         team: global___Team | None = ...,
         app: global___App | None = ...,
-        module: global___Module | None = ...,
-        module_version: global___ModuleVersion | None = ...,
         workflow: global___Workflow | None = ...,
         workflow_version: global___WorkflowVersion | None = ...,
         model: global___Model | None = ...,
@@ -15428,10 +14935,6 @@ class AuditLogTarget(google.protobuf.message.Message):
             b"model",
             "model_version",
             b"model_version",
-            "module",
-            b"module",
-            "module_version",
-            b"module_version",
             "nodepool",
             b"nodepool",
             "role",
@@ -15461,10 +14964,6 @@ class AuditLogTarget(google.protobuf.message.Message):
             b"model",
             "model_version",
             b"model_version",
-            "module",
-            b"module",
-            "module_version",
-            b"module_version",
             "nodepool",
             b"nodepool",
             "role",
@@ -15489,8 +14988,6 @@ class AuditLogTarget(google.protobuf.message.Message):
             "role",
             "team",
             "app",
-            "module",
-            "module_version",
             "workflow",
             "workflow_version",
             "model",
@@ -16047,6 +15544,174 @@ class CpuMetrics(google.protobuf.message.Message):
     ) -> None: ...
 
 global___CpuMetrics = CpuMetrics
+
+@typing_extensions.final
+class RunnerReplicaTaskMetrics(google.protobuf.message.Message):
+    """RunnerReplicaTaskMetrics captures auto-annotation task metrics reported by an individual
+    runner replica. Each entry corresponds to a specific task running on a specific replica.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    TASK_ID_FIELD_NUMBER: builtins.int
+    START_TIME_FIELD_NUMBER: builtins.int
+    END_TIME_FIELD_NUMBER: builtins.int
+    START_FRAME_TIME_FIELD_NUMBER: builtins.int
+    END_FRAME_TIME_FIELD_NUMBER: builtins.int
+    FRAMES_PROCESSED_FIELD_NUMBER: builtins.int
+    FRAMES_DROPPED_FIELD_NUMBER: builtins.int
+    FRAMES_SKIPPED_FIELD_NUMBER: builtins.int
+    ANNOTATIONS_UPLOADED_FIELD_NUMBER: builtins.int
+    ANNOTATIONS_FAILED_FIELD_NUMBER: builtins.int
+    BATCHES_UPLOADED_FIELD_NUMBER: builtins.int
+    BATCHES_DROPPED_FIELD_NUMBER: builtins.int
+    AVG_UPLOAD_LATENCY_FIELD_NUMBER: builtins.int
+    MAX_UPLOAD_LATENCY_FIELD_NUMBER: builtins.int
+    LAST_UPLOAD_LATENCY_FIELD_NUMBER: builtins.int
+    AVG_STREAM_DELAY_FIELD_NUMBER: builtins.int
+    MAX_STREAM_DELAY_FIELD_NUMBER: builtins.int
+    LAST_STREAM_DELAY_FIELD_NUMBER: builtins.int
+    PREDICT_QUEUE_SIZE_FIELD_NUMBER: builtins.int
+    UPLOAD_QUEUE_SIZE_FIELD_NUMBER: builtins.int
+    CURRENT_FRAME_DROP_CHANCE_FIELD_NUMBER: builtins.int
+    task_id: builtins.str
+    @property
+    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
+        """Time window these metrics cover."""
+    @property
+    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp: ...
+    @property
+    def start_frame_time(self) -> google.protobuf.wrappers_pb2.UInt64Value:
+        """Frame time range in milliseconds (nullable — absent when no frames have been processed yet)."""
+    @property
+    def end_frame_time(self) -> google.protobuf.wrappers_pb2.UInt64Value: ...
+    frames_processed: builtins.int
+    """Frame counts."""
+    frames_dropped: builtins.int
+    frames_skipped: builtins.int
+    annotations_uploaded: builtins.int
+    """Annotation counts."""
+    annotations_failed: builtins.int
+    batches_uploaded: builtins.int
+    batches_dropped: builtins.int
+    @property
+    def avg_upload_latency(self) -> google.protobuf.duration_pb2.Duration:
+        """Upload latency metrics (nullable — absent means not yet measured)."""
+    @property
+    def max_upload_latency(self) -> google.protobuf.duration_pb2.Duration: ...
+    @property
+    def last_upload_latency(self) -> google.protobuf.duration_pb2.Duration: ...
+    @property
+    def avg_stream_delay(self) -> google.protobuf.duration_pb2.Duration:
+        """Stream delay metrics (nullable — absent means not yet measured)."""
+    @property
+    def max_stream_delay(self) -> google.protobuf.duration_pb2.Duration: ...
+    @property
+    def last_stream_delay(self) -> google.protobuf.duration_pb2.Duration: ...
+    predict_queue_size: builtins.int
+    """Queue metrics."""
+    upload_queue_size: builtins.int
+    current_frame_drop_chance: builtins.float
+    """Current probability of dropping a frame (0.0 – 1.0)."""
+    def __init__(
+        self,
+        *,
+        task_id: builtins.str = ...,
+        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
+        start_frame_time: google.protobuf.wrappers_pb2.UInt64Value | None = ...,
+        end_frame_time: google.protobuf.wrappers_pb2.UInt64Value | None = ...,
+        frames_processed: builtins.int = ...,
+        frames_dropped: builtins.int = ...,
+        frames_skipped: builtins.int = ...,
+        annotations_uploaded: builtins.int = ...,
+        annotations_failed: builtins.int = ...,
+        batches_uploaded: builtins.int = ...,
+        batches_dropped: builtins.int = ...,
+        avg_upload_latency: google.protobuf.duration_pb2.Duration | None = ...,
+        max_upload_latency: google.protobuf.duration_pb2.Duration | None = ...,
+        last_upload_latency: google.protobuf.duration_pb2.Duration | None = ...,
+        avg_stream_delay: google.protobuf.duration_pb2.Duration | None = ...,
+        max_stream_delay: google.protobuf.duration_pb2.Duration | None = ...,
+        last_stream_delay: google.protobuf.duration_pb2.Duration | None = ...,
+        predict_queue_size: builtins.int = ...,
+        upload_queue_size: builtins.int = ...,
+        current_frame_drop_chance: builtins.float = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "avg_stream_delay",
+            b"avg_stream_delay",
+            "avg_upload_latency",
+            b"avg_upload_latency",
+            "end_frame_time",
+            b"end_frame_time",
+            "end_time",
+            b"end_time",
+            "last_stream_delay",
+            b"last_stream_delay",
+            "last_upload_latency",
+            b"last_upload_latency",
+            "max_stream_delay",
+            b"max_stream_delay",
+            "max_upload_latency",
+            b"max_upload_latency",
+            "start_frame_time",
+            b"start_frame_time",
+            "start_time",
+            b"start_time",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "annotations_failed",
+            b"annotations_failed",
+            "annotations_uploaded",
+            b"annotations_uploaded",
+            "avg_stream_delay",
+            b"avg_stream_delay",
+            "avg_upload_latency",
+            b"avg_upload_latency",
+            "batches_dropped",
+            b"batches_dropped",
+            "batches_uploaded",
+            b"batches_uploaded",
+            "current_frame_drop_chance",
+            b"current_frame_drop_chance",
+            "end_frame_time",
+            b"end_frame_time",
+            "end_time",
+            b"end_time",
+            "frames_dropped",
+            b"frames_dropped",
+            "frames_processed",
+            b"frames_processed",
+            "frames_skipped",
+            b"frames_skipped",
+            "last_stream_delay",
+            b"last_stream_delay",
+            "last_upload_latency",
+            b"last_upload_latency",
+            "max_stream_delay",
+            b"max_stream_delay",
+            "max_upload_latency",
+            b"max_upload_latency",
+            "predict_queue_size",
+            b"predict_queue_size",
+            "start_frame_time",
+            b"start_frame_time",
+            "start_time",
+            b"start_time",
+            "task_id",
+            b"task_id",
+            "upload_queue_size",
+            b"upload_queue_size",
+        ],
+    ) -> None: ...
+
+global___RunnerReplicaTaskMetrics = RunnerReplicaTaskMetrics
 
 @typing_extensions.final
 class LogEntry(google.protobuf.message.Message):

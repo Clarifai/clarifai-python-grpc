@@ -102,7 +102,6 @@ class _SEnumTypeWrapper(
     Workflows_Delete: _S.ValueType  # 21
     """To delete we need read/write."""
     WorkflowMetrics_Get: _S.ValueType  # 96
-    """DEPRECATED"""
     WorkflowMetrics_Add: _S.ValueType  # 97
     WorkflowMetrics_Delete: _S.ValueType  # 98
     TSNEVisualizations_Add: _S.ValueType  # 24
@@ -172,9 +171,7 @@ class _SEnumTypeWrapper(
     LabelOrders_Delete: _S.ValueType  # 69
     """To delete label orders we need read/write"""
     FindDuplicateAnnotationsJobs_Add: _S.ValueType  # 102
-    """CRUD on FindDuplicateAnnotationsJobs table
-    DEPRECATED
-    """
+    """CRUD on FindDuplicateAnnotationsJobs table"""
     FindDuplicateAnnotationsJobs_Get: _S.ValueType  # 103
     FindDuplicateAnnotationsJobs_Delete: _S.ValueType  # 104
     Datasets_Get: _S.ValueType  # 105
@@ -363,7 +360,6 @@ Deprecated.
 Workflows_Delete: S.ValueType  # 21
 """To delete we need read/write."""
 WorkflowMetrics_Get: S.ValueType  # 96
-"""DEPRECATED"""
 WorkflowMetrics_Add: S.ValueType  # 97
 WorkflowMetrics_Delete: S.ValueType  # 98
 TSNEVisualizations_Add: S.ValueType  # 24
@@ -433,9 +429,7 @@ LabelOrders_Add: S.ValueType  # 68
 LabelOrders_Delete: S.ValueType  # 69
 """To delete label orders we need read/write"""
 FindDuplicateAnnotationsJobs_Add: S.ValueType  # 102
-"""CRUD on FindDuplicateAnnotationsJobs table
-DEPRECATED
-"""
+"""CRUD on FindDuplicateAnnotationsJobs table"""
 FindDuplicateAnnotationsJobs_Get: S.ValueType  # 103
 FindDuplicateAnnotationsJobs_Delete: S.ValueType  # 104
 Datasets_Get: S.ValueType  # 105
