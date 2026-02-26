@@ -1977,7 +1977,10 @@ global___PatchAction = PatchAction
 
 @typing_extensions.final
 class Concept(google.protobuf.message.Message):
-    """Concept or tag"""
+    """//////////////////////////////////////////////////////////////////////////////
+
+    Concept or tag
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -13861,6 +13864,30 @@ class Nodepool(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _NodepoolStatus:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _NodepoolStatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            Nodepool._NodepoolStatus.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        NODEPOOL_STATUS_UNKNOWN: Nodepool._NodepoolStatus.ValueType  # 0
+        NODEPOOL_STATUS_PENDING: Nodepool._NodepoolStatus.ValueType  # 1
+        NODEPOOL_STATUS_READY: Nodepool._NodepoolStatus.ValueType  # 2
+        NODEPOOL_STATUS_ERROR: Nodepool._NodepoolStatus.ValueType  # 3
+        NODEPOOL_STATUS_DELETED: Nodepool._NodepoolStatus.ValueType  # 4
+
+    class NodepoolStatus(_NodepoolStatus, metaclass=_NodepoolStatusEnumTypeWrapper): ...
+    NODEPOOL_STATUS_UNKNOWN: Nodepool.NodepoolStatus.ValueType  # 0
+    NODEPOOL_STATUS_PENDING: Nodepool.NodepoolStatus.ValueType  # 1
+    NODEPOOL_STATUS_READY: Nodepool.NodepoolStatus.ValueType  # 2
+    NODEPOOL_STATUS_ERROR: Nodepool.NodepoolStatus.ValueType  # 3
+    NODEPOOL_STATUS_DELETED: Nodepool.NodepoolStatus.ValueType  # 4
+
     ID_FIELD_NUMBER: builtins.int
     DESCRIPTION_FIELD_NUMBER: builtins.int
     CREATED_AT_FIELD_NUMBER: builtins.int
@@ -13876,6 +13903,8 @@ class Nodepool(google.protobuf.message.Message):
     METADATA_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     NODE_COUNT_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
+    STATUS_DESCRIPTION_FIELD_NUMBER: builtins.int
     id: builtins.str
     """The user defined ID of the nodepool."""
     description: builtins.str
@@ -13931,6 +13960,10 @@ class Nodepool(google.protobuf.message.Message):
     """The current number of nodes in this nodepool. This value is queried from Prometheus metrics
     and represents the most recent node count reported by the compute plane.
     """
+    status: global___Nodepool.NodepoolStatus.ValueType
+    """Current status of the nodepool."""
+    status_description: builtins.str
+    """Human-readable status description. Contains error details when status is NODEPOOL_STATUS_ERROR."""
     def __init__(
         self,
         *,
@@ -13949,6 +13982,8 @@ class Nodepool(google.protobuf.message.Message):
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
         node_count: builtins.int = ...,
+        status: global___Nodepool.NodepoolStatus.ValueType = ...,
+        status_description: builtins.str = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -13998,6 +14033,10 @@ class Nodepool(google.protobuf.message.Message):
             b"node_count",
             "special_handling",
             b"special_handling",
+            "status",
+            b"status",
+            "status_description",
+            b"status_description",
             "visibility",
             b"visibility",
         ],
@@ -17247,6 +17286,438 @@ class PipelineVersionRunStatusLog(google.protobuf.message.Message):
     ) -> None: ...
 
 global___PipelineVersionRunStatusLog = PipelineVersionRunStatusLog
+
+@typing_extensions.final
+class PipelineTemplateParameter(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _Type:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _TypeEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            PipelineTemplateParameter._Type.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        PARAMETER_TYPE_UNSPECIFIED: PipelineTemplateParameter._Type.ValueType  # 0
+        STRING: PipelineTemplateParameter._Type.ValueType  # 1
+        INT: PipelineTemplateParameter._Type.ValueType  # 2
+        FLOAT: PipelineTemplateParameter._Type.ValueType  # 3
+        BOOL: PipelineTemplateParameter._Type.ValueType  # 4
+
+    class Type(_Type, metaclass=_TypeEnumTypeWrapper): ...
+    PARAMETER_TYPE_UNSPECIFIED: PipelineTemplateParameter.Type.ValueType  # 0
+    STRING: PipelineTemplateParameter.Type.ValueType  # 1
+    INT: PipelineTemplateParameter.Type.ValueType  # 2
+    FLOAT: PipelineTemplateParameter.Type.ValueType  # 3
+    BOOL: PipelineTemplateParameter.Type.ValueType  # 4
+
+    @typing_extensions.final
+    class Constraints(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        @typing_extensions.final
+        class StringConstraints(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            ALLOWED_VALUES_FIELD_NUMBER: builtins.int
+            ALLOW_FREE_TEXT_FIELD_NUMBER: builtins.int
+            MIN_LENGTH_FIELD_NUMBER: builtins.int
+            MAX_LENGTH_FIELD_NUMBER: builtins.int
+            @property
+            def allowed_values(
+                self,
+            ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
+                """List of allowed values for the string parameter"""
+            allow_free_text: builtins.bool
+            """Whether free text input is allowed beyond allowed_values"""
+            min_length: builtins.int
+            """Minimum length of the string"""
+            max_length: builtins.int
+            """Maximum length of the string"""
+            def __init__(
+                self,
+                *,
+                allowed_values: collections.abc.Iterable[builtins.str] | None = ...,
+                allow_free_text: builtins.bool = ...,
+                min_length: builtins.int = ...,
+                max_length: builtins.int = ...,
+            ) -> None: ...
+            def ClearField(
+                self,
+                field_name: typing_extensions.Literal[
+                    "allow_free_text",
+                    b"allow_free_text",
+                    "allowed_values",
+                    b"allowed_values",
+                    "max_length",
+                    b"max_length",
+                    "min_length",
+                    b"min_length",
+                ],
+            ) -> None: ...
+
+        @typing_extensions.final
+        class IntConstraints(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            MIN_FIELD_NUMBER: builtins.int
+            MAX_FIELD_NUMBER: builtins.int
+            min: builtins.int
+            """Minimum value for the int parameter"""
+            max: builtins.int
+            """Maximum value for the int parameter"""
+            def __init__(
+                self,
+                *,
+                min: builtins.int = ...,
+                max: builtins.int = ...,
+            ) -> None: ...
+            def ClearField(
+                self, field_name: typing_extensions.Literal["max", b"max", "min", b"min"]
+            ) -> None: ...
+
+        @typing_extensions.final
+        class FloatConstraints(google.protobuf.message.Message):
+            DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+            MIN_FIELD_NUMBER: builtins.int
+            MAX_FIELD_NUMBER: builtins.int
+            min: builtins.float
+            """Minimum value for the float parameter"""
+            max: builtins.float
+            """Maximum value for the float parameter"""
+            def __init__(
+                self,
+                *,
+                min: builtins.float = ...,
+                max: builtins.float = ...,
+            ) -> None: ...
+            def ClearField(
+                self, field_name: typing_extensions.Literal["max", b"max", "min", b"min"]
+            ) -> None: ...
+
+        STRING_CONSTRAINTS_FIELD_NUMBER: builtins.int
+        INT_CONSTRAINTS_FIELD_NUMBER: builtins.int
+        FLOAT_CONSTRAINTS_FIELD_NUMBER: builtins.int
+        @property
+        def string_constraints(
+            self,
+        ) -> global___PipelineTemplateParameter.Constraints.StringConstraints: ...
+        @property
+        def int_constraints(
+            self,
+        ) -> global___PipelineTemplateParameter.Constraints.IntConstraints: ...
+        @property
+        def float_constraints(
+            self,
+        ) -> global___PipelineTemplateParameter.Constraints.FloatConstraints: ...
+        def __init__(
+            self,
+            *,
+            string_constraints: global___PipelineTemplateParameter.Constraints.StringConstraints
+            | None = ...,
+            int_constraints: global___PipelineTemplateParameter.Constraints.IntConstraints
+            | None = ...,
+            float_constraints: global___PipelineTemplateParameter.Constraints.FloatConstraints
+            | None = ...,
+        ) -> None: ...
+        def HasField(
+            self,
+            field_name: typing_extensions.Literal[
+                "constraints",
+                b"constraints",
+                "float_constraints",
+                b"float_constraints",
+                "int_constraints",
+                b"int_constraints",
+                "string_constraints",
+                b"string_constraints",
+            ],
+        ) -> builtins.bool: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal[
+                "constraints",
+                b"constraints",
+                "float_constraints",
+                b"float_constraints",
+                "int_constraints",
+                b"int_constraints",
+                "string_constraints",
+                b"string_constraints",
+            ],
+        ) -> None: ...
+        def WhichOneof(
+            self, oneof_group: typing_extensions.Literal["constraints", b"constraints"]
+        ) -> (
+            typing_extensions.Literal["string_constraints", "int_constraints", "float_constraints"]
+            | None
+        ): ...
+
+    @typing_extensions.final
+    class UIHints(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        class _UIWidget:
+            ValueType = typing.NewType("ValueType", builtins.int)
+            V: typing_extensions.TypeAlias = ValueType
+
+        class _UIWidgetEnumTypeWrapper(
+            google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+                PipelineTemplateParameter.UIHints._UIWidget.ValueType
+            ],
+            builtins.type,
+        ):  # noqa: F821
+            DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+            UI_WIDGET_UNSPECIFIED: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 0
+            TEXT_INPUT: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 1
+            NUMBER_INPUT: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 2
+            SLIDER: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 3
+            DROPDOWN: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 4
+            TOGGLE: PipelineTemplateParameter.UIHints._UIWidget.ValueType  # 5
+
+        class UIWidget(_UIWidget, metaclass=_UIWidgetEnumTypeWrapper): ...
+        UI_WIDGET_UNSPECIFIED: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 0
+        TEXT_INPUT: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 1
+        NUMBER_INPUT: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 2
+        SLIDER: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 3
+        DROPDOWN: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 4
+        TOGGLE: PipelineTemplateParameter.UIHints.UIWidget.ValueType  # 5
+
+        WIDGET_FIELD_NUMBER: builtins.int
+        DATA_SOURCE_FIELD_NUMBER: builtins.int
+        SERIALIZE_AS_STRING_FIELD_NUMBER: builtins.int
+        widget: global___PipelineTemplateParameter.UIHints.UIWidget.ValueType
+        """The UI widget to use for displaying this parameter"""
+        data_source: builtins.str
+        """Used for dropdowns populated dynamically"""
+        serialize_as_string: builtins.bool
+        """Used when backend expects string even if UI shows bool/int"""
+        def __init__(
+            self,
+            *,
+            widget: global___PipelineTemplateParameter.UIHints.UIWidget.ValueType = ...,
+            data_source: builtins.str = ...,
+            serialize_as_string: builtins.bool = ...,
+        ) -> None: ...
+        def ClearField(
+            self,
+            field_name: typing_extensions.Literal[
+                "data_source",
+                b"data_source",
+                "serialize_as_string",
+                b"serialize_as_string",
+                "widget",
+                b"widget",
+            ],
+        ) -> None: ...
+
+    NAME_FIELD_NUMBER: builtins.int
+    TYPE_FIELD_NUMBER: builtins.int
+    REQUIRED_FIELD_NUMBER: builtins.int
+    DEFAULT_STRING_FIELD_NUMBER: builtins.int
+    DEFAULT_INT_FIELD_NUMBER: builtins.int
+    DEFAULT_FLOAT_FIELD_NUMBER: builtins.int
+    DEFAULT_BOOL_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    CONSTRAINTS_FIELD_NUMBER: builtins.int
+    UI_HINTS_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Name of the parameter"""
+    type: global___PipelineTemplateParameter.Type.ValueType
+    """Type of the parameter (string, int, float, bool)"""
+    required: builtins.bool
+    """Whether this parameter is required"""
+    default_string: builtins.str
+    """Default value when type is STRING"""
+    default_int: builtins.int
+    """Default value when type is INT"""
+    default_float: builtins.float
+    """Default value when type is FLOAT"""
+    default_bool: builtins.bool
+    """Default value when type is BOOL"""
+    description: builtins.str
+    """Description of the parameter"""
+    @property
+    def constraints(self) -> global___PipelineTemplateParameter.Constraints:
+        """Constraints to validate parameter values"""
+    @property
+    def ui_hints(self) -> global___PipelineTemplateParameter.UIHints:
+        """UI hints for rendering this parameter in the frontend"""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        type: global___PipelineTemplateParameter.Type.ValueType = ...,
+        required: builtins.bool = ...,
+        default_string: builtins.str = ...,
+        default_int: builtins.int = ...,
+        default_float: builtins.float = ...,
+        default_bool: builtins.bool = ...,
+        description: builtins.str = ...,
+        constraints: global___PipelineTemplateParameter.Constraints | None = ...,
+        ui_hints: global___PipelineTemplateParameter.UIHints | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "constraints",
+            b"constraints",
+            "default_bool",
+            b"default_bool",
+            "default_float",
+            b"default_float",
+            "default_int",
+            b"default_int",
+            "default_string",
+            b"default_string",
+            "default_value",
+            b"default_value",
+            "ui_hints",
+            b"ui_hints",
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "constraints",
+            b"constraints",
+            "default_bool",
+            b"default_bool",
+            "default_float",
+            b"default_float",
+            "default_int",
+            b"default_int",
+            "default_string",
+            b"default_string",
+            "default_value",
+            b"default_value",
+            "description",
+            b"description",
+            "name",
+            b"name",
+            "required",
+            b"required",
+            "type",
+            b"type",
+            "ui_hints",
+            b"ui_hints",
+        ],
+    ) -> None: ...
+    def WhichOneof(
+        self, oneof_group: typing_extensions.Literal["default_value", b"default_value"]
+    ) -> (
+        typing_extensions.Literal["default_string", "default_int", "default_float", "default_bool"]
+        | None
+    ): ...
+
+global___PipelineTemplateParameter = PipelineTemplateParameter
+
+@typing_extensions.final
+class PipelineTemplate(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    class _PipelineTemplateType:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _PipelineTemplateTypeEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[
+            PipelineTemplate._PipelineTemplateType.ValueType
+        ],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        UNKNOWN: PipelineTemplate._PipelineTemplateType.ValueType  # 0
+        TRAINING: PipelineTemplate._PipelineTemplateType.ValueType  # 1
+
+    class PipelineTemplateType(
+        _PipelineTemplateType, metaclass=_PipelineTemplateTypeEnumTypeWrapper
+    ): ...
+    UNKNOWN: PipelineTemplate.PipelineTemplateType.ValueType  # 0
+    TRAINING: PipelineTemplate.PipelineTemplateType.ValueType  # 1
+
+    @typing_extensions.final
+    class PipelineStepsEntry(google.protobuf.message.Message):
+        DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+        KEY_FIELD_NUMBER: builtins.int
+        VALUE_FIELD_NUMBER: builtins.int
+        key: builtins.str
+        value: builtins.str
+        def __init__(
+            self,
+            *,
+            key: builtins.str = ...,
+            value: builtins.str = ...,
+        ) -> None: ...
+        def ClearField(
+            self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]
+        ) -> None: ...
+
+    NAME_FIELD_NUMBER: builtins.int
+    DESCRIPTION_FIELD_NUMBER: builtins.int
+    PIPELINE_TEMPLATE_TYPE_FIELD_NUMBER: builtins.int
+    COMPUTE_INFO_FIELD_NUMBER: builtins.int
+    PARAMETERS_FIELD_NUMBER: builtins.int
+    PIPELINE_STEPS_FIELD_NUMBER: builtins.int
+    name: builtins.str
+    """Name of the template"""
+    description: builtins.str
+    """Description of the template"""
+    pipeline_template_type: global___PipelineTemplate.PipelineTemplateType.ValueType
+    """Type of the pipeline template"""
+    @property
+    def compute_info(self) -> global___ComputeInfo:
+        """Compute resources required to run this pipeline template"""
+    @property
+    def parameters(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___PipelineTemplateParameter
+    ]:
+        """List of parameters that can be configured for this template"""
+    @property
+    def pipeline_steps(
+        self,
+    ) -> google.protobuf.internal.containers.ScalarMap[builtins.str, builtins.str]:
+        """Map from pipeline step name to pipeline step reference"""
+    def __init__(
+        self,
+        *,
+        name: builtins.str = ...,
+        description: builtins.str = ...,
+        pipeline_template_type: global___PipelineTemplate.PipelineTemplateType.ValueType = ...,
+        compute_info: global___ComputeInfo | None = ...,
+        parameters: collections.abc.Iterable[global___PipelineTemplateParameter] | None = ...,
+        pipeline_steps: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["compute_info", b"compute_info"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "compute_info",
+            b"compute_info",
+            "description",
+            b"description",
+            "name",
+            b"name",
+            "parameters",
+            b"parameters",
+            "pipeline_steps",
+            b"pipeline_steps",
+            "pipeline_template_type",
+            b"pipeline_template_type",
+        ],
+    ) -> None: ...
+
+global___PipelineTemplate = PipelineTemplate
 
 @typing_extensions.final
 class Secret(google.protobuf.message.Message):

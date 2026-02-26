@@ -1149,6 +1149,11 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
+        self.PostNodepoolStatus = channel.unary_unary(
+                '/clarifai.api.V2/PostNodepoolStatus',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolStatusRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
         self.GetDeployment = channel.unary_unary(
                 '/clarifai.api.V2/GetDeployment',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDeploymentRequest.SerializeToString,
@@ -1343,6 +1348,16 @@ class V2Stub(object):
                 '/clarifai.api.V2/DeletePipelineStepVersions',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineStepVersionsRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
+                )
+        self.ListPipelineTemplates = channel.unary_unary(
+                '/clarifai.api.V2/ListPipelineTemplates',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineTemplatesRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineTemplateResponse),
+                )
+        self.PostPipelineVersionRunFromTemplate = channel.unary_unary(
+                '/clarifai.api.V2/PostPipelineVersionRunFromTemplate',
+                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateRequest.SerializeToString,
+                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateResponse),
                 )
         self.PostArtifacts = channel.unary_unary(
                 '/clarifai.api.V2/PostArtifacts',
@@ -3137,6 +3152,13 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def PostNodepoolStatus(self, request, context):
+        """Update nodepool status. Called by the agent to report nodepool health/errors.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetDeployment(self, request, context):
         """Deployments CRUD
         """
@@ -3377,6 +3399,21 @@ class V2Servicer(object):
 
     def DeletePipelineStepVersions(self, request, context):
         """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def ListPipelineTemplates(self, request, context):
+        """Lists pipeline templates, which are ready-to-use templates that can simply be run on demand.
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def PostPipelineVersionRunFromTemplate(self, request, context):
+        """Creates a Pipeline, PipelineVersion, and PipelineVersionRun from a PipelineTemplate. 
+        This is a convenience endpoint for users to quickly get started with running pipelines.
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
@@ -4594,6 +4631,11 @@ def add_V2Servicer_to_server(servicer, server):
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteNodepoolsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
+            'PostNodepoolStatus': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostNodepoolStatus,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolStatusRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
             'GetDeployment': grpc.unary_unary_rpc_method_handler(
                     servicer.GetDeployment,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetDeploymentRequest.FromString,
@@ -4788,6 +4830,16 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeletePipelineStepVersions,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineStepVersionsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
+            ),
+            'ListPipelineTemplates': grpc.unary_unary_rpc_method_handler(
+                    servicer.ListPipelineTemplates,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineTemplatesRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineTemplateResponse.SerializeToString,
+            ),
+            'PostPipelineVersionRunFromTemplate': grpc.unary_unary_rpc_method_handler(
+                    servicer.PostPipelineVersionRunFromTemplate,
+                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateRequest.FromString,
+                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateResponse.SerializeToString,
             ),
             'PostArtifacts': grpc.unary_unary_rpc_method_handler(
                     servicer.PostArtifacts,
@@ -8684,6 +8736,23 @@ class V2(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def PostNodepoolStatus(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostNodepoolStatus',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostNodepoolStatusRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def GetDeployment(request,
             target,
             options=(),
@@ -9343,6 +9412,40 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeletePipelineStepVersions',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeletePipelineStepVersionsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def ListPipelineTemplates(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListPipelineTemplates',
+            proto_dot_clarifai_dot_api_dot_service__pb2.ListPipelineTemplatesRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.MultiPipelineTemplateResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def PostPipelineVersionRunFromTemplate(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostPipelineVersionRunFromTemplate',
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateRequest.SerializeToString,
+            proto_dot_clarifai_dot_api_dot_service__pb2.PostPipelineVersionRunFromTemplateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
