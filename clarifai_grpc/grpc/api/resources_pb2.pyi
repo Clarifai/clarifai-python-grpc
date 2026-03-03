@@ -14583,6 +14583,44 @@ class AutoscaleConfig(google.protobuf.message.Message):
 global___AutoscaleConfig = AutoscaleConfig
 
 @typing_extensions.final
+class DeploymentMetrics(google.protobuf.message.Message):
+    """DeploymentMetrics captures metrics and status for a Deployment's underlying runners.
+    This allows tracking of the desired replica count and the actual live replica count.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DESIRED_REPLICAS_FIELD_NUMBER: builtins.int
+    LIVE_REPLICAS_FIELD_NUMBER: builtins.int
+    ROLLOUT_IN_PROGRESS_FIELD_NUMBER: builtins.int
+    desired_replicas: builtins.int
+    """The number of replicas desired by the orchestrator."""
+    live_replicas: builtins.int
+    """The actual number of live replicas connected and ready to process requests."""
+    rollout_in_progress: builtins.bool
+    """If true, the deployment is currently rolling out a new version."""
+    def __init__(
+        self,
+        *,
+        desired_replicas: builtins.int = ...,
+        live_replicas: builtins.int = ...,
+        rollout_in_progress: builtins.bool = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "desired_replicas",
+            b"desired_replicas",
+            "live_replicas",
+            b"live_replicas",
+            "rollout_in_progress",
+            b"rollout_in_progress",
+        ],
+    ) -> None: ...
+
+global___DeploymentMetrics = DeploymentMetrics
+
+@typing_extensions.final
 class Deployment(google.protobuf.message.Message):
     """A deployment allows you to configure how runners for a particular type of resource will
     scale up and down. These are unique per user_id, nodepool and model so for differnet nodepools
@@ -14666,6 +14704,7 @@ class Deployment(google.protobuf.message.Message):
     EMAIL_REMINDER_AFTER_FIELD_NUMBER: builtins.int
     GRACEFUL_DEPLOY_FIELD_NUMBER: builtins.int
     DEPLOYMENT_NODEPOOLS_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_METRICS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -14740,6 +14779,9 @@ class Deployment(google.protobuf.message.Message):
         When any priority value is non-zero, the response will populate this field instead
         of 'nodepools'.
         """
+    @property
+    def deployment_metrics(self) -> global___DeploymentMetrics:
+        """Real-time metrics for this deployment, including the desired and live replica counts."""
     def __init__(
         self,
         *,
@@ -14760,6 +14802,7 @@ class Deployment(google.protobuf.message.Message):
         email_reminder_after: google.protobuf.duration_pb2.Duration | None = ...,
         graceful_deploy: builtins.bool = ...,
         deployment_nodepools: collections.abc.Iterable[global___DeploymentNodepool] | None = ...,
+        deployment_metrics: global___DeploymentMetrics | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14768,6 +14811,8 @@ class Deployment(google.protobuf.message.Message):
             b"autoscale_config",
             "created_at",
             b"created_at",
+            "deployment_metrics",
+            b"deployment_metrics",
             "desired_worker",
             b"desired_worker",
             "email_reminder_after",
@@ -14791,6 +14836,8 @@ class Deployment(google.protobuf.message.Message):
             b"created_at",
             "deploy_latest_version",
             b"deploy_latest_version",
+            "deployment_metrics",
+            b"deployment_metrics",
             "deployment_nodepools",
             b"deployment_nodepools",
             "description",
