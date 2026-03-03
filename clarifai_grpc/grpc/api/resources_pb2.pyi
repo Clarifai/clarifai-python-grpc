@@ -14665,18 +14665,15 @@ class Deployment(google.protobuf.message.Message):
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     EMAIL_REMINDER_AFTER_FIELD_NUMBER: builtins.int
     GRACEFUL_DEPLOY_FIELD_NUMBER: builtins.int
+    DEPLOYMENT_NODEPOOLS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
     """The user who owns the deployment. These live in the user/org account."""
     @property
     def autoscale_config(self) -> global___AutoscaleConfig:
-        """How to autoscale the object."""
-    @property
-    def nodepools(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Nodepool]:
-        """You can configure different autoscaling per nodepool(s).
+        """How to autoscale the object.
+        You can configure different autoscaling per nodepool(s).
         These nodepools have to be also owned by the same user_id/org as this deployment.
         If there is more than one nodepool we use the model's ComputeInfo to match
         with what the nodepool provides to decide which one can handle it combined with the
@@ -14684,6 +14681,11 @@ class Deployment(google.protobuf.message.Message):
         we need a way to rank scheduling choices when we don't know how to decide (like a model
         supports
         """
+    @property
+    def nodepools(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___Nodepool]:
+        """Use DeploymentNodepools field instead"""
     scheduling_choice: global___Deployment.SchedulingChoice.ValueType
     @property
     def visibility(self) -> global___Visibility:
@@ -14728,6 +14730,16 @@ class Deployment(google.protobuf.message.Message):
         """
     graceful_deploy: builtins.bool
     """Whether to gracefully deploy a new worker"""
+    @property
+    def deployment_nodepools(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___DeploymentNodepool
+    ]:
+        """Per-nodepool settings including priority. If set, 'nodepools' must not also be set.
+        When any priority value is non-zero, the response will populate this field instead
+        of 'nodepools'.
+        """
     def __init__(
         self,
         *,
@@ -14747,6 +14759,7 @@ class Deployment(google.protobuf.message.Message):
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
         email_reminder_after: google.protobuf.duration_pb2.Duration | None = ...,
         graceful_deploy: builtins.bool = ...,
+        deployment_nodepools: collections.abc.Iterable[global___DeploymentNodepool] | None = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14778,6 +14791,8 @@ class Deployment(google.protobuf.message.Message):
             b"created_at",
             "deploy_latest_version",
             b"deploy_latest_version",
+            "deployment_nodepools",
+            b"deployment_nodepools",
             "description",
             b"description",
             "desired_worker",
@@ -14808,6 +14823,62 @@ class Deployment(google.protobuf.message.Message):
     ) -> None: ...
 
 global___Deployment = Deployment
+
+@typing_extensions.final
+class DeploymentNodepool(google.protobuf.message.Message):
+    """DeploymentNodepool associates a nodepool with a deployment and holds per-nodepool settings."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    ID_FIELD_NUMBER: builtins.int
+    COMPUTE_CLUSTER_FIELD_NUMBER: builtins.int
+    PRIORITY_FIELD_NUMBER: builtins.int
+    NODEPOOL_FIELD_NUMBER: builtins.int
+    id: builtins.str
+    """Nodepool ID correlates with nodepools in deployment."""
+    @property
+    def compute_cluster(self) -> global___ComputeCluster:
+        """The compute cluster that owns this nodepool."""
+    priority: builtins.int
+    """The scheduling priority for this deployment on the given nodepool.
+    Valid values are 0-9, where higher values indicate higher priority.
+    Default is 0 (lowest priority).
+    """
+    @property
+    def nodepool(self) -> global___Nodepool:
+        """-------------------------------------------------------------------
+        OUTPUT FIELDS (Server populates these so the client gets the data)
+        -------------------------------------------------------------------
+        """
+    def __init__(
+        self,
+        *,
+        id: builtins.str = ...,
+        compute_cluster: global___ComputeCluster | None = ...,
+        priority: builtins.int = ...,
+        nodepool: global___Nodepool | None = ...,
+    ) -> None: ...
+    def HasField(
+        self,
+        field_name: typing_extensions.Literal[
+            "compute_cluster", b"compute_cluster", "nodepool", b"nodepool"
+        ],
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "compute_cluster",
+            b"compute_cluster",
+            "id",
+            b"id",
+            "nodepool",
+            b"nodepool",
+            "priority",
+            b"priority",
+        ],
+    ) -> None: ...
+
+global___DeploymentNodepool = DeploymentNodepool
 
 @typing_extensions.final
 class RunnerSelector(google.protobuf.message.Message):
