@@ -14629,6 +14629,28 @@ class Deployment(google.protobuf.message.Message):
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
+    class _Status:
+        ValueType = typing.NewType("ValueType", builtins.int)
+        V: typing_extensions.TypeAlias = ValueType
+
+    class _StatusEnumTypeWrapper(
+        google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[Deployment._Status.ValueType],
+        builtins.type,
+    ):  # noqa: F821
+        DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
+        ENABLED: Deployment._Status.ValueType  # 0
+        """Default: deployment is enabled and can serve traffic."""
+        DISABLED: Deployment._Status.ValueType  # 1
+        """Deployment is disabled: scaled to zero, traffic rejected."""
+
+    class Status(_Status, metaclass=_StatusEnumTypeWrapper):
+        """Status of the deployment."""
+
+    ENABLED: Deployment.Status.ValueType  # 0
+    """Default: deployment is enabled and can serve traffic."""
+    DISABLED: Deployment.Status.ValueType  # 1
+    """Deployment is disabled: scaled to zero, traffic rejected."""
+
     class _SchedulingChoice:
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
@@ -14705,6 +14727,7 @@ class Deployment(google.protobuf.message.Message):
     GRACEFUL_DEPLOY_FIELD_NUMBER: builtins.int
     DEPLOYMENT_NODEPOOLS_FIELD_NUMBER: builtins.int
     DEPLOYMENT_METRICS_FIELD_NUMBER: builtins.int
+    STATUS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """An id for this configured deployment."""
     user_id: builtins.str
@@ -14782,6 +14805,11 @@ class Deployment(google.protobuf.message.Message):
     @property
     def deployment_metrics(self) -> global___DeploymentMetrics:
         """Real-time metrics for this deployment, including the desired and live replica counts."""
+    status: global___Deployment.Status.ValueType
+    """The current status of the deployment.
+    When disabled, all infrastructure is scaled to zero and prediction requests are rejected.
+    The autoscale_config is preserved for when the deployment is enabled.
+    """
     def __init__(
         self,
         *,
@@ -14803,6 +14831,7 @@ class Deployment(google.protobuf.message.Message):
         graceful_deploy: builtins.bool = ...,
         deployment_nodepools: collections.abc.Iterable[global___DeploymentNodepool] | None = ...,
         deployment_metrics: global___DeploymentMetrics | None = ...,
+        status: global___Deployment.Status.ValueType = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -14860,6 +14889,8 @@ class Deployment(google.protobuf.message.Message):
             b"scheduling_choice",
             "special_handling",
             b"special_handling",
+            "status",
+            b"status",
             "user_id",
             b"user_id",
             "visibility",

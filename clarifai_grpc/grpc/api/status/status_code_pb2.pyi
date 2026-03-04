@@ -285,6 +285,8 @@ class _StatusCodeEnumTypeWrapper(
     """Deployment related codes 259xx"""
     DEPLOYMENT_INVALID_ARGUMENT: _StatusCode.ValueType  # 25901
     DEPLOYMENT_INVALID_REQUEST: _StatusCode.ValueType  # 25902
+    DEPLOYMENT_DISABLED: _StatusCode.ValueType  # 25903
+    """The deployment is disabled and cannot serve traffic."""
     INSTANCE_TYPE_DOES_NOT_EXIST: _StatusCode.ValueType  # 26000
     """InstanceType related codes 260xx"""
     INSTANCE_TYPE_INVALID_ARGUMENT: _StatusCode.ValueType  # 26001
@@ -895,6 +897,8 @@ DEPLOYMENT_DOES_NOT_EXIST: StatusCode.ValueType  # 25900
 """Deployment related codes 259xx"""
 DEPLOYMENT_INVALID_ARGUMENT: StatusCode.ValueType  # 25901
 DEPLOYMENT_INVALID_REQUEST: StatusCode.ValueType  # 25902
+DEPLOYMENT_DISABLED: StatusCode.ValueType  # 25903
+"""The deployment is disabled and cannot serve traffic."""
 INSTANCE_TYPE_DOES_NOT_EXIST: StatusCode.ValueType  # 26000
 """InstanceType related codes 260xx"""
 INSTANCE_TYPE_INVALID_ARGUMENT: StatusCode.ValueType  # 26001
