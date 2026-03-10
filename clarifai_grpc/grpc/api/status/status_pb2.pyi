@@ -33,6 +33,7 @@ class Status(google.protobuf.message.Message):
     INTERNAL_DETAILS_FIELD_NUMBER: builtins.int
     REDIRECT_INFO_FIELD_NUMBER: builtins.int
     DEVELOPER_NOTES_FIELD_NUMBER: builtins.int
+    HTTP_STATUS_CODE_FIELD_NUMBER: builtins.int
     code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """Status code from internal codes."""
     description: builtins.str
@@ -65,6 +66,8 @@ class Status(google.protobuf.message.Message):
     These notes are rather technical details for developers how to interpret the status,
     e.g. why an error occurred and how to avoid getting the error.
     """
+    http_status_code: builtins.int
+    """The HTTP status code of the response."""
     def __init__(
         self,
         *,
@@ -78,6 +81,7 @@ class Status(google.protobuf.message.Message):
         internal_details: builtins.str = ...,
         redirect_info: global___RedirectInfo | None = ...,
         developer_notes: builtins.str = ...,
+        http_status_code: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["redirect_info", b"redirect_info"]
@@ -93,6 +97,8 @@ class Status(google.protobuf.message.Message):
             b"details",
             "developer_notes",
             b"developer_notes",
+            "http_status_code",
+            b"http_status_code",
             "internal_details",
             b"internal_details",
             "percent_completed",
