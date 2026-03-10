@@ -19,6 +19,7 @@ import google.protobuf.wrappers_pb2
 import proto.clarifai.api.status.status_code_pb2
 import proto.clarifai.api.status.status_pb2
 import proto.clarifai.api.utils.matrix_pb2
+import proto.clarifai.api.utils.time_pb2
 
 if sys.version_info >= (3, 10):
     import typing as typing_extensions
@@ -11338,6 +11339,8 @@ class TaskConceptAutoAnnotationConfig(google.protobuf.message.Message):
     ANNOTATION_DATA_TYPES_FIELD_NUMBER: builtins.int
     THRESHOLD_RANGE_FIELD_NUMBER: builtins.int
     STATUS_CODE_FIELD_NUMBER: builtins.int
+    TIME_OF_DAY_RANGE_FIELD_NUMBER: builtins.int
+    POLYGON_FIELD_NUMBER: builtins.int
     annotation_data_types: builtins.int
     """Filter annotations by their annotation data type.
     This is a bit-mask field that holds multiple AnnotationDataType values that are combined in an OR fashion.
@@ -11351,25 +11354,49 @@ class TaskConceptAutoAnnotationConfig(google.protobuf.message.Message):
         """
     status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType
     """The output annotations will be created using this status code."""
+    @property
+    def time_of_day_range(self) -> proto.clarifai.api.utils.time_pb2.TimeOfDayRange:
+        """Task auto annotation for this concept only applies to this time of day range.
+        When out of range, the task will not generate annotations for the concept.
+        """
+    @property
+    def polygon(self) -> global___Polygon:
+        """Filter out annotations that are out of this polygon.
+        When it's set, only detection annotations that intersect the polygon will pass the filter.
+        """
     def __init__(
         self,
         *,
         annotation_data_types: builtins.int = ...,
         threshold_range: global___ThresholdRange | None = ...,
         status_code: proto.clarifai.api.status.status_code_pb2.StatusCode.ValueType = ...,
+        time_of_day_range: proto.clarifai.api.utils.time_pb2.TimeOfDayRange | None = ...,
+        polygon: global___Polygon | None = ...,
     ) -> None: ...
     def HasField(
-        self, field_name: typing_extensions.Literal["threshold_range", b"threshold_range"]
+        self,
+        field_name: typing_extensions.Literal[
+            "polygon",
+            b"polygon",
+            "threshold_range",
+            b"threshold_range",
+            "time_of_day_range",
+            b"time_of_day_range",
+        ],
     ) -> builtins.bool: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
             "annotation_data_types",
             b"annotation_data_types",
+            "polygon",
+            b"polygon",
             "status_code",
             b"status_code",
             "threshold_range",
             b"threshold_range",
+            "time_of_day_range",
+            b"time_of_day_range",
         ],
     ) -> None: ...
 
@@ -14530,6 +14557,7 @@ class AutoscaleConfig(google.protobuf.message.Message):
     SCALE_UP_DELAY_SECONDS_FIELD_NUMBER: builtins.int
     DISABLE_PACKING_FIELD_NUMBER: builtins.int
     SCALE_TO_ZERO_DELAY_SECONDS_FIELD_NUMBER: builtins.int
+    SOFT_MIN_REPLICAS_FIELD_NUMBER: builtins.int
     min_replicas: builtins.int
     """The minimum number of replicas for the runner to have.
     Defaults to 0 which means autoscaling can scale down to zero.
@@ -14549,6 +14577,13 @@ class AutoscaleConfig(google.protobuf.message.Message):
     """
     scale_to_zero_delay_seconds: builtins.int
     """The idle time before scaling down to zero"""
+    soft_min_replicas: builtins.int
+    """The soft minimum number of replicas for the runner.
+    Unlike min_replicas (which is a hard floor the autoscaler never violates),
+    soft_min_replicas is a target the autoscaler tries to maintain but can violate
+    (e.g., scaling to zero during idle periods).
+    A value of 0 means not set / disabled.
+    """
     def __init__(
         self,
         *,
@@ -14559,6 +14594,7 @@ class AutoscaleConfig(google.protobuf.message.Message):
         scale_up_delay_seconds: builtins.int = ...,
         disable_packing: builtins.bool = ...,
         scale_to_zero_delay_seconds: builtins.int = ...,
+        soft_min_replicas: builtins.int = ...,
     ) -> None: ...
     def ClearField(
         self,
@@ -14575,6 +14611,8 @@ class AutoscaleConfig(google.protobuf.message.Message):
             b"scale_to_zero_delay_seconds",
             "scale_up_delay_seconds",
             b"scale_up_delay_seconds",
+            "soft_min_replicas",
+            b"soft_min_replicas",
             "traffic_history_seconds",
             b"traffic_history_seconds",
         ],

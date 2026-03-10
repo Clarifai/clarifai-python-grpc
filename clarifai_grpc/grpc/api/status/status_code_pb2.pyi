@@ -606,6 +606,8 @@ class _StatusCodeEnumTypeWrapper(
     TWILIO_MAX_VERIFICATION_BEGIN_EXCEEDED: _StatusCode.ValueType  # 71003
     """Twilio related issues: 71xxx"""
     TWILIO_MAX_VERIFICATION_CHECK_EXCEEDED: _StatusCode.ValueType  # 71004
+    TWILIO_PHONE_NUMBER_BLOCKED: _StatusCode.ValueType  # 71005
+    """The provided phone number was rejected or blocked by Twilio."""
     INTERNAL_SERVER_ISSUE: _StatusCode.ValueType  # 98004
     """Internal issues: 98xxx"""
     INTERNAL_FETCHING_ISSUE: _StatusCode.ValueType  # 98005
@@ -1218,6 +1220,8 @@ LOG_ENTRIES_INVALID_REQUEST: StatusCode.ValueType  # 70000
 TWILIO_MAX_VERIFICATION_BEGIN_EXCEEDED: StatusCode.ValueType  # 71003
 """Twilio related issues: 71xxx"""
 TWILIO_MAX_VERIFICATION_CHECK_EXCEEDED: StatusCode.ValueType  # 71004
+TWILIO_PHONE_NUMBER_BLOCKED: StatusCode.ValueType  # 71005
+"""The provided phone number was rejected or blocked by Twilio."""
 INTERNAL_SERVER_ISSUE: StatusCode.ValueType  # 98004
 """Internal issues: 98xxx"""
 INTERNAL_FETCHING_ISSUE: StatusCode.ValueType  # 98005
