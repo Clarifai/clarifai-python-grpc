@@ -666,6 +666,7 @@ class _EventTypeEnumTypeWrapper(
     """Event types related to users: 800 - 899"""
     COMPUTE_CLUSTER_CREATE: _EventType.ValueType  # 900
     """Event types related to compute clusters: 900-999"""
+    COMPUTE_CLUSTER_UPDATE: _EventType.ValueType  # 902
     COMPUTE_CLUSTER_DELETE: _EventType.ValueType  # 901
     NODEPOOL_CREATE: _EventType.ValueType  # 1000
     """Event types related to nodepools: 1000-1099"""
@@ -723,6 +724,7 @@ USER_UPDATE: EventType.ValueType  # 800
 """Event types related to users: 800 - 899"""
 COMPUTE_CLUSTER_CREATE: EventType.ValueType  # 900
 """Event types related to compute clusters: 900-999"""
+COMPUTE_CLUSTER_UPDATE: EventType.ValueType  # 902
 COMPUTE_CLUSTER_DELETE: EventType.ValueType  # 901
 NODEPOOL_CREATE: EventType.ValueType  # 1000
 """Event types related to nodepools: 1000-1099"""
