@@ -13755,6 +13755,7 @@ class Runner(google.protobuf.message.Message):
     NUM_REPLICAS_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     RUNNER_METRICS_FIELD_NUMBER: builtins.int
+    MIN_REPLICAS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
@@ -13817,6 +13818,10 @@ class Runner(google.protobuf.message.Message):
         """Metrics and status for the underlying k8s deployment.
         Each Runner is 1:1 with a k8s deployment, so this field tracks deployment health and metrics.
         """
+    min_replicas: builtins.int
+    """Hard minimum replicas from the deployment's autoscale config.
+    The agent uses this to determine how many replicas are non-preemptable.
+    """
     def __init__(
         self,
         *,
@@ -13832,6 +13837,7 @@ class Runner(google.protobuf.message.Message):
         num_replicas: builtins.int = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
         runner_metrics: global___RunnerMetrics | None = ...,
+        min_replicas: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -13867,6 +13873,8 @@ class Runner(google.protobuf.message.Message):
             b"labels",
             "metadata",
             b"metadata",
+            "min_replicas",
+            b"min_replicas",
             "modified_at",
             b"modified_at",
             "nodepool",
@@ -14580,10 +14588,9 @@ class AutoscaleConfig(google.protobuf.message.Message):
     scale_to_zero_delay_seconds: builtins.int
     """The idle time before scaling down to zero"""
     soft_min_replicas: builtins.int
-    """The soft minimum number of replicas for the runner.
-    Unlike min_replicas (which is a hard floor the autoscaler never violates),
-    soft_min_replicas is a target the autoscaler tries to maintain but can violate
-    (e.g., scaling to zero during idle periods).
+    """Additional minimum replicas added on top of min_replicas. "Soft" refers to scheduling
+    priority (preemptable), not to whether the floor is enforced. The orchestrator always
+    maintains min_replicas + soft_min_replicas (capped to max_replicas).
     A value of 0 means not set / disabled.
     """
     def __init__(
