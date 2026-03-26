@@ -36,6 +36,24 @@ GENERAL_MODEL_ID = "aaa03c23b3724a16a56b629203edc62c"
 MODERATION_MODEL_ID = "d16f390eb32cad478c7ae150069bd2c6"
 
 
+from clarifai_grpc.grpc.api import resources_pb2
+
+
+def get_test_user_app_id() -> resources_pb2.UserAppIDSet:
+    """Return UserAppIDSet for the test app.
+
+    When using PAT (instead of app-specific API key), requests need explicit
+    user_app_id for app-scoped operations like PostInputs, PostSearches, etc.
+    CI sets CLARIFAI_APP_ID and derives user_id from the test user email.
+    """
+    app_id = os.environ.get("CLARIFAI_APP_ID", "")
+    user_id = os.environ.get("CLARIFAI_USER_ID", "")
+    if app_id and user_id:
+        return resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id)
+    # If not set, return empty — API will infer from the key
+    return None
+
+
 def get_status_message(status: Status):
     message = f"{status.code} {status.description}"
     if status.details:
@@ -51,9 +69,13 @@ def headers(pat=False):
             % os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
         }
     else:
+        # Prefer PAT over app-specific API key for shared CO model access.
         return {
             "authorization": "Key %s"
-            % os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_PAT"))
+            % os.environ.get(
+                "CLARIFAI_PAT_KEY",
+                os.environ.get("CLARIFAI_PAT", os.environ.get("CLARIFAI_API_KEY")),
+            )
         }
 
 
@@ -85,7 +107,13 @@ def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
     if pat:
         key = os.environ.get("CLARIFAI_PAT_KEY", os.environ.get("CLARIFAI_PAT"))
     else:
-        key = os.environ.get("CLARIFAI_API_KEY", os.environ.get("CLARIFAI_PAT"))
+        # Prefer PAT over app-specific API key. App-specific API keys cannot access
+        # shared CO models (e.g., general-image-embedding in clarifai/main) that are
+        # triggered internally by operations like PostAnnotations and PostSearches.
+        key = os.environ.get(
+            "CLARIFAI_PAT_KEY",
+            os.environ.get("CLARIFAI_PAT", os.environ.get("CLARIFAI_API_KEY")),
+        )
 
     return (
         ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
