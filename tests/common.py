@@ -39,19 +39,59 @@ MODERATION_MODEL_ID = "d16f390eb32cad478c7ae150069bd2c6"
 from clarifai_grpc.grpc.api import resources_pb2
 
 
+_cached_user_app_id = None  # module-level cache for the resolved UserAppIDSet
+
+
 def get_test_user_app_id() -> resources_pb2.UserAppIDSet:
     """Return UserAppIDSet for the test app.
 
-    When using PAT (instead of app-specific API key), requests need explicit
+    When using PAT (instead of app-specific API key), requests need an explicit
     user_app_id for app-scoped operations like PostInputs, PostSearches, etc.
-    CI sets CLARIFAI_APP_ID and derives user_id from the test user email.
+
+    Resolution order:
+      1. CLARIFAI_USER_ID + CLARIFAI_APP_ID env vars (if both set)
+      2. Login via CLARIFAI_USER_EMAIL + CLARIFAI_USER_PASSWORD to obtain the
+         user_id at runtime (CI provides these but does not export CLARIFAI_USER_ID)
+
+    The result is cached after the first successful call.
     """
+    global _cached_user_app_id
+    if _cached_user_app_id is not None:
+        return _cached_user_app_id
+
     app_id = os.environ.get("CLARIFAI_APP_ID", "")
+    if not app_id:
+        return None
+
     user_id = os.environ.get("CLARIFAI_USER_ID", "")
-    if app_id and user_id:
-        return resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id)
-    # If not set, return empty — API will infer from the key
-    return None
+    if not user_id:
+        # CLARIFAI_USER_ID is not explicitly exported in CI — resolve it by
+        # performing a lightweight login call using the credentials that are set.
+        import json as _json
+        from urllib.error import HTTPError
+        from urllib.request import HTTPHandler, Request, build_opener
+
+        email = os.environ.get("CLARIFAI_USER_EMAIL", "")
+        password = os.environ.get("CLARIFAI_USER_PASSWORD", "")
+        if email and password:
+            base = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com")
+            scheme = os.environ.get("CLARIFAI_GRPC_BASE_SCHEME", "https")
+            try:
+                req = Request(
+                    f"{scheme}://{base}/v2/login",
+                    data=_json.dumps({"email": email, "password": password}).encode(),
+                )
+                req.add_header("Content-Type", "application/json")
+                resp = _json.loads(build_opener(HTTPHandler).open(req).read().decode())
+                user_id = resp.get("v2_user_id", "")
+            except Exception:
+                pass
+
+    if not user_id:
+        return None
+
+    _cached_user_app_id = resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id)
+    return _cached_user_app_id
 
 
 def get_status_message(status: Status):
@@ -152,11 +192,12 @@ def aio_grpc_channel():
     return pytest.mark.parametrize('channel_key', ["aio_grpc"])
 
 
-def wait_for_inputs_upload(stub, metadata, input_ids):
+def wait_for_inputs_upload(stub, metadata, input_ids, user_app_id=None):
     for input_id in input_ids:
         while True:
             get_input_response = stub.GetInput(
-                service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
+                service_pb2.GetInputRequest(input_id=input_id, user_app_id=user_app_id),
+                metadata=metadata,
             )
             raise_on_failure(get_input_response)
             if get_input_response.input.status.code == status_code_pb2.INPUT_DOWNLOAD_SUCCESS:
@@ -175,21 +216,22 @@ def wait_for_inputs_upload(stub, metadata, input_ids):
     # At this point, all inputs have been downloaded successfully.
 
 
-def cleanup_inputs(stub, input_ids, metadata):
-    delete_request = service_pb2.DeleteInputsRequest(ids=input_ids)
+def cleanup_inputs(stub, input_ids, metadata, user_app_id=None):
+    delete_request = service_pb2.DeleteInputsRequest(ids=input_ids, user_app_id=user_app_id)
     delete_response = stub.DeleteInputs(delete_request, metadata=metadata)
     raise_on_failure(delete_response)
-    wait_for_inputs_delete(stub, input_ids, metadata=metadata)
+    wait_for_inputs_delete(stub, input_ids, metadata=metadata, user_app_id=user_app_id)
 
 
-def wait_for_inputs_delete(stub, input_ids, metadata):
+def wait_for_inputs_delete(stub, input_ids, metadata, user_app_id=None):
     remaining_input_ids = list(input_ids)
     start = datetime.now()
     timeout = 120
     while remaining_input_ids and (datetime.now() - start).total_seconds() < timeout:
         for input_id in remaining_input_ids:
             get_input_response = stub.GetInput(
-                service_pb2.GetInputRequest(input_id=input_id), metadata=metadata
+                service_pb2.GetInputRequest(input_id=input_id, user_app_id=user_app_id),
+                metadata=metadata,
             )
             if get_input_response.status.code == status_code_pb2.CONN_DOES_NOT_EXIST:
                 remaining_input_ids.remove(input_id)

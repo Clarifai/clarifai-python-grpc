@@ -5,6 +5,7 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -36,6 +37,7 @@ def test_post_annotations_searches(channel_key):
     with SetupImage(stub) as input_:
         post_palm_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(
+                user_app_id=get_test_user_app_id(),
                 annotations=[
                     resources_pb2.Annotation(
                         input_id=input_.id,
@@ -64,6 +66,7 @@ def test_post_annotations_searches(channel_key):
 
         post_water_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(
+                user_app_id=get_test_user_app_id(),
                 annotations=[
                     resources_pb2.Annotation(
                         input_id=input_.id,
@@ -92,6 +95,7 @@ def test_post_annotations_searches(channel_key):
 
         post_palm_annotations_searches_response = stub.PostAnnotationsSearches(
             service_pb2.PostAnnotationsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=resources_pb2.Query(
@@ -118,6 +122,7 @@ def test_post_annotations_searches(channel_key):
 
         post_water_annotations_searches_response = stub.PostAnnotationsSearches(
             service_pb2.PostAnnotationsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=resources_pb2.Query(
@@ -144,6 +149,7 @@ def test_post_annotations_searches(channel_key):
 
         post_palm_and_water_annotations_searches_response = stub.PostAnnotationsSearches(
             service_pb2.PostAnnotationsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=resources_pb2.Query(
@@ -184,8 +190,10 @@ class SetupImage:
         self._stub = stub
 
     def __enter__(self) -> resources_pb2.Input:
+        user_app_id = get_test_user_app_id()
         post_response = self._stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=user_app_id,
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -201,9 +209,9 @@ class SetupImage:
         raise_on_failure(post_response)
         self._input = post_response.inputs[0]
 
-        wait_for_inputs_upload(self._stub, metadata(), [self._input.id])
+        wait_for_inputs_upload(self._stub, metadata(), [self._input.id], user_app_id=user_app_id)
 
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        cleanup_inputs(self._stub, [self._input.id], metadata=metadata())
+        cleanup_inputs(self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id())
