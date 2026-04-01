@@ -19,7 +19,7 @@ def test_post_annotations_searches(channel_key):
     palm_search_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(
             user_app_id=get_test_user_app_id(),
-            concept_query=resources_pb2.ConceptQuery(name="palm")
+            concept_query=resources_pb2.ConceptQuery(name="palm"),
         ),
         metadata=metadata(),
     )
@@ -29,7 +29,7 @@ def test_post_annotations_searches(channel_key):
     water_search_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(
             user_app_id=get_test_user_app_id(),
-            concept_query=resources_pb2.ConceptQuery(name="water")
+            concept_query=resources_pb2.ConceptQuery(name="water"),
         ),
         metadata=metadata(),
     )

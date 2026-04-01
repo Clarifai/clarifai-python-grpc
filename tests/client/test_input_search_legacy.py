@@ -570,7 +570,9 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         # Executing the search returns results.
         post_search_by_id_response = stub.PostSearchesByID(
-            service_pb2.PostSearchesByIDRequest(user_app_id=get_test_user_app_id(), id=my_search_id),
+            service_pb2.PostSearchesByIDRequest(
+                user_app_id=get_test_user_app_id(), id=my_search_id
+            ),
             metadata=metadata(),
         )
         raise_on_failure(post_search_by_id_response)
