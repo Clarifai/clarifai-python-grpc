@@ -437,7 +437,7 @@ class SetupImage:
                             ),
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -449,4 +449,6 @@ class SetupImage:
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        cleanup_inputs(self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id())
+        cleanup_inputs(
+            self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id()
+        )

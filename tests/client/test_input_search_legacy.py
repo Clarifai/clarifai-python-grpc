@@ -34,7 +34,7 @@ def test_search_by_annotated_concept_id(channel_key):
                             )
                         )
                     ]
-                )
+                ),
             ),
             metadata=metadata(),
         )
@@ -61,7 +61,7 @@ def test_search_by_annotated_concept_name(channel_key):
                             )
                         )
                     ]
-                )
+                ),
             ),
             metadata=metadata(),
         )
@@ -476,7 +476,7 @@ def test_save_and_execute_search_by_id(channel_key):
                             ]
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -559,7 +559,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
                             ]
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )

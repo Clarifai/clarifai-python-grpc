@@ -38,7 +38,6 @@ MODERATION_MODEL_ID = "d16f390eb32cad478c7ae150069bd2c6"
 
 from clarifai_grpc.grpc.api import resources_pb2
 
-
 _cached_user_app_id = None  # module-level cache for the resolved UserAppIDSet
 
 
@@ -68,7 +67,6 @@ def get_test_user_app_id() -> resources_pb2.UserAppIDSet:
         # CLARIFAI_USER_ID is not explicitly exported in CI — resolve it by
         # performing a lightweight login call using the credentials that are set.
         import json as _json
-        from urllib.error import HTTPError
         from urllib.request import HTTPHandler, Request, build_opener
 
         email = os.environ.get("CLARIFAI_USER_EMAIL", "")

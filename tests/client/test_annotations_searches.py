@@ -58,7 +58,7 @@ def test_post_annotations_searches(channel_key):
                             ]
                         ),
                     ),
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -87,7 +87,7 @@ def test_post_annotations_searches(channel_key):
                             ]
                         ),
                     ),
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -132,7 +132,7 @@ def test_post_annotations_searches(channel_key):
                                         data=resources_pb2.Data(
                                             concepts=[
                                                 resources_pb2.Concept(id=water_concept_id, value=1)
-                                            ]
+                                            ],
                                         )
                                     )
                                 )
@@ -202,7 +202,7 @@ class SetupImage:
                             ),
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -214,4 +214,6 @@ class SetupImage:
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        cleanup_inputs(self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id())
+        cleanup_inputs(
+            self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id()
+        )
