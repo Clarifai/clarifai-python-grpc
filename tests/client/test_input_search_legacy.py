@@ -484,7 +484,7 @@ def test_save_and_execute_search_by_id(channel_key):
 
         # Executing the search returns results.
         post_search_by_id_response = stub.PostSearchesByID(
-            service_pb2.PostSearchesByIDRequest(id=search_id),
+            service_pb2.PostSearchesByIDRequest(user_app_id=get_test_user_app_id(), id=search_id),
             metadata=metadata(),
         )
         raise_on_failure(post_search_by_id_response)
@@ -501,7 +501,9 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
     with SetupImage(stub) as input1, SetupImage(stub) as input2:
         list_annotations_response = stub.ListAnnotations(
-            service_pb2.ListAnnotationsRequest(input_ids=[input1.id, input2.id]),
+            service_pb2.ListAnnotationsRequest(
+                user_app_id=get_test_user_app_id(), input_ids=[input1.id, input2.id]
+            ),
             metadata=metadata(),
         )
         raise_on_failure(list_annotations_response)
@@ -512,6 +514,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         patch_annotations_response = stub.PatchAnnotations(
             service_pb2.PatchAnnotationsRequest(
+                user_app_id=get_test_user_app_id(),
                 action="merge",
                 annotations=[
                     resources_pb2.Annotation(
@@ -567,7 +570,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         # Executing the search returns results.
         post_search_by_id_response = stub.PostSearchesByID(
-            service_pb2.PostSearchesByIDRequest(id=my_search_id),
+            service_pb2.PostSearchesByIDRequest(user_app_id=get_test_user_app_id(), id=my_search_id),
             metadata=metadata(),
         )
         raise_on_failure(post_search_by_id_response)
