@@ -12,6 +12,7 @@ from tests.common import (
     both_channels,
     get_channel,
     get_secure_hosting_url,
+    get_test_user_app_id,
     headers,
     metadata,
     raise_on_failure,
@@ -30,6 +31,7 @@ def test_export_dataset_version(channel_key):
     dataset_id = "export-" + uuid.uuid4().hex[:25]
     post_datasets_response = stub.PostDatasets(
         service_pb2.PostDatasetsRequest(
+            user_app_id=get_test_user_app_id(),
             datasets=[resources_pb2.Dataset(id=dataset_id)],
         ),
         metadata=metadata(),

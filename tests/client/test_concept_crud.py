@@ -2,7 +2,13 @@ import uuid
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import both_channels, get_channel, metadata, raise_on_failure
+from tests.common import (
+    both_channels,
+    get_channel,
+    get_test_user_app_id,
+    metadata,
+    raise_on_failure,
+)
 
 
 @both_channels()
@@ -15,7 +21,8 @@ def test_concept_post_get_patch(channel_key):
 
     post_concepts_response = stub.PostConcepts(
         service_pb2.PostConceptsRequest(
-            concepts=[resources_pb2.Concept(id=random_concept_id, name=random_concept_name)]
+            user_app_id=get_test_user_app_id(),
+            concepts=[resources_pb2.Concept(id=random_concept_id, name=random_concept_name)],
         ),
         metadata=metadata(),
     )

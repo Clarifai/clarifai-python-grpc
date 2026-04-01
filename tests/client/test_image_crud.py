@@ -9,6 +9,7 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -82,6 +83,7 @@ def test_post_delete_batch_images(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=get_test_user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -93,7 +95,7 @@ def test_post_delete_batch_images(channel_key):
                         image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True)
                     )
                 ),
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -207,11 +209,12 @@ def test_image_with_bytes(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=get_test_user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(image=resources_pb2.Image(base64=file_bytes))
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )

@@ -6,6 +6,7 @@ from tests.common import (
     CLOUD_URL,
     both_channels,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_extraction_job_completed,
@@ -42,6 +43,7 @@ def test_post_inputs_data_source_public_cloud_directory(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     post_data_source_response = stub.PostInputsDataSources(
         service_pb2.PostInputsDataSourcesRequest(
+            user_app_id=get_test_user_app_id(),
             data_sources=[
                 resources_pb2.InputsDataSource(url=resources_pb2.DataSourceURL(url=CLOUD_URL))
             ],
