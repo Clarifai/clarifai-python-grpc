@@ -22,6 +22,7 @@ def test_post_list_patch_get_delete_image(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=get_test_user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -29,7 +30,7 @@ def test_post_list_patch_get_delete_image(channel_key):
                         concepts=[resources_pb2.Concept(id="some-concept")],
                     )
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -37,23 +38,28 @@ def test_post_list_patch_get_delete_image(channel_key):
     input_id = post_response.inputs[0].id
 
     try:
-        wait_for_inputs_upload(stub, metadata(), [input_id])
+        wait_for_inputs_upload(stub, metadata(), [input_id], user_app_id=get_test_user_app_id())
 
         list_response = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=1), metadata=metadata()
+            service_pb2.ListInputsRequest(user_app_id=get_test_user_app_id(), per_page=1),
+            metadata=metadata(),
         )
         raise_on_failure(list_response)
         assert len(list_response.inputs) == 1
 
         # Most likely we don"t have that many inputs, so this should return 0.
         list_response2 = stub.ListInputs(
-            service_pb2.ListInputsRequest(per_page=500, page=1000), metadata=metadata()
+            service_pb2.ListInputsRequest(
+                user_app_id=get_test_user_app_id(), per_page=500, page=1000
+            ),
+            metadata=metadata(),
         )
         raise_on_failure(list_response2)
         assert len(list_response2.inputs) == 0
 
         patch_response = stub.PatchInputs(
             service_pb2.PatchInputsRequest(
+                user_app_id=get_test_user_app_id(),
                 action="overwrite",
                 inputs=[
                     resources_pb2.Input(
@@ -69,12 +75,13 @@ def test_post_list_patch_get_delete_image(channel_key):
         raise_on_failure(patch_response)
 
         get_response = stub.GetInput(
-            service_pb2.GetInputRequest(input_id=input_id), metadata=metadata()
+            service_pb2.GetInputRequest(user_app_id=get_test_user_app_id(), input_id=input_id),
+            metadata=metadata(),
         )
         raise_on_failure(get_response)
         assert get_response.input.data.concepts[0].name == "some-new-concept"
     finally:
-        cleanup_inputs(stub, [input_id], metadata=metadata())
+        cleanup_inputs(stub, [input_id], metadata=metadata(), user_app_id=get_test_user_app_id())
 
 
 @both_channels()
@@ -103,9 +110,13 @@ def test_post_delete_batch_images(channel_key):
     input_id1 = post_response.inputs[0].id
     input_id2 = post_response.inputs[1].id
 
-    wait_for_inputs_upload(stub, metadata(), [input_id1, input_id2])
+    wait_for_inputs_upload(
+        stub, metadata(), [input_id1, input_id2], user_app_id=get_test_user_app_id()
+    )
 
-    cleanup_inputs(stub, [input_id1, input_id2], metadata=metadata())
+    cleanup_inputs(
+        stub, [input_id1, input_id2], metadata=metadata(), user_app_id=get_test_user_app_id()
+    )
 
 
 @both_channels()
@@ -127,6 +138,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=get_test_user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     id=input_id,
@@ -142,16 +154,17 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
                         metadata=input_metadata,
                     ),
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
     raise_on_failure(post_response)
 
-    wait_for_inputs_upload(stub, metadata(), [input_id])
+    wait_for_inputs_upload(stub, metadata(), [input_id], user_app_id=get_test_user_app_id())
 
     get_response = stub.GetInput(
-        service_pb2.GetInputRequest(input_id=input_id), metadata=metadata()
+        service_pb2.GetInputRequest(user_app_id=get_test_user_app_id(), input_id=input_id),
+        metadata=metadata(),
     )
     raise_on_failure(get_response)
 
@@ -171,6 +184,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
     new_metadata.update({"new-key": "new-value"})
     patch_response = stub.PatchInputs(
         service_pb2.PatchInputsRequest(
+            user_app_id=get_test_user_app_id(),
             action="merge",
             inputs=[
                 resources_pb2.Input(
@@ -197,7 +211,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
         inp.data.metadata["key1"] == 123
     )  # Since we use the merge action, the old values should remain
 
-    cleanup_inputs(stub, [input_id], metadata=metadata())
+    cleanup_inputs(stub, [input_id], metadata=metadata(), user_app_id=get_test_user_app_id())
 
 
 @both_channels()
@@ -221,5 +235,5 @@ def test_image_with_bytes(channel_key):
     raise_on_failure(post_response)
     input_id = post_response.inputs[0].id
 
-    wait_for_inputs_upload(stub, metadata(), [input_id])
-    cleanup_inputs(stub, [input_id], metadata=metadata())
+    wait_for_inputs_upload(stub, metadata(), [input_id], user_app_id=get_test_user_app_id())
+    cleanup_inputs(stub, [input_id], metadata=metadata(), user_app_id=get_test_user_app_id())

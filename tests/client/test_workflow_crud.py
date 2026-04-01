@@ -6,6 +6,7 @@ from tests.common import (
     MODERATION_MODEL_ID,
     both_channels,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
 )
@@ -20,6 +21,7 @@ def test_post_patch_get_delete_workflow(channel_key):
 
     post_workflows_response = stub.PostWorkflows(
         service_pb2.PostWorkflowsRequest(
+            user_app_id=get_test_user_app_id(),
             workflows=[
                 resources_pb2.Workflow(
                     id=workflow_id,

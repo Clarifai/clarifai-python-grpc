@@ -41,11 +41,12 @@ def test_concept_post_get_patch(channel_key):
 
     duplicated_post_concepts_response = stub.PostConcepts(
         service_pb2.PostConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             concepts=[
                 resources_pb2.Concept(
                     id=random_concept_id,
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -58,7 +59,8 @@ def test_concept_post_get_patch(channel_key):
 
     post_concepts_searches_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(
-            concept_query=resources_pb2.ConceptQuery(name=random_concept_name)
+            user_app_id=get_test_user_app_id(),
+            concept_query=resources_pb2.ConceptQuery(name=random_concept_name),
         ),
         metadata=metadata(),
     )
@@ -67,6 +69,7 @@ def test_concept_post_get_patch(channel_key):
 
     patch_concepts_response = stub.PatchConcepts(
         service_pb2.PatchConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             action="overwrite",
             concepts=[resources_pb2.Concept(id=random_concept_id, name="some new concept name")],
         ),
@@ -81,6 +84,7 @@ def test_patching_public_concept_fails(channel_key):
 
     patch_concepts_searches_response = stub.PatchConcepts(
         service_pb2.PatchConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             action="overwrite",
             concepts=[
                 resources_pb2.Concept(

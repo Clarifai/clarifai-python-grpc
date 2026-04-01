@@ -27,7 +27,8 @@ def test_search_public_concepts_in_chinese(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     post_concepts_searches_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(
-            concept_query=resources_pb2.ConceptQuery(name="狗*", language="zh")
+            user_app_id=get_test_user_app_id(),
+            concept_query=resources_pb2.ConceptQuery(name="狗*", language="zh"),
         ),
         metadata=metadata(),
     )
