@@ -45,6 +45,7 @@ def test_export_dataset_version(channel_key):
 
         post_inputs_response = stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=get_test_user_app_id(),
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -71,10 +72,11 @@ def test_export_dataset_version(channel_key):
         raise_on_failure(post_inputs_response)
 
         input_ids = [input.id for input in post_inputs_response.inputs]
-        wait_for_inputs_upload(stub, metadata(), input_ids)
+        wait_for_inputs_upload(stub, metadata(), input_ids, user_app_id=get_test_user_app_id())
 
         post_dataset_versions_response = stub.PostDatasetVersions(
             service_pb2.PostDatasetVersionsRequest(
+                user_app_id=get_test_user_app_id(),
                 dataset_id=dataset_id,
                 dataset_versions=[
                     # Reuse dataset external ID for version.
@@ -86,10 +88,13 @@ def test_export_dataset_version(channel_key):
         raise_on_failure(post_dataset_versions_response)
 
         dataset_version_id = post_dataset_versions_response.dataset_versions[0].id
-        wait_for_dataset_version_ready(stub, metadata(), dataset_id, dataset_version_id)
+        wait_for_dataset_version_ready(
+            stub, metadata(), dataset_id, dataset_version_id, user_app_id=get_test_user_app_id()
+        )
 
         put_dataset_version_exports_response = stub.PutDatasetVersionExports(
             service_pb2.PutDatasetVersionExportsRequest(
+                user_app_id=get_test_user_app_id(),
                 dataset_id=dataset_id,
                 dataset_version_id=dataset_version_id,
                 exports=[
@@ -111,10 +116,12 @@ def test_export_dataset_version(channel_key):
             dataset_id,
             dataset_version_id,
             ["clarifai_data_protobuf", "clarifai_data_json"],
+            user_app_id=get_test_user_app_id(),
         )
 
         get_dataset_version_response = stub.GetDatasetVersion(
             service_pb2.GetDatasetVersionRequest(
+                user_app_id=get_test_user_app_id(),
                 dataset_id=dataset_id,
                 dataset_version_id=dataset_version_id,
             ),
@@ -149,6 +156,7 @@ def test_export_dataset_version(channel_key):
         if dataset_version_id:
             delete_dataset_versions_response = stub.DeleteDatasetVersions(
                 service_pb2.DeleteDatasetVersionsRequest(
+                    user_app_id=get_test_user_app_id(),
                     dataset_id=dataset_id,
                     dataset_version_ids=[dataset_version_id],
                 ),
@@ -157,12 +165,14 @@ def test_export_dataset_version(channel_key):
 
         if input_ids:
             delete_inputs_response = stub.DeleteInputs(
-                service_pb2.DeleteInputsRequest(ids=input_ids),
+                service_pb2.DeleteInputsRequest(user_app_id=get_test_user_app_id(), ids=input_ids),
                 metadata=metadata(),
             )
 
         delete_datasets_response = stub.DeleteDatasets(
-            service_pb2.DeleteDatasetsRequest(dataset_ids=[dataset_id]),
+            service_pb2.DeleteDatasetsRequest(
+                user_app_id=get_test_user_app_id(), dataset_ids=[dataset_id]
+            ),
             metadata=metadata(),
         )
 
@@ -170,7 +180,9 @@ def test_export_dataset_version(channel_key):
             raise_on_failure(delete_dataset_versions_response)
         if input_ids:
             raise_on_failure(delete_inputs_response)
-            wait_for_inputs_delete(stub, input_ids, metadata=metadata())
+            wait_for_inputs_delete(
+                stub, input_ids, metadata=metadata(), user_app_id=get_test_user_app_id()
+            )
         raise_on_failure(delete_datasets_response)
 
 

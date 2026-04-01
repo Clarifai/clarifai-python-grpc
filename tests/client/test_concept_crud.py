@@ -29,7 +29,11 @@ def test_concept_post_get_patch(channel_key):
     raise_on_failure(post_concepts_response)
 
     get_concepts_response = stub.GetConcept(
-        service_pb2.GetConceptRequest(concept_id=random_concept_id), metadata=metadata()
+        service_pb2.GetConceptRequest(
+            user_app_id=get_test_user_app_id(),
+            concept_id=random_concept_id,
+        ),
+        metadata=metadata(),
     )
     raise_on_failure(get_concepts_response)
     assert get_concepts_response.concept.id == random_concept_id

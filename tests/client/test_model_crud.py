@@ -9,6 +9,7 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -162,7 +163,9 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
             metadata=metadata(),
         )
         raise_on_failure(post_model_version_metrics_response)
-        wait_for_model_evaluated(stub, metadata(), model_id, model_version_id)
+        wait_for_model_evaluated(
+            stub, metadata(), model_id, model_version_id, user_app_id=get_test_user_app_id()
+        )
 
         post_model_outputs_response = stub.PostModelOutputs(
             service_pb2.PostModelOutputsRequest(

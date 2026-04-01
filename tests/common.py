@@ -278,11 +278,11 @@ def wait_for_model_trained(
     # At this point, the model has successfully finished training.
 
 
-def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
+def wait_for_model_evaluated(stub, metadata, model_id, model_version_id, user_app_id=None):
     while True:
         response = stub.GetModelVersionMetrics(
             service_pb2.GetModelVersionMetricsRequest(
-                model_id=model_id, version_id=model_version_id
+                user_app_id=user_app_id, model_id=model_id, version_id=model_version_id
             ),
             metadata=metadata,
         )
@@ -303,10 +303,13 @@ def wait_for_model_evaluated(stub, metadata, model_id, model_version_id):
     # At this point, the model has successfully finished evaluation.
 
 
-def wait_for_dataset_version_ready(stub, metadata, dataset_id, dataset_version_id):
+def wait_for_dataset_version_ready(
+    stub, metadata, dataset_id, dataset_version_id, user_app_id=None
+):
     while True:
         response = stub.GetDatasetVersion(
             service_pb2.GetDatasetVersionRequest(
+                user_app_id=user_app_id,
                 dataset_id=dataset_id,
                 dataset_version_id=dataset_version_id,
             ),
@@ -329,11 +332,12 @@ def wait_for_dataset_version_ready(stub, metadata, dataset_id, dataset_version_i
 
 
 def wait_for_dataset_version_export_success(
-    stub, metadata, dataset_id, dataset_version_id, export_info_fields: List[str]
+    stub, metadata, dataset_id, dataset_version_id, export_info_fields: List[str], user_app_id=None
 ):
     while True:
         response = stub.GetDatasetVersion(
             service_pb2.GetDatasetVersionRequest(
+                user_app_id=user_app_id,
                 dataset_id=dataset_id,
                 dataset_version_id=dataset_version_id,
             ),
@@ -365,10 +369,14 @@ def wait_for_dataset_version_export_success(
     # At this point, the dataset version has successfully finished exporting.
 
 
-def wait_for_extraction_job_completed(stub: service_pb2_grpc.V2Stub, extraction_job_id: str):
+def wait_for_extraction_job_completed(
+    stub: service_pb2_grpc.V2Stub, extraction_job_id: str, user_app_id=None
+):
     while True:
         response = stub.GetInputsExtractionJob(
-            service_pb2.GetInputsExtractionJobRequest(inputs_extraction_job_id=extraction_job_id),
+            service_pb2.GetInputsExtractionJobRequest(
+                user_app_id=user_app_id, inputs_extraction_job_id=extraction_job_id
+            ),
             metadata=metadata(),
         )
         raise_on_failure(response)
