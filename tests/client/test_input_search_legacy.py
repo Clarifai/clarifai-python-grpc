@@ -10,6 +10,7 @@ from tests.common import (
     DOG_IMAGE_URL,
     both_channels,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
 )
@@ -22,6 +23,7 @@ def test_search_by_annotated_concept_id(channel_key):
         my_concept_id = input_.data.concepts[0].id
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -32,7 +34,7 @@ def test_search_by_annotated_concept_id(channel_key):
                             )
                         )
                     ]
-                )
+                ),
             ),
             metadata=metadata(),
         )
@@ -48,6 +50,7 @@ def test_search_by_annotated_concept_name(channel_key):
         my_concept_name = input_.data.concepts[0].name
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -58,7 +61,7 @@ def test_search_by_annotated_concept_name(channel_key):
                             )
                         )
                     ]
-                )
+                ),
             ),
             metadata=metadata(),
         )
@@ -73,6 +76,7 @@ def test_search_by_predicted_concept_id(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -100,6 +104,7 @@ def test_search_by_predicted_concept_name(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -126,6 +131,7 @@ def test_search_by_predicted_concept_name_in_chinese(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -153,6 +159,7 @@ def test_search_by_predicted_concept_name_in_japanese(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -180,6 +187,7 @@ def test_search_by_image_url(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -210,6 +218,7 @@ def test_search_by_image_bytes(channel_key):
         url_bytes = http_response.read()
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -240,6 +249,7 @@ def test_search_by_metadata(channel_key):
         search_metadata.update({"another-key": {"inner-key": "inner-value"}})
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -264,6 +274,7 @@ def test_search_by_geo_point_and_limit(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -297,6 +308,7 @@ def test_search_by_geo_box(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -336,6 +348,7 @@ def test_search_by_image_url_and_geo_box(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -385,6 +398,7 @@ def test_search_by_geo_box_and_annotated_name_and_predicted_name(channel_key):
         my_concept_name = input_.data.concepts[0].name
         response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 query=resources_pb2.Query(
                     ands=[
                         resources_pb2.And(
@@ -443,6 +457,7 @@ def test_save_and_execute_search_by_id(channel_key):
         # This saves the search under an ID, but does not execute it / return any results.
         save_search_response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     resources_pb2.Search(
                         id=search_id,
@@ -461,7 +476,7 @@ def test_save_and_execute_search_by_id(channel_key):
                             ]
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -469,7 +484,7 @@ def test_save_and_execute_search_by_id(channel_key):
 
         # Executing the search returns results.
         post_search_by_id_response = stub.PostSearchesByID(
-            service_pb2.PostSearchesByIDRequest(id=search_id),
+            service_pb2.PostSearchesByIDRequest(user_app_id=get_test_user_app_id(), id=search_id),
             metadata=metadata(),
         )
         raise_on_failure(post_search_by_id_response)
@@ -486,7 +501,9 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
     with SetupImage(stub) as input1, SetupImage(stub) as input2:
         list_annotations_response = stub.ListAnnotations(
-            service_pb2.ListAnnotationsRequest(input_ids=[input1.id, input2.id]),
+            service_pb2.ListAnnotationsRequest(
+                user_app_id=get_test_user_app_id(), input_ids=[input1.id, input2.id]
+            ),
             metadata=metadata(),
         )
         raise_on_failure(list_annotations_response)
@@ -497,6 +514,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         patch_annotations_response = stub.PatchAnnotations(
             service_pb2.PatchAnnotationsRequest(
+                user_app_id=get_test_user_app_id(),
                 action="merge",
                 annotations=[
                     resources_pb2.Annotation(
@@ -524,6 +542,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         save_search_response = stub.PostSearches(
             service_pb2.PostSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     resources_pb2.Search(
                         id=my_search_id,
@@ -543,7 +562,7 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
                             ]
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
@@ -551,7 +570,9 @@ def test_save_and_execute_annotations_search_by_id(channel_key):
 
         # Executing the search returns results.
         post_search_by_id_response = stub.PostSearchesByID(
-            service_pb2.PostSearchesByIDRequest(id=my_search_id),
+            service_pb2.PostSearchesByIDRequest(
+                user_app_id=get_test_user_app_id(), id=my_search_id
+            ),
             metadata=metadata(),
         )
         raise_on_failure(post_search_by_id_response)

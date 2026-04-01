@@ -20,6 +20,7 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -34,6 +35,7 @@ def test_search_by_custom_concept_id(channel_key):
         concept_id = input_.data.concepts[0].id
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -63,6 +65,7 @@ def test_search_by_custom_concept_name(channel_key):
         concept_name = input_.data.concepts[0].name
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -91,6 +94,7 @@ def test_search_by_predicted_concept_id(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -121,6 +125,7 @@ def test_search_by_predicted_concept_name(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -150,6 +155,7 @@ def test_search_by_predicted_concept_name_in_chinese(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -180,6 +186,7 @@ def test_search_by_image_url(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -212,6 +219,7 @@ def test_search_by_image_bytes(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -242,6 +250,7 @@ def test_search_by_metadata(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -267,6 +276,7 @@ def test_search_by_geo_point_and_limit(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -305,6 +315,7 @@ def test_search_by_geo_box(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -349,6 +360,7 @@ def test_search_by_image_url_and_geo_box(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=get_test_user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -406,8 +418,10 @@ class SetupImage:
             {"some-key": "some-value", "another-key": {"inner-key": "inner-value"}}
         )
 
+        user_app_id = get_test_user_app_id()
         post_response = self._stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=user_app_id,
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -423,16 +437,18 @@ class SetupImage:
                             ),
                         ),
                     )
-                ]
+                ],
             ),
             metadata=metadata(),
         )
         raise_on_failure(post_response)
         self._input = post_response.inputs[0]
 
-        wait_for_inputs_upload(self._stub, metadata(), [self._input.id])
+        wait_for_inputs_upload(self._stub, metadata(), [self._input.id], user_app_id=user_app_id)
 
         return self._input
 
     def __exit__(self, type_, value, traceback) -> None:
-        cleanup_inputs(self._stub, [self._input.id], metadata=metadata())
+        cleanup_inputs(
+            self._stub, [self._input.id], metadata=metadata(), user_app_id=get_test_user_app_id()
+        )

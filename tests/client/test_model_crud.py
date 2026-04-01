@@ -9,6 +9,7 @@ from tests.common import (
     both_channels,
     cleanup_inputs,
     get_channel,
+    get_test_user_app_id,
     metadata,
     raise_on_failure,
     wait_for_inputs_upload,
@@ -68,6 +69,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
     concept_id_2 = "concept-id-" + uuid.uuid4().hex[:15]
     post_inputs_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=get_test_user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -81,7 +83,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
                         concepts=[resources_pb2.Concept(id=concept_id_2)],
                     )
                 ),
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -89,17 +91,20 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
 
     input_id_1 = post_inputs_response.inputs[0].id
     input_id_2 = post_inputs_response.inputs[1].id
-    wait_for_inputs_upload(stub, metadata(), [input_id_1, input_id_2])
+    wait_for_inputs_upload(
+        stub, metadata(), [input_id_1, input_id_2], user_app_id=get_test_user_app_id()
+    )
 
     model_id = "model-id-" + uuid.uuid4().hex[:15]
 
     post_response = stub.PostModels(
         service_pb2.PostModelsRequest(
+            user_app_id=get_test_user_app_id(),
             models=[
                 resources_pb2.Model(
                     id=model_id,
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -108,6 +113,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
     try:
         patch_response = stub.PatchModels(
             service_pb2.PatchModelsRequest(
+                user_app_id=get_test_user_app_id(),
                 action="overwrite",
                 models=[
                     resources_pb2.Model(
@@ -122,6 +128,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
 
         post_model_versions_response = stub.PostModelVersions(
             service_pb2.PostModelVersionsRequest(
+                user_app_id=get_test_user_app_id(),
                 model_id=model_id,
                 model_versions=[
                     resources_pb2.ModelVersion(
@@ -137,10 +144,13 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
         )
         raise_on_failure(post_model_versions_response)
         model_version_id = post_model_versions_response.model.model_version.id
-        wait_for_model_trained(stub, metadata(), model_id, model_version_id)
+        wait_for_model_trained(
+            stub, metadata(), model_id, model_version_id, user_app_id=get_test_user_app_id()
+        )
 
         get_response = stub.GetModelOutputInfo(
-            service_pb2.GetModelRequest(model_id=model_id), metadata=metadata()
+            service_pb2.GetModelRequest(user_app_id=get_test_user_app_id(), model_id=model_id),
+            metadata=metadata(),
         )
         raise_on_failure(get_response)
         assert get_response.model.id == model_id
@@ -157,15 +167,18 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
 
         post_model_version_metrics_response = stub.PostModelVersionMetrics(
             service_pb2.PostModelVersionMetricsRequest(
-                model_id=model_id, version_id=model_version_id
+                user_app_id=get_test_user_app_id(), model_id=model_id, version_id=model_version_id
             ),
             metadata=metadata(),
         )
         raise_on_failure(post_model_version_metrics_response)
-        wait_for_model_evaluated(stub, metadata(), model_id, model_version_id)
+        wait_for_model_evaluated(
+            stub, metadata(), model_id, model_version_id, user_app_id=get_test_user_app_id()
+        )
 
         post_model_outputs_response = stub.PostModelOutputs(
             service_pb2.PostModelOutputsRequest(
+                user_app_id=get_test_user_app_id(),
                 model_id=model_id,
                 version_id=model_version_id,
                 inputs=[
@@ -182,11 +195,14 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
         assert post_model_outputs_response.outputs[0].data.concepts[0].id == concept_id_2
     finally:
         delete_response = stub.DeleteModel(
-            service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
+            service_pb2.DeleteModelRequest(user_app_id=get_test_user_app_id(), model_id=model_id),
+            metadata=metadata(),
         )
         raise_on_failure(delete_response)
 
-        cleanup_inputs(stub, [input_id_1, input_id_2], metadata=metadata())
+        cleanup_inputs(
+            stub, [input_id_1, input_id_2], metadata=metadata(), user_app_id=get_test_user_app_id()
+        )
 
 
 @both_channels()
@@ -207,11 +223,12 @@ def test_post_model_with_hyper_params(channel_key):
     )
     post_response = stub.PostModels(
         service_pb2.PostModelsRequest(
+            user_app_id=get_test_user_app_id(),
             models=[
                 resources_pb2.Model(
                     id=model_id,
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -219,6 +236,7 @@ def test_post_model_with_hyper_params(channel_key):
 
     post_model_versions_response = stub.PostModelVersions(
         service_pb2.PostModelVersionsRequest(
+            user_app_id=get_test_user_app_id(),
             model_id=model_id,
             model_versions=[
                 resources_pb2.ModelVersion(
@@ -243,7 +261,8 @@ def test_post_model_with_hyper_params(channel_key):
     )
 
     delete_response = stub.DeleteModel(
-        service_pb2.DeleteModelRequest(model_id=model_id), metadata=metadata()
+        service_pb2.DeleteModelRequest(user_app_id=get_test_user_app_id(), model_id=model_id),
+        metadata=metadata(),
     )
     raise_on_failure(delete_response)
 

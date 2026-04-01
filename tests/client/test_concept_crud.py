@@ -2,7 +2,13 @@ import uuid
 
 from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
-from tests.common import both_channels, get_channel, metadata, raise_on_failure
+from tests.common import (
+    both_channels,
+    get_channel,
+    get_test_user_app_id,
+    metadata,
+    raise_on_failure,
+)
 
 
 @both_channels()
@@ -15,14 +21,19 @@ def test_concept_post_get_patch(channel_key):
 
     post_concepts_response = stub.PostConcepts(
         service_pb2.PostConceptsRequest(
-            concepts=[resources_pb2.Concept(id=random_concept_id, name=random_concept_name)]
+            user_app_id=get_test_user_app_id(),
+            concepts=[resources_pb2.Concept(id=random_concept_id, name=random_concept_name)],
         ),
         metadata=metadata(),
     )
     raise_on_failure(post_concepts_response)
 
     get_concepts_response = stub.GetConcept(
-        service_pb2.GetConceptRequest(concept_id=random_concept_id), metadata=metadata()
+        service_pb2.GetConceptRequest(
+            user_app_id=get_test_user_app_id(),
+            concept_id=random_concept_id,
+        ),
+        metadata=metadata(),
     )
     raise_on_failure(get_concepts_response)
     assert get_concepts_response.concept.id == random_concept_id
@@ -30,11 +41,12 @@ def test_concept_post_get_patch(channel_key):
 
     duplicated_post_concepts_response = stub.PostConcepts(
         service_pb2.PostConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             concepts=[
                 resources_pb2.Concept(
                     id=random_concept_id,
                 )
-            ]
+            ],
         ),
         metadata=metadata(),
     )
@@ -47,7 +59,8 @@ def test_concept_post_get_patch(channel_key):
 
     post_concepts_searches_response = stub.PostConceptsSearches(
         service_pb2.PostConceptsSearchesRequest(
-            concept_query=resources_pb2.ConceptQuery(name=random_concept_name)
+            user_app_id=get_test_user_app_id(),
+            concept_query=resources_pb2.ConceptQuery(name=random_concept_name),
         ),
         metadata=metadata(),
     )
@@ -56,6 +69,7 @@ def test_concept_post_get_patch(channel_key):
 
     patch_concepts_response = stub.PatchConcepts(
         service_pb2.PatchConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             action="overwrite",
             concepts=[resources_pb2.Concept(id=random_concept_id, name="some new concept name")],
         ),
@@ -70,6 +84,7 @@ def test_patching_public_concept_fails(channel_key):
 
     patch_concepts_searches_response = stub.PatchConcepts(
         service_pb2.PatchConceptsRequest(
+            user_app_id=get_test_user_app_id(),
             action="overwrite",
             concepts=[
                 resources_pb2.Concept(
