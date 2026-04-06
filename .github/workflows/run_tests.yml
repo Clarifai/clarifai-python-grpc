@@ -58,7 +58,7 @@ jobs:
       env:
         SLACK_ICON: "https://raw.githubusercontent.com/github/explore/2c7e603b797535e5ad8b4beb575ab3b7354666e1/topics/actions/actions.png"
         SLACK_USERNAME: "GitHub Alerts"
-        SLACK_CHANNEL: "#grpc-client-repo-alerts"
+        SLACK_CHANNEL: "#alerts-grpc-client-repo"
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_COLOR: ${{ job.status }}
         SLACK_MESSAGE: "Test failure"
