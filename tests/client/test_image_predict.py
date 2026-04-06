@@ -214,5 +214,8 @@ def test_mixed_success_predict(channel_key):
     # For V3 predict, the API does not do partial predicts on early failures, so it will respond with FAILURE and two failed inputs.
     assert response.status.code in [status_code_pb2.MIXED_STATUS, status_code_pb2.FAILURE]
 
-    assert response.outputs[0].status.code in [status_code_pb2.SUCCESS, status_code_pb2.INPUT_FAILED]
+    assert response.outputs[0].status.code in [
+        status_code_pb2.SUCCESS,
+        status_code_pb2.INPUT_FAILED,
+    ]
     assert response.outputs[1].status.code == status_code_pb2.INPUT_INVALID_ARGUMENT
