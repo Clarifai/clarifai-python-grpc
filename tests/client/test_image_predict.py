@@ -210,7 +210,7 @@ def test_mixed_success_predict(channel_key):
         stub, request, metadata=metadata(pat=True)
     )
 
-    # For V2 predict, the API will respond with MIXED_SUCCESS and one SUCCESS input.
+    # For V2 predict, the API will respond with MIXED_STATUS and one of the inputs will be SUCCESS.
     # For V3 predict, the API does not do partial predicts on early failures, so it will respond with FAILURE and two failed inputs.
     assert response.status.code in [status_code_pb2.MIXED_STATUS, status_code_pb2.FAILURE]
 
