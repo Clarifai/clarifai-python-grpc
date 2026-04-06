@@ -22,6 +22,13 @@ IGNORE_INSTANCE_TYPES = [
     'g4-standard-96',
     'tpu7x-standard-1t',
     'tpu7x-standard-4t',
+    's-2vcpu-2gb',
+    'gpu-h100x2-160gb',
+    'gpu-h100x4-320gb',
+    'gpu-mi300x1-192gb',
+    'gpu-mi300x8-1536gb',
+    'gpu-mi350x1-288gb-contracted',
+    'gpu-mi350x8-2304gb-contracted',
 ]
 
 
@@ -112,6 +119,7 @@ def fetch_skypilot_instance_types_by_provider(cloud_provider_id):
             'aws': 'aws',
             'gcp': 'gcp',
             'azure': 'azure',
+            'digitalocean': 'do',
             'local': 'local',  # if local is supported
         }
 
@@ -212,7 +220,7 @@ def collect_all_instance_types(stub, metadata_tuple) -> Dict[str, Dict[str, List
     return all_instance_types
 
 
-UNSUPPORTED_SKYCATALOG_PROVIDERS = {"vultr", "oracle", "digitalocean", "local"}
+UNSUPPORTED_SKYCATALOG_PROVIDERS = {"vultr", "oracle"}
 
 
 def is_provider_supported(provider_id: str) -> bool:
