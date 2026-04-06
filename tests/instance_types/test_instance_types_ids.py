@@ -212,7 +212,7 @@ def collect_all_instance_types(stub, metadata_tuple) -> Dict[str, Dict[str, List
     return all_instance_types
 
 
-UNSUPPORTED_SKYCATALOG_PROVIDERS = {"vultr", "oracle"}
+UNSUPPORTED_SKYCATALOG_PROVIDERS = {"vultr", "oracle", "digitalocean", "local"}
 
 
 def is_provider_supported(provider_id: str) -> bool:
