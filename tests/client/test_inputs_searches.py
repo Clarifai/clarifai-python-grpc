@@ -22,6 +22,7 @@ from tests.common import (
     get_channel,
     metadata,
     raise_on_failure,
+    user_app_id,
     wait_for_inputs_upload,
 )
 
@@ -408,6 +409,7 @@ class SetupImage:
 
         post_response = self._stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=user_app_id(),
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -425,7 +427,8 @@ class SetupImage:
                     )
                 ]
             ),
-            metadata=metadata(),
+            # Need PAT to run base workflow with models from clarifai/main against added inputs.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_response)
         self._input = post_response.inputs[0]

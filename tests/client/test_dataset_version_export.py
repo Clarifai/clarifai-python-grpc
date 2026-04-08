@@ -16,6 +16,7 @@ from tests.common import (
     metadata,
     raise_on_failure,
     use_secure_hosting_url,
+    user_app_id,
     wait_for_dataset_version_export_success,
     wait_for_dataset_version_ready,
     wait_for_inputs_delete,
@@ -43,6 +44,7 @@ def test_export_dataset_version(channel_key):
 
         post_inputs_response = stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=user_app_id(),
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -64,7 +66,8 @@ def test_export_dataset_version(channel_key):
                     ),
                 ],
             ),
-            metadata=metadata(),
+            # Need PAT to run base workflow with models from clarifai/main against added inputs.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_inputs_response)
 

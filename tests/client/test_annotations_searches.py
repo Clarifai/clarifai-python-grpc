@@ -7,6 +7,7 @@ from tests.common import (
     get_channel,
     metadata,
     raise_on_failure,
+    user_app_id,
     wait_for_inputs_upload,
 )
 
@@ -36,6 +37,7 @@ def test_post_annotations_searches(channel_key):
     with SetupImage(stub) as input_:
         post_palm_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(
+                user_app_id=user_app_id(),
                 annotations=[
                     resources_pb2.Annotation(
                         input_id=input_.id,
@@ -56,14 +58,16 @@ def test_post_annotations_searches(channel_key):
                             ]
                         ),
                     ),
-                ]
+                ],
             ),
-            metadata=metadata(),
+            # Need PAT to run base workflow with models from clarifai/main against added regions.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_palm_annotations_response)
 
         post_water_annotations_response = stub.PostAnnotations(
             service_pb2.PostAnnotationsRequest(
+                user_app_id=user_app_id(),
                 annotations=[
                     resources_pb2.Annotation(
                         input_id=input_.id,
@@ -84,9 +88,10 @@ def test_post_annotations_searches(channel_key):
                             ]
                         ),
                     ),
-                ]
+                ],
             ),
-            metadata=metadata(),
+            # Need PAT to run base workflow with models from clarifai/main against added regions.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_water_annotations_response)
 
@@ -186,6 +191,7 @@ class SetupImage:
     def __enter__(self) -> resources_pb2.Input:
         post_response = self._stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=user_app_id(),
                 inputs=[
                     resources_pb2.Input(
                         data=resources_pb2.Data(
@@ -194,9 +200,10 @@ class SetupImage:
                             ),
                         ),
                     )
-                ]
+                ],
             ),
-            metadata=metadata(),
+            # Need PAT to run base workflow with models from clarifai/main against added inputs.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_response)
         self._input = post_response.inputs[0]

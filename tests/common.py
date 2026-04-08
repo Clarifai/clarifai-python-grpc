@@ -8,7 +8,7 @@ from grpc._channel import _Rendezvous
 
 from clarifai_grpc.channel.clarifai_channel import ClarifaiChannel
 from clarifai_grpc.channel.http_client import CLIENT_VERSION
-from clarifai_grpc.grpc.api import service_pb2, service_pb2_grpc
+from clarifai_grpc.grpc.api import resources_pb2, service_pb2, service_pb2_grpc
 from clarifai_grpc.grpc.api.status import status_code_pb2
 from clarifai_grpc.grpc.api.status.status_pb2 import Status
 
@@ -91,6 +91,12 @@ def metadata(pat: bool = False) -> Tuple[Tuple[str, str], Tuple[str, str]]:
         ("x-clarifai-request-id-prefix", f"python-grpc-{CLIENT_VERSION}"),
         ("authorization", f"Key {key}"),
     )
+
+
+def user_app_id(user_id="me", app_id=None):
+    if app_id is None:
+        app_id = os.environ.get("CLARIFAI_APP_ID")
+    return resources_pb2.UserAppIDSet(user_id=user_id, app_id=app_id)
 
 
 def get_channel(channel_key):

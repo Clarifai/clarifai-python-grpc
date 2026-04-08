@@ -15,6 +15,7 @@ from tests.common import (
     get_secure_hosting_url,
     raise_on_failure,
     use_secure_hosting_url,
+    user_app_id,
     wait_for_inputs_upload,
 )
 
@@ -22,6 +23,8 @@ DUMMY_KEY = "0" * 32
 PAT = os.environ.get("CLARIFAI_PAT_KEY_SECURE_HOSTING")
 API_KEY = os.environ.get("CLARIFAI_API_KEY_SECURE_HOSTING")
 SESSION_TOKEN = os.environ.get("CLARIFAI_SESSION_TOKEN_SECURE_HOSTING")
+
+USER_APP_ID = user_app_id(app_id=os.environ.get("CLARIFAI_APP_ID_SECURE_HOSTING"))
 
 PAT_CLIENT_AUTH = (("authorization", "Key %s" % PAT),)
 API_CLIENT_AUTH = (("authorization", "Key %s" % API_KEY),)
@@ -152,6 +155,7 @@ def test_adding_inputs(channel_key):
     try:
         post_image_response = stub.PostInputs(
             service_pb2.PostInputsRequest(
+                user_app_id=USER_APP_ID,
                 inputs=[
                     resources_pb2.Input(
                         id=input_img1,
@@ -171,12 +175,14 @@ def test_adding_inputs(channel_key):
                     ),
                 ]
             ),
-            metadata=API_CLIENT_AUTH,
+            # Need PAT to run base workflow with models from clarifai/main against added inputs.
+            metadata=PAT_CLIENT_AUTH,
         )
         raise_on_failure(post_image_response)
 
         post_video_response = stub.PostInputs(  # videos must be uploaded individually
             service_pb2.PostInputsRequest(
+                user_app_id=USER_APP_ID,
                 inputs=[
                     resources_pb2.Input(
                         id=input_vid1,
@@ -188,7 +194,8 @@ def test_adding_inputs(channel_key):
                     )
                 ]
             ),
-            metadata=API_CLIENT_AUTH,
+            # Need PAT to run base workflow with models from clarifai/main against added inputs.
+            metadata=PAT_CLIENT_AUTH,
         )
         raise_on_failure(post_video_response)
 

@@ -11,6 +11,7 @@ from tests.common import (
     get_channel,
     metadata,
     raise_on_failure,
+    user_app_id,
     wait_for_inputs_upload,
 )
 
@@ -21,6 +22,7 @@ def test_post_list_patch_get_delete_image(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -30,7 +32,8 @@ def test_post_list_patch_get_delete_image(channel_key):
                 )
             ]
         ),
-        metadata=metadata(),
+        # Need PAT to run base workflow with models from clarifai/main against added inputs.
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_response)
     input_id = post_response.inputs[0].id
@@ -82,6 +85,7 @@ def test_post_delete_batch_images(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -95,7 +99,8 @@ def test_post_delete_batch_images(channel_key):
                 ),
             ]
         ),
-        metadata=metadata(),
+        # Need PAT to run base workflow with models from clarifai/main against added inputs.
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_response)
     input_id1 = post_response.inputs[0].id
@@ -125,6 +130,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     id=input_id,
@@ -142,7 +148,8 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
                 )
             ]
         ),
-        metadata=metadata(),
+        # Need PAT to run base workflow with models from clarifai/main against added inputs.
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_response)
 
@@ -207,13 +214,15 @@ def test_image_with_bytes(channel_key):
 
     post_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(image=resources_pb2.Image(base64=file_bytes))
                 )
             ]
         ),
-        metadata=metadata(),
+        # Need PAT to run base workflow with models from clarifai/main against added inputs.
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_response)
     input_id = post_response.inputs[0].id

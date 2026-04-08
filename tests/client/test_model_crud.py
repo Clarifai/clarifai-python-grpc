@@ -11,6 +11,7 @@ from tests.common import (
     get_channel,
     metadata,
     raise_on_failure,
+    user_app_id,
     wait_for_inputs_upload,
     wait_for_model_evaluated,
     wait_for_model_trained,
@@ -68,6 +69,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
     concept_id_2 = "concept-id-" + uuid.uuid4().hex[:15]
     post_inputs_response = stub.PostInputs(
         service_pb2.PostInputsRequest(
+            user_app_id=user_app_id(),
             inputs=[
                 resources_pb2.Input(
                     data=resources_pb2.Data(
@@ -83,7 +85,8 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
                 ),
             ]
         ),
-        metadata=metadata(),
+        # Need PAT to run base workflow with models from clarifai/main against added inputs.
+        metadata=metadata(pat=True),
     )
     raise_on_failure(post_inputs_response)
 
