@@ -425,7 +425,7 @@ class SetupImage:
                             ),
                         ),
                     )
-                ]
+                ],
             ),
             # Need PAT to run base workflow with models from clarifai/main against added inputs.
             metadata=metadata(pat=True),

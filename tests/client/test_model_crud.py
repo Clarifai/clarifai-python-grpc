@@ -83,7 +83,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
                         concepts=[resources_pb2.Concept(id=concept_id_2)],
                     )
                 ),
-            ]
+            ],
         ),
         # Need PAT to run base workflow with models from clarifai/main against added inputs.
         metadata=metadata(pat=True),

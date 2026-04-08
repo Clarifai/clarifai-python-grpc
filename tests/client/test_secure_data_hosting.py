@@ -173,7 +173,7 @@ def test_adding_inputs(channel_key):
                             ),
                         ),
                     ),
-                ]
+                ],
             ),
             # Need PAT to run base workflow with models from clarifai/main against added inputs.
             metadata=PAT_CLIENT_AUTH,
@@ -192,7 +192,7 @@ def test_adding_inputs(channel_key):
                             ),
                         ),
                     )
-                ]
+                ],
             ),
             # Need PAT to run base workflow with models from clarifai/main against added inputs.
             metadata=PAT_CLIENT_AUTH,

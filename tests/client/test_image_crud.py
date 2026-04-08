@@ -30,7 +30,7 @@ def test_post_list_patch_get_delete_image(channel_key):
                         concepts=[resources_pb2.Concept(id="some-concept")],
                     )
                 )
-            ]
+            ],
         ),
         # Need PAT to run base workflow with models from clarifai/main against added inputs.
         metadata=metadata(pat=True),
@@ -97,7 +97,7 @@ def test_post_delete_batch_images(channel_key):
                         image=resources_pb2.Image(url=TRUCK_IMAGE_URL, allow_duplicate_url=True)
                     )
                 ),
-            ]
+            ],
         ),
         # Need PAT to run base workflow with models from clarifai/main against added inputs.
         metadata=metadata(pat=True),
@@ -146,7 +146,7 @@ def test_post_patch_get_image_with_id_concepts_geo_and_metadata(channel_key):
                         metadata=input_metadata,
                     ),
                 )
-            ]
+            ],
         ),
         # Need PAT to run base workflow with models from clarifai/main against added inputs.
         metadata=metadata(pat=True),
@@ -219,7 +219,7 @@ def test_image_with_bytes(channel_key):
                 resources_pb2.Input(
                     data=resources_pb2.Data(image=resources_pb2.Image(base64=file_bytes))
                 )
-            ]
+            ],
         ),
         # Need PAT to run base workflow with models from clarifai/main against added inputs.
         metadata=metadata(pat=True),
