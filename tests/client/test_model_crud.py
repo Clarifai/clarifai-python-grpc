@@ -169,6 +169,7 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
 
         post_model_outputs_response = stub.PostModelOutputs(
             service_pb2.PostModelOutputsRequest(
+                user_app_id=user_app_id(),
                 model_id=model_id,
                 version_id=model_version_id,
                 inputs=[
@@ -177,7 +178,8 @@ def test_post_patch_get_train_evaluate_predict_delete_model(channel_key):
                     )
                 ],
             ),
-            metadata=metadata(),
+            # Need PAT to run embedder model from clarifai/main on the image data.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(post_model_outputs_response)
         assert len(post_model_outputs_response.outputs) == 1
