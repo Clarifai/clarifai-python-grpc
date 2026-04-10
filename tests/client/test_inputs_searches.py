@@ -181,6 +181,7 @@ def test_search_by_image_url(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -196,7 +197,8 @@ def test_search_by_image_url(channel_key):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata(),
+            # Need PAT to run embedder model from clarifai/main on the image data.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -213,6 +215,7 @@ def test_search_by_image_bytes(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -226,7 +229,8 @@ def test_search_by_image_bytes(channel_key):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata(),
+            # Need PAT to run embedder model from clarifai/main on the image data.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
@@ -350,6 +354,7 @@ def test_search_by_image_url_and_geo_box(channel_key):
     with SetupImage(stub) as input_:
         response = stub.PostInputsSearches(
             PostInputsSearchesRequest(
+                user_app_id=user_app_id(),
                 searches=[
                     Search(
                         query=Query(
@@ -387,7 +392,8 @@ def test_search_by_image_url_and_geo_box(channel_key):
                 ],
                 pagination=service_pb2.Pagination(page=1, per_page=1000),
             ),
-            metadata=metadata(),
+            # Need PAT to run embedder model from clarifai/main on the image data.
+            metadata=metadata(pat=True),
         )
         raise_on_failure(response)
         assert len(response.hits) >= 1
