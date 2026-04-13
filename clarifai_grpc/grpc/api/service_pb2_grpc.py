@@ -899,31 +899,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
-        self.PostCollectors = channel.unary_unary(
-                '/clarifai.api.V2/PostCollectors',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
-                )
-        self.GetCollector = channel.unary_unary(
-                '/clarifai.api.V2/GetCollector',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetCollectorRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.SingleCollectorResponse),
-                )
-        self.ListCollectors = channel.unary_unary(
-                '/clarifai.api.V2/ListCollectors',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollectorsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
-                )
-        self.PatchCollectors = channel.unary_unary(
-                '/clarifai.api.V2/PatchCollectors',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollectorsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse),
-                )
-        self.DeleteCollectors = channel.unary_unary(
-                '/clarifai.api.V2/DeleteCollectors',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollectorsRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
-                )
         self.PostStatValues = channel.unary_unary(
                 '/clarifai.api.V2/PostStatValues',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.SerializeToString,
@@ -2650,31 +2625,25 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostAppDuplications(self, request, context):
-        """PostAppDuplications starts async app duplication jobs which copy resources
-        (inputs, annotations, models etc) from one application to another. It can
-        also create the destination application if it does not exist, with fields
-        (description, metadata etc) copied from the source application.
-
-        A duplication job can be started by any user that can read from the source
-        application (the target of this call) and can create and write to the
-        destination application. The duplication is associated with the user that
-        created it, so in order to read the status and progress of the job, that
-        user's ID has to be used in the call to GetAppDuplication, which might be
-        different to the source application owner ID in this call.
+        """Deprecated: App duplication is no longer supported.
+        PostAppDuplications starts async app duplication jobs which copy resources
+        (inputs, annotations, models etc) from one application to another.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def ListAppDuplications(self, request, context):
-        """ListAppDuplications lists all app duplication jobs created by the user.
+        """Deprecated: App duplication is no longer supported.
+        ListAppDuplications lists all app duplication jobs created by the user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def GetAppDuplication(self, request, context):
-        """GetAppDuplication returns an app duplication job created by the user.
+        """Deprecated: App duplication is no longer supported.
+        GetAppDuplication returns an app duplication job created by the user.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -2764,47 +2733,6 @@ class V2Servicer(object):
     def DeleteLabelOrders(self, request, context):
         """Delete multiple label orders in one request.
         this do not change task status
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostCollectors(self, request, context):
-        """Add a list of Collectors to an app.
-        In the handler of this endpoint we also check for all the scopes of the  POST /inputs
-        endpoint.
-        Those current scopes are listed here as a hard requirement.
-        They are needed when adding the collectors just so we now that you have permission with
-        that key at least to do the writing to this app with POST /inputs.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def GetCollector(self, request, context):
-        """Get a specific collector from an app.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def ListCollectors(self, request, context):
-        """List all the collectors.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PatchCollectors(self, request, context):
-        """Patch one or more collectors.
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def DeleteCollectors(self, request, context):
-        """Delete multiple collectors in one request.
-        This call is asynchronous. Use DeleteCollector if you want a synchronous version.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -3411,7 +3339,7 @@ class V2Servicer(object):
         raise NotImplementedError('Method not implemented!')
 
     def PostPipelineVersionRunFromTemplate(self, request, context):
-        """Creates a Pipeline, PipelineVersion, and PipelineVersionRun from a PipelineTemplate. 
+        """Creates a Pipeline, PipelineVersion, and PipelineVersionRun from a PipelineTemplate.
         This is a convenience endpoint for users to quickly get started with running pipelines.
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -4379,31 +4307,6 @@ def add_V2Servicer_to_server(servicer, server):
             'DeleteLabelOrders': grpc.unary_unary_rpc_method_handler(
                     servicer.DeleteLabelOrders,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-            ),
-            'PostCollectors': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostCollectors,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
-            ),
-            'GetCollector': grpc.unary_unary_rpc_method_handler(
-                    servicer.GetCollector,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.GetCollectorRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.SingleCollectorResponse.SerializeToString,
-            ),
-            'ListCollectors': grpc.unary_unary_rpc_method_handler(
-                    servicer.ListCollectors,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.ListCollectorsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
-            ),
-            'PatchCollectors': grpc.unary_unary_rpc_method_handler(
-                    servicer.PatchCollectors,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollectorsRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.SerializeToString,
-            ),
-            'DeleteCollectors': grpc.unary_unary_rpc_method_handler(
-                    servicer.DeleteCollectors,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollectorsRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
             ),
             'PostStatValues': grpc.unary_unary_rpc_method_handler(
@@ -7881,91 +7784,6 @@ class V2(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteLabelOrders',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostCollectors(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostCollectors',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostCollectorsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def GetCollector(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/GetCollector',
-            proto_dot_clarifai_dot_api_dot_service__pb2.GetCollectorRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.SingleCollectorResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def ListCollectors(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/ListCollectors',
-            proto_dot_clarifai_dot_api_dot_service__pb2.ListCollectorsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PatchCollectors(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PatchCollectors',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PatchCollectorsRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiCollectorResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def DeleteCollectors(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteCollectors',
-            proto_dot_clarifai_dot_api_dot_service__pb2.DeleteCollectorsRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

@@ -746,14 +746,18 @@ class _MetricTypeEnumTypeWrapper(
 ):
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     METRIC_TYPE_NOT_SET: _MetricType.ValueType  # 0
-    MODEL_REQUEST_COUNT: _MetricType.ValueType  # 1
-    MODEL_LATENCY: _MetricType.ValueType  # 2
+    MODEL_TTFT: _MetricType.ValueType  # 1
+    MODEL_THROUGHPUT: _MetricType.ValueType  # 2
+    MODEL_PROMPT_TOKEN_THROUGHPUT: _MetricType.ValueType  # 3
+    MODEL_COMPLETION_TOKEN_THROUGHPUT: _MetricType.ValueType  # 4
 
 class MetricType(_MetricType, metaclass=_MetricTypeEnumTypeWrapper): ...
 
 METRIC_TYPE_NOT_SET: MetricType.ValueType  # 0
-MODEL_REQUEST_COUNT: MetricType.ValueType  # 1
-MODEL_LATENCY: MetricType.ValueType  # 2
+MODEL_TTFT: MetricType.ValueType  # 1
+MODEL_THROUGHPUT: MetricType.ValueType  # 2
+MODEL_PROMPT_TOKEN_THROUGHPUT: MetricType.ValueType  # 3
+MODEL_COMPLETION_TOKEN_THROUGHPUT: MetricType.ValueType  # 4
 global___MetricType = MetricType
 
 class _MetricLabel:
@@ -769,8 +773,7 @@ class _MetricLabelEnumTypeWrapper(
     APP_ID: _MetricLabel.ValueType  # 1
     MODEL_ID: _MetricLabel.ValueType  # 2
     MODEL_VERSION_ID: _MetricLabel.ValueType  # 3
-    CALLER_USER_ID: _MetricLabel.ValueType  # 4
-    WORKFLOW_ID: _MetricLabel.ValueType  # 5
+    HTTP_STATUS: _MetricLabel.ValueType  # 4
 
 class MetricLabel(_MetricLabel, metaclass=_MetricLabelEnumTypeWrapper): ...
 
@@ -778,8 +781,7 @@ METRIC_LABEL_NOT_SET: MetricLabel.ValueType  # 0
 APP_ID: MetricLabel.ValueType  # 1
 MODEL_ID: MetricLabel.ValueType  # 2
 MODEL_VERSION_ID: MetricLabel.ValueType  # 3
-CALLER_USER_ID: MetricLabel.ValueType  # 4
-WORKFLOW_ID: MetricLabel.ValueType  # 5
+HTTP_STATUS: MetricLabel.ValueType  # 4
 global___MetricLabel = MetricLabel
 
 @typing_extensions.final
@@ -7963,6 +7965,7 @@ class Output(google.protobuf.message.Message):
     DATA_FIELD_NUMBER: builtins.int
     PROMPT_TOKENS_FIELD_NUMBER: builtins.int
     COMPLETION_TOKENS_FIELD_NUMBER: builtins.int
+    CACHED_TOKENS_FIELD_NUMBER: builtins.int
     id: builtins.str
     """One of these outputs per Input"""
     @property
@@ -7992,6 +7995,10 @@ class Output(google.protobuf.message.Message):
     """Number of prompt tokens as reported by the model or third-party API."""
     completion_tokens: builtins.int
     """Number of completion tokens as reported by the model or third-party API."""
+    cached_tokens: builtins.int
+    """Number of cached prompt tokens as reported by the model (subset of prompt_tokens).
+    Cached tokens are prompt tokens served from the model's KV cache rather than recomputed.
+    """
     def __init__(
         self,
         *,
@@ -8003,6 +8010,7 @@ class Output(google.protobuf.message.Message):
         data: global___Data | None = ...,
         prompt_tokens: builtins.int = ...,
         completion_tokens: builtins.int = ...,
+        cached_tokens: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -8022,6 +8030,8 @@ class Output(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
+            "cached_tokens",
+            b"cached_tokens",
             "completion_tokens",
             b"completion_tokens",
             "created_at",
@@ -9989,7 +9999,9 @@ global___WorkflowState = WorkflowState
 
 @typing_extensions.final
 class AppDuplication(google.protobuf.message.Message):
-    """AppDuplication"""
+    """Deprecated: App duplication is no longer supported.
+    AppDuplication
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -10007,44 +10019,13 @@ class AppDuplication(google.protobuf.message.Message):
     """The unique identifier of an app duplication job."""
     @property
     def destination_app(self) -> global___App:
-        """The destination application where resources are written.
-
-        If the destination does not exist, then the fields from the request are
-        used to create the application. If a field is not set or not supported,
-        then it will be copied from the source app, unless otherwise noted.
-
-        Note: this field can be empty when reading app duplication jobs in cases
-        where the app has been deleted or is just not visible to the caller.
-
-        ########## Supported fields ##########
-         - description
-         - id      - if not set, then generated automatically
-         - user_id - if not set, then the calling user is used as the app owner
-        """
+        """The destination application where resources are written."""
     existing_app_id: builtins.str
-    """The ID of an existing app you want to copy data into.
-
-    If not provided, then we will create a new application as the destination instead.
-    The various new_app_* fields can be used to set fields of this new application.
-
-    Deprecated: Use destination_app.id with an existing ID instead.
-    """
+    """Deprecated: Use destination_app.id with an existing ID instead."""
     new_app_id: builtins.str
-    """The ID to use when creating a new application.
-    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
-
-    If not provided, then it will be generated automatically.
-
-    Deprecated: Use destination_app.id with a new ID instead.
-    """
+    """Deprecated: Use destination_app.id with a new ID instead."""
     new_app_name: builtins.str
-    """The name to use when creating a new application.
-    You cannot set this field when copying into an existing app, i.e., when existing_app_is is set.
-
-    If not provided, then the ID of the new application is also used as the name.
-
-    Deprecated: Application names are deprecated, use application IDs instead.
-    """
+    """Deprecated: Application names are deprecated, use application IDs instead."""
     @property
     def status(self) -> proto.clarifai.api.status.status_pb2.Status:
         """The status of the app duplication job."""
@@ -10063,13 +10044,7 @@ class AppDuplication(google.protobuf.message.Message):
     ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
         global___AppCopyProgress
     ]:
-        """Copy progress for each resource type requested by the filter. Possible fields:
-        - inputs
-        - concepts
-        - annotations
-        - models
-        - workflows
-        """
+        """Copy progress for each resource type requested by the filter."""
     def __init__(
         self,
         *,
@@ -10149,7 +10124,9 @@ global___AppCopyProgress = AppCopyProgress
 
 @typing_extensions.final
 class AppDuplicationFilters(google.protobuf.message.Message):
-    """AppDuplicationFilters"""
+    """Deprecated: App duplication is no longer supported.
+    AppDuplicationFilters
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -10159,15 +10136,13 @@ class AppDuplicationFilters(google.protobuf.message.Message):
     COPY_MODELS_FIELD_NUMBER: builtins.int
     COPY_WORKFLOWS_FIELD_NUMBER: builtins.int
     copy_inputs: builtins.bool
-    """Copy inputs. Requires that copy_concepts is also set.
-    Note that this will still copy input-level annotations even if copy_annotations is not set.
-    """
+    """Copy inputs."""
     copy_concepts: builtins.bool
     """Copy concepts."""
     copy_annotations: builtins.bool
-    """Copy annotations. Requires that copy_inputs and copy_concepts are also set."""
+    """Copy annotations."""
     copy_models: builtins.bool
-    """Copy models. Requires that copy_concepts is also set."""
+    """Copy models."""
     copy_workflows: builtins.bool
     """Copy workflows."""
     def __init__(
@@ -11751,241 +11726,6 @@ class Team(google.protobuf.message.Message):
     ) -> None: ...
 
 global___Team = Team
-
-@typing_extensions.final
-class Collector(google.protobuf.message.Message):
-    """Collector is a data pathway from a CollectorSource to an app to collect data automatically.
-    For example, a CollectorSource
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    ID_FIELD_NUMBER: builtins.int
-    DESCRIPTION_FIELD_NUMBER: builtins.int
-    CREATED_AT_FIELD_NUMBER: builtins.int
-    PRE_QUEUE_WORKFLOW_ID_FIELD_NUMBER: builtins.int
-    PRE_QUEUE_RANDOM_SAMPLE_FIELD_NUMBER: builtins.int
-    POST_QUEUE_WORKFLOW_ID_FIELD_NUMBER: builtins.int
-    COLLECTOR_SOURCE_FIELD_NUMBER: builtins.int
-    STATUS_FIELD_NUMBER: builtins.int
-    COLLECT_OUTPUTS_FIELD_NUMBER: builtins.int
-    id: builtins.str
-    """Unique ID for the collector."""
-    description: builtins.str
-    """Human readable description for the collector."""
-    @property
-    def created_at(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """When the collector is created. We follow the XXXX timestamp
-        format. We use https://www.ietf.org/rfc/rfc3339.txt format:
-        "2006-01-02T15:04:05.999999Z" so you can expect results like
-        the following from the API:
-        "2017-04-11T21:50:50.223962Z"
-        """
-    pre_queue_workflow_id: builtins.str
-    """This is a workflow to run inline in model predict calls. It should ONLY have very fast and
-    light-weight models in it as it will effect the speed of the predictions being made.
-    This workflow's purpose is to filter down the inputs to queue for the collector to process.
-    The input to this workflow is going to be the OUTPUT of the model, not the input to the model
-    since we want to encourage having fast workflows that can also take advantage of the model
-    outputs to make deciions (for example: thresholding based on concepts). If the workflow
-    output has any field that is non-empty then the input will be queued for the collector
-    to process with the post_queue_workflow_id.
-
-    As a simpler alternative, pre_queue_random_sample can be set to just use random sampling instead.
-    """
-    pre_queue_random_sample: builtins.float
-    """Instead of needing to create a new workflow for pre_queue_workflow_id, if just random sampling
-    of the model inputs is required, then pre_queue_random_sample can be set to a value from (0-1]
-    to denote the fraction of inputs to collect.
-    """
-    post_queue_workflow_id: builtins.str
-    """A workflow to run to after the collector is processing the queued input. This workflow
-    uses the original input to the model as input to the workflow so that you can run additional
-    models as well on that input to decide whether to queue the model or not. If the workflow
-    output has any field that is non-empty then it will be passed on to POST /inputs to
-    the destination app.
-    """
-    @property
-    def collector_source(self) -> global___CollectorSource:
-        """The source of the collector to feed data into this app.
-        Note(zeiler): if we wanted more than one source per collector we could make this it's own
-        object and introduce /collectors/{collector_id}/sources
-        We will keep it simple for now and have just one source per collector since a user can make
-        more than one collector in the same app anyways.
-        """
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """This is the workflow ID to do POST /inputs with the collected data using.
-        This needs to be present at all times in this app for the collector to work.
-        If this is not specified then it will use the default_workflow_id of the app.
-        Note(zeiler): not yet available, uses only the default workflow that POST /inputs uses.
-        string workflow_id = 7;
-
-        Status for the collector. This allows you to pause a collector without having to delete it as
-        an example.
-        """
-    collect_outputs: builtins.bool
-    """Whether to collect outputs or not. Default is false. If selected, outputs from the
-    original model predict call will be posted as annotations along with the input with success status.
-    """
-    def __init__(
-        self,
-        *,
-        id: builtins.str = ...,
-        description: builtins.str = ...,
-        created_at: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        pre_queue_workflow_id: builtins.str = ...,
-        pre_queue_random_sample: builtins.float = ...,
-        post_queue_workflow_id: builtins.str = ...,
-        collector_source: global___CollectorSource | None = ...,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        collect_outputs: builtins.bool = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "collector_source",
-            b"collector_source",
-            "created_at",
-            b"created_at",
-            "status",
-            b"status",
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "collect_outputs",
-            b"collect_outputs",
-            "collector_source",
-            b"collector_source",
-            "created_at",
-            b"created_at",
-            "description",
-            b"description",
-            "id",
-            b"id",
-            "post_queue_workflow_id",
-            b"post_queue_workflow_id",
-            "pre_queue_random_sample",
-            b"pre_queue_random_sample",
-            "pre_queue_workflow_id",
-            b"pre_queue_workflow_id",
-            "status",
-            b"status",
-        ],
-    ) -> None: ...
-
-global___Collector = Collector
-
-@typing_extensions.final
-class CollectorSource(google.protobuf.message.Message):
-    """Configuration for the source to collect data from.
-    Only one of the fields can be present at a time.
-    The ID of the source in case we want to implment /collectors/{collector_id}/sources
-    string id = 1;
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    API_POST_MODEL_OUTPUTS_COLLECTOR_SOURCE_FIELD_NUMBER: builtins.int
-    @property
-    def api_post_model_outputs_collector_source(
-        self,
-    ) -> global___APIPostModelOutputsCollectorSource:
-        """Collect from the inputs passed in for PostModelOutputs predictions of a specific model.
-        This does not apply to models used within workflows, only PostModelOutputs calls.
-        """
-    def __init__(
-        self,
-        *,
-        api_post_model_outputs_collector_source: global___APIPostModelOutputsCollectorSource
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "api_post_model_outputs_collector_source", b"api_post_model_outputs_collector_source"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "api_post_model_outputs_collector_source", b"api_post_model_outputs_collector_source"
-        ],
-    ) -> None: ...
-
-global___CollectorSource = CollectorSource
-
-@typing_extensions.final
-class APIPostModelOutputsCollectorSource(google.protobuf.message.Message):
-    """This is configuration for using the inputs send for model prediction in our API as
-    as the source for data.
-    """
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    MODEL_USER_ID_FIELD_NUMBER: builtins.int
-    MODEL_APP_ID_FIELD_NUMBER: builtins.int
-    MODEL_ID_FIELD_NUMBER: builtins.int
-    MODEL_VERSION_ID_FIELD_NUMBER: builtins.int
-    POST_INPUTS_KEY_ID_FIELD_NUMBER: builtins.int
-    CALLER_USER_ID_FIELD_NUMBER: builtins.int
-    model_user_id: builtins.str
-    """To define the model that we should collect from we need to specify the following 4 IDs:
-    The User ID of the model we want to collect from.
-    This is User B in the example.
-    """
-    model_app_id: builtins.str
-    """The App ID of the model we want to collect from."""
-    model_id: builtins.str
-    """The Model ID of the model we want to collect from."""
-    model_version_id: builtins.str
-    """The Version ID of the model we want to collect from."""
-    post_inputs_key_id: builtins.str
-    """This key is used to POST /inputs into your app by the collector. It can be an API key or a
-    PAT. This needs the permissions that are needed for POST /inputs for the app_id this
-    Collector is defined in.
-    """
-    caller_user_id: builtins.str
-    """The User ID of the caller of the model we want to collect from.
-    This is needed because the below Model's ids could be used by multiple users like the
-    clarifai/main models are or any model that has been shared with a collaborator. Therefore we
-    need to know which caller of the model to collect inputs from.
-    This is User A in the example.
-
-    This is a private field that defaults to the app owner for public users.
-    If this is left blank then this collector will collect from ALL users calling the given model.
-    """
-    def __init__(
-        self,
-        *,
-        model_user_id: builtins.str = ...,
-        model_app_id: builtins.str = ...,
-        model_id: builtins.str = ...,
-        model_version_id: builtins.str = ...,
-        post_inputs_key_id: builtins.str = ...,
-        caller_user_id: builtins.str = ...,
-    ) -> None: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "caller_user_id",
-            b"caller_user_id",
-            "model_app_id",
-            b"model_app_id",
-            "model_id",
-            b"model_id",
-            "model_user_id",
-            b"model_user_id",
-            "model_version_id",
-            b"model_version_id",
-            "post_inputs_key_id",
-            b"post_inputs_key_id",
-        ],
-    ) -> None: ...
-
-global___APIPostModelOutputsCollectorSource = APIPostModelOutputsCollectorSource
 
 @typing_extensions.final
 class StatValue(google.protobuf.message.Message):
@@ -13708,11 +13448,16 @@ class RunnerMetrics(google.protobuf.message.Message):
     PODS_TOTAL_FIELD_NUMBER: builtins.int
     PODS_RUNNING_FIELD_NUMBER: builtins.int
     TOTAL_PODS_RUNNING_TIME_S_FIELD_NUMBER: builtins.int
+    PODS_PREEMPTED_TOTAL_FIELD_NUMBER: builtins.int
     pods_total: builtins.int
     pods_running: builtins.int
     total_pods_running_time_s: builtins.int
     """Cumulative total time (in seconds) that pods have been running for this runner.
     This accumulates across scale-up/down cycles and is reported by the agent.
+    """
+    pods_preempted_total: builtins.int
+    """Cumulative count of pods that have been preempted by the k8s scheduler.
+    This accumulates across reconcile cycles and is reported by the agent.
     """
     def __init__(
         self,
@@ -13720,10 +13465,13 @@ class RunnerMetrics(google.protobuf.message.Message):
         pods_total: builtins.int = ...,
         pods_running: builtins.int = ...,
         total_pods_running_time_s: builtins.int = ...,
+        pods_preempted_total: builtins.int = ...,
     ) -> None: ...
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
+            "pods_preempted_total",
+            b"pods_preempted_total",
             "pods_running",
             b"pods_running",
             "pods_total",
@@ -13756,6 +13504,7 @@ class Runner(google.protobuf.message.Message):
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
     RUNNER_METRICS_FIELD_NUMBER: builtins.int
     MIN_REPLICAS_FIELD_NUMBER: builtins.int
+    PRIORITY_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A unique ID for this runner.
     This is a UUID since runners can be automatically orchestrated.
@@ -13822,6 +13571,11 @@ class Runner(google.protobuf.message.Message):
     """Hard minimum replicas from the deployment's autoscale config.
     The agent uses this to determine how many replicas are non-preemptable.
     """
+    priority: builtins.int
+    """The scheduling priority for this runner's k8s deployment.
+    Valid values are 0-9, where higher values indicate higher priority.
+    This value comes from the deployment nodepool's priority setting.
+    """
     def __init__(
         self,
         *,
@@ -13838,6 +13592,7 @@ class Runner(google.protobuf.message.Message):
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
         runner_metrics: global___RunnerMetrics | None = ...,
         min_replicas: builtins.int = ...,
+        priority: builtins.int = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -13881,6 +13636,8 @@ class Runner(google.protobuf.message.Message):
             b"nodepool",
             "num_replicas",
             b"num_replicas",
+            "priority",
+            b"priority",
             "runner_metrics",
             b"runner_metrics",
             "special_handling",
@@ -14630,9 +14387,9 @@ class AutoscaleConfig(google.protobuf.message.Message):
 global___AutoscaleConfig = AutoscaleConfig
 
 @typing_extensions.final
-class DeploymentMetrics(google.protobuf.message.Message):
-    """DeploymentMetrics captures metrics and status for a Deployment's underlying runners.
-    This allows tracking of the desired replica count and the actual live replica count.
+class DeploymentMetricsSummary(google.protobuf.message.Message):
+    """DeploymentMetricsSummary holds the core deployment metrics fields, reusable as both
+    an aggregate across all nodepools and per-individual-nodepool metrics.
     """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
@@ -14645,7 +14402,7 @@ class DeploymentMetrics(google.protobuf.message.Message):
     live_replicas: builtins.int
     """The actual number of live replicas connected and ready to process requests."""
     rollout_in_progress: builtins.bool
-    """If true, the deployment is currently rolling out a new version."""
+    """If true, a new version is currently being rolled out."""
     def __init__(
         self,
         *,
@@ -14660,6 +14417,106 @@ class DeploymentMetrics(google.protobuf.message.Message):
             b"desired_replicas",
             "live_replicas",
             b"live_replicas",
+            "rollout_in_progress",
+            b"rollout_in_progress",
+        ],
+    ) -> None: ...
+
+global___DeploymentMetricsSummary = DeploymentMetricsSummary
+
+@typing_extensions.final
+class NodepoolDeploymentMetrics(google.protobuf.message.Message):
+    """NodepoolDeploymentMetrics captures metrics for a single nodepool within a Deployment."""
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    METRICS_FIELD_NUMBER: builtins.int
+    compute_cluster_id: builtins.str
+    """The user-facing compute cluster ID."""
+    nodepool_id: builtins.str
+    """The user-facing nodepool ID."""
+    @property
+    def metrics(self) -> global___DeploymentMetricsSummary:
+        """Metrics for this nodepool."""
+    def __init__(
+        self,
+        *,
+        compute_cluster_id: builtins.str = ...,
+        nodepool_id: builtins.str = ...,
+        metrics: global___DeploymentMetricsSummary | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["metrics", b"metrics"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "compute_cluster_id",
+            b"compute_cluster_id",
+            "metrics",
+            b"metrics",
+            "nodepool_id",
+            b"nodepool_id",
+        ],
+    ) -> None: ...
+
+global___NodepoolDeploymentMetrics = NodepoolDeploymentMetrics
+
+@typing_extensions.final
+class DeploymentMetrics(google.protobuf.message.Message):
+    """DeploymentMetrics captures metrics and status for a Deployment's underlying runners.
+    This allows tracking of the desired replica count and the actual live replica count.
+    """
+
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    DESIRED_REPLICAS_FIELD_NUMBER: builtins.int
+    LIVE_REPLICAS_FIELD_NUMBER: builtins.int
+    ROLLOUT_IN_PROGRESS_FIELD_NUMBER: builtins.int
+    NODEPOOL_METRICS_FIELD_NUMBER: builtins.int
+    AGGREGATE_FIELD_NUMBER: builtins.int
+    desired_replicas: builtins.int
+    """Deprecated: use aggregate instead."""
+    live_replicas: builtins.int
+    """Deprecated: use aggregate instead."""
+    rollout_in_progress: builtins.bool
+    """Deprecated: use aggregate instead."""
+    @property
+    def nodepool_metrics(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
+        global___NodepoolDeploymentMetrics
+    ]:
+        """Per-nodepool breakdown of metrics."""
+    @property
+    def aggregate(self) -> global___DeploymentMetricsSummary:
+        """Aggregate metrics across all nodepools."""
+    def __init__(
+        self,
+        *,
+        desired_replicas: builtins.int = ...,
+        live_replicas: builtins.int = ...,
+        rollout_in_progress: builtins.bool = ...,
+        nodepool_metrics: collections.abc.Iterable[global___NodepoolDeploymentMetrics]
+        | None = ...,
+        aggregate: global___DeploymentMetricsSummary | None = ...,
+    ) -> None: ...
+    def HasField(
+        self, field_name: typing_extensions.Literal["aggregate", b"aggregate"]
+    ) -> builtins.bool: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "aggregate",
+            b"aggregate",
+            "desired_replicas",
+            b"desired_replicas",
+            "live_replicas",
+            b"live_replicas",
+            "nodepool_metrics",
+            b"nodepool_metrics",
             "rollout_in_progress",
             b"rollout_in_progress",
         ],

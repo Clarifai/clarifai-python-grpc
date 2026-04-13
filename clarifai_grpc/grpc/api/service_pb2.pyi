@@ -10909,7 +10909,9 @@ global___SingleWorkflowVersionResponse = SingleWorkflowVersionResponse
 
 @typing_extensions.final
 class PostAppDuplicationsRequest(google.protobuf.message.Message):
-    """Request to start app duplication jobs."""
+    """Deprecated: App duplication is no longer supported.
+    Request to start app duplication jobs.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -10945,7 +10947,9 @@ global___PostAppDuplicationsRequest = PostAppDuplicationsRequest
 
 @typing_extensions.final
 class GetAppDuplicationRequest(google.protobuf.message.Message):
-    """Request to get an app duplication job."""
+    """Deprecated: App duplication is no longer supported.
+    Request to get an app duplication job.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -10975,7 +10979,9 @@ global___GetAppDuplicationRequest = GetAppDuplicationRequest
 
 @typing_extensions.final
 class ListAppDuplicationsRequest(google.protobuf.message.Message):
-    """Request to list all the app duplication jobs that a user created."""
+    """Deprecated: App duplication is no longer supported.
+    Request to list all the app duplication jobs that a user created.
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -11014,7 +11020,9 @@ global___ListAppDuplicationsRequest = ListAppDuplicationsRequest
 
 @typing_extensions.final
 class MultiAppDuplicationsResponse(google.protobuf.message.Message):
-    """MultiAppDuplicationsResponse"""
+    """Deprecated: App duplication is no longer supported.
+    MultiAppDuplicationsResponse
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -11049,7 +11057,9 @@ global___MultiAppDuplicationsResponse = MultiAppDuplicationsResponse
 
 @typing_extensions.final
 class SingleAppDuplicationResponse(google.protobuf.message.Message):
-    """SingleAppDuplicationResponse"""
+    """Deprecated: App duplication is no longer supported.
+    SingleAppDuplicationResponse
+    """
 
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
@@ -11791,244 +11801,6 @@ class SingleLabelOrderResponse(google.protobuf.message.Message):
     ) -> None: ...
 
 global___SingleLabelOrderResponse = SingleLabelOrderResponse
-
-@typing_extensions.final
-class PostCollectorsRequest(google.protobuf.message.Message):
-    """Request to create Collectors."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    COLLECTORS_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def collectors(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.Collector
-    ]: ...
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "collectors", b"collectors", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___PostCollectorsRequest = PostCollectorsRequest
-
-@typing_extensions.final
-class PatchCollectorsRequest(google.protobuf.message.Message):
-    """PatchCollectorsRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    COLLECTORS_FIELD_NUMBER: builtins.int
-    ACTION_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def collectors(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.Collector
-    ]: ...
-    action: builtins.str
-    """The action to perform on the patched objects
-    Only 'overwrite' is supported
-    """
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector]
-        | None = ...,
-        action: builtins.str = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "action", b"action", "collectors", b"collectors", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___PatchCollectorsRequest = PatchCollectorsRequest
-
-@typing_extensions.final
-class DeleteCollectorsRequest(google.protobuf.message.Message):
-    """Request to delete several things by the list of ids."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    IDS_FIELD_NUMBER: builtins.int
-    DELETE_ALL_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    @property
-    def ids(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
-    delete_all: builtins.bool
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        ids: collections.abc.Iterable[builtins.str] | None = ...,
-        delete_all: builtins.bool = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "delete_all", b"delete_all", "ids", b"ids", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___DeleteCollectorsRequest = DeleteCollectorsRequest
-
-@typing_extensions.final
-class GetCollectorRequest(google.protobuf.message.Message):
-    """Request to GET a single Collector."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    COLLECTOR_ID_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    collector_id: builtins.str
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        collector_id: builtins.str = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "collector_id", b"collector_id", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___GetCollectorRequest = GetCollectorRequest
-
-@typing_extensions.final
-class ListCollectorsRequest(google.protobuf.message.Message):
-    """Request to GET all the Collectors."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    PAGE_FIELD_NUMBER: builtins.int
-    PER_PAGE_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
-    page: builtins.int
-    """(optional URL parameter) The page number. Pagination is used to split the results into chunks.
-    Defaults to 1.
-    """
-    per_page: builtins.int
-    """(optional URL parameter) The number of results that will be contained in each page. Defaults
-    to 128.
-    """
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        page: builtins.int = ...,
-        per_page: builtins.int = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "page", b"page", "per_page", b"per_page", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___ListCollectorsRequest = ListCollectorsRequest
-
-@typing_extensions.final
-class MultiCollectorResponse(google.protobuf.message.Message):
-    """Response with multiple Collectors."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    COLLECTORS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    @property
-    def collectors(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.Collector
-    ]: ...
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        collectors: collections.abc.Iterable[proto.clarifai.api.resources_pb2.Collector]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["status", b"status"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal["collectors", b"collectors", "status", b"status"],
-    ) -> None: ...
-
-global___MultiCollectorResponse = MultiCollectorResponse
-
-@typing_extensions.final
-class SingleCollectorResponse(google.protobuf.message.Message):
-    """Response with a single Collector."""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    COLLECTOR_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status: ...
-    @property
-    def collector(self) -> proto.clarifai.api.resources_pb2.Collector: ...
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        collector: proto.clarifai.api.resources_pb2.Collector | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["collector", b"collector", "status", b"status"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self, field_name: typing_extensions.Literal["collector", b"collector", "status", b"status"]
-    ) -> None: ...
-
-global___SingleCollectorResponse = SingleCollectorResponse
 
 @typing_extensions.final
 class PostStatValuesRequest(google.protobuf.message.Message):
@@ -13966,6 +13738,7 @@ class RunnerItem(google.protobuf.message.Message):
     POST_MODEL_OUTPUTS_REQUEST_FIELD_NUMBER: builtins.int
     SYNC_STATE_REQUEST_FIELD_NUMBER: builtins.int
     AUTO_ANNOTATION_REQUEST_FIELD_NUMBER: builtins.int
+    METADATA_FIELD_NUMBER: builtins.int
     id: builtins.str
     """A UUID hash for this work item."""
     description: builtins.str
@@ -13985,6 +13758,9 @@ class RunnerItem(google.protobuf.message.Message):
         Workflow request from a user.  // FUTURE
         training request next, etc.
         """
+    @property
+    def metadata(self) -> global___RunnerItemMetadata:
+        """Metadata used for routing and other purposes."""
     def __init__(
         self,
         *,
@@ -13994,12 +13770,15 @@ class RunnerItem(google.protobuf.message.Message):
         post_model_outputs_request: global___PostModelOutputsRequest | None = ...,
         sync_state_request: global___SyncStateRequest | None = ...,
         auto_annotation_request: global___AutoAnnotationRequest | None = ...,
+        metadata: global___RunnerItemMetadata | None = ...,
     ) -> None: ...
     def HasField(
         self,
         field_name: typing_extensions.Literal[
             "auto_annotation_request",
             b"auto_annotation_request",
+            "metadata",
+            b"metadata",
             "post_model_outputs_request",
             b"post_model_outputs_request",
             "processing_info",
@@ -14019,6 +13798,8 @@ class RunnerItem(google.protobuf.message.Message):
             b"description",
             "id",
             b"id",
+            "metadata",
+            b"metadata",
             "post_model_outputs_request",
             b"post_model_outputs_request",
             "processing_info",
@@ -14039,6 +13820,34 @@ class RunnerItem(google.protobuf.message.Message):
     ): ...
 
 global___RunnerItem = RunnerItem
+
+@typing_extensions.final
+class RunnerItemMetadata(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+
+    USER_ID_FIELD_NUMBER: builtins.int
+    BLOCK_HASHES_FIELD_NUMBER: builtins.int
+    user_id: builtins.str
+    """The user ID of the requester. Used for sticky routing to the same runner replica."""
+    @property
+    def block_hashes(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """chained block hashes of input for prefix cache routing"""
+    def __init__(
+        self,
+        *,
+        user_id: builtins.str = ...,
+        block_hashes: collections.abc.Iterable[builtins.int] | None = ...,
+    ) -> None: ...
+    def ClearField(
+        self,
+        field_name: typing_extensions.Literal[
+            "block_hashes", b"block_hashes", "user_id", b"user_id"
+        ],
+    ) -> None: ...
+
+global___RunnerItemMetadata = RunnerItemMetadata
 
 @typing_extensions.final
 class AutoAnnotationRequest(google.protobuf.message.Message):

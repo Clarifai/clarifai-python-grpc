@@ -244,7 +244,7 @@ class _StatusCodeEnumTypeWrapper(
     DATA_DUMP_EXPORT_IN_PROGRESS: _StatusCode.ValueType  # 25173
     DATA_DUMP_EXPORT_UNEXPECTED_ERROR: _StatusCode.ValueType  # 25174
     APP_DUPLICATION_SUCCESS: _StatusCode.ValueType  # 25200
-    """Duplicate related 252xx"""
+    """Duplicate related 252xx - DEPRECATED: App duplication is no longer supported."""
     APP_DUPLICATION_FAILED: _StatusCode.ValueType  # 25201
     APP_DUPLICATION_PENDING: _StatusCode.ValueType  # 25202
     APP_DUPLICATION_IN_PROGRESS: _StatusCode.ValueType  # 25203
@@ -476,13 +476,11 @@ class _StatusCodeEnumTypeWrapper(
     """Workers 51xxx"""
     WORKER_ACTIVE: _StatusCode.ValueType  # 51001
     WORKER_INACTIVE: _StatusCode.ValueType  # 51002
-    COLLECTOR_MISSING: _StatusCode.ValueType  # 52000
-    """Collectors 52xxx"""
-    COLLECTOR_ACTIVE: _StatusCode.ValueType  # 52001
-    COLLECTOR_INACTIVE: _StatusCode.ValueType  # 52002
-    COLLECTOR_POST_INPUT_FAILED: _StatusCode.ValueType  # 52003
     SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST: _StatusCode.ValueType  # 53001
-    """SSO 53xxx"""
+    """Collectors 52xxx DEPRECATED
+
+    SSO 53xxx
+    """
     TASK_IN_PROGRESS: _StatusCode.ValueType  # 54001
     """Tasks 54xxx
     The task was created.
@@ -858,7 +856,7 @@ DATA_DUMP_EXPORT_FAILED: StatusCode.ValueType  # 25172
 DATA_DUMP_EXPORT_IN_PROGRESS: StatusCode.ValueType  # 25173
 DATA_DUMP_EXPORT_UNEXPECTED_ERROR: StatusCode.ValueType  # 25174
 APP_DUPLICATION_SUCCESS: StatusCode.ValueType  # 25200
-"""Duplicate related 252xx"""
+"""Duplicate related 252xx - DEPRECATED: App duplication is no longer supported."""
 APP_DUPLICATION_FAILED: StatusCode.ValueType  # 25201
 APP_DUPLICATION_PENDING: StatusCode.ValueType  # 25202
 APP_DUPLICATION_IN_PROGRESS: StatusCode.ValueType  # 25203
@@ -1090,13 +1088,11 @@ WORKER_MISSING: StatusCode.ValueType  # 51000
 """Workers 51xxx"""
 WORKER_ACTIVE: StatusCode.ValueType  # 51001
 WORKER_INACTIVE: StatusCode.ValueType  # 51002
-COLLECTOR_MISSING: StatusCode.ValueType  # 52000
-"""Collectors 52xxx"""
-COLLECTOR_ACTIVE: StatusCode.ValueType  # 52001
-COLLECTOR_INACTIVE: StatusCode.ValueType  # 52002
-COLLECTOR_POST_INPUT_FAILED: StatusCode.ValueType  # 52003
 SSO_IDENTITY_PROVIDER_DOES_NOT_EXIST: StatusCode.ValueType  # 53001
-"""SSO 53xxx"""
+"""Collectors 52xxx DEPRECATED
+
+SSO 53xxx
+"""
 TASK_IN_PROGRESS: StatusCode.ValueType  # 54001
 """Tasks 54xxx
 The task was created.

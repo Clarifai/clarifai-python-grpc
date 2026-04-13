@@ -123,11 +123,9 @@ class _SEnumTypeWrapper(
     Annotations_Delete: _S.ValueType  # 40
     """To delete we need read/write."""
     Collectors_Add: _S.ValueType  # 41
-    """Write to the collectors DB table."""
+    """Deprecated: collectors feature has been removed."""
     Collectors_Get: _S.ValueType  # 42
-    """Read from the collectors DB table."""
     Collectors_Delete: _S.ValueType  # 43
-    """To delete we need read/write."""
     Apps_Add: _S.ValueType  # 44
     """Write to the apps DB table."""
     Apps_Get: _S.ValueType  # 45
@@ -282,10 +280,7 @@ class S(_S, metaclass=_SEnumTypeWrapper):
     also specify cl_depending_scopes for each API endpoint. Those cover cases where an endpoint
     might need to access more than just that one resource type in order to operate (ie. API handlers
     that make multiple DB calls of various resource types likely have more cl_depending_scopes than
-    the ones listed below). For example: PostCollectors to create a collector we make sure that you
-    can do model predictions, get concepts, etc. so that you don't have a collector that would be
-    useless at the end of that API handler but below you can see that the dependencies of Collector
-    scopes are only on other Collector scopes.
+    the ones listed below).
     """
 
 undef: S.ValueType  # 0
@@ -381,11 +376,9 @@ Deprecated.
 Annotations_Delete: S.ValueType  # 40
 """To delete we need read/write."""
 Collectors_Add: S.ValueType  # 41
-"""Write to the collectors DB table."""
+"""Deprecated: collectors feature has been removed."""
 Collectors_Get: S.ValueType  # 42
-"""Read from the collectors DB table."""
 Collectors_Delete: S.ValueType  # 43
-"""To delete we need read/write."""
 Apps_Add: S.ValueType  # 44
 """Write to the apps DB table."""
 Apps_Get: S.ValueType  # 45
