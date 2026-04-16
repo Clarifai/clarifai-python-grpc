@@ -473,6 +473,7 @@ class StreamAnnotationsRequest(google.protobuf.message.Message):
     MAX_FRAMES_FIELD_NUMBER: builtins.int
     MAX_DURATION_FIELD_NUMBER: builtins.int
     WORKER_FIELD_NUMBER: builtins.int
+    MIN_PREDICTION_SCORE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     input_id: builtins.str
@@ -505,6 +506,12 @@ class StreamAnnotationsRequest(google.protobuf.message.Message):
         Point annotations don't need filtering by worker.
         For non-point types, a model version ID must be provided.
         """
+    min_prediction_score: builtins.float
+    """Optional minimum prediction confidence threshold (0.0 to 1.0).
+    When set (> 0), only annotations with at least one concept (tag) having
+    metadata.prediction_score >= this value are returned.
+    When unset (0), all annotations are returned (backwards compatible).
+    """
     def __init__(
         self,
         *,
@@ -517,6 +524,7 @@ class StreamAnnotationsRequest(google.protobuf.message.Message):
         max_frames: builtins.int = ...,
         max_duration: builtins.int = ...,
         worker: proto.clarifai.api.resources_pb2.Worker | None = ...,
+        min_prediction_score: builtins.float = ...,
     ) -> None: ...
     def HasField(
         self,
@@ -537,6 +545,8 @@ class StreamAnnotationsRequest(google.protobuf.message.Message):
             b"max_duration",
             "max_frames",
             b"max_frames",
+            "min_prediction_score",
+            b"min_prediction_score",
             "track_ids",
             b"track_ids",
             "user_app_id",
@@ -558,15 +568,23 @@ class StreamLivestreamAnnotationsRequest(google.protobuf.message.Message):
 
     USER_APP_ID_FIELD_NUMBER: builtins.int
     INPUT_ID_FIELD_NUMBER: builtins.int
+    MIN_PREDICTION_SCORE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     input_id: builtins.str
     """The input ID containing the video being processed"""
+    min_prediction_score: builtins.float
+    """Optional minimum prediction confidence threshold (0.0 to 1.0).
+    When set (> 0), only annotations with at least one concept (tag) having
+    metadata.prediction_score >= this value are streamed.
+    When unset (0), all annotations are streamed (backwards compatible).
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         input_id: builtins.str = ...,
+        min_prediction_score: builtins.float = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -574,7 +592,12 @@ class StreamLivestreamAnnotationsRequest(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
-            "input_id", b"input_id", "user_app_id", b"user_app_id"
+            "input_id",
+            b"input_id",
+            "min_prediction_score",
+            b"min_prediction_score",
+            "user_app_id",
+            b"user_app_id",
         ],
     ) -> None: ...
 

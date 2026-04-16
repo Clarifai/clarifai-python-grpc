@@ -750,6 +750,7 @@ class _MetricTypeEnumTypeWrapper(
     MODEL_THROUGHPUT: _MetricType.ValueType  # 2
     MODEL_PROMPT_TOKEN_THROUGHPUT: _MetricType.ValueType  # 3
     MODEL_COMPLETION_TOKEN_THROUGHPUT: _MetricType.ValueType  # 4
+    MODEL_REQUEST_COUNT: _MetricType.ValueType  # 5
 
 class MetricType(_MetricType, metaclass=_MetricTypeEnumTypeWrapper): ...
 
@@ -758,6 +759,7 @@ MODEL_TTFT: MetricType.ValueType  # 1
 MODEL_THROUGHPUT: MetricType.ValueType  # 2
 MODEL_PROMPT_TOKEN_THROUGHPUT: MetricType.ValueType  # 3
 MODEL_COMPLETION_TOKEN_THROUGHPUT: MetricType.ValueType  # 4
+MODEL_REQUEST_COUNT: MetricType.ValueType  # 5
 global___MetricType = MetricType
 
 class _MetricLabel:
