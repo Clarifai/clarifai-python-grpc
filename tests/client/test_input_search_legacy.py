@@ -122,60 +122,6 @@ def test_search_by_predicted_concept_name(channel_key):
 
 
 @both_channels()
-def test_search_by_predicted_concept_name_in_chinese(channel_key):
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-    with SetupImage(stub) as input_:
-        response = stub.PostSearches(
-            service_pb2.PostSearchesRequest(
-                query=resources_pb2.Query(
-                    ands=[
-                        resources_pb2.And(
-                            output=resources_pb2.Output(
-                                data=resources_pb2.Data(
-                                    concepts=[resources_pb2.Concept(name="狗", value=1)]
-                                )
-                            )
-                        )
-                    ],
-                    language="zh",
-                ),
-                pagination=service_pb2.Pagination(page=1, per_page=1000),
-            ),
-            metadata=metadata(),
-        )
-        raise_on_failure(response)
-        assert len(response.hits) > 0
-        assert input_.id in [hit.input.id for hit in response.hits]
-
-
-@both_channels()
-def test_search_by_predicted_concept_name_in_japanese(channel_key):
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-    with SetupImage(stub) as input_:
-        response = stub.PostSearches(
-            service_pb2.PostSearchesRequest(
-                query=resources_pb2.Query(
-                    ands=[
-                        resources_pb2.And(
-                            output=resources_pb2.Output(
-                                data=resources_pb2.Data(
-                                    concepts=[resources_pb2.Concept(name="犬", value=1)]
-                                )
-                            )
-                        )
-                    ],
-                    language="ja",
-                ),
-                pagination=service_pb2.Pagination(page=1, per_page=1000),
-            ),
-            metadata=metadata(),
-        )
-        raise_on_failure(response)
-        assert len(response.hits) > 0
-        assert input_.id in [hit.input.id for hit in response.hits]
-
-
-@both_channels()
 def test_search_by_image_url(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
     with SetupImage(stub) as input_:

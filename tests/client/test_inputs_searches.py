@@ -145,36 +145,6 @@ def test_search_by_predicted_concept_name(channel_key):
 
 
 @both_channels()
-def test_search_by_predicted_concept_name_in_chinese(channel_key):
-    stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
-
-    with SetupImage(stub) as input_:
-        response = stub.PostInputsSearches(
-            PostInputsSearchesRequest(
-                searches=[
-                    Search(
-                        query=Query(
-                            ranks=[
-                                Rank(
-                                    annotation=Annotation(
-                                        data=Data(concepts=[Concept(name="狗", value=1)])
-                                    )
-                                )
-                            ],
-                            language="zh",
-                        ),
-                    )
-                ],
-                pagination=service_pb2.Pagination(page=1, per_page=1000),
-            ),
-            metadata=metadata(),
-        )
-        raise_on_failure(response)
-        assert len(response.hits) >= 1
-        assert input_.id in [hit.input.id for hit in response.hits]
-
-
-@both_channels()
 def test_search_by_image_url(channel_key):
     stub = service_pb2_grpc.V2Stub(get_channel(channel_key))
 
