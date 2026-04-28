@@ -899,16 +899,6 @@ class V2Stub(object):
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.SerializeToString,
                 response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse),
                 )
-        self.PostStatValues = channel.unary_unary(
-                '/clarifai.api.V2/PostStatValues',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueResponse),
-                )
-        self.PostStatValuesAggregate = channel.unary_unary(
-                '/clarifai.api.V2/PostStatValuesAggregate',
-                request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
-                response_deserializer=wrap_response_deserializer(proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse),
-                )
         self.PostBulkOperations = channel.unary_unary(
                 '/clarifai.api.V2/PostBulkOperations',
                 request_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostBulkOperationsRequest.SerializeToString,
@@ -2738,20 +2728,6 @@ class V2Servicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def PostStatValues(self, request, context):
-        """PostStatValues
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
-    def PostStatValuesAggregate(self, request, context):
-        """PostStatValuesAggregate
-        """
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def PostBulkOperations(self, request, context):
         """Perform bulk operations on a list of inputs based on input source.
         Operation include add, update, delete of concepts, metadata and geo data.
@@ -4308,16 +4284,6 @@ def add_V2Servicer_to_server(servicer, server):
                     servicer.DeleteLabelOrders,
                     request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.FromString,
                     response_serializer=proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.SerializeToString,
-            ),
-            'PostStatValues': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostStatValues,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueResponse.SerializeToString,
-            ),
-            'PostStatValuesAggregate': grpc.unary_unary_rpc_method_handler(
-                    servicer.PostStatValuesAggregate,
-                    request_deserializer=proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.FromString,
-                    response_serializer=proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.SerializeToString,
             ),
             'PostBulkOperations': grpc.unary_unary_rpc_method_handler(
                     servicer.PostBulkOperations,
@@ -7785,40 +7751,6 @@ class V2(object):
         return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/DeleteLabelOrders',
             proto_dot_clarifai_dot_api_dot_service__pb2.DeleteLabelOrdersRequest.SerializeToString,
             proto_dot_clarifai_dot_api_dot_status_dot_status__pb2.BaseResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostStatValues(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostStatValues',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueResponse.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
-
-    @staticmethod
-    def PostStatValuesAggregate(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/clarifai.api.V2/PostStatValuesAggregate',
-            proto_dot_clarifai_dot_api_dot_service__pb2.PostStatValuesAggregateRequest.SerializeToString,
-            proto_dot_clarifai_dot_api_dot_service__pb2.MultiStatValueAggregateResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 

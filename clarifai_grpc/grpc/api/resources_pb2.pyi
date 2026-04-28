@@ -482,52 +482,6 @@ TEAM: RoleType.ValueType  # 0
 ORG: RoleType.ValueType  # 1
 global___RoleType = RoleType
 
-class _StatValueAggType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _StatValueAggTypeEnumTypeWrapper(
-    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatValueAggType.ValueType],
-    builtins.type,
-):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    SUM: _StatValueAggType.ValueType  # 0
-    AVG: _StatValueAggType.ValueType  # 1
-
-class StatValueAggType(_StatValueAggType, metaclass=_StatValueAggTypeEnumTypeWrapper): ...
-
-SUM: StatValueAggType.ValueType  # 0
-AVG: StatValueAggType.ValueType  # 1
-global___StatValueAggType = StatValueAggType
-
-class _StatTimeAggType:
-    ValueType = typing.NewType("ValueType", builtins.int)
-    V: typing_extensions.TypeAlias = ValueType
-
-class _StatTimeAggTypeEnumTypeWrapper(
-    google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[_StatTimeAggType.ValueType],
-    builtins.type,
-):
-    DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
-    NO_TIME_AGG: _StatTimeAggType.ValueType  # 0
-    YEAR: _StatTimeAggType.ValueType  # 1
-    MONTH: _StatTimeAggType.ValueType  # 2
-    WEEK: _StatTimeAggType.ValueType  # 3
-    DAY: _StatTimeAggType.ValueType  # 4
-    HOUR: _StatTimeAggType.ValueType  # 5
-    MINUTE: _StatTimeAggType.ValueType  # 6
-
-class StatTimeAggType(_StatTimeAggType, metaclass=_StatTimeAggTypeEnumTypeWrapper): ...
-
-NO_TIME_AGG: StatTimeAggType.ValueType  # 0
-YEAR: StatTimeAggType.ValueType  # 1
-MONTH: StatTimeAggType.ValueType  # 2
-WEEK: StatTimeAggType.ValueType  # 3
-DAY: StatTimeAggType.ValueType  # 4
-HOUR: StatTimeAggType.ValueType  # 5
-MINUTE: StatTimeAggType.ValueType  # 6
-global___StatTimeAggType = StatTimeAggType
-
 class _ValidationErrorType:
     ValueType = typing.NewType("ValueType", builtins.int)
     V: typing_extensions.TypeAlias = ValueType
@@ -747,19 +701,37 @@ class _MetricTypeEnumTypeWrapper(
     DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
     METRIC_TYPE_NOT_SET: _MetricType.ValueType  # 0
     MODEL_TTFT: _MetricType.ValueType  # 1
+    """Model metrics: 1-50"""
     MODEL_THROUGHPUT: _MetricType.ValueType  # 2
     MODEL_PROMPT_TOKEN_THROUGHPUT: _MetricType.ValueType  # 3
     MODEL_COMPLETION_TOKEN_THROUGHPUT: _MetricType.ValueType  # 4
     MODEL_REQUEST_COUNT: _MetricType.ValueType  # 5
+    MODEL_E2E_LATENCY: _MetricType.ValueType  # 6
+    NODEPOOL_NODE_COUNT: _MetricType.ValueType  # 51
+    """Nodepool metrics: 51-100"""
+    NODEPOOL_GPU_UTILIZATION: _MetricType.ValueType  # 52
+    NODEPOOL_GPU_TENSOR_UTILIZATION: _MetricType.ValueType  # 53
+    NODEPOOL_GPU_MEMORY_UTILIZATION: _MetricType.ValueType  # 54
+    NODEPOOL_CPU_UTILIZATION: _MetricType.ValueType  # 55
+    NODEPOOL_MEMORY_UTILIZATION: _MetricType.ValueType  # 56
 
 class MetricType(_MetricType, metaclass=_MetricTypeEnumTypeWrapper): ...
 
 METRIC_TYPE_NOT_SET: MetricType.ValueType  # 0
 MODEL_TTFT: MetricType.ValueType  # 1
+"""Model metrics: 1-50"""
 MODEL_THROUGHPUT: MetricType.ValueType  # 2
 MODEL_PROMPT_TOKEN_THROUGHPUT: MetricType.ValueType  # 3
 MODEL_COMPLETION_TOKEN_THROUGHPUT: MetricType.ValueType  # 4
 MODEL_REQUEST_COUNT: MetricType.ValueType  # 5
+MODEL_E2E_LATENCY: MetricType.ValueType  # 6
+NODEPOOL_NODE_COUNT: MetricType.ValueType  # 51
+"""Nodepool metrics: 51-100"""
+NODEPOOL_GPU_UTILIZATION: MetricType.ValueType  # 52
+NODEPOOL_GPU_TENSOR_UTILIZATION: MetricType.ValueType  # 53
+NODEPOOL_GPU_MEMORY_UTILIZATION: MetricType.ValueType  # 54
+NODEPOOL_CPU_UTILIZATION: MetricType.ValueType  # 55
+NODEPOOL_MEMORY_UTILIZATION: MetricType.ValueType  # 56
 global___MetricType = MetricType
 
 class _MetricLabel:
@@ -776,6 +748,8 @@ class _MetricLabelEnumTypeWrapper(
     MODEL_ID: _MetricLabel.ValueType  # 2
     MODEL_VERSION_ID: _MetricLabel.ValueType  # 3
     HTTP_STATUS: _MetricLabel.ValueType  # 4
+    COMPUTE_CLUSTER_ID: _MetricLabel.ValueType  # 5
+    NODEPOOL_ID: _MetricLabel.ValueType  # 6
 
 class MetricLabel(_MetricLabel, metaclass=_MetricLabelEnumTypeWrapper): ...
 
@@ -784,6 +758,8 @@ APP_ID: MetricLabel.ValueType  # 1
 MODEL_ID: MetricLabel.ValueType  # 2
 MODEL_VERSION_ID: MetricLabel.ValueType  # 3
 HTTP_STATUS: MetricLabel.ValueType  # 4
+COMPUTE_CLUSTER_ID: MetricLabel.ValueType  # 5
+NODEPOOL_ID: MetricLabel.ValueType  # 6
 global___MetricLabel = MetricLabel
 
 @typing_extensions.final
@@ -11730,232 +11706,6 @@ class Team(google.protobuf.message.Message):
 global___Team = Team
 
 @typing_extensions.final
-class StatValue(google.protobuf.message.Message):
-    """StatValue"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TIME_FIELD_NUMBER: builtins.int
-    VALUE_FIELD_NUMBER: builtins.int
-    TAGS_FIELD_NUMBER: builtins.int
-    @property
-    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """The time of the event. Defaults to now()."""
-    value: builtins.float
-    """A value for the metric you're recording."""
-    @property
-    def tags(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """List of tags to attach to this stat. Each should contain one colon so that the first part will
-        be used as a tag group while the second being the tag itself. For example: ["task_id:a",
-        "worker_id:1"]. These tag groups like "task_id" or "worker_id" are important for aggregating
-        values in the StatValueAggregateQuery.
-        """
-    def __init__(
-        self,
-        *,
-        time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        value: builtins.float = ...,
-        tags: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["time", b"time"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal["tags", b"tags", "time", b"time", "value", b"value"],
-    ) -> None: ...
-
-global___StatValue = StatValue
-
-@typing_extensions.final
-class StatValueAggregateResult(google.protobuf.message.Message):
-    """StatValueAggregateResult"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STAT_VALUE_AGGREGATES_FIELD_NUMBER: builtins.int
-    STAT_VALUE_AGGREGATE_QUERY_FIELD_NUMBER: builtins.int
-    @property
-    def stat_value_aggregates(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        global___StatValueAggregate
-    ]:
-        """The list of repeated aggregate values and their counts."""
-    @property
-    def stat_value_aggregate_query(self) -> global___StatValueAggregateQuery:
-        """The query that created these results."""
-    def __init__(
-        self,
-        *,
-        stat_value_aggregates: collections.abc.Iterable[global___StatValueAggregate] | None = ...,
-        stat_value_aggregate_query: global___StatValueAggregateQuery | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "stat_value_aggregate_query", b"stat_value_aggregate_query"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "stat_value_aggregate_query",
-            b"stat_value_aggregate_query",
-            "stat_value_aggregates",
-            b"stat_value_aggregates",
-        ],
-    ) -> None: ...
-
-global___StatValueAggregateResult = StatValueAggregateResult
-
-@typing_extensions.final
-class StatValueAggregate(google.protobuf.message.Message):
-    """StatValueAggregate"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TIME_FIELD_NUMBER: builtins.int
-    AGGREGATE_VALUE_FIELD_NUMBER: builtins.int
-    COUNT_FIELD_NUMBER: builtins.int
-    TAGS_FIELD_NUMBER: builtins.int
-    @property
-    def time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """The time of the aggregation. For example, if you aggregate over "HOUR" buckets then you can
-        expect each hour that has atleast one value (matching the rest of your query fields) will have
-        a StatValueAggregate with the time filled into that hour.
-        """
-    aggregate_value: builtins.float
-    """The value aggregated according to the stat_value_agg_type"""
-    count: builtins.int
-    """The count of the stat values that were used in this aggregation."""
-    @property
-    def tags(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """The tags for this aggregated_value and count. This will be filled in if tag groups were used in
-        the query to group aggregations.
-        """
-    def __init__(
-        self,
-        *,
-        time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        aggregate_value: builtins.float = ...,
-        count: builtins.int = ...,
-        tags: collections.abc.Iterable[builtins.str] | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["time", b"time"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "aggregate_value",
-            b"aggregate_value",
-            "count",
-            b"count",
-            "tags",
-            b"tags",
-            "time",
-            b"time",
-        ],
-    ) -> None: ...
-
-global___StatValueAggregate = StatValueAggregate
-
-@typing_extensions.final
-class StatValueAggregateQuery(google.protobuf.message.Message):
-    """StatValueAggregateQuery"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    TAGS_FIELD_NUMBER: builtins.int
-    TAG_GROUPS_FIELD_NUMBER: builtins.int
-    STAT_VALUE_AGG_TYPE_FIELD_NUMBER: builtins.int
-    STAT_TIME_AGG_TYPE_FIELD_NUMBER: builtins.int
-    START_TIME_FIELD_NUMBER: builtins.int
-    END_TIME_FIELD_NUMBER: builtins.int
-    @property
-    def tags(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """These tags are used to filter down the values before they are aggregated. For example,
-        if you want to aggregate values for "task_id:a" you could specify that as a tag here.
-        """
-    @property
-    def tag_groups(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]:
-        """These are tag groups to aggregate over. So for example if you added stat values with tags
-        "task_id:a" and others with "task_id:b", then added ["task_id"] to the task group, it the
-        aggregation would return StatValueAggregate values for each task_id. If you provide more than
-        one tag_group the response will return all rolled up combinations of them. For example
-        ["task_id", "something"] where "something:1" and "something:2" were used as tags for some
-        values then you'd get StatValueAggregate values back for:
-        task_id | something
-        a       | 1
-        a       | 2
-        b       | 1
-        b       | 1
-        """
-    stat_value_agg_type: global___StatValueAggType.ValueType
-    """Aggregation function to use over the values. Count(value) is also always returns.
-    Defaults to 'sum' if not provided.
-    """
-    stat_time_agg_type: global___StatTimeAggType.ValueType
-    """Aggregation bins for time where the values will be aggregated at this bin granualarity.
-    And the "time" field will be returned in StatValueAggregate object.
-    If not provided then bins are not used, and all time is aggregated over.
-    """
-    @property
-    def start_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """If provided the time range over which values will be >= this time. If not provided then
-        all values will be used back to start of time.
-        """
-    @property
-    def end_time(self) -> google.protobuf.timestamp_pb2.Timestamp:
-        """If provided the time range over which values will be <= this time. If not provided then all
-        values will be used up until now().
-        """
-    def __init__(
-        self,
-        *,
-        tags: collections.abc.Iterable[builtins.str] | None = ...,
-        tag_groups: collections.abc.Iterable[builtins.str] | None = ...,
-        stat_value_agg_type: global___StatValueAggType.ValueType = ...,
-        stat_time_agg_type: global___StatTimeAggType.ValueType = ...,
-        start_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-        end_time: google.protobuf.timestamp_pb2.Timestamp | None = ...,
-    ) -> None: ...
-    def HasField(
-        self,
-        field_name: typing_extensions.Literal[
-            "end_time", b"end_time", "start_time", b"start_time"
-        ],
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "end_time",
-            b"end_time",
-            "start_time",
-            b"start_time",
-            "stat_time_agg_type",
-            b"stat_time_agg_type",
-            "stat_value_agg_type",
-            b"stat_value_agg_type",
-            "tag_groups",
-            b"tag_groups",
-            "tags",
-            b"tags",
-        ],
-    ) -> None: ...
-
-global___StatValueAggregateQuery = StatValueAggregateQuery
-
-@typing_extensions.final
 class PCAProjectionComparator(google.protobuf.message.Message):
     """PCAProjectionComparator"""
 
@@ -15454,6 +15204,7 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
     GPU_METRICS_FIELD_NUMBER: builtins.int
     HOSTNAME_FIELD_NUMBER: builtins.int
     CPU_METRICS_FIELD_NUMBER: builtins.int
+    IS_FINAL_METRICS_FIELD_NUMBER: builtins.int
     @property
     def meta(self) -> global___ComputeSourceMetadata:
         """Who and where the metrics are from.
@@ -15492,6 +15243,11 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
         self,
     ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[global___CpuMetrics]:
         """CPU metrics."""
+    is_final_metrics: builtins.bool
+    """When true, indicates this is the final metrics submission from a node that is being
+    terminated. The handler should skip node count aggregation to avoid corrupting the
+    count with a partial batch from the dying node.
+    """
     def __init__(
         self,
         *,
@@ -15507,6 +15263,7 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
         gpu_metrics: collections.abc.Iterable[global___GpuMetrics] | None = ...,
         hostname: builtins.str = ...,
         cpu_metrics: collections.abc.Iterable[global___CpuMetrics] | None = ...,
+        is_final_metrics: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["meta", b"meta", "timestamp", b"timestamp"]
@@ -15526,6 +15283,8 @@ class ComputePlaneMetrics(google.protobuf.message.Message):
             b"hostname",
             "instance_type",
             b"instance_type",
+            "is_final_metrics",
+            b"is_final_metrics",
             "meta",
             b"meta",
             "region",

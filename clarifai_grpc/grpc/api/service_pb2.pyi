@@ -11826,159 +11826,6 @@ class SingleLabelOrderResponse(google.protobuf.message.Message):
 global___SingleLabelOrderResponse = SingleLabelOrderResponse
 
 @typing_extensions.final
-class PostStatValuesRequest(google.protobuf.message.Message):
-    """PostStatValuesRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    STAT_VALUES_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """The user and app information for the request."""
-    @property
-    def stat_values(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.StatValue
-    ]:
-        """The stats to post, can post more than one at a time."""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        stat_values: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValue]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "stat_values", b"stat_values", "user_app_id", b"user_app_id"
-        ],
-    ) -> None: ...
-
-global___PostStatValuesRequest = PostStatValuesRequest
-
-@typing_extensions.final
-class MultiStatValueResponse(google.protobuf.message.Message):
-    """MultiStatValueResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    STAT_VALUES_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """The response status."""
-    @property
-    def stat_values(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.StatValue
-    ]:
-        """The returned stats values."""
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        stat_values: collections.abc.Iterable[proto.clarifai.api.resources_pb2.StatValue]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["status", b"status"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal["stat_values", b"stat_values", "status", b"status"],
-    ) -> None: ...
-
-global___MultiStatValueResponse = MultiStatValueResponse
-
-@typing_extensions.final
-class PostStatValuesAggregateRequest(google.protobuf.message.Message):
-    """PostStatValuesAggregateRequest"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    USER_APP_ID_FIELD_NUMBER: builtins.int
-    STAT_VALUE_AGGREGATE_QUERIES_FIELD_NUMBER: builtins.int
-    @property
-    def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet:
-        """Ids present in the url of the request."""
-    @property
-    def stat_value_aggregate_queries(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.StatValueAggregateQuery
-    ]:
-        """Query to retrieve aggregate values."""
-    def __init__(
-        self,
-        *,
-        user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
-        stat_value_aggregate_queries: collections.abc.Iterable[
-            proto.clarifai.api.resources_pb2.StatValueAggregateQuery
-        ]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "stat_value_aggregate_queries",
-            b"stat_value_aggregate_queries",
-            "user_app_id",
-            b"user_app_id",
-        ],
-    ) -> None: ...
-
-global___PostStatValuesAggregateRequest = PostStatValuesAggregateRequest
-
-@typing_extensions.final
-class MultiStatValueAggregateResponse(google.protobuf.message.Message):
-    """MultiStatValueAggregateResponse"""
-
-    DESCRIPTOR: google.protobuf.descriptor.Descriptor
-
-    STATUS_FIELD_NUMBER: builtins.int
-    STAT_VALUE_AGGREGATE_RESULTS_FIELD_NUMBER: builtins.int
-    @property
-    def status(self) -> proto.clarifai.api.status.status_pb2.Status:
-        """The response status."""
-    @property
-    def stat_value_aggregate_results(
-        self,
-    ) -> google.protobuf.internal.containers.RepeatedCompositeFieldContainer[
-        proto.clarifai.api.resources_pb2.StatValueAggregateResult
-    ]:
-        """The aggregate results for each query passedin."""
-    def __init__(
-        self,
-        *,
-        status: proto.clarifai.api.status.status_pb2.Status | None = ...,
-        stat_value_aggregate_results: collections.abc.Iterable[
-            proto.clarifai.api.resources_pb2.StatValueAggregateResult
-        ]
-        | None = ...,
-    ) -> None: ...
-    def HasField(
-        self, field_name: typing_extensions.Literal["status", b"status"]
-    ) -> builtins.bool: ...
-    def ClearField(
-        self,
-        field_name: typing_extensions.Literal[
-            "stat_value_aggregate_results", b"stat_value_aggregate_results", "status", b"status"
-        ],
-    ) -> None: ...
-
-global___MultiStatValueAggregateResponse = MultiStatValueAggregateResponse
-
-@typing_extensions.final
 class ListNextTaskAssignmentsRequest(google.protobuf.message.Message):
     """ListNextTaskAssignmentsRequest"""
 
@@ -14496,16 +14343,22 @@ class GetNodepoolRequest(google.protobuf.message.Message):
     USER_APP_ID_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
     NODEPOOL_ID_FIELD_NUMBER: builtins.int
+    ACTIVE_USAGE_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     compute_cluster_id: builtins.str
     nodepool_id: builtins.str
+    active_usage: builtins.bool
+    """Only return the nodepool if it is actively being used (having min_instances > 0,
+    runners with replicas >= threshold or pipeline versions scheduled to run)
+    """
     def __init__(
         self,
         *,
         user_app_id: proto.clarifai.api.resources_pb2.UserAppIDSet | None = ...,
         compute_cluster_id: builtins.str = ...,
         nodepool_id: builtins.str = ...,
+        active_usage: builtins.bool = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -14513,6 +14366,8 @@ class GetNodepoolRequest(google.protobuf.message.Message):
     def ClearField(
         self,
         field_name: typing_extensions.Literal[
+            "active_usage",
+            b"active_usage",
             "compute_cluster_id",
             b"compute_cluster_id",
             "nodepool_id",
@@ -14854,6 +14709,7 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
     MODEL_VERSION_IDS_FIELD_NUMBER: builtins.int
     WORKFLOW_VERSION_IDS_FIELD_NUMBER: builtins.int
     COMPUTE_CLUSTER_ID_FIELD_NUMBER: builtins.int
+    SCHEDULING_PRIORITIES_FIELD_NUMBER: builtins.int
     @property
     def user_app_id(self) -> proto.clarifai.api.resources_pb2.UserAppIDSet: ...
     nodepool_id: builtins.str
@@ -14878,6 +14734,13 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
         """(optional URL parameter) WorkflowVersion IDs. To list all deployments for the workflow version"""
     compute_cluster_id: builtins.str
     """(optional URL parameter) ComputeCluster ID. To list all deployed workers in a ComputeCluster"""
+    @property
+    def scheduling_priorities(
+        self,
+    ) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.int]:
+        """(optional URL parameter) Scheduling priorities. To list all deployments with one of the
+        provided scheduling priorities. Valid values are 0-9.
+        """
     def __init__(
         self,
         *,
@@ -14888,6 +14751,7 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
         model_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
         workflow_version_ids: collections.abc.Iterable[builtins.str] | None = ...,
         compute_cluster_id: builtins.str = ...,
+        scheduling_priorities: collections.abc.Iterable[builtins.int] | None = ...,
     ) -> None: ...
     def HasField(
         self, field_name: typing_extensions.Literal["user_app_id", b"user_app_id"]
@@ -14905,6 +14769,8 @@ class ListDeploymentsRequest(google.protobuf.message.Message):
             b"page",
             "per_page",
             b"per_page",
+            "scheduling_priorities",
+            b"scheduling_priorities",
             "user_app_id",
             b"user_app_id",
             "workflow_version_ids",
