@@ -13445,6 +13445,7 @@ class Nodepool(google.protobuf.message.Message):
     MAX_INSTANCES_FIELD_NUMBER: builtins.int
     ENFORCED_MIN_INSTANCES_FIELD_NUMBER: builtins.int
     ENFORCED_MAX_INSTANCES_FIELD_NUMBER: builtins.int
+    WARM_INSTANCES_FIELD_NUMBER: builtins.int
     VISIBILITY_FIELD_NUMBER: builtins.int
     METADATA_FIELD_NUMBER: builtins.int
     SPECIAL_HANDLING_FIELD_NUMBER: builtins.int
@@ -13484,6 +13485,11 @@ class Nodepool(google.protobuf.message.Message):
     """The actual minimum number of instances. Enforced by the user's plan limits."""
     enforced_max_instances: builtins.int
     """The actual maximum number of instances. Enforced by the user's plan limits."""
+    warm_instances: builtins.int
+    """Number of warm idle instances to keep in this nodepool.
+    These allow the nodepool to have extra capacity ready for quickly scheduling additional runners.
+    This is the user desired amount. See node_count for actual current number of nodes.
+    """
     @property
     def visibility(self) -> global___Visibility:
         """The visibility field represents whether this message is privately/publicly visible.
@@ -13524,6 +13530,7 @@ class Nodepool(google.protobuf.message.Message):
         max_instances: builtins.int = ...,
         enforced_min_instances: builtins.int = ...,
         enforced_max_instances: builtins.int = ...,
+        warm_instances: builtins.int = ...,
         visibility: global___Visibility | None = ...,
         metadata: google.protobuf.struct_pb2.Struct | None = ...,
         special_handling: collections.abc.Iterable[global___SpecialHandling] | None = ...,
@@ -13585,6 +13592,8 @@ class Nodepool(google.protobuf.message.Message):
             b"status_description",
             "visibility",
             b"visibility",
+            "warm_instances",
+            b"warm_instances",
         ],
     ) -> None: ...
 
