@@ -228,7 +228,7 @@ def is_provider_supported(provider_id: str) -> bool:
 
 
 @grpc_channel()
-@pytest.skip("Skipping test: failing. need to unblock PR merging.")
+@pytest.mark.skip(reason="Skipping test: failing. need to unblock PR merging.")
 def test_instance_types_exist_and_not_deprecated(channel_key):
     """
     Test that all instance types returned by the API exist and are not deprecated.
