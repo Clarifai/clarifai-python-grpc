@@ -76,6 +76,9 @@ def use_secure_hosting_url(url):
     if secure_hosting_url == "https://data-dev-internal.clarifai.com":
         if url.startswith("https://data-dev.clarifai.com"):
             return url.replace("https://data-dev.clarifai.com", secure_hosting_url)
+    if secure_hosting_url == "https://data-staging-internal.clarifai.com":
+        if url.startswith("https://data-staging.clarifai.com"):
+            return url.replace("https://data-staging.clarifai.com", secure_hosting_url)
     if secure_hosting_url != orig_secure_hosting_url and url.startswith(orig_secure_hosting_url):
         return url.replace(orig_secure_hosting_url, secure_hosting_url)
     return url
