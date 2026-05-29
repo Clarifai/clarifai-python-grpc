@@ -62,7 +62,7 @@ def get_secure_hosting_url():
     env_subdomain = os.environ.get("CLARIFAI_GRPC_BASE", "api.clarifai.com").split(".")[0]
     if env_subdomain == "api-dev-internal":
         default_secure_data_hosting_url = "https://data-dev-internal.clarifai.com"
-    elif env_subdomain == "api-staging":
+    elif env_subdomain == "api-staging-internal":
         default_secure_data_hosting_url = "https://data-staging-internal.clarifai.com"
     url = os.environ.get("CLARIFAI_SECURE_HOSTING_URL", default_secure_data_hosting_url)
     return url
